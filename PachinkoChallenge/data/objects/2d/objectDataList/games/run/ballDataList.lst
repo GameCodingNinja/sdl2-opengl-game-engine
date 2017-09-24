@@ -1,0 +1,225 @@
+<objectDataList2D>
+
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+    <default  name="">
+        <visual>
+            <texture count="0" file="data/textures/games/run/run_spriteSheet.png" compressed="false"/>
+            <mesh genType="sprite_sheet">
+                <spriteSheet file="data/objects/2d/mesh/games/run.xml"/>
+                <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
+            </mesh>
+            <color r="1" g="1" b="1" a="1"/>
+            <shader id="shader_2d_spriteSheet"/>
+        </visual>
+        <physics world="(game)">
+            <body type="" linearDamping="0" angularDamping="0" fixedRotation="false"/>
+            <fixtureLst>
+                <fixture shape="" radius="0" chainLoop="false" friction="0.2" density="0.2" restitution="0.2">
+                    <!-- <collisionFilter categoryBits="" maskBits="" groupIndex=""/> -->
+                    <!-- <vertLst>
+                    vert list for polygon shapes - max of 8
+                    Box2D polygons are defined using Counter Clockwise Winding (CCW)
+                    <vert x="" y=""/>
+                    </vertLst> -->
+                    <sizeMod top="0" bottom="0" left="0" right="0"/>
+                </fixture>
+            </fixtureLst>
+        </physics>
+        <size width="0" height="0"/>
+    </default>
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+  
+    <objectList>
+    
+        <object name="square_green">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="square_green"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.3" restitution="0.6">
+                        <sizeMod top="-4" bottom="-3" left="-4" right="-3"/>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="square_blue">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="square_blue"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.2" restitution="0.4">
+                        <sizeMod top="-4" bottom="-3" left="-4" right="-3"/>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="square_red">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="square_red"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.1" restitution="0.2">
+                        <sizeMod top="-4" bottom="-3" left="-4" right="-3"/>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+    
+        <object name="triangle_green">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="triangle_green"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.3" restitution="0.6">
+                        <vertLst>
+                            <vert x="50" y="5"/>
+                            <vert x="5" y="94"/>
+                            <vert x="94" y="94"/>
+                        </vertLst>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="triangle_blue">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="triangle_blue"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.2" restitution="0.4">
+                        <vertLst>
+                            <vert x="50" y="5"/>
+                            <vert x="5" y="94"/>
+                            <vert x="94" y="94"/>
+                        </vertLst>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="triangle_red">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="triangle_red"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="polygon" density="0.1" restitution="0.2">
+                        <vertLst>
+                            <vert x="50" y="5"/>
+                            <vert x="5" y="94"/>
+                            <vert x="94" y="94"/>
+                        </vertLst>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+    
+        <object name="circle_green">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="circle_green"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="circle" radius="48" density="0.3" restitution="0.6">
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="circle_blue">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="circle_blue"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="circle" radius="48" density="0.2" restitution="0.4">
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="circle_red">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="circle_red"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="dynamic"/>
+                <fixtureLst>
+                    <fixture shape="circle" radius="48" density="0.1" restitution="0.2">
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="strawberry">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="strawberry"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="static"/>
+                <fixtureLst>
+                    <fixture shape="circle" radius="20" sensor="true">
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+
+    </objectList>
+
+</objectDataList2D>
+

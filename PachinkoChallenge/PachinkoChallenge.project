@@ -1,0 +1,1765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="PachinkoChallenge" Version="10.0.0" InternalType="">
+  <VirtualDirectory Name="library">
+    <VirtualDirectory Name="utilities">
+      <File Name="../library/utilities/settings.h"/>
+      <File Name="../library/utilities/state.h"/>
+      <File Name="../library/utilities/threadpool.cpp"/>
+      <File Name="../library/utilities/statcounter.h"/>
+      <File Name="../library/utilities/exceptionhandling.h"/>
+      <File Name="../library/utilities/settings.cpp"/>
+      <File Name="../library/utilities/timer.cpp"/>
+      <File Name="../library/utilities/thread.h"/>
+      <File Name="../library/utilities/timer.h"/>
+      <File Name="../library/utilities/xmlpreloader.h"/>
+      <File Name="../library/utilities/highresolutiontimer.h"/>
+      <File Name="../library/utilities/threadpool.h"/>
+      <File Name="../library/utilities/xmlparsehelper.cpp"/>
+      <File Name="../library/utilities/xmlParser.cpp"/>
+      <File Name="../library/utilities/smartpointers.h"/>
+      <File Name="../library/utilities/genfunc.h"/>
+      <File Name="../library/utilities/genfunc.cpp"/>
+      <File Name="../library/utilities/xmlpreloader.cpp"/>
+      <File Name="../library/utilities/xmlParser.h"/>
+      <File Name="../library/utilities/mathfunc.h"/>
+      <File Name="../library/utilities/deletefuncs.h"/>
+      <File Name="../library/utilities/mathfunc.cpp"/>
+      <File Name="../library/utilities/highresolutiontimer.cpp"/>
+      <File Name="../library/utilities/statcounter.cpp"/>
+      <File Name="../library/utilities/state.cpp"/>
+      <File Name="../library/utilities/xmlparsehelper.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="gui">
+      <File Name="../library/gui/scrollparam.h"/>
+      <File Name="../library/gui/ismartguibase.cpp"/>
+      <File Name="../library/gui/menumanager.h"/>
+      <File Name="../library/gui/menutree.h"/>
+      <File Name="../library/gui/uiscrollbox.cpp"/>
+      <File Name="../library/gui/uiprogressbar.cpp"/>
+      <File Name="../library/gui/uicheckbox.h"/>
+      <File Name="../library/gui/menutree.cpp"/>
+      <File Name="../library/gui/messagecracker.h"/>
+      <File Name="../library/gui/menu.h"/>
+      <File Name="../library/gui/uibutton.h"/>
+      <File Name="../library/gui/uicontroldefs.h"/>
+      <File Name="../library/gui/uimeter.h"/>
+      <File Name="../library/gui/uicontrolfactory.h"/>
+      <File Name="../library/gui/uislider.h"/>
+      <File Name="../library/gui/menudefs.h"/>
+      <File Name="../library/gui/uislider.cpp"/>
+      <File Name="../library/gui/uibutton.cpp"/>
+      <File Name="../library/gui/uicontrolnavnode.h"/>
+      <File Name="../library/gui/uicontrol.cpp"/>
+      <File Name="../library/gui/ismartguibase.h"/>
+      <File Name="../library/gui/controlbase.cpp"/>
+      <File Name="../library/gui/uicontrolfactory.cpp"/>
+      <File Name="../library/gui/uilabel.cpp"/>
+      <File Name="../library/gui/uisubcontrol.h"/>
+      <File Name="../library/gui/uiscrollbox.h"/>
+      <File Name="../library/gui/uibuttonlist.h"/>
+      <File Name="../library/gui/uibuttonlist.cpp"/>
+      <File Name="../library/gui/uicheckbox.cpp"/>
+      <File Name="../library/gui/controlbase.h"/>
+      <File Name="../library/gui/uimeter.cpp"/>
+      <File Name="../library/gui/uiprogressbar.h"/>
+      <File Name="../library/gui/menumanager.cpp"/>
+      <File Name="../library/gui/uicontrol.h"/>
+      <File Name="../library/gui/uilabel.h"/>
+      <File Name="../library/gui/menu.cpp"/>
+      <File Name="../library/gui/uisubcontrol.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="slot">
+      <File Name="../library/slot/symbolposition.h"/>
+      <File Name="../library/slot/mathsymbol.h"/>
+      <File Name="../library/slot/slotmathmanager.h"/>
+      <File Name="../library/slot/playresult.h"/>
+      <File Name="../library/slot/betmanager.cpp"/>
+      <File Name="../library/slot/reelstripset.cpp"/>
+      <File Name="../library/slot/reelstripview.cpp"/>
+      <File Name="../library/slot/pay.cpp"/>
+      <File Name="../library/slot/spinprofile.h"/>
+      <File Name="../library/slot/slotdefs.h"/>
+      <File Name="../library/slot/slotmath.h"/>
+      <File Name="../library/slot/paycombo.cpp"/>
+      <File Name="../library/slot/symbolsetviewdatamanager.h"/>
+      <File Name="../library/slot/valuetable.cpp"/>
+      <File Name="../library/slot/reelstripmodel.h"/>
+      <File Name="../library/slot/paycombo.h"/>
+      <File Name="../library/slot/reelgroupview.cpp"/>
+      <File Name="../library/slot/symbol2d.h"/>
+      <File Name="../library/slot/reelgroup.h"/>
+      <File Name="../library/slot/reelgroupmodel.h"/>
+      <File Name="../library/slot/reelgroupview.h"/>
+      <File Name="../library/slot/slotresults.h"/>
+      <File Name="../library/slot/reelgroup.cpp"/>
+      <File Name="../library/slot/spinprofile.cpp"/>
+      <File Name="../library/slot/slotmath.cpp"/>
+      <File Name="../library/slot/weightedtable.h"/>
+      <File Name="../library/slot/valuetable.h"/>
+      <File Name="../library/slot/ifrontpanel.h"/>
+      <File Name="../library/slot/slotresults.cpp"/>
+      <File Name="../library/slot/slotmathmanager.cpp"/>
+      <File Name="../library/slot/mathsymbol.cpp"/>
+      <File Name="../library/slot/symbol2d.cpp"/>
+      <File Name="../library/slot/reelstripset.h"/>
+      <File Name="../library/slot/symbolsetviewdata.h"/>
+      <File Name="../library/slot/reelgroupmodel.cpp"/>
+      <File Name="../library/slot/playresult.cpp"/>
+      <File Name="../library/slot/symbolsetviewdata.cpp"/>
+      <File Name="../library/slot/paytableset.h"/>
+      <File Name="../library/slot/reelstripview.h"/>
+      <File Name="../library/slot/symbolsetviewdatamanager.cpp"/>
+      <File Name="../library/slot/symbolviewdata.h"/>
+      <File Name="../library/slot/paytableset.cpp"/>
+      <File Name="../library/slot/pay.h"/>
+      <File Name="../library/slot/slotgame.cpp"/>
+      <File Name="../library/slot/betmanager.h"/>
+      <File Name="../library/slot/slotgame.h"/>
+      <File Name="../library/slot/symbolviewdata.cpp"/>
+      <File Name="../library/slot/weightedtable.cpp"/>
+      <File Name="../library/slot/reelstripmodel.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="soil">
+      <File Name="../library/soil/SOIL.c"/>
+      <File Name="../library/soil/stb_image_aug.h"/>
+      <File Name="../library/soil/image_DXT.h"/>
+      <File Name="../library/soil/stb_image_aug.c"/>
+      <File Name="../library/soil/image_helper.h"/>
+      <File Name="../library/soil/image_helper.c"/>
+      <File Name="../library/soil/test_SOIL.cpp"/>
+      <File Name="../library/soil/stbi_DDS_aug_c.h"/>
+      <File Name="../library/soil/SOIL.h"/>
+      <File Name="../library/soil/image_DXT.c"/>
+      <File Name="../library/soil/stbi_DDS_aug.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="objectdata">
+      <File Name="../library/objectdata/objectdata2d.h"/>
+      <File Name="../library/objectdata/objectdatamanager.cpp"/>
+      <File Name="../library/objectdata/objectphysicsdata3d.h"/>
+      <File Name="../library/objectdata/objectdata3d.cpp"/>
+      <File Name="../library/objectdata/objectvisualdata3d.h"/>
+      <File Name="../library/objectdata/objectvisualdata3d.cpp"/>
+      <File Name="../library/objectdata/objectvisualdata2d.h"/>
+      <File Name="../library/objectdata/objectphysicsdata2d.cpp"/>
+      <File Name="../library/objectdata/objectdata3d.h"/>
+      <File Name="../library/objectdata/objectphysicsdata2d.h"/>
+      <File Name="../library/objectdata/objectphysicsdata3d.cpp"/>
+      <File Name="../library/objectdata/objectdata2d.cpp"/>
+      <File Name="../library/objectdata/objectvisualdata2d.cpp"/>
+      <File Name="../library/objectdata/objectdatamanager.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="2d">
+      <File Name="../library/2d/iaibase2d.h"/>
+      <File Name="../library/2d/actorsprite2d.cpp"/>
+      <File Name="../library/2d/loopstagestrategy2d.cpp"/>
+      <File Name="../library/2d/sprite2d.cpp"/>
+      <File Name="../library/2d/object2d.h"/>
+      <File Name="../library/2d/sprite2d.h"/>
+      <File Name="../library/2d/basicactorstrategy2d.cpp"/>
+      <File Name="../library/2d/font.cpp"/>
+      <File Name="../library/2d/linearstagestrategy2d.cpp"/>
+      <File Name="../library/2d/basicstagestrategy2d.h"/>
+      <File Name="../library/2d/object2d.cpp"/>
+      <File Name="../library/2d/font.h"/>
+      <File Name="../library/2d/sector2d.h"/>
+      <File Name="../library/2d/visualcomponent2d.cpp"/>
+      <File Name="../library/2d/iaibase2d.cpp"/>
+      <File Name="../library/2d/sector2d.cpp"/>
+      <File Name="../library/2d/linearstagestrategy2d.h"/>
+      <File Name="../library/2d/basicactorstrategy2d.h"/>
+      <File Name="../library/2d/basicspritestrategy2d.h"/>
+      <File Name="../library/2d/visualcomponent2d.h"/>
+      <File Name="../library/2d/loopstagestrategy2d.h"/>
+      <File Name="../library/2d/basicstagestrategy2d.cpp"/>
+      <File Name="../library/2d/actorsprite2d.h"/>
+      <File Name="../library/2d/basicspritestrategy2d.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="script">
+      <File Name="../library/script/scriptcomponent.cpp"/>
+      <File Name="../library/script/scriptcolor.h"/>
+      <File Name="../library/script/scriptglobals.h"/>
+      <File Name="../library/script/scriptcolor.cpp"/>
+      <File Name="../library/script/scriptpoint.cpp"/>
+      <File Name="../library/script/scriptmanager.cpp"/>
+      <File Name="../library/script/scriptpoint.h"/>
+      <File Name="../library/script/scriptglobals.cpp"/>
+      <File Name="../library/script/scriptmanager.h"/>
+      <File Name="../library/script/scriptcomponent.h"/>
+      <File Name="../library/script/scriptdefs.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="system">
+      <File Name="../library/system/device.h"/>
+      <File Name="../library/system/basegame.cpp"/>
+      <File Name="../library/system/basegame.h"/>
+      <File Name="../library/system/device.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="managers">
+      <File Name="../library/managers/meshmanager.h"/>
+      <File Name="../library/managers/spritestrategymanager.h"/>
+      <File Name="../library/managers/texturemanager.h"/>
+      <File Name="../library/managers/shadermanager.h"/>
+      <File Name="../library/managers/vertexbuffermanager.cpp"/>
+      <File Name="../library/managers/soundmanager.h"/>
+      <File Name="../library/managers/actionmanager.cpp"/>
+      <File Name="../library/managers/texturemanager.cpp"/>
+      <File Name="../library/managers/soundmanager.cpp"/>
+      <File Name="../library/managers/fontmanager.h"/>
+      <File Name="../library/managers/vertexbuffermanager.h"/>
+      <File Name="../library/managers/managerbase.cpp"/>
+      <File Name="../library/managers/actionmanager.h"/>
+      <File Name="../library/managers/meshmanager.cpp"/>
+      <File Name="../library/managers/spritestrategymanager.cpp"/>
+      <File Name="../library/managers/spritesheetmanager.cpp"/>
+      <File Name="../library/managers/signalmanager.cpp"/>
+      <File Name="../library/managers/signalmanager.h"/>
+      <File Name="../library/managers/shadermanager.cpp"/>
+      <File Name="../library/managers/spritesheetmanager.h"/>
+      <File Name="../library/managers/fontmanager.cpp"/>
+      <File Name="../library/managers/managerbase.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="common">
+      <File Name="../library/common/spritesheetglyph.h"/>
+      <File Name="../library/common/object.h"/>
+      <File Name="../library/common/mesh3d.h"/>
+      <File Name="../library/common/spritedata.h"/>
+      <File Name="../library/common/playlist.h"/>
+      <File Name="../library/common/sectordata.h"/>
+      <File Name="../library/common/ispritestrategy.h"/>
+      <File Name="../library/common/matrix.h"/>
+      <File Name="../library/common/object.cpp"/>
+      <File Name="../library/common/shaderdata.h"/>
+      <File Name="../library/common/radian.h"/>
+      <File Name="../library/common/keycodeaction.h"/>
+      <File Name="../library/common/camera.h"/>
+      <File Name="../library/common/color.h"/>
+      <File Name="../library/common/face2d.h"/>
+      <File Name="../library/common/spritesheet.h"/>
+      <File Name="../library/common/basestrategy.cpp"/>
+      <File Name="../library/common/worldvalue.h"/>
+      <File Name="../library/common/matrix.cpp"/>
+      <File Name="../library/common/rect.h"/>
+      <File Name="../library/common/camera.cpp"/>
+      <File Name="../library/common/relativeoffset.h"/>
+      <File Name="../library/common/quad2d.h"/>
+      <File Name="../library/common/quad.h"/>
+      <File Name="../library/common/fontproperties.h"/>
+      <File Name="../library/common/defs.h"/>
+      <File Name="../library/common/basestrategy.h"/>
+      <File Name="../library/common/playlist.cpp"/>
+      <File Name="../library/common/spritesheet.cpp"/>
+      <File Name="../library/common/vertex3d.h"/>
+      <File Name="../library/common/actordata.cpp"/>
+      <File Name="../library/common/build_defs.h"/>
+      <File Name="../library/common/sound.h"/>
+      <File Name="../library/common/spritedata.cpp"/>
+      <File Name="../library/common/uv.h"/>
+      <File Name="../library/common/bitmask.h"/>
+      <File Name="../library/common/dynamicoffset.h"/>
+      <File Name="../library/common/normal.h"/>
+      <File Name="../library/common/scaledframe.h"/>
+      <File Name="../library/common/quaternion.h"/>
+      <File Name="../library/common/sound.cpp"/>
+      <File Name="../library/common/spritebinaryfileheader.h"/>
+      <File Name="../library/common/sectordata.cpp"/>
+      <File Name="../library/common/shaderdata.cpp"/>
+      <File Name="../library/common/vertex2d.h"/>
+      <File Name="../library/common/texture.h"/>
+      <File Name="../library/common/point.h"/>
+      <File Name="../library/common/build_defs.cpp"/>
+      <File Name="../library/common/worldvalue.cpp"/>
+      <File Name="../library/common/actordata.h"/>
+      <File Name="../library/common/size.h"/>
+      <File Name="../library/common/collisionmesh3d.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="physics">
+      <File Name="../library/physics/physicsworldmanager.cpp"/>
+      <File Name="../library/physics/physicsworld2d.cpp"/>
+      <File Name="../library/physics/physicscomponent3d.h"/>
+      <File Name="../library/physics/physicsworldmanager.h"/>
+      <File Name="../library/physics/physicsworld3d.cpp"/>
+      <File Name="../library/physics/physicscomponent3d.cpp"/>
+      <File Name="../library/physics/physicscomponent2d.h"/>
+      <File Name="../library/physics/physicsworld3d.h"/>
+      <File Name="../library/physics/physicscomponent2d.cpp"/>
+      <File Name="../library/physics/physicsworld2d.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="hud">
+      <File Name="../library/hud/hudmanager.h"/>
+      <File Name="../library/hud/uiprogressbar.cpp"/>
+      <File Name="../library/hud/hudcontrol.cpp"/>
+      <File Name="../library/hud/uihudfactory.cpp"/>
+      <File Name="../library/hud/hudcontrol.h"/>
+      <File Name="../library/hud/hudmanager.cpp"/>
+      <File Name="../library/hud/uihudfactory.h"/>
+      <File Name="../library/hud/uiprogressbar.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="3d">
+      <File Name="../library/3d/light.h"/>
+      <File Name="../library/3d/object3d.h"/>
+      <File Name="../library/3d/sprite3d.cpp"/>
+      <File Name="../library/3d/sprite3d.h"/>
+      <File Name="../library/3d/visualcomponent3d.h"/>
+      <File Name="../library/3d/visualcomponent3d.cpp"/>
+      <File Name="../library/3d/lightlist.cpp"/>
+      <File Name="../library/3d/lightlist.h"/>
+      <File Name="../library/3d/object3d.cpp"/>
+      <File Name="../library/3d/light.cpp"/>
+    </VirtualDirectory>
+    <File Name="../library/CMakeLists.txt"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="bulletPhysics">
+    <VirtualDirectory Name="build3">
+      <VirtualDirectory Name="vs2010">
+        <File Name="../bulletPhysics/build3/vs2010/BulletFileLoader.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/ConvexDecomposition.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletFileLoader.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3OpenCL_clew.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Collision.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamics.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Collision.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3OpenCL_clew.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet2FileLoader.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamicsUtils.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Common.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/HACD.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletWorldImporter.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet2FileLoader.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletDynamics.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletDynamics.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/HACD.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamics.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/ConvexDecomposition.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletCollision.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/LinearMath.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Common.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletSoftBody.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletSoftBody.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletXmlWorldImporter.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletSoftBody.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/HACD.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Dynamics.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamicsUtils.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/LinearMath.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamics.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Geometry.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletCollision.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3OpenCL_clew.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletXmlWorldImporter.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Geometry.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletWorldImporter.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Common.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Geometry.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletFileLoader.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletWorldImporter.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletInverseDynamicsUtils.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Collision.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Dynamics.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet3Dynamics.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletDynamics.vcxproj.user"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletCollision.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/Bullet2FileLoader.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/LinearMath.vcxproj.filters"/>
+        <File Name="../bulletPhysics/build3/vs2010/BulletXmlWorldImporter.vcxproj"/>
+        <File Name="../bulletPhysics/build3/vs2010/ConvexDecomposition.vcxproj"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="src">
+      <VirtualDirectory Name="BulletDynamics">
+        <VirtualDirectory Name="ConstraintSolver">
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btContactConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btConstraintSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSliderConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSliderConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btHingeConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btTypedConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGearConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btFixedConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btContactConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btTypedConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSolverConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btFixedConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSolverBody.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btHingeConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btGearConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btContactSolverInfo.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btJacobianEntry.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="MLCPSolvers">
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btPATHSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btDantzigLCP.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btLemkeAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btMLCPSolverInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btDantzigLCP.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btMLCPSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btLemkeAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btLemkeSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btMLCPSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/MLCPSolvers/btDantzigSolver.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Character">
+          <File Name="../bulletPhysics/src/BulletDynamics/Character/btKinematicCharacterController.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Character/btCharacterControllerInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Character/btKinematicCharacterController.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Vehicle">
+          <File Name="../bulletPhysics/src/BulletDynamics/Vehicle/btRaycastVehicle.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Vehicle/btWheelInfo.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Vehicle/btVehicleRaycaster.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Vehicle/btWheelInfo.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Vehicle/btRaycastVehicle.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Dynamics">
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btRigidBody.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btActionInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btDynamicsWorld.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Dynamics/btRigidBody.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Featherstone">
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyLink.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyJointFeedback.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyPoint2Point.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyPoint2Point.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyConstraintSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBody.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodySolverConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyJointMotor.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBody.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyJointMotor.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/BulletDynamics/premake4.lua"/>
+        <File Name="../bulletPhysics/src/BulletDynamics/CMakeLists.txt"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3Serialize">
+        <VirtualDirectory Name="Bullet2FileLoader">
+          <VirtualDirectory Name="autogenerated">
+            <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/autogenerated/bullet2.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Common.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3DNA.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3DNA.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Serializer.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Chunk.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Chunk.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/premake4.lua"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3BulletFile.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Defines.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3BulletFile.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3File.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/CMakeLists.txt"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3File.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Serialize/Bullet2FileLoader/b3Serializer.cpp"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3Collision">
+        <VirtualDirectory Name="NarrowPhaseCollision">
+          <VirtualDirectory Name="shared">
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3NewContactReduction.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3ContactSphereSphere.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3Collidable.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3ConvexPolyhedronData.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3ContactConvexConvexSAT.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3QuantizedBvhNodeData.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3FindConcaveSatAxis.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3Contact4Data.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3BvhSubtreeInfoData.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3BvhTraversal.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3ReduceContacts.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3UpdateAabbs.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3MprPenetration.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3ClipFaces.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3RigidBodyData.h"/>
+            <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/shared/b3FindSeparatingAxis.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3Config.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3RaycastInfo.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3CpuNarrowPhase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3CpuNarrowPhase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3RigidBodyCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3Contact4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3ConvexUtility.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/NarrowPhaseCollision/b3ConvexUtility.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="BroadPhaseCollision">
+          <VirtualDirectory Name="shared">
+            <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/shared/b3Aabb.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3DynamicBvhBroadphase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3OverlappingPairCache.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3OverlappingPair.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3DynamicBvh.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3DynamicBvhBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3OverlappingPairCache.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3DynamicBvh.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Collision/BroadPhaseCollision/b3BroadphaseCallback.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/Bullet3Collision/premake4.lua"/>
+        <File Name="../bulletPhysics/src/Bullet3Collision/CMakeLists.txt"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="BulletCollision">
+        <VirtualDirectory Name="CollisionShapes">
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexPolyhedron.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btSphereShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCapsuleShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConcaveShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexHullShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexInternalShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexPolyhedron.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexPointCloudShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBoxShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btUniformScalingShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btOptimizedBvh.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btEmptyShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMultimaterialTriangleMeshShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleMesh.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btOptimizedBvh.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTetrahedronShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBox2dShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCylinderShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCapsuleShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConeShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBoxShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btStaticPlaneShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCollisionShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCompoundShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btEmptyShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btBox2dShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexHullShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleCallback.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMaterial.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexPointCloudShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConeShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCollisionShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMultimaterialTriangleMeshShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMultiSphereShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvex2dShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btStaticPlaneShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleMesh.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btShapeHull.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTetrahedronShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvex2dShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConvexInternalShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btStridingMeshInterface.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btShapeHull.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMinkowskiSumShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCollisionMargin.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleCallback.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btSphereShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleBuffer.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleIndexVertexMaterialArray.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleIndexVertexMaterialArray.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleMeshShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btConcaveShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCompoundShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btCylinderShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btUniformScalingShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMultiSphereShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btTriangleBuffer.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btMinkowskiSumShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Gimpact">
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_tri_collision.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btBoxCollision.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactQuantizedBvh.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_math.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_memory.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_bitset.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_hash_table.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_contact.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_radixsort.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btCompoundFromGimpact.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_basic_geometry_operations.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_geometry.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_box_set.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGeometryOperations.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGenericPoolAllocator.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_box_collision.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactShape.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_geom_types.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactBvh.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btClipPolygon.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactBvh.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_memory.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btContactProcessing.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGenericPoolAllocator.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_linear_math.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactShape.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btContactProcessing.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_tri_collision.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactMassUtil.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btQuantization.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btGImpactQuantizedBvh.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_clip_polygon.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_array.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_contact.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btTriangleShapeEx.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/gim_box_set.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/Gimpact/btTriangleShapeEx.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="NarrowPhaseCollision">
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btComputeGjkEpaPenetration.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkEpa3.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btPointCollector.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkEpa2.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkCollisionDescription.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkPairDetector.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkConvexCast.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btConvexCast.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btMprPenetration.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btConvexCast.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btGjkConvexCast.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btRaycastCallback.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/NarrowPhaseCollision/btRaycastCallback.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="CollisionDispatch">
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSimulationIslandManager.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBoxBoxDetector.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionWorld.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionWorldImporter.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btGhostObject.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btHashedSimplePairCache.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btGhostObject.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionObject.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBoxBoxDetector.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/SphereTriangleDetector.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionObject.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionWorld.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btManifoldResult.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/SphereTriangleDetector.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btUnionFind.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btHashedSimplePairCache.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btManifoldResult.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btSimulationIslandManager.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btUnionFind.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionConfiguration.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btCollisionWorldImporter.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="BroadphaseCollision">
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btMultiSapBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDbvt.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btAxisSweep3.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDispatcher.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btMultiSapBroadphase.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.cpp"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btAxisSweep3.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDispatcher.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btDbvt.h"/>
+          <File Name="../bulletPhysics/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/BulletCollision/premake4.lua"/>
+        <File Name="../bulletPhysics/src/BulletCollision/CMakeLists.txt"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="BulletInverseDynamics">
+        <VirtualDirectory Name="details">
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/IDMatVec.hpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/MultiBodyTreeInitCache.hpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/MultiBodyTreeImpl.hpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/MultiBodyTreeImpl.cpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/IDEigenInterface.hpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/IDLinearMathInterface.hpp"/>
+          <File Name="../bulletPhysics/src/BulletInverseDynamics/details/MultiBodyTreeInitCache.cpp"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDConfigBuiltin.hpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDMath.hpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/MultiBodyTree.cpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDConfig.hpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/premake4.lua"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDMath.cpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDErrorMessages.hpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/MultiBodyTree.hpp"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/CMakeLists.txt"/>
+        <File Name="../bulletPhysics/src/BulletInverseDynamics/IDConfigEigen.hpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3OpenCL">
+        <VirtualDirectory Name="RigidBody">
+          <VirtualDirectory Name="kernels">
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solveFriction.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/integrateKernel.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solveContact.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/integrateKernel.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverSetup.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solveContact.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverUtils.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/jointSolver.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/jointSolver.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverSetup.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverUtils.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/updateAabbsKernel.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverSetup2.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solveFriction.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/solverSetup2.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/batchingKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/batchingKernelsNew.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/batchingKernelsNew.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/updateAabbsKernel.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/kernels/batchingKernels.cl"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuNarrowPhase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuPgsConstraintSolver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuSolverConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuPgsContactSolver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3Solver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuPgsConstraintSolver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuSolverBody.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuNarrowPhase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuGenericConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuPgsContactSolver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuJacobiContactSolver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuRigidBodyPipelineInternalData.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuGenericConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuRigidBodyPipeline.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuRigidBodyPipeline.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3Solver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuConstraint4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuJacobiContactSolver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/RigidBody/b3GpuNarrowPhaseInternalData.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="ParallelPrimitives">
+          <VirtualDirectory Name="kernels">
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/FillKernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/BoundSearchKernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/BoundSearchKernelsCL.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/PrefixScanKernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/CopyKernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/RadixSort32KernelsCL.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/RadixSort32Kernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/PrefixScanFloat4Kernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/PrefixScanKernelsFloat4CL.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/PrefixScanKernelsCL.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/FillKernelsCL.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/kernels/CopyKernelsCL.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3BufferInfoCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3PrefixScanCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3PrefixScanFloat4CL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3LauncherCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3FillCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3RadixSort32CL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3FillCL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3OpenCLArray.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3BoundSearchCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3PrefixScanCL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3LauncherCL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3PrefixScanFloat4CL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3BoundSearchCL.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/ParallelPrimitives/b3RadixSort32CL.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Raycast">
+          <VirtualDirectory Name="kernels">
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/Raycast/kernels/rayCastKernels.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/Raycast/kernels/rayCastKernels.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/Raycast/b3GpuRaycast.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/Raycast/b3GpuRaycast.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="BroadphaseCollision">
+          <VirtualDirectory Name="kernels">
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/sap.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/gridBroadphase.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/parallelLinearBvhKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/sapKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/parallelLinearBvh.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/kernels/gridBroadphaseKernels.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuParallelLinearBvhBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuGridBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuParallelLinearBvhBroadphase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuGridBroadphase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3SapAabb.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuParallelLinearBvh.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuSapBroadphase.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuSapBroadphase.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuParallelLinearBvh.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/BroadphaseCollision/b3GpuBroadphaseInterface.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="NarrowphaseCollision">
+          <VirtualDirectory Name="kernels">
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/bvhTraversal.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/mprKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/bvhTraversal.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/satClipHullContacts.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/mpr.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/satConcaveKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/sat.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/primitiveContacts.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/primitiveContacts.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/satKernels.h"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/satConcave.cl"/>
+            <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/kernels/satClipHullContacts.h"/>
+          </VirtualDirectory>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3StridingMeshInterface.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3TriangleIndexVertexArray.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3GjkPairDetector.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3SupportMappings.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3OptimizedBvh.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3TriangleCallback.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3QuantizedBvh.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3VoronoiSimplexSolver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3ConvexHullContact.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3GjkPairDetector.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3ContactCache.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3TriangleIndexVertexArray.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3VectorFloat4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3ContactCache.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3TriangleCallback.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3VoronoiSimplexSolver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3OptimizedBvh.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3ConvexPolyhedronCL.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3StridingMeshInterface.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3BvhInfo.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3GjkEpa.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3GjkEpa.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/NarrowphaseCollision/b3QuantizedBvh.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Initialize">
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/Initialize/b3OpenCLUtils.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/Initialize/b3OpenCLInclude.h"/>
+          <File Name="../bulletPhysics/src/Bullet3OpenCL/Initialize/b3OpenCLUtils.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/Bullet3OpenCL/premake4.lua"/>
+        <File Name="../bulletPhysics/src/Bullet3OpenCL/CMakeLists.txt"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3Dynamics">
+        <VirtualDirectory Name="ConstraintSolver">
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3Point2PointConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3FixedConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3TypedConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3PgsJacobiSolver.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3Point2PointConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3PgsJacobiSolver.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3ContactSolverInfo.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3Generic6DofConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3SolverConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3SolverBody.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3FixedConstraint.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3Generic6DofConstraint.cpp"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3JacobianEntry.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/ConstraintSolver/b3TypedConstraint.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="shared">
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/shared/b3IntegrateTransforms.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/shared/b3ConvertConstraint4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/shared/b3ContactConstraint4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Dynamics/shared/b3Inertia.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/Bullet3Dynamics/b3CpuRigidBodyPipeline.cpp"/>
+        <File Name="../bulletPhysics/src/Bullet3Dynamics/premake4.lua"/>
+        <File Name="../bulletPhysics/src/Bullet3Dynamics/CMakeLists.txt"/>
+        <File Name="../bulletPhysics/src/Bullet3Dynamics/b3CpuRigidBodyPipeline.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3Common">
+        <VirtualDirectory Name="shared">
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3Float4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3PlatformDefinitions.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3Quat.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3Int4.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3Int2.h"/>
+          <File Name="../bulletPhysics/src/Bullet3Common/shared/b3Mat3x3.h"/>
+        </VirtualDirectory>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3CommandLineArgs.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3TransformUtil.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3StackAlloc.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Logging.cpp"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3FileUtils.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Quaternion.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Vector3.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Random.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Logging.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Scalar.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Transform.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Vector3.cpp"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/premake4.lua"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3MinMax.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3HashMap.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3AlignedObjectArray.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3QuadWord.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3AlignedAllocator.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3PoolAllocator.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3Matrix3x3.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/CMakeLists.txt"/>
+        <File Name="../bulletPhysics/src/Bullet3Common/b3AlignedAllocator.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="clew">
+        <File Name="../bulletPhysics/src/clew/clew.c"/>
+        <File Name="../bulletPhysics/src/clew/clew.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Bullet3Geometry">
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3GeometryUtil.cpp"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3GeometryUtil.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3ConvexHullComputer.cpp"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/premake4.lua"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3AabbUtil.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3ConvexHullComputer.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/b3GrahamScan2dConvexHull.h"/>
+        <File Name="../bulletPhysics/src/Bullet3Geometry/CMakeLists.txt"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="LinearMath">
+        <File Name="../bulletPhysics/src/LinearMath/btConvexHull.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btList.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btPolarDecomposition.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btConvexHull.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btAlignedObjectArray.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btGeometryUtil.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btTransform.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btSpatialAlgebra.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btSerializer.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btQuaternion.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btScalar.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btMatrix3x3.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btIDebugDraw.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btQuickprof.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btAlignedAllocator.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btDefaultMotionState.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btCpuFeatureUtility.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btMinMax.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btGrahamScan2dConvexHull.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btAabbUtil2.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btConvexHullComputer.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btQuickprof.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btPolarDecomposition.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btMatrixX.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btMotionState.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/premake4.lua"/>
+        <File Name="../bulletPhysics/src/LinearMath/btAlignedAllocator.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btQuadWord.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btPoolAllocator.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btStackAlloc.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btSerializer.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btGeometryUtil.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btRandom.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btVector3.cpp"/>
+        <File Name="../bulletPhysics/src/LinearMath/btConvexHullComputer.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btVector3.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/CMakeLists.txt"/>
+        <File Name="../bulletPhysics/src/LinearMath/btHashMap.h"/>
+        <File Name="../bulletPhysics/src/LinearMath/btTransformUtil.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="BulletSoftBody">
+        <File Name="../bulletPhysics/src/BulletSoftBody/btDefaultSoftBodySolver.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftRigidDynamicsWorld.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftRigidDynamicsWorld.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btDefaultSoftBodySolver.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyData.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyHelpers.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/premake4.lua"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyHelpers.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftRigidCollisionAlgorithm.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBody.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftSoftCollisionAlgorithm.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodySolverVertexBuffer.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyInternals.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBody.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/CMakeLists.txt"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSparseSDF.h"/>
+        <File Name="../bulletPhysics/src/BulletSoftBody/btSoftBodySolvers.h"/>
+      </VirtualDirectory>
+      <File Name="../bulletPhysics/src/btBulletCollisionCommon.h"/>
+      <File Name="../bulletPhysics/src/btBulletDynamicsCommon.h"/>
+      <File Name="../bulletPhysics/src/CMakeLists.txt"/>
+    </VirtualDirectory>
+    <File Name="../bulletPhysics/version 2.83.7.txt"/>
+    <File Name="../bulletPhysics/CMakeLists.txt"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="angelscript">
+    <VirtualDirectory Name="add_on">
+      <VirtualDirectory Name="autowrapper">
+        <VirtualDirectory Name="generator">
+          <File Name="../angelscript/add_on/autowrapper/generator/generateheader.cpp"/>
+          <File Name="../angelscript/add_on/autowrapper/generator/generator.vcproj"/>
+          <File Name="../angelscript/add_on/autowrapper/generator/generator.sln"/>
+        </VirtualDirectory>
+        <File Name="../angelscript/add_on/autowrapper/aswrappedcall.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptarray">
+        <File Name="../angelscript/add_on/scriptarray/scriptarray.h"/>
+        <File Name="../angelscript/add_on/scriptarray/scriptarray.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptgrid">
+        <File Name="../angelscript/add_on/scriptgrid/scriptgrid.h"/>
+        <File Name="../angelscript/add_on/scriptgrid/scriptgrid.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="contextmgr">
+        <File Name="../angelscript/add_on/contextmgr/contextmgr.h"/>
+        <File Name="../angelscript/add_on/contextmgr/contextmgr.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scripthelper">
+        <File Name="../angelscript/add_on/scripthelper/scripthelper.cpp"/>
+        <File Name="../angelscript/add_on/scripthelper/scripthelper.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="weakref">
+        <File Name="../angelscript/add_on/weakref/weakref.cpp"/>
+        <File Name="../angelscript/add_on/weakref/weakref.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptfile">
+        <File Name="../angelscript/add_on/scriptfile/scriptfile.cpp"/>
+        <File Name="../angelscript/add_on/scriptfile/scriptfile.h"/>
+        <File Name="../angelscript/add_on/scriptfile/scriptfilesystem.h"/>
+        <File Name="../angelscript/add_on/scriptfile/scriptfilesystem.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scripthandle">
+        <File Name="../angelscript/add_on/scripthandle/scripthandle.cpp"/>
+        <File Name="../angelscript/add_on/scripthandle/scripthandle.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="serializer">
+        <File Name="../angelscript/add_on/serializer/serializer.h"/>
+        <File Name="../angelscript/add_on/serializer/serializer.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptmath">
+        <File Name="../angelscript/add_on/scriptmath/scriptmathcomplex.h"/>
+        <File Name="../angelscript/add_on/scriptmath/scriptmath.h"/>
+        <File Name="../angelscript/add_on/scriptmath/scriptmath.cpp"/>
+        <File Name="../angelscript/add_on/scriptmath/scriptmathcomplex.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptany">
+        <File Name="../angelscript/add_on/scriptany/scriptany.h"/>
+        <File Name="../angelscript/add_on/scriptany/scriptany.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptbuilder">
+        <File Name="../angelscript/add_on/scriptbuilder/scriptbuilder.h"/>
+        <File Name="../angelscript/add_on/scriptbuilder/scriptbuilder.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="debugger">
+        <File Name="../angelscript/add_on/debugger/debugger.h"/>
+        <File Name="../angelscript/add_on/debugger/debugger.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="datetime">
+        <File Name="../angelscript/add_on/datetime/datetime.cpp"/>
+        <File Name="../angelscript/add_on/datetime/datetime.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptdictionary">
+        <File Name="../angelscript/add_on/scriptdictionary/scriptdictionary.h"/>
+        <File Name="../angelscript/add_on/scriptdictionary/scriptdictionary.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="scriptstdstring">
+        <File Name="../angelscript/add_on/scriptstdstring/scriptstdstring.h"/>
+        <File Name="../angelscript/add_on/scriptstdstring/scriptstdstring.cpp"/>
+        <File Name="../angelscript/add_on/scriptstdstring/scriptstdstring_utils.cpp"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="projects">
+      <VirtualDirectory Name="msvc10">
+        <File Name="../angelscript/projects/msvc10/angelscript.vcxproj"/>
+        <File Name="../angelscript/projects/msvc10/angelscript.vcxproj.user"/>
+        <File Name="../angelscript/projects/msvc10/angelscript.vcxproj.filters"/>
+        <File Name="../angelscript/projects/msvc10/angelscript.sln"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="msvc2012">
+        <File Name="../angelscript/projects/msvc2012/angelscript.vcxproj"/>
+        <File Name="../angelscript/projects/msvc2012/angelscript.vcxproj.filters"/>
+        <File Name="../angelscript/projects/msvc2012/angelscript.sln"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="msvc2013">
+        <File Name="../angelscript/projects/msvc2013/angelscript.vcxproj"/>
+        <File Name="../angelscript/projects/msvc2013/angelscript.vcxproj.filters"/>
+        <File Name="../angelscript/projects/msvc2013/angelscript.sln"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="include">
+      <File Name="../angelscript/include/angelscript.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="source">
+      <File Name="../angelscript/source/as_callfunc_arm_xcode.S"/>
+      <File Name="../angelscript/source/as_generic.h"/>
+      <File Name="../angelscript/source/as_tokendef.h"/>
+      <File Name="../angelscript/source/as_context.h"/>
+      <File Name="../angelscript/source/as_namespace.h"/>
+      <File Name="../angelscript/source/as_callfunc_x64_mingw.cpp"/>
+      <File Name="../angelscript/source/as_scriptnode.h"/>
+      <File Name="../angelscript/source/as_callfunc_ppc_64.cpp"/>
+      <File Name="../angelscript/source/as_scriptcode.cpp"/>
+      <File Name="../angelscript/source/as_context.cpp"/>
+      <File Name="../angelscript/source/as_gc.h"/>
+      <File Name="../angelscript/source/as_callfunc_arm.cpp"/>
+      <File Name="../angelscript/source/as_array.h"/>
+      <File Name="../angelscript/source/as_scriptnode.cpp"/>
+      <File Name="../angelscript/source/as_criticalsection.h"/>
+      <File Name="../angelscript/source/as_map.h"/>
+      <File Name="../angelscript/source/as_restore.h"/>
+      <File Name="../angelscript/source/as_memory.h"/>
+      <File Name="../angelscript/source/as_texts.h"/>
+      <File Name="../angelscript/source/as_string.h"/>
+      <File Name="../angelscript/source/as_callfunc_x64_gcc.cpp"/>
+      <File Name="../angelscript/source/as_module.h"/>
+      <File Name="../angelscript/source/as_callfunc.h"/>
+      <File Name="../angelscript/source/as_scriptobject.h"/>
+      <File Name="../angelscript/source/as_bytecode.cpp"/>
+      <File Name="../angelscript/source/as_tokenizer.cpp"/>
+      <File Name="../angelscript/source/as_callfunc_xenon.cpp"/>
+      <File Name="../angelscript/source/as_debug.h"/>
+      <File Name="../angelscript/source/as_compiler.cpp"/>
+      <File Name="../angelscript/source/as_outputbuffer.cpp"/>
+      <File Name="../angelscript/source/as_scriptfunction.cpp"/>
+      <File Name="../angelscript/source/as_outputbuffer.h"/>
+      <File Name="../angelscript/source/as_callfunc_sh4.cpp"/>
+      <File Name="../angelscript/source/as_builder.h"/>
+      <File Name="../angelscript/source/as_callfunc_arm_gcc.S"/>
+      <File Name="../angelscript/source/as_restore.cpp"/>
+      <File Name="../angelscript/source/as_configgroup.cpp"/>
+      <File Name="../angelscript/source/as_variablescope.cpp"/>
+      <File Name="../angelscript/source/as_callfunc.cpp"/>
+      <File Name="../angelscript/source/as_string_util.h"/>
+      <File Name="../angelscript/source/as_configgroup.h"/>
+      <File Name="../angelscript/source/as_atomic.cpp"/>
+      <File Name="../angelscript/source/as_compiler.h"/>
+      <File Name="../angelscript/source/as_callfunc_mips.cpp"/>
+      <File Name="../angelscript/source/as_datatype.h"/>
+      <File Name="../angelscript/source/as_callfunc_x64_msvc_asm.asm"/>
+      <File Name="../angelscript/source/as_config.h"/>
+      <File Name="../angelscript/source/as_tokenizer.h"/>
+      <File Name="../angelscript/source/as_string_util.cpp"/>
+      <File Name="../angelscript/source/as_scriptcode.h"/>
+      <File Name="../angelscript/source/as_bytecode.h"/>
+      <File Name="../angelscript/source/as_scriptengine.cpp"/>
+      <File Name="../angelscript/source/as_generic.cpp"/>
+      <File Name="../angelscript/source/as_scriptfunction.h"/>
+      <File Name="../angelscript/source/as_property.h"/>
+      <File Name="../angelscript/source/as_objecttype.cpp"/>
+      <File Name="../angelscript/source/as_parser.cpp"/>
+      <File Name="../angelscript/source/as_typeinfo.cpp"/>
+      <File Name="../angelscript/source/as_callfunc_x64_msvc.cpp"/>
+      <File Name="../angelscript/source/as_globalproperty.cpp"/>
+      <File Name="../angelscript/source/as_scriptobject.cpp"/>
+      <File Name="../angelscript/source/as_thread.cpp"/>
+      <File Name="../angelscript/source/as_typeinfo.h"/>
+      <File Name="../angelscript/source/as_builder.cpp"/>
+      <File Name="../angelscript/source/as_objecttype.h"/>
+      <File Name="../angelscript/source/as_string.cpp"/>
+      <File Name="../angelscript/source/as_scriptengine.h"/>
+      <File Name="../angelscript/source/as_variablescope.h"/>
+      <File Name="../angelscript/source/as_memory.cpp"/>
+      <File Name="../angelscript/source/as_thread.h"/>
+      <File Name="../angelscript/source/as_parser.h"/>
+      <File Name="../angelscript/source/as_gc.cpp"/>
+      <File Name="../angelscript/source/as_symboltable.h"/>
+      <File Name="../angelscript/source/as_callfunc_arm_msvc.asm"/>
+      <File Name="../angelscript/source/as_callfunc_x86.cpp"/>
+      <File Name="../angelscript/source/as_callfunc_arm_vita.S"/>
+      <File Name="../angelscript/source/as_datatype.cpp"/>
+      <File Name="../angelscript/source/as_callfunc_ppc.cpp"/>
+      <File Name="../angelscript/source/as_module.cpp"/>
+      <File Name="../angelscript/source/as_atomic.h"/>
+    </VirtualDirectory>
+    <File Name="../angelscript/version.txt"/>
+    <File Name="../angelscript/CMakeLists.txt"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="PachinkoChallenge">
+    <VirtualDirectory Name="source">
+      <VirtualDirectory Name="strategy">
+        <File Name="source/strategy/ballstrategy.cpp"/>
+        <File Name="source/strategy/ballstrategy.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="state">
+        <File Name="source/state/loadstate.h"/>
+        <File Name="source/state/titlescreenstate.cpp"/>
+        <File Name="source/state/loadstate.cpp"/>
+        <File Name="source/state/startupstate.h"/>
+        <File Name="source/state/statemessage.h"/>
+        <File Name="source/state/runstate.cpp"/>
+        <File Name="source/state/igamestate.h"/>
+        <File Name="source/state/gamedefs.h"/>
+        <File Name="source/state/commonstate.h"/>
+        <File Name="source/state/runstate.h"/>
+        <File Name="source/state/commonstate.cpp"/>
+        <File Name="source/state/startupstate.cpp"/>
+        <File Name="source/state/titlescreenstate.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="game">
+        <File Name="source/game/game.h"/>
+        <File Name="source/game/game.cpp"/>
+        <File Name="source/game/main.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="ai">
+        <File Name="source/ai/ballai.cpp"/>
+        <File Name="source/ai/ballai.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="smartGUI">
+        <File Name="source/smartGUI/smartresetkeybind.cpp"/>
+        <File Name="source/smartGUI/smartfullscreencheckbox.h"/>
+        <File Name="source/smartGUI/smartvsynccheckbox.h"/>
+        <File Name="source/smartGUI/smartkeybindbtn.h"/>
+        <File Name="source/smartGUI/smartdeadzoneslider.cpp"/>
+        <File Name="source/smartGUI/smartsettingsmenubtn.cpp"/>
+        <File Name="source/smartGUI/smartkeybindbtn.cpp"/>
+        <File Name="source/smartGUI/smartvsynccheckbox.cpp"/>
+        <File Name="source/smartGUI/smartconfirmbtn.h"/>
+        <File Name="source/smartGUI/smartapplysettingsbtn.h"/>
+        <File Name="source/smartGUI/smartfullscreencheckbox.cpp"/>
+        <File Name="source/smartGUI/smartapplysettingsbtn.cpp"/>
+        <File Name="source/smartGUI/smartresolutionbtn.cpp"/>
+        <File Name="source/smartGUI/smartresetkeybind.h"/>
+        <File Name="source/smartGUI/smartsettingsmenubtn.h"/>
+        <File Name="source/smartGUI/smartresolutionbtn.h"/>
+        <File Name="source/smartGUI/smartdeadzoneslider.h"/>
+        <File Name="source/smartGUI/smartconfirmbtn.cpp"/>
+      </VirtualDirectory>
+      <File Name="source/game.rc"/>
+      <File Name="source/game.ico"/>
+      <File Name="source/CMakeLists.txt"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="data">
+      <VirtualDirectory Name="sound">
+        <VirtualDirectory Name="menu">
+          <File Name="data/sound/menu/select0.ogg"/>
+          <File Name="data/sound/menu/select1.ogg"/>
+          <File Name="data/sound/menu/highlight2.ogg"/>
+          <File Name="data/sound/menu/select2.ogg"/>
+          <File Name="data/sound/menu/highlight0.ogg"/>
+          <File Name="data/sound/menu/highlight5.ogg"/>
+          <File Name="data/sound/menu/select3.ogg"/>
+          <File Name="data/sound/menu/highlight4.ogg"/>
+          <File Name="data/sound/menu/highlight1.ogg"/>
+          <File Name="data/sound/menu/highlight3.ogg"/>
+        </VirtualDirectory>
+        <File Name="data/sound/menuSound.lst"/>
+        <File Name="data/sound/soundListTable.lst"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="objects">
+        <VirtualDirectory Name="2d">
+          <VirtualDirectory Name="objectDataList">
+            <VirtualDirectory Name="games">
+              <VirtualDirectory Name="run">
+                <File Name="data/objects/2d/objectDataList/games/run/ballDataList.lst"/>
+                <File Name="data/objects/2d/objectDataList/games/run/stage1DataList.lst"/>
+              </VirtualDirectory>
+            </VirtualDirectory>
+            <File Name="data/objects/2d/objectDataList/debug.lst"/>
+            <File Name="data/objects/2d/objectDataList/keybindingMenu.lst"/>
+            <File Name="data/objects/2d/objectDataList/startupDataList.lst"/>
+            <File Name="data/objects/2d/objectDataList/menuGeneric.lst"/>
+            <File Name="data/objects/2d/objectDataList/dataListTable.lst"/>
+            <File Name="data/objects/2d/objectDataList/menuOther.lst"/>
+            <File Name="data/objects/2d/objectDataList/loadingScreenDataList.lst"/>
+            <File Name="data/objects/2d/objectDataList/titleScreenDataList.lst"/>
+            <File Name="data/objects/2d/objectDataList/menuBackgrounds.lst"/>
+          </VirtualDirectory>
+          <VirtualDirectory Name="mesh">
+            <VirtualDirectory Name="games">
+              <File Name="data/objects/2d/mesh/games/run.xml"/>
+            </VirtualDirectory>
+            <VirtualDirectory Name="menu">
+              <File Name="data/objects/2d/mesh/menu/key_binding_button_frame.2dm"/>
+            </VirtualDirectory>
+          </VirtualDirectory>
+          <VirtualDirectory Name="menu">
+            <VirtualDirectory Name="control">
+              <File Name="data/objects/2d/menu/control/key_binding_scroll_box.ctrl"/>
+              <File Name="data/objects/2d/menu/control/check_box_245x55.ctrl"/>
+              <File Name="data/objects/2d/menu/control/back_button.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_button_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_125x55.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_instructions_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/ui_button_150x60.ctrl"/>
+              <File Name="data/objects/2d/menu/control/close_button.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_capture_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_slider.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_seperator.ctrl"/>
+              <File Name="data/objects/2d/menu/control/confirmation_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_275x55.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_button.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_interface_275x55.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_145x55.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_reset_button.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_slider.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_list.ctrl"/>
+              <File Name="data/objects/2d/menu/control/deadzone_slider.ctrl"/>
+              <File Name="data/objects/2d/menu/control/menu_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/button_arrow.ctrl"/>
+              <File Name="data/objects/2d/menu/control/key_binding_label.ctrl"/>
+              <File Name="data/objects/2d/menu/control/meter_label.ctrl"/>
+            </VirtualDirectory>
+            <File Name="data/objects/2d/menu/menuListTable.lst"/>
+            <File Name="data/objects/2d/menu/confirmation.menu"/>
+            <File Name="data/objects/2d/menu/key_bindings.menu"/>
+            <File Name="data/objects/2d/menu/menu_action.list"/>
+            <File Name="data/objects/2d/menu/pause.menu"/>
+            <File Name="data/objects/2d/menu/main_menu.cfg"/>
+            <File Name="data/objects/2d/menu/settings.menu"/>
+            <File Name="data/objects/2d/menu/title_screen.menu"/>
+          </VirtualDirectory>
+          <VirtualDirectory Name="spritestrategy">
+            <VirtualDirectory Name="actor">
+              <File Name="data/objects/2d/spritestrategy/actor/spriteList.lst"/>
+            </VirtualDirectory>
+            <VirtualDirectory Name="stage1">
+              <File Name="data/objects/2d/spritestrategy/stage1/stage.cfg"/>
+              <File Name="data/objects/2d/spritestrategy/stage1/sector0.lst"/>
+            </VirtualDirectory>
+            <File Name="data/objects/2d/spritestrategy/sprite.lst"/>
+            <File Name="data/objects/2d/spritestrategy/spriteListTable.lst"/>
+          </VirtualDirectory>
+          <VirtualDirectory Name="ui">
+            <VirtualDirectory Name="games">
+              <VirtualDirectory Name="run">
+                <VirtualDirectory Name="controls">
+                  <File Name="data/objects/2d/ui/games/run/controls/win_meter.ctrl"/>
+                </VirtualDirectory>
+                <File Name="data/objects/2d/ui/games/run/base_game.cfg"/>
+                <File Name="data/objects/2d/ui/games/run/base_game.gui"/>
+              </VirtualDirectory>
+            </VirtualDirectory>
+          </VirtualDirectory>
+          <VirtualDirectory Name="scripts">
+            <File Name="data/objects/2d/scripts/shared_utilities.ang"/>
+            <File Name="data/objects/2d/scripts/shared_general.ang"/>
+            <File Name="data/objects/2d/scripts/menu_defs.ang"/>
+            <File Name="data/objects/2d/scripts/scriptListTable.lst"/>
+            <File Name="data/objects/2d/scripts/menu.ang"/>
+          </VirtualDirectory>
+          <VirtualDirectory Name="physics">
+            <File Name="data/objects/2d/physics/gamePhysics.cfg"/>
+            <File Name="data/objects/2d/physics/physicsListTable.lst"/>
+          </VirtualDirectory>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="textures">
+        <VirtualDirectory Name="games">
+          <VirtualDirectory Name="run">
+            <File Name="data/textures/games/run/run_spriteSheet.png"/>
+          </VirtualDirectory>
+        </VirtualDirectory>
+        <VirtualDirectory Name="titleScreen">
+          <File Name="data/textures/titleScreen/title_background.png"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="loadingScreen">
+          <File Name="data/textures/loadingScreen/loading_spriteSheet.png"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="startup">
+          <File Name="data/textures/startup/waffles_logo.png"/>
+          <File Name="data/textures/startup/logo.png"/>
+          <File Name="data/textures/startup/logoOld.png"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="menu">
+          <File Name="data/textures/menu/arrow.png"/>
+          <File Name="data/textures/menu/menu_bg.png"/>
+          <File Name="data/textures/menu/slider_button.png"/>
+          <File Name="data/textures/menu/16x16_2_pixel_frame.png"/>
+          <File Name="data/textures/menu/16x16_3_pixel_frame.png"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="fonts">
+          <File Name="data/textures/fonts/dejavu_sans_cond_50.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_45.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_26.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_32.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_55.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_outline_25.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_50.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_32.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_50.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_bold_32.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_bold_32.png"/>
+          <File Name="data/textures/fonts/font.lst"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_45.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_bold_32.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_65.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_55.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_45.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_60.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_70.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_outline_25.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_55.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_65.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_60.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_40.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_32.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_65.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_outline_24.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_bold_14.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_24.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_55.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_26.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_28.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_28.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_60.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_bold_32.fnt"/>
+          <File Name="data/textures/fonts/arial_reg_55.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_70.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_60.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_40.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_28.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_50.fnt"/>
+          <File Name="data/textures/fonts/arial_black_170.png"/>
+          <File Name="data/textures/fonts/arial_black_170.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_45.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_50.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_24.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_bold_14.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_60.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_55.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_65.png"/>
+          <File Name="data/textures/fonts/arial_reg_55.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_28.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_45.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_70.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_45.fnt"/>
+          <File Name="data/textures/fonts/arial_reg_45.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_55.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_bold_70.png"/>
+          <File Name="data/textures/fonts/arial_reg_45.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_outline_24.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_50.png"/>
+          <File Name="data/textures/fonts/dejavu_sans_cond_32.fnt"/>
+          <File Name="data/textures/fonts/dejavu_sans_reg_60.fnt"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="shaders">
+        <File Name="data/shaders/shader_v120.vert"/>
+        <File Name="data/shaders/shader_solid_v120.vert"/>
+        <File Name="data/shaders/shader_mesh_v100.vert"/>
+        <File Name="data/shaders/shader_mesh_v100.frag"/>
+        <File Name="data/shaders/shader_spriteSheet_v100.vert"/>
+        <File Name="data/shaders/shader_soild_v120.frag"/>
+        <File Name="data/shaders/shader_solid_v100.vert"/>
+        <File Name="data/shaders/shader_v100.vert"/>
+        <File Name="data/shaders/shader_mesh_no_txt_v100.vert"/>
+        <File Name="data/shaders/load_shader.cfg"/>
+        <File Name="data/shaders/load_shader_v100.frag"/>
+        <File Name="data/shaders/shader_v140.vert"/>
+        <File Name="data/shaders/shader_v100.frag"/>
+        <File Name="data/shaders/shader_mesh_no_txt_v100.frag"/>
+        <File Name="data/shaders/shader.cfg"/>
+        <File Name="data/shaders/shader_v140.frag"/>
+        <File Name="data/shaders/shader_soild_v100.frag"/>
+        <File Name="data/shaders/shader_v120.frag"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="settings">
+        <File Name="data/settings/controllerMapping.cfg"/>
+        <File Name="data/settings/gamecontrollerdb.txt"/>
+        <File Name="data/settings/settings.cfg"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <File Name="CMakeLists.txt"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Box2D">
+    <VirtualDirectory Name="Dynamics">
+      <VirtualDirectory Name="Contacts">
+        <File Name="../Box2D/Dynamics/Contacts/b2PolygonContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2PolygonContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ContactSolver.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2CircleContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ChainAndCircleContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2Contact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ContactSolver.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2CircleContact.cpp"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2Contact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.h"/>
+        <File Name="../Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Joints">
+        <File Name="../Box2D/Dynamics/Joints/b2WeldJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2PrismaticJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2FrictionJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2DistanceJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2PulleyJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2WheelJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2MotorJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2MouseJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2GearJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2PulleyJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2WeldJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2RopeJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2Joint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2WheelJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2MotorJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2Joint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2RopeJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2PrismaticJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2DistanceJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2MouseJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2FrictionJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2RevoluteJoint.cpp"/>
+        <File Name="../Box2D/Dynamics/Joints/b2GearJoint.h"/>
+        <File Name="../Box2D/Dynamics/Joints/b2RevoluteJoint.h"/>
+      </VirtualDirectory>
+      <File Name="../Box2D/Dynamics/b2WorldCallbacks.cpp"/>
+      <File Name="../Box2D/Dynamics/b2World.cpp"/>
+      <File Name="../Box2D/Dynamics/b2Fixture.h"/>
+      <File Name="../Box2D/Dynamics/b2Body.h"/>
+      <File Name="../Box2D/Dynamics/b2World.h"/>
+      <File Name="../Box2D/Dynamics/b2ContactManager.h"/>
+      <File Name="../Box2D/Dynamics/b2TimeStep.h"/>
+      <File Name="../Box2D/Dynamics/b2Fixture.cpp"/>
+      <File Name="../Box2D/Dynamics/b2ContactManager.cpp"/>
+      <File Name="../Box2D/Dynamics/b2Island.h"/>
+      <File Name="../Box2D/Dynamics/b2Island.cpp"/>
+      <File Name="../Box2D/Dynamics/b2Body.cpp"/>
+      <File Name="../Box2D/Dynamics/b2WorldCallbacks.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Collision">
+      <VirtualDirectory Name="Shapes">
+        <File Name="../Box2D/Collision/Shapes/b2ChainShape.cpp"/>
+        <File Name="../Box2D/Collision/Shapes/b2CircleShape.cpp"/>
+        <File Name="../Box2D/Collision/Shapes/b2EdgeShape.h"/>
+        <File Name="../Box2D/Collision/Shapes/b2PolygonShape.cpp"/>
+        <File Name="../Box2D/Collision/Shapes/b2CircleShape.h"/>
+        <File Name="../Box2D/Collision/Shapes/b2PolygonShape.h"/>
+        <File Name="../Box2D/Collision/Shapes/b2Shape.h"/>
+        <File Name="../Box2D/Collision/Shapes/b2EdgeShape.cpp"/>
+        <File Name="../Box2D/Collision/Shapes/b2ChainShape.h"/>
+      </VirtualDirectory>
+      <File Name="../Box2D/Collision/b2DynamicTree.h"/>
+      <File Name="../Box2D/Collision/b2BroadPhase.h"/>
+      <File Name="../Box2D/Collision/b2BroadPhase.cpp"/>
+      <File Name="../Box2D/Collision/b2Collision.h"/>
+      <File Name="../Box2D/Collision/b2DynamicTree.cpp"/>
+      <File Name="../Box2D/Collision/b2CollidePolygon.cpp"/>
+      <File Name="../Box2D/Collision/b2Collision.cpp"/>
+      <File Name="../Box2D/Collision/b2CollideEdge.cpp"/>
+      <File Name="../Box2D/Collision/b2Distance.cpp"/>
+      <File Name="../Box2D/Collision/b2TimeOfImpact.cpp"/>
+      <File Name="../Box2D/Collision/b2TimeOfImpact.h"/>
+      <File Name="../Box2D/Collision/b2Distance.h"/>
+      <File Name="../Box2D/Collision/b2CollideCircle.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Rope">
+      <File Name="../Box2D/Rope/b2Rope.h"/>
+      <File Name="../Box2D/Rope/b2Rope.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Common">
+      <File Name="../Box2D/Common/b2Settings.cpp"/>
+      <File Name="../Box2D/Common/b2StackAllocator.h"/>
+      <File Name="../Box2D/Common/b2BlockAllocator.cpp"/>
+      <File Name="../Box2D/Common/b2Math.h"/>
+      <File Name="../Box2D/Common/b2Math.cpp"/>
+      <File Name="../Box2D/Common/b2GrowableStack.h"/>
+      <File Name="../Box2D/Common/b2StackAllocator.cpp"/>
+      <File Name="../Box2D/Common/b2BlockAllocator.h"/>
+      <File Name="../Box2D/Common/b2Timer.cpp"/>
+      <File Name="../Box2D/Common/b2Timer.h"/>
+      <File Name="../Box2D/Common/b2Settings.h"/>
+      <File Name="../Box2D/Common/b2Draw.cpp"/>
+      <File Name="../Box2D/Common/b2Draw.h"/>
+    </VirtualDirectory>
+    <File Name="../Box2D/Box2DConfig.cmake"/>
+    <File Name="../Box2D/CMakeLists.txt"/>
+    <File Name="../Box2D/Box2D.h"/>
+  </VirtualDirectory>
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="" IntermediateDirectory="./Debug" Command="$(WorkspacePath)/build/source/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
+      <BuildSystem Name="CMake"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <Target Name="cmake-build">mkdir -p build &amp;&amp; cd build &amp;&amp; cmake -DCMAKE_BUILD_TYPE=Debug ..</Target>
+        <RebuildCommand/>
+        <CleanCommand>cd build &amp;&amp; make clean</CleanCommand>
+        <BuildCommand>cd build &amp;&amp; make -j1</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(WorkspacePath)</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="" IntermediateDirectory="./Release" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/bin/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="CMake"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <RebuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(WorkspacePath)</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

@@ -1,0 +1,73 @@
+<objectDataList2D>
+
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+    <default  name="">
+        <visual>
+            <texture count="0" file="data/textures/games/run/run_spriteSheet.png" compressed="false"/>
+            <mesh genType="sprite_sheet">
+                <spriteSheet file="data/objects/2d/mesh/games/run.xml"/>
+                <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
+            </mesh>
+            <color r="1" g="1" b="1" a="1"/>
+            <shader id="shader_2d_spriteSheet"/>
+        </visual>
+        <physics world="(game)">
+            <body type="" linearDamping="0" angularDamping="0" fixedRotation="false"/>
+            <fixtureLst>
+                <fixture shape="" radius="0" chainLoop="false" friction="0.2" density="0.2" restitution="0.2">
+                    <!-- <collisionFilter categoryBits="" maskBits="" groupIndex=""/> -->
+                    <!-- <vertLst>
+                    vert list for polygon shapes - max of 8
+                    Box2D polygons are defined using Counter Clockwise Winding (CCW)
+                    <vert x="" y=""/>
+                    </vertLst> -->
+                    <sizeMod top="0" bottom="0" left="0" right="0"/>
+                </fixture>
+            </fixtureLst>
+        </physics>
+        <size width="0" height="0"/>
+    </default>
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+  
+    <objectList>
+    
+        <object name="peg">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="peg"/>
+                        <glyph id="peg_light"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="static"/>
+                <fixtureLst>
+                    <fixture shape="circle" radius="17">
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+        
+        <object name="bar">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="bar"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+            <physics>
+                <body type="static"/>
+                <fixtureLst>
+                    <fixture shape="polygon">
+                        <sizeMod top="-4" bottom="-4" left="-4" right="-4"/>
+                    </fixture>
+                </fixtureLst>
+            </physics>
+        </object>
+    
+    </objectList>
+
+</objectDataList2D>
+

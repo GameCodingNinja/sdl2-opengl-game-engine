@@ -1,0 +1,19 @@
+<spriteList>
+
+    <sprite objectName="peg" group="(run)">
+        <position x="800" y="320" z="0"/>
+    </sprite>
+
+    <sprite objectName="peg" group="(run)">
+        <position x="640" y="320" z="0"/>
+    </sprite>
+
+    <sprite objectName="peg" group="(run)">
+        <position x="480" y="320" z="0"/>
+    </sprite>
+
+    <sprite objectName="peg" group="(run)">
+        <position x="320" y="320" z="0"/>
+    </sprite>
+
+</spriteList>
