@@ -1,0 +1,99 @@
+
+/************************************************************************
+*    FILE NAME:       spritedata.cpp
+*
+*    DESCRIPTION:     Sprite Data Class
+************************************************************************/
+
+// Physical component dependency
+#include <common/spritedata.h>
+
+// Game lib dependencies
+#include <utilities/exceptionhandling.h>
+#include <utilities/xmlParser.h>
+
+/************************************************************************
+*    desc:  Constructor
+************************************************************************/
+CSpriteData::CSpriteData( const XMLNode & node ) :
+    m_id(defs_SPRITE_DEFAULT_ID)
+{
+    LoadFromNode( node );
+    
+}   // constructor
+
+
+/************************************************************************
+*    desc:  destructor                                                             
+************************************************************************/
+CSpriteData::~CSpriteData()
+{
+}   // destructor
+
+
+/************************************************************************
+*    desc:  Load the data from node
+************************************************************************/
+void CSpriteData::LoadFromNode( const XMLNode & node )
+{
+    // Get the object data name
+    m_objectName = node.getAttribute( "objectName" );
+    
+    // Get the group this sprite belongs to
+    m_group = node.getAttribute( "group" );
+    
+    // Get the sprite's AI name
+    if( node.isAttributeSet( "aiName" ) )
+        m_aiName = node.getAttribute( "aiName" );
+    
+    // Get the sprite's unique id number
+    if( node.isAttributeSet( "id" ) )
+        m_id = std::atoi(node.getAttribute( "id" ));
+
+    // Load the transform data from node
+    LoadTransFromNode( node );
+
+}   // LoadFromXML
+
+
+/************************************************************************
+*    desc:  Get the name
+*
+*	 ret:	const std::string & - name
+************************************************************************/
+const std::string & CSpriteData::GetObjectName() const
+{
+    return m_objectName;
+
+}   // GetObjectName
+
+
+/************************************************************************
+*    desc:  Get the group
+*
+*	 ret:	const std::string & - group
+************************************************************************/
+const std::string & CSpriteData::GetGroup() const
+{
+    return m_group;
+
+}   // GetGroup
+
+
+/************************************************************************
+*    desc:  Get the ai name
+************************************************************************/
+const std::string & CSpriteData::GetAIName() const
+{
+    return m_aiName;
+}
+
+
+/************************************************************************
+*    desc:  Get the unique id number
+************************************************************************/
+int CSpriteData::GetId() const
+{
+    return m_id;
+
+}   // GetId

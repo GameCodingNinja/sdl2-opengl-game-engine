@@ -1,0 +1,40 @@
+/************************************************************************
+*    FILE NAME:       fontdata.h
+*
+*    DESCRIPTION:     fontdata class
+************************************************************************/  
+
+#ifndef __font_data_h__
+#define __font_data_h__
+
+// Game lib dependencies
+#include <common/fontproperties.h>
+#include <common/size.h>
+
+// Forward Declarations
+struct XMLNode;
+
+class CFontData
+{
+public:
+    
+    // Copy the data
+    void Copy( const CFontData & obj );
+    
+    // Load the font properties from XML node
+    void LoadFromNode( const XMLNode & node );
+    
+public:
+    
+    // Displayed font string
+    std::string m_fontString;
+
+    // Font members
+    CFontProperties m_fontProp;
+
+    // Font string size
+    // Not usefull for multiline strings
+    CSize<float> m_fontStrSize;
+};
+
+#endif  // __font_data_h__

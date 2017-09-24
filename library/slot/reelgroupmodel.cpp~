@@ -1,0 +1,250 @@
+
+/************************************************************************
+*    FILE NAME:       reelgroupmodel.cpp
+*
+*    DESCRIPTION:     Model class for the reel group
+************************************************************************/
+
+// Physical component dependency
+#include <slot/reelgroupmodel.h>
+
+// Game lib dependencies
+#include <slot/slotmath.h>
+#include <slot/playresult.h>
+#include <slot/symbolposition.h>
+#include <slot/slotmathmanager.h>
+#include <slot/betmanager.h>
+#include <utilities/xmlParser.h>
+#include <utilities/exceptionhandling.h>
+
+// Boost lib dependencies
+#include <boost/format.hpp>
+
+// Standard lib dependencies
+#include <chrono>
+
+/************************************************************************
+*    desc:  Constructor
+************************************************************************/
+CReelGroupModel::CReelGroupModel( const CSlotMath & rSlotMath, CPlayResult & rPlayResult ) :
+    m_rSlotMath( rSlotMath ),
+    m_rPlayResult( rPlayResult ),
+    m_rPaylineSet( CSlotMathMgr::Instance().GetPaylineSet( rSlotMath.GetPaylineSetID() ) )
+{
+    // Seed the random number generator
+    auto time = std::chrono::high_resolution_clock::now().time_since_epoch();
+    auto seed = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
+    m_rng.seed( seed );
+    
+}   // constructor
+
+
+/************************************************************************
+*    desc:  destructor
+************************************************************************/
+CReelGroupModel::~CReelGroupModel()
+{
+}   // destructor
+
+
+/************************************************************************
+*    desc:  Create the model reel strips
+************************************************************************/
+void CReelGroupModel::CreateReelStrips(
+    const std::string & reelStripSetId, const std::string & paytableSetId )
+{
+    m_paytableSetId = paytableSetId;
+    
+    // Get the reel strip set
+    auto & rReelStripMathVec = m_rSlotMath.GetReelStripSet( reelStripSetId );
+    
+    // Create the model reel strips
+    for( auto & iter : rReelStripMathVec )
+        m_reelStripModelDeq.emplace_back( m_rSlotMath.GetReelStrip( iter.GetId() ), m_rng, iter.GetEvalSymbCount() );
+    
+    // Setup the evaluation vectors
+    m_evalMathSymbs.resize( rReelStripMathVec.size() );
+    for( size_t i = 0; i < rReelStripMathVec.size(); ++i )
+        m_evalMathSymbs.at(i).resize( rReelStripMathVec.at(i).GetEvalSymbCount() );
+    
+}   // CreateReelStrips
+
+
+/************************************************************************
+*    desc:  Generate the reel stops
+************************************************************************/
+void CReelGroupModel::GenerateStops()
+{
+    for( auto & iter : m_reelStripModelDeq )
+        iter.GenerateStop();
+    
+}   // GenerateStops
+
+
+/************************************************************************
+*    desc:  Evaluate the reels
+************************************************************************/
+void CReelGroupModel::Evaluate()
+{
+    GenerateEvalSymbs();
+    
+    // Get the paytable set and evaluate as line pay or scatter
+    auto & rPaytableSetVec = m_rSlotMath.GetPaytableSet( m_paytableSetId );
+    for( auto & iter: rPaytableSetVec )
+    {
+        if( iter.GetType() == NSlotDefs::EP_PAYLINE )
+            EvaluateLinePays( iter.GetId() );
+        
+        else if( iter.GetType() == NSlotDefs::EP_SCATTER )
+            EvaluateScatters( iter.GetId() );
+    }
+    
+}   // Evaluate
+
+
+/************************************************************************
+*    desc:  Generate the evaluation symbols
+************************************************************************/
+void CReelGroupModel::GenerateEvalSymbs()
+{
+    for( size_t reel = 0; reel < m_reelStripModelDeq.size(); ++reel )
+    {
+        const int stop = m_reelStripModelDeq.at(reel).GetStop();
+        const int symbsPerReel = m_reelStripModelDeq.at(reel).GetEvalSymbolCount();
+        
+        for( int symb = 0; symb < symbsPerReel; ++symb )
+            m_evalMathSymbs.at(reel).at(symb) = m_reelStripModelDeq.at(reel).GetSymbol( stop + symb );
+    }
+    
+}   // GenerateEvalSymbs
+
+
+/************************************************************************
+*    desc:  Evaluate the line pays
+************************************************************************/
+void CReelGroupModel::EvaluateLinePays( const std::string & paytable )
+{
+    auto & rPayComboVec = m_rSlotMath.GetPayComboSet( paytable );
+    
+    // An vector of flags to indicate a payline has been awarded and is no longer checked
+    std::vector<bool> awarded(m_rPaylineSet.size());
+    
+    for( auto & cboIter : rPayComboVec )
+    {
+        for( size_t payline = 0; payline < m_rPaylineSet.size(); ++payline )
+        {
+            // Continue if this payline has already been awarded
+            if( awarded.at(payline) )
+                continue;
+            
+            for( size_t reel = 0; reel < m_rPaylineSet.at(payline).size(); ++reel )
+            {
+                const int pos = m_rPaylineSet.at(payline).at(reel);
+
+                auto pMathSymb = m_evalMathSymbs.at(reel).at(pos);
+
+                // Break here if not a match to start checking the next payline
+                if( !pMathSymb->IsMatch( cboIter.GetSymbol() ) )
+                    break;
+                
+                // If we made it this far and the below condition is true, then it's a match
+                if( reel == static_cast<size_t>(cboIter.GetCount()-1) )
+                {
+                    awarded.at(payline) = true;
+
+                    AddLinePay( cboIter, payline, m_rPaylineSet );
+
+                    break;
+                }
+            }
+        }
+    }
+    
+}   // EvaluateLinePays
+
+
+/************************************************************************
+*    desc:  Add line pay to slot result
+************************************************************************/
+void CReelGroupModel::AddLinePay(
+    const CPayCombo & rPayCombo,
+    const int payline,
+    const std::vector<std::vector<int>> & rPaylineSet )
+{
+    std::vector<CSymbPos> symbPos;
+    symbPos.reserve(rPayCombo.GetCount());
+    
+    // Copy over the symbol offsets for the number of reels effected by the win
+    for( int i = 0; i < rPayCombo.GetCount(); ++i )
+        symbPos.emplace_back( i, rPaylineSet.at(payline).at(i) );
+    
+    // Add the win to the play result
+    m_rPlayResult.AddPay( NSlotDefs::EP_PAYLINE, rPayCombo, CBetMgr::Instance().GetLineBet(), payline, symbPos );
+    
+}   // AddLinePay
+
+
+/************************************************************************
+*    desc:  Evaluate the scatter pays
+************************************************************************/
+void CReelGroupModel::EvaluateScatters( const std::string & paytable )
+{
+    const std::vector<CPayCombo> & rPayComboVec = m_rSlotMath.GetPayComboSet( paytable );
+    
+    // An array of each unique scatter symbol name in the paytable
+    std::vector<std::string> symbVec;
+    // A multi-dementional array to record the position of scatter symbols
+    std::vector<std::vector<CSymbPos>> posVecVec;
+
+    for( auto & cboIter : rPayComboVec )
+    {
+        if( std::find( symbVec.begin(), symbVec.end(), cboIter.GetSymbol() ) == symbVec.end() )
+        {
+            symbVec.push_back( cboIter.GetSymbol() );
+            posVecVec.emplace_back();
+        }
+    }
+    
+    // Go through the eval symbols to find these symbols
+    for( size_t reel = 0; reel < m_evalMathSymbs.size(); ++reel )
+    {
+        for( size_t pos = 0; pos < m_evalMathSymbs.at(reel).size(); ++pos )
+        {
+            auto pMathSymb = m_evalMathSymbs.at(reel).at(pos);
+            
+            for( size_t symb = 0; symb < symbVec.size(); ++symb )
+            {
+                // If the symbol is a match, record it's position
+                if( pMathSymb->IsMatch( symbVec.at(symb) )  )
+                {
+                    posVecVec.at(symb).emplace_back( reel, pos );
+                }
+            }
+        }
+    }
+    
+    // Go throught the combo, check for the symbol and see if any of the counts match
+    for( auto & cboIter : rPayComboVec )
+    {
+        for( size_t symb = 0; symb < symbVec.size(); ++symb )
+        {
+            if( (cboIter.GetSymbol() == symbVec.at(symb)) &&
+                (posVecVec.at(symb).size() == static_cast<size_t>(cboIter.GetCount())) )
+            {
+                // Add the win to the play result
+                m_rPlayResult.AddPay( NSlotDefs::EP_SCATTER, cboIter, CBetMgr::Instance().GetTotalBet(), -1, posVecVec.at(symb) );
+            }
+        }
+    }
+    
+}   // EvaluateScatters
+
+
+/************************************************************************
+*    desc:  Get the reel strips
+************************************************************************/
+const std::deque<CReelStripModel> & CReelGroupModel::GetReelStrips() const
+{
+    return m_reelStripModelDeq;
+    
+}   // GetReelStrips
