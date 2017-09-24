@@ -1,0 +1,15 @@
+<soundList>
+
+  <soundFiles>
+    <!--<load id="generic_button" volume="100" file="data/sound/standard/Generic_Button.ogg"/>-->
+    <load id="reel_stop_1-4" volume="40" file="data/sound/standard/ReelStop_1.ogg"/>
+    <load id="reel_stop_5" volume="40" file="data/sound/standard/ReelStop_5.ogg"/>
+    
+    <!-- Just here for test purposes-->
+    <!--<stream id="echoes" file="data/sound/music/echoes.ogg"/>
+    <stream id="edgeOfReality" file="data/sound/music/edgeOfReality.ogg"/>
+    <stream id="moonlightSynthesis" file="data/sound/music/moonlightSynthesis.ogg"/>
+    <stream id="sonataOfTheUnseen" file="data/sound/music/sonataOfTheUnseen.ogg"/>-->
+  </soundFiles>
+
+</soundList>

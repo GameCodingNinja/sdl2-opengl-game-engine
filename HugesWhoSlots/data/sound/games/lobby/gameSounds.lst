@@ -1,0 +1,23 @@
+<soundList>
+
+    <soundFiles>
+
+        <!-- Stream sounds -->
+        <stream id="islandQuestTheme" file="data/sound/games/lobby/Island Quest Game Theme Song.ogg"/>
+        <stream id="shagTheBosa"      file="data/sound/games/lobby/ShagTheBosa.ogg"/>
+        <stream id="Jazztune"         file="data/sound/games/lobby/Jazztune.ogg"/>
+        <stream id="latin"            file="data/sound/games/lobby/latin.ogg"/>
+
+    </soundFiles>
+
+    <playlistSet>
+        <playList id="lobby_music" playtype="random">
+            <sound id="islandQuestTheme"/>
+            <sound id="shagTheBosa"/>
+            <sound id="Jazztune"/>
+            <sound id="latin"/>
+        </playList>
+
+    </playlistSet>
+
+</soundList>

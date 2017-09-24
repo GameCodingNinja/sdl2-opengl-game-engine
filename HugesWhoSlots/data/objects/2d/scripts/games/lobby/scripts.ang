@@ -1,0 +1,44 @@
+
+/************************************************************************
+*    FILE NAME:       menu.ang
+*
+*    DESCRIPTION:     Scripts for controlling/animating menu interface
+************************************************************************/
+
+/************************************************************************
+*    desc:  Play lobby music
+************************************************************************/
+void Lobby_PlayMusic()
+{
+    Hold( 500 );
+    
+    CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
+    
+    playLst.SetVolume( MAX_SOUND_VOLUME );
+    playLst.Play();
+    
+    do
+    {
+        Hold( 1000 );
+        
+        if( !playLst.IsPlaying() )
+            playLst.Play();
+
+    }
+    while( true );
+}
+
+
+/************************************************************************
+*    desc:  Fast stop lobby music
+************************************************************************/
+void Lobby_FastStopMusic()
+{
+    CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
+    
+    if( playLst.IsPlaying() )
+    {
+        VolumeTo( 500.f, 0.f, playLst );
+        playLst.Stop();
+    }
+}

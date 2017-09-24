@@ -1,0 +1,21 @@
+<menu>
+
+    <mouseOnlyControls>
+        
+        <!-- Dev options menu button -->
+        <control name="dev_options_menu_btn" controlType="button" defaultState="inactive">
+            <filePath file="data/objects/2d/menu/control/dev_button_40x80.ctrl"/>
+            <position x="0" y="0" z="0"/>
+            <fontStringLst>
+                <string text="Dev"/>
+            </fontStringLst>
+            <action actionType="to_tree" executionAction="dev_options_tree"/>
+            <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
+            <!-- size modifier for collision rect -->
+            <rect x1="40" y1="40" x2="40" y2="40"/>
+        </control>
+
+    </mouseOnlyControls>
+  
+</menu>
+

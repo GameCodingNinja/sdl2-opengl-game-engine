@@ -1,0 +1,268 @@
+
+/************************************************************************
+*    FILE NAME:       menu.ang
+*
+*    DESCRIPTION:     Scripts for controlling/animating menu interface
+************************************************************************/
+
+
+/************************************************************************
+*    desc:  Menu transition in script
+************************************************************************/
+void Menu_TransIn( CMenu & menu )
+{
+    menu.SetVisible( true );
+    
+    AlphaTo( 250, 1.f, menu );
+    
+    DispatchEvent( EGE_MENU_TRANS_IN, ETC_END );
+}
+
+
+/************************************************************************
+*    desc:  Menu transition out script
+************************************************************************/
+void Menu_TransOut( CMenu & menu )
+{
+    AlphaTo( 250, 0.f, menu );
+    
+    menu.SetVisible( false );
+    
+    DispatchEvent( EGE_MENU_TRANS_OUT, ETC_END );
+}
+
+
+/************************************************************************
+*    desc:  Script for setting the look of the disabled state
+************************************************************************/
+void Control_Disabled( CSprite2d & sprite )
+{
+    CColor color = sprite.GetDefaultColor();
+    color.TransformHSV( 0, 0, 1 );
+
+    sprite.SetColor( color );
+}
+
+
+/************************************************************************
+*    desc:  Script for setting the look of the inactive state
+************************************************************************/
+void Control_Inactive( CSprite2d & sprite )
+{
+    sprite.SetDefaultColor();
+}
+
+
+/************************************************************************
+*    desc:  Script for setting the look of the hidden state
+************************************************************************/
+void Control_Hidden( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+}
+
+
+/************************************************************************
+*    desc:  Script for animating the look of the active state
+************************************************************************/
+void Ctrl_Active( CSprite2d & sprite, float hiHSV, float lowHSV )
+{
+    sprite.SetVisible( true );
+
+    CColor hiColor = sprite.GetDefaultColor();
+    hiColor.TransformHSV( 0, 1, hiHSV );
+
+    CColor lowColor = sprite.GetDefaultColor();
+    lowColor.TransformHSV( 0, 1, lowHSV );
+
+    while(true)
+    {
+        ColorTo( 500, hiColor, sprite );
+        ColorTo( 500, lowColor, sprite );
+    }
+}
+
+void Control_Active( CSprite2d & sprite )
+{
+    Ctrl_Active( sprite, 1.3, .5 );
+}
+
+void Control_Solid_Active( CSprite2d & sprite )
+{
+    Ctrl_Active( sprite, 1.1, .5 );
+}
+
+
+/************************************************************************
+*    desc:  Script for animating the look of the selected state
+************************************************************************/
+void Ctrl_Selected( CSprite2d & sprite, float hiHSV, float lowHSV )
+{
+    sprite.SetVisible( true );
+
+    CColor hiColor = sprite.GetDefaultColor();
+    hiColor.TransformHSV( 0, 1, hiHSV );
+
+    CColor lowColor = sprite.GetDefaultColor();
+    lowColor.TransformHSV( 0, 1, lowHSV );
+
+    sprite.SetColor( hiColor );
+
+    ColorTo( 120, lowColor, sprite );
+    ColorTo( 100, hiColor, sprite );
+}
+
+
+/************************************************************************
+*    desc:  Animates the selected state and sends a message
+************************************************************************/
+void Control_Selected_Dispatch_Exe( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.7, .6 );
+
+    sprite.SetColor( sprite.GetDefaultColor() );
+
+    DispatchEvent( EGE_MENU_SELECT_EXECUTE );
+}
+
+void Control_Selected_Dispatch_Exe_Act( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.7, .6 );
+
+    sprite.SetColor( sprite.GetDefaultColor() );
+
+    DispatchEvent( EGE_MENU_SELECT_EXECUTE );
+    DispatchEvent( EGE_MENU_REACTIVATE );
+}
+
+void Control_Selected_Visible( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.7, .6 );
+
+    sprite.SetColor( sprite.GetDefaultColor() );
+}
+
+
+/************************************************************************
+*    desc:  Animates the selected state for solid
+************************************************************************/
+void Control_Solid_Selected_visible( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.5, .6 );
+
+    sprite.SetColor( sprite.GetDefaultColor() );
+}
+
+void Control_Selected( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.7, .6 );
+
+    sprite.SetVisible( false );
+}
+
+void Control_Solid_Selected( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.5, .6 );
+
+    sprite.SetVisible( false );
+}
+
+
+/************************************************************************
+*    desc:  Animates the selected state and sets final color to white
+************************************************************************/
+void Control_Selected_frame_highlight( CSprite2d & sprite )
+{
+    Ctrl_Selected( sprite, 1.7, .6 );
+
+    sprite.SetRGBA( 1, 1, 1, 1 );
+}
+
+
+/************************************************************************
+*    desc:  Fast display of selected state
+************************************************************************/
+void Ctrl_Fast_Selected( CSprite2d & sprite, float hiHSV )
+{
+    sprite.SetVisible( true );
+
+    CColor hiColor = sprite.GetDefaultColor();
+    hiColor.TransformHSV( 0, 1, hiHSV );
+
+    sprite.SetColor( hiColor );
+}
+
+void Control_Fast_Face_Selected( CSprite2d & sprite )
+{
+    Ctrl_Fast_Selected( sprite, 1.7 );
+
+    Hold( 80 );
+
+    sprite.SetDefaultColor();
+}
+
+void Control_Fast_Face_Selected_Act( CSprite2d & sprite )
+{
+    Ctrl_Fast_Selected( sprite, 1.7 );
+
+    Hold( 80 );
+
+    sprite.SetDefaultColor();
+
+    DispatchEvent( EGE_MENU_REACTIVATE );
+}
+
+void Control_Fast_Selected( CSprite2d & sprite )
+{
+    Ctrl_Fast_Selected( sprite, 1.5 );
+
+    Hold( 80 );
+
+    sprite.SetVisible( false );
+}
+
+void Control_Fast_Solid_Selected( CSprite2d & sprite )
+{
+    Ctrl_Fast_Selected( sprite, 1.3 );
+
+    Hold( 80 );
+
+    sprite.SetVisible( false );
+}
+
+void Control_slider_btn_Selected( CSprite2d & sprite )
+{
+    Ctrl_Fast_Selected( sprite, 1.7 );
+}
+
+
+/************************************************************************
+*    desc:  Meter on start
+************************************************************************/
+void Meter_OnStart( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+    AlphaTo( 300, 1, sprite );
+}
+
+
+/************************************************************************
+*    desc:  Meter on stop
+************************************************************************/
+void Meter_OnStop( CSprite2d & sprite )
+{
+}
+
+
+/************************************************************************
+*    desc:  Meter on clear
+************************************************************************/
+void Meter_OnClear( CSprite2d & sprite, uint value )
+{
+    if( sprite.IsVisible() )
+    {
+        AlphaTo( 250, 0, sprite );
+        sprite.SetVisible( false );
+        sprite.CreateFontString( "" + value );
+    }
+}

@@ -1,0 +1,165 @@
+<objectDataList2D>
+
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+    <default  name="">
+        <visual>
+            <!-- Resolution swap only used for mobile devices - list from lowest to highest resolution -->
+            <graphicResSwap>
+                <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
+            </graphicResSwap>
+            <texture file="data/textures/games/bigCashBack/basegame_spriteSheet.png" compressed="false"/>
+            <mesh genType="sprite_sheet">
+                <spriteSheet file="data/objects/2d/mesh/games/bigCashBack/basegame.xml">
+                    <!--
+                    <glyph id="weaponicons (2)"/>
+                    <glyph id="pomel (14)"/> -->
+                </spriteSheet>
+                <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
+            </mesh>
+            <color r="1" g="1" b="1" a="1"/>
+            <shader id="shader_2d_spriteSheet"/>
+        </visual>
+        <physics world="">
+            <body type="" linearDamping="0" angularDamping="0" fixedRotation="false"/>
+            <fixtureLst>
+                <fixture shape="" radius="0" chainLoop="false" friction="0.2" density="0.2" restitution="0.2">
+                    <!-- <collisionFilter categoryBits="" maskBits="" groupIndex=""/> -->
+                    <!-- <vertLst>
+                    vert list for polygon shapes - max of 8
+                    Box2D polygons are defined using Counter Clockwise Winding (CCW)
+                    <vert x="" y=""/>
+                    </vertLst> -->
+                    <sizeMod top="0" bottom="0" left="0" right="0"/>
+                </fixture>
+            </fixtureLst>
+        </physics>
+        <size width="0" height="0"/>
+    </default>
+    <!-- DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT DEFAULT -->
+  
+    <objectList>
+        
+        <object name="symb_logo">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_logo"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+
+        <object name="symb_gold_record">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_gold_record"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_stack_of_money">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_stack_of_money"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_diamond_ring">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_diamond_ring"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_gems">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_gems"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_piano_keys">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_piano_keys"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_microphone">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_microphone"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_music_note">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_music_note"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_t">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_t"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+
+        <object name="symb_b">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_b"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+        <object name="symb_p">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_p"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+
+        <object name="symb_coin">
+            <visual>
+                <mesh>
+                    <spriteSheet>
+                        <glyph id="symb_coin"/>
+                    </spriteSheet>
+                </mesh>
+            </visual>
+        </object>
+        
+    </objectList>
+
+</objectDataList2D>
+

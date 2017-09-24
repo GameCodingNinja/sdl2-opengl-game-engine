@@ -1,0 +1,149 @@
+
+/************************************************************************
+*    FILE NAME:       shared_general.ang
+*
+*    DESCRIPTION:     General purpose shared scripts. Game specific scrips
+*                     that are not specific to any one group.
+*
+*                     The keyword "shared" allows for only one copy to
+*                     loaded and used among all modules
+************************************************************************/
+
+/************************************************************************
+*    desc:  Sound to play when the menu control becomes active
+************************************************************************/
+void Control_OnActive()
+{
+    PlaySound( "(menu)", "active" );
+}
+
+
+/************************************************************************
+*    desc:  Sound to play when the menu control is selected
+************************************************************************/
+void Control_OnSelect()
+{
+    PlaySound( "(menu)", "select" );
+}
+
+/************************************************************************
+*    desc:  Screen fade in script
+************************************************************************/
+shared void Screen_FadeIn()
+{
+    CColor current(0,0,0,1);
+    CColor final(1,1,1,1);
+    ShaderColorTo( 500, current, final, "additive" );
+    
+}   // Screen_FadeIn
+
+
+/************************************************************************
+*    desc:  Screen fade out script
+************************************************************************/
+shared void Screen_FadeOut()
+{
+    CColor current(1,1,1,1);
+    CColor final(0,0,0,1);
+    ShaderColorTo( 500, current, final, "additive" );
+    
+    DispatchEvent( EGE_MENU_GAME_STATE_CHANGE, ETC_END );
+    
+}   // Screen_FadeOut
+
+
+/************************************************************************
+*    desc:  Script for common menu buttons
+************************************************************************/
+shared void MenuBtnActOver_Selected( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+    
+    AlphaTo( 40, 0, sprite );
+    Hold( 25 );
+    
+    AlphaTo( 40, 1, sprite );
+    Hold( 50 );
+    AlphaTo( 40, 0, sprite );
+    Hold( 50 );
+    AlphaTo( 40, 1, sprite );
+    Hold( 50 );
+    AlphaTo( 40, 0, sprite );
+    
+    sprite.SetVisible( false );
+
+    DispatchEvent( EGE_MENU_SELECT_EXECUTE );
+    DispatchEvent( EGE_MENU_REACTIVATE );
+}
+
+shared void MenuBtnActOver_FastSelected( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+    
+    AlphaTo( 30, 1, sprite );
+    Hold( 50 );
+    AlphaTo( 30, 0, sprite );
+    
+    sprite.SetVisible( false );
+
+    DispatchEvent( EGE_MENU_SELECT_EXECUTE );
+    DispatchEvent( EGE_MENU_REACTIVATE );
+}
+
+shared void MenuBtnActOver_Active( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 0 );
+    sprite.SetVisible( true );
+    
+    while(true)
+    {
+        AlphaTo( 500, 0.8, sprite );
+        AlphaTo( 500, 0, sprite );
+    }
+}
+
+shared void MenuBtnActOver_Inactive( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+    sprite.SetAlpha( 0 );
+}
+
+shared void MenuBtnActOver_Disabled( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+    sprite.SetAlpha( 0 );
+}
+
+shared void MenuBtn_Init( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+    sprite.SetAlpha( 0 );
+}
+
+shared void MenuBtnDisOver_InactiveAnim( CSprite2d & sprite )
+{
+    if( sprite.IsVisible() )
+    {
+        AlphaTo( 200, 0, sprite );
+        sprite.SetVisible( false );
+    }
+}
+
+shared void MenuBtnDisOver_DisabledAnim( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 0 );
+    sprite.SetVisible( true );
+    AlphaTo( 200, 1, sprite );
+}
+
+shared void MenuBtnDisOver_Inactive( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 0 );
+    sprite.SetVisible( false );
+}
+
+shared void MenuBtnDisOver_Disabled( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 1 );
+    sprite.SetVisible( true );
+}
