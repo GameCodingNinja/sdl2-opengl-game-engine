@@ -1,0 +1,12 @@
+<spriteList defaultGroup="(stage1)">
+
+    <sprite objectName="bottom" group="(stage1)">
+        <position x="0" y="-460" z="0"/>
+    </sprite>
+
+    <sprite objectName="bottom">
+        <position x="0" y="460" z="0"/>
+        <rotation x="0" y="0" z="180"/>
+    </sprite>
+
+</spriteList>
