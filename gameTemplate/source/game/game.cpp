@@ -2,7 +2,7 @@
 /************************************************************************
 *    FILE NAME:       game.cpp
 *
-*    DESCRIPTION:     CGame class
+*    DESCRIPTION:     CGame class - bringer of bacon
 ************************************************************************/
 
 // Physical component dependency
