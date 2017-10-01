@@ -121,7 +121,7 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
 *    desc:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
-void CBasicSpriteStrategy2D::Create(
+int CBasicSpriteStrategy2D::Create(
     const std::string & name,
     const int id,
     const CPoint<CWorldValue> & pos,
@@ -189,6 +189,8 @@ void CBasicSpriteStrategy2D::Create(
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
         CSignalMgr::Instance().Broadcast( aiName, m_iter.first->second );
+    
+    return spriteId;
 
 }   // Create
 

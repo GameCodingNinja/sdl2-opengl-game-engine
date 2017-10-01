@@ -50,11 +50,7 @@ private:
     // The script conponent
     CScriptComponent m_scriptComponent;
     
-    CSprite2D m_box;
-    CSprite2D m_triangle;
-    CSprite2D m_circle;
-    CSprite2D m_floor;
-    
+    // Physics world
     CPhysicsWorld2D & m_rPhysicsWorld;
 };
 

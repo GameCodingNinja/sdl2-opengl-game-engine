@@ -46,8 +46,8 @@ public:
     void Update();
 
     // Transform the actor
-    void DoTransform();
-    void DoTransform( const CObject2D & object );
+    void Transform() override;
+    void Transform( const CObject2D & object ) override;
 
     // Render the actor
     void Render( const CMatrix & matrix );

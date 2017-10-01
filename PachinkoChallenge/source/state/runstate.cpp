@@ -28,6 +28,8 @@
 #include <managers/soundmanager.h>
 #include <managers/signalmanager.h>
 #include <common/camera.h>
+#include <common/spritedata.h>
+#include <common/worldvalue.h>
 #include <gui/uimeter.h>
 #include <gui/uibutton.h>
 
@@ -245,7 +247,7 @@ void CRunState::BeginContact(b2Contact* contact)
             m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, STRAWBERRY );
             
             // Add another strawberry
-            m_rStrawberryData.SetPos( CPoint<float>( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -550.f ));
+            m_rStrawberryData.SetPosXYZ( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -550.f);
             m_rStrategy.HandleMessage( NDefs::ESM_CREATE_SPRITE, "strawberry" );
         }
                 

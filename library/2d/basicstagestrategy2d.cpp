@@ -107,14 +107,14 @@ void CBasicStageStrategy2D::Update()
 void CBasicStageStrategy2D::Transform()
 {
     for( auto & iter : m_sectorDeq )
-        iter.DoTransform();
+        iter.Transform();
 
 }   // Transform
 
 void CBasicStageStrategy2D::Transform( const CObject2D & object )
 {
     for( auto & iter : m_sectorDeq )
-        iter.DoTransform( object );
+        iter.Transform( object );
 
 }   // Transform
 

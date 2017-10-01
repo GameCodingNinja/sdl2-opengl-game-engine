@@ -13,6 +13,7 @@
 #include "../state/titlescreenstate.h"
 #include "../state/loadstate.h"
 #include "../state/runstate.h"
+#include "../ai/ballai.h"
 #include "../smartGUI/smartconfirmbtn.h"
 #include "../smartGUI/smartresolutionbtn.h"
 #include "../smartGUI/smartapplysettingsbtn.h"
@@ -31,7 +32,7 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/settings.h>
 #include <utilities/statcounter.h>
-#include <2d/actorsprite2d.h>
+#include <2d/isprite2d.h>
 #include <common/color.h>
 #include <common/build_defs.h>
 #include <objectdata/objectdatamanager.h>
@@ -48,7 +49,7 @@ CGame::CGame()
 {
     CSignalMgr::Instance().Connect_SmartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
     CSignalMgr::Instance().Connect_SmartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
-    //CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::ActorAICreateCallBack, this, _1, _2) );
+    CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
     CShaderMgr::Instance().Connect_InitShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
     
     if( NBDefs::IsDebugMode() )
@@ -130,17 +131,14 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 
 
 /***************************************************************************
-*    decs:  Call back function to create actor ai
+*    decs:  Call back function to create sprite ai
 ****************************************************************************/
-void CGame::ActorAICreateCallBack( const std::string & aiName, CActorSprite2D & rActorSprite )
+void CGame::AICreateCallBack( const std::string & aiName, iSprite2D * pSprite )
 {
-    /*if( aiName == "player_ship" )
-        rActorSprite.SetAI( new CPlayerShipAI( rActorSprite ) );
-    
-    else if( aiName == "player_projectile" )
-        rActorSprite.SetAI( new CProjectileAI( rActorSprite ) );*/
-    
-}   // ActorAICreateCallBack
+    if( aiName == "aiBall" )
+        pSprite->SetAI( new CBallAI( pSprite ) );
+
+}   // AICreateCallBack
 
 
 /************************************************************************

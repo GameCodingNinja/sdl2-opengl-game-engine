@@ -142,7 +142,7 @@ void CLinearStageStrategy2D::Transform()
 
     for( size_t i = m_firstIndex; i < m_sectorDeq.size(); ++i )
     {
-        m_sectorDeq.at(i).DoTransform();
+        m_sectorDeq.at(i).Transform();
 
         if( SetRange(i) )
             break;
@@ -152,7 +152,7 @@ void CLinearStageStrategy2D::Transform()
         if( m_firstIndex < tmpFirstIndex )
         {
             tmpFirstIndex = m_firstIndex;
-            m_sectorDeq.at(m_firstIndex).DoTransform();
+            m_sectorDeq.at(m_firstIndex).Transform();
         }
     }
 
@@ -164,7 +164,7 @@ void CLinearStageStrategy2D::Transform( const CObject2D & object )
 
     for( size_t i = m_firstIndex; i < m_sectorDeq.size(); ++i )
     {
-        m_sectorDeq.at(i).DoTransform( object );
+        m_sectorDeq.at(i).Transform( object );
 
         if( SetRange(i) )
             break;
@@ -174,7 +174,7 @@ void CLinearStageStrategy2D::Transform( const CObject2D & object )
         if( m_firstIndex < tmpFirstIndex )
         {
             tmpFirstIndex = m_firstIndex;
-            m_sectorDeq.at(m_firstIndex).DoTransform( object );
+            m_sectorDeq.at(m_firstIndex).Transform( object );
         }
     }
 

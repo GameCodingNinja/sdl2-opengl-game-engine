@@ -43,7 +43,7 @@ public:
     void LoadFromFile( const std::string & file ) override;
 
     // Create the sprite
-    virtual void Create(
+    virtual int Create(
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,

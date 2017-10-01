@@ -24,7 +24,7 @@
 *    desc:  Constructor
 ************************************************************************/
 CSpriteStrategyMgr::CSpriteStrategyMgr() :
-    m_SpriteInc(0)
+    m_spriteInc(0)
 {
 }   // constructor
 
@@ -78,7 +78,7 @@ const std::vector<int> & CSpriteStrategyMgr::Create(
     const CPoint<float> & rot,
     const CPoint<float> & scale )
 {
-    // Make sure the group we are looking has been defined in the list table file
+    // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
@@ -90,10 +90,7 @@ const std::vector<int> & CSpriteStrategyMgr::Create(
     
     // Create the requested number of sprites
     for( int i = 0; i < count; ++i )
-    {
-        m_incReturn.push_back(++m_SpriteInc);
-        mapIter->second->Create( name, m_SpriteInc, pos, rot, scale );
-    }
+        m_incReturn.push_back( mapIter->second->Create( name, ++m_spriteInc, pos, rot, scale ) );
     
     return m_incReturn;
 
@@ -106,16 +103,14 @@ int CSpriteStrategyMgr::Create(
     const CPoint<float> & rot,
     const CPoint<float> & scale )
 {
-    // Make sure the group we are looking has been defined in the list table file
+    // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
                 % strategyId % __FUNCTION__ % __LINE__ ));
     
-    mapIter->second->Create( name, ++m_SpriteInc, pos, rot, scale );
-    
-    return m_SpriteInc;
+    return mapIter->second->Create( name, ++m_spriteInc, pos, rot, scale );
 
 }   // Create
 
@@ -127,7 +122,7 @@ void CSpriteStrategyMgr::Clear()
 {
     NDelFunc::DeleteUnorderedMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
-    m_SpriteInc = 0;
+    m_spriteInc = 0;
 
 }   // Clear
 

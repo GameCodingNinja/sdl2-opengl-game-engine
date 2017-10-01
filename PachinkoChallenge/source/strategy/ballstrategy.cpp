@@ -36,14 +36,14 @@ CBallStrategy::~CBallStrategy()
 /************************************************************************
 *    desc:  create the sprite sprite
 ************************************************************************/
-void CBallStrategy::Create(
+int CBallStrategy::Create(
     const std::string & name,
     const int id,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
     const CPoint<float> & scale )
 {
-    CBasicSpriteStrategy2D::Create( name, id, pos, rot, scale );
+    const int spriteId = CBasicSpriteStrategy2D::Create( name, id, pos, rot, scale );
     
     // Put ball into a random rotation
     auto pBody = m_iter.first->second->GetPhysicsComponent().GetBody();
@@ -51,5 +51,7 @@ void CBallStrategy::Create(
     
     // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
     m_iter.first->second->GetPhysicsComponent().GetBody()->ApplyAngularImpulse( m_angularImpulse(m_generator), false );
+    
+    return spriteId;
     
 }   // Create

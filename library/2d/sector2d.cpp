@@ -186,18 +186,18 @@ void CSector2D::Update()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CSector2D::DoTransform()
+void CSector2D::Transform()
 {
-    Transform();
+    CObject2D::Transform();
 
     for( auto iter : m_pSpriteVec )
         iter->Transform( GetMatrix(), WasWorldPosTranformed() );
     
 }   // Transform
 
-void CSector2D::DoTransform( const CObject2D & object )
+void CSector2D::Transform( const CObject2D & object )
 {
-    Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
 
     for( auto iter : m_pSpriteVec )
         iter->Transform( GetMatrix(), WasWorldPosTranformed() );

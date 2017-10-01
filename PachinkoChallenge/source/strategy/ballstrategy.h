@@ -25,7 +25,7 @@ public:
     virtual ~CBallStrategy();
     
     // Create the sprite
-    void Create(
+    int Create(
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,

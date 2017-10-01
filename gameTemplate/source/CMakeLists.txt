@@ -4,6 +4,7 @@ add_executable(
     ${PROJECT_NAME}
     game/game.cpp
     game/main.cpp
+    ai/ballai.cpp
     smartGUI/smartconfirmbtn.cpp
     smartGUI/smartresolutionbtn.cpp
     smartGUI/smartsettingsmenubtn.cpp

@@ -36,12 +36,12 @@ public:
     virtual void HandleMessage( int msg, const std::string & code ){}
     
     // Create the sprite
-    virtual void Create(
+    virtual int Create(
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
-        const CPoint<float> & scale ){}
+        const CPoint<float> & scale ){ return -1; }
     
     // Do any pre-loop init
     virtual void Init(){}

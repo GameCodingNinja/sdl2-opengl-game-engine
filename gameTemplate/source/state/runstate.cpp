@@ -17,16 +17,18 @@
 #include <physics/physicsworldmanager.h>
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
+#include <managers/spritestrategymanager.h>
+#include <2d/basicstagestrategy2d.h>
+#include <2d/basicspritestrategy2d.h>
+
+// Standard lib dependencies
+#include <vector>
 
 /************************************************************************
 *    desc:  Constructor                                                             
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
-        m_box( CObjectDataMgr::Instance().GetData2D( "(run)", "box" ) ),
-        m_triangle( CObjectDataMgr::Instance().GetData2D( "(run)", "triangle" ) ),
-        m_circle( CObjectDataMgr::Instance().GetData2D( "(run)", "circle" ) ),
-        m_floor( CObjectDataMgr::Instance().GetData2D( "(run)", "floor" ) ),
         m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld2D( "(game)" ) )
 {
 }   // Constructor
@@ -40,24 +42,6 @@ void CRunState::Init()
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().Allow();
     CMenuManager::Instance().ActivateTree("pause_tree");
-    
-    m_floor.SetPosXYZ( 0, -400, 0 );
-    //m_floor.SetRotXYZ( 0, 0, 15 );
-    m_floor.InitPhysics();
-    
-    m_box.SetPosXYZ( 50, 600, 0 );
-    m_box.SetRotXYZ( 0, 0, 25 );
-    //m_box.SetScaleXYZ( 3, 3, 3 );
-    m_box.InitPhysics();
-    
-    m_triangle.SetPosXYZ( 0, 500, 0 );
-    m_triangle.SetRotXYZ( 0, 0, 25 );
-    //m_triangle.SetScaleXYZ( 3, 3, 3 );
-    m_triangle.InitPhysics();
-    
-    m_circle.SetPosXYZ( -50, 700, 0 );
-    //m_circle.SetScaleXYZ( 3, 3, 3 );
-    m_circle.InitPhysics();
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -109,25 +93,7 @@ void CRunState::Update()
     m_scriptComponent.Update();
     
     if( !CMenuManager::Instance().IsActive() )
-    {
-        m_box.Update();
-        m_triangle.Update();
-        m_circle.Update();
-        
-        m_box.PhysicsUpdate();
-        m_triangle.PhysicsUpdate();
-        m_circle.PhysicsUpdate();
-
-        // If they fall off the floor, reposition to the top again
-        if( m_box.GetPos().y < -600.0f )
-            m_box.GetPhysicsComponent().SetTransform( 50, 600, 25 );
-
-        if( m_triangle.GetPos().y < -600.0f )
-            m_triangle.GetPhysicsComponent().SetTransform( 0, 600, 25 );
-
-        if( m_circle.GetPos().y < -600.0f )
-            m_circle.GetPhysicsComponent().SetTransform( -50, 600, 0 );
-    }
+        CSpriteStrategyMgr::Instance().Update();
 
 }   // Update
 
@@ -139,10 +105,8 @@ void CRunState::Transform()
 {
     CCommonState::Transform();
     
-    m_box.Transform();
-    m_triangle.Transform();
-    m_circle.Transform();
-    m_floor.Transform();
+    if( !CMenuManager::Instance().IsActive() )
+        CSpriteStrategyMgr::Instance().Transform();
 
 }   // Transform
 
@@ -155,10 +119,7 @@ void CRunState::PreRender()
     CCommonState::PreRender();
     
     const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    m_box.Render( matrix );
-    m_triangle.Render( matrix );
-    m_circle.Render( matrix );
-    m_floor.Render( matrix );
+    CSpriteStrategyMgr::Instance().Render( matrix );
 
 }   // PreRender
 
@@ -187,12 +148,16 @@ namespace NRunState
     {
 	// All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager::Instance().CreateWorld2D( "(game)" );
-        
-    }   // ThreadLoad
+        CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
+        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D );
+    }
     
     void CriticalInit()
     {
-
+        const char* shapes[] = {"triangle_blue", "triangle_green", "circle_blue", "circle_green", "circle_red", "square_red"};
+        
+        for( int i = 0; i < 24; ++i )
+            CSpriteStrategyMgr::Instance().Create( "(sprite)", shapes[i % 6] );
     }
 
 
@@ -202,13 +167,15 @@ namespace NRunState
     ****************************************************************************/
     void CriticalUnload()
     {
+        CSpriteStrategyMgr::Instance().CleanUp();
         CObjectDataMgr::Instance().FreeGroup2D( "(run)" );
     }
     
     void Unload()
     {
+        CSpriteStrategyMgr::Instance().Clear();
         CPhysicsWorldManager::Instance().DestroyWorld2D( "(game)" );
         
-    }   // Unload
+    }
 
 }   // NTitleScreenState

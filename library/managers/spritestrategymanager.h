@@ -96,7 +96,7 @@ private:
     std::unordered_map<std::string, iSpriteStrategy *> m_pStrategyMap;
     
     // Sprite Id incrementor
-    int m_SpriteInc;
+    int m_spriteInc;
     
     // Temporary vector to hold the return ids
     std::vector<int> m_incReturn;
