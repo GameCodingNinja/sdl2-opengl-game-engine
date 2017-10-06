@@ -2,7 +2,7 @@
 /************************************************************************
 *    FILE NAME:       commonstate.cpp
 *
-*    DESCRIPTION:     CCommonState Class State
+*    DESCRIPTION:     CCommonState Class State to be common
 ************************************************************************/
 
 // Physical component dependency
