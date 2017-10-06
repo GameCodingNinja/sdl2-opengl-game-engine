@@ -31,10 +31,8 @@
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
         m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
-        m_slotGame( "(title_screen)" )
-        //m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cube" ) )
-        //m_pixelPerfectTest( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "pixelPerfectTest" ) )
-        //m_spriteSheet( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "spriteSheetTest" ) )
+        //m_slotGame( "(title_screen)" )
+        m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cube" ) )
 {
 }   // Constructor
 
@@ -48,19 +46,13 @@ void CTitleScreenState::Init()
     CMenuManager::Instance().Allow();
     CMenuManager::Instance().ActivateTree( "title_screen_tree" );
 
-    //m_cube.SetScaleXYZ( 3, 3, 3 );
+    m_cube.SetScaleXYZ( 3, 3, 3 );
     
-    //m_spriteSheet.SetPosXYZ( -700, 0, 0 );
-    //m_pixelPerfectTest.SetPosXYZ( -700, 0, 0 );
-    
-    //m_camera.SetPosXYZ( 0, 0, 20 );
-    //m_camera.SetRotXYZ( 10, 0, 0 );
-    
-    // Create the player ship actor
-    //CActorMgr::Instance().CreateActor("player_ship");
+    m_camera.SetPosXYZ( 0, 0, 20 );
+    m_camera.SetRotXYZ( 10, 0, 0 );
     
     // Set the line bet and the total numvber of lines bet
-    CBetMgr::Instance().SetLineBet(1);
+    /*CBetMgr::Instance().SetLineBet(1);
     CBetMgr::Instance().SetTotalLines(1);
     
     // Hook the Play button to the reel group
@@ -79,7 +71,7 @@ void CTitleScreenState::Init()
         std::move(std::unique_ptr<iCycleResults>(new CSimpleCycleresults)) );
     
     // Clear any preloaded XML files
-    CXMLPreloader::Instance().Clear();
+    CXMLPreloader::Instance().Clear();*/
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -104,8 +96,6 @@ void CTitleScreenState::HandleEvent( const SDL_Event & rEvent )
         if( rEvent.user.code == NMenu::ETC_BEGIN ) 
             m_scriptComponent.Prepare( "(menu)", "Screen_FadeOut" );
     }
-    
-    //CActorMgr::Instance().HandleEvent( rEvent );
 
 }   // HandleEvent
 
@@ -115,9 +105,7 @@ void CTitleScreenState::HandleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CTitleScreenState::MiscProcess()
 {
-    // Delete any actors scheduled to die
-    //CActorMgr::Instance().HandleDelete();
-    m_slotGame.ProcessGameState();
+    //m_slotGame.ProcessGameState();
     
 }   // MiscProcess
 
@@ -131,14 +119,10 @@ void CTitleScreenState::Update()
     
     m_scriptComponent.Update();
     
-    m_slotGame.Update();
+    //m_slotGame.Update();
 
-    //float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
-    //m_cube.IncRotXYZ( 0, rot, 0 );
-    
-    //CActorMgr::Instance().Update();
-    
-    //CStageMgr::Instance().Update2D();
+    float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
+    m_cube.IncRotXYZ( 0, rot, 0 );
 
 }   // Update
 
@@ -151,16 +135,10 @@ void CTitleScreenState::Transform()
     CCommonState::Transform();
 
     m_background.Transform();
-    m_slotGame.Transform();
-    //m_pixelPerfectTest.Transform();
-    //m_spriteSheet.Transform();
-    //m_cube.Transform();
+    //m_slotGame.Transform();
+    m_cube.Transform();
     
-    //m_camera.Transform();
-    
-    //CActorMgr::Instance().Transform();
-    
-    //CStageMgr::Instance().Transform2D();
+    m_camera.Transform();
 
 }   // Transform
 
@@ -172,21 +150,12 @@ void CTitleScreenState::PreRender()
 {
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
-    m_slotGame.Render( orthoMatrix );
-    
-    //m_spriteSheet.Render( orthoMatrix );
-    //m_pixelPerfectTest.Render( orthoMatrix );
+    //m_slotGame.Render( orthoMatrix );
     
     CCommonState::PreRender();
     
-    
-
-    //const CMatrix & perMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE );
-    //m_cube.Render( m_camera.GetMatrix() * perMatrix, m_camera.GetRotMatrix() );
-    
-    //CActorMgr::Instance().Render( orthoMatrix );
-    
-    //CStageMgr::Instance().Render2D( orthoMatrix );
+    const CMatrix & perMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE );
+    m_cube.Render( m_camera.GetMatrix() * perMatrix, m_camera.GetRotMatrix() );
 
 }   // PreRender
 
@@ -205,33 +174,27 @@ namespace NTitleScreenState
         CObjectDataMgr::Instance().LoadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
         
         //CObjectDataMgr::Instance().LoadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        //CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().CreateFromData2D( "(title_screen)" );
-        //CObjectDataMgr::Instance().CreateFromData3D( "(cube)" );
-        //CObjectDataMgr::Instance().CreateFromData2D( "(actor)" );
+        CObjectDataMgr::Instance().CreateFromData3D( "(cube)" );
     }
     
     void Load()
     {
-        //CScriptManager::Instance().LoadGroup("(actor)");
-        // Load actor data group
-        //CActorMgr::Instance().SetCast( new CBasicCast2D );
-        //CActorMgr::Instance().LoadGroup("(actor)");
-        
         // Load the slot group stuff
-        CSymbolSetViewMgr::Instance().LoadGroup( "(title_screen)" );
-        CSlotMathMgr::Instance().LoadGroup( "(title_screen)" );
-        CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_wheel.cfg" );
+        //CSymbolSetViewMgr::Instance().LoadGroup( "(title_screen)" );
+        //CSlotMathMgr::Instance().LoadGroup( "(title_screen)" );
+        //CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_wheel.cfg" );
         
         // Preload some needed XML files
-        CXMLPreloader::Instance().Clear();
-        CXMLPreloader::Instance().Load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
-        CXMLPreloader::Instance().Load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
+        //CXMLPreloader::Instance().Clear();
+        //CXMLPreloader::Instance().Load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
+        //CXMLPreloader::Instance().Load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
         
     }   // ThreadLoad
     
@@ -248,19 +211,16 @@ namespace NTitleScreenState
     void CriticalUnload()
     {
         CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)" );
-        //CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
-        //CObjectDataMgr::Instance().FreeGroup3D( "(actor)" );
+        CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
         
         // Unload the slot group stuff. Could be using fonts
-        CSymbolSetViewMgr::Instance().Clear();
+        //CSymbolSetViewMgr::Instance().Clear();
     }
     
     void Unload()
     {
-        //CActorMgr::Instance().Clear();
-        
         // Unload the slot group stuff
-        CSlotMathMgr::Instance().Clear();
+        //CSlotMathMgr::Instance().Clear();
         
     }   // Unload
 

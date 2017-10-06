@@ -35,16 +35,6 @@
               </visual>
             </object>
         -->
-        <object name="pause_menu_bg">
-            <visual>
-                <texture file="data/textures/menu/menu_bg.png"/>
-                <mesh genType="scaled_frame">
-                    <scaledFrame thicknessWidth="30" thicknessHeight="30"/>
-                </mesh>
-                <!--<color r="48" g="97" b="153" a="217"/>-->
-            </visual>
-            <size width="355" height="395"/>
-        </object>
         
         <object name="waffles">
             <visual>

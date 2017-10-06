@@ -22,11 +22,11 @@
         </control>
 
         <!-- New Game Button -->
-        <control name="new_game_btn" controlType="button" defaultState="inactive">
+        <control name="new_game_btn" controlType="button" defaultState="disabled">
             <filePath file="data/objects/2d/menu/control/button_spin_275x55.ctrl"/>
             <position x="0" y="84" z="0"/>
             <fontStringLst>
-                <string text="Spin"/>
+                <string text="New Game"/>
             </fontStringLst>
             <!--<action actionType="to_menu" executionAction="settings_menu"/>-->
             <action actionType="action"/>

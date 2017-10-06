@@ -156,10 +156,10 @@ void CStartUpState::Fade(
 void CStartUpState::AssetLoad()
 {
     // Load the symbol set view data manager list table
-    CSymbolSetViewMgr::Instance().LoadListTable( "data/objects/2d/slot/symbolSetListTable.lst" );
+    //CSymbolSetViewMgr::Instance().LoadListTable( "data/objects/2d/slot/symbolSetListTable.lst" );
     
     // Load the math data manager list table
-    CSlotMathMgr::Instance().LoadListTable( "data/objects/2d/slot/mathListTable.lst" );
+    //CSlotMathMgr::Instance().LoadListTable( "data/objects/2d/slot/mathListTable.lst" );
     
     // Load 3D object data list table
     CObjectDataMgr::Instance().LoadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );

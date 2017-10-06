@@ -61,15 +61,11 @@ private:
     CSprite2D m_background;
     
     // Slot game class
-    CSlotGame m_slotGame;
+    //CSlotGame m_slotGame;
     
-    //CSprite2D m_spriteSheet;
+    CSprite3D m_cube;
     
-    //CSprite2D m_pixelPerfectTest;
-    
-    //CSprite3D m_cube;
-    
-    //CCamera m_camera;
+    CCamera m_camera;
 };
 
 
@@ -78,8 +74,8 @@ private:
 ****************************************************************************/
 namespace NTitleScreenState
 {
-    static std::tuple<std::string, std::string> reelGrpCfg("data/objects/2d/slot/wheelgroup.cfg", "wheelgroup");
-    static std::tuple<std::string, std::string> spinProfileCfg("data/objects/2d/slot/spinProfile.cfg", "spinProfile");
+    //static std::tuple<std::string, std::string> reelGrpCfg("data/objects/2d/slot/wheelgroup.cfg", "wheelgroup");
+    //static std::tuple<std::string, std::string> spinProfileCfg("data/objects/2d/slot/spinProfile.cfg", "spinProfile");
     
     void ObjectDataLoad();
     void CriticalLoad();

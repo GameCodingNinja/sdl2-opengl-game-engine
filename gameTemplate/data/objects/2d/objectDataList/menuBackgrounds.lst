@@ -9,7 +9,6 @@
                     <glyph id="menu_bg"/>
                 </spriteSheet>
                 <scaledFrame thicknessWidth="30" thicknessHeight="30"/>
-                <file name=""/>
             </mesh>
             <color r="48" g="97" b="153" a="217"/>
             <shader id="shader_2d"/>
