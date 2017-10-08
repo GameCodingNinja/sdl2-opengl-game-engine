@@ -96,7 +96,7 @@ private:
         const CSize<int> & textureSize,
         const CSize<int> & glyphSize,
         const CSize<int> & frameSize,
-        const CRect<float> & spriteSheetOffset );
+        const CRect<float> & textureOffset );
     
     // Generate a scaled frame with a mesh file
     void GenerateScaledFrameMeshFile( 
@@ -104,7 +104,7 @@ private:
         const CSize<int> & textureSize,
         const CSize<int> & glyphSize,
         const CSize<int> & frameSize,
-        const CRect<float> & spriteSheetOffset );
+        const CRect<float> & textureOffset );
     
     // Generate a mesh file
     void GenerateFromMeshFile( 
@@ -115,7 +115,7 @@ private:
         const std::string & group,
         const CSize<int> & textureSize,
         const CSize<int> & size,
-        const CRect<float> & spriteSheetOffset,
+        const CRect<float> & textureOffset,
         int iboOffset,
         std::vector<CVertex2D> & rVertVec,
         std::vector<GLubyte> & rIboVec );

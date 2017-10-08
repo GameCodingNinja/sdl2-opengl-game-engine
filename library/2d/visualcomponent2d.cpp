@@ -734,7 +734,7 @@ void CVisualComponent2D::SetDefaultColor()
 bool CVisualComponent2D::AllowRender()
 {
     return ((GENERATION_TYPE > NDefs::EGT_NULL) && (GENERATION_TYPE < NDefs::EGT_FONT)) ||
-           ((GENERATION_TYPE == NDefs::EGT_FONT) && !m_pFontData->m_fontString.empty());
+           ((GENERATION_TYPE == NDefs::EGT_FONT) && !m_pFontData->m_fontString.empty() && (m_vbo > 0));
 
 }   // AllowRender
 

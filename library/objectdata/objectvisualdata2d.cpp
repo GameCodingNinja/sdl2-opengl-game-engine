@@ -372,13 +372,13 @@ void CObjectVisualData2D::GenerateScaledFrame(
     const CSize<int> & textureSize,
     const CSize<int> & glyphSize,
     const CSize<int> & frameSize,
-    const CRect<float> & spriteSheetOffset )
+    const CRect<float> & textureOffset )
 {
     std::string vboName = boost::str( boost::format("scaled_frame_%d_%d_%d_%d_%d_%d_%d_%d") 
         % frameSize.w % frameSize.h % m_scaledFrame.m_frame.w % m_scaledFrame.m_frame.h % textureSize.w % textureSize.h % glyphSize.w % glyphSize.h );
 
     m_vbo = CVertBufMgr::Instance().CreateScaledFrame(
-        group, vboName, m_scaledFrame, textureSize, glyphSize, frameSize, spriteSheetOffset, std::vector<CVertex2D>() );
+        group, vboName, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, std::vector<CVertex2D>() );
 
     GLubyte indexData[] = {
         0,1,2,     0,3,1,
@@ -417,7 +417,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     const CSize<int> & textureSize,
     const CSize<int> & glyphSize,
     const CSize<int> & frameSize,
-    const CRect<float> & spriteSheetOffset )
+    const CRect<float> & textureOffset )
 {
     // Construct the name used for vbo and ibo
     std::string name = "scaled_frame_mesh_" + m_meshFilePath;
@@ -445,11 +445,11 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
         std::vector<CVertex2D> vertVec;
         
         // Load a mesh from XML file
-        LoadMeshFromXML( group, textureSize, frameSize, spriteSheetOffset, 16, vertVec, iboVec );
+        LoadMeshFromXML( group, textureSize, frameSize, textureOffset, 16, vertVec, iboVec );
         
         // create the vbo
         m_vbo = CVertBufMgr::Instance().CreateScaledFrame(
-            group, name, m_scaledFrame, textureSize, glyphSize, frameSize, spriteSheetOffset, vertVec );
+            group, name, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, vertVec );
     }
 
     // Create the unique IBO buffer
@@ -497,7 +497,7 @@ void CObjectVisualData2D::LoadMeshFromXML(
     const std::string & group,
     const CSize<int> & textureSize,
     const CSize<int> & size,
-    const CRect<float> & spriteSheetOffset,
+    const CRect<float> & textureOffset,
     int iboOffset,
     std::vector<CVertex2D> & rVertVec,
     std::vector<GLubyte> & rIboVec )
@@ -532,8 +532,8 @@ void CObjectVisualData2D::LoadMeshFromXML(
             // This converts the data to a center aligned vertex buffer
             vert.vert.x = centerAlignSize.w + vert.vert.x + additionalOffsetX;
             vert.vert.y = centerAlignSize.h - vert.vert.y + additionalOffsetY;
-            vert.uv.u = spriteSheetOffset.x1 + (vert.uv.u / textureSize.w);
-            vert.uv.v = spriteSheetOffset.y1 + (vert.uv.v / textureSize.h);
+            vert.uv.u = textureOffset.x1 + (vert.uv.u / textureSize.w);
+            vert.uv.v = textureOffset.y1 + (vert.uv.v / textureSize.h);
 
             rVertVec.emplace_back( vert );
         }
