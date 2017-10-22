@@ -1,6 +1,6 @@
 /*
    AngelCode Scripting Library
-   Copyright (c) 2003-2016 Andreas Jonsson
+   Copyright (c) 2003-2015 Andreas Jonsson
 
    This software is provided 'as-is', without any express or implied 
    warranty. In no event will the authors be held liable for any 
@@ -79,8 +79,6 @@ public:
 	int MakeReference(bool b);
 	int MakeReadOnly(bool b);
 	int MakeHandleToConst(bool b);
-	void SetIfHandleThenConst(bool b) { ifHandleThenConst = b; }
-	bool HasIfHandleThenConst() const { return ifHandleThenConst; }
 
 	bool IsTemplate()             const;
 	bool IsScriptObject()         const;
@@ -152,8 +150,7 @@ protected:
 	bool isConstHandle:1;
 	bool isAuto:1;
 	bool isHandleToAsHandleType:1; // Used by the compiler to know how to initialize the object
-	bool ifHandleThenConst:1; // Used when creating template instances to determine if a handle should be const or not
-	char dummy:1;
+	char dummy:2;
 };
 
 END_AS_NAMESPACE

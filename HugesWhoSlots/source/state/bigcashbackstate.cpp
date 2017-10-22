@@ -90,7 +90,7 @@ void CBigCashBackState::Init()
         CSymbolSetViewMgr::Instance().Get( m_group, "base_game" ),
         std::move(std::unique_ptr<iCycleResults>(new CSimpleCycleresults)) );
 
-    m_pig.SetPos( CPoint<float>(-800,-60,0) );
+    m_pig.SetPos( CPoint<float>(-875,-200,0) );
     
     // Init the front panel
     std::vector<CUIControl *> btnVec = {
@@ -233,9 +233,8 @@ void CBigCashBackState::PreRender()
 {
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
-    m_pig.Render( orthoMatrix );
-    
     m_slotGame.Render( orthoMatrix );
+    m_pig.Render( orthoMatrix );
     
     CCommonState::PreRender();
 
@@ -276,11 +275,11 @@ namespace NBigCashBack
         // Load the slot group stuff
         CSymbolSetViewMgr::Instance().LoadGroup( "(big_cash_back)" );
         CSlotMathMgr::Instance().LoadGroup( "(big_cash_back)" );
-        CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_15_3x5.cfg" );
+        CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_4x5.cfg" );
         
         // Set the line bet and the total numvber of lines bet
         CBetMgr::Instance().SetLineBet(1);
-        CBetMgr::Instance().SetTotalLines( CSlotMathMgr::Instance().GetPaylineSet("15_3x5").GetLineData().size() );
+        CBetMgr::Instance().SetTotalLines( CSlotMathMgr::Instance().GetPaylineSet("40_4x5").GetLineData().size() );
         
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().Clear();

@@ -5,7 +5,7 @@
         <visual>
             <!-- Resolution swap only used for mobile devices - list from lowest to highest resolution -->
             <graphicResSwap>
-                <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
+                <res heightOrLess="1100" defaultUniformScale="1.5" ext="_720"/>
             </graphicResSwap>
             <texture file="data/textures/games/bigCashBack/basegame_spriteSheet.png" compressed="false"/>
             <mesh genType="sprite_sheet">
@@ -79,11 +79,11 @@
             </visual>
         </object>
         
-        <object name="symb_gems">
+        <object name="sym_limo">
             <visual>
                 <mesh>
                     <spriteSheet>
-                        <glyph id="symb_gems"/>
+                        <glyph id="sym_limo"/>
                     </spriteSheet>
                 </mesh>
             </visual>

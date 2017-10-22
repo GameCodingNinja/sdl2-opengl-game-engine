@@ -200,3 +200,22 @@ void SlotGame_FastStopSpinMusic()
     }
 }
 
+/************************************************************************
+*    desc:  Script for setting the look of the disabled state
+************************************************************************/
+void Control_Disabled( CSprite2d & sprite )
+{
+    CColor color = sprite.GetDefaultColor();
+    color.TransformHSV( 0, 0, 1 );
+
+    sprite.SetColor( color );
+}
+
+
+/************************************************************************
+*    desc:  Script for setting the look of the inactive state
+************************************************************************/
+void Control_Inactive( CSprite2d & sprite )
+{
+    sprite.SetDefaultColor();
+}

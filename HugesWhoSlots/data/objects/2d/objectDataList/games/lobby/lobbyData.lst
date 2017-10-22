@@ -5,7 +5,7 @@
         <visual>
             <!-- Resolution swap only used for mobile devices - list from lowest to highest resolution -->
             <graphicResSwap>
-                <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
+                <res heightOrLess="1100" defaultUniformScale="1.5" ext="_720"/>
             </graphicResSwap>
             <texture file="data/textures/games/lobby/lobby_spriteSheet.png" compressed="false"/>
             <mesh genType="sprite_sheet">
@@ -41,7 +41,7 @@
 
         <object name="background">
             <visual>
-                <texture file="data/textures/games/lobby/background.png"/>
+                <texture file="data/textures/games/lobby/background.jpg"/>
                 <mesh genType="quad">
                     <file name=""/>
                 </mesh>

@@ -844,7 +844,7 @@ int CScriptBuilder::ExtractDeclaration(int pos, string &declaration, int &type)
 						}
 						return pos;
 					}
-					if( (token == "=" && !hasParenthesis) || token == ";" )
+					if( token == "=" || token == ";" )
 					{
 						// Substitute the declaration with just the name
 						declaration = name;

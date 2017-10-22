@@ -54,7 +54,7 @@ void CSmartConfirmBtn::Execute()
     }
     else if( m_pUIControl->GetName() == "big_cash_back_btn" )
     {
-        conformationMsg = "Are you sure you|want to load|The Big Payback game?";
+        conformationMsg = "Are you sure you|want to load|The Big Pay Back game?";
         executionAction = "big_cash_back_state";
         actionType = NUIControl::ECAT_GAME_STATE_CHANGE;
     }

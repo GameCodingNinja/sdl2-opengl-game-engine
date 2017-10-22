@@ -14,6 +14,7 @@
 
 // Standard lib dependencies
 #include <cstring>
+#include <cstdlib>
 
 /************************************************************************
 *    desc:  Constructor

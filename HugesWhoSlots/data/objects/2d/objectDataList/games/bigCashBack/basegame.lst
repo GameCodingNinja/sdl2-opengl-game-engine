@@ -5,7 +5,7 @@
         <visual>
             <!-- Resolution swap only used for mobile devices - list from lowest to highest resolution -->
             <graphicResSwap>
-                <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
+                <res heightOrLess="1100" defaultUniformScale="1.5" ext="_720"/>
             </graphicResSwap>
             <texture file="data/textures/games/bigCashBack/basegame_spriteSheet.png" compressed="false"/>
             <mesh genType="sprite_sheet">
@@ -41,21 +41,11 @@
         
         <object name="background">
             <visual>
-                <texture file="data/textures/games/bigCashBack/background.png"/>
+                <texture file="data/textures/games/bigCashBack/background.jpg"/>
                 <mesh genType="quad">
                     <file name=""/>
                 </mesh>
                 <shader id="shader_2d"/>
-            </visual>
-        </object>
-
-        <object name="reel_frame">
-            <visual>
-                <mesh>
-                    <spriteSheet>
-                        <glyph id="reel_frame"/>
-                    </spriteSheet>
-                </mesh>
             </visual>
         </object>
 
@@ -240,64 +230,32 @@
             </visual>
         </object>
         
-        <object name="total_bet_meter">
+        <object name="credit_bet_meter_frame">
             <visual>
-                <mesh>
+                <mesh genType="scaled_frame">
+                    <scaledFrame thicknessWidth="20" thicknessHeight="20" centerQuad="true"/>
                     <spriteSheet>
-                        <glyph id="total_bet_meter"/>
+                        <glyph id="meter frame"/>
                     </spriteSheet>
                 </mesh>
+                <color r="48" g="97" b="153" a="1"/>
+                <shader id="shader_2d"/>
             </visual>
+            <size width="300" height="67"/>
         </object>
         
-        <object name="total_bet_meter_active_overlay">
+        <object name="win_meter_frame">
             <visual>
-                <mesh>
+                <mesh genType="scaled_frame">
+                    <scaledFrame thicknessWidth="20" thicknessHeight="20" centerQuad="true"/>
                     <spriteSheet>
-                        <glyph id="total_bet_meter_active_overlay"/>
+                        <glyph id="meter frame"/>
                     </spriteSheet>
                 </mesh>
+                <color r="48" g="97" b="153" a="1"/>
+                <shader id="shader_2d"/>
             </visual>
-        </object>
-        
-        <object name="total_bet_meter_disabled_overlay">
-            <visual>
-                <mesh>
-                    <spriteSheet>
-                        <glyph id="total_bet_meter_disabled_overlay"/>
-                    </spriteSheet>
-                </mesh>
-            </visual>
-        </object>
-        
-        <object name="credit_meter">
-            <visual>
-                <mesh>
-                    <spriteSheet>
-                        <glyph id="credit_meter"/>
-                    </spriteSheet>
-                </mesh>
-            </visual>
-        </object>
-        
-        <object name="win_meter">
-            <visual>
-                <mesh>
-                    <spriteSheet>
-                        <glyph id="win_meter"/>
-                    </spriteSheet>
-                </mesh>
-            </visual>
-        </object>
-        
-        <object name="level_meter">
-            <visual>
-                <mesh>
-                    <spriteSheet>
-                        <glyph id="level_meter"/>
-                    </spriteSheet>
-                </mesh>
-            </visual>
+            <size width="450" height="142"/>
         </object>
         
     </objectList>

@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="add_on">
-      <UniqueIdentifier>{b5069512-738e-4488-81b2-d2cf150e57b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="add_on\scriptstdstring">
-      <UniqueIdentifier>{5d37f89c-35aa-4e3a-970c-b7e6ab47ead7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="add_on\scriptarray">
-      <UniqueIdentifier>{0c937e8a-65be-4f4a-b1ad-8a0eea2ac0f0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\as_atomic.cpp">
@@ -138,12 +129,6 @@
     <ClCompile Include="..\..\source\as_callfunc_xenon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\add_on\scriptstdstring\scriptstdstring.cpp">
-      <Filter>add_on\scriptstdstring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\add_on\scriptarray\scriptarray.cpp">
-      <Filter>add_on\scriptarray</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\angelscript.h">
@@ -250,12 +235,6 @@
     </ClInclude>
     <ClInclude Include="..\..\source\as_atomic.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\add_on\scriptstdstring\scriptstdstring.h">
-      <Filter>add_on\scriptstdstring</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\add_on\scriptarray\scriptarray.h">
-      <Filter>add_on\scriptarray</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

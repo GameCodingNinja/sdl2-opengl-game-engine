@@ -172,32 +172,36 @@ int ExecuteString(asIScriptEngine *engine, const char *code, void *ref, int refT
 	// If no context was provided, request a new one from the engine
 	asIScriptContext *execCtx = ctx ? ctx : engine->RequestContext();
 	r = execCtx->Prepare(func);
-	if (r >= 0)
+	if( r < 0 )
 	{
-		// Execute the function
-		r = execCtx->Execute();
+		func->Release();
+		if( !ctx ) execCtx->Release();
+		return r;
+	}
 
-		// Unless the provided type was void retrieve it's value
-		if (ref != 0 && refTypeId != asTYPEID_VOID)
+	// Execute the function
+	r = execCtx->Execute();
+
+	// Unless the provided type was void retrieve it's value
+	if( ref != 0 && refTypeId != asTYPEID_VOID )
+	{
+		if( refTypeId & asTYPEID_OBJHANDLE )
 		{
-			if (refTypeId & asTYPEID_OBJHANDLE)
-			{
-				// Expect the pointer to be null to start with
-				assert(*reinterpret_cast<void**>(ref) == 0);
-				*reinterpret_cast<void**>(ref) = *reinterpret_cast<void**>(execCtx->GetAddressOfReturnValue());
-				engine->AddRefScriptObject(*reinterpret_cast<void**>(ref), engine->GetTypeInfoById(refTypeId));
-			}
-			else if (refTypeId & asTYPEID_MASK_OBJECT)
-			{
-				// Expect the pointer to point to a valid object
-				assert(*reinterpret_cast<void**>(ref) != 0);
-				engine->AssignScriptObject(ref, execCtx->GetAddressOfReturnValue(), engine->GetTypeInfoById(refTypeId));
-			}
-			else
-			{
-				// Copy the primitive value
-				memcpy(ref, execCtx->GetAddressOfReturnValue(), engine->GetSizeOfPrimitiveType(refTypeId));
-			}
+			// Expect the pointer to be null to start with
+			assert( *reinterpret_cast<void**>(ref) == 0 );
+			*reinterpret_cast<void**>(ref) = *reinterpret_cast<void**>(execCtx->GetAddressOfReturnValue());
+			engine->AddRefScriptObject(*reinterpret_cast<void**>(ref), engine->GetTypeInfoById(refTypeId));
+		}
+		else if( refTypeId & asTYPEID_MASK_OBJECT )
+		{
+			// Expect the pointer to point to a valid object
+			assert( *reinterpret_cast<void**>(ref) != 0 );
+			engine->AssignScriptObject(ref, execCtx->GetAddressOfReturnValue(), engine->GetTypeInfoById(refTypeId));
+		}
+		else
+		{
+			// Copy the primitive value
+			memcpy(ref, execCtx->GetAddressOfReturnValue(), engine->GetSizeOfPrimitiveType(refTypeId));
 		}
 	}
 
@@ -607,7 +611,7 @@ int ConfigEngineFromStream(asIScriptEngine *engine, istream &strm, const char *c
 		strm.getline(buffer, 1000);
 		config += buffer;
 		config += "\n";
-	} while( !strm.eof() && strm.good() );
+	} while( !strm.eof() );
 
 	// Process the configuration file and register each entity
 	asUINT pos  = 0;

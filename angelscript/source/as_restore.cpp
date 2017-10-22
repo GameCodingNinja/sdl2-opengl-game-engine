@@ -172,7 +172,7 @@ int asCReader::ReadInner()
 					(t->flags & asOBJ_ENUM) )
 				{
 					asDELETE(et, asCEnumType);
-					et = CastToEnumType(t);
+					et = t->CastToEnumType();
 					sharedExists = true;
 					break;
 				}
@@ -223,7 +223,7 @@ int asCReader::ReadInner()
 			for( asUINT n = 0; n < engine->sharedScriptTypes.GetLength(); n++ )
 			{
 				asCTypeInfo *ti = engine->sharedScriptTypes[n];
-				asCObjectType *t = CastToObjectType(ti);
+				asCObjectType *t = ti ? ti->CastToObjectType() : 0;
 				if( t &&
 					t->IsShared() &&
 					t->name == ot->name &&
@@ -231,7 +231,7 @@ int asCReader::ReadInner()
 					t->IsInterface() == ot->IsInterface() )
 				{
 					asDELETE(ot, asCObjectType);
-					ot = CastToObjectType(t);
+					ot = t->CastToObjectType();
 					sharedExists = true;
 					break;
 				}
@@ -518,7 +518,7 @@ int asCReader::ReadInner()
 	{
 		for( i = 0; i < usedTypes.GetLength() && !error; i++ )
 		{
-			asCObjectType *ot = CastToObjectType(usedTypes[i]);
+			asCObjectType *ot = usedTypes[i]->CastToObjectType();
 			if( !ot ||
 				!(ot->flags & asOBJ_TEMPLATE) || 
 				!ot->beh.templateCallback )
@@ -735,7 +735,7 @@ void asCReader::ReadUsedFunctions()
 					else if( func.name == "$fact" || func.name == "$beh3" )
 					{
 						// This is a factory (or stub), so look for the function in the return type's factories
-						asCObjectType *objType = CastToObjectType(func.returnType.GetTypeInfo());
+						asCObjectType *objType = func.returnType.GetTypeInfo()->CastToObjectType();
 						if( objType )
 						{
 							for( asUINT i = 0; i < objType->beh.factories.GetLength(); i++ )
@@ -753,7 +753,7 @@ void asCReader::ReadUsedFunctions()
 					else if( func.name == "$list" )
 					{
 						// listFactory is used for both factory is global and returns a handle and constructor that is a method
-						asCObjectType *objType = func.objectType ? func.objectType : CastToObjectType(func.returnType.GetTypeInfo());
+						asCObjectType *objType = func.objectType ? func.objectType : func.returnType.GetTypeInfo()->CastToObjectType();
 						if( objType )
 						{
 							asCScriptFunction *f = engine->scriptFunctions[objType->beh.listFactory];
@@ -775,7 +775,7 @@ void asCReader::ReadUsedFunctions()
 					else if( func.name == "$beh4" )
 					{
 						// This is a list factory, so check the return type's list factory
-						asCObjectType *objType = CastToObjectType(func.returnType.GetTypeInfo());
+						asCObjectType *objType = func.returnType.GetTypeInfo()->CastToObjectType();
 						if( objType )
 						{
 							asCScriptFunction *f = engine->scriptFunctions[objType->beh.listFactory];
@@ -951,7 +951,7 @@ void asCReader::ReadFunctionSignature(asCScriptFunction *func, asCObjectType **p
 		}
 	}
 	
-	func->objectType = CastToObjectType(ReadTypeInfo());
+	func->objectType = ReadTypeInfo()->CastToObjectType();
 	if( func->objectType )
 	{
 		func->objectType->AddRefInternal();
@@ -979,7 +979,7 @@ void asCReader::ReadFunctionSignature(asCScriptFunction *func, asCObjectType **p
 			{
 				func->nameSpace = 0;
 				if (parentClass)
-					*parentClass = CastToObjectType(ReadTypeInfo());
+					*parentClass = ReadTypeInfo()->CastToObjectType();
 				else
 					error = true;
 			}
@@ -1243,9 +1243,9 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 		type->nameSpace = engine->AddNameSpace(ns.AddressOf());
 
 		// Verify that the flags match the asCTypeInfo
-		if ((CastToEnumType(type) && !(type->flags & asOBJ_ENUM)) ||
-			(CastToFuncdefType(type) && !(type->flags & asOBJ_FUNCDEF)) ||
-			(CastToObjectType(type) && !(type->flags & (asOBJ_REF | asOBJ_VALUE))))
+		if ((type->CastToEnumType() && !(type->flags & asOBJ_ENUM)) ||
+			(type->CastToFuncdefType() && !(type->flags & asOBJ_FUNCDEF)) ||
+			(type->CastToObjectType() && !(type->flags & (asOBJ_REF | asOBJ_VALUE))))
 		{
 			error = true;
 			return;
@@ -1255,7 +1255,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 		if( (type->flags & asOBJ_SCRIPT_OBJECT) && type->size != 0 )
 			type->size = sizeof(asCScriptObject);
 
-		asCObjectType *ot = CastToObjectType(type);
+		asCObjectType *ot = type->CastToObjectType();
 		if (ot)
 		{
 			// Use the default script class behaviours
@@ -1280,7 +1280,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 	{
 		if( type->flags & asOBJ_ENUM )
 		{
-			asCEnumType *t = CastToEnumType(type);
+			asCEnumType *t = type->CastToEnumType();
 			int count = ReadEncodedUInt();
 			bool sharedExists = existingShared.MoveTo(0, type);
 			if( !sharedExists )
@@ -1331,14 +1331,14 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 		}
 		else if( type->flags & asOBJ_TYPEDEF )
 		{
-			asCTypedefType *td = CastToTypedefType(type);
+			asCTypedefType *td = type->CastToTypedefType();
 			asASSERT(td);
 			eTokenType t = (eTokenType)ReadEncodedUInt();
 			td->aliasForType = asCDataType::CreatePrimitive(t, false);
 		}
 		else
 		{
-			asCObjectType *ot = CastToObjectType(type);
+			asCObjectType *ot = type->CastToObjectType();
 			asASSERT(ot);
 
 			// If the type is shared and pre-existing, we should just 
@@ -1346,7 +1346,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 			bool sharedExists = existingShared.MoveTo(0, type);
 			if( sharedExists )
 			{
-				asCObjectType *dt = CastToObjectType(ReadTypeInfo());
+				asCObjectType *dt = ReadTypeInfo()->CastToObjectType();
 				if( ot->derivedFrom != dt )
 				{
 					asCString str;
@@ -1357,7 +1357,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 			}
 			else
 			{
-				ot->derivedFrom = CastToObjectType(ReadTypeInfo());
+				ot->derivedFrom = ReadTypeInfo()->CastToObjectType();
 				if( ot->derivedFrom )
 					ot->derivedFrom->AddRefInternal();
 			}
@@ -1368,7 +1368,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 			{
 				for( int n = 0; n < size; n++ )
 				{
-					asCObjectType *intf = CastToObjectType(ReadTypeInfo());
+					asCObjectType *intf = ReadTypeInfo()->CastToObjectType();
 					ReadEncodedUInt();
 
 					if( !type->Implements(intf) )
@@ -1386,7 +1386,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 				ot->interfaceVFTOffsets.Allocate(size, false);
 				for( int n = 0; n < size; n++ )
 				{
-					asCObjectType *intf = CastToObjectType(ReadTypeInfo());
+					asCObjectType *intf = ReadTypeInfo()->CastToObjectType();
 					ot->interfaces.PushLast(intf);
 
 					asUINT offset = ReadEncodedUInt();
@@ -1672,7 +1672,7 @@ void asCReader::ReadTypeDeclaration(asCTypeInfo *type, int phase)
 	}
 	else if( phase == 3 )
 	{
-		asCObjectType *ot = CastToObjectType(type);
+		asCObjectType *ot = type->CastToObjectType();
 
 		// This is only done for object types
 		asASSERT(ot);
@@ -1916,7 +1916,7 @@ asCTypeInfo* asCReader::ReadTypeInfo()
 		asSNameSpace *nameSpace = engine->AddNameSpace(ns.AddressOf());
 
 		asCTypeInfo *tmp = engine->GetRegisteredType(typeName.AddressOf(), nameSpace);
-		asCObjectType *tmpl = CastToObjectType(tmp);
+		asCObjectType *tmpl = tmp ? tmp->CastToObjectType() : 0;
 		if( tmpl == 0 )
 		{
 			asCString str;
@@ -1972,7 +1972,7 @@ asCTypeInfo* asCReader::ReadTypeInfo()
 	}
 	else if( ch == 'l' )
 	{
-		asCObjectType *st = CastToObjectType(ReadTypeInfo());
+		asCObjectType *st = ReadTypeInfo()->CastToObjectType();
 		if( st == 0 || st->beh.listFactory == 0 )
 		{
 			Error(TXT_INVALID_BYTECODE_d);
@@ -2048,7 +2048,7 @@ asCTypeInfo* asCReader::ReadTypeInfo()
 		ReadString(&typeName);
 
 		// Read the parent class
-		asCObjectType *parentClass = CastToObjectType(ReadTypeInfo());
+		asCObjectType *parentClass = ReadTypeInfo()->CastToObjectType();
 		if (parentClass == 0)
 		{
 			Error(TXT_INVALID_BYTECODE_d);
@@ -2389,7 +2389,7 @@ void asCReader::ReadUsedObjectProps()
 	usedObjectProperties.SetLength(c);
 	for( asUINT n = 0; n < c; n++ )
 	{
-		asCObjectType *objType = CastToObjectType(ReadTypeInfo());
+		asCObjectType *objType = ReadTypeInfo()->CastToObjectType();
 		if( objType == 0 )
 		{
 			Error(TXT_INVALID_BYTECODE_d);
@@ -2479,7 +2479,7 @@ void asCReader::TranslateFunction(asCScriptFunction *func)
 		{
 			// Translate the index to the true object type
 			asPWORD *ot = (asPWORD*)&bc[n+1];
-			*(asCObjectType**)ot = CastToObjectType(FindType(int(*ot)));
+			*(asCObjectType**)ot = FindType(int(*ot))->CastToObjectType();
 		}
 		else if( c == asBC_TYPEID ||
 			     c == asBC_Cast )
@@ -2577,7 +2577,7 @@ void asCReader::TranslateFunction(asCScriptFunction *func)
 		{
 			// Translate the index to the true object type
 			asPWORD *arg = (asPWORD*)&bc[n+1];
-			*(asCObjectType**)arg = CastToObjectType(FindType(int(*arg)));
+			*(asCObjectType**)arg = FindType(int(*arg))->CastToObjectType();
 
 			// The constructor function id must be translated, unless it is zero
 			int *fid = (int*)&bc[n+1+AS_PTR_SIZE];
@@ -2681,14 +2681,14 @@ void asCReader::TranslateFunction(asCScriptFunction *func)
 			// corresponding asBC_FREE is encountered
 
 			// The adjuster also needs to know the list type so it can know the type of the elements
-			asCObjectType *ot = CastToObjectType(func->GetTypeInfoOfLocalVar(asBC_SWORDARG0(&bc[n])));
+			asCObjectType *ot = func->GetTypeInfoOfLocalVar(asBC_SWORDARG0(&bc[n]))->CastToObjectType();
 			listAdjusters.PushLast(asNEW(SListAdjuster)(this, &bc[n], ot));
 		}
 		else if( c == asBC_FREE )
 		{
 			// Translate the index to the true object type
 			asPWORD *pot = (asPWORD*)&bc[n+1];
-			*(asCObjectType**)pot = CastToObjectType(FindType(int(*pot)));
+			*(asCObjectType**)pot = FindType(int(*pot))->CastToObjectType();
 
 			asCObjectType *ot = *(asCObjectType**)pot;
 			if( ot && (ot->flags & asOBJ_LIST_PATTERN) )
@@ -2813,8 +2813,7 @@ void asCReader::TranslateFunction(asCScriptFunction *func)
 
 		if( c == asBC_GETREF ||
 		    c == asBC_GETOBJ ||
-		    c == asBC_GETOBJREF ||
-		    c == asBC_ChkNullS )
+		    c == asBC_GETOBJREF )
 		{
 			asBC_WORDARG0(&bc[n]) = (asWORD)AdjustGetOffset(asBC_WORDARG0(&bc[n]), func, n);
 		}
@@ -3316,7 +3315,7 @@ asCScriptFunction *asCReader::GetCalledFunction(asCScriptFunction *func, asDWORD
 		// Find the funcdef from the local variable
 		for( v = 0; v < func->scriptData->objVariablePos.GetLength(); v++ )
 			if( func->scriptData->objVariablePos[v] == var )
-				return CastToFuncdefType(func->scriptData->objVariableTypes[v])->funcdef;
+				return func->scriptData->objVariableTypes[v]->CastToFuncdefType()->funcdef;
 
 		// Look in parameters
 		int paramPos = 0;
@@ -3329,7 +3328,7 @@ asCScriptFunction *asCReader::GetCalledFunction(asCScriptFunction *func, asDWORD
 			if (var == paramPos)
 			{
 				if (func->parameterTypes[v].IsFuncdef())
-					return CastToFuncdefType(func->parameterTypes[v].GetTypeInfo())->funcdef;
+					return func->parameterTypes[v].GetTypeInfo()->CastToFuncdefType()->funcdef;
 				else
 				{
 					error = true;
@@ -3351,8 +3350,6 @@ int asCReader::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 	// Get offset 0 doesn't need adjustment
 	if( offset == 0 ) return 0;
 
-	bool bcAlloc = false;
-
 	// Find out which function that will be called
 	asCScriptFunction *calledFunc = 0;
 	int stackDelta = 0;
@@ -3367,11 +3364,6 @@ int asCReader::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 			bc == asBC_CALLBND ||
 			bc == asBC_CallPtr )
 		{
-			// The alloc instruction allocates the object memory
-			// so it doesn't take the this pointer as input
-			if (bc == asBC_ALLOC)
-				bcAlloc = true;
-
 			calledFunc = GetCalledFunction(func, n);
 			break;
 		}
@@ -3400,7 +3392,7 @@ int asCReader::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 	// current offset, and then adjust the offset accordingly
 	asUINT numPtrs = 0;
 	int currOffset = -stackDelta;
-	if( offset > currOffset && calledFunc->GetObjectType() && !bcAlloc )
+	if( offset > currOffset && calledFunc->GetObjectType() )
 	{
 		currOffset++;
 		if( currOffset > 0 )
@@ -3985,7 +3977,7 @@ void asCWriter::WriteTypeDeclaration(asCTypeInfo *type, int phase)
 		if(type->flags & asOBJ_ENUM )
 		{
 			// enumValues[]
-			asCEnumType *t = CastToEnumType(type);
+			asCEnumType *t = type->CastToEnumType();
 			int size = (int)t->enumValues.GetLength();
 			WriteEncodedInt64(size);
 
@@ -3997,13 +3989,13 @@ void asCWriter::WriteTypeDeclaration(asCTypeInfo *type, int phase)
 		}
 		else if(type->flags & asOBJ_TYPEDEF )
 		{
-			asCTypedefType *td = CastToTypedefType(type);
+			asCTypedefType *td = type->CastToTypedefType();
 			eTokenType t = td->aliasForType.GetTokenType();
 			WriteEncodedInt64(t);
 		}
 		else
 		{
-			asCObjectType *t = CastToObjectType(type);
+			asCObjectType *t = type->CastToObjectType();
 			WriteTypeInfo(t->derivedFrom);
 
 			// interfaces[] / interfaceVFTOffsets[]
@@ -4056,7 +4048,7 @@ void asCWriter::WriteTypeDeclaration(asCTypeInfo *type, int phase)
 	else if( phase == 3 )
 	{
 		// properties[]
-		asCObjectType *t = CastToObjectType(type);
+		asCObjectType *t = type->CastToObjectType();
 
 		// This is only done for object types
 		asASSERT(t);
@@ -4228,7 +4220,7 @@ void asCWriter::WriteTypeInfo(asCTypeInfo* ti)
 	if( ti )
 	{
 		// Check for template instances/specializations
-		asCObjectType *ot = CastToObjectType(ti);
+		asCObjectType *ot = ti->CastToObjectType();
 		if( ot && ot->templateSubTypes.GetLength() )
 		{
 			// Check for list pattern type or template type
@@ -4284,7 +4276,7 @@ void asCWriter::WriteTypeInfo(asCTypeInfo* ti)
 			ch = 'c'; // child type
 			WriteData(&ch, 1);
 			WriteString(&ti->name);
-			WriteTypeInfo(CastToFuncdefType(ti)->parentClass);
+			WriteTypeInfo(ti->CastToFuncdefType()->parentClass);
 		}
 	}
 	else
@@ -4425,8 +4417,6 @@ int asCWriter::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 	// Get offset 0 doesn't need adjustment
 	if( offset == 0 ) return 0;
 
-	bool bcAlloc = false;
-
 	// Find out which function that will be called
 	asCScriptFunction *calledFunc = 0;
 	int stackDelta = 0;
@@ -4445,10 +4435,6 @@ int asCWriter::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 		}
 		else if( bc == asBC_ALLOC )
 		{
-			// The alloc instruction doesn't take the object pointer on the stack,
-			// as the memory will be allocated by the instruction itself
-			bcAlloc = true;
-
 			// Find the function from the function id in the bytecode
 			int funcId = asBC_INTARG(&func->scriptData->byteCode[n+AS_PTR_SIZE]);
 			calledFunc = engine->scriptFunctions[funcId];
@@ -4470,7 +4456,7 @@ int asCWriter::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 			{
 				if( func->scriptData->objVariablePos[v] == var )
 				{
-					calledFunc = CastToFuncdefType(func->scriptData->objVariableTypes[v])->funcdef;
+					calledFunc = func->scriptData->objVariableTypes[v]->CastToFuncdefType()->funcdef;
 					break;
 				}
 			}
@@ -4486,7 +4472,7 @@ int asCWriter::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 				{
 					if( var == paramPos )
 					{
-						calledFunc = CastToFuncdefType(func->parameterTypes[v].GetTypeInfo())->funcdef;
+						calledFunc = func->parameterTypes[v].GetTypeInfo()->CastToFuncdefType()->funcdef;
 						break;
 					}
 					paramPos -= func->parameterTypes[v].GetSizeOnStackDWords();
@@ -4515,7 +4501,7 @@ int asCWriter::AdjustGetOffset(int offset, asCScriptFunction *func, asDWORD prog
 	// current offset, and then adjust the offset accordingly
 	asUINT numPtrs = 0;
 	int currOffset = -stackDelta;
-	if( offset > currOffset && calledFunc->GetObjectType() && !bcAlloc )
+	if( offset > currOffset && calledFunc->GetObjectType() )
 	{
 		currOffset += AS_PTR_SIZE;
 		if( currOffset > 0 )
@@ -4716,8 +4702,7 @@ void asCWriter::WriteByteCode(asCScriptFunction *func)
 		}
 		else if( c == asBC_GETOBJ ||    // W_ARG
 			     c == asBC_GETOBJREF ||
-			     c == asBC_GETREF ||
-			     c == asBC_ChkNullS )
+				 c == asBC_GETREF )
 		{
 			// Adjust the offset according to the function call that comes after
 			asBC_WORDARG0(tmpBC) = (asWORD)AdjustGetOffset(asBC_WORDARG0(tmpBC), func, asDWORD(bc - startBC));
@@ -4729,7 +4714,7 @@ void asCWriter::WriteByteCode(asCScriptFunction *func)
 
 			// Determine the type of the list pattern from the variable
 			short var = asBC_WORDARG0(tmpBC);
-			asCObjectType *ot = CastToObjectType(func->GetTypeInfoOfLocalVar(var));
+			asCObjectType *ot = func->GetTypeInfoOfLocalVar(var)->CastToObjectType();
 
 			// Create this helper object to adjust the offset of the elements accessed in the buffer
 			listAdjusters.PushLast(asNEW(SListAdjuster)(ot));

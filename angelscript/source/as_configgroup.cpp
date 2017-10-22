@@ -1,6 +1,6 @@
 /*
    AngelCode Scripting Library
-   Copyright (c) 2003-2016 Andreas Jonsson
+   Copyright (c) 2003-2015 Andreas Jonsson
 
    This software is provided 'as-is', without any express or implied 
    warranty. In no event will the authors be held liable for any 
@@ -103,8 +103,8 @@ void asCConfigGroup::AddReferencesForType(asCScriptEngine *engine, asCTypeInfo *
 	RefConfigGroup(engine->FindConfigGroupForTypeInfo(type));
 
 	// Keep track of which generated template instances the config group uses
-	if( type->flags & asOBJ_TEMPLATE && engine->generatedTemplateTypes.Exists(CastToObjectType(type)) && !generatedTemplateInstances.Exists(CastToObjectType(type)) )
-		generatedTemplateInstances.PushLast(CastToObjectType(type));
+	if( type->flags & asOBJ_TEMPLATE && engine->generatedTemplateTypes.Exists(type->CastToObjectType()) && !generatedTemplateInstances.Exists(type->CastToObjectType()) )
+		generatedTemplateInstances.PushLast(type->CastToObjectType());
 }
 
 bool asCConfigGroup::HasLiveObjects()
@@ -151,7 +151,7 @@ void asCConfigGroup::RemoveConfiguration(asCScriptEngine *engine, bool notUsed)
 	// Remove behaviours and members of object types
 	for( n = 0; n < types.GetLength(); n++ )
 	{
-		asCObjectType *obj = CastToObjectType(types[n]);
+		asCObjectType *obj = types[n]->CastToObjectType();
 		if( obj )
 			obj->ReleaseAllFunctions();
 	}
@@ -172,29 +172,29 @@ void asCConfigGroup::RemoveConfiguration(asCScriptEngine *engine, bool notUsed)
 					engine->defaultArrayObjectType = 0;
 
 				if( t->flags & asOBJ_TYPEDEF )
-					engine->registeredTypeDefs.RemoveValue(CastToTypedefType(t));
+					engine->registeredTypeDefs.RemoveValue(t->CastToTypedefType());
 				else if( t->flags & asOBJ_ENUM )
-					engine->registeredEnums.RemoveValue(CastToEnumType(t));
+					engine->registeredEnums.RemoveValue(t->CastToEnumType());
 				else if (t->flags & asOBJ_TEMPLATE)
-					engine->registeredTemplateTypes.RemoveValue(CastToObjectType(t));
+					engine->registeredTemplateTypes.RemoveValue(t->CastToObjectType());
 				else if (t->flags & asOBJ_FUNCDEF)
 				{
-					engine->registeredFuncDefs.RemoveValue(CastToFuncdefType(t));
-					engine->RemoveFuncdef(CastToFuncdefType(t));
+					engine->registeredFuncDefs.RemoveValue(t->CastToFuncdefType());
+					engine->RemoveFuncdef(t->CastToFuncdefType());
 				}
 				else
-					engine->registeredObjTypes.RemoveValue(CastToObjectType(t));
+					engine->registeredObjTypes.RemoveValue(t->CastToObjectType());
 
 				t->DestroyInternal();
 				t->ReleaseInternal();
 			}
 			else
 			{
-				int idx = engine->templateInstanceTypes.IndexOf(CastToObjectType(t));
+				int idx = engine->templateInstanceTypes.IndexOf(t->CastToObjectType());
 				if( idx >= 0 )
 				{
 					engine->templateInstanceTypes.RemoveIndexUnordered(idx);
-					asCObjectType *ot = CastToObjectType(t);
+					asCObjectType *ot = t->CastToObjectType();
 					ot->DestroyInternal();
 					ot->ReleaseInternal();
 				}

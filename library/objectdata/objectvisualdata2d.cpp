@@ -261,8 +261,15 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
     {
         if( !m_glyphIDs.empty() && !m_spriteSheetFilePath.empty() )
         {
+            // Make a copy of the file path because we may need to add a resource extension to it
+            std::string filePath = m_spriteSheetFilePath;
+
+            // Add in the resource swap file extension if needed
+            if( !m_resExt.empty() )
+                NGenFunc::AddFileExt( m_spriteSheetFilePath, filePath, m_resExt );
+            
             // This will return the sprite sheet
-            auto rSpriteSheet = CSpriteSheetMgr::Instance().LoadFromXML( m_spriteSheetFilePath );
+            auto rSpriteSheet = CSpriteSheetMgr::Instance().LoadFromXML( filePath );
             
             // Get the glyph to make the frame with
             auto rGlyph = rSpriteSheet.FindGlyph( m_glyphIDs.back() );

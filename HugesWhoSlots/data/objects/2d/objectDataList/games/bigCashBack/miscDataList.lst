@@ -37,6 +37,7 @@
                 <mesh genType="font">
                     <file name=""/>
                 </mesh>
+                <color r="143" g="179" b="218" a="1"/>
             </visual>
         </object>
         
@@ -48,11 +49,11 @@
             </visual>
         </object>
         
-        <object name="reel_strip_mask_vert_3">
+        <object name="reel_strip_mask_vert_4">
             <visual>
                 <shader id="shader_solid_2d"/>
             </visual>
-            <size width="238" height="654"/>
+            <size width="281" height="790"/>
         </object>
 
     </objectList>

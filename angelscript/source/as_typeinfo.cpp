@@ -265,50 +265,50 @@ int asCTypeInfo::GetProperty(asUINT index, const char **out_name, int *out_typeI
 }
 
 // internal
-asCObjectType *CastToObjectType(asCTypeInfo *ti)
+asCObjectType *asCTypeInfo::CastToObjectType()
 {
 	// Allow call on null pointer
-	if (ti == 0) return 0;
+	if (this == 0) return 0;
 
 	// TODO: type: Should List pattern have its own type class?
-	if ((ti->flags & (asOBJ_VALUE | asOBJ_REF | asOBJ_LIST_PATTERN)) && !(ti->flags & asOBJ_FUNCDEF))
-		return reinterpret_cast<asCObjectType*>(ti);
+	if ((flags & (asOBJ_VALUE | asOBJ_REF | asOBJ_LIST_PATTERN)) && !(flags & asOBJ_FUNCDEF))
+		return reinterpret_cast<asCObjectType*>(this);
 
 	return 0;
 }
 
 // internal
-asCEnumType *CastToEnumType(asCTypeInfo *ti)
+asCEnumType *asCTypeInfo::CastToEnumType()
 {
 	// Allow call on null pointer
-	if (ti == 0) return 0;
+	if (this == 0) return 0;
 
-	if (ti->flags & (asOBJ_ENUM))
-		return reinterpret_cast<asCEnumType*>(ti);
+	if (flags & (asOBJ_ENUM))
+		return reinterpret_cast<asCEnumType*>(this);
 
 	return 0;
 }
 
 // internal
-asCTypedefType *CastToTypedefType(asCTypeInfo *ti)
+asCTypedefType *asCTypeInfo::CastToTypedefType()
 {
 	// Allow call on null pointer
-	if (ti == 0) return 0;
+	if (this == 0) return 0;
 
-	if (ti->flags & (asOBJ_TYPEDEF))
-		return reinterpret_cast<asCTypedefType*>(ti);
+	if (flags & (asOBJ_TYPEDEF))
+		return reinterpret_cast<asCTypedefType*>(this);
 
 	return 0;
 }
 
 // internal
-asCFuncdefType *CastToFuncdefType(asCTypeInfo *ti)
+asCFuncdefType *asCTypeInfo::CastToFuncdefType()
 {
 	// Allow call on null pointer
-	if (ti == 0) return 0;
+	if (this == 0) return 0;
 
-	if (ti->flags & (asOBJ_FUNCDEF))
-		return reinterpret_cast<asCFuncdefType*>(ti);
+	if (flags & (asOBJ_FUNCDEF))
+		return reinterpret_cast<asCFuncdefType*>(this);
 
 	return 0;
 }
