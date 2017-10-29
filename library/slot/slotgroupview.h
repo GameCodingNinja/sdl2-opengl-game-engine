@@ -34,7 +34,7 @@ class CSlotGroupView : public CObject2D
 public:
 
     // Constructor
-    CSlotGroupView( const CSlotGroupModel & rSlotGroupModel );
+    CSlotGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel );
 
     // Destructor
     virtual ~CSlotGroupView();
@@ -78,7 +78,7 @@ public:
 protected:
     
     // Slot group model
-    const CSlotGroupModel & m_rSlotGroupModel;
+    const std::shared_ptr<CSlotGroupModel> m_spSlotGroupModel;
     
     // Spin profile map
     std::map<const std::string, std::vector<CSpinProfile>> m_spinProfileMapVec;

@@ -35,9 +35,9 @@ CSimpleCycleresults::~CSimpleCycleresults()
 /***************************************************************************
 *    desc:  Do some inits
 ****************************************************************************/
-void CSimpleCycleresults::Init( CSlotGroupView * pSlotGroupView, CPlayResult * pPlayResult )
+void CSimpleCycleresults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult )
 {
-    m_pSlotGroupView = pSlotGroupView;
+    m_spSlotGroupView = spSlotGroupView;
     m_pPlayResult = pPlayResult;
     
 }   // Init
@@ -61,7 +61,7 @@ void CSimpleCycleresults::Start()
     {
         iCycleResults::Start();
 
-        m_pSlotGroupView->GenerateCycleResultSymbs();
+        m_spSlotGroupView->GenerateCycleResultSymbs();
     }
     
 }   // Start
@@ -76,7 +76,7 @@ void CSimpleCycleresults::StartAnimation()
     {
         m_cycleResultsTimer.Set( 1000 );
         
-        auto & rCycleResultSymb = m_pSlotGroupView->GetCycleResultSymbs();
+        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
         
         auto & rPay = m_pPlayResult->GetPay( m_cyclePayCounter );
         auto & rSymbPos = rPay.GetSymbPos();
@@ -91,7 +91,7 @@ void CSimpleCycleresults::StartAnimation()
         for( auto & iter : rSymbPos )
             rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().SetDefaultColor();
 
-        m_pSlotGroupView->SetCycleResultText( true, &rPay );
+        m_spSlotGroupView->SetCycleResultText( true, &rPay );
     }
     
 }   // StartAnimation
@@ -106,16 +106,16 @@ void CSimpleCycleresults::StopAnimation()
     {
         m_cycleResultsTimer.SetExpired();
         
-        auto & rCycleResultSymb = m_pSlotGroupView->GetCycleResultSymbs();
+        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
         
         // Set it all back to normal
         for( auto & iter : rCycleResultSymb )
             for( auto sympIter : iter )
                 sympIter->GetSprite().SetDefaultColor();
         
-        m_pSlotGroupView->SetCycleResultText( false );
+        m_spSlotGroupView->SetCycleResultText( false );
 
-        m_pSlotGroupView->ClearCycleResultSymbs();
+        m_spSlotGroupView->ClearCycleResultSymbs();
     }
     
 }   // StopAnimation

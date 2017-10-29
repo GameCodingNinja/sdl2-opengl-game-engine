@@ -18,6 +18,7 @@
 #include <2d/sprite2d.h>
 #include <3d/sprite3d.h>
 #include <slot/slotgame.h>
+#include <slot/basegamemusic.h>
 #include <script/scriptcomponent.h>
 
 // Standard lib dependencies
@@ -66,7 +67,7 @@ private:
 private:
     
     // Group name
-    const std::string m_group;
+    const std::string m_stateGroup;
     
     // The script conponent
     CScriptComponent m_scriptComponent;
@@ -81,6 +82,9 @@ private:
     
     // Front panel
     CFrontPanel m_frontPanel;
+    
+    // Base game music
+    CBaseGameMusic m_baseGameMusic;
 
 };
 

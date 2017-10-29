@@ -5,8 +5,8 @@
 *    DESCRIPTION:     Simple cycle results implementation
 ************************************************************************/
 
-#ifndef __simplecycleresults_h__
-#define __simplecycleresults_h__
+#ifndef __simple_cycle_results_h__
+#define __simple_cycle_results_h__
 
 // Physical component dependency
 #include <slot/icycleresults.h>
@@ -16,11 +16,6 @@
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
-
-// Standard lib dependencies
-
-// Forward declaration(s)
-
 
 class CSimpleCycleresults : public iCycleResults, boost::noncopyable
 {
@@ -33,7 +28,7 @@ public:
     virtual ~CSimpleCycleresults();
     
     // Do some inits
-    void Init( CSlotGroupView * pSlotGroupView, CPlayResult * pPlayResult ) override;
+    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult ) override;
     
     // Update the cycle results
     void Update() override;
@@ -56,6 +51,6 @@ private:
     CTimer m_cycleResultsTimer;
 };
 
-#endif  // __simplecycleresults_h__
+#endif  // __simple_cycle_results_h__
 
 

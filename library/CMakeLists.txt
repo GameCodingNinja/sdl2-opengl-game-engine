@@ -111,6 +111,7 @@ add_library(
         slot/spinprofile.cpp
         slot/playresult.cpp
         slot/slotresults.cpp
+        slot/basegamemusic.cpp
         slot/pay.cpp
         slot/slotgame.cpp
         slot/paytableset.cpp
@@ -121,6 +122,7 @@ add_library(
         slot/wheelview.cpp
         slot/simplecycleresults.cpp
         slot/icycleresults.cpp
+        slot/slotgroupfactory.cpp
         soil/stb_image_aug.c
         soil/SOIL.c
         soil/image_helper.c

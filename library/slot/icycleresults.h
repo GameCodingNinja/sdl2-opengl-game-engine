@@ -8,6 +8,9 @@
 #ifndef __i_cycle_results_h__
 #define __i_cycle_results_h__
 
+// Standard lib dependencies
+#include <memory>
+
 // Forward declaration(s)
 class CSlotGroupView;
 class CPlayResult;
@@ -23,7 +26,7 @@ public:
     virtual ~iCycleResults();
     
     // Do some inits
-    virtual void Init( CSlotGroupView * pSlotGroupView, CPlayResult * const pPlayResult ) = 0;
+    virtual void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult ) = 0;
     
     // Start the cycle results animation
     virtual void StartAnimation() = 0;
@@ -54,8 +57,8 @@ protected:
     // Pointer to the play result. NOTE: We don't own this pointer
     CPlayResult * m_pPlayResult;
     
-    // Pointer to slot group view. NOTE: We don't own this pointer
-    CSlotGroupView * m_pSlotGroupView;
+    // Pointer to slot group view.
+    std::shared_ptr<CSlotGroupView> m_spSlotGroupView;
     
     // index into pay
     int m_cyclePayCounter;

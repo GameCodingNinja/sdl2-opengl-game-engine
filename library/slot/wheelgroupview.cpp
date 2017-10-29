@@ -22,7 +22,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CWheelGroupView::CWheelGroupView( const CSlotGroupModel & rSlotGroupModel ) :
+CWheelGroupView::CWheelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     CSlotGroupView( rSlotGroupModel )
 {
 }   // constructor
@@ -59,7 +59,7 @@ void CWheelGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetV
         const XMLNode wheelNode = wheelLstNode.getChildNode(wheel);
         
         // Add the model reel strip to the view reel strip
-        m_wheelViewDeq.emplace_back( m_rSlotGroupModel.GetStrip(wheel), rSymbolSetView, wheel );
+        m_wheelViewDeq.emplace_back( m_spSlotGroupModel->GetStrip(wheel), rSymbolSetView, wheel );
         m_wheelViewDeq.back().Create( wheelNode, group );
     }
     
@@ -83,7 +83,7 @@ void CWheelGroupView::GenerateCycleResultSymbs()
 {
     for( size_t wheel = 0; wheel < m_cycleResultSymbVec.size(); ++wheel )
     {
-        auto & evalSymbIndexVec = m_rSlotGroupModel.GetStrip(wheel).GetEvalIndexVec();
+        auto & evalSymbIndexVec = m_spSlotGroupModel->GetStrip(wheel).GetEvalIndexVec();
         
         // Get the first symbol index array as the starting point
         // NOTE: It is assumed these values as listed in the math file are in order from lowest to highest
@@ -221,4 +221,3 @@ void CWheelGroupView::AllowStopSounds( bool allow )
         iter.AllowStopSounds( allow );
     
 }   // AllowStopSounds
-

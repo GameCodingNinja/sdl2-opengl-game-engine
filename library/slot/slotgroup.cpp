@@ -12,6 +12,8 @@
 #include <slot/slotmathmanager.h>
 #include <slot/playresult.h>
 #include <slot/symbol2d.h>
+#include <slot/playresult.h>
+#include <slot/slotgroupmodel.h>
 #include <slot/reelgroupview.h>
 #include <slot/wheelgroupview.h>
 #include <slot/icycleresults.h>
@@ -27,9 +29,13 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSlotGroup::CSlotGroup( const CSlotMath & rSlotMath, CPlayResult & rPlayResult ) :
-    m_slotGroupModel( rSlotMath, rPlayResult ),
-    m_rPlayResult( rPlayResult )
+CSlotGroup::CSlotGroup(
+    std::shared_ptr<CSlotGroupModel> spSlotGroupModel,
+    std::shared_ptr<CSlotGroupView> spSlotGroupView,
+    std::unique_ptr<iCycleResults> upCycleResults ) :
+        m_spSlotGroupModel( spSlotGroupModel ),
+        m_spSlotGroupView( spSlotGroupView ),
+        m_upCycleResults( std::move(upCycleResults) )
 {
 }   // constructor
 
@@ -40,48 +46,6 @@ CSlotGroup::CSlotGroup( const CSlotMath & rSlotMath, CPlayResult & rPlayResult )
 CSlotGroup::~CSlotGroup()
 {
 }   // destructor
-
-
-/************************************************************************
-*    desc:  Create the slot group. Math and video slot strips
-************************************************************************/
-void CSlotGroup::Create(
-    const NSlotDefs::ESlotDevice slotDevice,
-    const std::string & slotStripSetId,
-    const std::string & paytableSetId,
-    const XMLNode & viewSlotCfgNode,
-    const XMLNode & viewSpinProfileCfgNode,
-    CSymbolSetView & rSymbolSetView,
-    std::unique_ptr<iCycleResults> upCycleResults )
-{
-    // Create the model slot strips
-    m_slotGroupModel.Create( slotStripSetId, paytableSetId );
-    
-    // Allocate the slot device
-    if( slotDevice == NSlotDefs::ED_REEL )
-        m_upSlotGroupView.reset( new CReelGroupView(m_slotGroupModel) );
-    
-    else if( slotDevice == NSlotDefs::ED_WHEEL )
-        m_upSlotGroupView.reset( new CWheelGroupView(m_slotGroupModel) );
-    
-    else
-        throw NExcept::CCriticalException("Slot Group Create Error!",
-            boost::str( boost::format("Undefined slot device!\n\n%s\nLine: %s")
-                % __FUNCTION__ % __LINE__ ));
-    
-    // Create the view slot strips
-    m_upSlotGroupView->Create( viewSlotCfgNode, rSymbolSetView );
-    
-    // Load the spin profile from XML node
-    m_upSlotGroupView->LoadSpinProfileFromNode( viewSpinProfileCfgNode );
-    
-    if( upCycleResults )
-    {
-        m_upCycleResults = std::move(upCycleResults);
-        m_upCycleResults->Init( m_upSlotGroupView.get(), &m_rPlayResult );
-    }
-    
-}   // Create
 
 
 /************************************************************************
@@ -146,7 +110,7 @@ bool CSlotGroup::IsCycleResultsAnimating()
 ****************************************************************************/
 void CSlotGroup::Update()
 {
-    m_upSlotGroupView->Update();
+    m_spSlotGroupView->Update();
     
     if( m_upCycleResults )
         m_upCycleResults->Update();
@@ -157,9 +121,9 @@ void CSlotGroup::Update()
 /************************************************************************
 *    desc:  Get the slot group model
 ************************************************************************/
-CSlotGroupModel & CSlotGroup::GetModel()
+CSlotGroupModel * CSlotGroup::GetModel()
 {
-    return m_slotGroupModel;
+    return m_spSlotGroupModel.get();
     
 }   // GetModel
 
@@ -169,6 +133,6 @@ CSlotGroupModel & CSlotGroup::GetModel()
 ************************************************************************/
 CSlotGroupView * CSlotGroup::GetView()
 {
-    return m_upSlotGroupView.get();
+    return m_spSlotGroupView.get();
     
 }   // GetView

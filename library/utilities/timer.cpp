@@ -28,7 +28,8 @@ CTimer::CTimer(double interval, bool startExpired)
 
 CTimer::CTimer()
     : m_expiredTime(CHighResTimer::Instance().GetTime()),
-      m_disabled(false)
+      m_disabled(false),
+      m_disableValue(false)
 {
 }   // constructor
 

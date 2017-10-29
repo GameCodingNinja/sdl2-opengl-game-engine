@@ -9,7 +9,6 @@
 #define __slot_group_h__
 
 // Game lib dependencies
-#include <slot/slotgroupmodel.h>
 #include <slot/slotdefs.h>
 
 // Standard lib dependencies
@@ -17,8 +16,8 @@
 #include <memory>
 
 // Forward declaration(s)
+class CSlotGroupModel;
 class CSlotGroupView;
-class CPlayResult;
 class CSymbolSetView;
 class iCycleResults;
 
@@ -27,20 +26,13 @@ class CSlotGroup
 public:
 
     // Constructor
-    CSlotGroup( const CSlotMath & rSlotMath, CPlayResult & rPlayResult );
+    CSlotGroup(
+        std::shared_ptr<CSlotGroupModel> spSlotGroupModel,
+        std::shared_ptr<CSlotGroupView> spSlotGroupView,
+        std::unique_ptr<iCycleResults> upCycleResults );
 
     // Destructor
     virtual ~CSlotGroup();
-    
-    // Create the slot group. Math and video slot strips
-    void Create(
-        const NSlotDefs::ESlotDevice slotDevice,
-        const std::string & slotStripSetId,
-        const std::string & paytableSetId,
-        const XMLNode & viewSlotCfgNode,
-        const XMLNode & viewSpinProfileCfgNode,
-        CSymbolSetView & rSymbolSetView,
-        std::unique_ptr<iCycleResults> upCycleResults );
     
     // Start the cycle results
     void StartCycleResults();
@@ -61,7 +53,7 @@ public:
     void Update();
     
     // Get the slot group model
-    CSlotGroupModel & GetModel();
+    CSlotGroupModel * GetModel();
     
     // Get the slot group view
     CSlotGroupView * GetView();
@@ -69,16 +61,13 @@ public:
 private:
     
     // Slot group model
-    CSlotGroupModel m_slotGroupModel;
+    std::shared_ptr<CSlotGroupModel> m_spSlotGroupModel;
     
     // Slot group view
-    std::unique_ptr<CSlotGroupView> m_upSlotGroupView;
+    std::shared_ptr<CSlotGroupView> m_spSlotGroupView;
     
     // Cycle results interface
     std::unique_ptr<iCycleResults> m_upCycleResults;
-    
-    // The slot group has it's own copy of the play result reference
-    CPlayResult & m_rPlayResult;
 
 };
 

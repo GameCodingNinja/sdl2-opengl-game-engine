@@ -13,7 +13,6 @@
 ************************************************************************/
 iCycleResults::iCycleResults() :
     m_pPlayResult(nullptr),
-    m_pSlotGroupView(nullptr),
     m_cyclePayCounter(0),
     m_firstCycleComplete(false),
     m_cycleResultsActive(false)

@@ -33,7 +33,7 @@ class CReelGroupView : public CSlotGroupView, boost::noncopyable
 public:
 
     // Constructor
-    CReelGroupView( const CSlotGroupModel & rSlotGroupModel );
+    CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel );
 
     // Destructor
     virtual ~CReelGroupView();

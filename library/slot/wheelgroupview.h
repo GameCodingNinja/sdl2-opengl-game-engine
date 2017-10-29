@@ -32,7 +32,7 @@ class CWheelGroupView : public CSlotGroupView, boost::noncopyable
 public:
 
     // Constructor
-    CWheelGroupView( const CSlotGroupModel & rSlotGroupModel );
+    CWheelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel );
 
     // Destructor
     virtual ~CWheelGroupView();

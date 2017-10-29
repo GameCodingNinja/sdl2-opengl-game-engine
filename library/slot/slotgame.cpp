@@ -9,12 +9,14 @@
 #include <slot/slotgame.h>
 
 // Game lib dependencies
+#include <slot/slotgroup.h>
 #include <slot/slotmathmanager.h>
 #include <slot/betmanager.h>
-#include <slot/ifrontpanel.h>
 #include <slot/slotgroupview.h>
 #include <slot/slotgroupmodel.h>
+#include <slot/ifrontpanel.h>
 #include <slot/icycleresults.h>
+#include <slot/igamemusic.h>
 #include <gui/uimeter.h>
 #include <utilities/xmlParser.h>
 #include <utilities/matrix.h>
@@ -32,14 +34,10 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSlotGame::CSlotGame( const std::string & group ) :
+CSlotGame::CSlotGame() :
     m_slotState( NSlotDefs::ESLOT_IDLE ),
-    m_group( group ),
     m_pFrontPanel( nullptr ),
-    m_waitForSpinMusicTimer(false),
-    m_spinMusicTimeOut(0),
-    m_allowSpinMusic(true),
-    m_allowStopSounds(true),
+    m_pGameMusic( nullptr ),
     m_cycleResultsActive(false)
 {
 }   // constructor
@@ -54,59 +52,12 @@ CSlotGame::~CSlotGame()
 
 
 /************************************************************************
-*    desc:  Create the slot group. Math and video reel strips
+*    desc:  Add the slot group
 ************************************************************************/
-void CSlotGame::CreateSlotGroup(
-    const NSlotDefs::ESlotDevice slotDevice,
-    const std::string & slotStripSetId,
-    const std::string & paytableSetId,
-    const CSlotMath & rSlotMath,
-    const XMLNode & viewReelCfgNode,
-    const XMLNode & viewSpinProfileCfgNode,
-    CSymbolSetView & rSymbolSetView,
-    std::unique_ptr<iCycleResults> upCycleResults )
+void CSlotGame::AddSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
 {
-    m_slotGroupDeq.emplace_back( rSlotMath, m_slotResults.Create() );
-    
-    m_slotGroupDeq.back().Create(
-        slotDevice,
-        slotStripSetId,
-        paytableSetId,
-        viewReelCfgNode,
-        viewSpinProfileCfgNode,
-        rSymbolSetView,
-        std::move(upCycleResults) );
-    
-}   // CreateReelGroup
-
-
-/***************************************************************************
-*    desc:  Load the slot config file
-****************************************************************************/
-void CSlotGame::LoadSlotConfig( const std::string & filePath )
-{
-    // Open and parse the XML file:
-    const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "slot" );
-    
-    const XMLNode spinMusicScriptFunNode = node.getChildNode( "spinMusicScriptFun" );
-    if( !spinMusicScriptFunNode.isEmpty() )
-    {
-        m_spinMusicStartFunc = spinMusicScriptFunNode.getAttribute( "startMusic" );
-        m_spinMusicStopFunc = spinMusicScriptFunNode.getAttribute( "stopMusic" );
-        m_spinMusicTimeOut = std::atoi(spinMusicScriptFunNode.getAttribute( "timeOut" ));
-    }
-    
-}   // LoadSlotConfig
-
-
-/************************************************************************
-*    desc:  Do we play the spin music
-************************************************************************/
-void CSlotGame::AllowSpinMusic( bool allow )
-{
-    m_allowSpinMusic = allow;
-    
-}   // AllowSpinMusic
+    m_slotGroupVec.emplace_back( std::move(slotGroup) );
+}
 
 
 /************************************************************************
@@ -114,8 +65,8 @@ void CSlotGame::AllowSpinMusic( bool allow )
 ************************************************************************/
 void CSlotGame::AllowStopSounds( bool allow )
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetView()->AllowStopSounds( allow );
+    for( auto & iter : m_slotGroupVec )
+        iter->GetView()->AllowStopSounds( allow );
     
 }   // AllowStopSounds
 
@@ -153,16 +104,6 @@ void CSlotGame::ProcessGameState()
 ****************************************************************************/
 void CSlotGame::StateIdle()
 {
-    // Fade down the music if the player is not spinning
-    if( m_allowSpinMusic && m_waitForSpinMusicTimer && !m_spinMusicStopFunc.empty() )
-    {
-        if( m_stopSpinMusicTimer.Expired() )
-        {
-            m_scriptComponent.Prepare( m_group, m_spinMusicStopFunc );
-            m_waitForSpinMusicTimer = false;
-        }
-    }
-    
 }   // StateIdle
 
 
@@ -175,8 +116,8 @@ void CSlotGame::StateWaitCycleResultsStop()
     {
         m_cycleResultsActive = false;
         
-        for( auto & iter : m_slotGroupDeq )
-            iter.StopCycleResults();
+        for( auto & iter : m_slotGroupVec )
+            iter->StopCycleResults();
         
         m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
     }
@@ -196,11 +137,8 @@ void CSlotGame::StatePlaceWager()
     
     m_slotResults.Clear();
     
-    if( m_allowSpinMusic && !m_spinMusicStartFunc.empty() )
-    {
-        m_scriptComponent.StopAndRecycle( m_spinMusicStopFunc );
-        m_scriptComponent.Prepare( m_group, m_spinMusicStartFunc );
-    }
+    if( m_pGameMusic )
+        m_pGameMusic->StartMusic();
     
     m_slotState = NSlotDefs::ESLOT_GENERATE_STOPS;
     
@@ -212,8 +150,8 @@ void CSlotGame::StatePlaceWager()
 ****************************************************************************/
 void CSlotGame::StateGenerateStops()
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetModel().GenerateStops();
+    for( auto & iter : m_slotGroupVec )
+        iter->GetModel()->GenerateStops();
     
     m_slotState = NSlotDefs::ESLOT_EVALUATE;
     
@@ -225,8 +163,8 @@ void CSlotGame::StateGenerateStops()
 ****************************************************************************/
 void CSlotGame::StateEvaluate()
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetModel().Evaluate();
+    for( auto & iter : m_slotGroupVec )
+        iter->GetModel()->Evaluate();
     
     m_slotResults.SortPays();
     m_slotResults.AddUpWin();
@@ -241,8 +179,8 @@ void CSlotGame::StateEvaluate()
 ****************************************************************************/
 void CSlotGame::StatePreSpin()
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetView()->StartSpin();
+    for( auto & iter : m_slotGroupVec )
+        iter->GetView()->StartSpin();
     
     m_slotState = NSlotDefs::ESLOT_SPIN;
     
@@ -255,9 +193,9 @@ void CSlotGame::StatePreSpin()
 void CSlotGame::StateSpin()
 {
     bool stopped(true);
-    for( auto & iter : m_slotGroupDeq )
+    for( auto & iter : m_slotGroupVec )
     {
-        if( !iter.GetView()->IsSpinState( NSlotDefs::ESS_STOPPED ) )
+        if( !iter->GetView()->IsSpinState( NSlotDefs::ESS_STOPPED ) )
         {
             stopped = false;
             break;
@@ -344,8 +282,8 @@ void CSlotGame::StatePostAwardWin()
                 m_slotResults.GetTotalWin(), CBetMgr::Instance().GetCredits() );
         
         // Start the cycle results
-        for( auto & iter : m_slotGroupDeq )
-            iter.StartCycleResults();
+        for( auto & iter : m_slotGroupVec )
+            iter->StartCycleResults();
         
         m_cycleResultsActive = true;
     }
@@ -381,9 +319,8 @@ void CSlotGame::StateEnd()
     if( m_pFrontPanel != nullptr )
         m_pFrontPanel->EnableButtons( CBetMgr::Instance().AllowPlay() );
     
-    // Set the timer that waits to see if the music should time out
-    m_stopSpinMusicTimer.Set( m_spinMusicTimeOut );
-    m_waitForSpinMusicTimer = true;
+    if( m_pGameMusic )
+        m_pGameMusic->SetTimeOut();
     
     m_slotState = NSlotDefs::ESLOT_IDLE;
     
@@ -403,18 +340,16 @@ void CSlotGame::HandleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CSlotGame::Update()
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.Update();
+    for( auto & iter : m_slotGroupVec )
+        iter->Update();
     
     // Start the cycle results animation if not currently animating
     if( m_cycleResultsActive )
     {
         if( !IsCycleResultsAnimating() )
-            for( auto & iter : m_slotGroupDeq )
-                iter.StartCycleResultsAnimation();
+            for( auto & iter : m_slotGroupVec )
+                iter->StartCycleResultsAnimation();
     }
-    
-    m_scriptComponent.Update();
 
 }   // Update
 
@@ -424,8 +359,8 @@ void CSlotGame::Update()
 ****************************************************************************/
 void CSlotGame::Transform()
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetView()->Transform();
+    for( auto & iter : m_slotGroupVec )
+        iter->GetView()->Transform();
 
 }   // Transform
 
@@ -435,8 +370,8 @@ void CSlotGame::Transform()
 ****************************************************************************/
 void CSlotGame::Render( const CMatrix & matrix )
 {
-    for( auto & iter : m_slotGroupDeq )
-        iter.GetView()->Render( matrix );
+    for( auto & iter : m_slotGroupVec )
+        iter->GetView()->Render( matrix );
 
 }   // Render
 
@@ -453,8 +388,8 @@ void CSlotGame::PlayGame(CUIControl *)
             if( m_cycleResultsActive )
             {
                 // Stop the cycle results
-                for( auto & iter : m_slotGroupDeq )
-                    iter.StopCycleResultsAnimation();
+                for( auto & iter : m_slotGroupVec )
+                    iter->StopCycleResultsAnimation();
                 
                 m_slotState = NSlotDefs::ESLOT_WAIT_CYCLE_RESULTS_STOP;
             }
@@ -464,8 +399,8 @@ void CSlotGame::PlayGame(CUIControl *)
     }
     else if( m_slotState == NSlotDefs::ESLOT_SPIN )
     {
-        for( auto & iter : m_slotGroupDeq )
-            iter.GetView()->StopSpin();
+        for( auto & iter : m_slotGroupVec )
+            iter->GetView()->StopSpin();
     }
     else if( m_slotState == NSlotDefs::ESLOT_WAIT_FOR_AWARD )
     {
@@ -486,6 +421,15 @@ void CSlotGame::SetFrontPanel( iFrontPanel * pFrontPanel )
 
 
 /***************************************************************************
+*    desc:  Set the game music
+****************************************************************************/
+void CSlotGame::SetGameMusic( iGameMusic * pGameMusic )
+{
+    m_pGameMusic = pGameMusic;
+}
+
+
+/***************************************************************************
 *    desc:  Get the state
 ****************************************************************************/
 NSlotDefs::ESlotState CSlotGame::GetState()
@@ -502,9 +446,18 @@ bool CSlotGame::IsCycleResultsAnimating()
 {
     bool animating = false;
 
-    for( auto & iter : m_slotGroupDeq )
-        animating |= iter.IsCycleResultsAnimating();
+    for( auto & iter : m_slotGroupVec )
+        animating |= iter->IsCycleResultsAnimating();
 
     return animating;
     
 }   // IsCycleResultsAnimating
+
+
+/************************************************************************
+*    desc:  Create a play result for a slot group
+************************************************************************/
+CPlayResult & CSlotGame::CreatePlayResult()
+{
+    return m_slotResults.Create();
+}

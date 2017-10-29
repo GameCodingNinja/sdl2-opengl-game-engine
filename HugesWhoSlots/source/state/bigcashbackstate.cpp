@@ -26,7 +26,9 @@
 #include <slot/slotmathmanager.h>
 #include <slot/symbolsetviewmanager.h>
 #include <slot/betmanager.h>
+#include <slot/slotgroup.h>
 #include <slot/simplecycleresults.h>
+#include <slot/slotgroupfactory.h>
 #include <script/scriptmanager.h>
 #include <managers/soundmanager.h>
 #include <managers/spritesheetmanager.h>
@@ -43,10 +45,10 @@
 ************************************************************************/
 CBigCashBackState::CBigCashBackState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_BIG_CASH_BACK, NGameDefs::EGS_GAME_LOAD ),
-        m_group( group ),
-        m_slotGame( group ),
+        m_stateGroup( group ),
         m_background( CObjectDataMgr::Instance().GetData2D( group, "background" ) ),
-	m_pig( CObjectDataMgr::Instance().GetData2D( group, "Payback Pig" ) )
+	m_pig( CObjectDataMgr::Instance().GetData2D( group, "Payback Pig" ) ),
+        m_baseGameMusic( group, "SlotGame_StartSpinMusic", "SlotGame_StopSpinMusic", "SlotGame_FastStopSpinMusic", 7000 )
 {
 }   // Constructer
 
@@ -76,21 +78,18 @@ void CBigCashBackState::Init()
     rTotalBetDecBtn.Connect_ExecutionAction( boost::bind(&CBigCashBackState::TotalBetCallBack, this, _1) );
     rTotalBetIncBtn.Connect_ExecutionAction( boost::bind(&CBigCashBackState::TotalBetCallBack, this, _1) );
     
-    // Load the slot config
-    m_slotGame.LoadSlotConfig( "data/objects/2d/slot/games/bigCashBack/slot.cfg" );
-    
     // Create the slot group
-    m_slotGame.CreateSlotGroup(
-        NSlotDefs::ED_REEL,
-        "main_reel_strip",
-        "main_paytable",
-        CSlotMathMgr::Instance().GetSlotMath( m_group, "slot" ),
-        CXMLPreloader::Instance().GetNode( std::get<0>(NBigCashBack::reelGrpCfg) ),
-        CXMLPreloader::Instance().GetNode( std::get<0>(NBigCashBack::spinProfileCfg) ),
-        CSymbolSetViewMgr::Instance().Get( m_group, "base_game" ),
-        std::move(std::unique_ptr<iCycleResults>(new CSimpleCycleresults)) );
-
-    m_pig.SetPos( CPoint<float>(-875,-200,0) );
+    m_slotGame.AddSlotGroup(
+        NSlotGroupFactory::Create(
+            NSlotDefs::ED_REEL,
+            "main_reel_strip",
+            "main_paytable",
+            CSlotMathMgr::Instance().GetSlotMath( m_stateGroup, "slot" ),
+            CXMLPreloader::Instance().GetNode( std::get<0>(NBigCashBack::reelGrpCfg) ),
+            CXMLPreloader::Instance().GetNode( std::get<0>(NBigCashBack::spinProfileCfg) ),
+            CSymbolSetViewMgr::Instance().Get( m_stateGroup, "base_game" ),
+            m_slotGame.CreatePlayResult(),
+            std::move(std::unique_ptr<iCycleResults>(new CSimpleCycleresults)) ) );
     
     // Init the front panel
     std::vector<CUIControl *> btnVec = {
@@ -104,8 +103,11 @@ void CBigCashBackState::Init()
         &CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
         &CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
     
-    // Set the front panel to the slot game
+    // Add slot game component
     m_slotGame.SetFrontPanel( &m_frontPanel );
+    m_slotGame.SetGameMusic( &m_baseGameMusic );
+    
+    m_pig.SetPos( CPoint<float>(-875,-200,0) );
     
     // Init the credit meter
     CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).Set( CBetMgr::Instance().GetCredits()  );
@@ -114,7 +116,7 @@ void CBigCashBackState::Init()
     CXMLPreloader::Instance().Clear();
     
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( m_group, "Screen_FadeIn" );
+    m_scriptComponent.Prepare( m_stateGroup, "Screen_FadeIn" );
     
     AllowMusic( CGameSave::Instance().GetPlaySpinMusic() );
     AllowStopSounds( CGameSave::Instance().GetPlayStopSounds() );
@@ -131,9 +133,9 @@ void CBigCashBackState::Init()
 void CBigCashBackState::AllowMusic( bool allow )
 {
     if( !allow )
-        m_scriptComponent.Prepare( m_group, "SlotGame_FastStopSpinMusic" );
+        m_baseGameMusic.FastFadeDown();
     
-    m_slotGame.AllowSpinMusic( allow );
+    m_baseGameMusic.AllowMusic( allow );
     
 }   // AllowSpinMusic
 
@@ -172,8 +174,8 @@ void CBigCashBackState::HandleEvent( const SDL_Event & rEvent )
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN )
         {
-            m_scriptComponent.Prepare( m_group, "Screen_FadeOut" );
-            m_scriptComponent.Prepare( m_group, "SlotGame_FastStopSpinMusic" );
+            m_scriptComponent.Prepare( m_stateGroup, "Screen_FadeOut" );
+            m_baseGameMusic.FastFadeDown();
         }
     }
     else if( rEvent.type == SDL_APP_WILLENTERBACKGROUND )
@@ -205,6 +207,8 @@ void CBigCashBackState::Update()
     CScriptManager::Instance().Update();
     
     m_scriptComponent.Update();
+    
+    m_baseGameMusic.Update();
     
     if( !CMenuManager::Instance().IsMenuActive() )
         m_slotGame.Update();

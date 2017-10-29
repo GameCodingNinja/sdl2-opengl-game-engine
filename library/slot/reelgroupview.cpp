@@ -26,7 +26,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CReelGroupView::CReelGroupView( const CSlotGroupModel & rSlotGroupModel ) :
+CReelGroupView::CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     CSlotGroupView( rSlotGroupModel )
 {
 }   // constructor
@@ -60,7 +60,7 @@ void CReelGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetVi
                 % __FUNCTION__ % __LINE__ ));
     
     // Check that the model and view reel strip count is the same
-    if( static_cast<int>(m_rSlotGroupModel.GetCount()) != reelstripLstNode.nChildNode() )
+    if( static_cast<int>(m_spSlotGroupModel->GetCount()) != reelstripLstNode.nChildNode() )
     {
         throw NExcept::CCriticalException("Reel Strip Creation Error!",
             boost::str( boost::format("Reelstrip model count does not match view count.\n\n%s\nLine: %s")
@@ -76,7 +76,7 @@ void CReelGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetVi
         const XMLNode reelNode = reelstripLstNode.getChildNode(reel);
         
         // Add the model reel strip to the view reel strip
-        m_reelStripViewDeq.emplace_back( m_rSlotGroupModel.GetStrip(reel), rSymbolSetView, reel );
+        m_reelStripViewDeq.emplace_back( m_spSlotGroupModel->GetStrip(reel), rSymbolSetView, reel );
         m_reelStripViewDeq.back().Create( reelNode, group );
     }
 
@@ -95,7 +95,7 @@ void CReelGroupView::GenerateCycleResultSymbs()
 {
     for( size_t reel = 0; reel < m_cycleResultSymbVec.size(); ++reel )
     {
-        auto & evalSymbIndexVec = m_rSlotGroupModel.GetStrip(reel).GetEvalIndexVec();
+        auto & evalSymbIndexVec = m_spSlotGroupModel->GetStrip(reel).GetEvalIndexVec();
         
         // This is an allocated pointer and will need to be freed
         for( size_t symb = 0; symb < evalSymbIndexVec.size(); ++symb )

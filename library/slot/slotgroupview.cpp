@@ -22,8 +22,8 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSlotGroupView::CSlotGroupView( const CSlotGroupModel & rSlotGroupModel ) :
-    m_rSlotGroupModel( rSlotGroupModel )
+CSlotGroupView::CSlotGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
+    m_spSlotGroupModel( rSlotGroupModel )
 {
 }   // constructor
 
