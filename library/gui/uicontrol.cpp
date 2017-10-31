@@ -202,16 +202,16 @@ void CUIControl::Update()
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUIControl::DoTransform( const CObject2D & object )
+void CUIControl::Transform( const CObject2D & object )
 {
-    Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
 
     for( auto & iter : m_spriteDeq )
         iter.Transform( GetMatrix(), WasWorldPosTranformed() );
 
     TransformCollision();
 
-}   // DoTransform
+}   // Transform
 
 
 /************************************************************************

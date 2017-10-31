@@ -8,9 +8,6 @@
 // Physical component dependency
 #include "runstate.h"
 
-// Game dependencies
-#include "../strategy/ballstrategy.h"
-
 // Game lib dependencies
 #include <gui/menumanager.h>
 #include <utilities/highresolutiontimer.h>
@@ -81,6 +78,10 @@ void CRunState::ResolutionChangeCallBack()
     m_camera.GenerateOrthographicProjection(
         CSettings::Instance().GetNativeSize().w / CSettings::Instance().GetDefaultSize().w );
     
+    float scale = CSettings::Instance().GetDefaultSize().w / CSettings::Instance().GetNativeSize().w;
+    m_Object2D.SetScaleXYZ( scale, scale, scale );
+    m_Object2D.Transform();
+    
 }   // ResolutionChangeCallBack
 
 
@@ -111,8 +112,7 @@ void CRunState::Init()
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
     
     // Scale the playing field to match the aspect ratio
-    m_camera.GenerateOrthographicProjection(
-        CSettings::Instance().GetNativeSize().w / CSettings::Instance().GetDefaultSize().w );
+    ResolutionChangeCallBack();
     
     // Add the first strawberry
     CSpriteStrategyMgr::Instance().Create("(sprite)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-550.f) );
@@ -144,7 +144,7 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
             const float ratio = 1.f / m_camera.GetOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - m_camera.GetOrthoProjSizeHalf().w;
 
-            CSpriteStrategyMgr::Instance().Create("(sprite)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 500));
+            CSpriteStrategyMgr::Instance().Create("(sprite)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 700));
         }
     }
 
@@ -202,6 +202,8 @@ void CRunState::Transform()
     CCommonState::Transform();
     
     CSpriteStrategyMgr::Instance().Transform();
+    
+    CMenuManager::Instance().TransformInterface( m_Object2D );
 
 }   // Transform
 
@@ -315,7 +317,7 @@ namespace NRunState
         
         // The unordered map run these in reverse order
         CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
-        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBallStrategy(1000) );
+        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D(1000) );
         
     }   // ThreadLoad
     

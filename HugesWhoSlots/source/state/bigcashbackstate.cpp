@@ -223,6 +223,7 @@ void CBigCashBackState::Transform()
 {
     CCommonState::Transform();
 
+    CMenuManager::Instance().TransformInterface();
     m_background.Transform();
     m_pig.Transform();
     m_slotGame.Transform();

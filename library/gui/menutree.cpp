@@ -85,12 +85,19 @@ void CMenuTree::Update()
 /************************************************************************
 *    desc:  Transform the menu tree
 ************************************************************************/
-void CMenuTree::DoTransform()
+void CMenuTree::Transform()
 {
     if( !m_pMenuPathVec.empty() )
-        m_pMenuPathVec.back()->DoTransform();
+        m_pMenuPathVec.back()->Transform();
 
-}   // DoTransform
+}   // Transform
+
+void CMenuTree::Transform( const CObject2D & object )
+{
+    if( !m_pMenuPathVec.empty() )
+        m_pMenuPathVec.back()->Transform( object );
+
+}   // Transform
 
 
 /************************************************************************

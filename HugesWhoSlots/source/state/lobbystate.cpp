@@ -141,6 +141,8 @@ void CLobbyState::Update()
 void CLobbyState::Transform()
 {
     CCommonState::Transform();
+    
+    CMenuManager::Instance().TransformInterface();
 
     m_background.Transform();
 

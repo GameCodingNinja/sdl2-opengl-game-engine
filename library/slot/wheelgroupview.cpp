@@ -10,7 +10,6 @@
 
 // Game lib dependencies
 #include <slot/symbolsetview.h>
-#include <slot/wheelview.h>
 #include <slot/slotgroupmodel.h>
 #include <slot/slotstripmodel.h>
 #include <2d/sprite2d.h>

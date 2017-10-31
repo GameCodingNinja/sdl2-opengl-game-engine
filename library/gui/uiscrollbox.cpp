@@ -331,19 +331,19 @@ void CUIScrollBox::Update()
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUIScrollBox::DoTransform( const CObject2D & object )
+void CUIScrollBox::Transform( const CObject2D & object )
 {
     // Call the parent
-    CUISubControl::DoTransform( object );
+    CUISubControl::Transform( object );
 
     // Transform all controls
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->DoTransform( *this );
+        m_pScrollControlVec[i]->Transform( *this );
 
     // Transform the mask
     m_upStencilMaskSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
 
-}   // DoTransform
+}   // Transform
 
 
 /************************************************************************

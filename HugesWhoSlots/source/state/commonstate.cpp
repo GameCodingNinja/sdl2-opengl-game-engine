@@ -103,7 +103,7 @@ void CCommonState::Update()
 void CCommonState::Transform()
 {
     // Transform the menus
-    CMenuManager::Instance().Transform();
+    CMenuManager::Instance().TransformMenu();
 
 }   // Transform
 

@@ -61,7 +61,8 @@ public:
     void Update();
 
     // Transform the menu
-    void DoTransform();
+    void Transform() override;
+    void Transform( const CObject2D & object ) override;
 
     // Get the name of the menu
     const std::string & GetName() const;

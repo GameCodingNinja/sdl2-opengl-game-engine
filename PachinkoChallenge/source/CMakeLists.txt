@@ -18,8 +18,7 @@ add_executable(
     state/titlescreenstate.cpp
     state/loadstate.cpp
     state/runstate.cpp
-    ai/ballai.cpp
-    strategy/ballstrategy.cpp )
+    ai/ballai.cpp )
 
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^arm")
     # List all the libraries to link against

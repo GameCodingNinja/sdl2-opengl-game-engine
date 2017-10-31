@@ -17,6 +17,8 @@
 #include <slot/spinprofile.h>
 #include <slot/slotdefs.h>
 #include <utilities/timer.h>
+#include <slot/symbol2d.h>
+#include <2d/sprite2d.h>
 
 // Boost lib dependencies
 #include <boost/signals2.hpp>
@@ -28,8 +30,6 @@
 // Forward declaration(s)
 class CSlotStripModel;
 class CSymbolSetView;
-class CSymbol2d;
-class CSprite2D;
 class CSound;
 struct XMLNode;
 

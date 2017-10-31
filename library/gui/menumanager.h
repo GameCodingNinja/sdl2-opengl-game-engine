@@ -73,9 +73,12 @@ public:
 
     // Update the menu
     void Update();
-
-    // Transform the menu
-    void Transform();
+    
+    // Do the transform
+    void TransformMenu();
+    void TransformMenu( const CObject2D & object );
+    void TransformInterface();
+    void TransformInterface( const CObject2D & object );
 
     // Render menus
     void Render( const CMatrix & matrix );
@@ -155,7 +158,8 @@ private:
     bool UpdateMenu( const std::vector<CMenuTree *> & activeTreeVec );
     
     // Transform the menu
-    bool TransformMenu( const std::vector<CMenuTree *> & activeTreeVec );
+    void Transform( const std::vector<CMenuTree *> & activeTreeVec );
+    void Transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object );
     
     // Get a pointer to the active tree
     CMenuTree * GetActiveTree();

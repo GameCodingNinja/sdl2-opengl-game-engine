@@ -50,7 +50,7 @@ public:
     void HandleEvent( const SDL_Event & rEvent ) override;
 
     // Transform the control
-    void DoTransform( const CObject2D & object ) override;
+    void Transform( const CObject2D & object ) override;
 
     // Render the control
     void Render( const CMatrix & matrix ) override;

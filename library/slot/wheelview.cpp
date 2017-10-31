@@ -11,12 +11,10 @@
 #include <slot/wheelview.h>
 
 // Game lib dependencies
-#include <2d/sprite2d.h>
 #include <slot/slotstripmodel.h>
 #include <slot/symbolsetview.h>
 #include <slot/mathsymbol.h>
 #include <slot/stripstop.h>
-#include <slot/symbol2d.h>
 #include <utilities/matrix.h>
 #include <utilities/exceptionhandling.h>
 #include <utilities/highresolutiontimer.h>

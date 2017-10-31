@@ -12,7 +12,7 @@
 //#define DEBUG_MOBILE 1
 
 // Uncomment this to be in debug mode
-//#define DEBUG 1
+#define DEBUG 1
 
 namespace NBDefs
 {

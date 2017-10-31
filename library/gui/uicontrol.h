@@ -61,7 +61,7 @@ public:
     virtual void Update();
 
     // Transform the control
-    virtual void DoTransform( const CObject2D & object );
+    virtual void Transform( const CObject2D & object );
 
     // do the render
     virtual void Render( const CMatrix & matrix );

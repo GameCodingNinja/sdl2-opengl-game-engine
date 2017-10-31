@@ -770,40 +770,63 @@ bool CMenuManager::UpdateMenu( const std::vector<CMenuTree *> & activeTreeVec )
 /************************************************************************
 *    desc:  Transform the menu
 ************************************************************************/
-void CMenuManager::Transform()
+void CMenuManager::TransformMenu()
 {
     if( m_active )
-    {
-        if( !TransformMenu( m_pActiveMenuTreeVec ) )
-        {
-            // Only allow Updating for interface menus when regular menus are not active
-            TransformMenu( m_pActiveInterTreeVec );
-        }
-    }
+        Transform( m_pActiveMenuTreeVec );
 
-}   // Transform
+}   // TransformMenu
+
+void CMenuManager::TransformMenu( const CObject2D & object )
+{
+    if( m_active )
+        Transform( m_pActiveMenuTreeVec, object );
+
+}   // TransformMenu
 
 
 /************************************************************************
 *    desc:  Transform the menu
 ************************************************************************/
-bool CMenuManager::TransformMenu( const std::vector<CMenuTree *> & activeTreeVec )
+void CMenuManager::TransformInterface()
 {
-    bool menuActive(false);
-    
+    if( m_active )
+        Transform( m_pActiveInterTreeVec );
+
+}   // TransformInterface
+
+void CMenuManager::TransformInterface( const CObject2D & object )
+{
+    if( m_active )
+        Transform( m_pActiveInterTreeVec, object );
+
+}   // TransformInterface
+
+
+/************************************************************************
+*    desc:  Transform the menu
+************************************************************************/
+void CMenuManager::Transform( const std::vector<CMenuTree *> & activeTreeVec )
+{
     for( auto iter : activeTreeVec )
     {
         // See if there's an active menu
         if( iter->IsActive() )
-        {
-            menuActive = true;
-            iter->DoTransform();
-        }
+            iter->Transform();
     }
-    
-    return menuActive;
 
-}   // TransformMenu
+}   // Transform
+
+void CMenuManager::Transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object )
+{
+    for( auto iter : activeTreeVec )
+    {
+        // See if there's an active menu
+        if( iter->IsActive() )
+            iter->Transform( object );
+    }
+
+}   // Transform
 
 
 /************************************************************************

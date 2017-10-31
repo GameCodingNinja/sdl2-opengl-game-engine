@@ -438,26 +438,47 @@ void CMenu::Update()
 /************************************************************************
 *    desc:  Transform the menu
 ************************************************************************/
-void CMenu::DoTransform()
+void CMenu::Transform()
 {
     if( IsVisible() )
     {
-        Transform();
+        CObject2D::Transform();
 
         for( auto & iter : m_spriteDeq )
             iter.Transform( GetMatrix(), WasWorldPosTranformed() );
 
         for( auto iter : m_pStaticControlVec )
-            iter->DoTransform( *this );
+            iter->Transform( *this );
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->DoTransform( *this );
+            iter->Transform( *this );
 
         for( auto iter : m_pControlVec )
-            iter->DoTransform( *this );
+            iter->Transform( *this );
     }
 
-}   // DoTransform
+}   // Transform
+
+void CMenu::Transform( const CObject2D & object )
+{
+    if( IsVisible() )
+    {
+        CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+
+        for( auto & iter : m_spriteDeq )
+            iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+
+        for( auto iter : m_pStaticControlVec )
+            iter->Transform( *this );
+
+        for( auto iter : m_pMouseOnlyControlVec )
+            iter->Transform( *this );
+
+        for( auto iter : m_pControlVec )
+            iter->Transform( *this );
+    }
+
+}   // Transform
 
 
 /************************************************************************

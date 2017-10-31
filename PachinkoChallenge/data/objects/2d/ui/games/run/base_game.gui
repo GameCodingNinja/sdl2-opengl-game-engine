@@ -32,7 +32,7 @@
         <!-- Menu Button -->
         <control name="menu_btn" controlType="button" defaultState="inactive">
             <filePath file="data/objects/2d/menu/control/ui_button_150x60.ctrl"/>
-            <position x="-845" y="-480" z="0"/>
+            <position x="-865" y="495" z="0"/>
             <fontStringLst>
                 <string text="Menu"/>
             </fontStringLst>

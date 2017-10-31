@@ -213,7 +213,7 @@
             <physics>
                 <body type="static"/>
                 <fixtureLst>
-                    <fixture shape="circle" radius="20" sensor="true">
+                    <fixture shape="circle" radius="5" sensor="true">
                     </fixture>
                 </fixtureLst>
             </physics>

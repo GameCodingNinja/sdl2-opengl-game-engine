@@ -27,6 +27,7 @@
 
 // Forward declaration(s)
 struct XMLNode;
+class CObject2D;
 class CMenu;
 
 class CMenuTree : public boost::noncopyable
@@ -51,7 +52,8 @@ public:
     void Update();
 
     // Transform the menu tree
-    void DoTransform();
+    void Transform();
+    void Transform( const CObject2D & object );
 
     // do the render
     void Render( const CMatrix & matrix );

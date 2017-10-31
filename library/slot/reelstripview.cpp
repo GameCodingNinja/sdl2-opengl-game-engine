@@ -21,7 +21,6 @@
 #include <utilities/matrix.h>
 #include <common/sound.h>
 #include <managers/soundmanager.h>
-#include <2d/sprite2d.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>

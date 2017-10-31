@@ -14,6 +14,9 @@
 // Game lib dependencies
 #include <common/point.h>
 
+// Standard lib dependencies
+#include <random>
+
 // Forward declaration(s)
 class iSprite2D;
 class CSprite2D;
@@ -42,6 +45,10 @@ private:
     
     // Reference to sprite strategy
     CBasicSpriteStrategy2D & m_rStrategy;
+    
+    std::default_random_engine m_generator;
+    std::uniform_real_distribution<float> m_angularImpulse;
+    std::uniform_real_distribution<float> m_rotation;
 };
 
 #endif  // __projectile_ai_h__

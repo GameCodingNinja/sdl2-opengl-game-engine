@@ -154,9 +154,9 @@ void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUIProgressBar::DoTransform( const CObject2D & object )
+void CUIProgressBar::Transform( const CObject2D & object )
 {
-    CUIControl::DoTransform( object );
+    CUIControl::Transform( object );
     
     if( m_upStencilMaskSprite )
         m_upStencilMaskSprite->Transform( GetMatrix(), WasWorldPosTranformed() );

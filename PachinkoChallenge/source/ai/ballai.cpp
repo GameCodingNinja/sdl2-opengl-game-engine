@@ -21,7 +21,10 @@
 ************************************************************************/
 CBallAI::CBallAI( iSprite2D * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
-    m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(sprite)"))
+    m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(sprite)")),
+    m_generator(std::random_device{}()),
+    m_angularImpulse(-1, 1),
+    m_rotation(-M_PI, M_PI)
 {
 }   // constructor
 
@@ -39,6 +42,13 @@ CBallAI::~CBallAI()
 ************************************************************************/
 void CBallAI::Init()
 {
+    // Put ball into a random rotation
+    auto pBody = m_sprite.GetPhysicsComponent().GetBody();
+    pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
+    
+    // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
+    m_sprite.GetPhysicsComponent().GetBody()->ApplyAngularImpulse( m_angularImpulse(m_generator), false );
+    
 }   // Init
 
 

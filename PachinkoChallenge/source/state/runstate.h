@@ -14,10 +14,11 @@
 // Game lib dependencies
 #include <script/scriptcomponent.h>
 #include <common/camera.h>
+#include <2d/object2d.h>
+#include <utilities/timer.h>
 
 // Box2D lib dependencies
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
-#include <utilities/timer.h>
 
 // Standard lib dependencies
 #include <vector>
@@ -110,6 +111,8 @@ private:
     
     // Ball type string
     std::vector<std::string> m_ballVec;
+    
+    CObject2D m_Object2D;
     
     // Sprite peg
     enum

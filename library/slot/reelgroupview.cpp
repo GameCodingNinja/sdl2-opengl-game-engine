@@ -13,7 +13,6 @@
 #include <slot/slotgroupmodel.h>
 #include <slot/slotstripmodel.h>
 #include <slot/pay.h>
-#include <slot/reelstripview.h>
 #include <utilities/xmlParser.h>
 #include <utilities/exceptionhandling.h>
 #include <utilities/deletefuncs.h>

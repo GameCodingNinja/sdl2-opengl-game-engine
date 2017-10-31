@@ -13,6 +13,7 @@
 
 // Game lib dependencies
 #include <slot/slotdefs.h>
+#include <slot/reelstripview.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
@@ -26,7 +27,6 @@ class CSymbolSetView;
 class CSlotStripModel;
 class CSymbol2d;
 class CMatrix;
-class CReelStripView;
 
 class CReelGroupView : public CSlotGroupView, boost::noncopyable
 {

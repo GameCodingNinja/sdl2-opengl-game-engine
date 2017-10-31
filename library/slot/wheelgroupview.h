@@ -13,6 +13,7 @@
 
 // Game lib dependencies
 #include <slot/slotdefs.h>
+#include <slot/wheelview.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
@@ -24,7 +25,6 @@
 class CSymbolSetView;
 class CSlotStripModel;
 class CSymbol2d;
-class CWheelView;
 class CMatrix;
 
 class CWheelGroupView : public CSlotGroupView, boost::noncopyable

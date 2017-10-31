@@ -35,7 +35,7 @@ public:
     void LoadControlFromNode( const XMLNode & controlNode ) override;
     
     // Transform the control
-    void DoTransform( const CObject2D & object ) override;
+    void Transform( const CObject2D & object ) override;
     
     // do the render
     void Render( const CMatrix & matrix ) override;
