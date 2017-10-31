@@ -75,7 +75,7 @@ void CWheelView::Create( const XMLNode & node, const std::string & group )
     // Set the spin direction
     if( node.isAttributeSet("spinDirection") )
     {
-        m_spinDir = NSlotDefs::ESpinDirection( std::atof(node.getAttribute( "spinDirection" )) );
+        m_spinDir = NSlotDefs::ESpinDirection( std::atoi(node.getAttribute( "spinDirection" )) );
         
         if( m_spinDir == NSlotDefs::EDS_COUNTERCLOCKWISE )
             m_spinDirVector = 1;

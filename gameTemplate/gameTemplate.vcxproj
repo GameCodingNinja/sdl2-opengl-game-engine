@@ -118,7 +118,7 @@
     <None Include="source\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\angelscript\projects\msvc10\angelscript.vcxproj">
+    <ProjectReference Include="..\angelscript\projects\msvc2015\angelscript.vcxproj">
       <Project>{39e6af97-6ba3-4a72-8c61-bcebf214ebfd}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Box2D\Box2D.vcxproj">
@@ -141,6 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\ai\ballai.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\main.cpp" />
     <ClCompile Include="source\smartGUI\smartapplysettingsbtn.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="source\state\titlescreenstate.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ai\ballai.h" />
     <ClInclude Include="source\game\game.h" />
     <ClInclude Include="source\smartGUI\smartapplysettingsbtn.h" />
     <ClInclude Include="source\smartGUI\smartconfirmbtn.h" />
@@ -170,11 +172,12 @@
     <ClInclude Include="source\smartGUI\smartsettingsmenubtn.h" />
     <ClInclude Include="source\smartGUI\smartvsynccheckbox.h" />
     <ClInclude Include="source\state\commonstate.h" />
+    <ClInclude Include="source\state\gamedefs.h" />
     <ClInclude Include="source\state\loadstate.h" />
     <ClInclude Include="source\state\igamestate.h" />
-    <ClInclude Include="source\state\loadscreenanimationinfo.h" />
     <ClInclude Include="source\state\runstate.h" />
     <ClInclude Include="source\state\startupstate.h" />
+    <ClInclude Include="source\state\statemessage.h" />
     <ClInclude Include="source\state\titlescreenstate.h" />
   </ItemGroup>
   <ItemGroup>

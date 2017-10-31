@@ -15,9 +15,6 @@
 #include <utilities/statcounter.h>
 #include <script/scriptglobals.h>
 
-// AngelScript lib dependencies
-#include <angelscript.h>
-
 // Boost lib dependencies
 #include <boost/format.hpp>
 

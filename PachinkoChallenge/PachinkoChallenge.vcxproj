@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\angelscript\projects\msvc10\angelscript.vcxproj">
+    <ProjectReference Include="..\angelscript\projects\msvc2015\angelscript.vcxproj">
       <Project>{39e6af97-6ba3-4a72-8c61-bcebf214ebfd}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Box2D\Box2D.vcxproj">
@@ -51,7 +51,6 @@
     <ClCompile Include="source\state\runstate.cpp" />
     <ClCompile Include="source\state\startupstate.cpp" />
     <ClCompile Include="source\state\titlescreenstate.cpp" />
-    <ClCompile Include="source\strategy\ballstrategy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ai\ballai.h" />
@@ -73,7 +72,6 @@
     <ClInclude Include="source\state\startupstate.h" />
     <ClInclude Include="source\state\statemessage.h" />
     <ClInclude Include="source\state\titlescreenstate.h" />
-    <ClInclude Include="source\strategy\ballstrategy.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9C7BBD82-D546-4554-BCCE-DE38726B042D}</ProjectGuid>

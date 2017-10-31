@@ -252,9 +252,6 @@
     <ClCompile Include="2d\sector2d.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="common\sectordata.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="slot\betmanager.cpp">
       <Filter>slot</Filter>
     </ClCompile>
@@ -273,19 +270,7 @@
     <ClCompile Include="slot\playresult.cpp">
       <Filter>slot</Filter>
     </ClCompile>
-    <ClCompile Include="slot\reelgroup.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
-    <ClCompile Include="slot\reelgroupmodel.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
     <ClCompile Include="slot\reelgroupview.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
-    <ClCompile Include="slot\reelstripmodel.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
-    <ClCompile Include="slot\reelstripset.cpp">
       <Filter>slot</Filter>
     </ClCompile>
     <ClCompile Include="slot\reelstripview.cpp">
@@ -309,12 +294,6 @@
     <ClCompile Include="slot\symbol2d.cpp">
       <Filter>slot</Filter>
     </ClCompile>
-    <ClCompile Include="slot\symbolsetviewdata.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
-    <ClCompile Include="slot\symbolsetviewdatamanager.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
     <ClCompile Include="slot\valuetable.cpp">
       <Filter>slot</Filter>
     </ClCompile>
@@ -332,12 +311,6 @@
     </ClCompile>
     <ClCompile Include="common\spritesheet.cpp">
       <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="slot\symbolviewdata.cpp">
-      <Filter>slot</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\basicactorstrategy2d.cpp">
-      <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="2d\basicspritestrategy2d.cpp">
       <Filter>2d</Filter>
@@ -374,6 +347,75 @@
     </ClCompile>
     <ClCompile Include="gui\scrollparam.cpp">
       <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\basegamemusic.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\icycleresults.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\paylineset.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\simplecycleresults.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\slotgroup.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\slotgroupfactory.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\slotgroupmodel.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\slotgroupview.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\slotstripmodel.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\stripset.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\stripstop.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\symbolsetview.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\symbolsetviewmanager.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\wheelgroupview.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="slot\wheelview.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
+    <ClCompile Include="common\fontdata.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\fontproperties.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\spritedatacontainer.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\isprite2d.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\spritechild2d.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\light.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\lightlist.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\state.cpp">
+      <Filter>utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -509,9 +551,6 @@
     <ClInclude Include="managers\fontmanager.h">
       <Filter>managers</Filter>
     </ClInclude>
-    <ClInclude Include="common\bitmask.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="common\object.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -635,9 +674,6 @@
     <ClInclude Include="objectdata\objectvisualdata3d.h">
       <Filter>objectdata</Filter>
     </ClInclude>
-    <ClInclude Include="common\spritebinaryfileheader.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="managers\meshmanager.h">
       <Filter>managers</Filter>
     </ClInclude>
@@ -692,15 +728,6 @@
     <ClInclude Include="2d\sector2d.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="common\sectordata.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\icast.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\istage.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="slot\betmanager.h">
       <Filter>slot</Filter>
     </ClInclude>
@@ -719,19 +746,7 @@
     <ClInclude Include="slot\playresult.h">
       <Filter>slot</Filter>
     </ClInclude>
-    <ClInclude Include="slot\reelgroup.h">
-      <Filter>slot</Filter>
-    </ClInclude>
-    <ClInclude Include="slot\reelgroupmodel.h">
-      <Filter>slot</Filter>
-    </ClInclude>
     <ClInclude Include="slot\reelgroupview.h">
-      <Filter>slot</Filter>
-    </ClInclude>
-    <ClInclude Include="slot\reelstripmodel.h">
-      <Filter>slot</Filter>
-    </ClInclude>
-    <ClInclude Include="slot\reelstripset.h">
       <Filter>slot</Filter>
     </ClInclude>
     <ClInclude Include="slot\reelstripview.h">
@@ -761,12 +776,6 @@
     <ClInclude Include="slot\symbolposition.h">
       <Filter>slot</Filter>
     </ClInclude>
-    <ClInclude Include="slot\symbolsetviewdata.h">
-      <Filter>slot</Filter>
-    </ClInclude>
-    <ClInclude Include="slot\symbolsetviewdatamanager.h">
-      <Filter>slot</Filter>
-    </ClInclude>
     <ClInclude Include="slot\valuetable.h">
       <Filter>slot</Filter>
     </ClInclude>
@@ -788,14 +797,8 @@
     <ClInclude Include="common\spritesheetglyph.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="slot\symbolviewdata.h">
-      <Filter>slot</Filter>
-    </ClInclude>
     <ClInclude Include="slot\ifrontpanel.h">
       <Filter>slot</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\basicactorstrategy2d.h">
-      <Filter>2d</Filter>
     </ClInclude>
     <ClInclude Include="2d\basicspritestrategy2d.h">
       <Filter>2d</Filter>
@@ -837,6 +840,81 @@
       <Filter>gui</Filter>
     </ClInclude>
     <ClInclude Include="utilities\matrix.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\basegamemusic.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\icycleresults.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\igamemusic.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\paylineset.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\simplecycleresults.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\slotgroup.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\slotgroupfactory.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\slotgroupmodel.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\slotgroupview.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\slotstripmodel.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\stripset.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\stripstop.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\symbolsetview.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\symbolsetviewmanager.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\wheelgroupview.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\wheelview.h">
+      <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fontdata.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\meshbinaryfileheader.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\spritedatacontainer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\isprite2d.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\spritechild2d.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\light.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\lightlist.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\bitmask.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\state.h">
       <Filter>utilities</Filter>
     </ClInclude>
   </ItemGroup>

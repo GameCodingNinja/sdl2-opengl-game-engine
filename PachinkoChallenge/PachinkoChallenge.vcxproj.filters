@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="source\ai\ballai.cpp">
+      <Filter>source\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="source\state\commonstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\game.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\state\loadstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\main.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\state\runstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartapplysettingsbtn.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartconfirmbtn.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartdeadzoneslider.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartfullscreencheckbox.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartkeybindbtn.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartresetkeybind.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartresolutionbtn.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartsettingsmenubtn.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\smartGUI\smartvsynccheckbox.cpp">
+      <Filter>source\smartGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\state\startupstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
+    <ClCompile Include="source\state\titlescreenstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\ai\ballai.h">
+      <Filter>source\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\commonstate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\game\game.h">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\gamedefs.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\igamestate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\loadstate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\runstate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartapplysettingsbtn.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartconfirmbtn.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartdeadzoneslider.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartfullscreencheckbox.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartkeybindbtn.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartresetkeybind.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartresolutionbtn.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartsettingsmenubtn.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\smartGUI\smartvsynccheckbox.h">
+      <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\startupstate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\statemessage.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\titlescreenstate.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{2d780767-7a2c-47f0-bad2-a0dce461c3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ai">
+      <UniqueIdentifier>{85cda254-a848-4ee0-afe2-5d028cfa68dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\game">
+      <UniqueIdentifier>{be8c173b-39ff-42f0-86ae-947448a8cf1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\smartGUI">
+      <UniqueIdentifier>{490be7c1-2cb4-4707-a0d4-70fb6a88e543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\state">
+      <UniqueIdentifier>{b2d2dd40-a263-4ad0-b271-bc5390cbc7cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

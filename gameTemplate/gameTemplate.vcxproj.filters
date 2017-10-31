@@ -62,6 +62,9 @@
     <Filter Include="data\objects\3d\objectDataList">
       <UniqueIdentifier>{09896821-8d41-41a7-884c-48905a784660}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\ai">
+      <UniqueIdentifier>{b12c7e29-46d3-4cb4-82c2-f258d4cbcab6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\settings\settings.cfg">
@@ -283,6 +286,9 @@
     <ClCompile Include="source\smartGUI\smartresetkeybind.cpp">
       <Filter>source\smartGUI</Filter>
     </ClCompile>
+    <ClCompile Include="source\ai\ballai.cpp">
+      <Filter>source\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\game\game.h">
@@ -318,9 +324,6 @@
     <ClInclude Include="source\state\titlescreenstate.h">
       <Filter>source\state</Filter>
     </ClInclude>
-    <ClInclude Include="source\state\loadscreenanimationinfo.h">
-      <Filter>source\state</Filter>
-    </ClInclude>
     <ClInclude Include="source\state\runstate.h">
       <Filter>source\state</Filter>
     </ClInclude>
@@ -335,6 +338,15 @@
     </ClInclude>
     <ClInclude Include="source\smartGUI\smartresetkeybind.h">
       <Filter>source\smartGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ai\ballai.h">
+      <Filter>source\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\gamedefs.h">
+      <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\statemessage.h">
+      <Filter>source\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
