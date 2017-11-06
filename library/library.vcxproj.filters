@@ -417,6 +417,9 @@
     <ClCompile Include="utilities\state.cpp">
       <Filter>utilities</Filter>
     </ClCompile>
+    <ClCompile Include="slot\animatedcycleresults.cpp">
+      <Filter>slot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\sprite2d.h">
@@ -916,6 +919,9 @@
     </ClInclude>
     <ClInclude Include="utilities\state.h">
       <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="slot\animatedcycleresults.h">
+      <Filter>slot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

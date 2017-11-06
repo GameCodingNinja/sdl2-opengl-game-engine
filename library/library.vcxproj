@@ -170,6 +170,7 @@
     <ClCompile Include="script\scriptglobals.cpp" />
     <ClCompile Include="script\scriptmanager.cpp" />
     <ClCompile Include="script\scriptpoint.cpp" />
+    <ClCompile Include="slot\animatedcycleresults.cpp" />
     <ClCompile Include="slot\basegamemusic.cpp" />
     <ClCompile Include="slot\betmanager.cpp" />
     <ClCompile Include="slot\icycleresults.cpp" />
@@ -327,6 +328,7 @@
     <ClInclude Include="script\scriptglobals.h" />
     <ClInclude Include="script\scriptmanager.h" />
     <ClInclude Include="script\scriptpoint.h" />
+    <ClInclude Include="slot\animatedcycleresults.h" />
     <ClInclude Include="slot\basegamemusic.h" />
     <ClInclude Include="slot\betmanager.h" />
     <ClInclude Include="slot\icycleresults.h" />

@@ -376,9 +376,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\state\bigcashbackstate.cpp">
-      <Filter>source\state</Filter>
-    </ClCompile>
     <ClCompile Include="source\state\commonstate.cpp">
       <Filter>source\state</Filter>
     </ClCompile>
@@ -430,11 +427,11 @@
     <ClCompile Include="source\game\main.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+    <ClCompile Include="source\state\bigpaybackstate.cpp">
+      <Filter>source\state</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\state\bigcashbackstate.h">
-      <Filter>source\state</Filter>
-    </ClInclude>
     <ClInclude Include="source\state\commonstate.h">
       <Filter>source\state</Filter>
     </ClInclude>
@@ -491,6 +488,9 @@
     </ClInclude>
     <ClInclude Include="source\game\gamesave.h">
       <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\state\bigpaybackstate.h">
+      <Filter>source\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

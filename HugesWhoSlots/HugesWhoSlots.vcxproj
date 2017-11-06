@@ -180,7 +180,7 @@
     <ClCompile Include="source\smartGUI\smartresolutionbtn.cpp" />
     <ClCompile Include="source\smartGUI\smartsettingsmenubtn.cpp" />
     <ClCompile Include="source\smartGUI\smartvsynccheckbox.cpp" />
-    <ClCompile Include="source\state\bigcashbackstate.cpp" />
+    <ClCompile Include="source\state\bigpaybackstate.cpp" />
     <ClCompile Include="source\state\commonstate.cpp" />
     <ClCompile Include="source\state\loadstate.cpp" />
     <ClCompile Include="source\state\lobbystate.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="source\smartGUI\smartresolutionbtn.h" />
     <ClInclude Include="source\smartGUI\smartsettingsmenubtn.h" />
     <ClInclude Include="source\smartGUI\smartvsynccheckbox.h" />
-    <ClInclude Include="source\state\bigcashbackstate.h" />
+    <ClInclude Include="source\state\bigpaybackstate.h" />
     <ClInclude Include="source\state\commonstate.h" />
     <ClInclude Include="source\state\gamedefs.h" />
     <ClInclude Include="source\state\igamestate.h" />
