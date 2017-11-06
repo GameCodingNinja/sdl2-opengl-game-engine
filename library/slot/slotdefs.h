@@ -45,7 +45,7 @@ namespace NSlotDefs
     enum ESlotState
     {
         ESLOT_IDLE,
-        ESLOT_WAIT_CYCLE_RESULTS_STOP,
+        ESLOT_KILL_CYCLE_RESULTS,
         ESLOT_PLACE_WAGER,
         ESLOT_GENERATE_STOPS,
         ESLOT_EVALUATE,

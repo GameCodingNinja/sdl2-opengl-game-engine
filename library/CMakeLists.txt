@@ -123,6 +123,7 @@ add_library(
         slot/simplecycleresults.cpp
         slot/icycleresults.cpp
         slot/slotgroupfactory.cpp
+        slot/animatedcycleresults.cpp
         soil/stb_image_aug.c
         soil/SOIL.c
         soil/image_helper.c

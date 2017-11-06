@@ -37,8 +37,7 @@
 CSlotGame::CSlotGame() :
     m_slotState( NSlotDefs::ESLOT_IDLE ),
     m_pFrontPanel( nullptr ),
-    m_pGameMusic( nullptr ),
-    m_cycleResultsActive(false)
+    m_pGameMusic( nullptr )
 {
 }   // constructor
 
@@ -78,22 +77,22 @@ void CSlotGame::ProcessGameState()
 {
     switch( m_slotState )
     {
-        case NSlotDefs::ESLOT_IDLE:                     StateIdle();                  break;
-        case NSlotDefs::ESLOT_WAIT_CYCLE_RESULTS_STOP:  StateWaitCycleResultsStop();  break;
-        case NSlotDefs::ESLOT_PLACE_WAGER:              StatePlaceWager();            break;
-        case NSlotDefs::ESLOT_GENERATE_STOPS:           StateGenerateStops();         break;
-        case NSlotDefs::ESLOT_EVALUATE:                 StateEvaluate();              break;
-        case NSlotDefs::ESLOT_PRE_SPIN:                 StatePreSpin();               break;
-        case NSlotDefs::ESLOT_SPIN:                     StateSpin();                  break;
-        case NSlotDefs::ESLOT_POST_SPIN:                StatePostSpin();              break;
-        case NSlotDefs::ESLOT_PRE_AWARD_WIN:            StatePreAwardWin();           break;
-        case NSlotDefs::ESLOT_BONUS_DECISION:           StateBonusDecision();         break;
-        case NSlotDefs::ESLOT_PRE_BONUS:                StatePreBonus();              break;
-        case NSlotDefs::ESLOT_BONUS:                    StateBonus();                 break;
-        case NSlotDefs::ESLOT_POST_BONUS:               StatePostBonus();             break;
-        case NSlotDefs::ESLOT_POST_AWARD_WIN:           StatePostAwardWin();          break;
-        case NSlotDefs::ESLOT_WAIT_FOR_AWARD:           StateWaitForAward();          break;
-        case NSlotDefs::ESLOT_END:                      StateEnd();                   break;
+        case NSlotDefs::ESLOT_IDLE:                StateIdle();              break;
+        case NSlotDefs::ESLOT_KILL_CYCLE_RESULTS:  StateKillCycleResults();  break;
+        case NSlotDefs::ESLOT_PLACE_WAGER:         StatePlaceWager();        break;
+        case NSlotDefs::ESLOT_GENERATE_STOPS:      StateGenerateStops();     break;
+        case NSlotDefs::ESLOT_EVALUATE:            StateEvaluate();          break;
+        case NSlotDefs::ESLOT_PRE_SPIN:            StatePreSpin();           break;
+        case NSlotDefs::ESLOT_SPIN:                StateSpin();              break;
+        case NSlotDefs::ESLOT_POST_SPIN:           StatePostSpin();          break;
+        case NSlotDefs::ESLOT_PRE_AWARD_WIN:       StatePreAwardWin();       break;
+        case NSlotDefs::ESLOT_BONUS_DECISION:      StateBonusDecision();     break;
+        case NSlotDefs::ESLOT_PRE_BONUS:           StatePreBonus();          break;
+        case NSlotDefs::ESLOT_BONUS:               StateBonus();             break;
+        case NSlotDefs::ESLOT_POST_BONUS:          StatePostBonus();         break;
+        case NSlotDefs::ESLOT_POST_AWARD_WIN:      StatePostAwardWin();      break;
+        case NSlotDefs::ESLOT_WAIT_FOR_AWARD:      StateWaitForAward();      break;
+        case NSlotDefs::ESLOT_END:                 StateEnd();               break;
     };
     
 }   // ProcessGameState
@@ -110,17 +109,11 @@ void CSlotGame::StateIdle()
 /***************************************************************************
 *    desc:  State Wait for the cycle results to stop
 ****************************************************************************/
-void CSlotGame::StateWaitCycleResultsStop()
+void CSlotGame::StateKillCycleResults()
 {
-    if( !IsCycleResultsAnimating() )
-    {
-        m_cycleResultsActive = false;
-        
-        for( auto & iter : m_slotGroupVec )
-            iter->StopCycleResults();
-        
-        m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
-    }
+    KillCycleResults();
+
+    m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
     
 }   // StateWaitCycleResultsStop
 
@@ -283,9 +276,7 @@ void CSlotGame::StatePostAwardWin()
         
         // Start the cycle results
         for( auto & iter : m_slotGroupVec )
-            iter->StartCycleResults();
-        
-        m_cycleResultsActive = true;
+            iter->ActivateCycleResults();
     }
     
     m_slotState = NSlotDefs::ESLOT_WAIT_FOR_AWARD;
@@ -344,11 +335,10 @@ void CSlotGame::Update()
         iter->Update();
     
     // Start the cycle results animation if not currently animating
-    if( m_cycleResultsActive )
+    if( IsCycleResultsActive() && !IsCycleResultsAnimating() )
     {
-        if( !IsCycleResultsAnimating() )
-            for( auto & iter : m_slotGroupVec )
-                iter->StartCycleResultsAnimation();
+        for( auto & iter : m_slotGroupVec )
+            iter->StartCycleResultsAnimation();
     }
 
 }   // Update
@@ -360,7 +350,7 @@ void CSlotGame::Update()
 void CSlotGame::Transform()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->Transform();
+        iter->Transform();
 
 }   // Transform
 
@@ -371,7 +361,7 @@ void CSlotGame::Transform()
 void CSlotGame::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->Render( matrix );
+        iter->Render( matrix );
 
 }   // Render
 
@@ -385,14 +375,8 @@ void CSlotGame::PlayGame(CUIControl *)
     {
         if( CBetMgr::Instance().AllowPlay() )
         {
-            if( m_cycleResultsActive )
-            {
-                // Stop the cycle results
-                for( auto & iter : m_slotGroupVec )
-                    iter->StopCycleResultsAnimation();
-                
-                m_slotState = NSlotDefs::ESLOT_WAIT_CYCLE_RESULTS_STOP;
-            }
+            if( IsCycleResultsActive() )
+                m_slotState = NSlotDefs::ESLOT_KILL_CYCLE_RESULTS;
             else
                 m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
         }
@@ -444,14 +428,27 @@ NSlotDefs::ESlotState CSlotGame::GetState()
 ************************************************************************/
 bool CSlotGame::IsCycleResultsAnimating()
 {
-    bool animating = false;
-
     for( auto & iter : m_slotGroupVec )
-        animating |= iter->IsCycleResultsAnimating();
+        if( iter->IsCycleResultsAnimating() )
+            return true;
 
-    return animating;
+    return false;
     
 }   // IsCycleResultsAnimating
+
+
+/************************************************************************
+*    desc:  Is the cycle results active
+************************************************************************/
+bool CSlotGame::IsCycleResultsActive()
+{
+    for( auto & iter : m_slotGroupVec )
+        if( iter->IsCycleResultsActive() )
+            return true;
+
+    return false;
+    
+}   // IsCycleResultsActive
 
 
 /************************************************************************
@@ -461,3 +458,17 @@ CPlayResult & CSlotGame::CreatePlayResult()
 {
     return m_slotResults.Create();
 }
+
+
+/************************************************************************
+*    desc:  Kill the cycle results
+************************************************************************/
+void CSlotGame::KillCycleResults()
+{
+    for( auto & iter : m_slotGroupVec )
+    {
+        iter->StopCycleResultsAnimation();
+        iter->DeactivateCycleResults();
+    }
+    
+}   // KillCycleResults

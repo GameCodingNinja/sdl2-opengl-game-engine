@@ -13,6 +13,7 @@
 
 // Standard lib dependencies
 #include <string>
+#include <map>
 #include <memory>
 
 // Forward declaration(s)
@@ -35,6 +36,12 @@ public:
     
     // Destructor
     ~CSpriteData();
+    
+    // Init the script functions and add them to the map
+    void LoadScriptFunctions( const XMLNode & node );
+    
+    // Get the script functions
+    const std::map<std::string, std::string> & GetScriptFunctions() const;
     
     // Get the group
     const std::string & GetName() const;
@@ -60,6 +67,7 @@ private:
     std::string m_group;
     std::string m_objectName;
     std::string m_aiName;
+    std::map<std::string, std::string> m_scriptFunctionMap;
     int m_id;
     std::unique_ptr<CFontData> m_upFontData;
 };

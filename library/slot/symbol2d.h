@@ -49,6 +49,10 @@ public:
     // do the render
     void Render( const CMatrix & matrix );
     
+    // Get/Set if deferred render
+    bool IsDeferredRender();
+    void SetDeferredRender( bool value );
+    
 private:
     
     // final matrix
@@ -59,6 +63,10 @@ private:
     
     // string Id;
     std::string m_id;
+    
+    // Deferred render flag
+    bool m_deferredRender;
+    
 };
 
 #endif  // __symbol_2d_h__

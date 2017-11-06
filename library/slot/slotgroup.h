@@ -20,6 +20,7 @@ class CSlotGroupModel;
 class CSlotGroupView;
 class CSymbolSetView;
 class iCycleResults;
+class CMatrix;
 
 class CSlotGroup
 {
@@ -34,11 +35,11 @@ public:
     // Destructor
     virtual ~CSlotGroup();
     
-    // Start the cycle results
-    void StartCycleResults();
+    // Activate the cycle results
+    void ActivateCycleResults();
     
     // Stop the cycle results
-    void StopCycleResults();
+    void DeactivateCycleResults();
     
     // Start the cycle results animation
     void StartCycleResultsAnimation();
@@ -46,11 +47,20 @@ public:
     // Stop the cycle results animation
     void StopCycleResultsAnimation();
     
+    // Is the cycle results active
+    bool IsCycleResultsActive();
+    
     // Is the cycle results animating
     bool IsCycleResultsAnimating();
     
     // Update objects that require them
     void Update();
+    
+    // Transform the game objects
+    void Transform();
+    
+    // Render of game content
+    void Render( const CMatrix & matrix );
     
     // Get the slot group model
     CSlotGroupModel * GetModel();

@@ -12,7 +12,7 @@
 #include "gamesave.h"
 #include "../state/startupstate.h"
 #include "../state/lobbystate.h"
-#include "../state/bigcashbackstate.h"
+#include "../state/bigpaybackstate.h"
 #include "../state/loadstate.h"
 #include "../smartGUI/smartconfirmbtn.h"
 #include "../smartGUI/smartresolutionbtn.h"
@@ -298,7 +298,7 @@ void CGame::DoStateChange()
             upGameState.reset( new CLobbyState("(lobby)") );
         
         else if( nextState == NGameDefs::EGS_BIG_CASH_BACK )
-            upGameState.reset( new CBigCashBackState("(big_cash_back)") );
+            upGameState.reset( new CBigPayBackState("(big_pay_back)") );
 
         else if( nextState == NGameDefs::EGS_GAME_LOAD )
             upGameState.reset( new CLoadState( stateMessage ) );

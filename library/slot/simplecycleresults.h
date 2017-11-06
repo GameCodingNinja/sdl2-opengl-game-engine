@@ -33,8 +33,11 @@ public:
     // Update the cycle results
     void Update() override;
     
-    // Start the cycle results
-    void Start() override;
+    // Activate the cycle results
+    void Activate() override;
+    
+    // Deactivate the cycle results
+    void Deactivate() override;
     
     // Start the cycle results animation
     void StartAnimation() override;

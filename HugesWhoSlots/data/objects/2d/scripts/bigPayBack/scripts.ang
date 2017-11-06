@@ -1,0 +1,238 @@
+
+/************************************************************************
+*    FILE NAME:       scripts.ang
+*
+*    DESCRIPTION:     Scripts specific to the Big Cash Back game
+************************************************************************/
+
+// Global variables
+bool g_playBtnSparkle = true;
+bool g_doubleFlicker = true;
+
+/************************************************************************
+*    desc:  Script for setting the play button
+************************************************************************/
+void PlayBtnActOver_Selected( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+    
+    AlphaTo( 20, 0, sprite );
+    Hold( 25 );
+    
+    AlphaTo( 40, 1, sprite );
+    Hold( 50 );
+    AlphaTo( 40, 0, sprite );
+    
+    if( g_doubleFlicker )
+    {
+        g_doubleFlicker = false;
+        
+        Hold( 50 );
+        AlphaTo( 40, 1, sprite );
+        Hold( 50 );
+        AlphaTo( 40, 0, sprite );
+    }
+    
+    sprite.SetVisible( false );
+    
+    DispatchEvent( EGE_MENU_SELECT_EXECUTE );
+    DispatchEvent( EGE_MENU_REACTIVATE );
+}
+
+void PlayBtnActOver_Active( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 0 );
+    sprite.SetVisible( true );
+    
+    while(true)
+    {
+        AlphaTo( 600, 0.75, sprite );
+        AlphaTo( 600, 0, sprite );
+    }
+}
+
+void PlayBtnTxt_Selected( CSprite2d & sprite )
+{
+    if( sprite.GetCurrentFrame() == 0 )
+    {
+        Hold( 350 );
+        sprite.SetFrame( 1 );
+    }
+}
+
+void PlayBtnTxt_PlayReady( CSprite2d & sprite )
+{
+    DispatchEvent( EGE_MENU_REACTIVATE );
+    g_playBtnSparkle = true;
+    g_doubleFlicker = true;
+    sprite.SetFrame( 0 );
+}
+
+void PlayBtnSparkle_Init( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+}
+
+void PlayBtnSparkle_Selected( CSprite2d & sprite )
+{
+    if( g_playBtnSparkle )
+    {
+        g_playBtnSparkle = false;
+
+        Spawn( "PlayBtnSparkle_Animate", sprite );
+    }
+}
+
+void PlayBtnSparkle_Animate( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+
+    Play( 12, sprite );
+
+    sprite.SetVisible( false );
+}
+
+
+/************************************************************************
+*    desc:  Script for the total bet meter
+************************************************************************/
+void TotalBetActOver_Active( CSprite2d & sprite )
+{
+    sprite.SetAlpha( 0 );
+    sprite.SetVisible( true );
+    
+    while(true)
+    {
+        AlphaTo( 500, 0.5, sprite );
+        AlphaTo( 500, 0, sprite );
+    }
+}
+
+
+/************************************************************************
+*    desc:  Meter on start
+************************************************************************/
+void Meter_OnInit( CSprite2d & sprite )
+{
+    sprite.SetVisible( false );
+    sprite.SetAlpha( 0 );
+}
+
+
+/************************************************************************
+*    desc:  Meter on start
+************************************************************************/
+void Meter_OnStart( CSprite2d & sprite )
+{
+    sprite.SetVisible( true );
+    AlphaTo( 300, 1, sprite );
+}
+
+
+/************************************************************************
+*    desc:  Meter on stop
+************************************************************************/
+void Meter_OnStop( CSprite2d & sprite )
+{
+}
+
+
+/************************************************************************
+*    desc:  Meter on clear
+************************************************************************/
+void Meter_OnClear( CSprite2d & sprite, uint value )
+{
+    if( sprite.IsVisible() )
+    {
+        AlphaTo( 250, 0, sprite );
+        sprite.SetVisible( false );
+        sprite.CreateFontString( "" + value );
+    }
+}
+
+
+/************************************************************************
+*    desc:  Sound functions
+************************************************************************/
+void SlotGame_StartSpinMusic()
+{
+    CSound sound = GetSound( "(big_pay_back)", "reelSpinMusic" );
+    
+    if( !sound.IsPlaying() )
+    {
+        SetVolume( "(big_pay_back)", "reelSpinMusic", MAX_SOUND_VOLUME );
+        sound.Play(0, -1);
+    }
+    else if( sound.IsPaused() )
+    {
+        sound.Resume();
+        VolumeTo( 1000.f, MAX_SOUND_VOLUME, sound );
+    }
+    else if( sound.GetVolume() != MAX_SOUND_VOLUME )
+    {
+        float inc = 1000.f / float(MAX_SOUND_VOLUME);
+        int time = int((MAX_SOUND_VOLUME - sound.GetVolume()) * inc);
+        
+        VolumeTo( time, MAX_SOUND_VOLUME, sound );
+    }
+}
+
+void SlotGame_StopSpinMusic()
+{
+    CSound sound = GetSound( "(big_pay_back)", "reelSpinMusic" );
+    
+    if( sound.IsPlaying() )
+    {
+        VolumeTo( 2000.f, 0.f, sound );
+        sound.Pause();
+    }
+}
+
+void SlotGame_FastStopSpinMusic()
+{
+    CSound sound = GetSound( "(big_pay_back)", "reelSpinMusic" );
+    
+    if( sound.IsPlaying() )
+    {
+        VolumeTo( 500.f, 0.f, sound );
+        sound.Stop();
+    }
+}
+
+/************************************************************************
+*    desc:  Script for setting the look of the disabled state
+************************************************************************/
+void Control_Disabled( CSprite2d & sprite )
+{
+    CColor color = sprite.GetDefaultColor();
+    color.TransformHSV( 0, 0, 1 );
+
+    sprite.SetColor( color );
+}
+
+
+/************************************************************************
+*    desc:  Script for setting the look of the inactive state
+************************************************************************/
+void Control_Inactive( CSprite2d & sprite )
+{
+    sprite.SetDefaultColor();
+}
+
+
+/************************************************************************
+*    desc:  Script for animating a symbol
+************************************************************************/
+void Symbol_Animate( CSprite2d & sprite )
+{
+    Play( 18, sprite );
+}
+
+
+/************************************************************************
+*    desc:  Script for animating a symbol
+************************************************************************/
+void Symbol_Hold( CSprite2d & sprite )
+{
+    Hold( 1000 );
+}

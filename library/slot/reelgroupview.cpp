@@ -146,11 +146,8 @@ void CReelGroupView::DeleteCycleResultSymbs()
 ************************************************************************/
 void CReelGroupView::Update()
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_reelStripViewDeq )
-            iter.Update();
-    }
+    for( auto & iter : m_reelStripViewDeq )
+        iter.Update();
     
 }   // Update
 
@@ -160,31 +157,36 @@ void CReelGroupView::Update()
 ************************************************************************/
 void CReelGroupView::Transform()
 {
-    if( IsVisible() )
-    {
-        CObject2D::Transform();
-        
-        for( auto & iter : m_reelStripViewDeq )
-            iter.Transform( GetMatrix(), WasWorldPosTranformed() );
-        
-        m_upCycleResultsTxtSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
-    }
+    CObject2D::Transform();
+
+    for( auto & iter : m_reelStripViewDeq )
+        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+
+    m_upCycleResultsTxtSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
     
 }   // Transform
 
 
 /************************************************************************
-*    desc:  do the render
+*    desc:  Do the render
 ************************************************************************/
 void CReelGroupView::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_reelStripViewDeq )
-            iter.Render( matrix );
-        
-        m_upCycleResultsTxtSprite->Render( matrix );
-    }
+    for( auto & iter : m_reelStripViewDeq )
+        iter.Render( matrix );
+
+    m_upCycleResultsTxtSprite->Render( matrix );
+    
+}   // Render
+
+
+/************************************************************************
+*    desc:  Do the deferred render
+************************************************************************/
+void CReelGroupView::DeferredRender( const CMatrix & matrix )
+{
+    for( auto & iter : m_reelStripViewDeq )
+        iter.DeferredRender( matrix );
     
 }   // Render
 

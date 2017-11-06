@@ -379,22 +379,29 @@ void CWheelView::Transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  do the render
+*    desc:  Do the render
 ************************************************************************/
 void CWheelView::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_wheelSpriteDeq )
-            iter.Render( matrix );
-    
-        for( auto & iter : m_symbolDeq )
-            iter.Render( matrix );
-        
-        for( auto & iter : m_spriteDeq )
-            iter.Render( matrix );
-    }
+    for( auto & iter : m_wheelSpriteDeq )
+        iter.Render( matrix );
+
+    for( auto & iter : m_symbolDeq )
+        iter.Render( matrix );
+
+    for( auto & iter : m_spriteDeq )
+        iter.Render( matrix );
 }
+
+
+/************************************************************************
+*    desc:  Do the deferred render
+************************************************************************/
+void CWheelView::DeferredRender( const CMatrix & matrix )
+{
+    
+}
+
 
 /************************************************************************
 *    desc:  Start the spin

@@ -14,6 +14,7 @@
 // Forward declaration(s)
 class CSlotGroupView;
 class CPlayResult;
+class CMatrix;
 
 class iCycleResults
 {
@@ -39,12 +40,15 @@ public:
     
     // Update the cycle results
     virtual void Update() = 0;
+
+    // Do the render
+    virtual void Render( const CMatrix & matrix ){}
     
-    // Start the cycle results
-    virtual void Start();
+    // Activate the cycle results
+    virtual void Activate();
     
-    // Stop the cycle results
-    virtual void Stop();
+    // Deactivate the cycle results
+    virtual void Deactivate();
     
     // Did we complete one animation cycle of all the pays?
     bool IsFirstCycleComplete();
@@ -62,6 +66,9 @@ protected:
     
     // index into pay
     int m_cyclePayCounter;
+    
+    // Current cycle pay
+    int m_curPayIndex;
     
     // Did we complete one animation cycle of all the pays
     bool m_firstCycleComplete;

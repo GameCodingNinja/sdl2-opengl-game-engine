@@ -84,7 +84,7 @@ protected:
     
     // Game state functions
     void StateIdle();
-    void StateWaitCycleResultsStop();
+    void StateKillCycleResults();
     void StatePlaceWager();
     void StateGenerateStops();
     void StateEvaluate();
@@ -102,6 +102,12 @@ protected:
     
     // Is the cycle results animating
     bool IsCycleResultsAnimating();
+    
+    // Is the cycle results active
+    bool IsCycleResultsActive();
+    
+    // Kill the cycle results
+    void KillCycleResults();
 
 private:
     
@@ -121,9 +127,6 @@ private:
     // Class for holding interface items
     // Does not own pointer. Do Not Free
     iGameMusic * m_pGameMusic;
-    
-    // Cycle results flag
-    bool m_cycleResultsActive;
 };
 
 #endif  // __slot_game_h__

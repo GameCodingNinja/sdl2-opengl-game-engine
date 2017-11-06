@@ -14,6 +14,7 @@
 iCycleResults::iCycleResults() :
     m_pPlayResult(nullptr),
     m_cyclePayCounter(0),
+    m_curPayIndex(0),
     m_firstCycleComplete(false),
     m_cycleResultsActive(false)
 {
@@ -29,25 +30,26 @@ iCycleResults::~iCycleResults()
 
 
 /***************************************************************************
-*    desc:  Start the cycle results
+*    desc:  Activate the cycle results
 ****************************************************************************/
-void iCycleResults::Start()
+void iCycleResults::Activate()
 {
     m_cycleResultsActive = true;
     m_firstCycleComplete = false;
     m_cyclePayCounter = 0;
+    m_curPayIndex = 0;
     
-}   // Start
+}   // Activate
 
 
 /***************************************************************************
-*    desc:  Stop the cycle results
+*    desc:  Deactivate the cycle results
 ****************************************************************************/
-void iCycleResults::Stop()
+void iCycleResults::Deactivate()
 {
     m_cycleResultsActive = false;
     
-}   // Stop
+}   // Deactivate
 
 
 /***************************************************************************

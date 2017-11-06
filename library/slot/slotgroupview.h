@@ -63,8 +63,11 @@ public:
     // Update the reel group
     virtual void Update() = 0;
     
-    // do the render
+    // Do the render
     virtual void Render( const CMatrix & matrix ) = 0;
+    
+    // Do the deferred render
+    virtual void DeferredRender( const CMatrix & matrix ) = 0;
     
     // Start the reels spinning
     virtual void StartSpin() = 0;

@@ -47,8 +47,11 @@ public:
     // Transform the reel group
     void Transform() override;
     
-    // do the render
+    // Do the render
     void Render( const CMatrix & matrix ) override;
+    
+    // Do the deferred render
+    void DeferredRender( const CMatrix & matrix ) override;
     
     // Start the reels spinning
     void StartSpin() override;

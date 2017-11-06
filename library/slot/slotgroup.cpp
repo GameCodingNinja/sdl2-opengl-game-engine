@@ -49,25 +49,25 @@ CSlotGroup::~CSlotGroup()
 
 
 /************************************************************************
-*    desc:  Start the cycle results
+*    desc:  Activate the cycle results
 ************************************************************************/
-void CSlotGroup::StartCycleResults()
+void CSlotGroup::ActivateCycleResults()
 {
     if( m_upCycleResults )
-        m_upCycleResults->Start();
+        m_upCycleResults->Activate();
     
-}   // StartCycleResults
+}   // ActivateCycleResults
 
 
 /************************************************************************
-*    desc:  Stop the cycle results
+*    desc:  Deactivate the cycle results
 ************************************************************************/
-void CSlotGroup::StopCycleResults()
+void CSlotGroup::DeactivateCycleResults()
 {
     if( m_upCycleResults )
-        m_upCycleResults->Stop();
+        m_upCycleResults->Deactivate();
     
-}   // StopCycleResults
+}   // DeactivateCycleResults
 
 
 /************************************************************************
@@ -90,6 +90,19 @@ void CSlotGroup::StopCycleResultsAnimation()
         m_upCycleResults->StopAnimation();
     
 }   // StartCycleResultsAnimation
+
+
+/************************************************************************
+*    desc:  Is the cycle results active
+************************************************************************/
+bool CSlotGroup::IsCycleResultsActive()
+{
+    if( m_upCycleResults )
+        return m_upCycleResults->IsCycleResultsActive();
+    
+    return false;
+    
+}   // IsCycleResultsActive
 
 
 /************************************************************************
@@ -116,6 +129,28 @@ void CSlotGroup::Update()
         m_upCycleResults->Update();
     
 }   // Update
+
+
+/***************************************************************************
+*    desc:  Transform the game objects
+****************************************************************************/
+void CSlotGroup::Transform()
+{
+    m_spSlotGroupView->Transform();
+}
+
+
+/***************************************************************************
+*    desc:  2D/3D Render of game content
+****************************************************************************/
+void CSlotGroup::Render( const CMatrix & matrix )
+{
+    m_spSlotGroupView->Render( matrix );
+    
+    if( m_upCycleResults )
+        m_upCycleResults->Render( matrix );
+    
+}   // Render
 
 
 /************************************************************************

@@ -91,6 +91,9 @@ public:
     // Get the font size
     const CSize<float> & GetFontSize() const;
     
+    // Copy over the script functions
+    void CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
+    
     //////////////////////////////////
     // Functions accessed via script
     //////////////////////////////////

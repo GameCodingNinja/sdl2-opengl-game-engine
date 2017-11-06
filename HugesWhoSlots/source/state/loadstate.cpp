@@ -18,7 +18,7 @@
 // Physical component dependency
 #include "loadstate.h"
 #include "lobbystate.h"
-#include "bigcashbackstate.h"
+#include "bigpaybackstate.h"
 
 // Game lib dependencies
 #include <system/device.h>
@@ -150,7 +150,7 @@ void CLoadState::ObjectDataLoad()
             NLobby::ObjectDataLoad();
 
         else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_BIG_CASH_BACK )
-            NBigCashBack::ObjectDataLoad();
+            NBigPayBack::ObjectDataLoad();
     }
     catch (NExcept::CCriticalException & ex)
     {
@@ -185,7 +185,7 @@ void CLoadState::CriticalLoad()
         NLobby::CriticalUnload();
     
     else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_BIG_CASH_BACK )
-        NBigCashBack::CriticalUnload();
+        NBigPayBack::CriticalUnload();
     
     
     // ------------------ LOAD SECTION ------------------
@@ -194,7 +194,7 @@ void CLoadState::CriticalLoad()
         NLobby::CriticalLoad();
 
     else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_BIG_CASH_BACK )
-        NBigCashBack::CriticalLoad();
+        NBigPayBack::CriticalLoad();
     
 }   // CriticalLoad
 
@@ -208,7 +208,7 @@ void CLoadState::CriticalInit()
         NLobby::CriticalInit();
 
     else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_BIG_CASH_BACK )
-        NBigCashBack::CriticalInit();
+        NBigPayBack::CriticalInit();
     
 }   // CriticalInit
 
@@ -226,7 +226,7 @@ void CLoadState::AssetsLoad()
             NLobby::Unload();
 
         else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_BIG_CASH_BACK )
-            NBigCashBack::Unload();
+            NBigPayBack::Unload();
 
 
         // ------------------ LOAD SECTION ------------------
@@ -235,7 +235,7 @@ void CLoadState::AssetsLoad()
             NLobby::Load();
 
         else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_BIG_CASH_BACK )
-            NBigCashBack::Load();
+            NBigPayBack::Load();
     }
     catch (NExcept::CCriticalException & ex)
     {

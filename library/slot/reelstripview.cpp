@@ -485,55 +485,80 @@ void CReelStripView::Transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  do the render
+*    desc:  Do the render
 ************************************************************************/
 void CReelStripView::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
+    for( auto & iter : m_spriteDeq )
+        iter.Render( matrix );
+
+    // Disable rendering to the color buffer
+    glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
+    glDepthMask( GL_FALSE );
+
+    // Start using the stencil
+    glEnable( GL_STENCIL_TEST );
+
+    glStencilFunc( GL_ALWAYS, 0x1, 0x1 );
+    glStencilOp( GL_REPLACE, GL_REPLACE, GL_REPLACE );
+
+
+    m_upStencilMaskSprite->Render( matrix );
+
+
+    // Re-enable color
+    glColorMask( GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE );
+
+    // Where a 1 was not rendered
+    glStencilFunc( GL_EQUAL, 0x1, 0x1 );
+
+    // Keep the pixel
+    glStencilOp( GL_KEEP, GL_KEEP, GL_KEEP );
+
+    // Disable any writing to the stencil buffer
+    glDepthMask(GL_TRUE);
+
+
+    for( size_t i = 0; i < m_symbolDeq.size(); ++i )
     {
-        for( auto & iter : m_spriteDeq )
-            iter.Render( matrix );
-        
-        // Disable rendering to the color buffer
-        glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
-        glDepthMask( GL_FALSE );
+        auto symbol = m_symbolDeq.at(i);
 
-        // Start using the stencil
-        glEnable( GL_STENCIL_TEST );
-
-        glStencilFunc( GL_ALWAYS, 0x1, 0x1 );
-        glStencilOp( GL_REPLACE, GL_REPLACE, GL_REPLACE );
-
-
-        m_upStencilMaskSprite->Render( matrix );
-
-
-        // Re-enable color
-        glColorMask( GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE );
-
-        // Where a 1 was not rendered
-        glStencilFunc( GL_EQUAL, 0x1, 0x1 );
-
-        // Keep the pixel
-        glStencilOp( GL_KEEP, GL_KEEP, GL_KEEP );
-
-        // Disable any writing to the stencil buffer
-        glDepthMask(GL_TRUE);
-
-
-        for( size_t i = 0; i < m_symbolDeq.size(); ++i )
+        if( !symbol->IsDeferredRender() )
         {
-            m_symbolDeq.at(i)->SetPos( m_symPosDeq.at(i) );
-            m_symbolDeq.at(i)->Transform( GetMatrix(), WasWorldPosTranformed() );
-            m_symbolDeq.at(i)->Render( matrix );
+            symbol->SetPos( m_symPosDeq.at(i) );
+            symbol->Transform( GetMatrix(), WasWorldPosTranformed() );
+            symbol->Render( matrix );
         }
-
-
-        // Finished using stencil
-        glDisable( GL_STENCIL_TEST );
     }
 
+
+    // Finished using stencil
+    glDisable( GL_STENCIL_TEST );
+
 }   // Render
+
+
+/************************************************************************
+*    desc:  do the render
+************************************************************************/
+void CReelStripView::DeferredRender( const CMatrix & matrix )
+{
+    if( m_spinState == NSlotDefs::ESS_STOPPED )
+    {
+        for( size_t i = 0; i < m_symbolDeq.size(); ++i )
+        {
+            auto symbol = m_symbolDeq.at(i);
+            
+            if( symbol->IsDeferredRender() )
+            {
+                symbol->SetPos( m_symPosDeq.at(i) );
+                symbol->Transform( GetMatrix(), WasWorldPosTranformed() );
+                symbol->Render( matrix );
+            }
+        }
+    }
+
+}   // DeferredRender
 
 
 /************************************************************************

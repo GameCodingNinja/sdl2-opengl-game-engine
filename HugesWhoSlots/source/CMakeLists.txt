@@ -18,7 +18,7 @@ add_executable(
     state/commonstate.cpp
     state/startupstate.cpp
     state/lobbystate.cpp
-    state/bigcashbackstate.cpp
+    state/bigpaybackstate.cpp
     state/loadstate.cpp )
 
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^arm")

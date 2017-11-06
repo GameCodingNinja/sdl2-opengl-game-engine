@@ -55,16 +55,31 @@ void CSimpleCycleresults::Update()
 /***************************************************************************
 *    desc:  Start the cycle results
 ****************************************************************************/
-void CSimpleCycleresults::Start()
+void CSimpleCycleresults::Activate()
 {
     if( m_pPlayResult->GetPayCount() > 0 )
     {
-        iCycleResults::Start();
+        iCycleResults::Activate();
 
         m_spSlotGroupView->GenerateCycleResultSymbs();
     }
     
-}   // Start
+}   // Activate
+
+
+/***************************************************************************
+*    desc:  Deactivate the cycle results
+****************************************************************************/
+void CSimpleCycleresults::Deactivate()
+{
+    if( m_cycleResultsActive )
+    {
+        iCycleResults::Deactivate();
+        
+        m_spSlotGroupView->ClearCycleResultSymbs();
+    }
+    
+}   // Deactivate
 
 
 /***************************************************************************
@@ -114,8 +129,6 @@ void CSimpleCycleresults::StopAnimation()
                 sympIter->GetSprite().SetDefaultColor();
         
         m_spSlotGroupView->SetCycleResultText( false );
-
-        m_spSlotGroupView->ClearCycleResultSymbs();
     }
     
 }   // StopAnimation

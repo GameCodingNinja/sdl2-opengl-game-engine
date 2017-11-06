@@ -27,7 +27,7 @@ CCommonState::CCommonState( const NGameDefs::EGameState gameState, const NGameDe
     iGameState( gameState, nextState )
 {
     m_gameStateMap.emplace( "lobby_state", NGameDefs::EGS_LOBBY );
-    m_gameStateMap.emplace( "big_cash_back_state", NGameDefs::EGS_BIG_CASH_BACK );
+    m_gameStateMap.emplace( "big_pay_back_state", NGameDefs::EGS_BIG_CASH_BACK );
     
 }   // Constructer
 

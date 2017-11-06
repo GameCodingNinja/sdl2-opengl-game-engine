@@ -25,13 +25,13 @@
     </groupList>
     
     <groupList groupName="(lobby)">
-        <file path="data/objects/2d/objectDataList/games/lobby/lobbyData.lst"/>
+        <file path="data/objects/2d/objectDataList/lobby/lobbyData.lst"/>
     </groupList>
 
-    <groupList groupName="(big_cash_back)">
-        <file path="data/objects/2d/objectDataList/games/bigCashBack/basegame.lst"/>
-	<file path="data/objects/2d/objectDataList/games/bigCashBack/symbolDataList.lst"/>
-        <file path="data/objects/2d/objectDataList/games/bigCashBack/miscDataList.lst"/>
+    <groupList groupName="(big_pay_back)">
+        <file path="data/objects/2d/objectDataList/bigPayBack/basegame.lst"/>
+	<file path="data/objects/2d/objectDataList/bigPayBack/symbolDataList.lst"/>
+        <file path="data/objects/2d/objectDataList/bigPayBack/miscDataList.lst"/>
     </groupList>
   
 </listTable>

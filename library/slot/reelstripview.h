@@ -58,8 +58,11 @@ public:
     // Transform the reel strip
     void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
-    // do the render
+    // Do the render
     void Render( const CMatrix & matrix );
+    
+    // Do the deferred render
+    void DeferredRender( const CMatrix & matrix );
     
     // Start the spin
     void StartSpin();

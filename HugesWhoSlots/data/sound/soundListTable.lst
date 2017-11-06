@@ -8,12 +8,12 @@
     <file path="data/sound/standard/standardSound.lst"/>
   </groupList>
   
-  <groupList groupName="(big_cash_back)">
-    <file path="data/sound/games/bigCashBack/gameSounds.lst"/>
+  <groupList groupName="(big_pay_back)">
+    <file path="data/sound/bigPayBack/gameSounds.lst"/>
   </groupList>
   
   <groupList groupName="(lobby)">
-    <file path="data/sound/games/lobby/gameSounds.lst"/>
+    <file path="data/sound/lobby/gameSounds.lst"/>
   </groupList>
   
 </listTable>

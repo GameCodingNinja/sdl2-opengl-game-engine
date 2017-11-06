@@ -17,7 +17,8 @@
 *    desc:  Constructor
 ************************************************************************/
 CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std::string & id ) :
-    m_id(id)
+    m_id(id),
+    m_deferredRender(false)
 {
     for( auto & iter : rSpriteDataVec )
     {
@@ -32,6 +33,8 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
         }
         
         m_spriteDeq.back().CopyTransform( &iter );
+        
+        m_spriteDeq.back().CopyScriptFunctions( iter.GetScriptFunctions() );
     }
         
 }   // constructor
@@ -133,3 +136,17 @@ void CSymbol2d::Render( const CMatrix & matrix )
         iter.Render( matrix );
 
 }   // Render
+
+
+/************************************************************************
+*    desc:  Get/Set if deferred render
+************************************************************************/
+bool CSymbol2d::IsDeferredRender()
+{
+    return m_deferredRender;
+}
+
+void CSymbol2d::SetDeferredRender( bool value )
+{
+    m_deferredRender = value;
+}

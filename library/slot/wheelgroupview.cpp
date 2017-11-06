@@ -139,7 +139,7 @@ void CWheelGroupView::Transform()
 
 
 /************************************************************************
-*    desc:  do the render
+*    desc:  Do the render
 ************************************************************************/
 void CWheelGroupView::Render( const CMatrix & matrix )
 {
@@ -152,6 +152,20 @@ void CWheelGroupView::Render( const CMatrix & matrix )
     }
     
 }   // Render
+
+
+/************************************************************************
+*    desc:  Do the deferred render
+************************************************************************/
+void CWheelGroupView::DeferredRender( const CMatrix & matrix )
+{
+    if( IsVisible() )
+    {
+        for( auto & iter : m_wheelViewDeq )
+            iter.Render( matrix );
+    }
+    
+}   // DeferredRender
 
 
 /************************************************************************

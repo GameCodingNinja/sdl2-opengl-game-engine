@@ -9,11 +9,11 @@
     </groupList>
     
     <groupList groupName="(lobby)">
-        <file path="data/objects/2d/ui/games/lobby/lobby.cfg"/>
+        <file path="data/objects/2d/ui/lobby/lobby.cfg"/>
     </groupList>
     
-    <groupList groupName="(big_cash_back)">
-        <file path="data/objects/2d/ui/games/bigCashBack/base_game.cfg"/>
+    <groupList groupName="(big_pay_back)">
+        <file path="data/objects/2d/ui/bigPayBack/base_game.cfg"/>
     </groupList>
   
 </listTable>

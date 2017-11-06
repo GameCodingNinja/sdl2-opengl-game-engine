@@ -77,6 +77,16 @@ void CSprite2D::InitScriptFunctions( const XMLNode & node )
     
 }   // InitScriptFunctions
 
+/************************************************************************
+*    desc:  Copy over the script functions
+************************************************************************/
+void CSprite2D::CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap )
+{
+    for( auto & iter : scriptFunctionMap )
+        m_scriptFunctionMap.emplace( iter );
+    
+}   // CopyScriptFunctions
+
 
 /************************************************************************
 *    desc:  Prepare the script function to run
@@ -107,7 +117,8 @@ void CSprite2D::Prepare(
     // for the scripts that don't animate
     if( forceUpdate )
         m_scriptComponent.Update();
-}
+    
+}   // Prepare
 
 
 /************************************************************************
