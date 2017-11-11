@@ -40,7 +40,7 @@ CDevice::CDevice() :
 ************************************************************************/
 CDevice::~CDevice()
 {
-}	// destructor
+}   // destructor
 
 
 /***************************************************************************
@@ -79,7 +79,7 @@ void CDevice::Create()
 
     #if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
     // Initialize GLEW
-    glewExperimental = GL_TRUE;
+    //glewExperimental = GL_TRUE; moved to project main.cpp to allow for GLEW linking in Linux Mint
     GLenum glewError = glewInit();
     if( glewError != GLEW_OK )
         throw NExcept::CCriticalException("Error initializing GLEW!", 

@@ -149,9 +149,6 @@ const CTexture & CTextureMgr::LoadFor3D( const std::string & group, const std::s
 ************************************************************************/
 void CTextureMgr::LoadTexture( CTexture & texture, const std::string & filePath, bool compressed )
 {
-    if( filePath == "data/textures/games/bigCashBack/symbol_t_spriteSheet_720.png")
-        bool dummy = true;
-    
     texture.m_id = SOIL_load_OGL_texture(
         filePath.c_str(),
         &texture.m_size.w,
