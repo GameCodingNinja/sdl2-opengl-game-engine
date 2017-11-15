@@ -101,9 +101,11 @@ void CAnimatedCycleresults::StartAnimation()
         auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
         
         m_curPayIndex = m_cyclePayCounter;
+        m_cyclePayCounter = (m_cyclePayCounter + 1) % m_pPlayResult->GetPayCount();
+        
         auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
         auto & rSymbPos = rPay.GetSymbPos();
-        m_cyclePayCounter = (m_cyclePayCounter + 1) % m_pPlayResult->GetPayCount();
+        
 
         // Set them all the alphs low
         for( auto & iter : rCycleResultSymb )
@@ -111,18 +113,18 @@ void CAnimatedCycleresults::StartAnimation()
             for( auto sympIter : iter )
             {
                 sympIter->GetSprite().SetAlpha( 0.20f );
-                sympIter->SetDeferredRender( false );
                 sympIter->GetSprite().GetScriptComponent().ResetAndRecycle();
+                sympIter->SetDeferredRender( false );
             }
         }
 
-        // Set only the winners to default color
+        // Set only the winners to default color and set the script function
         for( auto & iter : rSymbPos )
         {
             auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
             symbol->GetSprite().SetDefaultColor();
-            symbol->SetDeferredRender( true );
             symbol->GetSprite().PrepareFuncId( "animate" );
+            symbol->SetDeferredRender( true );
         }
 
         m_spSlotGroupView->SetCycleResultText( true, &rPay );
@@ -146,8 +148,8 @@ void CAnimatedCycleresults::StopAnimation()
             for( auto sympIter : iter )
             {
                 sympIter->GetSprite().SetDefaultColor();
-                sympIter->SetDeferredRender( false );
                 sympIter->GetSprite().GetScriptComponent().ResetAndRecycle();
+                sympIter->SetDeferredRender( false );
             }
         }
         
@@ -162,15 +164,18 @@ void CAnimatedCycleresults::StopAnimation()
 ****************************************************************************/
 bool CAnimatedCycleresults::IsAnimating()
 {
-    auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
-    auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
-    auto & rSymbPos = rPay.GetSymbPos();
-    
-    for( auto & iter : rSymbPos )
+    if( m_cycleResultsActive )
     {
-        auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-        if( symbol->GetSprite().GetScriptComponent().IsActive() )
-            return true;
+        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
+        auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
+        auto & rSymbPos = rPay.GetSymbPos();
+
+        for( auto & iter : rSymbPos )
+        {
+            auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
+            if( symbol->GetSprite().GetScriptComponent().IsActive() )
+                return true;
+        }
     }
     
     return false;

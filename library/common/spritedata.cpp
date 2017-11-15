@@ -160,8 +160,7 @@ const std::map<std::string, std::string> & CSpriteData::GetScriptFunctions() con
 
 
 /************************************************************************
-*    desc:  Init the script functions and add them to the map
-*           This function loads the attribute info reguardless of what it is
+*    desc:  Load the script functions and add them to the map
 ************************************************************************/
 void CSpriteData::LoadScriptFunctions( const XMLNode & node )
 {
