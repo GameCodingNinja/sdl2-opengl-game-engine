@@ -60,14 +60,6 @@ namespace NUIControl
         ECAT_GAME_STATE_CHANGE,
         ECAT_QUIT_GAME
     };
-    
-    enum EMeterScriptFunctions
-    {
-        EMSF_ON_INIT=0,
-        EMSF_ON_START,
-        EMSF_ON_STOP,
-        EMSF_ON_CLEAR,
-    };
 }
 
 #endif  // __ui_control_defs_h__

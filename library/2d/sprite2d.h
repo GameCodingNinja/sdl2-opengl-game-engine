@@ -44,7 +44,7 @@ public:
     void InitScriptFunctions( const XMLNode & node );
     
     // Prepare the script function to run
-    void PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate = false );
+    bool PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate = false );
     void Prepare(
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>(),

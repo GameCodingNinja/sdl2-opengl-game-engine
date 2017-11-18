@@ -110,9 +110,9 @@ void TotalBetActOver_Active( CSprite2d & sprite )
 
 
 /************************************************************************
-*    desc:  Meter on start
+*    desc:  Meter on init
 ************************************************************************/
-void Meter_OnInit( CSprite2d & sprite )
+void Meter_Init( CSprite2d & sprite )
 {
     sprite.SetVisible( false );
     sprite.SetAlpha( 0 );
@@ -122,7 +122,7 @@ void Meter_OnInit( CSprite2d & sprite )
 /************************************************************************
 *    desc:  Meter on start
 ************************************************************************/
-void Meter_OnStart( CSprite2d & sprite )
+void Meter_Start( CSprite2d & sprite )
 {
     sprite.SetVisible( true );
     AlphaTo( 300, 1, sprite );
@@ -132,7 +132,7 @@ void Meter_OnStart( CSprite2d & sprite )
 /************************************************************************
 *    desc:  Meter on stop
 ************************************************************************/
-void Meter_OnStop( CSprite2d & sprite )
+void Meter_Stop( CSprite2d & sprite )
 {
 }
 
@@ -140,7 +140,7 @@ void Meter_OnStop( CSprite2d & sprite )
 /************************************************************************
 *    desc:  Meter on clear
 ************************************************************************/
-void Meter_OnClear( CSprite2d & sprite, uint value )
+void Meter_Clear( CSprite2d & sprite, uint value )
 {
     if( sprite.IsVisible() )
     {

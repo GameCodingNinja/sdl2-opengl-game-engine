@@ -155,9 +155,6 @@ private:
     
     // Scale on axis or accurate
     EScaleType m_scaleType;
-    
-    // On meter script function names
-    std::map< int, std::string > m_meterScriptFunction;
 };
 
 #endif  // __ui_label_h__

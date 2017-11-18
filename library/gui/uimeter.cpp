@@ -92,23 +92,6 @@ void CUIMeter::LoadFromNode( const XMLNode & node )
         }
     }
     
-    // Get the meter script functions
-    const XMLNode meterScriptNode = node.getChildNode( "meterScript" );
-    if( !meterScriptNode.isEmpty() )
-    {
-        if( meterScriptNode.isAttributeSet( "onInit" ) )
-            m_meterScriptFunction.emplace( NUIControl::EMSF_ON_INIT, meterScriptNode.getAttribute( "onInit" ) );
-        
-        if( meterScriptNode.isAttributeSet( "onStart" ) )
-            m_meterScriptFunction.emplace( NUIControl::EMSF_ON_START, meterScriptNode.getAttribute( "onStart" ) );
-        
-        if( meterScriptNode.isAttributeSet( "onStop" ) )
-            m_meterScriptFunction.emplace( NUIControl::EMSF_ON_STOP, meterScriptNode.getAttribute( "onStop" ) );
-
-        if( meterScriptNode.isAttributeSet( "onClear" ) )
-            m_meterScriptFunction.emplace( NUIControl::EMSF_ON_CLEAR, meterScriptNode.getAttribute( "onClear" ) );
-    }
-    
     // Get the max size of the font string to fit within this meter.
     // As the string get's bigger, it will be scaled to fit.
     m_maxFontStrSize = NParseHelper::LoadSize( node );
@@ -237,9 +220,8 @@ void CUIMeter::InitBangRange( const CBangRange & bangRange )
     // Set the timer to allow the bang-up to start off slowly
     m_startUpTimer.Set( bangRange.m_slowStartTime );
     
-    auto iter = m_meterScriptFunction.find( NUIControl::EMSF_ON_START );
-    if( iter != m_meterScriptFunction.end() )
-        m_pSprite->Prepare(iter->second, {m_pSprite});
+    // Prepare the start script function if one exists
+    m_pSprite->PrepareFuncId( "start" );
     
 }   // InitBangRange
 
@@ -329,10 +311,8 @@ void CUIMeter::Update()
                 m_currentValue = m_targetValue;
                 m_bangUp = false;
                 
-                // Call the AngelScript function if one is defined
-                auto iter = m_meterScriptFunction.find( NUIControl::EMSF_ON_STOP );
-                if( iter != m_meterScriptFunction.end() )
-                    m_pSprite->Prepare(iter->second, {m_pSprite});
+                // Prepare the stop script function if one exists
+                m_pSprite->PrepareFuncId( "stop" );
             }
         
             // Display the value in the meter
@@ -395,12 +375,7 @@ void CUIMeter::Clear()
     m_lastValue = m_currentValue = m_targetValue = 0;
     m_bangUp = false;
     
-    auto iter = m_meterScriptFunction.find( NUIControl::EMSF_ON_CLEAR );
-    if( iter != m_meterScriptFunction.end() )
-    {
-        m_pSprite->Prepare(iter->second, {m_pSprite, (uint)m_currentValue});
-    }
-    else
+    if( !m_pSprite->PrepareFuncId( "clear" ) )
     {
         m_pSprite->CreateFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
     }

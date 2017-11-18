@@ -91,7 +91,7 @@ void CSprite2D::CopyScriptFunctions( const std::map<std::string, std::string> & 
 /************************************************************************
 *    desc:  Prepare the script function to run
 ************************************************************************/
-void CSprite2D::PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate )
+bool CSprite2D::PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate )
 {
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
@@ -102,8 +102,12 @@ void CSprite2D::PrepareFuncId( const std::string & scriptFuncId, bool forceUpdat
         // for the scripts that don't animate
         if( forceUpdate )
             m_scriptComponent.Update();
+        
+        return true;
     }
 
+    return false;
+    
 }   // Prepare
 
 void CSprite2D::Prepare(
