@@ -21,13 +21,13 @@ class iCycleResults
 public:
     
     // Constructor
-    iCycleResults();
+    iCycleResults( CPlayResult * pPlayResult );
 
     // Destructor
     virtual ~iCycleResults();
     
     // Do some inits
-    virtual void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult ) = 0;
+    virtual void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) = 0;
     
     // Start the cycle results animation
     virtual void StartAnimation() = 0;
@@ -39,7 +39,10 @@ public:
     virtual bool IsAnimating() = 0;
     
     // Update the cycle results
-    virtual void Update() = 0;
+    virtual void Update(){};
+    
+    // Transform the reel group
+    virtual void Transform( const CMatrix & matrix, bool tranformWorldPos ){};
 
     // Do the render
     virtual void Render( const CMatrix & matrix ){}

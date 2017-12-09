@@ -29,6 +29,7 @@
 #include <slot/slotgroup.h>
 #include <slot/animatedcycleresults.h>
 #include <slot/slotgroupfactory.h>
+#include <slot/playresult.h>
 #include <script/scriptmanager.h>
 #include <managers/soundmanager.h>
 #include <managers/spritesheetmanager.h>
@@ -50,7 +51,7 @@ CBigPayBackState::CBigPayBackState( const std::string & group ) :
 	m_pig( CObjectDataMgr::Instance().GetData2D( group, "Payback Pig" ) ),
         m_baseGameMusic( group, "SlotGame_StartSpinMusic", "SlotGame_StopSpinMusic", "SlotGame_FastStopSpinMusic", 7000 )
 {
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
@@ -78,6 +79,9 @@ void CBigPayBackState::Init()
     rTotalBetDecBtn.Connect_ExecutionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
     rTotalBetIncBtn.Connect_ExecutionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
     
+    // Create a play result
+    auto & rPlayResult = m_slotGame.CreatePlayResult();
+    
     // Create the slot group
     m_slotGame.AddSlotGroup(
         NSlotGroupFactory::Create(
@@ -88,8 +92,8 @@ void CBigPayBackState::Init()
             CXMLPreloader::Instance().GetNode( std::get<0>(NBigPayBack::reelGrpCfg) ),
             CXMLPreloader::Instance().GetNode( std::get<0>(NBigPayBack::spinProfileCfg) ),
             CSymbolSetViewMgr::Instance().Get( m_stateGroup, "base_game" ),
-            m_slotGame.CreatePlayResult(),
-            std::move(std::unique_ptr<iCycleResults>(new CAnimatedCycleresults)) ) );
+            rPlayResult,
+            std::move(std::unique_ptr<iCycleResults>(new CAnimatedCycleResults( &rPlayResult ))) ) );
     
     // Init the front panel
     std::vector<CUIControl *> btnVec = {

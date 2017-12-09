@@ -12,6 +12,7 @@
 #include <slot/symbolsetview.h>
 #include <slot/slotgroupmodel.h>
 #include <slot/slotstripmodel.h>
+#include <slot/icycleresults.h>
 #include <2d/sprite2d.h>
 #include <utilities/exceptionhandling.h>
 
@@ -38,9 +39,12 @@ CWheelGroupView::~CWheelGroupView()
 /************************************************************************
 *    desc:  Create the view slot strips
 ************************************************************************/
-void CWheelGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetView )
+void CWheelGroupView::Create(
+    const XMLNode & node,
+    CSymbolSetView & rSymbolSetView,
+    std::unique_ptr<iCycleResults> upCycleResults )
 {
-    CSlotGroupView::Create( node, rSymbolSetView );
+    CSlotGroupView::Create( node, rSymbolSetView, std::move(upCycleResults) );
     
     // Get the group name
     const std::string group = node.getAttribute( "group" );
@@ -111,11 +115,10 @@ std::vector<std::vector<CSymbol2d *>> & CWheelGroupView::GetCycleResultSymbs()
 ************************************************************************/
 void CWheelGroupView::Update()
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_wheelViewDeq )
-            iter.Update();
-    }
+    CSlotGroupView::Update();
+    
+    for( auto & iter : m_wheelViewDeq )
+        iter.Update();
     
 }   // Update
 
@@ -125,15 +128,12 @@ void CWheelGroupView::Update()
 ************************************************************************/
 void CWheelGroupView::Transform()
 {
-    if( IsVisible() )
-    {
-        CObject2D::Transform();
-        
-        for( auto & iter : m_wheelViewDeq )
-            iter.Transform( GetMatrix(), WasWorldPosTranformed() );
-        
-        m_upCycleResultsTxtSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
-    }
+    CSlotGroupView::Transform();
+
+    for( auto & iter : m_wheelViewDeq )
+        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+
+    m_upCycleResultsTxtSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
     
 }   // Transform
 
@@ -143,13 +143,12 @@ void CWheelGroupView::Transform()
 ************************************************************************/
 void CWheelGroupView::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_wheelViewDeq )
-            iter.Render( matrix );
-        
-        m_upCycleResultsTxtSprite->Render( matrix );
-    }
+    for( auto & iter : m_wheelViewDeq )
+        iter.Render( matrix );
+
+    m_upCycleResultsTxtSprite->Render( matrix );
+    
+    CSlotGroupView::Render( matrix );
     
 }   // Render
 
@@ -159,11 +158,8 @@ void CWheelGroupView::Render( const CMatrix & matrix )
 ************************************************************************/
 void CWheelGroupView::DeferredRender( const CMatrix & matrix )
 {
-    if( IsVisible() )
-    {
-        for( auto & iter : m_wheelViewDeq )
-            iter.Render( matrix );
-    }
+    for( auto & iter : m_wheelViewDeq )
+        iter.Render( matrix );
     
 }   // DeferredRender
 

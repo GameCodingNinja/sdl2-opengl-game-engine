@@ -19,7 +19,8 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CAnimatedCycleresults::CAnimatedCycleresults()
+CAnimatedCycleResults::CAnimatedCycleResults( CPlayResult * pPlayResult ) :
+    iCycleResults( pPlayResult )
 {
 }   // constructor
 
@@ -27,7 +28,7 @@ CAnimatedCycleresults::CAnimatedCycleresults()
 /************************************************************************
 *    desc:  destructor                                                             
 ************************************************************************/
-CAnimatedCycleresults::~CAnimatedCycleresults()
+CAnimatedCycleResults::~CAnimatedCycleResults()
 {
 }   // destructor
 
@@ -35,10 +36,9 @@ CAnimatedCycleresults::~CAnimatedCycleresults()
 /***************************************************************************
 *    desc:  Do some inits
 ****************************************************************************/
-void CAnimatedCycleresults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult )
+void CAnimatedCycleResults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
 {
     m_spSlotGroupView = spSlotGroupView;
-    m_pPlayResult = pPlayResult;
     
 }   // Init
 
@@ -46,7 +46,7 @@ void CAnimatedCycleresults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupV
 /***************************************************************************
 *    desc:  Update the cycle results
 ****************************************************************************/
-void CAnimatedCycleresults::Update()
+void CAnimatedCycleResults::Update()
 {
     if( m_cycleResultsActive )
     {
@@ -61,10 +61,19 @@ void CAnimatedCycleresults::Update()
 }   // Update
 
 
+/************************************************************************
+*    desc:  Transform
+************************************************************************/
+void CAnimatedCycleResults::Transform( const CMatrix & matrix, bool tranformWorldPos )
+{
+    
+}   // Transform
+
+
 /***************************************************************************
 *    desc:  Activate the cycle results
 ****************************************************************************/
-void CAnimatedCycleresults::Activate()
+void CAnimatedCycleResults::Activate()
 {
     if( m_pPlayResult->GetPayCount() > 0 )
     {
@@ -79,7 +88,7 @@ void CAnimatedCycleresults::Activate()
 /***************************************************************************
 *    desc:  Deactivate the cycle results
 ****************************************************************************/
-void CAnimatedCycleresults::Deactivate()
+void CAnimatedCycleResults::Deactivate()
 {
     if( m_cycleResultsActive )
     {
@@ -94,7 +103,7 @@ void CAnimatedCycleresults::Deactivate()
 /***************************************************************************
 *    desc:  Start the cycle results animation
 ****************************************************************************/
-void CAnimatedCycleresults::StartAnimation()
+void CAnimatedCycleResults::StartAnimation()
 {
     if( m_cycleResultsActive )
     {
@@ -136,7 +145,7 @@ void CAnimatedCycleresults::StartAnimation()
 /***************************************************************************
 *    desc:  Stop the cycle results animation
 ****************************************************************************/
-void CAnimatedCycleresults::StopAnimation()
+void CAnimatedCycleResults::StopAnimation()
 {
     if( m_cycleResultsActive )
     {
@@ -162,7 +171,7 @@ void CAnimatedCycleresults::StopAnimation()
 /***************************************************************************
 *    desc:  Are we still animating
 ****************************************************************************/
-bool CAnimatedCycleresults::IsAnimating()
+bool CAnimatedCycleResults::IsAnimating()
 {
     if( m_cycleResultsActive )
     {
@@ -186,7 +195,7 @@ bool CAnimatedCycleresults::IsAnimating()
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CAnimatedCycleresults::Render( const CMatrix & matrix )
+void CAnimatedCycleResults::Render( const CMatrix & matrix )
 {
     if( m_cycleResultsActive )
         m_spSlotGroupView->DeferredRender( matrix );

@@ -11,6 +11,7 @@
 // Game lib dependencies
 #include <slot/slotgroupmodel.h>
 #include <slot/pay.h>
+#include <slot/icycleresults.h>
 #include <utilities/xmlParser.h>
 #include <utilities/exceptionhandling.h>
 #include <objectdata/objectdatamanager.h>
@@ -39,8 +40,14 @@ CSlotGroupView::~CSlotGroupView()
 /************************************************************************
 *    desc:  Create the view slot strips
 ************************************************************************/
-void CSlotGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetView )
+void CSlotGroupView::Create(
+    const XMLNode & node,
+    CSymbolSetView & rSymbolSetView,
+    std::unique_ptr<iCycleResults> upCycleResults )
 {
+    // Set the cycle results unique pointer
+    m_upCycleResults = std::move(upCycleResults);
+    
     // Get the group name
     const std::string group = node.getAttribute( "group" );
     
@@ -135,6 +142,110 @@ void CSlotGroupView::LoadSpinProfileFromNode( const XMLNode & node )
     }
     
 }   // LoadSpinProfileFromXML
+
+
+/************************************************************************
+*    desc:  Update the reel group
+************************************************************************/
+void CSlotGroupView::Update()
+{
+    if( m_upCycleResults )
+        m_upCycleResults->Update();
+    
+}   // Update
+
+
+/************************************************************************
+*    desc:  Transform the reel group
+************************************************************************/
+void CSlotGroupView::Transform()
+{
+    CObject2D::Transform();
+    
+    if( m_upCycleResults )
+        m_upCycleResults->Transform( GetMatrix(), WasWorldPosTranformed() );
+    
+}   // Transform
+
+
+/************************************************************************
+*    desc:  Do the render
+************************************************************************/
+void CSlotGroupView::Render( const CMatrix & matrix )
+{
+    if( m_upCycleResults )
+        m_upCycleResults->Render( matrix );
+}
+
+
+/************************************************************************
+*    desc:  Activate the cycle results
+************************************************************************/
+void CSlotGroupView::ActivateCycleResults()
+{
+    if( m_upCycleResults )
+        m_upCycleResults->Activate();
+    
+}   // ActivateCycleResults
+
+
+/************************************************************************
+*    desc:  Deactivate the cycle results
+************************************************************************/
+void CSlotGroupView::DeactivateCycleResults()
+{
+    if( m_upCycleResults )
+        m_upCycleResults->Deactivate();
+    
+}   // DeactivateCycleResults
+
+
+/************************************************************************
+*    desc:  Stop the cycle results animation
+************************************************************************/
+void CSlotGroupView::StartCycleResultsAnimation()
+{
+    if( m_upCycleResults )
+        m_upCycleResults->StartAnimation();
+    
+}   // StartCycleResultsAnimation
+
+
+/************************************************************************
+*    desc:  Stop the cycle results animation
+************************************************************************/
+void CSlotGroupView::StopCycleResultsAnimation()
+{
+    if( m_upCycleResults )
+        m_upCycleResults->StopAnimation();
+    
+}   // StartCycleResultsAnimation
+
+
+/************************************************************************
+*    desc:  Is the cycle results active
+************************************************************************/
+bool CSlotGroupView::IsCycleResultsActive()
+{
+    if( m_upCycleResults )
+        return m_upCycleResults->IsCycleResultsActive();
+    
+    return false;
+    
+}   // IsCycleResultsActive
+
+
+/************************************************************************
+*    desc:  Is the cycle results animating
+************************************************************************/
+bool CSlotGroupView::IsCycleResultsAnimating()
+{
+    if( m_upCycleResults )
+        return m_upCycleResults->IsAnimating();
+    
+    return false;
+    
+}   // IsCycleResultsAnimating
 
 
 /************************************************************************

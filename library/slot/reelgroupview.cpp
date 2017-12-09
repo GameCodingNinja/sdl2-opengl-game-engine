@@ -12,6 +12,7 @@
 #include <slot/symbolsetview.h>
 #include <slot/slotgroupmodel.h>
 #include <slot/slotstripmodel.h>
+#include <slot/icycleresults.h>
 #include <slot/pay.h>
 #include <utilities/xmlParser.h>
 #include <utilities/exceptionhandling.h>
@@ -44,9 +45,12 @@ CReelGroupView::~CReelGroupView()
 /************************************************************************
 *    desc:  Create the view slot strips
 ************************************************************************/
-void CReelGroupView::Create( const XMLNode & node, CSymbolSetView & rSymbolSetView )
+void CReelGroupView::Create(
+    const XMLNode & node,
+    CSymbolSetView & rSymbolSetView,
+    std::unique_ptr<iCycleResults> upCycleResults )
 {
-    CSlotGroupView::Create( node, rSymbolSetView );
+    CSlotGroupView::Create( node, rSymbolSetView, std::move(upCycleResults) );
     
     // Get the group name
     const std::string group = node.getAttribute( "group" );
@@ -146,6 +150,8 @@ void CReelGroupView::DeleteCycleResultSymbs()
 ************************************************************************/
 void CReelGroupView::Update()
 {
+    CSlotGroupView::Update();
+    
     for( auto & iter : m_reelStripViewDeq )
         iter.Update();
     
@@ -157,7 +163,7 @@ void CReelGroupView::Update()
 ************************************************************************/
 void CReelGroupView::Transform()
 {
-    CObject2D::Transform();
+    CSlotGroupView::Transform();
 
     for( auto & iter : m_reelStripViewDeq )
         iter.Transform( GetMatrix(), WasWorldPosTranformed() );
@@ -176,6 +182,8 @@ void CReelGroupView::Render( const CMatrix & matrix )
         iter.Render( matrix );
 
     m_upCycleResultsTxtSprite->Render( matrix );
+    
+    CSlotGroupView::Render( matrix );
     
 }   // Render
 

@@ -16,7 +16,6 @@
 #include <slot/slotgroupmodel.h>
 #include <slot/reelgroupview.h>
 #include <slot/wheelgroupview.h>
-#include <slot/icycleresults.h>
 #include <utilities/xmlParser.h>
 #include <utilities/exceptionhandling.h>
 
@@ -31,11 +30,9 @@
 ************************************************************************/
 CSlotGroup::CSlotGroup(
     std::shared_ptr<CSlotGroupModel> spSlotGroupModel,
-    std::shared_ptr<CSlotGroupView> spSlotGroupView,
-    std::unique_ptr<iCycleResults> upCycleResults ) :
+    std::shared_ptr<CSlotGroupView> spSlotGroupView ) :
         m_spSlotGroupModel( spSlotGroupModel ),
-        m_spSlotGroupView( spSlotGroupView ),
-        m_upCycleResults( std::move(upCycleResults) )
+        m_spSlotGroupView( spSlotGroupView )
 {
 }   // constructor
 
@@ -46,111 +43,6 @@ CSlotGroup::CSlotGroup(
 CSlotGroup::~CSlotGroup()
 {
 }   // destructor
-
-
-/************************************************************************
-*    desc:  Activate the cycle results
-************************************************************************/
-void CSlotGroup::ActivateCycleResults()
-{
-    if( m_upCycleResults )
-        m_upCycleResults->Activate();
-    
-}   // ActivateCycleResults
-
-
-/************************************************************************
-*    desc:  Deactivate the cycle results
-************************************************************************/
-void CSlotGroup::DeactivateCycleResults()
-{
-    if( m_upCycleResults )
-        m_upCycleResults->Deactivate();
-    
-}   // DeactivateCycleResults
-
-
-/************************************************************************
-*    desc:  Stop the cycle results animation
-************************************************************************/
-void CSlotGroup::StartCycleResultsAnimation()
-{
-    if( m_upCycleResults )
-        m_upCycleResults->StartAnimation();
-    
-}   // StartCycleResultsAnimation
-
-
-/************************************************************************
-*    desc:  Stop the cycle results animation
-************************************************************************/
-void CSlotGroup::StopCycleResultsAnimation()
-{
-    if( m_upCycleResults )
-        m_upCycleResults->StopAnimation();
-    
-}   // StartCycleResultsAnimation
-
-
-/************************************************************************
-*    desc:  Is the cycle results active
-************************************************************************/
-bool CSlotGroup::IsCycleResultsActive()
-{
-    if( m_upCycleResults )
-        return m_upCycleResults->IsCycleResultsActive();
-    
-    return false;
-    
-}   // IsCycleResultsActive
-
-
-/************************************************************************
-*    desc:  Is the cycle results animating
-************************************************************************/
-bool CSlotGroup::IsCycleResultsAnimating()
-{
-    if( m_upCycleResults )
-        return m_upCycleResults->IsAnimating();
-    
-    return false;
-    
-}   // IsCycleResultsAnimating
-
-
-/***************************************************************************
-*    desc:  Update objects that require them
-****************************************************************************/
-void CSlotGroup::Update()
-{
-    m_spSlotGroupView->Update();
-    
-    if( m_upCycleResults )
-        m_upCycleResults->Update();
-    
-}   // Update
-
-
-/***************************************************************************
-*    desc:  Transform the game objects
-****************************************************************************/
-void CSlotGroup::Transform()
-{
-    m_spSlotGroupView->Transform();
-}
-
-
-/***************************************************************************
-*    desc:  2D/3D Render of game content
-****************************************************************************/
-void CSlotGroup::Render( const CMatrix & matrix )
-{
-    m_spSlotGroupView->Render( matrix );
-    
-    if( m_upCycleResults )
-        m_upCycleResults->Render( matrix );
-    
-}   // Render
 
 
 /************************************************************************

@@ -276,7 +276,7 @@ void CSlotGame::StatePostAwardWin()
         
         // Start the cycle results
         for( auto & iter : m_slotGroupVec )
-            iter->ActivateCycleResults();
+            iter->GetView()->ActivateCycleResults();
     }
     
     m_slotState = NSlotDefs::ESLOT_WAIT_FOR_AWARD;
@@ -332,13 +332,13 @@ void CSlotGame::HandleEvent( const SDL_Event & rEvent )
 void CSlotGame::Update()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->Update();
+        iter->GetView()->Update();
     
     // Start the cycle results animation if not currently animating
     if( IsCycleResultsActive() && !IsCycleResultsAnimating() )
     {
         for( auto & iter : m_slotGroupVec )
-            iter->StartCycleResultsAnimation();
+            iter->GetView()->StartCycleResultsAnimation();
     }
 
 }   // Update
@@ -350,7 +350,7 @@ void CSlotGame::Update()
 void CSlotGame::Transform()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->Transform();
+        iter->GetView()->Transform();
 
 }   // Transform
 
@@ -361,7 +361,7 @@ void CSlotGame::Transform()
 void CSlotGame::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_slotGroupVec )
-        iter->Render( matrix );
+        iter->GetView()->Render( matrix );
 
 }   // Render
 
@@ -429,7 +429,7 @@ NSlotDefs::ESlotState CSlotGame::GetState()
 bool CSlotGame::IsCycleResultsAnimating()
 {
     for( auto & iter : m_slotGroupVec )
-        if( iter->IsCycleResultsAnimating() )
+        if( iter->GetView()->IsCycleResultsAnimating() )
             return true;
 
     return false;
@@ -443,7 +443,7 @@ bool CSlotGame::IsCycleResultsAnimating()
 bool CSlotGame::IsCycleResultsActive()
 {
     for( auto & iter : m_slotGroupVec )
-        if( iter->IsCycleResultsActive() )
+        if( iter->GetView()->IsCycleResultsActive() )
             return true;
 
     return false;
@@ -467,8 +467,8 @@ void CSlotGame::KillCycleResults()
 {
     for( auto & iter : m_slotGroupVec )
     {
-        iter->StopCycleResultsAnimation();
-        iter->DeactivateCycleResults();
+        iter->GetView()->StopCycleResultsAnimation();
+        iter->GetView()->DeactivateCycleResults();
     }
     
 }   // KillCycleResults

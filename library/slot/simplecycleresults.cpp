@@ -19,7 +19,8 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSimpleCycleresults::CSimpleCycleresults()
+CSimpleCycleresults::CSimpleCycleresults( CPlayResult * pPlayResult ) :
+    iCycleResults( pPlayResult )
 {
 }   // constructor
 
@@ -35,21 +36,11 @@ CSimpleCycleresults::~CSimpleCycleresults()
 /***************************************************************************
 *    desc:  Do some inits
 ****************************************************************************/
-void CSimpleCycleresults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult )
+void CSimpleCycleresults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
 {
     m_spSlotGroupView = spSlotGroupView;
-    m_pPlayResult = pPlayResult;
     
 }   // Init
-
-
-/***************************************************************************
-*    desc:  Update the cycle results
-****************************************************************************/
-void CSimpleCycleresults::Update()
-{
-
-}   // Update
 
 
 /***************************************************************************

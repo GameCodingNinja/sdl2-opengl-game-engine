@@ -14,21 +14,24 @@
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
 
-class CAnimatedCycleresults : public iCycleResults, boost::noncopyable
+class CAnimatedCycleResults : public iCycleResults, boost::noncopyable
 {
 public:
 
     // Constructor
-    CAnimatedCycleresults();
+    CAnimatedCycleResults( CPlayResult * pPlayResult );
 
     // Destructor
-    virtual ~CAnimatedCycleresults();
+    virtual ~CAnimatedCycleResults();
     
     // Do some inits
-    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult ) override;
+    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) override;
     
     // Update the cycle results
     void Update() override;
+    
+    // Transform
+    void Transform( const CMatrix & matrix, bool tranformWorldPos ) override;
     
     // Activate the cycle results
     void Activate() override;

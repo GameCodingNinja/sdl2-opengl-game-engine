@@ -8,11 +8,14 @@
 // Physical component dependency
 #include <slot/icycleresults.h>
 
+// Game lib dependencies
+#include <slot/playresult.h>
+
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-iCycleResults::iCycleResults() :
-    m_pPlayResult(nullptr),
+iCycleResults::iCycleResults( CPlayResult * pPlayResult ) :
+    m_pPlayResult( pPlayResult ),
     m_cyclePayCounter(0),
     m_curPayIndex(0),
     m_firstCycleComplete(false),

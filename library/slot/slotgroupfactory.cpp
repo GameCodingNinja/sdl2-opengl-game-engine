@@ -52,18 +52,18 @@ namespace NSlotGroupFactory
                 boost::str( boost::format("Undefined slot device!\n\n%s\nLine: %s")
                     % __FUNCTION__ % __LINE__ ));
         
+        // Init the cycle results if we have one
+        if( upCycleResults )
+            upCycleResults->Init( spSlotGroupView );
+        
         // Create group view based on xml node and symbol set view
-        spSlotGroupView->Create( rViewCfgNode, rSymbolSetView );
+        spSlotGroupView->Create( rViewCfgNode, rSymbolSetView, std::move(upCycleResults) );
 
         // Load the spin profile from XML node
         spSlotGroupView->LoadSpinProfileFromNode( rViewSpinProfileCfgNode );
-
-        // Init the cycle results if we have one
-        if( upCycleResults )
-            upCycleResults->Init( spSlotGroupView, &rPlayResult );
         
         // Create the slot group
-        std::unique_ptr<CSlotGroup> upSlotGroup( new CSlotGroup(spSlotGroupModel, spSlotGroupView, std::move(upCycleResults)) );
+        std::unique_ptr<CSlotGroup> upSlotGroup( new CSlotGroup(spSlotGroupModel, spSlotGroupView) );
 
         return upSlotGroup;
 

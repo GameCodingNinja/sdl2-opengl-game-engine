@@ -39,7 +39,10 @@ public:
     virtual ~CReelGroupView();
     
     // Create the view slot strips
-    void Create( const XMLNode & node, CSymbolSetView & rSymbolSetView ) override;
+    void Create(
+        const XMLNode & node,
+        CSymbolSetView & rSymbolSetView,
+        std::unique_ptr<iCycleResults> upCycleResults ) override;
     
     // Update the reel group
     void Update() override;

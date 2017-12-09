@@ -27,6 +27,7 @@ class CSlotGroupModel;
 class CSymbolSetView;
 class CSymbol2d;
 class CSprite2D;
+class iCycleResults;
 class CPay;
 
 class CSlotGroupView : public CObject2D
@@ -40,7 +41,10 @@ public:
     virtual ~CSlotGroupView();
     
     // Create the view slot strips
-    virtual void Create( const XMLNode & node, CSymbolSetView & rSymbolSetView );
+    virtual void Create(
+        const XMLNode & node,
+        CSymbolSetView & rSymbolSetView,
+        std::unique_ptr<iCycleResults> upCycleResults );
     
     // Set the cycle results text
     void SetCycleResultText( bool visible, const CPay * pPay = nullptr );
@@ -61,10 +65,13 @@ public:
     virtual void AllowStopSounds( bool allow ) = 0;
     
     // Update the reel group
-    virtual void Update() = 0;
+    virtual void Update();
+    
+    // Transform the reel group
+    virtual void Transform();
     
     // Do the render
-    virtual void Render( const CMatrix & matrix ) = 0;
+    virtual void Render( const CMatrix & matrix );
     
     // Do the deferred render
     virtual void DeferredRender( const CMatrix & matrix ) = 0;
@@ -77,6 +84,24 @@ public:
     
     // Is the spin state
     virtual bool IsSpinState( NSlotDefs::ESpinState state ) const = 0;
+    
+    // Activate the cycle results
+    void ActivateCycleResults();
+    
+    // Stop the cycle results
+    void DeactivateCycleResults();
+    
+    // Start the cycle results animation
+    void StartCycleResultsAnimation();
+    
+    // Stop the cycle results animation
+    void StopCycleResultsAnimation();
+    
+    // Is the cycle results active
+    bool IsCycleResultsActive();
+    
+    // Is the cycle results animating
+    bool IsCycleResultsAnimating();
 
 protected:
     
@@ -94,6 +119,9 @@ protected:
     
     // cycle results text sprite
     std::unique_ptr<CSprite2D> m_upCycleResultsTxtSprite;
+    
+    // Cycle results interface
+    std::unique_ptr<iCycleResults> m_upCycleResults;
 
 };
 

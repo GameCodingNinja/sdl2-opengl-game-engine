@@ -22,16 +22,13 @@ class CSimpleCycleresults : public iCycleResults, boost::noncopyable
 public:
 
     // Constructor
-    CSimpleCycleresults();
+    CSimpleCycleresults( CPlayResult * pPlayResult );
 
     // Destructor
     virtual ~CSimpleCycleresults();
     
     // Do some inits
-    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView, CPlayResult * pPlayResult ) override;
-    
-    // Update the cycle results
-    void Update() override;
+    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) override;
     
     // Activate the cycle results
     void Activate() override;
