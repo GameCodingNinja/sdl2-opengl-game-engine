@@ -522,9 +522,9 @@ public:
 	{
 		struct Euler
 		{
-			btScalar yaw;
-			btScalar pitch;
-			btScalar roll;
+                    btScalar yaw;
+                    btScalar pitch;
+                    btScalar roll;
 		};
 
 		Euler euler_out;
@@ -534,53 +534,62 @@ public:
 		// Check that pitch is not at a singularity
 		if (btFabs(m_el[2].x()) >= 1)
 		{
-			euler_out.yaw = 0;
-			euler_out2.yaw = 0;
+                    // From difference of angles formula
+                    btScalar delta = btAtan2(m_el[0].x(),m_el[0].z());
+                    if (m_el[2].x() > 0)  //gimbal locked up
+                    {
+                        euler_out.yaw = 0;
 
-			// From difference of angles formula
-			btScalar delta = btAtan2(m_el[0].x(),m_el[0].z());
-			if (m_el[2].x() > 0)  //gimbal locked up
-			{
-				euler_out.pitch = SIMD_PI / btScalar(2.0);
-				euler_out2.pitch = SIMD_PI / btScalar(2.0);
-				euler_out.roll = euler_out.pitch + delta;
-				euler_out2.roll = euler_out.pitch + delta;
-			}
-			else // gimbal locked down
-			{
-				euler_out.pitch = -SIMD_PI / btScalar(2.0);
-				euler_out2.pitch = -SIMD_PI / btScalar(2.0);
-				euler_out.roll = -euler_out.pitch + delta;
-				euler_out2.roll = -euler_out.pitch + delta;
-			}
+                        euler_out.pitch = SIMD_PI / btScalar(2.0);
+                        euler_out2.pitch = SIMD_PI / btScalar(2.0);
+                        euler_out.roll = euler_out.pitch + delta;
+                        euler_out2.roll = euler_out.pitch + delta;
+                    }
+                    else // gimbal locked down
+                    {
+                        euler_out2.yaw = 0;
+
+                        euler_out.pitch = -SIMD_PI / btScalar(2.0);
+                        euler_out2.pitch = -SIMD_PI / btScalar(2.0);
+                        euler_out.roll = -euler_out.pitch + delta;
+                        euler_out2.roll = -euler_out.pitch + delta;
+                    }
 		}
 		else
 		{
-			euler_out.pitch = - btAsin(m_el[2].x());
-			euler_out2.pitch = SIMD_PI - euler_out.pitch;
+                    euler_out.pitch = - btAsin(m_el[2].x());
+                        
+                    if (solution_number == 1)
+                    {
+                        euler_out.roll = btAtan2(m_el[2].y()/btCos(euler_out.pitch), 
+                            m_el[2].z()/btCos(euler_out.pitch));
+                        
+                        euler_out.yaw = btAtan2(m_el[1].x()/btCos(euler_out.pitch), 
+                            m_el[0].x()/btCos(euler_out.pitch));
+                    }
+                    else
+                    {
+                        euler_out2.pitch = SIMD_PI - euler_out.pitch;
+                        
+                        euler_out2.roll = btAtan2(m_el[2].y()/btCos(euler_out2.pitch), 
+                            m_el[2].z()/btCos(euler_out2.pitch));
 
-			euler_out.roll = btAtan2(m_el[2].y()/btCos(euler_out.pitch), 
-				m_el[2].z()/btCos(euler_out.pitch));
-			euler_out2.roll = btAtan2(m_el[2].y()/btCos(euler_out2.pitch), 
-				m_el[2].z()/btCos(euler_out2.pitch));
-
-			euler_out.yaw = btAtan2(m_el[1].x()/btCos(euler_out.pitch), 
-				m_el[0].x()/btCos(euler_out.pitch));
 			euler_out2.yaw = btAtan2(m_el[1].x()/btCos(euler_out2.pitch), 
-				m_el[0].x()/btCos(euler_out2.pitch));
+                            m_el[0].x()/btCos(euler_out2.pitch));
+                    }
 		}
 
 		if (solution_number == 1)
 		{ 
-			yaw = euler_out.yaw; 
-			pitch = euler_out.pitch;
-			roll = euler_out.roll;
+                    yaw = euler_out.yaw; 
+                    pitch = euler_out.pitch;
+                    roll = euler_out.roll;
 		}
 		else
 		{ 
-			yaw = euler_out2.yaw; 
-			pitch = euler_out2.pitch;
-			roll = euler_out2.roll;
+                    yaw = euler_out2.yaw; 
+                    pitch = euler_out2.pitch;
+                    roll = euler_out2.roll;
 		}
 	}
 

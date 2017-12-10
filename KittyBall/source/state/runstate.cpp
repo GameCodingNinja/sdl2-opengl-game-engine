@@ -55,14 +55,14 @@ void CRunState::Init()
     /*m_upFloorPlane->SetPos( CPoint<float>( 0.f, 0.f, 0.f ) );
     m_upFloorPlane->SetRot( CPoint<float>( 0.f, 0.f, 0.f ) );*/
 
-    //m_cube.SetRotXYZ( 45, 45, 45 );
+    m_cube.SetRotXYZ( 45, 45, 45 );
     m_cube.SetPos( CPoint<float>( 0, 8, 0 ) );
     m_upFloorPlane.SetPos( CPoint<float>( 0, -5, 0 ) );
 
     m_upFloorPlane.InitPhysics();
     m_cube.InitPhysics();
 
-    m_cube.GetPhysicsComponent().SetAngularVelocity( CPoint<float>( 10, 10, 10 ) );
+    m_cube.GetPhysicsComponent().SetAngularVelocity( CPoint<float>( 1, 1, 1 ) );
 
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();

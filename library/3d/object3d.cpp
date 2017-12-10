@@ -38,19 +38,20 @@ CObject3D::~CObject3D()
 ************************************************************************/
 void CObject3D::SetTransform( const btTransform & trans )
 {
-    m_parameters.Add( NDefs::MATRIX_ROTATION | NDefs::TRANSFORM );
+    //m_parameters.Add( NDefs::MATRIX_ROTATION | NDefs::TRANSFORM );
+    m_parameters.Add( NDefs::TRANSFORM );
 
     // Set the position
     const btVector3 & btVec = trans.getOrigin();
     SetPosXYZ( btVec.x(), btVec.y(), btVec.z() );
     
-    // Set the rotation
+    // Get the rotation
     const btMatrix3x3 & btMat = trans.getBasis();
-    for( int i = 0; i < 3; ++i )
-    {
-        const btVector3 & vec = btMat.getRow(i);
-        m_rotMatrix.SetColumn( i, CPoint<float>(vec.x(), vec.y(), vec.z()) );
-    }
+    btScalar z, y, x;
+    btMat.getEulerYPR( z, y, x );
+    
+    // Set the rotation
+    SetRotXYZ( x, y, z, false );
 
 }   // SetTransform
 
