@@ -23,7 +23,7 @@
 
 int main( int argc, char* args[] )
 {
-// Moved here so as to allows building in Linux Mint to link GLEW
+// Moved here from library/system/device.cpp so as to allows building in Linux Mint to link GLEW
 #if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
 glewExperimental = GL_TRUE;
 #endif
