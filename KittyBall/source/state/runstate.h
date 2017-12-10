@@ -69,6 +69,7 @@ namespace NRunState
     void CriticalLoad();
     void CriticalUnload();
     void Load();
+    void ObjectDataUnload();
     void Unload();
     void CriticalInit();
     

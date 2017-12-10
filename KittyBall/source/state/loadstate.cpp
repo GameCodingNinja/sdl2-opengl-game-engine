@@ -104,7 +104,7 @@ void CLoadState::Init()
 
 
 /***************************************************************************
-*    desc:  Animate from thread durring the load
+*    desc:  Animate from thread during the load
 ****************************************************************************/
 void CLoadState::Animate()
 {
@@ -141,15 +141,25 @@ void CLoadState::Animate()
 
 
 /***************************************************************************
-*    desc:  Object Data Load
+*    desc:  Object Data unload and Load
 ****************************************************************************/
-void CLoadState::ObjectDataLoad()
+void CLoadState::ObjectData()
 {
     // Test code to see loading animation!!!!
     std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
 
     try
     {
+        // ----------------- UNLOAD OBJECT DATA SECTION -----------------
+    
+        if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
+            NTitleScreenState::ObjectDataUnload();
+
+        else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_RUN )
+            NRunState::ObjectDataUnload();
+
+        // ------------------ UNLOAD OBJECT DATA SECTION ------------------
+
         if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::ObjectDataLoad();
 
@@ -175,13 +185,13 @@ void CLoadState::ObjectDataLoad()
     // Set the flag to indicate the load is complete
     m_threadActive = false;
     
-}   // ObjectDataLoad
+}   // ObjectData
 
 
 /***************************************************************************
-*    desc:  Load the assets
+*    desc:  Critical unload and load
 ****************************************************************************/
-void CLoadState::CriticalLoad()
+void CLoadState::Critical()
 { 
     // ----------------- UNLOAD ASSETS SECTION -----------------
     
@@ -203,7 +213,7 @@ void CLoadState::CriticalLoad()
 
 
 /***************************************************************************
-*    desc:  Critical inits
+*    desc:  Critical inits - After the fact OpenGL creates like fonts
 ****************************************************************************/
 void CLoadState::CriticalInit()
 {
@@ -217,9 +227,9 @@ void CLoadState::CriticalInit()
 
 
 /***************************************************************************
-*    desc:  Load the assets
+*    desc:  Assets unload and load
 ****************************************************************************/
-void CLoadState::AssetsLoad()
+void CLoadState::Assets()
 {
     // Test code to see loading animation!!!!
     std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
@@ -233,7 +243,6 @@ void CLoadState::AssetsLoad()
 
         else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_RUN )
             NRunState::Unload();
-
 
         // ------------------ LOAD ASSETS SECTION ------------------
 
@@ -272,7 +281,7 @@ bool CLoadState::DoStateChange()
 {
     CActionMgr::Instance().ResetLastUsedDevice();
 
-    std::thread objLoadThread( &CLoadState::ObjectDataLoad, this );
+    std::thread objLoadThread( &CLoadState::ObjectData, this );
     objLoadThread.detach();
     
     do
@@ -286,11 +295,11 @@ bool CLoadState::DoStateChange()
     if( !m_errorMsg.empty() )
         throw NExcept::CCriticalException(m_errorTitle, m_errorMsg);
     
-    CriticalLoad();
+    Critical();
     
     // Start the loading/unloading thread
     m_threadActive = true;
-    std::thread loadThread( &CLoadState::AssetsLoad, this );
+    std::thread loadThread( &CLoadState::Assets, this );
     loadThread.detach();
     
     do
@@ -304,6 +313,7 @@ bool CLoadState::DoStateChange()
     if( !m_errorMsg.empty() )
         throw NExcept::CCriticalException(m_errorTitle, m_errorMsg);
     
+    // After the fact OpenGL creates like fonts
     CriticalInit();
 
     return true;

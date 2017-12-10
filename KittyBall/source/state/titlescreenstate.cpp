@@ -171,14 +171,12 @@ namespace NTitleScreenState
     ****************************************************************************/
     void ObjectDataLoad()
     {
+        CObjectDataMgr::Instance().LoadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        //CObjectDataMgr::Instance().LoadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().CreateFromData2D( "(title_screen)" );
         CObjectDataMgr::Instance().CreateFromData3D( "(cube)" );
@@ -208,10 +206,16 @@ namespace NTitleScreenState
     *    desc:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
+    void ObjectDataUnload()
+    {
+        CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)", CObjectDataMgr::DONT_FREE_OPENGL_OBJECTS );
+        CObjectDataMgr::Instance().FreeGroup3D( "(cube)", CObjectDataMgr::DONT_FREE_OPENGL_OBJECTS );
+    }
+    
     void CriticalUnload()
     {
-        CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)" );
-        CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
+        CObjectDataMgr::Instance().FreeOpenGL2D( "(title_screen)" );
+        CObjectDataMgr::Instance().FreeOpenGL3D( "(cube)" );
         
         // Unload the slot group stuff. Could be using fonts
         //CSymbolSetViewMgr::Instance().Clear();

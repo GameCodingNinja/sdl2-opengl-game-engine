@@ -21,6 +21,7 @@ public:
     
     // Flag that indicates the load group doesn't create the VBO, IBO, textures, etc
     static const bool DONT_CREATE_FROM_DATA = false;
+    static const bool DONT_FREE_OPENGL_OBJECTS = false;
 
     // Get the instance of the singleton class
     static CObjectDataMgr & Instance()
@@ -42,8 +43,12 @@ public:
     void CreateFromData3D( const std::string & group );
 
     // Free all of the meshes and materials of a specific data group
-    void FreeGroup2D( const std::string & group );
-    void FreeGroup3D( const std::string & group );
+    void FreeGroup2D( const std::string & group, const bool freeOpenGLObjects = true );
+    void FreeGroup3D( const std::string & group, const bool freeOpenGLObjects = true );
+    
+    // Free all OpenGL objects created from these groups
+    void FreeOpenGL2D( const std::string & group );
+    void FreeOpenGL3D( const std::string & group );
 
 private:
 

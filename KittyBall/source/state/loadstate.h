@@ -43,10 +43,12 @@ private:
     // Load during the startup screen
     void Animate();
 
-    // Load the assets
-    void ObjectDataLoad();
-    void AssetsLoad();
-    void CriticalLoad();
+    // Unload and load sections
+    void ObjectData();
+    void Assets();
+    void Critical();
+    
+    // After the fact OpenGL creates like fonts
     void CriticalInit();
     
 private:

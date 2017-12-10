@@ -162,14 +162,12 @@ namespace NRunState
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        //CObjectDataMgr::Instance().LoadGroup2D( "(run)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        //CObjectDataMgr::Instance().CreateFromData2D( "(run)" );
-        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
         CObjectDataMgr::Instance().CreateFromData3D( "(cube)" );
     }
     
@@ -197,11 +195,16 @@ namespace NRunState
     *    desc:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
+    void ObjectDataUnload()
+    {
+        CObjectDataMgr::Instance().FreeGroup3D( "(cube)", CObjectDataMgr::DONT_FREE_OPENGL_OBJECTS );
+    }
+    
     void CriticalUnload()
     {
         /*CSpriteStrategyMgr::Instance().CleanUp();
         CObjectDataMgr::Instance().FreeGroup2D( "(run)" );*/
-        CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
+        CObjectDataMgr::Instance().FreeOpenGL3D( "(cube)" );
     }
     
     void Unload()

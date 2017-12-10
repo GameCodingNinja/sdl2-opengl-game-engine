@@ -164,7 +164,7 @@ void CObjectDataMgr::CreateFromData2D( const std::string & group )
 /************************************************************************
  *    desc:  Free all of the meshes materials and data of a specific group
  ************************************************************************/
-void CObjectDataMgr::FreeGroup2D( const std::string & group )
+void CObjectDataMgr::FreeGroup2D( const std::string & group, const bool freeOpenGLObjects )
 {
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
@@ -177,14 +177,25 @@ void CObjectDataMgr::FreeGroup2D( const std::string & group )
     auto groupMapIter = m_objectData2DMapMap.find( group );
     if( groupMapIter != m_objectData2DMapMap.end() )
     {
-        CTextureMgr::Instance().DeleteTextureGroupFor2D( group );
-        CVertBufMgr::Instance().DeleteBufferGroupFor2D( group );
+        if( freeOpenGLObjects )
+            FreeOpenGL2D( group );
 
         // Unload the group data
         m_objectData2DMapMap.erase( groupMapIter );
     }
 
 }   // FreeGroup2D
+
+
+/************************************************************************
+ *    desc:  Free all OpenGL objects created from these groups
+ ************************************************************************/
+void CObjectDataMgr::FreeOpenGL2D( const std::string & group )
+{
+    CTextureMgr::Instance().DeleteTextureGroupFor2D( group );
+    CVertBufMgr::Instance().DeleteBufferGroupFor2D( group );
+
+}   // FreeOpenGL2D
 
 
 /************************************************************************
@@ -338,7 +349,7 @@ void CObjectDataMgr::LoadFromXML3D( const std::string & group, const std::string
  *
  *    param: string & group - specified group of meshes and materials to load
  ************************************************************************/
-void CObjectDataMgr::FreeGroup3D( const std::string & group )
+void CObjectDataMgr::FreeGroup3D( const std::string & group, const bool freeOpenGLObjects )
 {
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
@@ -347,18 +358,29 @@ void CObjectDataMgr::FreeGroup3D( const std::string & group )
             boost::str( boost::format( "Object data list group name can't be found (%s).\n\n%s\nLine: %s" )
                 % group % __FUNCTION__ % __LINE__ ) );
 
-    // See if this group is still loaded
-    auto groupMapIter = m_objectData3DMapMap.find( group );
-    if( groupMapIter != m_objectData3DMapMap.end() )
-    {
-        CTextureMgr::Instance().DeleteTextureGroupFor3D( group );
-        CMeshMgr::Instance().DeleteBufferGroup( group );
+        // See if this group is still loaded
+        auto groupMapIter = m_objectData3DMapMap.find( group );
+        if( groupMapIter != m_objectData3DMapMap.end() )
+        {
+            if( freeOpenGLObjects )
+                FreeOpenGL3D( group );
 
-        // Unload the group data
-        m_objectData3DMapMap.erase( groupMapIter );
-    }
+            // Unload the group data
+            m_objectData3DMapMap.erase( groupMapIter );
+        }
 
 }   // FreeGroup3D
+
+
+/************************************************************************
+ *    desc:  Free all OpenGL objects created from these groups
+ ************************************************************************/
+void CObjectDataMgr::FreeOpenGL3D( const std::string & group )
+{
+    CTextureMgr::Instance().DeleteTextureGroupFor3D( group );
+    CMeshMgr::Instance().DeleteBufferGroup( group );
+
+}   // FreeOpenGL3D
 
 
 /************************************************************************
