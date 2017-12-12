@@ -84,7 +84,7 @@ namespace NDefs
         WAS_TRANSFORMED     = 0x40,
 
         // Matrix rotation
-        MATRIX_ROTATION     = 0x80,
+        PHYSICS_TRANSFORM   = 0x80,
 
         // Visible bit
         VISIBLE             = 0x100,

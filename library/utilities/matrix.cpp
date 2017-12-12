@@ -1030,13 +1030,13 @@ void CMatrix::SetRow( int row, const CPoint<float> & point )
 /************************************************************************
 *    desc:  Use a point to set a column
 ************************************************************************/
-void CMatrix::SetColumn( int col, const CPoint<float> & point )
+void CMatrix::SetColumn( const int col, const float x, const float y, const float z )
 {
     float *pCol = matrix + col;
     
-    *pCol = point.x; pCol += 4;
-    *pCol = point.y; pCol += 4;
-    *pCol = point.z;
+    *pCol = x; pCol += 4;
+    *pCol = y; pCol += 4;
+    *pCol = z;
     
 }   // SetColumn
 

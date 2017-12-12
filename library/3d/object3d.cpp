@@ -38,20 +38,30 @@ CObject3D::~CObject3D()
 ************************************************************************/
 void CObject3D::SetTransform( const btTransform & trans )
 {
-    //m_parameters.Add( NDefs::MATRIX_ROTATION | NDefs::TRANSFORM );
-    m_parameters.Add( NDefs::TRANSFORM );
-
+    m_parameters.Add( NDefs::ROTATE | NDefs::PHYSICS_TRANSFORM );
+    
     // Set the position
     const btVector3 & btVec = trans.getOrigin();
     SetPosXYZ( btVec.x(), btVec.y(), btVec.z() );
     
-    // Get the rotation
+    // Set the rotation
     const btMatrix3x3 & btMat = trans.getBasis();
-    btScalar z, y, x;
-    btMat.getEulerYPR( z, y, x );
+    for( int i = 0; i < 3; ++i )
+    {
+        const btVector3 & vec = btMat.getRow(i);
+        m_rotMatrix.SetColumn( i, vec.x(), vec.y(), vec.z() );
+    }
+    
+    // This is an example of how to get the rotation out of bullet physics
+    // but it's a lot of extra work to only do the rotation calculation all over again.
+    
+    // Get the rotation
+    //const btMatrix3x3 & btMat = trans.getBasis();
+    //btScalar z, y, x;
+    //btMat.getEulerYPR( z, y, x );
     
     // Set the rotation
-    SetRotXYZ( x, y, z, false );
+    //SetRotXYZ( x, y, z, false );
 
 }   // SetTransform
 
@@ -61,10 +71,23 @@ void CObject3D::SetTransform( const btTransform & trans )
 ************************************************************************/
 void CObject3D::ApplyRotation( CMatrix & matrix )
 {
-    CObject2D::ApplyRotation( matrix );
+    // Add in the center point prior to rotation
+    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
+        matrix.Translate( m_centerPos );
     
-    m_rotMatrix.InitilizeMatrix();
-    m_rotMatrix.Rotate( m_rot );
+    // Add in the rotation if this is NOT a physics transformation
+    if( !m_parameters.IsSet( NDefs::PHYSICS_TRANSFORM ) )
+    {
+        m_rotMatrix.InitilizeMatrix();
+        m_rotMatrix.Rotate( m_rot );
+    }
+    
+    // Since the rotation has already been done, multiply it into the matrix
+    matrix.Multiply3x3( m_rotMatrix );
+    
+    // Subtract the center point after rotation to put back in original position
+    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
+        matrix.Translate( -m_centerPos );
 
 }   // ApplyRotation
 

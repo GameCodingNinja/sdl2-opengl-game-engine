@@ -65,7 +65,7 @@ void CObject2D::TransformLocal( CMatrix & matrix )
         matrix.Translate( m_pos );
 
     // Clear the check parameter
-    m_parameters.Remove( NDefs::TRANSFORM );
+    m_parameters.Remove( NDefs::TRANSFORM | NDefs::PHYSICS_TRANSFORM );
 
     // Indicate that translation was done
     m_parameters.Add( NDefs::WAS_TRANSFORMED );

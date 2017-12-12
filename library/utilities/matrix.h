@@ -98,7 +98,7 @@ public:
     void SetRow( int row, const CPoint<float> & point );
     
     // Use a point to set a column
-    void SetColumn( int col, const CPoint<float> & point );
+    void SetColumn( const int col, const float x, const float y, const float z );
 
     // Create the matrix based on where the camera is looking
     void LookAt( const CPoint<float> & pos, const CPoint<float> & target, const CPoint<float> & cameraUp );
