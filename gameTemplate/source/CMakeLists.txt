@@ -58,13 +58,13 @@ else()
     target_link_libraries(
         ${PROJECT_NAME}
         ${OPENGL_LIBRARIES}
-        ${GLEW_LIBRARY}
         ${SDL2_LIBRARIES}
         ${SDL2MIXER_LIBRARIES}
         ${CMAKE_BINARY_DIR}/angelscript/libangelscript.a
         ${CMAKE_BINARY_DIR}/Box2D/libBox2D.a
         ${CMAKE_BINARY_DIR}/bulletPhysics/libbulletPhysics.a
-        ${CMAKE_BINARY_DIR}/library/liblibrary.a )
+        ${CMAKE_BINARY_DIR}/library/liblibrary.a
+        ${GLEW_LIBRARY} )
 endif()
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR})

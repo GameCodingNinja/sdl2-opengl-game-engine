@@ -38,6 +38,14 @@
 /KittyBall/nbproject/
 /KittyBall/build/
 
+/consoleTestAp/Win32/
+/consoleTestAp/AS_DEBUG/
+/consoleTestAp/.vs/
+/consoleTestAp/KittyBall.sdf
+/consoleTestAp/consoleTestAp.VC.opendb
+/consoleTestAp/nbproject/
+/consoleTestAp/build/
+
 /library/Win32/
 
 /angelscript/projects/msvc2015/Win32/
@@ -49,4 +57,3 @@
 /bulletPhysics/build3/vs2010/Win32/
 
 /*.user
-

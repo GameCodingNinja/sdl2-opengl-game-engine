@@ -8,26 +8,15 @@
 // Game dependencies
 #include "game.h"
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-#include <GL/glew.h>     // Glew dependencies (have to be defined first)
-#endif
-
 // Game lib dependencies
 #include <utilities/exceptionhandling.h>
-#include <system/device.h>
 
 // Standard lib dependencies
 #include <string>
 #include <ctime>
-#include <cstdlib>
 
 int main( int argc, char* args[] )
 {
-// Moved here from library/system/device.cpp so as to allows building in Linux Mint to link GLEW
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-glewExperimental = GL_TRUE;
-#endif
-
     std::srand ( unsigned ( std::time(0) ) );
 
     CGame game;

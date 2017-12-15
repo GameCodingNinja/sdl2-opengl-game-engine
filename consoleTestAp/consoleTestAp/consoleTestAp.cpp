@@ -1,22 +1,25 @@
 // consoleTestAp.cpp : Defines the entry point for the console application.
 //
 
-
 #include <iostream>
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
+#include <utilities/matrix.h>
 
 int main()
 {
     uint64_t value = 0;
     uint64_t test;
+    
+    CMatrix matrix1, matrix2;
    
     std::cout << "Test started..." << std::endl;
     CHighResTimer::Instance().TimerStart();
     
     do
     {
-        test = ++value;
+        matrix2.MergeMatrix( matrix1 );
+        /*test = ++value;
 
         do
         {
@@ -27,9 +30,10 @@ int main()
             else
                 test = (test * 3) + 1;
         }
-        while (test > 1);
+        while (test > 1);*/
     }
-    while ((test > 0) && (value < 100000000));
+    //while ((test > 0) && (value < 100000000));
+    while (++value < 100000000);
     
     std::cout << "Execution time: " << CHighResTimer::Instance().TimerStop() << std::endl;
     
