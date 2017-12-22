@@ -179,7 +179,7 @@ void CStartUpState::AssetLoad()
     // Load sound resources for the menu
     CSoundMgr::Instance().LoadListTable( "data/sound/soundListTable.lst" );
     CSoundMgr::Instance().LoadGroup("(menu)");
-    CSoundMgr::Instance().LoadGroup("(effects)");
+    //CSoundMgr::Instance().LoadGroup("(effects)");
     
     // Load the script list table
     CScriptManager::Instance().LoadListTable( "data/objects/2d/scripts/scriptListTable.lst" );

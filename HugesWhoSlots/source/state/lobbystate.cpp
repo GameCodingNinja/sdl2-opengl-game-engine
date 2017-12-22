@@ -189,7 +189,6 @@ namespace NLobby
         
         CSoundMgr::Instance().LoadGroup("(lobby)");
         
-        // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(lobby)");
 
         // Free the sprite sheet data manager because it's no longer needed
