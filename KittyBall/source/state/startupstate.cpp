@@ -166,6 +166,7 @@ void CStartUpState::AssetLoad()
     
     // Load the actor list table
     CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/3d/spritestrategy/strategyDataList.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().LoadActionFromXML( "data/settings/controllerMapping.cfg" );

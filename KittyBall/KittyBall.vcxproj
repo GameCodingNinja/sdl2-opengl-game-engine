@@ -69,16 +69,20 @@
     <None Include="data\objects\2d\objectDataList\dataListTable.lst">
       <SubType>Designer</SubType>
     </None>
+    <None Include="data\objects\2d\objectDataList\loadingScreenDataList.lst" />
     <None Include="data\objects\2d\objectDataList\menuBackgrounds.lst" />
+    <None Include="data\objects\2d\objectDataList\menuButtonFrames.lst" />
     <None Include="data\objects\2d\objectDataList\menuDataList.lst">
       <SubType>Designer</SubType>
     </None>
     <None Include="data\objects\2d\objectDataList\menuGeneric.lst">
       <SubType>Designer</SubType>
     </None>
+    <None Include="data\objects\2d\objectDataList\menuMisc.lst" />
     <None Include="data\objects\2d\objectDataList\startupDataList.lst">
       <SubType>Designer</SubType>
     </None>
+    <None Include="data\objects\2d\objectDataList\symbolDataList.lst" />
     <None Include="data\objects\2d\objectDataList\titleScreenDataList.lst" />
     <None Include="data\objects\2d\physics\gamePhysics.cfg" />
     <None Include="data\objects\2d\physics\physicsListTable.lst" />
@@ -88,10 +92,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="data\objects\2d\scripts\shared_utilities.ang" />
+    <None Include="data\objects\2d\spritestrategy\actor\spriteList.lst" />
+    <None Include="data\objects\2d\spritestrategy\stage\sector0.lst" />
+    <None Include="data\objects\2d\spritestrategy\stage\stage.cfg" />
+    <None Include="data\objects\2d\spritestrategy\strategyListTable.lst" />
     <None Include="data\objects\3d\objectDataList\cube.lst" />
     <None Include="data\objects\3d\objectDataList\dataListTable.lst" />
     <None Include="data\objects\3d\physics\cubePhysics.cfg" />
     <None Include="data\objects\3d\physics\physicsListTable.lst" />
+    <None Include="data\objects\3d\spritestrategy\stage\sector0.lst" />
+    <None Include="data\objects\3d\spritestrategy\stage\stage0.cfg" />
+    <None Include="data\objects\3d\spritestrategy\strategyDataList.lst" />
     <None Include="data\settings\controllerMapping.cfg">
       <SubType>Designer</SubType>
     </None>

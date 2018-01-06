@@ -1,0 +1,12 @@
+<spriteList defaultId="-2">
+  
+  <sprite group="(cube)" objectName="cubePhysics">
+    <position x="-5" y="8"/>
+    <rotation x="50" y="20" z="30"/>
+  </sprite>
+  
+  <sprite group="(cube)" objectName="plane">
+    <position y="-5"/>
+  </sprite>
+  
+</spriteList>

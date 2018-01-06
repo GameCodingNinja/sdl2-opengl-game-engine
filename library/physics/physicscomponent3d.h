@@ -29,6 +29,7 @@ class CPhysicsComponent3D : boost::noncopyable
 public:
 
     // Constructor
+    CPhysicsComponent3D();
     CPhysicsComponent3D( const CObjectPhysicsData3D & physicsData );
 
     // Destructor

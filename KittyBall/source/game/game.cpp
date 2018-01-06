@@ -49,7 +49,8 @@ CGame::CGame()
 {
     CSignalMgr::Instance().Connect_SmartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
     CSignalMgr::Instance().Connect_SmartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
+    CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::AICreateCallBack2D, this, _1, _2) );
+    CSignalMgr::Instance().Connect_AICreate3D( boost::bind( &CGame::AICreateCallBack3D, this, _1, _2 ) );
     CShaderMgr::Instance().Connect_InitShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
     
     if( NBDefs::IsDebugMode() )
@@ -133,12 +134,19 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 /***************************************************************************
 *    decs:  Call back function to create sprite ai
 ****************************************************************************/
-void CGame::AICreateCallBack( const std::string & aiName, iSprite2D * pSprite )
+void CGame::AICreateCallBack2D( const std::string & aiName, iSprite2D * pSprite )
 {
     if( aiName == "aiBall" )
         pSprite->SetAI( new CBallAI( pSprite ) );
 
-}   // AICreateCallBack
+}   // AICreateCallBack2D
+
+void CGame::AICreateCallBack3D( const std::string & aiName, iSprite3D * pSprite )
+{
+    /*if( aiName == "aiBall" )
+        pSprite->SetAI( new CBallAI( pSprite ) );*/
+
+}   // AICreateCallBack3D
 
 
 /************************************************************************

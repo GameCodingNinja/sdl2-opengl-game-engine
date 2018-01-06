@@ -57,8 +57,8 @@ private:
     CPhysicsWorld3D & m_rPhysicsWorld;
 
     // Sprite plane safe pointers
-    CSprite3D m_upFloorPlane;
-    CSprite3D m_cube;
+    /*CSprite3D m_upFloorPlane;
+    CSprite3D m_cube;*/
     CCamera m_camera;
 };
 

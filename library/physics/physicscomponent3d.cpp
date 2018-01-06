@@ -30,6 +30,11 @@
 /************************************************************************
  *    desc:  Constructor
  ************************************************************************/
+CPhysicsComponent3D::CPhysicsComponent3D() :
+    m_pWorld( nullptr )
+{
+}   // constructor
+
 CPhysicsComponent3D::CPhysicsComponent3D( const CObjectPhysicsData3D & physicsData ) :
     m_pWorld(nullptr)
 {

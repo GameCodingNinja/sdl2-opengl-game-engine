@@ -199,6 +199,13 @@ void CSpriteStrategyMgr::Render( const CMatrix & matrix )
 
 }   // Render
 
+void CSpriteStrategyMgr::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
+{
+    for( auto & iter : m_pStrategyMap )
+        iter.second->Render( projMatrix, cameraMatrix );
+
+}   // Render
+
 
 /************************************************************************
 *    desc:  Get the pointer to the strategy
