@@ -136,9 +136,6 @@
     <None Include="data\objects\2d\menu\pause.menu">
       <Filter>data\objects\2d\menu</Filter>
     </None>
-    <None Include="data\objects\2d\objectDataList\menuDataList.lst">
-      <Filter>data\objects\2d\objectDataList</Filter>
-    </None>
     <None Include="data\objects\2d\menu\tree.list">
       <Filter>data\objects\2d\menu</Filter>
     </None>
@@ -224,9 +221,6 @@
     <None Include="data\objects\2d\objectDataList\menuBackgrounds.lst">
       <Filter>data\objects\2d\objectDataList</Filter>
     </None>
-    <None Include="data\objects\2d\objectDataList\menuGeneric.lst">
-      <Filter>data\objects\2d\objectDataList</Filter>
-    </None>
     <None Include="data\objects\2d\menu\control\key_binding_slider.ctrl">
       <Filter>data\objects\2d\menu\control</Filter>
     </None>
@@ -296,6 +290,9 @@
     <None Include="data\objects\3d\spritestrategy\strategyDataList.lst">
       <Filter>data\objects\3d\spritestrategy</Filter>
     </None>
+    <None Include="data\objects\3d\spritestrategy\actor\spriteList.lst">
+      <Filter>data\objects\3d\spritestrategy\actor</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\game.cpp">
@@ -347,6 +344,9 @@
       <Filter>source\smartGUI</Filter>
     </ClCompile>
     <ClCompile Include="source\ai\ballai.cpp">
+      <Filter>source\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ai\cubeai.cpp">
       <Filter>source\ai</Filter>
     </ClCompile>
   </ItemGroup>
@@ -407,6 +407,9 @@
     </ClInclude>
     <ClInclude Include="source\state\statemessage.h">
       <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ai\cubeai.h">
+      <Filter>source\ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

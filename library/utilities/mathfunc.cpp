@@ -7,6 +7,11 @@
 // Physical component dependency
 #include <utilities/mathfunc.h>
 
+// Game lib dependencies
+#include <utilities/matrix.h>
+#include <utilities/settings.h>
+#include <common/camera.h>
+
 namespace NMathFunc
 {
     /************************************************************************
@@ -75,5 +80,40 @@ namespace NMathFunc
         return v1 - v2 * floor(v1 / v2);
 
     }	// Modulus
+
+
+    /************************************************************************
+    *    desc:  Get the mouse's position in 3D
+    *
+    *	 param: float mx, my - mouse position
+    *           CCamera matCam - camera matrix
+    *           CMatrix matProj - projection matrix
+    *
+    *	 ret:   CPoint<float> - result
+    ************************************************************************/
+    CPoint<float> MouseTo3D( float mx, float my, CCamera matCam, CMatrix matProj )
+    {
+        // Combine the camera and projection transformations and then invert the result
+        // so we can use it like we're reversing all transformations on the mouse point.
+        CMatrix m = matCam.GetMatrix() * matProj;
+        m.Invert();
+
+        // Convert to values between -1 and 1.
+        CPoint<float> mp;
+        mp.x = (2.f * (mx / (CSettings::Instance().GetSize().w - 1.f))) - 1.f;
+        mp.y = 1.f - (2.f * (my / (CSettings::Instance().GetSize().h - 1.f)));
+        mp.z = 1;
+
+        // Undo the projection transformation.
+        CPoint<float> r;
+        m.Transform( r, mp );
+
+        // Temporary code to project onto the xy plane.
+        r.x *= -matCam.GetPos().z - r.z;
+        r.y *= -matCam.GetPos().z - r.z;
+        r.z = 0;
+
+        return r;
+    }
 }
 

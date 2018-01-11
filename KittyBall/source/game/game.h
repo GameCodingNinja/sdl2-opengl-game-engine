@@ -70,7 +70,7 @@ private:
     void SmartMenuCreateCallBack( CMenu * pMenu );
     
     // Call back function to create sprite ai
-    void AICreateCallBack2D( const std::string & aiName, iSprite2D * pSprite );
+    void AICreateCallBack( const std::string & aiName, iSprite2D * pSprite );
     void AICreateCallBack3D( const std::string & aiName, iSprite3D * pSprite );
     
     // Callback for shader init

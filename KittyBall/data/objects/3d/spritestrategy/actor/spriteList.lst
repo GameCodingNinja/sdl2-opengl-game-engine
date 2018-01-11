@@ -1,0 +1,5 @@
+<spriteList defaultGroup="(cube)">
+    
+    <sprite name="cube" objectName="cubePhysics" aiName="aiCube"/>
+ 
+</spriteList>

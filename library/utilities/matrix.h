@@ -90,6 +90,7 @@ public:
     void InvertY();
     void InvertZ();
     bool Inverse();
+    bool Invert();
 
     // Set quaternion
     void Set( const CQuaternion & quat );

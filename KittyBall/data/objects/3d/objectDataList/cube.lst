@@ -30,7 +30,7 @@
         <visual file="data/objects/3d/meshes/cube.3dm"/>
         <physics world="(cube)">
           <body shape="box" mass="1" restitution="0.3" friction="0.8"/>
-          <collisionFilter group="1" mask="2"/>
+          <!--<collisionFilter group="1" mask="2"/>-->
         </physics>
       </object>
 

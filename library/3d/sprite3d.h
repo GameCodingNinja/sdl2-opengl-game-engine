@@ -61,7 +61,7 @@ public:
     void Update();
     
     // Update the physics
-    //void PhysicsUpdate();
+    void PhysicsUpdate();
 
     // do the render
     void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );

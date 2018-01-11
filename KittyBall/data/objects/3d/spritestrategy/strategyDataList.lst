@@ -4,4 +4,8 @@
     <file path="data/objects/3d/spritestrategy/stage/stage0.cfg"/>
   </groupList>
 
+  <groupList groupName="(sprite)">
+    <file path="data/objects/3d/spritestrategy/actor/spriteList.lst"/>
+  </groupList>
+
 </listTable>

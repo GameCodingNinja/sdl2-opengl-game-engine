@@ -77,6 +77,16 @@ void CSprite3D::Update()
 
 
 /************************************************************************
+*    desc:  Update the physics
+************************************************************************/
+void CSprite3D::PhysicsUpdate()
+{
+    m_physicsComponent.Update( this );
+
+}   // PhysicsUpdate
+
+
+/************************************************************************
  *    desc:  do the render                                                            
  ************************************************************************/
 void CSprite3D::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )

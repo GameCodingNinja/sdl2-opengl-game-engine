@@ -135,7 +135,7 @@ int CBasicSpriteStrategy3D::Create(
     int spriteId( (id + m_idOffset) * m_idDir );
     
     // Create the sprite
-    if( rSpriteDataContainer.GetType() == NDefs::SPRITE3D )
+    if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
     {
         const auto & rData = rSpriteDataContainer.Get<CSpriteData>();
         if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
@@ -151,7 +151,7 @@ int CBasicSpriteStrategy3D::Create(
         
         aiName = rData.GetAIName();
     }
-    else if( rSpriteDataContainer.GetType() == NDefs::ACTOR3D )
+    else if( rSpriteDataContainer.GetType() == NDefs::ACTOR2D )
     {
         const auto & rData = rSpriteDataContainer.Get<CActorData>();
         if( rData.GetId() != defs_SPRITE_DEFAULT_ID )

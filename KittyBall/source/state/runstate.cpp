@@ -11,6 +11,8 @@
 // Game lib dependencies
 #include <gui/menumanager.h>
 #include <utilities/highresolutiontimer.h>
+#include <utilities/settings.h>
+#include <utilities/mathfunc.h>
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
@@ -19,7 +21,7 @@
 #include <physics/physicscomponent3d.h>
 #include <managers/spritestrategymanager.h>
 #include <3d/basicstagestrategy3d.h>
-#include <2d/basicspritestrategy2d.h>
+#include <3d/basicspritestrategy3d.h>
 
 // Standard lib dependencies
 #include <vector>
@@ -29,11 +31,22 @@
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
-    m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld3D( "(cube)" ) )/*,
-    m_upFloorPlane( CObjectDataMgr::Instance().GetData3D( "(cube)", "plane" ) ),
-    m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cubePhysics") )*/
+    m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld3D( "(cube)" ) )
 {
 }   // Constructor
+
+
+/************************************************************************
+*    desc:  destructer
+************************************************************************/
+CRunState::~CRunState()
+{
+    /*m_rPhysicsWorld.GetWorld().SetContactListener( nullptr );
+    CSignalMgr::Instance().Disconnect_ResolutionChange();*/
+
+    CSpriteStrategyMgr::Instance().Clear();
+
+}   // destructer
 
 
 /************************************************************************
@@ -46,24 +59,10 @@ void CRunState::Init()
     CMenuManager::Instance().ActivateTree("pause_tree");
 
     m_camera.SetPosXYZ( 0, 0, 20 );
-    m_camera.SetRotXYZ( 10, 0, 0 );
+    //m_camera.SetRotXYZ( 10, 0, 0 );
 
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
-    
-    // Create the plane on the left of the screen
-    /*m_upFloorPlane->SetPos( CPoint<float>( 0.f, 0.f, 0.f ) );
-    m_upFloorPlane->SetRot( CPoint<float>( 0.f, 0.f, 0.f ) );*/
-
-    //m_cube.SetRotXYZ( 50, 20, 30 );
-    //m_cube.SetPos( CPoint<float>( -5, 8, 0 ) );
-    //m_upFloorPlane.SetPos( CPoint<float>( 0, -5, 0 ) );
-
-    //m_upFloorPlane.InitPhysics();
-    //m_cube.InitPhysics();
-
-    //m_cube.GetPhysicsComponent().SetAngularVelocity( CPoint<float>( 0, 0, 5 ) );
-    //m_cube.GetPhysicsComponent().SetLinearVelocity( CPoint<float>( 3, 0, 0 ) );
 
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -84,6 +83,18 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN ) 
             m_scriptComponent.Prepare( "(menu)", "Screen_FadeOut" );
+    }
+    else if( rEvent.type == SDL_MOUSEBUTTONUP )
+    {
+        if( !CMenuManager::Instance().IsMenuActive() && !CMenuManager::Instance().IsActive() )
+        {
+            CPoint<float> r = NMathFunc::MouseTo3D( 
+                rEvent.button.x, rEvent.button.y, m_camera,
+                CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE ) );
+
+            //rEvent.button.x
+            CSpriteStrategyMgr::Instance().Create( "(sprite)", "cube", r, CPoint<float>( 20, 30, 40 ) );
+        }
     }
 
 }   // HandleEvent
@@ -114,8 +125,6 @@ void CRunState::Update()
     if( !CMenuManager::Instance().IsActive() )
         CSpriteStrategyMgr::Instance().Update();
 
-    //m_cube.Update();
-
 }   // Update
 
 
@@ -126,8 +135,6 @@ void CRunState::Transform()
 {
     CCommonState::Transform();
 
-    //m_upFloorPlane.Transform();
-    //m_cube.Transform();
     m_camera.Transform();
 
     if( !CMenuManager::Instance().IsActive() )
@@ -146,9 +153,6 @@ void CRunState::PreRender()
     const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE );
     //CSpriteStrategyMgr::Instance().Render( matrix );
     CSpriteStrategyMgr::Instance().Render( m_camera.GetMatrix() * matrix, m_camera.GetRotMatrix() );
-
-    //m_cube.Render( m_camera.GetMatrix() * matrix, m_camera.GetRotMatrix() );
-    //m_upFloorPlane.Render( m_camera.GetMatrix() * matrix, m_camera.GetRotMatrix() );
 
 }   // PreRender
 
@@ -183,6 +187,7 @@ namespace NRunState
 
         // The unordered map run these in reverse order
         CSpriteStrategyMgr::Instance().Load( "(stage0)", new CBasicStageStrategy3D );
+        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy3D );
     }
     
     void CriticalInit()

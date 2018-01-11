@@ -70,15 +70,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="data\objects\2d\objectDataList\loadingScreenDataList.lst" />
-    <None Include="data\objects\2d\objectDataList\menuBackgrounds.lst" />
-    <None Include="data\objects\2d\objectDataList\menuButtonFrames.lst" />
-    <None Include="data\objects\2d\objectDataList\menuDataList.lst">
+    <None Include="data\objects\2d\objectDataList\menuBackgrounds.lst">
       <SubType>Designer</SubType>
     </None>
-    <None Include="data\objects\2d\objectDataList\menuGeneric.lst">
+    <None Include="data\objects\2d\objectDataList\menuButtonFrames.lst">
       <SubType>Designer</SubType>
     </None>
-    <None Include="data\objects\2d\objectDataList\menuMisc.lst" />
+    <None Include="data\objects\2d\objectDataList\menuMisc.lst">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="data\objects\2d\objectDataList\startupDataList.lst">
       <SubType>Designer</SubType>
     </None>
@@ -100,6 +100,7 @@
     <None Include="data\objects\3d\objectDataList\dataListTable.lst" />
     <None Include="data\objects\3d\physics\cubePhysics.cfg" />
     <None Include="data\objects\3d\physics\physicsListTable.lst" />
+    <None Include="data\objects\3d\spritestrategy\actor\spriteList.lst" />
     <None Include="data\objects\3d\spritestrategy\stage\sector0.lst" />
     <None Include="data\objects\3d\spritestrategy\stage\stage0.cfg" />
     <None Include="data\objects\3d\spritestrategy\strategyDataList.lst" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\ai\ballai.cpp" />
+    <ClCompile Include="source\ai\cubeai.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\main.cpp" />
     <ClCompile Include="source\smartGUI\smartapplysettingsbtn.cpp" />
@@ -174,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ai\ballai.h" />
+    <ClInclude Include="source\ai\cubeai.h" />
     <ClInclude Include="source\game\game.h" />
     <ClInclude Include="source\smartGUI\smartapplysettingsbtn.h" />
     <ClInclude Include="source\smartGUI\smartconfirmbtn.h" />
