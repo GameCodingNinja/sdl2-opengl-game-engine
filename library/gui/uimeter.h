@@ -37,7 +37,7 @@ public:
     virtual void LoadFromNode( const XMLNode & node ) override;
     
     // Update the control
-    virtual void Update() override;
+    virtual void Update();
     
     // Set the amount to the meter without banging up
     void Set( const double amount );
@@ -57,7 +57,7 @@ public:
 protected:
 
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) override;
+    virtual void LoadControlFromNode( const XMLNode & node );
     
     // Display the value in the meter
     void DisplayValue();

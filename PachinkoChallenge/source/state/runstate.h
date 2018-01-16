@@ -63,10 +63,10 @@ public:
     void PreRender() override;
     
     // Called when two fixtures begin to touch
-    virtual void BeginContact(b2Contact* contact) override;
+    virtual void BeginContact(b2Contact* contact);
     
     // Called when two fixtures cease to touch
-    virtual void EndContact(b2Contact* contact) override;
+    virtual void EndContact(b2Contact* contact);
     
 private:
     

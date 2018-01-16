@@ -75,7 +75,7 @@ private:
     std::vector< CSpriteSheetGlyph > m_glyphVec;
     
     // A map of all the glyphs
-    std::map< std::string, CSpriteSheetGlyph > m_glyphMap;
+    std::map< const std::string, CSpriteSheetGlyph > m_glyphMap;
 };
 
 #endif  // __sprite_sheet_h__

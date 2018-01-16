@@ -1,6 +1,6 @@
 /*
    AngelCode Scripting Library
-   Copyright (c) 2003-2016 Andreas Jonsson
+   Copyright (c) 2003-2015 Andreas Jonsson
 
    This software is provided 'as-is', without any express or implied 
    warranty. In no event will the authors be held liable for any 
@@ -295,7 +295,7 @@ asCScriptObject::asCScriptObject(asCObjectType *ot, bool doInitialize)
 				if( prop->type.IsReference() || (prop->type.GetTypeInfo()->flags & asOBJ_REF) )
 				{
 					asPWORD *ptr = reinterpret_cast<asPWORD*>(reinterpret_cast<asBYTE*>(this) + prop->byteOffset);
-					*ptr = (asPWORD)AllocateUninitializedObject(CastToObjectType(prop->type.GetTypeInfo()), engine);
+					*ptr = (asPWORD)AllocateUninitializedObject(prop->type.GetTypeInfo()->CastToObjectType(), engine);
 				}
 			}
 		}
@@ -359,7 +359,7 @@ asCScriptObject::~asCScriptObject()
 		if( prop->type.IsObject() )
 		{
 			// Destroy the object
-			asCObjectType *propType = CastToObjectType(prop->type.GetTypeInfo());
+			asCObjectType *propType = prop->type.GetTypeInfo()->CastToObjectType();
 			if( prop->type.IsReference() || propType->flags & asOBJ_REF )
 			{
 				void **ptr = (void**)(((char*)this) + prop->byteOffset);
@@ -809,12 +809,12 @@ asCScriptObject &asCScriptObject::operator=(const asCScriptObject &other)
 					if( !prop->type.IsObjectHandle() )
 					{
 						if( prop->type.IsReference() || (prop->type.GetTypeInfo()->flags & asOBJ_REF) )
-							CopyObject(*src, *dst, CastToObjectType(prop->type.GetTypeInfo()), engine);
+							CopyObject(*src, *dst, prop->type.GetTypeInfo()->CastToObjectType(), engine);
 						else
-							CopyObject(src, dst, CastToObjectType(prop->type.GetTypeInfo()), engine);
+							CopyObject(src, dst, prop->type.GetTypeInfo()->CastToObjectType(), engine);
 					}
 					else
-						CopyHandle((asPWORD*)src, (asPWORD*)dst, CastToObjectType(prop->type.GetTypeInfo()), engine);
+						CopyHandle((asPWORD*)src, (asPWORD*)dst, prop->type.GetTypeInfo()->CastToObjectType(), engine);
 				}
 				else if (prop->type.IsFuncdef())
 				{

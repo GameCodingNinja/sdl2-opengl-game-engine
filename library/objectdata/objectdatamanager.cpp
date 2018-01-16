@@ -354,22 +354,20 @@ void CObjectDataMgr::FreeGroup3D( const std::string & group, const bool freeOpen
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
     if( listTableIter == m_listTableMap.end() )
-    {
         throw NExcept::CCriticalException( "Obj Data List 3D Load Group Data Error!",
             boost::str( boost::format( "Object data list group name can't be found (%s).\n\n%s\nLine: %s" )
                 % group % __FUNCTION__ % __LINE__ ) );
-    }
 
-    // See if this group is still loaded
-    auto groupMapIter = m_objectData3DMapMap.find( group );
-    if( groupMapIter != m_objectData3DMapMap.end() )
-    {
-        if( freeOpenGLObjects )
-            FreeOpenGL3D( group );
+        // See if this group is still loaded
+        auto groupMapIter = m_objectData3DMapMap.find( group );
+        if( groupMapIter != m_objectData3DMapMap.end() )
+        {
+            if( freeOpenGLObjects )
+                FreeOpenGL3D( group );
 
-        // Unload the group data
-        m_objectData3DMapMap.erase( groupMapIter );
-    }
+            // Unload the group data
+            m_objectData3DMapMap.erase( groupMapIter );
+        }
 
 }   // FreeGroup3D
 

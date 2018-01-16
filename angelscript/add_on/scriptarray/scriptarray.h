@@ -83,7 +83,6 @@ public:
 	void SortAsc(asUINT startAt, asUINT count);
 	void SortDesc(asUINT startAt, asUINT count);
 	void Sort(asUINT startAt, asUINT count, bool asc);
-	void Sort(asIScriptFunction *less, asUINT startAt, asUINT count);
 	void Reverse();
 	int  Find(void *value) const;
 	int  Find(asUINT startAt, void *value) const;

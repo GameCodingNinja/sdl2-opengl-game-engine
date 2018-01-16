@@ -1,6 +1,6 @@
 /*
    AngelCode Scripting Library
-   Copyright (c) 2003-2017 Andreas Jonsson
+   Copyright (c) 2003-2016 Andreas Jonsson
 
    This software is provided 'as-is', without any express or implied 
    warranty. In no event will the authors be held liable for any 
@@ -55,7 +55,6 @@ asCDataType::asCDataType()
 	isObjectHandle         = false;
 	isConstHandle          = false;
 	isHandleToAsHandleType = false;
-	ifHandleThenConst      = false;
 }
 
 asCDataType::asCDataType(const asCDataType &dt)
@@ -68,7 +67,6 @@ asCDataType::asCDataType(const asCDataType &dt)
 	isObjectHandle         = dt.isObjectHandle;
 	isConstHandle          = dt.isConstHandle;
 	isHandleToAsHandleType = dt.isHandleToAsHandleType;
-	ifHandleThenConst      = dt.ifHandleThenConst;
 }
 
 asCDataType::~asCDataType()
@@ -110,7 +108,7 @@ asCDataType asCDataType::CreateObjectHandle(asCTypeInfo *ot, bool isConst)
 {
 	asCDataType dt;
 
-	asASSERT(CastToObjectType(ot));
+	asASSERT(ot->CastToObjectType());
 
 	dt.tokenType        = ttIdentifier;
 	dt.typeInfo         = ot;
@@ -173,7 +171,7 @@ asCString asCDataType::Format(asSNameSpace *currNs, bool includeNamespace) const
 	{
 		// If funcDef->nameSpace is null it means the funcDef was declared as member of 
 		// another type, in which case the scope should be built with the name of that type
-		str += CastToFuncdefType(typeInfo)->parentClass->name + "::";
+		str += typeInfo->CastToFuncdefType()->parentClass->name + "::";
 	}
 
 	if( tokenType != ttIdentifier )
@@ -182,7 +180,7 @@ asCString asCDataType::Format(asSNameSpace *currNs, bool includeNamespace) const
 	}
 	else if( IsArrayType() && typeInfo && !typeInfo->engine->ep.expandDefaultArrayToTemplate )
 	{
-		asCObjectType *ot = CastToObjectType(typeInfo);
+		asCObjectType *ot = typeInfo->CastToObjectType();
 		asASSERT( ot && ot->templateSubTypes.GetLength() == 1 );
 		str += ot->templateSubTypes[0].Format(currNs, includeNamespace);
 		str += "[]";
@@ -190,7 +188,7 @@ asCString asCDataType::Format(asSNameSpace *currNs, bool includeNamespace) const
 	else if(typeInfo)
 	{
 		str += typeInfo->name;
-		asCObjectType *ot = CastToObjectType(typeInfo);
+		asCObjectType *ot = typeInfo->CastToObjectType();
 		if( ot && ot->templateSubTypes.GetLength() > 0 )
 		{
 			str += "<";
@@ -235,7 +233,6 @@ asCDataType &asCDataType::operator =(const asCDataType &dt)
 	isConstHandle          = dt.isConstHandle;
 	isAuto                 = dt.isAuto;
 	isHandleToAsHandleType = dt.isHandleToAsHandleType;
-	ifHandleThenConst      = dt.ifHandleThenConst;
 
 	return (asCDataType &)*this;
 }
@@ -360,7 +357,7 @@ bool asCDataType::CanBeInstantiated() const
 	if (IsFuncdef())
 		return false;
 
-	asCObjectType *ot = CastToObjectType(typeInfo);
+	asCObjectType *ot = typeInfo->CastToObjectType();
 	if( ot && (ot->flags & asOBJ_REF) && ot->beh.factories.GetLength() == 0 ) // ref types without factories
 		return false;
 
@@ -380,7 +377,7 @@ bool asCDataType::IsInterface() const
 	if (typeInfo == 0)
 		return false;
 
-	asCObjectType *ot = CastToObjectType(typeInfo);
+	asCObjectType *ot = typeInfo->CastToObjectType();
 	return ot && ot->IsInterface();
 }
 
@@ -395,14 +392,15 @@ bool asCDataType::CanBeCopied() const
 	// It must be possible to instantiate the type
 	if( !CanBeInstantiated() ) return false;
 
-	// It must have a default constructor or factory and the opAssign
-	// Alternatively it must have the copy constructor
-	asCObjectType *ot = CastToObjectType(typeInfo);
-	if (ot && (((ot->beh.construct != 0 || ot->beh.factory != 0) && ot->beh.copy != 0) || 
-		       (ot->beh.copyconstruct != 0 || ot->beh.copyfactory != 0)) )
-		return true;
+	// It must have a default constructor or factory
+	asCObjectType *ot = typeInfo->CastToObjectType();
+	if( ot && ot->beh.construct == 0 &&
+		ot->beh.factory == 0 ) return false;
 
-	return false;
+	// It must be possible to copy the type
+	if( ot && ot->beh.copy == 0 ) return false;
+
+	return true;
 }
 
 bool asCDataType::IsReadOnly() const
@@ -456,7 +454,7 @@ bool asCDataType::IsScriptObject() const
 asCDataType asCDataType::GetSubType(asUINT subtypeIndex) const
 {
 	asASSERT(typeInfo);
-	asCObjectType *ot = CastToObjectType(typeInfo);
+	asCObjectType *ot = typeInfo->CastToObjectType();
 	return ot->templateSubTypes[subtypeIndex];
 }
 
@@ -589,7 +587,7 @@ bool asCDataType::IsObject() const
 		return IsNullHandle();
 
 	// Template subtypes shouldn't be considered objects
-	return CastToObjectType(typeInfo) ? true : false;
+	return typeInfo->CastToObjectType() ? true : false;
 }
 
 bool asCDataType::IsFuncdef() const
@@ -671,7 +669,7 @@ int  asCDataType::GetAlignment() const
 asSTypeBehaviour *asCDataType::GetBehaviour() const
 {
 	if (!typeInfo) return 0;
-	asCObjectType *ot = CastToObjectType(typeInfo);
+	asCObjectType *ot = typeInfo->CastToObjectType();
 	return ot ? &ot->beh : 0; 
 }
 
