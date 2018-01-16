@@ -63,7 +63,7 @@ protected:
     virtual void LoadControlFromNode( const XMLNode & node ) override;
 
     // Handle the select action
-    bool HandleSelectAction( const CSelectMsgCracker & msgCracker );
+    bool HandleSelectAction( const CSelectMsgCracker & msgCracker ) override;
 
 private:
 

@@ -1,7 +1,0 @@
-<listTable>
-
-  <groupList groupName="(menu)">
-    <file path="data/sound/menuSound.lst"/>
-  </groupList>
-  
-</listTable>

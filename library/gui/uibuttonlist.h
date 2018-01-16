@@ -59,16 +59,16 @@ private:
     void Dec();
 
     // Handle Action messages
-    virtual void OnLeftAction( const SDL_Event & rEvent );
-    virtual void OnRightAction( const SDL_Event & rEvent );
-    virtual void OnUpAction( const SDL_Event & rEvent );
-    virtual void OnDownAction( const SDL_Event & rEvent );
+    virtual void OnLeftAction( const SDL_Event & rEvent ) override;
+    virtual void OnRightAction( const SDL_Event & rEvent ) override;
+    virtual void OnUpAction( const SDL_Event & rEvent ) override;
+    virtual void OnDownAction( const SDL_Event & rEvent ) override;
 
     // Handle Scroll messages
-    virtual void OnLeftScroll( const SDL_Event & rEvent );
-    virtual void OnRightScroll( const SDL_Event & rEvent );
-    virtual void OnUpScroll( const SDL_Event & rEvent );
-    virtual void OnDownScroll( const SDL_Event & rEvent );
+    virtual void OnLeftScroll( const SDL_Event & rEvent ) override;
+    virtual void OnRightScroll( const SDL_Event & rEvent ) override;
+    virtual void OnUpScroll( const SDL_Event & rEvent ) override;
+    virtual void OnDownScroll( const SDL_Event & rEvent ) override;
 
     // Inc/Dec the list
     void IncList();
