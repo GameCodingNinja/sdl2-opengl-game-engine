@@ -60,7 +60,8 @@ public:
     virtual void Transform( const class CObject2D & object ){}
 
     // Render the sprite
-    virtual void Render( const class CMatrix & matrix ) = 0;
+    virtual void Render( const class CMatrix & matrix ) {}
+    virtual void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) {}
     
 protected:
     

@@ -9,7 +9,7 @@
 #define __sprite_3d_h__
 
 // Physical component dependency
-#include <3d/object3d.h>
+#include <3d/isprite3d.h>
 
 // Game lib dependencies
 #include <3d/visualcomponent3d.h>
@@ -24,7 +24,7 @@ class CObjectData3D;
 class CColor;
 class asIScriptEngine;
 
-class CSprite3D : public CObject3D, boost::noncopyable
+class CSprite3D : public iSprite3D, boost::noncopyable
 {
 public:
 
@@ -54,6 +54,9 @@ public:
     // Init the physics
     void InitPhysics();
 
+    // React to what the player is doing
+    void HandleEvent( const SDL_Event & rEvent ) override;
+
     // Update the sprite 
     void Update();
     
@@ -62,6 +65,9 @@ public:
 
     // do the render
     void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );
+
+    // Set/Get the AI pointer
+    void SetAI( iAIBase2D * pAIBase ) override;
     
     //////////////////////////////////
     // Functions accessed via script
@@ -92,6 +98,9 @@ private:
 
     // The physics part of the 2d sprite
     CPhysicsComponent3D m_physicsComponent;
+
+    // Base AI scoped pointer
+    std::unique_ptr<iAIBase2D> m_upAI;
 
 };
 

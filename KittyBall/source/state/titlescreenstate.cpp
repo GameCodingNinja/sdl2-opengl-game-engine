@@ -12,6 +12,7 @@
 #include <objectdata/objectdatamanager.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/xmlpreloader.h>
+#include <utilities/settings.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
 #include <gui/uibutton.h>
@@ -134,11 +135,11 @@ void CTitleScreenState::Transform()
 {
     CCommonState::Transform();
 
+
+    m_camera.Transform();
     m_background.Transform();
     //m_slotGame.Transform();
     m_cube.Transform();
-    
-    m_camera.Transform();
 
 }   // Transform
 
@@ -148,9 +149,15 @@ void CTitleScreenState::Transform()
 ****************************************************************************/
 void CTitleScreenState::PreRender()
 {
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glDisable( GL_DEPTH_TEST );
+
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
     //m_slotGame.Render( orthoMatrix );
+
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glEnable( GL_DEPTH_TEST );
     
     CCommonState::PreRender();
     

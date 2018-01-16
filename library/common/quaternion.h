@@ -227,7 +227,7 @@ public:
 
         return *this;
 
-    }   // operator *
+    }   // operator *=
 
     /************************************************************************                                                             
     *    desc:  The addition operator 

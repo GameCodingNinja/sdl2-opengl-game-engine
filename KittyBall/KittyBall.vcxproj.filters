@@ -68,6 +68,24 @@
     <Filter Include="data\objects\3d\physics">
       <UniqueIdentifier>{89806882-5d3d-4f05-abd7-7c13ac4272b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="data\objects\2d\spritestrategy">
+      <UniqueIdentifier>{b4376930-4410-4dbf-9b71-34a945d9349f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\objects\2d\spritestrategy\stage">
+      <UniqueIdentifier>{a304b9e9-5327-4518-a38a-d1633d6b1455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\objects\2d\spritestrategy\actor">
+      <UniqueIdentifier>{c3c13721-d67e-4290-aa85-b6ac448f9ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\objects\3d\spritestrategy">
+      <UniqueIdentifier>{f85e9f5b-4fc1-4378-99ba-80b208601db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\objects\3d\spritestrategy\actor">
+      <UniqueIdentifier>{2f081b6e-a385-442d-b542-98ea256153c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\objects\3d\spritestrategy\stage">
+      <UniqueIdentifier>{9af6b1c7-a815-4a89-b723-475f2454c451}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\settings\settings.cfg">
@@ -117,9 +135,6 @@
     </None>
     <None Include="data\objects\2d\menu\pause.menu">
       <Filter>data\objects\2d\menu</Filter>
-    </None>
-    <None Include="data\objects\2d\objectDataList\menuDataList.lst">
-      <Filter>data\objects\2d\objectDataList</Filter>
     </None>
     <None Include="data\objects\2d\menu\tree.list">
       <Filter>data\objects\2d\menu</Filter>
@@ -206,9 +221,6 @@
     <None Include="data\objects\2d\objectDataList\menuBackgrounds.lst">
       <Filter>data\objects\2d\objectDataList</Filter>
     </None>
-    <None Include="data\objects\2d\objectDataList\menuGeneric.lst">
-      <Filter>data\objects\2d\objectDataList</Filter>
-    </None>
     <None Include="data\objects\2d\menu\control\key_binding_slider.ctrl">
       <Filter>data\objects\2d\menu\control</Filter>
     </None>
@@ -244,6 +256,42 @@
     </None>
     <None Include="data\objects\3d\physics\physicsListTable.lst">
       <Filter>data\objects\3d\physics</Filter>
+    </None>
+    <None Include="data\objects\2d\spritestrategy\strategyListTable.lst">
+      <Filter>data\objects\2d\spritestrategy</Filter>
+    </None>
+    <None Include="data\objects\2d\spritestrategy\actor\spriteList.lst">
+      <Filter>data\objects\2d\spritestrategy\actor</Filter>
+    </None>
+    <None Include="data\objects\2d\spritestrategy\stage\sector0.lst">
+      <Filter>data\objects\2d\spritestrategy\stage</Filter>
+    </None>
+    <None Include="data\objects\2d\spritestrategy\stage\stage.cfg">
+      <Filter>data\objects\2d\spritestrategy\stage</Filter>
+    </None>
+    <None Include="data\objects\2d\objectDataList\loadingScreenDataList.lst">
+      <Filter>data\objects\2d\objectDataList</Filter>
+    </None>
+    <None Include="data\objects\2d\objectDataList\menuButtonFrames.lst">
+      <Filter>data\objects\2d\objectDataList</Filter>
+    </None>
+    <None Include="data\objects\2d\objectDataList\menuMisc.lst">
+      <Filter>data\objects\2d\objectDataList</Filter>
+    </None>
+    <None Include="data\objects\2d\objectDataList\symbolDataList.lst">
+      <Filter>data\objects\2d\objectDataList</Filter>
+    </None>
+    <None Include="data\objects\3d\spritestrategy\stage\sector0.lst">
+      <Filter>data\objects\3d\spritestrategy\stage</Filter>
+    </None>
+    <None Include="data\objects\3d\spritestrategy\stage\stage0.cfg">
+      <Filter>data\objects\3d\spritestrategy\stage</Filter>
+    </None>
+    <None Include="data\objects\3d\spritestrategy\strategyDataList.lst">
+      <Filter>data\objects\3d\spritestrategy</Filter>
+    </None>
+    <None Include="data\objects\3d\spritestrategy\actor\spriteList.lst">
+      <Filter>data\objects\3d\spritestrategy\actor</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +344,9 @@
       <Filter>source\smartGUI</Filter>
     </ClCompile>
     <ClCompile Include="source\ai\ballai.cpp">
+      <Filter>source\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ai\cubeai.cpp">
       <Filter>source\ai</Filter>
     </ClCompile>
   </ItemGroup>
@@ -356,6 +407,9 @@
     </ClInclude>
     <ClInclude Include="source\state\statemessage.h">
       <Filter>source\state</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ai\cubeai.h">
+      <Filter>source\ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

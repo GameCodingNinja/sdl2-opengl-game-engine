@@ -20,6 +20,7 @@ class CUIControl;
 class iGameState;
 class CMenu;
 class iSprite2D;
+class iSprite3D;
 
 class CGame : public CBaseGame
 {
@@ -70,6 +71,7 @@ private:
     
     // Call back function to create sprite ai
     void AICreateCallBack( const std::string & aiName, iSprite2D * pSprite );
+    void AICreateCallBack3D( const std::string & aiName, iSprite3D * pSprite );
     
     // Callback for shader init
     void ShaderInitCallBack( const std::string & shaderId );

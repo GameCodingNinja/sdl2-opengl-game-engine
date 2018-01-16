@@ -11,6 +11,9 @@
 #include <common/point.h>
 #include <common/worldvalue.h>
 
+class CCamera;
+class CMatrix;
+
 namespace NMathFunc
 {
     // 2D dot product
@@ -25,6 +28,9 @@ namespace NMathFunc
 
     // Perform a modulus operation on the passed in floats
     float Modulus( float v1, float v2 );
+
+    // Get the mouse's position in 3D
+    CPoint<float> MouseTo3D( float mx, float my, CCamera matCam, CMatrix matProj );
 }
 
 #endif  // __math_func_2d_h__

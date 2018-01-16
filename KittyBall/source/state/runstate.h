@@ -27,7 +27,7 @@ public:
     CRunState();
 
     // Destructor
-    virtual ~CRunState(){};
+    virtual ~CRunState();
     
     // Do any pre-game loop init's
     void Init() override;
@@ -56,9 +56,6 @@ private:
     //CPhysicsWorld2D & m_rPhysicsWorld;
     CPhysicsWorld3D & m_rPhysicsWorld;
 
-    // Sprite plane safe pointers
-    CSprite3D m_upFloorPlane;
-    CSprite3D m_cube;
     CCamera m_camera;
 };
 

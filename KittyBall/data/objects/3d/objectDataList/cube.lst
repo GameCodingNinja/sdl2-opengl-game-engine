@@ -29,14 +29,14 @@
       <object name="cubePhysics">
         <visual file="data/objects/3d/meshes/cube.3dm"/>
         <physics world="(cube)">
-          <body shape="box" mass="1" restitution="0.7"/>
-          <collisionFilter group="1" mask="2"/>
+          <body shape="box" mass="1" restitution="0.3" friction="0.8"/>
+          <!--<collisionFilter group="1" mask="2"/>-->
         </physics>
       </object>
 
       <object name="plane">
         <physics world="(cube)">
-          <body shape="plane" restitution="0.5"/>
+          <body shape="plane" restitution="0.3" friction="0.8"/>
           <collisionFilter group="2" mask="1"/>
           <planeNormal x="0" y="1" z="0"/>
         </physics>

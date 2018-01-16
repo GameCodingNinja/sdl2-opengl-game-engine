@@ -71,6 +71,7 @@ public:
 
     // Render the sprites
     void Render( const class CMatrix & matrix );
+    void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );
     
     // Get a pointer to the strategy
     template <typename target>

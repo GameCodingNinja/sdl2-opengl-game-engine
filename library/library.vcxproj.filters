@@ -420,6 +420,21 @@
     <ClCompile Include="slot\animatedcycleresults.cpp">
       <Filter>slot</Filter>
     </ClCompile>
+    <ClCompile Include="3d\sector3d.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\actorsprite3d.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\isprite3d.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\basicspritestrategy3d.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\basicstagestrategy3d.cpp">
+      <Filter>3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\sprite2d.h">
@@ -922,6 +937,21 @@
     </ClInclude>
     <ClInclude Include="slot\animatedcycleresults.h">
       <Filter>slot</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\sector3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\actorsprite3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\isprite3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\basicspritestrategy3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\basicstagestrategy3d.h">
+      <Filter>3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

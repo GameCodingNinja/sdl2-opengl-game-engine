@@ -79,6 +79,12 @@ void CSignalMgr::Connect_AICreate( const AICreateSignal::slot_type & slot )
 
 }   // Connect_AISpriteCreate
 
+void CSignalMgr::Connect_AICreate3D( const AICreateSignal3D::slot_type & slot )
+{
+    m_aiCreateSignal3d.connect( slot );
+
+}   // Connect_AISpriteCreate
+
 void CSignalMgr::Disconnect_AICreate()
 {
     m_aiCreateSignal.disconnect_all_slots();
@@ -142,6 +148,12 @@ void CSignalMgr::Broadcast( CMenu * pMenu )
 void CSignalMgr::Broadcast( const std::string & aiName, iSprite2D * pSprite )
 {
     m_aiCreateSignal(aiName, pSprite);
+
+}   // Broadcast
+
+void CSignalMgr::Broadcast( const std::string & aiName, iSprite3D * pSprite )
+{
+    m_aiCreateSignal3d( aiName, pSprite );
 
 }   // Broadcast
 

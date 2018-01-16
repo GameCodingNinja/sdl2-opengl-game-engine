@@ -165,7 +165,8 @@ void CStartUpState::AssetLoad()
     CObjectDataMgr::Instance().LoadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
     
     // Load the actor list table
-    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    //CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/3d/spritestrategy/strategyDataList.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().LoadActionFromXML( "data/settings/controllerMapping.cfg" );
@@ -231,6 +232,9 @@ void CStartUpState::AssetLoad()
 ****************************************************************************/
 bool CStartUpState::DoStateChange()
 {
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glDisable( GL_DEPTH_TEST );
+
     // Do the fade in
     Fade( *m_upSpriteLogo.get(), 500.f, CColor(0,0,0,1), CColor(1,1,1,1) );
     
@@ -245,6 +249,9 @@ bool CStartUpState::DoStateChange()
     
     // Do the fade out
     Fade( *m_upSpriteLogo.get(), 500.f, CColor(1,1,1,1), CColor(0,0,0,1) );
+
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glEnable( GL_DEPTH_TEST );
 
     return true;
 

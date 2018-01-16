@@ -212,11 +212,15 @@ void CBaseGame::Render()
     // Do the pre render
     PreRender();
 
-    glDisable( GL_DEPTH_TEST );
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glDisable( GL_DEPTH_TEST );
 
     // Do the post render
     PostRender();
     
+    if( CSettings::Instance().GetEnableDepthBuffer() )
+        glEnable( GL_DEPTH_TEST );
+
     // Do the back buffer swap
     SDL_GL_SwapWindow( m_pWindow );
 

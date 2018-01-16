@@ -20,6 +20,7 @@
 class CUIControl;
 class CMenu;
 class iSprite2D;
+class iSprite3D;
 
 class CSignalMgr
 {
@@ -29,6 +30,7 @@ public:
     typedef boost::signals2::signal<void (CUIControl *)> SmartGuiControlSignal;
     typedef boost::signals2::signal<void (CMenu *)> SmartMenuSignal;
     typedef boost::signals2::signal<void (const std::string &, iSprite2D *)> AICreateSignal;
+    typedef boost::signals2::signal<void( const std::string &, iSprite3D * )> AICreateSignal3D;
     typedef boost::signals2::signal<void ()> BasicFunction;
 
     // Get the instance of the singleton class
@@ -54,6 +56,7 @@ public:
     
     // Connect to the Ai Sprite create signal
     void Connect_AICreate( const AICreateSignal::slot_type & slot );
+    void Connect_AICreate3D( const AICreateSignal3D::slot_type & slot );
     void Disconnect_AICreate();
     
     // Connect/Disconnect to the load signal
@@ -72,6 +75,7 @@ public:
     
     // Broadcast AI Sprite create signal
     void Broadcast( const std::string & aiName, iSprite2D * pSprite );
+    void Broadcast( const std::string & aiName, iSprite3D * pSprite );
     
     // Broadcast the load signal
     void Broadcast_LoadSignal();
@@ -93,6 +97,7 @@ private:
     SmartGuiControlSignal m_smartGuiControlSignal;
     SmartMenuSignal m_smartMenuSignal;
     AICreateSignal m_aiCreateSignal;
+    AICreateSignal3D m_aiCreateSignal3d;
     BasicFunction m_loadSignal;
     BasicFunction m_resolutionChange;
 

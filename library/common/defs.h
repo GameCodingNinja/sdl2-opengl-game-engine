@@ -73,7 +73,7 @@ namespace NDefs
         NONE                = 0x00,
 
         // Transform parameters
-        TRANSLATE	    = 0x01,
+        TRANSLATE           = 0x01,
         ROTATE	            = 0x02,
         SCALE	            = 0x04,
         CENTER_POINT        = 0x08,
@@ -92,6 +92,8 @@ namespace NDefs
         // Type bits
         SPRITE2D            = 0x200,
         ACTOR2D             = 0x400,
+        SPRITE3D            = 0x800,
+        ACTOR3D             = 0x1000
     };
     
     enum EAspectRatio

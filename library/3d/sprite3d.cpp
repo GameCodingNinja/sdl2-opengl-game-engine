@@ -14,10 +14,10 @@
 #include <utilities/exceptionhandling.h>
 #include <common/color.h>
 #include <script/scriptglobals.h>
+#include <2d/iaibase2d.h>
 
 // AngelScript lib dependencies
 #include <angelscript.h>
-
 /************************************************************************
  *    desc:  Constructor
  ************************************************************************/
@@ -50,6 +50,17 @@ void CSprite3D::InitPhysics()
 
 
 /************************************************************************
+*    desc:  React to what the player is doing
+************************************************************************/
+void CSprite3D::HandleEvent( const SDL_Event & rEvent )
+{
+    if( m_upAI )
+        m_upAI->HandleEvent( rEvent );
+
+}   // HandleEvent
+
+
+/************************************************************************
  *    desc:  Update the sprite                                                           
  ************************************************************************/
 void CSprite3D::Update()
@@ -59,7 +70,20 @@ void CSprite3D::Update()
 
     m_scriptComponent.Update();
 
+    if( m_upAI )
+        m_upAI->Update();
+
 }   // Update
+
+
+/************************************************************************
+*    desc:  Update the physics
+************************************************************************/
+void CSprite3D::PhysicsUpdate()
+{
+    m_physicsComponent.Update( this );
+
+}   // PhysicsUpdate
 
 
 /************************************************************************
@@ -111,6 +135,19 @@ const CObjectData3D & CSprite3D::GetObjectData() const
     return m_objectData;
 
 }   // GetObjectData
+
+
+/************************************************************************
+*    desc:  Set/Get the AI pointer. This class owns the pointer
+************************************************************************/
+void CSprite3D::SetAI( iAIBase2D * pAIBase )
+{
+    m_upAI.reset( pAIBase );
+
+    // Handle any initialization in a separate function
+    m_upAI->Init();
+
+}   // SetAI
 
 
 /************************************************************************
