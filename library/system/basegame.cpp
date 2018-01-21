@@ -188,9 +188,20 @@ bool CBaseGame::GameLoop()
 
         // Transform game objects
         Transform();
+        
+        // Clear the buffers
+        glClear( m_clearBufferMask );
 
         // Do the rendering
         Render();
+        
+        // Do the back buffer swap
+        SDL_GL_SwapWindow( m_pWindow );
+        
+        // Unbind everything after a round of rendering
+        CShaderMgr::Instance().Unbind();
+        CTextureMgr::Instance().Unbind();
+        CVertBufMgr::Instance().Unbind();
 
         // Inc the cycle
         if( NBDefs::IsDebugMode() )
@@ -200,36 +211,6 @@ bool CBaseGame::GameLoop()
     return m_gameRunning;
 
 }   // GameLoop
-
-
-/***************************************************************************
-*   desc:  Do the rendering
-****************************************************************************/
-void CBaseGame::Render()
-{
-    glClear( m_clearBufferMask );
-
-    // Do the pre render
-    PreRender();
-
-    if( CSettings::Instance().GetEnableDepthBuffer() )
-        glDisable( GL_DEPTH_TEST );
-
-    // Do the post render
-    PostRender();
-    
-    if( CSettings::Instance().GetEnableDepthBuffer() )
-        glEnable( GL_DEPTH_TEST );
-
-    // Do the back buffer swap
-    SDL_GL_SwapWindow( m_pWindow );
-
-    // Unbind everything after a round of rendering
-    CShaderMgr::Instance().Unbind();
-    CTextureMgr::Instance().Unbind();
-    CVertBufMgr::Instance().Unbind();
-
-}   // Render
 
 
 /***************************************************************************

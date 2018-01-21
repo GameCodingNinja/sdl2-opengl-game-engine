@@ -293,21 +293,12 @@ void CGame::Transform()
 /***************************************************************************
 *    decs:  Render of game content
 ****************************************************************************/
-void CGame::PreRender()
+void CGame::Render()
 {
     upGameState->PreRender();
-
-}   // GameRender3D
-
-
-/***************************************************************************
-*    decs:  Render of content after post process effects
-****************************************************************************/
-void CGame::PostRender()
-{
     upGameState->PostRender();
 
-}   // PostGameRender2D
+}   // Render
 
 
 /***************************************************************************

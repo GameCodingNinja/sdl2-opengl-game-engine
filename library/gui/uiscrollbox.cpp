@@ -573,7 +573,7 @@ bool CUIScrollBox::SelectAndRepositionCtrl( int scrollVector )
         {
             int pos( m_scrollCurPos / (float)m_controlHeight );
             
-            bool nextCtrl( (m_activeScrollCtrl - m_firstScrollCtrlIndex) * m_controlHeight );
+            bool nextCtrl( ((m_activeScrollCtrl - m_firstScrollCtrlIndex) * m_controlHeight) != 0 );
 
             if( nextCtrl || (m_firstScrollCtrlIndex > pos) )
                 InitScrolling( 1, m_controlHeight - diff, false );

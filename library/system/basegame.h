@@ -63,19 +63,13 @@ protected:
     virtual void Transform() = 0;
 
     // Render of game content
-    virtual void PreRender() = 0;
-
-    // Post Render of game content
-    virtual void PostRender() = 0;
+    virtual void Render() = 0;
 
     // Start the game
     void StartGame();
 
     // Stop the game
     void StopGame();
-
-    // Do the rendering
-    void Render();
 
     // Poll for game events
     void PollEvents();

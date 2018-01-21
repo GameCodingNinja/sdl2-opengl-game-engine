@@ -61,22 +61,22 @@
 #include <chrono>
 
 /************************************************************************
-*    desc:  Constructer                                                             
+*    desc:  Constructor                                                             
 ************************************************************************/
 CStartUpState::CStartUpState() :
     iGameState( NGameDefs::EGS_STARTUP, NGameDefs::EGS_LOBBY )
 {
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
-*    desc:  destructer
+*    desc:  destructor
 ************************************************************************/
 CStartUpState::~CStartUpState()
 {
     CObjectDataMgr::Instance().FreeGroup2D( "(startup)" );
     
-}   // destructer
+}   // destructor
 
 
 /************************************************************************

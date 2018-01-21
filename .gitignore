@@ -46,6 +46,10 @@
 /consoleTestAp/nbproject/
 /consoleTestAp/build/
 
+/com.hugheswhoproductions.hugheswhoslots
+/org.lapcatgames.PachinkoChallenge
+/org.lapcatgames.template
+
 /library/Win32/
 
 /angelscript/projects/msvc2015/Win32/
@@ -57,5 +61,3 @@
 /bulletPhysics/build3/vs2010/Win32/
 
 /*.user
-/CppApplication_1/build/
-/CppApplication_1/dist/

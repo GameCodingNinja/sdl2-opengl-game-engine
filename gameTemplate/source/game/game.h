@@ -55,10 +55,7 @@ protected:
     void Transform() override;
 
     // 2D/3D Render of game content
-    void PreRender() override;
-
-    // 2D/3D Render of post game content
-    void PostRender() override;
+    void Render() override;
 
 private:
 
