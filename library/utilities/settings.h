@@ -158,11 +158,6 @@ private:
     CSize<float> m_native_size;
     CSize<float> m_default_size;
     CSize<float> m_default_size_half;
-    CSize<float> m_portrait_size;
-    CSize<float> m_portrait_size_half;
-    CSize<float> m_portrait_native_size;
-    CSize<float> m_portrait_default_size;
-    CSize<float> m_portrait_default_size_half;
     
     // Orientation of game window
     NDefs::EOrentation m_orientation;

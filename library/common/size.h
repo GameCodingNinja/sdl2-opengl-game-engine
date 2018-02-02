@@ -407,13 +407,11 @@ public:
     /************************************************************************
     *    desc:  Swap the width and height
     ************************************************************************/
-    CSize Swap() const
+    void Swap()
     {
-        CSize swap;
-        swap.w = h;
-        swap.h = w;
-        
-        return swap;
+        type tmp = w;
+        w = h;
+        h = tmp;
 
     }   // Swap
 };

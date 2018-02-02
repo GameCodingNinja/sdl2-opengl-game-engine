@@ -5,7 +5,7 @@
         <!-- Win Meter Label -->
         <control name="win_meter" controlType="meter" defaultState="inactive">
             <filePath file="data/objects/2d/ui/games/run/controls/win_meter.ctrl"/>
-            <position x="-845" y="-410" z="0"/>
+            <position x="-410" y="900"/>
             <!-- Max size of font string in meter -->
             <size width="175" height="55"/>
             <!-- <meterScript onInit="Meter_OnInit" onStart="Meter_OnStart" onStop="Meter_OnStop" onClear="Meter_OnClear"/> -->
@@ -32,7 +32,7 @@
         <!-- Menu Button -->
         <control name="menu_btn" controlType="button" defaultState="inactive">
             <filePath file="data/objects/2d/menu/control/ui_button_150x60.ctrl"/>
-            <position x="-865" y="495" z="0"/>
+            <position x="410" y="900"/>
             <fontStringLst>
                 <string text="Menu"/>
             </fontStringLst>

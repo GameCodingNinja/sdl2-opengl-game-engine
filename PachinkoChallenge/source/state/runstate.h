@@ -67,11 +67,6 @@ public:
     
     // Called when two fixtures cease to touch
     virtual void EndContact(b2Contact* contact) override;
-    
-private:
-    
-    // Resolution change call back
-    void ResolutionChangeCallBack();
 
 private:
     

@@ -32,6 +32,7 @@
         <object name="logo">
             <visual>
                 <texture file="data/textures/startup/logo.png"/>
+                <!-- <texture file="data/textures/startup/waffles.png"/> -->
             </visual>
         </object>
         
@@ -40,16 +41,9 @@
                 <shader id="shader_solid_2d"/>
                 <color r="1" g="1" b="1" a="1"/>
             </visual>
-            <size width="1920" height="1080"/>
+            <size width="1080" height="1920"/>
         </object>
-        <!--
-        <object name="waffles">
-            <visual>
-                <texture file="data/textures/startup/waffles.png"/>
-            </visual>
-        </object>
-        -->
+        
     </objectList>
 
 </objectDataList2D>
-

@@ -34,7 +34,7 @@
 #include <Box2D/Box2D.h>
 
 /************************************************************************
-*    desc:  Constructer                                                             
+*    desc:  Constructor                                                             
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
@@ -52,37 +52,18 @@ CRunState::CRunState() :
     // so this state is the collision listener
     m_rPhysicsWorld.GetWorld().SetContactListener(this);
     
-    // Connect to the Resolution Change signal
-    CSignalMgr::Instance().Connect_ResolutionChange( boost::bind(&CRunState::ResolutionChangeCallBack, this) );
-    
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
-*    desc:  destructer
+*    desc:  destructor
 ************************************************************************/
 CRunState::~CRunState()
 {
     m_rPhysicsWorld.GetWorld().SetContactListener(nullptr);
     CSignalMgr::Instance().Disconnect_ResolutionChange();
     
-}   // destructer
-
-
-/************************************************************************
-*    desc:  Resolution change call back
-************************************************************************/
-void CRunState::ResolutionChangeCallBack()
-{
-    // Scale the playing field to match the aspect ratio
-    m_camera.GenerateOrthographicProjection(
-        CSettings::Instance().GetNativeSize().w / CSettings::Instance().GetDefaultSize().w );
-    
-    float scale = CSettings::Instance().GetDefaultSize().w / CSettings::Instance().GetNativeSize().w;
-    m_Object2D.SetScaleXYZ( scale, scale, scale );
-    m_Object2D.Transform();
-    
-}   // ResolutionChangeCallBack
+}   // destructor
 
 
 /************************************************************************
@@ -104,18 +85,18 @@ void CRunState::Init()
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
     
+    // Set the initial camera scale
+    m_camera.GenerateOrthographicProjection( 1.65 );
+    
     // Reset the camera
-    m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
-    m_camera.Transform();
+    //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
+    //m_camera.Transform();
     
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
     
-    // Scale the playing field to match the aspect ratio
-    ResolutionChangeCallBack();
-    
     // Add the first strawberry
-    CSpriteStrategyMgr::Instance().Create("(sprite)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-550.f) );
+    CSpriteStrategyMgr::Instance().Create("(sprite)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-1450.f) );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -144,7 +125,7 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
             const float ratio = 1.f / m_camera.GetOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - m_camera.GetOrthoProjSizeHalf().w;
 
-            CSpriteStrategyMgr::Instance().Create("(sprite)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 700));
+            CSpriteStrategyMgr::Instance().Create("(sprite)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1350));
         }
     }
 
@@ -249,7 +230,7 @@ void CRunState::BeginContact(b2Contact* contact)
             m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, STRAWBERRY );
             
             // Add another strawberry
-            m_rStrawberryData.SetPosXYZ( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -550.f);
+            m_rStrawberryData.SetPosXYZ( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -1450.f);
             m_rStrategy.HandleMessage( NDefs::ESM_CREATE_SPRITE, "strawberry" );
         }
                 

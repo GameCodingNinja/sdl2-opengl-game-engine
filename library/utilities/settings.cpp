@@ -116,14 +116,30 @@ void CSettings::LoadXML()
 
             // Get the attributes from the "defaultHeight" node
             const XMLNode defResNode = displayListNode.getChildNode("default");
-            m_native_size.h = m_default_size.h = std::atof(defResNode.getAttribute("height"));
-            
-            if( defResNode.isAttributeSet("width") )
-                m_native_size.w = std::atof(defResNode.getAttribute("width"));
-            
+
             if( defResNode.isAttributeSet("orientation") )
+            {
                 if( std::strcmp( defResNode.getAttribute("orientation"), "portrait" ) == 0 )
+                {
                     m_orientation = NDefs::EO_PORTRAIT;
+                    m_size.Swap();
+                }
+            }
+
+            if( m_orientation == NDefs::EO_PORTRAIT )
+            {
+                m_native_size.h = m_default_size.h = std::atof(defResNode.getAttribute("width"));
+                
+                if( defResNode.isAttributeSet("height") )
+                    m_native_size.w = std::atof(defResNode.getAttribute("height"));
+            }
+            else
+            {
+                m_native_size.h = m_default_size.h = std::atof(defResNode.getAttribute("height"));
+                
+                if( defResNode.isAttributeSet("width") )
+                    m_native_size.w = std::atof(defResNode.getAttribute("width"));
+            }
         }
 
         CalcRatio();
@@ -288,24 +304,15 @@ void CSettings::CalcRatio()
     // NOTE: Make sure the width does not have a floating point component
     m_default_size.w = (float)(int)((m_screenAspectRatio.w * m_default_size.h) + 0.5);
 
-    // Get half the size for use with screen boundries
+    // Get half the size for use with screen boundaries
     m_default_size_half = m_default_size / 2.f;
 
-    // Screen size devided by two
+    // Screen size divided by two
     m_size_half = m_size / 2.f;
     
-    // Precalculate the aspect ratios for orthographic projection
+    // Pre-calculate the aspect ratios for orthographic projection
     m_orthoAspectRatio.h = m_size.h / m_default_size.h;
     m_orthoAspectRatio.w = m_size.w / m_default_size.w;
-    
-    if( m_orientation == NDefs::EO_PORTRAIT )
-    {
-        m_portrait_size = m_size.Swap();
-        m_portrait_size_half = m_size_half.Swap();
-        m_portrait_native_size = m_native_size.Swap();
-        m_portrait_default_size = m_default_size.Swap();
-        m_portrait_default_size_half = m_default_size_half.Swap();
-    }
 
 }   // CalcRatio
 
@@ -320,10 +327,7 @@ const CSize<float> & CSettings::GetResolution() const
 
 const CSize<float> & CSettings::GetSize() const
 {
-    if( m_orientation == NDefs::EO_PORTRAIT )
-        return m_portrait_size;
-    else
-        return m_size;
+    return m_size;
 }
 
 void CSettings::SetSize( const CSize<float> & size )
@@ -339,10 +343,7 @@ void CSettings::SetSize( const CSize<float> & size )
 ************************************************************************/
 const CSize<float> & CSettings::GetSizeHalf() const
 {
-    if( m_orientation == NDefs::EO_PORTRAIT )
-        return m_portrait_size_half;
-    else
-        return m_size_half;
+    return m_size_half;
     
 }   // GetSizeHalf
 
@@ -352,10 +353,7 @@ const CSize<float> & CSettings::GetSizeHalf() const
 ************************************************************************/
 const CSize<float> & CSettings::GetNativeSize() const
 {
-    if( m_orientation == NDefs::EO_PORTRAIT )
-        return m_portrait_native_size;
-    else
-        return m_native_size;
+    return m_native_size;
     
 }   // GetNativeSize
 
@@ -365,10 +363,7 @@ const CSize<float> & CSettings::GetNativeSize() const
 ************************************************************************/
 const CSize<float> & CSettings::GetDefaultSize() const
 {
-    if( m_orientation == NDefs::EO_PORTRAIT )
-        return m_portrait_default_size;
-    else
-        return m_default_size;
+    return m_default_size;
     
 }   // GetDefaultSize
 
@@ -380,10 +375,7 @@ const CSize<float> & CSettings::GetDefaultSize() const
 ************************************************************************/
 const CSize<float> & CSettings::GetDefaultSizeHalf() const
 {
-    if( m_orientation == NDefs::EO_PORTRAIT )
-        return m_portrait_default_size_half;
-    else
-        return m_default_size_half;
+    return m_default_size_half;
     
 }   // GetDefaultSizeHalf
 
