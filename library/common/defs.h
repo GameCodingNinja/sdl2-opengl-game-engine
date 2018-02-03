@@ -138,10 +138,18 @@ namespace NDefs
     
     enum ELightType
     {
-        ELT_NONE=0,
+        ELT_NONE = 0,
         ELT_DIRECTIONAL,
         ELT_POINT_INFINITE,
         ELT_POINT_RADIUS,
+    };
+    
+    enum EMirror
+    {
+        EM_NULL = 0,
+        EM_HORIZONTAL,
+        EM_VERTICAL,
+        EM_HORIZONTAL_VERTICAL
     };
 
 }   // NDefs

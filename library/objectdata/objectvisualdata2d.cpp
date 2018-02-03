@@ -44,7 +44,8 @@ CObjectVisualData2D::CObjectVisualData2D() :
     m_compressed(false),
     m_iboCount(0),
     m_vertexScale(1,1),
-    m_defaultUniformScale(1)
+    m_defaultUniformScale(1),
+    m_mirror(NDefs::EM_NULL)
 {
 }   // constructor
 
@@ -131,6 +132,20 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
 
                 else if( genTypeStr == "font" )
                     m_genType = NDefs::EGT_FONT;
+            }
+            
+            if( meshNode.isAttributeSet("mirror") )
+            {
+                std::string mirrorTypeStr = meshNode.getAttribute( "mirror" );
+                
+                if( mirrorTypeStr == "horizontal" )
+                    m_mirror = NDefs::EM_HORIZONTAL;
+
+                else if( mirrorTypeStr == "vertical" )
+                    m_mirror = NDefs::EM_VERTICAL;
+
+                else if( mirrorTypeStr == "horizontal_vertical" )
+                    m_mirror = NDefs::EM_HORIZONTAL_VERTICAL;
             }
             
             const XMLNode spriteSheetNode = meshNode.getChildNode("spriteSheet");
@@ -361,8 +376,31 @@ void CObjectVisualData2D::GenerateQuad( const std::string & group )
         {{-0.5f, -0.5f, 0.0},  {0.0, 1.0}},
         {{ 0.5f, -0.5f, 0.0},  {1.0, 1.0}}
     };
+    
+    std::string horzStr = "";
+    std::string vertStr = "";
+    
+    if( (m_mirror == NDefs::EM_HORIZONTAL) || (m_mirror == NDefs::EM_HORIZONTAL_VERTICAL) )
+    {
+        horzStr = "_horz";
+        
+        vertVec[0].uv.u = 0.0;
+        vertVec[1].uv.u = 1.0;
+        vertVec[2].uv.u = 1.0;
+        vertVec[3].uv.u = 0.0;
+    }
 
-    m_vbo = CVertBufMgr::Instance().CreateVBO( group, "quad_0011", vertVec );
+    if( (m_mirror == NDefs::EM_VERTICAL) || (m_mirror == NDefs::EM_HORIZONTAL_VERTICAL) )
+    {
+        vertStr = "_vert";
+        
+        vertVec[0].uv.v = 1.0;
+        vertVec[1].uv.v = 1.0;
+        vertVec[2].uv.v = 0.0;
+        vertVec[3].uv.v = 0.0;
+    }
+
+    m_vbo = CVertBufMgr::Instance().CreateVBO( group, "quad_0011" + horzStr + vertStr, vertVec );
     m_ibo = CVertBufMgr::Instance().CreateIBO( group, "quad_0123", indexData, sizeof(indexData) );
 
     // A quad has 4 ibos

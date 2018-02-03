@@ -173,6 +173,9 @@ private:
     // Default scale
     float m_defaultUniformScale;
     
+    // Mirror enum
+    NDefs::EMirror m_mirror;
+    
     // File extension for resolution swap
     std::string m_resExt;
 };
