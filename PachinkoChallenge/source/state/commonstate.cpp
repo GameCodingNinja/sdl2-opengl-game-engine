@@ -20,24 +20,24 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer                                                             
+*    desc:  Constructor                                                             
 ************************************************************************/
 CCommonState::CCommonState( const NGameDefs::EGameState gameState, const NGameDefs::EGameState nextState ) :
     iGameState( gameState, nextState )
 {
     m_gameStateMap.emplace( "title_screen_state", NGameDefs::EGS_TITLE_SCREEN );
-    m_gameStateMap.emplace( "run_state", NGameDefs::EGS_RUN );
+    m_gameStateMap.emplace( "level_1_state", NGameDefs::EGS_LEVEL_1 );
     
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
-*    desc:  Destructer                                                             
+*    desc:  Destructor                                                             
 ************************************************************************/
 CCommonState::~CCommonState()
 {
 
-}   // Destructer
+}   // Destructor
 
 
 /***************************************************************************

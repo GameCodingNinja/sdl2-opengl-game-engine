@@ -60,22 +60,22 @@
 #include <chrono>
 
 /************************************************************************
-*    desc:  Constructer                                                             
+*    desc:  Constructor                                                             
 ************************************************************************/
 CStartUpState::CStartUpState() :
     iGameState( NGameDefs::EGS_STARTUP, NGameDefs::EGS_TITLE_SCREEN )
 {
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
-*    desc:  destructer
+*    desc:  destructor
 ************************************************************************/
 CStartUpState::~CStartUpState()
 {
     CObjectDataMgr::Instance().FreeGroup2D( "(startup)" );
     
-}   // destructer
+}   // destructor
 
 
 /************************************************************************
@@ -157,7 +157,7 @@ void CStartUpState::Fade(
 void CStartUpState::AssetLoad()
 {
     // Load the sprite list table
-    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/spriteListTable.lst" );
+    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().LoadActionFromXML( "data/settings/controllerMapping.cfg" );

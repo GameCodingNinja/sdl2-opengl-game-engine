@@ -21,7 +21,7 @@
 ************************************************************************/
 CBallAI::CBallAI( iSprite2D * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
-    m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(sprite)")),
+    m_rStrategy(CSpriteStrategyMgr::Instance().Find<CBasicSpriteStrategy2D>("_spriteStrategy")), // Find the strategy that has this ball
     m_generator(std::random_device{}()),
     m_angularImpulse(-1, 1),
     m_rotation(-M_PI, M_PI)
@@ -42,6 +42,8 @@ CBallAI::~CBallAI()
 ************************************************************************/
 void CBallAI::Init()
 {
+    m_sprite.PrepareFuncId( "fadeIn" );
+    
     // Put ball into a random rotation
     auto pBody = m_sprite.GetPhysicsComponent().GetBody();
     pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
@@ -57,7 +59,7 @@ void CBallAI::Init()
 ************************************************************************/
 void CBallAI::Update()
 {
-    if( m_sprite.GetPos().y < -1600.0f )
+    if( m_sprite.GetPos().y < -1650.0f )
         m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, m_sprite.GetId() );
         
 }   // Update

@@ -149,6 +149,9 @@ int CBasicSpriteStrategy2D::Create(
         // Copy transform data specified in the xml
         m_iter.first->second->CopyTransform( &rData );
         
+        // Copy over any scripts
+        dynamic_cast<CSprite2D *>(m_iter.first->second)->CopyScriptFunctions( rData.GetScriptFunctions() );
+        
         aiName = rData.GetAIName();
     }
     else if( rSpriteDataContainer.GetType() == NDefs::ACTOR2D )
@@ -281,3 +284,17 @@ iSprite2D * CBasicSpriteStrategy2D::get( const int id )
     return iter->second;
 
 }   // get
+
+
+/************************************************************************
+ *    desc:  Find if the sprite exists
+ ************************************************************************/
+bool CBasicSpriteStrategy2D::Find( iSprite2D * piSprite )
+{
+    // See if this sprite has already been created
+    auto iter = m_spriteMap.find( piSprite->GetId() );
+    if( iter != m_spriteMap.end() && (iter->second == piSprite) )
+        return true;
+        
+    return false;
+}

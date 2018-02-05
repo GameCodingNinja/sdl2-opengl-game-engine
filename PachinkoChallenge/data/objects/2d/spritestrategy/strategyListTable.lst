@@ -1,10 +1,10 @@
 <listTable>
 
-    <groupList groupName="(stage1)">
+    <groupList groupName="(level1_stage1Strategy)">
         <file path="data/objects/2d/spritestrategy/stage1/stage.cfg"/>
     </groupList>
     
-    <groupList groupName="(sprite)">
+    <groupList groupName="(level1_spriteStrategy)">
         <file path="data/objects/2d/spritestrategy/actor/spriteList.lst"/>
     </groupList>
   

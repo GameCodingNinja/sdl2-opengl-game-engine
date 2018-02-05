@@ -34,7 +34,7 @@ CSpriteStrategyMgr::CSpriteStrategyMgr() :
 ************************************************************************/
 CSpriteStrategyMgr::~CSpriteStrategyMgr()
 {
-    NDelFunc::DeleteUnorderedMapPointers(m_pStrategyMap);
+    NDelFunc::DeleteMapPointers(m_pStrategyMap);
     
 }   // destructor
 
@@ -63,6 +63,9 @@ void CSpriteStrategyMgr::Load( const std::string & strategyId, iSpriteStrategy *
 
     for( auto & filePathIter : listTableIter->second ) 
         mapIter.first->second->LoadFromFile( filePathIter );
+    
+    // Add the strategy pointer to the vector for rendering
+    m_pStrategyVec.push_back( pSpriteStrategy );
 
 }   // Load
 
@@ -120,8 +123,9 @@ int CSpriteStrategyMgr::Create(
 ************************************************************************/
 void CSpriteStrategyMgr::Clear()
 {
-    NDelFunc::DeleteUnorderedMapPointers(m_pStrategyMap);
+    NDelFunc::DeleteMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
+    m_pStrategyVec.clear();
     m_spriteInc = 0;
 
 }   // Clear
@@ -132,8 +136,8 @@ void CSpriteStrategyMgr::Clear()
 ************************************************************************/
 void CSpriteStrategyMgr::Init()
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Init();
+    for( auto iter : m_pStrategyVec )
+        iter->Init();
     
 }   // Init
 
@@ -143,8 +147,8 @@ void CSpriteStrategyMgr::Init()
 ************************************************************************/
 void CSpriteStrategyMgr::CleanUp()
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->CleanUp();
+    for( auto iter : m_pStrategyVec )
+        iter->CleanUp();
     
 }   // CleanUp
 
@@ -154,8 +158,8 @@ void CSpriteStrategyMgr::CleanUp()
 ************************************************************************/
 void CSpriteStrategyMgr::MiscProcess()
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->MiscProcess();
+    for( auto iter : m_pStrategyVec )
+        iter->MiscProcess();
     
 }   // MiscProcess
 
@@ -165,8 +169,8 @@ void CSpriteStrategyMgr::MiscProcess()
 ****************************************************************************/
 void CSpriteStrategyMgr::Update()
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Update();
+    for( auto iter : m_pStrategyVec )
+        iter->Update();
 
 }   // Update
 
@@ -176,15 +180,15 @@ void CSpriteStrategyMgr::Update()
 ************************************************************************/
 void CSpriteStrategyMgr::Transform()
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Transform();
+    for( auto iter : m_pStrategyVec )
+        iter->Transform();
 
 }   // Transform
 
 void CSpriteStrategyMgr::Transform( const CObject2D & object )
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Transform( object );
+    for( auto iter : m_pStrategyVec )
+        iter->Transform( object );
 
 }   // Transform
 
@@ -194,15 +198,15 @@ void CSpriteStrategyMgr::Transform( const CObject2D & object )
 ****************************************************************************/
 void CSpriteStrategyMgr::Render( const CMatrix & matrix )
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Render( matrix );
+    for( auto iter : m_pStrategyVec )
+        iter->Render( matrix );
 
 }   // Render
 
 void CSpriteStrategyMgr::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
 {
-    for( auto & iter : m_pStrategyMap )
-        iter.second->Render( projMatrix, cameraMatrix );
+    for( auto iter : m_pStrategyVec )
+        iter->Render( projMatrix, cameraMatrix );
 
 }   // Render
 

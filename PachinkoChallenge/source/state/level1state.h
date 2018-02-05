@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       runstate.h
+*    FILE NAME:       level1state.h
 *
-*    DESCRIPTION:     CRunState Class State
+*    DESCRIPTION:     CStage1State Class State
 ************************************************************************/
 
-#ifndef __run_up_state_h__
-#define __run_up_state_h__
+#ifndef __stage_1_state_h__
+#define __stage_1_state_h__
 
 // Physical component dependency
 #include "commonstate.h"
@@ -31,15 +31,15 @@ class CUIMeter;
 class CUIButton;
 class CSpriteData;
 
-class CRunState : public CCommonState, b2ContactListener
+class CLevel1State : public CCommonState, b2ContactListener
 {
 public:
 
     // Constructor
-    CRunState();
+    CLevel1State();
 
     // Destructor
-    virtual ~CRunState();
+    virtual ~CLevel1State();
     
     // Do any pre-game loop init's
     void Init() override;
@@ -118,7 +118,7 @@ private:
 };
 
 
-namespace NRunState
+namespace NLevel1State
 {
     void ObjectDataLoad();
     void CriticalLoad();
@@ -127,9 +127,9 @@ namespace NRunState
     void Unload();
     void CriticalInit();
     
-}   // NTitleScreenState
+}   // NLevel1State
 
 
-#endif  // __run_up_state_h__
+#endif  // __stage_1_state_h__
 
 

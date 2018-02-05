@@ -276,3 +276,19 @@ bool CSector2D::InPerspectiveView()
     return true;
 
 }   // InPerspectiveView
+
+
+/************************************************************************
+ *    desc:  Find if the sprite exists
+ ************************************************************************/
+bool CSector2D::Find( iSprite2D * piSprite )
+{
+    for( auto iter : m_pSpriteVec )
+    {
+        if( iter == piSprite )
+            return true;
+    }
+
+    return false;
+    
+}   // Find

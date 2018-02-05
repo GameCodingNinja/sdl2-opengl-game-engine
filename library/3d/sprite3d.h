@@ -46,25 +46,25 @@ public:
     CVisualComponent3D & GetVisualComponent();
 
     // Get the physics component
-    CPhysicsComponent3D & GetPhysicsComponent();
+    CPhysicsComponent3D & GetPhysicsComponent() override;
 
     // Get the scripting component
     CScriptComponent & GetScriptComponent();
     
     // Init the physics
-    void InitPhysics();
+    void InitPhysics() override;
 
     // React to what the player is doing
     void HandleEvent( const SDL_Event & rEvent ) override;
 
     // Update the sprite 
-    void Update();
+    void Update() override;
     
     // Update the physics
     void PhysicsUpdate();
 
     // do the render
-    void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );
+    void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) override;
 
     // Set/Get the AI pointer
     void SetAI( iAIBase2D * pAIBase ) override;

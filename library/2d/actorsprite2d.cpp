@@ -94,6 +94,9 @@ void CActorSprite2D::Create( const CActorData & actorData )
 
         // Copy over the transform
         m_spriteDeq.back().CopyTransform( &iter );
+        
+        // Copy over any scripts
+        m_spriteDeq.back().CopyScriptFunctions( iter.GetScriptFunctions() );
 
         // Find the largest size width and height of the different sprites for the controls size
         const CSize<float> & size = m_spriteDeq.back().GetObjectData().GetSize();

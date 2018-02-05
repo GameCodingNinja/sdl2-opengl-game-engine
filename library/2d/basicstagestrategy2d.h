@@ -52,6 +52,9 @@ public:
     // Render the actors
     virtual void Render( const class CMatrix & matrix ) override;
     
+    // Find if the sprite exists
+    bool Find( iSprite2D * piSprite );
+    
     // Get the default camera position
     CObject & GetDefaultCameraPos();
     

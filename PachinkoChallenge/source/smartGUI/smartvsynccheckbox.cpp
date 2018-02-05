@@ -14,7 +14,7 @@
 #include <utilities/genfunc.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartVSyncCheckBox::CSmartVSyncCheckBox( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )

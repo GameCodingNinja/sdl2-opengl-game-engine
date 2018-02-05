@@ -19,7 +19,7 @@
 
 // Game dependencies
 #include "titlescreenstate.h"
-#include "runstate.h"
+#include "level1state.h"
 
 // Game lib dependencies
 #include <system/device.h>
@@ -48,7 +48,7 @@ void SoilLoadCallBack()
 }
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CLoadState::CLoadState( const CStateMessage & stateMsg ) :
     iGameState( NGameDefs::EGS_GAME_LOAD, stateMsg ),
@@ -56,11 +56,11 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
     m_time(0),
     m_frame(0)
 {
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************
-*    desc:  destructer
+*    desc:  destructor
 ************************************************************************/
 CLoadState::~CLoadState()
 {
@@ -70,7 +70,7 @@ CLoadState::~CLoadState()
     
     CObjectDataMgr::Instance().FreeGroup2D( "(loadingScreen)" );
     
-}   // destructer
+}   // destructor
 
 
 /************************************************************************
@@ -153,8 +153,8 @@ void CLoadState::ObjectDataLoad()
         if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::ObjectDataLoad();
 
-        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_RUN )
-            NRunState::ObjectDataLoad();
+        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_LEVEL_1 )
+            NLevel1State::ObjectDataLoad();
     }
     catch (NExcept::CCriticalException & ex)
     {
@@ -188,16 +188,16 @@ void CLoadState::CriticalLoad()
     if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalUnload();
     
-    else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_RUN )
-        NRunState::CriticalUnload();
+    else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_LEVEL_1 )
+        NLevel1State::CriticalUnload();
     
     // ------------------ LOAD ASSETS SECTION ------------------
 
     if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalLoad();
 
-    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_RUN )
-        NRunState::CriticalLoad();
+    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_LEVEL_1 )
+        NLevel1State::CriticalLoad();
     
 }   // CriticalLoad
 
@@ -210,8 +210,8 @@ void CLoadState::CriticalInit()
     if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalInit();
 
-    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_RUN )
-        NRunState::CriticalInit();
+    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_LEVEL_1 )
+        NLevel1State::CriticalInit();
     
 }   // CriticalInit
 
@@ -231,8 +231,8 @@ void CLoadState::AssetsLoad()
         if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::Unload();
 
-        else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_RUN )
-            NRunState::Unload();
+        else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_LEVEL_1 )
+            NLevel1State::Unload();
 
 
         // ------------------ LOAD ASSETS SECTION ------------------
@@ -240,8 +240,8 @@ void CLoadState::AssetsLoad()
         if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::Load();
 
-        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_RUN )
-            NRunState::Load();
+        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_LEVEL_1 )
+            NLevel1State::Load();
     }
     catch (NExcept::CCriticalException & ex)
     {

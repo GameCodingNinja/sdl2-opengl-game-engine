@@ -55,6 +55,9 @@ public:
     // Is the actor in view
     bool InView();
     
+    // Find if the sprite exists
+    bool Find( iSprite2D * piSprite );
+    
 private:
     
     // Check if the sector is within the orthographic view frustum

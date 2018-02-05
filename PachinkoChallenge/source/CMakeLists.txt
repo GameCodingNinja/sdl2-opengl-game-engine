@@ -17,7 +17,7 @@ add_executable(
     state/startupstate.cpp
     state/titlescreenstate.cpp
     state/loadstate.cpp
-    state/runstate.cpp
+    state/level1state.cpp
     ai/ballai.cpp )
 
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^arm")

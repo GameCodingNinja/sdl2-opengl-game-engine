@@ -20,6 +20,9 @@
 #include <unordered_map>
 #include <vector>
 
+// Forward Declarations
+class iSprite2D;
+
 class CSpriteStrategyMgr : public CManagerBase
 {
 public:
@@ -79,6 +82,44 @@ public:
     {
         return *dynamic_cast<target *>(get( strategyId ));
     }
+    
+    // Get a pointer to the strategy based on if the sprite can be found
+    template <typename target>
+    target & Find( iSprite2D * piSprite )
+    {
+        target * pStrategy = nullptr;
+        
+        for( auto iter : m_pStrategyVec )
+        {
+            pStrategy = dynamic_cast<target *>(iter);
+            
+            if( (pStrategy != nullptr) && pStrategy->Find(piSprite) )
+                return *pStrategy;
+            
+            pStrategy = nullptr;
+        }
+        
+        return *pStrategy;
+    }
+    
+    // Get a pointer to the strategy based on if the sprite can be found
+    template <typename target>
+    target & Find( const std::string & strategyId )
+    {
+        target * pStrategy = nullptr;
+        
+        for( auto & iter : m_pStrategyMap )
+        {
+            pStrategy = dynamic_cast<target *>(iter.second);
+            
+            if( (pStrategy != nullptr) && (iter.first.find(strategyId) != std::string::npos) )
+                return *pStrategy;
+            
+            pStrategy = nullptr;
+        }
+        
+        return *pStrategy;
+    }
 
 private:
 
@@ -94,7 +135,10 @@ private:
 private:
 
     // Map of unique strategy pointers
-    std::unordered_map<std::string, iSpriteStrategy *> m_pStrategyMap;
+    std::map<std::string, iSpriteStrategy *> m_pStrategyMap;
+    
+    // Vector of unique strategy pointers for
+    std::vector<iSpriteStrategy *> m_pStrategyVec;
     
     // Sprite Id incrementor
     int m_spriteInc;

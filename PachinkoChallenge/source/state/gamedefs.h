@@ -17,7 +17,7 @@ namespace NGameDefs
         EGS_STARTUP,
         EGS_TITLE_SCREEN,
         EGS_GAME_LOAD,
-        EGS_RUN
+        EGS_LEVEL_1
     };
 
 }   // NGameDefs

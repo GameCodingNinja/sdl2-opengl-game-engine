@@ -23,9 +23,9 @@
         <file path="data/objects/2d/objectDataList/titleScreenDataList.lst"/>
     </groupList>
     
-    <groupList groupName="(run)">
-        <file path="data/objects/2d/objectDataList/games/run/ballDataList.lst"/>
-        <file path="data/objects/2d/objectDataList/games/run/stage1DataList.lst"/>
+    <groupList groupName="(level1)">
+        <file path="data/objects/2d/objectDataList/stages/stage1/ballDataList.lst"/>
+        <file path="data/objects/2d/objectDataList/stages/stage1/stage1DataList.lst"/>
     </groupList>
   
 </listTable>

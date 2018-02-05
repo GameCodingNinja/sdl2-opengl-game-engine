@@ -122,7 +122,10 @@ void CSettings::LoadXML()
                 if( std::strcmp( defResNode.getAttribute("orientation"), "portrait" ) == 0 )
                 {
                     m_orientation = NDefs::EO_PORTRAIT;
+                    
+                    #if !defined(__ANDROID__)
                     m_size.Swap();
+                    #endif
                 }
             }
 

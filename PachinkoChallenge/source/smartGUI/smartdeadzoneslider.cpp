@@ -14,7 +14,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartDeadZoneSlider::CSmartDeadZoneSlider( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )

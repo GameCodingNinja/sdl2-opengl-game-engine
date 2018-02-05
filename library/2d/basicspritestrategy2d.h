@@ -66,6 +66,9 @@ public:
         return *dynamic_cast<target *>(get( id ));
     }
     
+    // Find if the sprite exists
+    bool Find( iSprite2D * piSprite );
+    
     // Get the sprite data by name
     CSpriteDataContainer & GetData( const std::string & name );
 

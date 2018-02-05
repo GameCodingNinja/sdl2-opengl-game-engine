@@ -20,13 +20,13 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
         m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) )
 {
-}   // Constructer
+}   // Constructor
 
 
 /************************************************************************

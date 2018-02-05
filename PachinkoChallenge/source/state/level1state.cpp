@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       runstate.cpp
+*    FILE NAME:       level1state.cpp
 *
-*    DESCRIPTION:     CRunState Class State
+*    DESCRIPTION:     CStage1State Class State
 ************************************************************************/
 
 // Physical component dependency
-#include "runstate.h"
+#include "level1state.h"
 
 // Game lib dependencies
 #include <gui/menumanager.h>
@@ -29,6 +29,7 @@
 #include <common/worldvalue.h>
 #include <gui/uimeter.h>
 #include <gui/uibutton.h>
+#include <script/scriptmanager.h>
 
 // Box2D lib dependencies
 #include <Box2D/Box2D.h>
@@ -36,10 +37,10 @@
 /************************************************************************
 *    desc:  Constructor                                                             
 ************************************************************************/
-CRunState::CRunState() :
-    CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
+CLevel1State::CLevel1State() :
+    CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
         m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld2D( "(game)" ) ),
-        m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(sprite)")),
+        m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").Get<CSpriteData>()),
         m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_rMenuBtn(CMenuManager::Instance().GetMenuControl<CUIButton>( "base_game_menu", "menu_btn" )),
@@ -58,7 +59,7 @@ CRunState::CRunState() :
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-CRunState::~CRunState()
+CLevel1State::~CLevel1State()
 {
     m_rPhysicsWorld.GetWorld().SetContactListener(nullptr);
     CSignalMgr::Instance().Disconnect_ResolutionChange();
@@ -69,7 +70,7 @@ CRunState::~CRunState()
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CRunState::Init()
+void CLevel1State::Init()
 {
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().Allow();
@@ -96,7 +97,7 @@ void CRunState::Init()
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
     
     // Add the first strawberry
-    CSpriteStrategyMgr::Instance().Create("(sprite)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-1450.f) );
+    CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-1450.f) );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -107,7 +108,7 @@ void CRunState::Init()
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CRunState::HandleEvent( const SDL_Event & rEvent )
+void CLevel1State::HandleEvent( const SDL_Event & rEvent )
 {
     CCommonState::HandleEvent( rEvent );
 
@@ -125,7 +126,7 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
             const float ratio = 1.f / m_camera.GetOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - m_camera.GetOrthoProjSizeHalf().w;
 
-            CSpriteStrategyMgr::Instance().Create("(sprite)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1350));
+            CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1350));
         }
     }
 
@@ -135,7 +136,7 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ************************************************************************/
-void CRunState::MiscProcess()
+void CLevel1State::MiscProcess()
 {
     if( !CMenuManager::Instance().IsMenuActive() )
     {
@@ -148,7 +149,7 @@ void CRunState::MiscProcess()
 /***************************************************************************
 *    desc:  Handle the physics
 ****************************************************************************/
-void CRunState::Physics()
+void CLevel1State::Physics()
 {
     if( !CMenuManager::Instance().IsMenuActive() )
     {
@@ -161,7 +162,7 @@ void CRunState::Physics()
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CRunState::Update()
+void CLevel1State::Update()
 {
     CCommonState::Update();
     
@@ -178,7 +179,7 @@ void CRunState::Update()
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CRunState::Transform()
+void CLevel1State::Transform()
 {
     CCommonState::Transform();
     
@@ -192,7 +193,7 @@ void CRunState::Transform()
 /***************************************************************************
 *    desc:  Do the 2D rendering
 ****************************************************************************/
-void CRunState::PreRender()
+void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
     
@@ -207,7 +208,7 @@ void CRunState::PreRender()
 /************************************************************************
 *    desc:  Called when two fixtures begin to touch
 ************************************************************************/
-void CRunState::BeginContact(b2Contact* contact)
+void CLevel1State::BeginContact(b2Contact* contact)
 {
     CSprite2D * pSpriteA = (CSprite2D *)contact->GetFixtureA()->GetUserData();
     CSprite2D * pSpriteB = (CSprite2D *)contact->GetFixtureB()->GetUserData();
@@ -255,7 +256,7 @@ void CRunState::BeginContact(b2Contact* contact)
 /************************************************************************
 *    desc:  Called when two fixtures cease to touch
 ************************************************************************/
-void CRunState::EndContact(b2Contact* contact)
+void CLevel1State::EndContact(b2Contact* contact)
 {
     CSprite2D * pSpriteA = (CSprite2D *)contact->GetFixtureA()->GetUserData();
     CSprite2D * pSpriteB = (CSprite2D *)contact->GetFixtureB()->GetUserData();
@@ -275,7 +276,7 @@ void CRunState::EndContact(b2Contact* contact)
 /***************************************************************************
 *    desc: Functions for loading/unloading the assets for this state
 ****************************************************************************/
-namespace NRunState
+namespace NLevel1State
 {
     /***************************************************************************
     *    desc:  Namespace function for loading the assets for this state
@@ -283,24 +284,26 @@ namespace NRunState
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(run)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().LoadGroup2D( "(level1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(run)" );
+        CObjectDataMgr::Instance().CreateFromData2D( "(level1)" );
     }
     
     void Load()
     {
+        // Load state specific AngelScript functions
+        CScriptManager::Instance().LoadGroup("(level1)");
+        
         CPhysicsWorldManager::Instance().CreateWorld2D( "(game)" );
         
-        // The unordered map run these in reverse order
-        CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
-        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D(1000) );
-        
-    }   // ThreadLoad
+        // Load the sprite strategies
+        CSpriteStrategyMgr::Instance().Load( "(level1_spriteStrategy)", new CBasicSpriteStrategy2D(1000) );
+        CSpriteStrategyMgr::Instance().Load( "(level1_stage1Strategy)", new CBasicStageStrategy2D );
+    }
     
     void CriticalInit()
     {
@@ -315,16 +318,18 @@ namespace NRunState
     void CriticalUnload()
     {
         CSpriteStrategyMgr::Instance().CleanUp();
-        CObjectDataMgr::Instance().FreeGroup2D( "(run)" );
+        CObjectDataMgr::Instance().FreeGroup2D( "(level1)" );
     }
     
     void Unload()
     {
         CSpriteStrategyMgr::Instance().Clear();
         
+        // Unload state specific AngelScript functions
+        CScriptManager::Instance().FreeGroup("(level1)");
+        
         // All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager::Instance().DestroyWorld2D( "(game)" );
-        
-    }   // Unload
+    }
 
 }   // NTitleScreenState

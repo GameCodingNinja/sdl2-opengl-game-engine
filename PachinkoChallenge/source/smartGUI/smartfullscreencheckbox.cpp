@@ -14,7 +14,7 @@
 #include <utilities/genfunc.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartScrnCheckBox::CSmartScrnCheckBox( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )

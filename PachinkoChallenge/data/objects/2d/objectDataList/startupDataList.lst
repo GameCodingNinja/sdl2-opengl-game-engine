@@ -41,7 +41,7 @@
                 <shader id="shader_solid_2d"/>
                 <color r="1" g="1" b="1" a="1"/>
             </visual>
-            <size width="1080" height="1920"/>
+            <size width="1500" height="1920"/>
         </object>
         
     </objectList>

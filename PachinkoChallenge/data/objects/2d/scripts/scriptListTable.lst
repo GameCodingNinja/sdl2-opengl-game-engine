@@ -1,14 +1,15 @@
 <listTable>
 
-  <groupList groupName="(menu)">
-    <file path="data/objects/2d/scripts/shared_utilities.ang"/>
-    <file path="data/objects/2d/scripts/menu_defs.ang"/>
-    <file path="data/objects/2d/scripts/menu.ang"/>
-    <file path="data/objects/2d/scripts/shared_general.ang"/>
-  </groupList>
+    <groupList groupName="(menu)">
+        <file path="data/objects/2d/scripts/shared_utilities.ang"/>
+        <file path="data/objects/2d/scripts/menu_defs.ang"/>
+        <file path="data/objects/2d/scripts/menu.ang"/>
+        <file path="data/objects/2d/scripts/shared_general.ang"/>
+    </groupList>
   
-  <groupList groupName="(actor)">
-    <file path="data/objects/2d/scripts/shared_utilities.ang"/>
-  </groupList>
+    <groupList groupName="(level1)">
+        <file path="data/objects/2d/scripts/shared_utilities.ang"/>
+        <file path="data/objects/2d/scripts/ball.ang"/>
+    </groupList>
 
 </listTable>

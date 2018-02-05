@@ -151,7 +151,7 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
 
-        this.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE );
+        this.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         // Load shared libraries
         String errorMsgBrokenLib = "";
