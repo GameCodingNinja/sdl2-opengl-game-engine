@@ -28,6 +28,7 @@
 class CObjectData2D;
 class CColor;
 class asIScriptEngine;
+class CSpriteData;
 struct XMLNode;
 
 class CSprite2D : public iSprite2D, boost::noncopyable
@@ -36,6 +37,7 @@ public:
 
     // Constructor
     CSprite2D( const CObjectData2D & objectData, int id = defs_SPRITE_DEFAULT_ID );
+    CSprite2D( const CObjectData2D & objectData, const CSpriteData & spriteData );
 
     // Destructor
     virtual ~CSprite2D();
@@ -49,6 +51,9 @@ public:
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>(),
         bool forceUpdate = false );
+    
+    // Load the sprite data from node
+    void LoadFromNode( const XMLNode & node );
     
     //////////////////////////////////////////////////////
     // Register the class with AngelScript

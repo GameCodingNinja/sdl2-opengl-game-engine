@@ -15,6 +15,7 @@
 #include <script/scriptcomponent.h>
 #include <common/camera.h>
 #include <2d/object2d.h>
+#include <2d/sprite2d.h>
 #include <utilities/timer.h>
 
 // Box2D lib dependencies
@@ -31,7 +32,7 @@ class CUIMeter;
 class CUIButton;
 class CSpriteData;
 
-class CLevel1State : public CCommonState, b2ContactListener
+class CLevel1State : public CCommonState, b2ContactListener, b2DestructionListener
 {
 public:
 
@@ -63,10 +64,16 @@ public:
     void PreRender() override;
     
     // Called when two fixtures begin to touch
-    virtual void BeginContact(b2Contact* contact) override;
+    void BeginContact(b2Contact* contact) override;
     
     // Called when two fixtures cease to touch
-    virtual void EndContact(b2Contact* contact) override;
+    void EndContact(b2Contact* contact) override;
+    
+    // Called when any joint is about to be destroyed
+    void SayGoodbye(b2Joint* joint) override {}
+    
+    // Called when any fixture is about to be destroyed
+    void SayGoodbye(b2Fixture* fixture) override;
 
 private:
     
@@ -82,6 +89,9 @@ private:
     // Strawberry data reference
     CSpriteData & m_rStrawberryData;
     
+    // sprite Multiplier
+    CSprite2D & m_rMultiplier;
+    
     // Reference to win meter
     CUIMeter & m_rWinMeter;
     
@@ -94,8 +104,11 @@ private:
     // Vector of prize position values
     std::vector<float> m_prizeXPosVec;
     
-    // Win Counter
-    int m_winCounter;
+    // Win Amount
+    int m_totalWin;
+    
+    // multiplier
+    int m_multiplier;
     
     std::default_random_engine m_generator;
     std::uniform_int_distribution<int> m_ballRand;
@@ -108,7 +121,7 @@ private:
     std::vector<std::string> m_ballVec;
     
     CObject2D m_Object2D;
-    
+
     // Sprite peg
     enum
     {

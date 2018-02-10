@@ -6,6 +6,9 @@ LOCAL_PATH := $(call my-dir)
 #
 ###########################
 
+# Removed code
+# $(wildcard $(LOCAL_PATH)/library/slot/*.cpp) \
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := main
@@ -34,16 +37,17 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(LOCAL_PATH)/library/objectdata/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/system/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/managers/*.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/physics/*.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/physics/physicsworldmanager2d.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/physics/physicsworld2d.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/physics/physicscomponent2d.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/2d/*.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/3d/*.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/3d/object3d.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/common/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/utilities/*.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/slot/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/soil/*.c) \
 	$(wildcard $(LOCAL_PATH)/library/script/*.cpp))
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_mixer bulletPhysics Box2D angelscript
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_mixer Box2D angelscript
 
 LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 

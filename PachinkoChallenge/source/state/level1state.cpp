@@ -7,6 +7,8 @@
 
 // Physical component dependency
 #include "level1state.h"
+#include "Box2D/Dynamics/b2Fixture.h"
+#include "Box2D/Dynamics/b2World.h"
 
 // Game lib dependencies
 #include <gui/menumanager.h>
@@ -15,7 +17,7 @@
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager2d.h>
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
 #include <2d/basicstagestrategy2d.h>
@@ -34,17 +36,22 @@
 // Box2D lib dependencies
 #include <Box2D/Box2D.h>
 
+// Standard lib dependencies
+#include <cstdlib>
+
 /************************************************************************
 *    desc:  Constructor                                                             
 ************************************************************************/
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
-        m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld2D( "(game)" ) ),
+        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").Get<CSpriteData>()),
+        m_rMultiplier(CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(level1_stage1Strategy)").Get<CSprite2D>("multiplier")),
         m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_rMenuBtn(CMenuManager::Instance().GetMenuControl<CUIButton>( "base_game_menu", "menu_btn" )),
-        m_winCounter(0),
+        m_totalWin(0),
+        m_multiplier(1),
         m_generator(std::random_device{}()),
         m_ballRand(0, 8),
         m_prizePosRand(0, 8)
@@ -52,6 +59,7 @@ CLevel1State::CLevel1State() :
     // The state inherits from b2ContactListener to handle physics collisions
     // so this state is the collision listener
     m_rPhysicsWorld.GetWorld().SetContactListener(this);
+    m_rPhysicsWorld.GetWorld().SetDestructionListener(this);
     
 }   // Constructor
 
@@ -226,28 +234,14 @@ void CLevel1State::BeginContact(b2Contact* contact)
         
         else if( (spriteAid == STRAWBERRY) || (spriteBid == STRAWBERRY) )
         {
-            m_winCounter += 1;
-            m_rWinMeter.StartBangUp(m_winCounter);
             m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, STRAWBERRY );
+            
+            m_rMultiplier.CreateFontString( std::to_string(++m_multiplier) + "x" );
             
             // Add another strawberry
             m_rStrawberryData.SetPosXYZ( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -1450.f);
             m_rStrategy.HandleMessage( NDefs::ESM_CREATE_SPRITE, "strawberry" );
         }
-                
-        /*else if( (spriteAid > -1) && (spriteAid < 10) )
-        {
-            m_winCounter += m_winAmount.at(spriteAid);
-            m_rWinMeter.StartBangUp(m_winCounter);
-            m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, spriteBid );
-        }
-
-        else if( (spriteBid > -1) && (spriteBid < 10) )
-        {
-            m_winCounter += m_winAmount.at(spriteBid);
-            m_rWinMeter.StartBangUp(m_winCounter);
-            m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, spriteAid );
-        }*/
     }
     
 }   // BeginContact
@@ -258,8 +252,8 @@ void CLevel1State::BeginContact(b2Contact* contact)
 ************************************************************************/
 void CLevel1State::EndContact(b2Contact* contact)
 {
-    CSprite2D * pSpriteA = (CSprite2D *)contact->GetFixtureA()->GetUserData();
-    CSprite2D * pSpriteB = (CSprite2D *)contact->GetFixtureB()->GetUserData();
+    CSprite2D * pSpriteA = reinterpret_cast<CSprite2D *>(contact->GetFixtureA()->GetUserData());
+    CSprite2D * pSpriteB = reinterpret_cast<CSprite2D *>(contact->GetFixtureB()->GetUserData());
     
     if( (pSpriteA != nullptr) && (pSpriteB != nullptr) )
     {
@@ -271,6 +265,22 @@ void CLevel1State::EndContact(b2Contact* contact)
     }
     
 }   // EndContact
+
+
+/************************************************************************
+*    desc:  Called when any fixture is about to be destroyed
+************************************************************************/
+void CLevel1State::SayGoodbye(b2Fixture* fixture)
+{
+    CSprite2D * pSprite = reinterpret_cast<CSprite2D *>(fixture->GetUserData());
+    
+    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->GetPos().GetX() ) < 720.f) )
+    {
+        m_totalWin += m_multiplier;
+        m_rWinMeter.StartBangUp( m_totalWin );
+    }
+    
+}   // SayGoodbye
 
 
 /***************************************************************************
@@ -298,7 +308,7 @@ namespace NLevel1State
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(level1)");
         
-        CPhysicsWorldManager::Instance().CreateWorld2D( "(game)" );
+        CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
         
         // Load the sprite strategies
         CSpriteStrategyMgr::Instance().Load( "(level1_spriteStrategy)", new CBasicSpriteStrategy2D(1000) );
@@ -329,7 +339,7 @@ namespace NLevel1State
         CScriptManager::Instance().FreeGroup("(level1)");
         
         // All physics entities are destroyed and all heap memory is released.
-        CPhysicsWorldManager::Instance().DestroyWorld2D( "(game)" );
+        CPhysicsWorldManager2D::Instance().DestroyWorld( "(game)" );
     }
 
 }   // NTitleScreenState

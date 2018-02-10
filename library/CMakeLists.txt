@@ -55,7 +55,8 @@ add_library(
 	managers/meshmanager.cpp
         managers/spritestrategymanager.cpp
         managers/spritesheetmanager.cpp
-        physics/physicsworldmanager.cpp
+        physics/physicsworldmanager2d.cpp
+        physics/physicsworldmanager3d.cpp
         physics/physicsworld2d.cpp
         physics/physicsworld3d.cpp
         physics/physicscomponent2d.cpp

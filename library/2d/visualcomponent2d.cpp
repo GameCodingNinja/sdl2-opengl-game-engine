@@ -231,12 +231,23 @@ void CVisualComponent2D::LoadFontPropFromNode( const XMLNode & node )
 
 
 /************************************************************************
+*    desc:  Set the font data
+************************************************************************/
+void CVisualComponent2D::SetFontData( const CFontData & fontData )
+{
+    if(m_pFontData)
+        m_pFontData->Copy( fontData );
+    
+}   // SetFontData
+
+
+/************************************************************************
 *    desc:  Set the font properties
 ************************************************************************/
 void CVisualComponent2D::SetFontProperties( const CFontProperties & fontProp )
 {
     if(m_pFontData)
-        m_pFontData->m_fontProp = fontProp;
+        m_pFontData->m_fontProp.Copy( fontProp );
     
 }   // SetFontProperties
 

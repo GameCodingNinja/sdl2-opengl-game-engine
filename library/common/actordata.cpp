@@ -34,6 +34,10 @@ CActorData::CActorData(
         m_collisionRadiusScalar(1),
         m_id(defId)
 {
+    // Get the name of this specific actor sprite instance
+    if( node.isAttributeSet( "name" ) )
+        m_name = node.getAttribute( "name" );
+    
     // Get the actor's AI name
     if( node.isAttributeSet( "aiName" ) )
         m_aiName = node.getAttribute( "aiName" );
@@ -92,6 +96,16 @@ CActorData::CActorData(
 CActorData::~CActorData()
 {
 }   // destructor
+
+
+/************************************************************************
+*    desc:  Get the name of this specific actor sprite instance
+************************************************************************/
+const std::string & CActorData::GetName() const
+{
+    return m_name;
+
+}   // GetName
 
 
 /************************************************************************

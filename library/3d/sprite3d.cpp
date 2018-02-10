@@ -18,6 +18,10 @@
 
 // AngelScript lib dependencies
 #include <angelscript.h>
+
+// Bullet Physics lib dependencies
+#include <btBulletCollisionCommon.h>
+
 /************************************************************************
  *    desc:  Constructor
  ************************************************************************/
@@ -47,6 +51,39 @@ void CSprite3D::InitPhysics()
 {
     m_physicsComponent.Init( *this );
 }
+
+
+/************************************************************************
+*    desc:  Set the translation/rotation from Bullet Physics
+************************************************************************/
+void CSprite3D::SetTransform( const btTransform & trans )
+{
+    m_parameters.Add( NDefs::ROTATE | NDefs::PHYSICS_TRANSFORM );
+    
+    // Set the position
+    const btVector3 & btVec = trans.getOrigin();
+    SetPosXYZ( btVec.x(), btVec.y(), btVec.z() );
+    
+    // Set the rotation
+    const btMatrix3x3 & btMat = trans.getBasis();
+    for( int i = 0; i < 3; ++i )
+    {
+        const btVector3 & vec = btMat.getRow(i);
+        m_rotMatrix.SetColumn( i, vec.x(), vec.y(), vec.z() );
+    }
+    
+    // This is an example of how to get the rotation out of bullet physics
+    // but it's a lot of extra work to only do the rotation calculation all over again.
+    
+    // Get the rotation
+    //const btMatrix3x3 & btMat = trans.getBasis();
+    //btScalar z, y, x;
+    //btMat.getEulerYPR( z, y, x );
+    
+    // Set the rotation
+    //SetRotXYZ( x, y, z, false );
+
+}   // SetTransform
 
 
 /************************************************************************

@@ -47,7 +47,7 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/settings.h>
 #include <utilities/xmlParser.h>
-#include <physics/physicsworldmanager.h>
+//#include <physics/physicsworldmanager2d.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -174,7 +174,7 @@ void CStartUpState::AssetLoad()
     CScriptManager::Instance().LoadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
     
     // Load the physics list table
-    CPhysicsWorldManager::Instance().LoadListTable( "data/objects/2d/physics/physicsListTable.lst" );
+    //CPhysicsWorldManager::Instance().LoadListTable( "data/objects/2d/physics/physicsListTable.lst" );
     
     // Register the script items
     RegisterStdString( CScriptManager::Instance().GetEnginePtr() );

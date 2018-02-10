@@ -314,7 +314,7 @@ void CObject::CopyTransform( const CObject * pObject )
         SetPos( pObject->m_pos );
 
     if( pObject->m_parameters.IsSet( NDefs::ROTATE ) )
-        SetRot( pObject->m_rot );
+        SetRot( pObject->m_rot, false );
 
     if( pObject->m_parameters.IsSet( NDefs::SCALE ) )
         SetScale( pObject->m_scale );

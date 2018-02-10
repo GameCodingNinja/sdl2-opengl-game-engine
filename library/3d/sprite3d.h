@@ -56,6 +56,9 @@ public:
 
     // React to what the player is doing
     void HandleEvent( const SDL_Event & rEvent ) override;
+    
+    // Set the translation/rotation from Bullet Physics
+    void SetTransform( const btTransform & trans );
 
     // Update the sprite 
     void Update() override;

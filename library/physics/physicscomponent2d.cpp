@@ -12,7 +12,7 @@
 // Game lib dependencies
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectphysicsdata2d.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager2d.h>
 #include <physics/physicsworld2d.h>
 #include <2d/sprite2d.h>
 #include <utilities/exceptionhandling.h>
@@ -36,7 +36,7 @@ CPhysicsComponent2D::CPhysicsComponent2D( const CObjectPhysicsData2D & physicsDa
 {
     if( physicsData.IsActive() )
     {
-        m_pWorld = &CPhysicsWorldManager::Instance().GetWorld2D( physicsData.GetWorld() );
+        m_pWorld = &CPhysicsWorldManager2D::Instance().GetWorld( physicsData.GetWorld() );
 
         // Re-init the constants to the values needed
         const_cast<float&>(METERS_TO_PIXELS) = m_pWorld->GetPixelsPerMeter();

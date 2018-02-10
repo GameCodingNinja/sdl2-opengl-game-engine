@@ -62,11 +62,11 @@ public:
 private:
 
     // Bullet Physics world members
-	btDefaultCollisionConfiguration m_defColConf;
-	btDbvtBroadphase m_broadphase;
-	btSequentialImpulseConstraintSolver m_conSolv;
-	btCollisionDispatcher m_colDisp;
-	btDiscreteDynamicsWorld m_world;
+    btDefaultCollisionConfiguration m_defColConf;
+    btDbvtBroadphase m_broadphase;
+    btSequentialImpulseConstraintSolver m_conSolv;
+    btCollisionDispatcher m_colDisp;
+    btDiscreteDynamicsWorld m_world;
 
     // If we're actively running simulations
     bool m_active;

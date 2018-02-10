@@ -12,7 +12,7 @@
 // Game lib dependencies
 #include <objectdata/objectdata3d.h>
 #include <objectdata/objectphysicsdata3d.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager3d.h>
 #include <physics/physicsworld3d.h>
 #include <3d/sprite3d.h>
 #include <utilities/exceptionhandling.h>
@@ -39,7 +39,7 @@ CPhysicsComponent3D::CPhysicsComponent3D( const CObjectPhysicsData3D & physicsDa
     m_pWorld(nullptr)
 {
     if( physicsData.IsActive() )
-        m_pWorld = &CPhysicsWorldManager::Instance().GetWorld3D( physicsData.GetWorld() );
+        m_pWorld = &CPhysicsWorldManager3D::Instance().GetWorld( physicsData.GetWorld() );
 
 }   // constructor
 

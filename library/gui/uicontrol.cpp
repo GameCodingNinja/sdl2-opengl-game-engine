@@ -148,25 +148,15 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( m_group, objectName ) );
     auto & rSprite = m_spriteDeq.back();
 
-    // Load the transform data
-    rSprite.LoadTransFromNode( node );
-
-    // Init the script functions
-    rSprite.InitScriptFunctions( node );
+    // Load the sprite data
+    rSprite.LoadFromNode( node );
 
     // See if this sprite is used for rendering a font string
     if( rSprite.GetVisualComponent().IsFontSprite() )
     {
-        // Load the font properties from XML node
-        rSprite.GetVisualComponent().LoadFontPropFromNode( node );
-
         // Set the font string to be created later
         if( !m_stringVec.empty() && (fontSpriteCount < m_stringVec.size()) )
             rSprite.GetVisualComponent().SetFontString( m_stringVec.at(fontSpriteCount) );
-
-        // set the color if it is different
-        const XMLNode fontNode = node.getChildNode( "font" );
-        rSprite.GetVisualComponent().SetColor( NParseHelper::LoadColor( node, rSprite.GetVisualComponent().GetColor() ) );
 
         ++fontSpriteCount;
     }

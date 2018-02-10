@@ -10,6 +10,7 @@
 
 // Physical component dependency
 #include <common/object.h>
+#include <common/color.h>
 
 // Standard lib dependencies
 #include <string>
@@ -43,13 +44,13 @@ public:
     // Get the script functions
     const std::map<std::string, std::string> & GetScriptFunctions() const;
     
-    // Get the group
+    // Get the sprite name
     const std::string & GetName() const;
     
     // Get the group
     const std::string & GetGroup() const;
     
-    // Get the name
+    // Get the object name
     const std::string & GetObjectName() const;
 
     // Get the AI name

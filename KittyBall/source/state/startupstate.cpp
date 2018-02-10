@@ -46,7 +46,7 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/settings.h>
 #include <utilities/xmlParser.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager3d.h>
 #include <slot/slotmathmanager.h>
 #include <slot/symbolsetviewmanager.h>
 
@@ -186,8 +186,7 @@ void CStartUpState::AssetLoad()
     CScriptManager::Instance().LoadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
     
     // Load the physics list table
-    CPhysicsWorldManager::Instance().LoadListTable( "data/objects/2d/physics/physicsListTable.lst" );
-    CPhysicsWorldManager::Instance().LoadListTable( "data/objects/3d/physics/physicsListTable.lst" );
+    CPhysicsWorldManager3D::Instance().LoadListTable( "data/objects/3d/physics/physicsListTable.lst" );
     
     // Register the script items
     RegisterStdString( CScriptManager::Instance().GetEnginePtr() );

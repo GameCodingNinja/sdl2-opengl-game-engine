@@ -36,6 +36,9 @@ public:
 
     // Destructor
     virtual ~CActorData();
+    
+    // Get the sprite name
+    const std::string & GetName() const;
 
     // Get the AI name
     const std::string & GetAIName() const;
@@ -60,6 +63,9 @@ public:
 
 private:
 
+    // Actor sprite name
+    std::string m_name;
+    
     // Name of the ai
     std::string m_aiName;
     

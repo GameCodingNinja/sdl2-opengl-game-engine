@@ -76,7 +76,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
     for( auto & iter: spriteDataVec )
     {
         // Allocate the sprite and add it to the map for easy access
-        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter.GetGroup(), iter.GetObjectName() ), iter.GetId() );
+        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter );
         
         // If there's a name for this sprite, add it to the map
         if( !iter.GetName().empty() )
@@ -91,12 +91,6 @@ void CActorSprite2D::Create( const CActorData & actorData )
                         % iter.GetName() % __FUNCTION__ % __LINE__ ));
             }
         }
-
-        // Copy over the transform
-        m_spriteDeq.back().CopyTransform( &iter );
-        
-        // Copy over any scripts
-        m_spriteDeq.back().CopyScriptFunctions( iter.GetScriptFunctions() );
 
         // Find the largest size width and height of the different sprites for the controls size
         const CSize<float> & size = m_spriteDeq.back().GetObjectData().GetSize();
@@ -114,7 +108,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
             largestSize.h = height;
     }
     
-    // Copy over the transform
+    // Copy over the transform for the Actor sprite
     CopyTransform( &actorData );
 
     // Convert the largest width and height to a radius

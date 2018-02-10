@@ -144,8 +144,8 @@ void CGame::AICreateCallBack( const std::string & aiName, iSprite2D * pSprite )
 
 void CGame::AICreateCallBack3D( const std::string & aiName, iSprite3D * pSprite )
 {
-    if( aiName == "aiCube" )
-        pSprite->SetAI( new CCubeAI( pSprite ) );
+    //if( aiName == "aiCube" )
+    //    pSprite->SetAI( new CCubeAI( pSprite ) );
 
 }   // AICreateCallBack3D
 

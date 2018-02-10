@@ -1,6 +1,6 @@
 <spriteList defaultGroup="(stage1)">
 
-    <sprite objectName="bottom" group="(stage1)">
+    <sprite objectName="bottom">
         <position x="0" y="-460" z="0"/>
     </sprite>
 

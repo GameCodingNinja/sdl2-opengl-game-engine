@@ -10,6 +10,7 @@
 
 // Game lib dependencies
 #include <common/build_defs.h>
+#include <common/spritedata.h>
 #include <utilities/exceptionhandling.h>
 #include <utilities/xmlParser.h>
 #include <objectdata/objectdata2d.h>
@@ -222,6 +223,12 @@ const CObjectData2D & CObjectDataMgr::GetData2D( const std::string & group, cons
 
     return dataMapIter->second;
 
+}   // GetData2D
+
+const CObjectData2D & CObjectDataMgr::GetData2D( const CSpriteData & spriteData ) const
+{
+    return GetData2D( spriteData.GetGroup(), spriteData.GetObjectName() );
+    
 }   // GetData2D
 
 

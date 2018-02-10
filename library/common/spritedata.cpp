@@ -111,7 +111,7 @@ const std::string & CSpriteData::GetGroup() const
 
 
 /************************************************************************
-*    desc:  Get the name
+*    desc:  Get the object name
 ************************************************************************/
 const std::string & CSpriteData::GetObjectName() const
 {

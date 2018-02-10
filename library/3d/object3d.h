@@ -28,9 +28,6 @@ public:
     // Get the object's rotation matrix
     const CMatrix & GetRotMatrix() const;
     
-    // Set the translation/rotation from Bullet Physics
-    void SetTransform( const btTransform & trans );
-    
 protected:
     
     // Apply the rotation

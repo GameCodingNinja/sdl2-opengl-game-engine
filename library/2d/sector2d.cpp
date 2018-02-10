@@ -13,6 +13,7 @@
 #include <2d/sprite2d.h>
 #include <2d/actorsprite2d.h>
 #include <utilities/settings.h>
+#include <utilities/exceptionhandling.h>
 #include <objectdata/objectdatamanager.h>
 #include <objectdata/objectdata2d.h>
 #include <managers/signalmanager.h>
@@ -47,7 +48,7 @@ void CSector2D::LoadFromNode( const XMLNode & node )
     const XMLNode spriteListNode = XMLNode::openFileHelper( filePath.c_str(), "spriteList" );
     if( !spriteListNode.isEmpty() )
     {
-        std::string defObjName, defGroup, defAIName;
+        std::string defObjName, defGroup, defAIName, spriteName;
         int defId(-1);
 
         // Check for any defaults
@@ -76,9 +77,10 @@ void CSector2D::LoadFromNode( const XMLNode & node )
             if( tag == "sprite" )
             {
                 CSpriteData data( spriteNode, defGroup, defObjName, defAIName, defId );
-                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data.GetGroup(), data.GetObjectName() ), data.GetId() ) );
+                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data ), data ) );
                 
                 aiName = data.GetAIName();
+                spriteName = data.GetName();
             }
             else if( tag == "actor" )
             {
@@ -86,10 +88,12 @@ void CSector2D::LoadFromNode( const XMLNode & node )
                 m_pSpriteVec.push_back( new CActorSprite2D( data, data.GetId() ) );
                 
                 aiName = data.GetAIName();
+                spriteName = data.GetName();
             }
             
-            // Load the transform data from node
-            m_pSpriteVec.back()->LoadTransFromNode( spriteNode );
+            // If there is a name, add it to the map
+            if( !spriteName.empty() )
+                m_pSpriteMap.emplace( spriteName, m_pSpriteVec.back() );
             
             // Init the physics
             m_pSpriteVec.back()->InitPhysics();
@@ -97,20 +101,6 @@ void CSector2D::LoadFromNode( const XMLNode & node )
             // Broadcast the signal to create the sprite AI
             if( !aiName.empty() )
                 CSignalMgr::Instance().Broadcast( aiName, m_pSpriteVec.back() );
-            
-            // See if this sprite is used for rendering a font string
-            const XMLNode fontNode = spriteNode.getChildNode( "font" );
-            if( !fontNode.isEmpty() && m_pSpriteVec.back()->IsSprite2D() )
-            {
-                // Load the font properties from XML node
-                dynamic_cast<CSprite2D *>(m_pSpriteVec.back())->GetVisualComponent().LoadFontPropFromNode( fontNode );
-                
-                if( fontNode.isAttributeSet( "string" ) )
-                {
-                    // Set the font string to be created later
-                    dynamic_cast<CSprite2D *>(m_pSpriteVec.back())->GetVisualComponent().SetFontString( fontNode.getAttribute( "string" ) );
-                }
-            }
         }
     }
 }   // LoadFromNode
@@ -292,3 +282,20 @@ bool CSector2D::Find( iSprite2D * piSprite )
     return false;
     
 }   // Find
+
+
+/************************************************************************
+*    desc:  Get the pointer to the sprite
+************************************************************************/
+iSprite2D * CSector2D::Get( const std::string & spriteName )
+{
+    // Make sure the strategy we are looking for is available
+    auto mapIter = m_pSpriteMap.find( spriteName );
+    if( mapIter == m_pSpriteMap.end() )
+        throw NExcept::CCriticalException("Sector Sprite Get Error!",
+            boost::str( boost::format("Sector Sprite can't be found (%s).\n\n%s\nLine: %s") 
+                % spriteName % __FUNCTION__ % __LINE__ ));
+
+    return mapIter->second;
+
+}   // get

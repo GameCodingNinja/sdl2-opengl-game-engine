@@ -33,7 +33,6 @@
 #include <utilities/highresolutiontimer.h>
 #include <utilities/settings.h>
 #include <utilities/exceptionhandling.h>
-#include <physics/physicsworldmanager.h>
 #include <common/color.h>
 #include <soil/stb_image_aug.h>
 

@@ -16,7 +16,7 @@
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager3d.h>
 #include <physics/physicsworld3d.h>
 #include <physics/physicscomponent3d.h>
 #include <managers/spritestrategymanager.h>
@@ -31,7 +31,7 @@
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
-    m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld3D( "(cube)" ) )
+    m_rPhysicsWorld( CPhysicsWorldManager3D::Instance().GetWorld( "(cube)" ) )
 {
 }   // Constructor
 
@@ -183,11 +183,11 @@ namespace NRunState
         /*CPhysicsWorldManager::Instance().CreateWorld2D( "(game)" );
         CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
         CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D );*/
-        CPhysicsWorldManager::Instance().CreateWorld3D( "(cube)" );
+        CPhysicsWorldManager3D::Instance().CreateWorld( "(cube)" );
 
         // The unordered map run these in reverse order
-        CSpriteStrategyMgr::Instance().Load( "(stage0)", new CBasicStageStrategy3D );
-        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy3D );
+        //CSpriteStrategyMgr::Instance().Load( "(stage0)", new CBasicStageStrategy3D );
+        //CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy3D );
     }
     
     void CriticalInit()
@@ -222,7 +222,7 @@ namespace NRunState
     {
         CSpriteStrategyMgr::Instance().Clear();
         //CPhysicsWorldManager::Instance().DestroyWorld2D( "(game)" );
-        CPhysicsWorldManager::Instance().DestroyWorld3D( "(cube)" );
+        CPhysicsWorldManager3D::Instance().DestroyWorld( "(cube)" );
     }
 
 }   // NTitleScreenState

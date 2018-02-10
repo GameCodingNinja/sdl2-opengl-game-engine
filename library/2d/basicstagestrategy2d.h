@@ -58,6 +58,13 @@ public:
     // Get the default camera position
     CObject & GetDefaultCameraPos();
     
+    // Get a reference to the sprite
+    template <typename target>
+    target & Get( const std::string & spriteName, int index = 0 )
+    {
+        return *dynamic_cast<target *>(m_sectorDeq.at(index).Get( spriteName ));
+    }
+    
 protected:
     
     // Load the sector data from node

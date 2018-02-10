@@ -103,7 +103,6 @@ public class SDLActivity extends Activity {
             "SDL2_mixer",
             "angelscript",
             "Box2D",
-            "bulletPhysics",
             "main"
         };
     }

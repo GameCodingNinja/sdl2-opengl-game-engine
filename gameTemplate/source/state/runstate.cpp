@@ -14,7 +14,7 @@
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
-#include <physics/physicsworldmanager.h>
+#include <physics/physicsworldmanager2d.h>
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
 #include <managers/spritestrategymanager.h>
@@ -29,7 +29,7 @@
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
-        m_rPhysicsWorld( CPhysicsWorldManager::Instance().GetWorld2D( "(game)" ) )
+        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) )
 {
 }   // Constructor
 
@@ -147,7 +147,7 @@ namespace NRunState
     void Load()
     {
 	// All physics entities are destroyed and all heap memory is released.
-        CPhysicsWorldManager::Instance().CreateWorld2D( "(game)" );
+        CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
         CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
         CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D );
     }
@@ -174,7 +174,7 @@ namespace NRunState
     void Unload()
     {
         CSpriteStrategyMgr::Instance().Clear();
-        CPhysicsWorldManager::Instance().DestroyWorld2D( "(game)" );
+        CPhysicsWorldManager2D::Instance().DestroyWorld( "(game)" );
         
     }
 

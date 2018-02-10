@@ -33,7 +33,7 @@ public:
     CFontProperties m_fontProp;
 
     // Font string size
-    // Not usefull for multiline strings
+    // Not use full for multi-line strings
     CSize<float> m_fontStrSize;
 };
 

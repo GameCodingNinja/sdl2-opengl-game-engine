@@ -72,6 +72,9 @@ public:
     // Get the current frame index
     uint GetCurrentFrame() const;
     
+    // Set the font data
+    void SetFontData( const CFontData & fontData );
+    
     // Load the font properties from XML node
     void LoadFontPropFromNode( const XMLNode & node );
 

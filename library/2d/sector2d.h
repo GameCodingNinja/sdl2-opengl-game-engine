@@ -16,6 +16,7 @@
 
 // Standard lib dependencies
 #include <vector>
+#include <map>
 
 // Forward Declarations
 class iSprite2D;
@@ -58,6 +59,9 @@ public:
     // Find if the sprite exists
     bool Find( iSprite2D * piSprite );
     
+    // Get the pointer to the sprite
+    iSprite2D * Get( const std::string & spriteName );
+    
 private:
     
     // Check if the sector is within the orthographic view frustum
@@ -70,6 +74,9 @@ private:
     
     // sprite allocation vector
     std::vector<iSprite2D *> m_pSpriteVec;
+    
+    // sprites with names
+    std::map<const std::string, iSprite2D *> m_pSpriteMap;
     
     // The projection type
     NDefs::EProjectionType m_projectionType;

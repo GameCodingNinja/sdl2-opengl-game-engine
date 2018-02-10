@@ -14,6 +14,7 @@
 // Forward declaration(s)
 class CObjectData2D;
 class CObjectData3D;
+class CSpriteData;
 
 class CObjectDataMgr : public CManagerBase
 {
@@ -32,6 +33,7 @@ public:
 
     // Get a specific object's data
     const CObjectData2D & GetData2D( const std::string & group, const std::string & name ) const;
+    const CObjectData2D & GetData2D( const CSpriteData & spriteData ) const;
     const CObjectData3D & GetData3D( const std::string & group, const std::string & name ) const;
 
     // Load all of the meshes and materials of a specific data group

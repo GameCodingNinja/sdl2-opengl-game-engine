@@ -76,7 +76,7 @@ public:
     void Render( const class CMatrix & matrix );
     void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );
     
-    // Get a pointer to the strategy
+    // Get a reference to the strategy
     template <typename target>
     target & Get( const std::string & strategyId )
     {

@@ -24,8 +24,7 @@
     </groupList>
     
     <groupList groupName="(level1)">
-        <file path="data/objects/2d/objectDataList/stages/stage1/ballDataList.lst"/>
-        <file path="data/objects/2d/objectDataList/stages/stage1/stage1DataList.lst"/>
+        <file path="data/objects/2d/objectDataList/levels/level1DataList.lst"/>
     </groupList>
   
 </listTable>

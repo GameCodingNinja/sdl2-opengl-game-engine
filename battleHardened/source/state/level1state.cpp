@@ -15,7 +15,6 @@
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
-#include <physics/physicsworldmanager.h>
 #include <physics/physicsworld2d.h>
 #include <managers/spritestrategymanager.h>
 #include <common/camera.h>
