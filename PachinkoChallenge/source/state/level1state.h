@@ -29,7 +29,7 @@
 class CPhysicsWorld2D;
 class CBasicSpriteStrategy2D;
 class CUIMeter;
-class CUIButton;
+class CUILabel;
 class CSpriteData;
 
 class CLevel1State : public CCommonState, b2ContactListener, b2DestructionListener
@@ -89,20 +89,17 @@ private:
     // Strawberry data reference
     CSpriteData & m_rStrawberryData;
     
-    // sprite Multiplier
-    CSprite2D & m_rMultiplier;
+    // Multiplier label
+    CUILabel & m_rMultiplierLabel;
     
     // Reference to win meter
     CUIMeter & m_rWinMeter;
     
-    // Menu button
-    CUIButton & m_rMenuBtn;
-    
-    // Vector of win values
-    std::vector<int> m_winAmount;
-    
     // Vector of prize position values
-    std::vector<float> m_prizeXPosVec;
+    std::vector<std::vector<float>> m_multiXPosVec;
+    
+    // Multiplier index position
+    int m_multiIndexPos;
     
     // Win Amount
     int m_totalWin;
@@ -112,15 +109,12 @@ private:
     
     std::default_random_engine m_generator;
     std::uniform_int_distribution<int> m_ballRand;
-    std::uniform_int_distribution<int> m_prizePosRand;
     
     // local camera
     CCamera m_camera;
     
     // Ball type string
     std::vector<std::string> m_ballVec;
-    
-    CObject2D m_Object2D;
 
     // Sprite peg
     enum

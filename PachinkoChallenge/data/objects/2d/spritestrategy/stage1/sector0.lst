@@ -1,7 +1,7 @@
 <spriteList defaultGroup="(level1)" defaultObjectName="peg" defaultId="-2">
 
     <!-- Y Spacing is 160 -->
-    
+    <!--
     <sprite>
         <position x="-720" y="860"/>
     </sprite>
@@ -41,7 +41,6 @@
     <sprite>
         <position x="720" y="860"/>
     </sprite>
-
 
 
     <sprite>
@@ -87,7 +86,7 @@
     <sprite>
         <position x="800" y="700"/>
     </sprite>
-    
+    -->
     
     
     <sprite>
@@ -481,15 +480,6 @@
 
     <sprite objectName="bar" id="-1">
         <position x="720" y="-1520"/>
-    </sprite>
-    
-    
-    <!--  multiplier  -->
-    <sprite name="multiplier" objectName="sprite_font" id="-10">
-        <position x="-490" y="1485"/>
-        <font fontString="1x" fontName="dejavu_sans_bold_70">
-            <alignment horzAlign="left"/>
-        </font>
     </sprite>
 
 </spriteList>

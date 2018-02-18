@@ -31,6 +31,7 @@
 #include <common/worldvalue.h>
 #include <gui/uimeter.h>
 #include <gui/uibutton.h>
+#include <gui/uilabel.h>
 #include <script/scriptmanager.h>
 
 // Box2D lib dependencies
@@ -47,14 +48,13 @@ CLevel1State::CLevel1State() :
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").Get<CSpriteData>()),
-        m_rMultiplier(CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(level1_stage1Strategy)").Get<CSprite2D>("multiplier")),
+        m_rMultiplierLabel(CMenuManager::Instance().GetMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
         m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
-        m_rMenuBtn(CMenuManager::Instance().GetMenuControl<CUIButton>( "base_game_menu", "menu_btn" )),
+        m_multiIndexPos(0),
         m_totalWin(0),
         m_multiplier(1),
         m_generator(std::random_device{}()),
-        m_ballRand(0, 8),
-        m_prizePosRand(0, 8)
+        m_ballRand(0, 8)
 {
     // The state inherits from b2ContactListener to handle physics collisions
     // so this state is the collision listener
@@ -85,11 +85,20 @@ void CLevel1State::Init()
     CMenuManager::Instance().ActivateTree("pause_tree");
     CMenuManager::Instance().ActivateTree("base_game_tree");
     
-    m_winAmount = {9, 1, 5, 2, 4, 2, 5, 1, 9};
     m_ballVec = {"circle_green", "circle_blue", "circle_red",
                  "square_green", "square_blue", "square_red",
                  "triangle_green", "triangle_blue", "triangle_red"};
-    m_prizeXPosVec = {-640,-480,-320,-160,0,160,320,480,640};
+    m_multiXPosVec = 
+        { {-160,0,160,320,480,640},
+          {0,160,320,480,640},
+          {160,320,480,640},
+          {-640,320,480,640},
+          {-640,-480,480,640},
+          {-640,-480,-320,640},
+          {-640,-480,-320,-160},
+          {-640,-480,-320,-160,0},
+          {-640,-480,-320,-160,0,160},
+          {-640,-480,-320,-160,0,160,320,480,640} };
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -101,11 +110,19 @@ void CLevel1State::Init()
     //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
     //m_camera.Transform();
     
+    // Since these interface elements don't move only need to transform them once.
+    CMenuManager::Instance().TransformInterface();
+    
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
     
     // Add the first strawberry
-    CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", "strawberry", CPoint<float>(m_prizeXPosVec.at(m_prizePosRand(m_generator)),-1450.f) );
+    std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.back().size()-1);
+    m_multiIndexPos = multiPosRand(m_generator);
+    CSpriteStrategyMgr::Instance().Create(
+        "(level1_spriteStrategy)",
+        "strawberry",
+        CPoint<float>(m_multiXPosVec.back().at(m_multiIndexPos),-1450.f) );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -129,12 +146,12 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     }
     else if( rEvent.type == SDL_MOUSEBUTTONUP)
     {
-        if( !CMenuManager::Instance().IsMenuActive() && m_rMenuBtn.IsInactive() )
+        if( !CMenuManager::Instance().IsMenuActive() )
         {
             const float ratio = 1.f / m_camera.GetOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - m_camera.GetOrthoProjSizeHalf().w;
 
-            CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1350));
+            CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
         }
     }
 
@@ -192,8 +209,6 @@ void CLevel1State::Transform()
     CCommonState::Transform();
     
     CSpriteStrategyMgr::Instance().Transform();
-    
-    CMenuManager::Instance().TransformInterface( m_Object2D );
 
 }   // Transform
 
@@ -236,10 +251,15 @@ void CLevel1State::BeginContact(b2Contact* contact)
         {
             m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, STRAWBERRY );
             
-            m_rMultiplier.CreateFontString( std::to_string(++m_multiplier) + "x" );
+            m_rMultiplierLabel.CreateFontString( std::to_string(++m_multiplier) + "x" );
+            
+            // Randomly pick the new position of the multiplier
+            std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.at(m_multiIndexPos).size()-1);
+            int multiPos = m_multiXPosVec.at(m_multiIndexPos).at(multiPosRand(m_generator));
+            m_multiIndexPos = std::find(m_multiXPosVec.back().begin(), m_multiXPosVec.back().end(), multiPos) - m_multiXPosVec.back().begin();
             
             // Add another strawberry
-            m_rStrawberryData.SetPosXYZ( m_prizeXPosVec.at(m_prizePosRand(m_generator)), -1450.f);
+            m_rStrawberryData.SetPosXYZ( multiPos, -1450.f );
             m_rStrategy.HandleMessage( NDefs::ESM_CREATE_SPRITE, "strawberry" );
         }
     }

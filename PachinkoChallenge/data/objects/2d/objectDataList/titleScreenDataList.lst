@@ -41,6 +41,12 @@
             </visual>
         </object>
         
+        <object name="title">
+            <visual>
+                <texture file="data/textures/titleScreen/PetPachinko.png"/>
+            </visual>
+        </object>
+        
     </objectList>
 
 </objectDataList2D>

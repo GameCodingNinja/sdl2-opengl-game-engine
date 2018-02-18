@@ -24,7 +24,8 @@
 ************************************************************************/
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
-        m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) )
+        m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
+        m_title( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "title" ) )
 {
 }   // Constructor
 
@@ -43,6 +44,13 @@ void CTitleScreenState::Init()
     
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
+    
+    // Transform what doesn't change
+    m_background.SetRotXYZ(0,0,90);
+    m_background.Transform();
+    
+    m_title.SetPosXYZ( 0, 700 );
+    m_title.Transform();
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -96,8 +104,6 @@ void CTitleScreenState::Transform()
 {
     CCommonState::Transform();
 
-    m_background.Transform();
-
 }   // Transform
 
 
@@ -108,6 +114,7 @@ void CTitleScreenState::PreRender()
 {
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
+    m_title.Render( orthoMatrix );
     
     CCommonState::PreRender();
 

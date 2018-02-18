@@ -42,33 +42,6 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
 
 }   // constructor
 
-CSprite2D::CSprite2D( const CObjectData2D & objectData, const CSpriteData & spriteData ) :
-    m_rObjectData( objectData ),
-    m_visualComponent( objectData.GetVisualData() ),
-    m_physicsComponent( objectData.GetPhysicsData() ),
-    m_id(spriteData.GetId())
-{
-    // If there's no visual data, set the hide flag
-    SetVisible( objectData.GetVisualData().IsActive() );
-    
-    // Set the sprite type
-    m_parameters.Add( NDefs::SPRITE2D );
-    
-    if( objectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-        SetCropOffset( objectData.GetVisualData().GetSpriteSheet().GetGlyph().GetCropOffset() );
-    
-    // Copy over the transform
-    CopyTransform( &spriteData );
-    
-    // Copy over the script functions
-    CopyScriptFunctions( spriteData.GetScriptFunctions() );
-    
-    // See if this sprite is used for rendering a font string
-    if( m_visualComponent.IsFontSprite() && (spriteData.GetFontData() != nullptr) )
-        m_visualComponent.SetFontData( *spriteData.GetFontData() );
-
-}   // constructor
-
 
 /************************************************************************
 *    desc:  destructor                                                             
@@ -79,9 +52,9 @@ CSprite2D::~CSprite2D()
 
 
 /************************************************************************
-*    desc:  Load sprite data from an XML node
+*    desc:  Load the sprite data
 ************************************************************************/
-void CSprite2D::LoadFromNode( const XMLNode & node )
+void CSprite2D::Load( const XMLNode & node )
 {
     // Load the transform data
     LoadTransFromNode( node );
@@ -90,9 +63,24 @@ void CSprite2D::LoadFromNode( const XMLNode & node )
     InitScriptFunctions( node );
     
     // Load the font properties from XML node
-    m_visualComponent.LoadFontPropFromNode( node );
+    if( m_visualComponent.IsFontSprite() )
+        m_visualComponent.LoadFontPropFromNode( node );
     
-}   // LoadFromNode
+}   // Load
+
+void CSprite2D::Load( const CSpriteData & spriteData )
+{
+    // Copy over the transform
+    CopyTransform( &spriteData );
+    
+    // Copy over the script functions
+    CopyScriptFunctions( spriteData.GetScriptFunctions() );
+    
+    // See if this sprite is used for rendering a font string
+    if( m_visualComponent.IsFontSprite() && (spriteData.GetFontData() != nullptr) )
+        m_visualComponent.SetFontData( *spriteData.GetFontData() );
+    
+}   // Load
 
 
 /************************************************************************

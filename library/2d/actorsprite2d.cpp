@@ -76,7 +76,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
     for( auto & iter: spriteDataVec )
     {
         // Allocate the sprite and add it to the map for easy access
-        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter );
+        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter.GetId() );
         
         // If there's a name for this sprite, add it to the map
         if( !iter.GetName().empty() )

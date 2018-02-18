@@ -1,11 +1,11 @@
 <UIControl>
 
   <spriteList>
-      
-    <sprite objectName="275x55_button_frame"/>
 
     <sprite objectName="meter_font">
-      <font fontName="dejavu_sans_reg_45"/>
+      <font fontName="dejavu_sans_bold_60">
+          <alignment horzAlign="left"/>
+      </font>
     </sprite>
     
   </spriteList>

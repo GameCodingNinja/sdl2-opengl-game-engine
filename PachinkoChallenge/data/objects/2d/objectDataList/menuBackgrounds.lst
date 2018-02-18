@@ -37,18 +37,7 @@
                 </mesh>
                 <color r="48" g="97" b="153" a="217"/>
             </visual>
-            <size width="355" height="395"/>
-        </object>
-
-        <object name="settings_menu_bg">
-            <visual>
-                <texture file="data/textures/menu/menu_bg.png"/>
-                <mesh genType="scaled_frame">
-                    <scaledFrame thicknessWidth="30" thicknessHeight="30"/>
-                </mesh>
-                <color r="48" g="97" b="153" a="217"/>
-            </visual>
-            <size width="330" height="440"/>
+            <size width="405" height="395"/>
         </object>
 
         <object name="confirmation_menu_bg">
@@ -59,7 +48,7 @@
                 </mesh>
                 <color r="48" g="97" b="153" a="217"/>
             </visual>
-            <size width="545" height="295"/>
+            <size width="645" height="395"/>
         </object>
 
     </objectList>

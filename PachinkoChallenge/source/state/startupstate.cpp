@@ -156,6 +156,9 @@ void CStartUpState::Fade(
 ****************************************************************************/
 void CStartUpState::AssetLoad()
 {
+    // Load in any fonts
+    CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
+    
     // Load the sprite list table
     CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
@@ -194,9 +197,6 @@ void CStartUpState::AssetLoad()
     
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");
-
-    // Load in any fonts
-    CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().LoadGroup2D("(menu)");

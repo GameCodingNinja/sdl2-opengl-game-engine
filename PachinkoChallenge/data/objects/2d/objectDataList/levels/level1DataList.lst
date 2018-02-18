@@ -254,18 +254,6 @@
                 </fixtureLst>
             </physics>
         </object>
-        
-        <object name="sprite_font">
-            <visual>
-                <texture file=""/>
-                <mesh genType="font">
-                    <spriteSheet file=""/>
-                </mesh>
-                <shader id="shader_2d"/>
-                <color r="64" g="125" b="192" a="1"/>
-            </visual>
-            <physics world=""/>
-        </object>
 
     </objectList>
 

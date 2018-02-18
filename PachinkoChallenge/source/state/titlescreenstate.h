@@ -53,6 +53,9 @@ private:
     
     // title screen background
     CSprite2D m_background;
+    
+    // title
+    CSprite2D m_title;
 };
 
 

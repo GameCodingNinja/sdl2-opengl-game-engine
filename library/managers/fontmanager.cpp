@@ -92,17 +92,17 @@ const CFont & CFontMgr::GetFont( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Is the font in the map 
+*    desc:  Is the font in the map. throws exception if not
 ************************************************************************/
-bool CFontMgr::IsFont( const std::string & name ) const
+void CFontMgr::IsFont( const std::string & name ) const
 {
     // See if this character is part of the map
     auto iter = m_fontMap.find( name );
 
-    if( iter != m_fontMap.end() )
-        return true;
-
-    return false;
+    if( iter == m_fontMap.end() )
+        throw NExcept::CCriticalException("Font Manager Error!",
+            boost::str( boost::format("Font name can't be found (%s).\n\n%s\nLine: %s")
+                % name % __FUNCTION__ % __LINE__ ));
 
 }   // IsFont
 

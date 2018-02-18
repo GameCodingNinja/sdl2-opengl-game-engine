@@ -512,7 +512,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
         m_pFontData->m_fontString.clear();
     }
 
-}   // SetFontString
+}   // CreateFontString
 
 
 /************************************************************************

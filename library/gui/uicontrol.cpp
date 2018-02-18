@@ -149,7 +149,7 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     auto & rSprite = m_spriteDeq.back();
 
     // Load the sprite data
-    rSprite.LoadFromNode( node );
+    rSprite.Load( node );
 
     // See if this sprite is used for rendering a font string
     if( rSprite.GetVisualComponent().IsFontSprite() )
@@ -882,7 +882,7 @@ void CUIControl::CreateFontString( const std::string & fontString, int spriteInd
             ++fontSpriteCounter;
         }
     }
-
+    
 }   // CreateFontString
 
 void CUIControl::CreateFontString( int stringIndex, int spriteIndex )
@@ -914,7 +914,7 @@ void CUIControl::SetFontString( const std::string & fontString, int spriteIndex 
         }
     }
 
-}   // CreateFontString
+}   // SetFontString
 
 
 /************************************************************************

@@ -32,8 +32,8 @@ public:
     // Get the font
     const CFont & GetFont( const std::string & name ) const;
 
-    // Is the font in the map
-    bool IsFont( const std::string & name ) const;
+    // Is the font in the map. throws exception if not
+    void IsFont( const std::string & name ) const;
 
     // Delete a specific mesh
     void DeleteTheFont( const std::string & key );

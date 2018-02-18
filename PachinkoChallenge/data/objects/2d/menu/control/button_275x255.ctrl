@@ -2,34 +2,31 @@
 
     <spriteList>
 
-        <sprite objectName="150x60_button_solid">
+        <sprite objectName="275x255_button_solid">
             <scriptLst>
-                <script init="Control_Hidden"/>
-                <script disabled="Control_Hidden"/>
-                <script inactive="Control_Hidden"/>
+                <script disabled="Control_Disabled"/>
+                <script inactive="Control_Inactive"/>
                 <script active="Control_Solid_Active"/>
                 <script selected="Control_Solid_Selected"/>
             </scriptLst>
         </sprite>
     
-        <sprite objectName="150x60_button_frame">
+        <sprite objectName="275x255_button_frame">
             <scriptLst>
-                <script init="Control_Inactive"/>
                 <script disabled="Control_Disabled"/>
                 <script inactive="Control_Inactive"/>
                 <script active="Control_Active"/>
-                <script selected="Control_Selected_Visible"/>
+                <script selected="Control_Selected"/>
             </scriptLst>
         </sprite>
 
         <sprite objectName="control_font">
-            <font fontName="dejavu_sans_reg_45"/>
+            <font fontName="dejavu_sans_bold_60"/>
             <scriptLst>
-                <script init="Control_Inactive"/>
                 <script disabled="Control_Disabled"/>
                 <script inactive="Control_Inactive"/>
                 <script active="Control_Active"/>
-                <script selected="Control_Selected_Dispatch_Exe_Act"/>
+                <script selected="Control_Selected_Dispatch_Exe"/>
             </scriptLst>
         </sprite>
 

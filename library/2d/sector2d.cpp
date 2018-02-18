@@ -76,14 +76,19 @@ void CSector2D::LoadFromNode( const XMLNode & node )
             // Allocate the sprite and add it to the vector
             if( tag == "sprite" )
             {
+                // Allocate the sprite
                 CSpriteData data( spriteNode, defGroup, defObjName, defAIName, defId );
-                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data ), data ) );
+                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data ), data.GetId() ) );
+                
+                // Load the rest from sprite data
+                dynamic_cast<CSprite2D *>(m_pSpriteVec.back())->Load( data );
                 
                 aiName = data.GetAIName();
                 spriteName = data.GetName();
             }
             else if( tag == "actor" )
             {
+                // Allocate the actor sprite
                 CActorData data( spriteNode, defGroup, defObjName, defAIName, defId );
                 m_pSpriteVec.push_back( new CActorSprite2D( data, data.GetId() ) );
                 

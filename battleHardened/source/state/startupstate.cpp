@@ -156,6 +156,9 @@ void CStartUpState::AssetLoad()
 {
     // Load the stage list table
     CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    
+    // Load in any fonts
+    CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().LoadActionFromXML( "data/settings/controllerMapping.cfg" );
@@ -189,9 +192,6 @@ void CStartUpState::AssetLoad()
     CObject::Register( CScriptManager::Instance().GetEnginePtr() );
     CMenu::Register( CScriptManager::Instance().GetEnginePtr() );
     CShaderMgr::Register( CScriptManager::Instance().GetEnginePtr() );
-    
-    // Load in any fonts
-    CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().LoadGroup2D("(menu)");

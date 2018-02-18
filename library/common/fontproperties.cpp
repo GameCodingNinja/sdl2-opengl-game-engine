@@ -11,6 +11,7 @@
 // Game lib dependencies
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
+#include <managers/fontmanager.h>
 #include <common/defs.h>
 
 /************************************************************************
@@ -23,6 +24,8 @@ CFontProperties::CFontProperties()
 CFontProperties::CFontProperties( const std::string fontName ) :
     m_fontName(fontName)
 {
+    // Throws an exception if font is not loaded
+    CFontMgr::Instance().IsFont( m_fontName );
 }
 
 CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignment hAlign, NDefs::EVertAlignment vAlign ) :
@@ -30,6 +33,8 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
     m_hAlign(hAlign),
     m_vAlign(vAlign)
 {
+    // Throws an exception if font is not loaded
+    CFontMgr::Instance().IsFont( m_fontName );
 }
 
 CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignment hAlign, NDefs::EVertAlignment vAlign, float kerning ) :
@@ -38,6 +43,8 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
     m_vAlign(vAlign),
     m_kerning(kerning)
 {
+    // Throws an exception if font is not loaded
+    CFontMgr::Instance().IsFont( m_fontName );
 }
 
 
@@ -54,6 +61,9 @@ void CFontProperties::Copy( const CFontProperties & obj )
     m_lineWrapWidth = obj.m_lineWrapWidth;
     m_lineWrapHeight = obj.m_lineWrapHeight;
     
+    // Throws an exception if font is not loaded
+    CFontMgr::Instance().IsFont( m_fontName );
+    
 }   // Copy
 
 
@@ -64,6 +74,9 @@ void CFontProperties::LoadFromNode( const XMLNode & node )
 {
     // Get the must have font name
     m_fontName = node.getAttribute( "fontName" );
+    
+    // Throws an exception if font is not loaded
+    CFontMgr::Instance().IsFont( m_fontName );
 
     // Get the attributes node
     const XMLNode attrNode = node.getChildNode( "attributes" );

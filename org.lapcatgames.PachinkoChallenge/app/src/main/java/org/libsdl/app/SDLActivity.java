@@ -27,6 +27,11 @@ import android.hardware.*;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ApplicationInfo;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.AdSize;
+
 
 /**
     SDL Activity
@@ -61,6 +66,7 @@ public class SDLActivity extends Activity {
     protected static ViewGroup mLayout;
     protected static SDLClipboardHandler mClipboardHandler;
 
+    //private AdView mAdView;
 
     // This is what SDL runs in. It invokes SDL_main(), eventually
     protected static Thread mSDLThread;
@@ -149,8 +155,6 @@ public class SDLActivity extends Activity {
         Log.v(TAG, "Model: " + android.os.Build.MODEL);
         Log.v(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
-
-        this.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         // Load shared libraries
         String errorMsgBrokenLib = "";

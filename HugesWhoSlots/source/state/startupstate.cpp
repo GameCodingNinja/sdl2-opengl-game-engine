@@ -154,6 +154,12 @@ void CStartUpState::Fade(
 ****************************************************************************/
 void CStartUpState::AssetLoad()
 {
+    // Load in any fonts
+    if( NBDefs::IsMobileDevice() )
+        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_mobile.lst" );
+    else
+        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
+    
     // Load the symbol set view data manager list table
     CSymbolSetViewMgr::Instance().LoadListTable( "data/objects/2d/slot/symbolSetListTable.lst" );
     
@@ -195,12 +201,6 @@ void CStartUpState::AssetLoad()
     
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");
-
-    // Load in any fonts
-    if( NBDefs::IsMobileDevice() )
-        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_mobile.lst" );
-    else
-        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().LoadGroup2D("(menu)");

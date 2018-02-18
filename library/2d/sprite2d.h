@@ -37,7 +37,6 @@ public:
 
     // Constructor
     CSprite2D( const CObjectData2D & objectData, int id = defs_SPRITE_DEFAULT_ID );
-    CSprite2D( const CObjectData2D & objectData, const CSpriteData & spriteData );
 
     // Destructor
     virtual ~CSprite2D();
@@ -52,8 +51,9 @@ public:
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>(),
         bool forceUpdate = false );
     
-    // Load the sprite data from node
-    void LoadFromNode( const XMLNode & node );
+    // Load the sprite data
+    void Load( const XMLNode & node );
+    void Load( const CSpriteData & spriteData );
     
     //////////////////////////////////////////////////////
     // Register the class with AngelScript

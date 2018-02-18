@@ -141,16 +141,11 @@ int CBasicSpriteStrategy2D::Create(
         if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
             spriteId = rData.GetId();
         
-        auto & objectData =
-            CObjectDataMgr::Instance().GetData2D( rData.GetGroup(), rData.GetObjectName() );
+        // Allocate the sprite
+        m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
         
-        m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objectData, spriteId ) );
-        
-        // Copy transform data specified in the xml
-        m_iter.first->second->CopyTransform( &rData );
-        
-        // Copy over any scripts
-        dynamic_cast<CSprite2D *>(m_iter.first->second)->CopyScriptFunctions( rData.GetScriptFunctions() );
+        // Load the rest from sprite data
+        dynamic_cast<CSprite2D *>(m_iter.first->second)->Load( rData );
         
         aiName = rData.GetAIName();
     }
@@ -160,10 +155,8 @@ int CBasicSpriteStrategy2D::Create(
         if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
             spriteId = rData.GetId();
         
+        // Allocate the actor sprite
         m_iter = m_spriteMap.emplace( spriteId, new CActorSprite2D( rData, spriteId ) );
-        
-        // Copy transform data specified in the xml
-        m_iter.first->second->CopyTransform( &rData );
         
         aiName = rData.GetAIName();
     }

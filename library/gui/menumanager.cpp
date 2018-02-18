@@ -516,7 +516,7 @@ void CMenuManager::HandleEvent( const SDL_Event & rEvent )
     if( m_allow )
     {
         // Convert keyboard, mouse and controller messages in action type messages
-        if( (rEvent.type > SDL_SYSWMEVENT) && (rEvent.type < SDL_FINGERDOWN) )
+        if( (rEvent.type > SDL_SYSWMEVENT) && (rEvent.type < SDL_CLIPBOARDUPDATE) )
         {
             // Message TESTING code
             /*if( rEvent.type == SDL_CONTROLLERBUTTONDOWN )
