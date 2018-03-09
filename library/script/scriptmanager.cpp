@@ -274,12 +274,13 @@ void CScriptManager::Prepare(
 {
     // Get a context from the script manager pool
     pContextVec.push_back( GetContext() );
+    auto * pContext = pContextVec.back();
     
     // Get the function pointer
     asIScriptFunction * pScriptFunc = GetPtrToFunc(group, funcName);
 
     // Prepare the function to run
-    if( pContextVec.back()->Prepare(pScriptFunc) < 0 )
+    if( pContext->Prepare(pScriptFunc) < 0 )
     {
         throw NExcept::CCriticalException("Error Preparing Script!",
             boost::str( boost::format("There was an error preparing the script (%s).\n\n%s\nLine: %s")
@@ -293,23 +294,23 @@ void CScriptManager::Prepare(
         
         if( paramVec[i].GetType() == CScriptParam::EPT_BOOL )
         {
-            returnVal = pContextVec.back()->SetArgByte(i, paramVec[i].Get<bool>());
+            returnVal = pContext->SetArgByte(i, paramVec[i].Get<bool>());
         }
         else if( paramVec[i].GetType() == CScriptParam::EPT_INT )
         {
-            returnVal = pContextVec.back()->SetArgDWord(i, paramVec[i].Get<int>());
+            returnVal = pContext->SetArgDWord(i, paramVec[i].Get<int>());
         }
         else if( paramVec[i].GetType() == CScriptParam::EPT_UINT )
         {
-            returnVal = pContextVec.back()->SetArgDWord(i, paramVec[i].Get<uint>());
+            returnVal = pContext->SetArgDWord(i, paramVec[i].Get<uint>());
         }
         else if( paramVec[i].GetType() == CScriptParam::EPT_FLOAT )
         {
-            returnVal = pContextVec.back()->SetArgFloat(i, paramVec[i].Get<float>());
+            returnVal = pContext->SetArgFloat(i, paramVec[i].Get<float>());
         }
         else if( paramVec[i].GetType() == CScriptParam::EPT_REG_OBJ )
         {
-            returnVal = pContextVec.back()->SetArgObject(i, paramVec[i].Get<void *>());
+            returnVal = pContext->SetArgObject(i, paramVec[i].Get<void *>());
         }
         
         if( returnVal < 0 )
@@ -349,7 +350,7 @@ void CScriptManager::PrepareSpawn( const std::string & funcName )
 
 }   // PrepareSpawn
 
-void CScriptManager::PrepareSpawnObj( const std::string & funcName, void * pVoid )
+void CScriptManager::PrepareSpawnVoid( const std::string & funcName, void * pVoid )
 {
     auto pContex = asGetActiveContext();
     if( pContex )
@@ -361,7 +362,21 @@ void CScriptManager::PrepareSpawnObj( const std::string & funcName, void * pVoid
         Prepare( group, funcName, m_pActiveContextVec, {pVoid} );
     }
 
-}   // PrepareSpawnObj
+}   // PrepareSpawnVoid
+
+void CScriptManager::PrepareLocalSpawnVoid( const std::string & funcName, void * pVoid )
+{
+    auto pContex = asGetActiveContext();
+    if( pContex )
+    {
+        // Get the module name
+        std::string group = pContex->GetFunction()->GetModuleName();
+        
+        // Prepare the script function to run
+        Prepare( group, funcName, m_pLocalSpawnContextVec, {pVoid} );
+    }
+
+}   // PrepareLocalSpawn
 
 
 /************************************************************************
@@ -394,6 +409,21 @@ void CScriptManager::Update( std::vector<asIScriptContext *> & pContextVec )
                         % __FUNCTION__ % __LINE__ ));
             }
 
+            // If this execution spawned any local contexts, they will be in this vector.
+            // This will also start their execution in this update
+            if( !m_pLocalSpawnContextVec.empty() )
+            {
+                // A push_back invalidates the iter which is why we need to create
+                // a new one at the same spot as the previous iter.
+                const size_t diff = iter-pContextVec.begin();
+                
+                for( auto spawnIter : m_pLocalSpawnContextVec )
+                    pContextVec.push_back( spawnIter );
+                
+                iter = pContextVec.begin()+diff;
+                m_pLocalSpawnContextVec.clear();
+            }
+
             // Return the context to the pool if it has not been suspended
             if( (*iter)->GetState() != asEXECUTION_SUSPENDED )
             {
@@ -408,15 +438,3 @@ void CScriptManager::Update( std::vector<asIScriptContext *> & pContextVec )
     }
 
 }   // UpdateSpawnScripts
-
-
-/************************************************************************
-*    desc:  Register the class with AngelScript
-************************************************************************/
-void CScriptManager::Register()
-{
-    using namespace NScriptGlobals;
-    
-    Throw( scpEngine->RegisterGlobalFunction("void Spawn(string &in)", asMETHOD(CScriptManager, PrepareSpawn), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
-    
-}   // Register

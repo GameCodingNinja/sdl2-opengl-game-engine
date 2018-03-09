@@ -26,6 +26,7 @@
 #include <system/device.h>
 #include <managers/signalmanager.h>
 #include <managers/shadermanager.h>
+#include <managers/fontmanager.h>
 #include <gui/menumanager.h>
 #include <gui/uicontrol.h>
 #include <gui/menu.h>
@@ -101,6 +102,7 @@ void CGame::Init()
         CObjectDataMgr::Instance().LoadGroup2D( "(debug)" );
         upDebugDisplay.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D("(debug)", "debugString_font") ) );
         const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
+        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->SetPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
         upDebugDisplay->GetVisualComponent().SetFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
         upDebugDisplay->Transform();

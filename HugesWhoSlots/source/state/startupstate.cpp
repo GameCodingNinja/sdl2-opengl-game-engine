@@ -197,7 +197,6 @@ void CStartUpState::AssetLoad()
     CObject::Register( pScriptEngine );
     CMenu::Register( pScriptEngine );
     CShaderMgr::Register( pScriptEngine );
-    CScriptManager::Instance().Register();
     
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");

@@ -25,6 +25,7 @@
 #include <2d/sprite2d.h>
 #include <managers/spritestrategymanager.h>
 #include <managers/soundmanager.h>
+#include <script/scriptmanager.h>
 #include <managers/signalmanager.h>
 #include <common/camera.h>
 #include <common/spritedata.h>
@@ -192,6 +193,8 @@ void CLevel1State::Update()
     CCommonState::Update();
     
     m_scriptComponent.Update();
+    
+    CScriptManager::Instance().Update();
     
     if( !CMenuManager::Instance().IsMenuActive() )
     {

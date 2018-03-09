@@ -463,6 +463,7 @@ void CSprite2D::Register( asIScriptEngine * pEngine )
     Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetScaleXYZ(float x, float y, float z)",        asMETHOD(CObject,   SetScaleXYZ),          asCALL_THISCALL) );
     Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncScaleXYZ(float x, float y, float z)",        asMETHOD(CObject,   IncScaleXYZ),          asCALL_THISCALL) );
     
-    Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareSpawnObj), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+    Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+    Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
     
 }   // Register

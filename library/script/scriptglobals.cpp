@@ -14,6 +14,7 @@
 #include <utilities/exceptionhandling.h>
 #include <managers/soundmanager.h>
 #include <managers/signalmanager.h>
+#include <script/scriptmanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -62,6 +63,7 @@ namespace NScriptGlobals
         // The DispatchEvent function has 4 parameters and because they are not defined here, they only return garbage
         // AngelScript is not allowing the other two voided pointers
         Throw( pEngine->RegisterGlobalFunction("void DispatchEvent(int type, int code = 0)", asFUNCTION(NGenFunc::DispatchEvent), asCALL_CDECL) );
+        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in)", asMETHOD(CScriptManager, PrepareSpawn), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
     }
 
 }   // NScriptGlobals

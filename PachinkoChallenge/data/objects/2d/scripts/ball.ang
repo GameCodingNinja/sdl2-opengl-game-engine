@@ -1,4 +1,3 @@
-
 /************************************************************************
 *    FILE NAME:       ball.ang
 *
@@ -14,4 +13,3 @@ void Ball_FadeIn( CSprite2d & sprite )
     
     AlphaTo( 500, 1, sprite );
 }
-

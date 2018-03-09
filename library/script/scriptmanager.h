@@ -74,14 +74,10 @@ public:
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec );
     
-    //////////////////////////////////////////////////////
-    // Register Object with AngelScript
-    //////////////////////////////////////////////////////
-    void Register();
-    
     // Prepare the spawn script function to run
     void PrepareSpawn( const std::string & funcName );
-    void PrepareSpawnObj( const std::string & funcName, void * pVoid );
+    void PrepareSpawnVoid( const std::string & funcName, void * pVoid );
+    void PrepareLocalSpawnVoid( const std::string & funcName, void * pVoid );
 
 private:
 
@@ -105,9 +101,6 @@ private:
     // Smart com pointer to AngelScript script engine
     NSmart::scoped_com_ptr<asIScriptEngine> scpEngine;
 
-    // Smart com pointer to AngelScript context
-    NSmart::scoped_com_ptr<asIScriptContext> scpContext;
-
     // Map containing a group of function pointers
     std::map< const std::string, std::map< const std::string, asIScriptFunction * > > m_scriptFunctMapMap;
 
@@ -116,6 +109,9 @@ private:
     
     // Holds active contexts that are executing scripts
     std::vector<asIScriptContext *> m_pActiveContextVec;
+    
+    // Holds the spawn contexts to be added to the component pool
+    std::vector<asIScriptContext *> m_pLocalSpawnContextVec;
 
 };
 
