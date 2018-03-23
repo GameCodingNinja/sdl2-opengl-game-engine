@@ -19,7 +19,7 @@ int main()
     do
     {
         matrix2.MergeMatrix( matrix1 );
-        /*test = ++value;
+        test = ++value;
 
         do
         {
@@ -30,7 +30,7 @@ int main()
             else
                 test = (test * 3) + 1;
         }
-        while (test > 1);*/
+        while (test > 1);
     }
     //while ((test > 0) && (value < 100000000));
     while (++value < 100000000);
@@ -568,17 +568,19 @@ int main()
 {
     std::vector< std::future<void> > jobs;
     
+    auto & mutex = CThreadPool::Instance().GetMutex();
+    
     for( int i = 0; i < 8; ++i )
     {
         jobs.emplace_back(
-            CThreadPool::Instance().PostRetFut([] {
-                //std::cout << "hello " << i << std::endl;
-                //std::this_thread::sleep_for(std::chrono::seconds(1));
-                //std::cout << "world " << i << std::endl;
+            CThreadPool::Instance().PostRetFut([&mutex] {
                 
                 std::this_thread::sleep_for(std::chrono::seconds(1));
                 
-                std::cout << "Task finished in thread: " << std::this_thread::get_id() << std::endl;
+                {
+                    std::unique_lock<std::mutex> lock( mutex );
+                    std::cout << "Task finished in thread: " << std::this_thread::get_id() << std::endl;
+                }
             })
         );
     }

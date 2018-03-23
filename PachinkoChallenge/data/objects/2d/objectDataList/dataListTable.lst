@@ -21,6 +21,10 @@
         <file path="data/objects/2d/objectDataList/titleScreenDataList.lst"/>
     </groupList>
     
+    <groupList groupName="(levels)">
+        <file path="data/objects/2d/objectDataList/levels/levels_ui.lst"/>
+    </groupList>
+    
     <groupList groupName="(level1)">
         <file path="data/objects/2d/objectDataList/levels/level1DataList.lst"/>
     </groupList>

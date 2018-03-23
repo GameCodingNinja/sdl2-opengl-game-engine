@@ -107,7 +107,7 @@ void CMenuManager::FreeGroup( const std::string & group )
         // Remove it from the tree vectors if it is there
         for( auto & treeIter : treeMapIter->second )
         {
-            if( treeIter.second.IsMenuInterface() )
+            if( treeIter.second.IsInterfaceTree() )
             {
                 auto interIter = std::find( m_pActiveInterTreeVec.begin(), m_pActiveInterTreeVec.end(), &treeIter.second );
                 if( interIter != m_pActiveInterTreeVec.end() )
@@ -277,16 +277,16 @@ void CMenuManager::LoadTreesFromNode( const std::string & group, const XMLNode &
         if( treeNode.isAttributeSet("default") )
             defaultMenu = treeNode.getAttribute( "default" );
         
-        // Is this menu an interface menu?
-        bool interfaceMenu(false);
-        if( treeNode.isAttributeSet("interfaceMenu") )
-            interfaceMenu = ( std::strcmp( treeNode.getAttribute("interfaceMenu"), "true" ) == 0 );
+        // Is this tree an interface tree?
+        bool interfaceTree(false);
+        if( treeNode.isAttributeSet("interfaceTree") )
+            interfaceTree = ( std::strcmp( treeNode.getAttribute("interfaceTree"), "true" ) == 0 );
 
         // Add the tree data to the map
         auto iter = treeMapIter->second.emplace(
             std::piecewise_construct,
             std::forward_as_tuple(name),
-            std::forward_as_tuple(name, menuMapIter->second, rootMenu, defaultMenu, interfaceMenu) );
+            std::forward_as_tuple(name, menuMapIter->second, rootMenu, defaultMenu, interfaceTree) );
 
         // Check for duplicate names
         if( !iter.second )
@@ -347,6 +347,69 @@ void CMenuManager::LoadMenuActionFromXML( const std::string & filePath )
 *    desc:  Activate a tree to be used by tree name only
 *           NOTE: Assumes unique tree names
 ************************************************************************/
+void CMenuManager::ActivateMenu( const std::string & treeStr, const std::string & menuName )
+{
+    for( auto & groupIter : m_menuTreeMapMap )
+    {
+        for( auto & treeIter : groupIter.second )
+        {
+            if( treeIter.first == treeStr )
+            {
+                ActivateMenu( groupIter.first, treeIter.first, menuName );
+                return;
+            }
+        }
+    }
+    
+    // If you got this far, it's a problem
+    throw NExcept::CCriticalException("Menu Activate Error!",
+        boost::str( boost::format("Menu tree doesn't exist (%s).\n\n%s\nLine: %s")
+            % treeStr % __FUNCTION__ % __LINE__ ));
+    
+}   // ActivateTree
+
+/************************************************************************
+*    desc:  Activate a menu to be used
+************************************************************************/
+void CMenuManager::ActivateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName )
+{
+    auto groupIter = m_menuTreeMapMap.find( group );
+    if( groupIter != m_menuTreeMapMap.end() )
+    {
+        // Find the tree in the map
+        auto treeIter = groupIter->second.find( treeStr );
+        if( treeIter != groupIter->second.end() )
+        {
+            // This doesn't make sense for interface trees
+            if( treeIter->second.IsInterfaceTree() )
+                throw NExcept::CCriticalException("Menu Activate Error!",
+                    boost::str( boost::format("Interface menus can't be activated (%s - %s - %s).\n\n%s\nLine: %s")
+                        % group % treeStr % menuName % __FUNCTION__ % __LINE__ ));
+
+            // Init the menu for use
+            treeIter->second.ActivateMenu( menuName );
+        }
+        else
+        {
+            throw NExcept::CCriticalException("Menu Activate Error!",
+                boost::str( boost::format("Menu tree doesn't exist (%s - %s).\n\n%s\nLine: %s")
+                    % group % treeStr % __FUNCTION__ % __LINE__ ));
+        }
+    }
+    else
+    {
+        throw NExcept::CCriticalException("Menu Activate Error!",
+            boost::str( boost::format("Menu tree group doesn't exist (%s - %s).\n\n%s\nLine: %s")
+                % group % treeStr % __FUNCTION__ % __LINE__ ));
+    }
+    
+}   // ActivateMenu
+
+
+/************************************************************************
+*    desc:  Activate a tree to be used by tree name only
+*           NOTE: Assumes unique tree names
+************************************************************************/
 void CMenuManager::ActivateTree( const std::string & treeStr )
 {
     for( auto & groupIter : m_menuTreeMapMap )
@@ -362,7 +425,7 @@ void CMenuManager::ActivateTree( const std::string & treeStr )
     }
     
     // If you got this far, it's a problem
-    throw NExcept::CCriticalException("Menu Tree Acticate Error!",
+    throw NExcept::CCriticalException("Menu Tree Activate Error!",
         boost::str( boost::format("Menu tree doesn't exist (%s).\n\n%s\nLine: %s")
             % treeStr % __FUNCTION__ % __LINE__ ));
     
@@ -380,10 +443,10 @@ void CMenuManager::ActivateTree( const std::string & group, const std::string & 
         auto treeIter = groupIter->second.find( treeStr );
         if( treeIter != groupIter->second.end() )
         {
-            if( treeIter->second.IsMenuInterface() )
+            if( treeIter->second.IsInterfaceTree() )
             {
                 if( std::find( m_pActiveInterTreeVec.begin(), m_pActiveInterTreeVec.end(), &treeIter->second ) != m_pActiveInterTreeVec.end() )
-                    throw NExcept::CCriticalException("Menu Tree Acticate Error!",
+                    throw NExcept::CCriticalException("Menu Tree Activate Error!",
                         boost::str( boost::format("Menu tree already active (%s - %s).\n\n%s\nLine: %s")
                             % group % treeStr % __FUNCTION__ % __LINE__ ));
                 
@@ -392,7 +455,7 @@ void CMenuManager::ActivateTree( const std::string & group, const std::string & 
             else
             {
                 if( std::find( m_pActiveMenuTreeVec.begin(), m_pActiveMenuTreeVec.end(), &treeIter->second ) != m_pActiveMenuTreeVec.end() )
-                    throw NExcept::CCriticalException("Menu Tree Acticate Error!",
+                    throw NExcept::CCriticalException("Menu Tree Activate Error!",
                         boost::str( boost::format("Menu tree already active (%s - %s).\n\n%s\nLine: %s")
                             % group % treeStr % __FUNCTION__ % __LINE__ ));
                 
@@ -404,14 +467,14 @@ void CMenuManager::ActivateTree( const std::string & group, const std::string & 
         }
         else
         {
-            throw NExcept::CCriticalException("Menu Tree Acticate Error!",
+            throw NExcept::CCriticalException("Menu Tree Activate Error!",
                 boost::str( boost::format("Menu tree doesn't exist (%s - %s).\n\n%s\nLine: %s")
                     % group % treeStr % __FUNCTION__ % __LINE__ ));
         }
     }
     else
     {
-        throw NExcept::CCriticalException("Menu Tree Acticate Error!",
+        throw NExcept::CCriticalException("Menu Tree Activate Error!",
             boost::str( boost::format("Menu tree group doesn't exist (%s - %s).\n\n%s\nLine: %s")
                 % group % treeStr % __FUNCTION__ % __LINE__ ));
     }
@@ -441,7 +504,7 @@ void CMenuManager::DeactivateTree( const std::string & treeStr )
     }
     
     // If you got this far, it's a problem
-    throw NExcept::CCriticalException("Menu Tree Deacticate Error!",
+    throw NExcept::CCriticalException("Menu Tree Deactivate Error!",
         boost::str( boost::format("Menu tree doesn't exist (%s - %s).\n\n%s\nLine: %s")
             % treeStr % __FUNCTION__ % __LINE__ ));
     
@@ -460,7 +523,7 @@ void CMenuManager::DeactivateTree( const std::string & group, const std::string 
         if( treeIter != groupIter->second.end() )
         {
             // Remove the tree from the vector
-            if( treeIter->second.IsMenuInterface() )
+            if( treeIter->second.IsInterfaceTree() )
             {
                 auto iter = std::find( m_pActiveInterTreeVec.begin(), m_pActiveInterTreeVec.end(), &treeIter->second );
                 if( iter != m_pActiveInterTreeVec.end() )
@@ -475,7 +538,7 @@ void CMenuManager::DeactivateTree( const std::string & group, const std::string 
         }
         else
         {
-            throw NExcept::CCriticalException("Menu Tree Deacticate Error!",
+            throw NExcept::CCriticalException("Menu Tree Deactivate Error!",
                 boost::str( boost::format("Menu tree doesn't exist (%s - %s).\n\n%s\nLine: %s")
                     % group % treeStr % __FUNCTION__ % __LINE__ ));
         }

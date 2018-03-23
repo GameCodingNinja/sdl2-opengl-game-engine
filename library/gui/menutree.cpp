@@ -26,12 +26,12 @@ CMenuTree::CMenuTree(
     std::map<const std::string, CMenu> & rMenuMap, 
     const std::string & rootMenu,
     const std::string & defaultMenu,
-    bool interfaceMenu ) :
+    bool interfaceTree ) :
     m_name(name),
     m_rMenuMap( rMenuMap ),
     m_pRootMenu( nullptr),
     m_pDefaultMenu( nullptr ),
-    m_interfaceMenu( interfaceMenu ),
+    m_interfaceTree( interfaceTree ),
     m_state( NMenu::EMTS_IDLE )
 {
     auto iter = rMenuMap.find( rootMenu );
@@ -137,7 +137,7 @@ bool CMenuTree::HasRootMenu()
 void CMenuTree::HandleEvent( const SDL_Event & rEvent )
 {
     // Trap only controller events to check for actions
-    if( !m_interfaceMenu )
+    if( !m_interfaceTree )
     {
         if( !m_pMenuPathVec.empty() )
             m_pMenuPathVec.back()->HandleEvent( rEvent );
@@ -182,6 +182,49 @@ void CMenuTree::HandleEvent( const SDL_Event & rEvent )
     }
 
 }   // HandleEvent
+
+
+/************************************************************************
+*    desc:  Activate a menu
+************************************************************************/
+void CMenuTree::ActivateMenu( const std::string & menuName )
+{
+    // Do a sanity check to make sure the menu exists
+    auto iter = m_rMenuMap.find(menuName);
+    if( iter == m_rMenuMap.end() )
+        throw NExcept::CCriticalException("Menu Display Error!",
+            boost::str( boost::format("Menu does not exist (%s).\n\n%s\nLine: %s")
+                % menuName % __FUNCTION__ % __LINE__ ));
+    
+    // Get the name of the menu we are transitioning to
+    // This is also used as a flag to indicate moving up the menu tree
+    m_toMenu = menuName;
+    
+    if( m_pMenuPathVec.empty() )
+    {
+        // Add the menu to the path
+        m_pMenuPathVec.push_back( &iter->second );
+
+        // Set the state as "active" so that input messages are ignored
+        m_state = NMenu::EMTS_ACTIVE;
+
+        // Start the transition in
+        NGenFunc::DispatchEvent( NMenu::EGE_MENU_TRANS_IN, NMenu::ETC_BEGIN );
+    }
+    else
+    {
+        // If this isn't the root menu, start the transition out
+        if( m_pMenuPathVec.back() != m_pRootMenu )
+        {
+            // Set the state as "active" so that input messages are ignored
+            m_state = NMenu::EMTS_ACTIVE;
+
+            // Start the transition out
+            NGenFunc::DispatchEvent( NMenu::EGE_MENU_TRANS_OUT, NMenu::ETC_BEGIN );
+        }
+    }
+    
+}   // ActivateMenu
 
 
 /************************************************************************
@@ -439,13 +482,13 @@ bool CMenuTree::IsMenuItemActive()
 
 
 /************************************************************************
-*    desc:  Is this menu an interface
+*    desc:  Is this an interface tree
 ************************************************************************/
-bool CMenuTree::IsMenuInterface() const
+bool CMenuTree::IsInterfaceTree() const
 {
-    return m_interfaceMenu;
+    return m_interfaceTree;
     
-}   // IsMenuInterface
+}   // IsInterface
 
 
 /************************************************************************

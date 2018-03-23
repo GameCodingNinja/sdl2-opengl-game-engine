@@ -4,7 +4,7 @@
         
         <!-- Win Meter -->
         <control name="win_meter" controlType="meter" defaultState="inactive">
-            <filePath file="data/objects/2d/ui/games/run/controls/win_meter.ctrl"/>
+            <filePath file="data/objects/2d/ui/levels/controls/win_meter.ctrl"/>
             <position x="-410" y="750"/>
             <!-- Max size of font string in meter -->
             <size width="175" height="55"/>
@@ -20,7 +20,7 @@
         
         <!-- Multiplier Label -->
         <control name="multiplier_label" controlType="label" defaultState="inactive">
-            <filePath file="data/objects/2d/ui/games/run/controls/multiplier_label.ctrl"/>
+            <filePath file="data/objects/2d/ui/levels/controls/multiplier_label.ctrl"/>
             <position x="-300" y="750" z="0"/>
             <fontStringLst>
                 <string text="1x"/>

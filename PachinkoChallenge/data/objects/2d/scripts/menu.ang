@@ -163,7 +163,7 @@ void Control_Selected_Visible( CSprite2d & sprite )
 /************************************************************************
 *    desc:  Animates the selected state for solid
 ************************************************************************/
-void Control_Solid_Selected_visible( CSprite2d & sprite )
+void Control_Solid_Selected_Visible( CSprite2d & sprite )
 {
     Ctrl_Selected( sprite, 1.5, .6 );
 

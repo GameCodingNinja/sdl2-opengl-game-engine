@@ -17,14 +17,10 @@
 #include <condition_variable>
 #include <functional>
 #include <stdexcept>
-#if !defined(__ANDROID__)
 #include <future>
-#endif
 
 // Thread disable flag for testing purposes
-#if defined(__ANDROID__)
-    #define __thread_disable__
-#endif
+//#define __thread_disable__
 
 class CThreadPool
 {
@@ -36,17 +32,14 @@ public:
         return threadPool;
     }
 
-    #if !defined(__ANDROID__)
     // Post Lambda to the work queue and return future
     template<class F, class... Args>
     auto PostRetFut(F&& f, Args&&... args)
         -> std::future<typename std::result_of<F(Args...)>::type>;
-    #endif
     
     // Post Lambda to the work queue and store future internally
     template<class F, class... Args>
     void Post(F&& f, Args&&... args);
-    
     
     // Wait for the jobs to complete
     void Wait();
@@ -56,6 +49,9 @@ public:
     
     // Unlock mutex for Synchronization
     void Unlock();
+    
+    // Get the mutex
+    std::mutex & GetMutex();
 
 private:
     
@@ -74,20 +70,18 @@ private:
     std::queue< std::function<void()> > m_tasks;
     
     // Store future to wait for end of job que
-    #if !defined(__ANDROID__)
     std::vector< std::future<void> > m_jobVec;
-    #endif
 
     // synchronization
     std::mutex m_queue_mutex;
     std::mutex m_mutex;
     std::condition_variable m_condition;
     
-    // Flag to allow the thread to fall tyhrough and end
+    // Flag to allow the thread to fall through and end
     bool m_stop = false;
 };
 
-#if !defined(__ANDROID__)
+
 /************************************************************************
 *    desc:  Post Lambda to the work queue and return future
 ************************************************************************/
@@ -98,13 +92,15 @@ auto CThreadPool::PostRetFut(F&& f, Args&&... args)
     using return_type = typename std::result_of < F(Args...)>::type;
     
     #if defined(__thread_disable__)
-    f();
-    std::future<return_type> res;
+    auto task = std::make_shared < std::packaged_task < return_type()> >(
+        std::bind(std::forward<F>(f), std::forward<Args>(args)...) );
+    
+    std::future<return_type> res = task->get_future();
+    (*task)();
     return res;
     #else
     auto task = std::make_shared < std::packaged_task < return_type()> >(
-            std::bind(std::forward<F>(f), std::forward<Args>(args)...)
-            );
+            std::bind(std::forward<F>(f), std::forward<Args>(args)...) );
 
     std::future<return_type> res = task->get_future();
     {
@@ -123,7 +119,6 @@ auto CThreadPool::PostRetFut(F&& f, Args&&... args)
     return res;
     #endif
 }
-#endif  // #if defined(__ANDROID__)
 
 
 /************************************************************************

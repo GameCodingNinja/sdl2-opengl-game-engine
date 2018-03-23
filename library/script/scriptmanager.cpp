@@ -390,50 +390,53 @@ void CScriptManager::Update()
 
 void CScriptManager::Update( std::vector<asIScriptContext *> & pContextVec )
 {
-    auto iter = pContextVec.begin();
-    while( iter != pContextVec.end() )
+    // Using a for loop because it simplifies the implementation that new
+    // spawns are added to the vector be it through a local spawn or a global spawn.
+    // For example, if this is the m_pActiveContextVec, PrepareSpawn adds a context to the vector
+    for( size_t i = 0; i < pContextVec.size(); ++i )
     {
+        auto pContext = pContextVec[i];
+        
         // See if this context is still being used
-        if( ((*iter)->GetState() == asEXECUTION_SUSPENDED) || 
-            ((*iter)->GetState() == asEXECUTION_PREPARED) )
+        if( (pContext->GetState() == asEXECUTION_SUSPENDED) || 
+            (pContext->GetState() == asEXECUTION_PREPARED) )
         {
-            // Increment the active script contex counter
+            // Increment the active script context counter
             CStatCounter::Instance().IncActiveScriptContexCounter();
-
+            
             // Execute the script and check for errors
             // Since the script can be suspended, this also is used to continue execution
-            if( (*iter)->Execute() < 0 )
+            if( pContext->Execute() < 0 )
             {
                 throw NExcept::CCriticalException("Error Calling Spawn Script!",
                     boost::str( boost::format("There was an error executing the script.\n\n%s\nLine: %s")
                         % __FUNCTION__ % __LINE__ ));
             }
-
+            
             // If this execution spawned any local contexts, they will be in this vector.
             // This will also start their execution in this update
             if( !m_pLocalSpawnContextVec.empty() )
             {
-                // A push_back invalidates the iter which is why we need to create
-                // a new one at the same spot as the previous iter.
-                const size_t diff = iter-pContextVec.begin();
-                
                 for( auto spawnIter : m_pLocalSpawnContextVec )
                     pContextVec.push_back( spawnIter );
                 
-                iter = pContextVec.begin()+diff;
                 m_pLocalSpawnContextVec.clear();
             }
-
-            // Return the context to the pool if it has not been suspended
-            if( (*iter)->GetState() != asEXECUTION_SUSPENDED )
-            {
-                RecycleContext( (*iter) );
-                iter = pContextVec.erase( iter );
-            }
-            else
-            {
-                ++iter;
-            }
+        }
+    }
+    
+    auto iter = pContextVec.begin();
+    while( iter != pContextVec.end() )
+    {
+        // Return the context to the pool if it has not been suspended
+        if( (*iter)->GetState() != asEXECUTION_SUSPENDED )
+        {
+            RecycleContext( (*iter) );
+            iter = pContextVec.erase( iter );
+        }
+        else
+        {
+            ++iter;
         }
     }
 

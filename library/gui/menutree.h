@@ -40,13 +40,16 @@ public:
         std::map<const std::string, CMenu> & rMenuMap, 
         const std::string & rootMenu,
         const std::string & defaultMenu,
-        bool interfaceMenu = false );
+        bool interfaceTree = false );
 
     // Destructor
     ~CMenuTree();
 
     // Handle events
     void HandleEvent( const SDL_Event & rEvent );
+    
+    // Activate a menu
+    void ActivateMenu( const std::string & menuName );
 
     // Update the menu tree
     void Update();
@@ -76,8 +79,8 @@ public:
     // Is a menu item active
     bool IsMenuItemActive();
     
-    // Is this menu an interface
-    bool IsMenuInterface() const;
+    // Is this an interface tree
+    bool IsInterfaceTree() const;
     
     // Get the name of the tree
     std::string & GetName();
@@ -112,8 +115,8 @@ private:
     // Do not free. We DON'T own the pointer
     CMenu * m_pDefaultMenu;
     
-    // Is interface menu?
-    const bool m_interfaceMenu;
+    // Is interface tree?
+    const bool m_interfaceTree;
 
     // Name of menu we are transitioning to
     std::string m_toMenu;

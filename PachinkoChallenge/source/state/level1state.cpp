@@ -86,6 +86,8 @@ void CLevel1State::Init()
     CMenuManager::Instance().ActivateTree("pause_tree");
     CMenuManager::Instance().ActivateTree("base_game_tree");
     
+    //CMenuManager::Instance().ActivateMenu("pause_tree", "confirmation_menu");
+    
     m_ballVec = {"circle_green", "circle_blue", "circle_red",
                  "square_green", "square_blue", "square_red",
                  "triangle_green", "triangle_blue", "triangle_red"};
@@ -318,16 +320,21 @@ namespace NLevel1State
     void ObjectDataLoad()
     {
         CObjectDataMgr::Instance().LoadGroup2D( "(level1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().LoadGroup2D( "(levels)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().CreateFromData2D( "(level1)" );
+        CObjectDataMgr::Instance().CreateFromData2D( "(levels)" );
     }
     
     void Load()
     {
+        // Load the state specific menu group
+        CMenuManager::Instance().LoadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
+        
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(level1)");
         
@@ -340,6 +347,9 @@ namespace NLevel1State
     
     void CriticalInit()
     {
+        // Creates the font strings, run init scripts
+        CMenuManager::Instance().InitGroup("(levels)");
+        
         CSpriteStrategyMgr::Instance().Init();
     }
 
@@ -349,13 +359,19 @@ namespace NLevel1State
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()
-    {
+    {        
+        CMenuManager::Instance().CleanUpGroup("(levels)");
         CSpriteStrategyMgr::Instance().CleanUp();
         CObjectDataMgr::Instance().FreeGroup2D( "(level1)" );
+        CObjectDataMgr::Instance().FreeGroup2D( "(levels)" );
     }
     
     void Unload()
     {
+        // Unload the state specific menu group
+        CMenuManager::Instance().FreeGroup("(levels)");
+        
+        // Unload the strategy group stuff
         CSpriteStrategyMgr::Instance().Clear();
         
         // Unload state specific AngelScript functions

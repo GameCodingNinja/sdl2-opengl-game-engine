@@ -2,7 +2,10 @@
 
     <groupList groupName="(menu)">
         <file path="data/objects/2d/menu/main_menu.cfg"/>
-        <file path="data/objects/2d/ui/games/run/base_game.cfg"/>
+    </groupList>
+    
+    <groupList groupName="(levels)">
+        <file path="data/objects/2d/ui/levels/base_game.cfg"/>
     </groupList>
   
 </listTable>

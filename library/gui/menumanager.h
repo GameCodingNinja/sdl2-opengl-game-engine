@@ -56,6 +56,10 @@ public:
     
     // Clean up a menu group
     void CleanUpGroup( const std::string & group );
+    
+    // Activate a menu
+    void ActivateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName );
+    void ActivateMenu( const std::string & treeStr, const std::string & menuName );
 
     // Activate a tree to be used
     void ActivateTree( const std::string & group, const std::string & treeStr );

@@ -21,7 +21,7 @@ CThreadPool::CThreadPool()
     int threads = CSettings::Instance().GetMinThreadCount();
     
     // Get maximum number of threads.
-    // Value of zero means use max hardware threads to no of cores
+    // Value of zero means use max hardware threads to number of cores
     const int maxThreads = CSettings::Instance().GetMaxThreadCount();
     
     // Get the number of hardware cores. May return 0 if can't determine
@@ -48,10 +48,11 @@ CThreadPool::CThreadPool()
                     {
                         std::unique_lock<std::mutex> lock(this->m_queue_mutex);
                         this->m_condition.wait(lock,
-                                [this] {
-                                    return this->m_stop || !this->m_tasks.empty(); });
+                            [this] { return this->m_stop || !this->m_tasks.empty(); });
+                                
                         if (this->m_stop && this->m_tasks.empty())
                             return;
+                                
                         task = std::move(this->m_tasks.front());
                         this->m_tasks.pop();
                     }
@@ -119,4 +120,13 @@ void CThreadPool::Unlock()
     #if !defined(__thread_disable__)
     m_mutex.unlock();
     #endif
+}
+
+
+/************************************************************************
+*    desc:  Get the mutex
+************************************************************************/
+std::mutex & CThreadPool::GetMutex()
+{
+    return m_mutex;
 }
