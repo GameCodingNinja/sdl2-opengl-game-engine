@@ -112,10 +112,6 @@ typedef unsigned char validate_uint32[sizeof(uint32)==4];
 //	I (JLD) want full messages for SOIL
 #define STBI_FAILURE_USERMSG 1
 
-// Function pointer
-SoilLoadCallBackFuncPtr SoilLoadCallBackFunc = NULL;
-
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // Generic API that works on all image types
@@ -1878,8 +1874,6 @@ static int dist_extra[32] =
 
 static int parse_huffman_block(zbuf *a)
 {
-    if( SoilLoadCallBackFunc != NULL )
-        SoilLoadCallBackFunc();
    for(;;) {
       int z = zhuffman_decode(a, &a->z_length);
       if (z < 256) {
@@ -1908,8 +1902,6 @@ static int parse_huffman_block(zbuf *a)
 
 static int compute_huffman_codes(zbuf *a)
 {
-    if( SoilLoadCallBackFunc != NULL )
-         SoilLoadCallBackFunc();
    static uint8 length_dezigzag[19] = { 16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15 };
    static zhuffman z_codelength; // static just to save stack space
    uint8 lencodes[286+32+137];//padding for maximum single op
@@ -2183,9 +2175,6 @@ static int create_png_image(png *a, uint8 *raw, uint32 raw_len, int out_n)
    if (!a->out) return e("outofmem", "Out of memory");
    if (raw_len != (img_n * s->img_x + 1) * s->img_y) return e("not enough pixels","Corrupt PNG");
    for (j=0; j < s->img_y; ++j) {
-       
-      if( (SoilLoadCallBackFunc != NULL) && (j % 5 == 0) )
-         SoilLoadCallBackFunc();
       
       uint8 *cur = a->out + stride*j;
       uint8 *prior = cur - stride;
@@ -2319,8 +2308,7 @@ static int parse_png_file(png *z, int scan, int req_comp)
 
    for(;;first=0) {
       chunk c = get_chunk_header(s);
-      if( SoilLoadCallBackFunc != NULL )
-         SoilLoadCallBackFunc();
+      
       if (first && c.type != PNG_TYPE('I','H','D','R'))
          return e("first not IHDR","Corrupt PNG");
       switch (c.type) {

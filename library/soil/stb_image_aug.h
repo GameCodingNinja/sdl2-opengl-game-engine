@@ -163,8 +163,6 @@
 
 #define STBI_VERSION 1
 
-typedef void (*SoilLoadCallBackFuncPtr)();
-
 enum
 {
    STBI_default = 0, // only used for req_comp

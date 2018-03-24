@@ -40,6 +40,12 @@ public:
     
     // Texture size - mostly needed for 2D
     CSize<int> m_size;
+    
+    // Texture channels
+    int channels = 0;
+    
+    // Texture byte data
+    unsigned char * pData = nullptr;
 
     GLuint GetID() const {return m_id;}
     const CSize<int> & GetSize() const {return m_size;}

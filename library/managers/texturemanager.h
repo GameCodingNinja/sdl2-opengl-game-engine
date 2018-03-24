@@ -34,8 +34,15 @@ public:
     }
 
     // Load the texture from file path
-    const CTexture & LoadFor2D( const std::string & group, const std::string & filePath, bool compressed = false );
     const CTexture & LoadFor3D( const std::string & group, const std::string & filePath, bool compressed = false );
+    
+    // Load the image from file path
+    const void LoadImageFor2D( const std::string & group, const std::string & filePath );
+    const CTexture & LoadImageFor3D( const std::string & group, const std::string & filePath );
+    
+    // Create the texture from file path
+    const CTexture & CreateTextureFor2D( const std::string & group, const std::string & filePath, bool compressed = false );
+    const CTexture & CreateTextureFor3D( const std::string & group, const std::string & filePath, bool compressed = false );
 
     // Texture deleting
     void DeleteTextureGroupFor2D( const std::string & group );
@@ -60,6 +67,12 @@ private:
     
     // Load the texture from file path
     void LoadTexture( CTexture & texture, const std::string & filePath, bool compressed );
+    
+    // Load the just the image from file path
+    void LoadImage( CTexture & texture, const std::string & filePath );
+    
+    // Create the texture from image data loaded into memory
+    void CreateTexture( CTexture & texture, bool compressed );
 
 private:
 

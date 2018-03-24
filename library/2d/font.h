@@ -37,11 +37,14 @@ class CFont
 {
 public:
 
-    CFont();
+    CFont( const std::string & filePath );
     ~CFont();
 
     // Load from XML file
-    void LoadFromXML( const std::string & group, const std::string & filePath );
+    void LoadFromXML( const std::string & group );
+    
+    // Create the font texture from data
+    void CreateFromData( const std::string & group );
 
     // Get the data for this character
     const CCharData & GetCharData( char id ) const;
@@ -66,6 +69,9 @@ public:
 
 private:
 
+    // font file path
+    std::string m_filePath;
+    
     // map list of character data
     std::map<char, CCharData> m_charDataMap;
 

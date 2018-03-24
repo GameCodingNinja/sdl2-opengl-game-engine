@@ -19,8 +19,9 @@
 /************************************************************************
 *    desc:  Constructor                                                             
 ************************************************************************/
-CFont::CFont()
-    : m_lineHeight(0),
+CFont::CFont( const std::string & filePath )
+    : m_filePath(filePath),
+      m_lineHeight(0),
       m_baselineOffset(0),
       m_horzPadding(0),
       m_vertPadding(0)
@@ -41,13 +42,13 @@ CFont::~CFont()
 *
 *    param: String filePath - path to xml file
 ************************************************************************/
-void CFont::LoadFromXML( const std::string & group, const std::string & filePath )
+void CFont::LoadFromXML( const std::string & group )
 {
-    // load the texture
-    m_texture = CTextureMgr::Instance().LoadFor2D( group, filePath + ".png" );
+    // load the image
+    CTextureMgr::Instance().LoadImageFor2D( group, m_filePath + ".png" );
 
     // open this file and parse
-    XMLNode mainNode = XMLNode::openFileHelper( (filePath + ".fnt").c_str(), "font" );
+    XMLNode mainNode = XMLNode::openFileHelper( (m_filePath + ".fnt").c_str(), "font" );
 
     // Get the padding
     std::string padding = mainNode.getChildNode( "info" ).getAttribute("padding");
@@ -94,6 +95,16 @@ void CFont::LoadFromXML( const std::string & group, const std::string & filePath
     }
 
 }   // LoadFromXML
+
+
+/************************************************************************
+ *    desc:  Create the font texture from data
+ ************************************************************************/
+void CFont::CreateFromData( const std::string & group )
+{
+    m_texture = CTextureMgr::Instance().CreateTextureFor2D( group, m_filePath + ".png" );
+    
+}   // CreateFromData
 
 
 /************************************************************************

@@ -67,14 +67,80 @@ CTextureMgr::~CTextureMgr()
 
 
 /************************************************************************
-*    desc:  Load the texture from file path
+*    desc:  Load the image from file path
 ************************************************************************/
-const CTexture & CTextureMgr::LoadFor2D( const std::string & group, const std::string & filePath, bool compressed )
+const void CTextureMgr::LoadImageFor2D( const std::string & group, const std::string & filePath )
 {
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_textureFor2DMapMap.find( group );
     if( mapMapIter == m_textureFor2DMapMap.end() )
-            mapMapIter = m_textureFor2DMapMap.emplace( group, std::map<const std::string, CTexture>() ).first;
+        mapMapIter = m_textureFor2DMapMap.emplace( group, std::map<const std::string, CTexture>() ).first;
+
+    // See if this texture has already been loaded
+    auto mapIter = mapMapIter->second.find( filePath );
+
+    // If it's not found, load the texture and add it to the list
+    if( mapIter == mapMapIter->second.end() )
+    {
+        CTexture texture;
+
+        // Load the image from file path
+        LoadImage( texture, filePath );
+
+        // Insert the new texture info
+        mapIter = mapMapIter->second.emplace( filePath, texture ).first;
+    }
+
+}   // LoadImageFor2D
+
+
+/************************************************************************
+*    desc:  Create the texture from file path
+************************************************************************/
+const CTexture & CTextureMgr::CreateTextureFor2D( const std::string & group, const std::string & filePath, bool compressed )
+{
+    // Create the map group if it doesn't already exist
+    auto mapMapIter = m_textureFor2DMapMap.find( group );
+    if( mapMapIter == m_textureFor2DMapMap.end() )
+        mapMapIter = m_textureFor2DMapMap.emplace( group, std::map<const std::string, CTexture>() ).first;
+
+    // See if this texture has already been loaded
+    auto mapIter = mapMapIter->second.find( filePath );
+
+    // If it's not found, there's a problem
+    if( mapIter == mapMapIter->second.end() )
+        throw NExcept::CCriticalException("Create Texture Error!",
+            boost::str( boost::format("Error creating texture (%s)(%s).\n\n%s\nLine: %s")
+                % filePath % __FUNCTION__ % __LINE__ ));
+    
+    if( mapIter->second.GetID() == 0 )
+    {
+        // Load the texture from file path
+        CreateTexture( mapIter->second, compressed );
+        
+        // NOTE: Now handled in SOIL (reason for commenting it out))
+        // Init with common features until I need to configure differently
+        //glBindTexture(GL_TEXTURE_2D, texture.GetID());
+        //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+        //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+        
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    return mapIter->second;
+
+}   // CreateTextureFor2D
+
+
+/************************************************************************
+*    desc:  Load the texture from file path
+************************************************************************/
+const CTexture & CTextureMgr::LoadImageFor3D( const std::string & group, const std::string & filePath )
+{
+    // Create the map group if it doesn't already exist
+    auto mapMapIter = m_textureFor3DMapMap.find( group );
+    if( mapMapIter == m_textureFor3DMapMap.end() )
+        mapMapIter = m_textureFor3DMapMap.emplace( group, std::map<const std::string, CTexture>() ).first;
 
     // See if this texture has already been loaded
     auto mapIter = mapMapIter->second.find( filePath );
@@ -85,15 +151,7 @@ const CTexture & CTextureMgr::LoadFor2D( const std::string & group, const std::s
         CTexture texture;
 
         // Load the texture from file path
-        LoadTexture( texture, filePath, compressed );
-        
-        // NOTE: Now handled in SOIL (reason for commenting it out))
-        // Init with common features until I need to configure differently
-        //glBindTexture(GL_TEXTURE_2D, texture.GetID());
-        //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-        //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-        
-        glBindTexture(GL_TEXTURE_2D, 0);
+        LoadImage( texture, filePath );
 
         // Insert the new texture info
         mapIter = mapMapIter->second.emplace( filePath, texture ).first;
@@ -101,7 +159,48 @@ const CTexture & CTextureMgr::LoadFor2D( const std::string & group, const std::s
 
     return mapIter->second;
 
-}   // LoadFor2D
+}   // LoadImageFor3D
+
+
+/************************************************************************
+*    desc:  Load the texture from file path
+************************************************************************/
+const CTexture & CTextureMgr::CreateTextureFor3D( const std::string & group, const std::string & filePath, bool compressed )
+{
+    // Create the map group if it doesn't already exist
+    auto mapMapIter = m_textureFor3DMapMap.find( group );
+    if( mapMapIter == m_textureFor3DMapMap.end() )
+        mapMapIter = m_textureFor3DMapMap.emplace( group, std::map<const std::string, CTexture>() ).first;
+
+    // See if this texture has already been loaded
+    auto mapIter = mapMapIter->second.find( filePath );
+    
+    // If it's not found, there's a problem
+    if( mapIter == mapMapIter->second.end() )
+        throw NExcept::CCriticalException("Create Texture Error!",
+            boost::str( boost::format("Error creating texture (%s)(%s).\n\n%s\nLine: %s")
+                % filePath % __FUNCTION__ % __LINE__ ));
+
+    // If it's not found, create the texture and add it to the list
+    if( mapIter->second.GetID() == 0 )
+    {
+        // Load the texture from file path
+        CreateTexture( mapIter->second, compressed );
+        
+        // Init with common features until I need to configure differently
+        glBindTexture(GL_TEXTURE_2D, mapIter->second.GetID());
+        
+        // Set the anisotropic value
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, m_anisotropicLevel );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+        
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    return mapIter->second;
+
+}   // CreateTextureFor3D
 
 
 /************************************************************************
@@ -158,13 +257,63 @@ void CTextureMgr::LoadTexture( CTexture & texture, const std::string & filePath,
         (compressed == true) ? SOIL_FLAG_COMPRESS_TO_DXT : SOIL_FLAG_ORIGINAL_TEXTURE_FORMAT );
 
     if( texture.GetID() == 0 )
-    {
         throw NExcept::CCriticalException("Load Texture Error!",
             boost::str( boost::format("Error loading texture (%s)(%s).\n\n%s\nLine: %s")
                 % stbi_failure_reason() % filePath % __FUNCTION__ % __LINE__ ));
-    }
 
 }   // LoadTexture
+
+
+/************************************************************************
+*    desc:  Load the just the image from file path
+************************************************************************/
+void CTextureMgr::LoadImage( CTexture & texture, const std::string & filePath )
+{
+    texture.pData = SOIL_load_image(
+        filePath.c_str(),
+        &texture.m_size.w,
+        &texture.m_size.h,
+        &texture.channels,
+        SOIL_LOAD_AUTO
+    );
+    
+    if( texture.pData == nullptr )
+        throw NExcept::CCriticalException("Load Image Error!",
+            boost::str( boost::format("Error loading image (%s)(%s).\n\n%s\nLine: %s")
+                % stbi_failure_reason() % filePath % __FUNCTION__ % __LINE__ ));
+    
+}   // LoadImage
+
+
+/************************************************************************
+*    desc:  Create the texture from image data loaded into memory
+************************************************************************/
+void CTextureMgr::CreateTexture( CTexture & texture, bool compressed )
+{
+    if( texture.pData == nullptr )
+        throw NExcept::CCriticalException("Create Texture Error!",
+            boost::str( boost::format("Can't create texture from null pointer.\n\n%s\nLine: %s")
+                % __FUNCTION__ % __LINE__ ));
+    
+    texture.m_id = SOIL_create_OGL_texture(
+        texture.pData,
+        texture.m_size.w,
+        texture.m_size.h,
+        texture.channels,
+        SOIL_CREATE_NEW_ID,
+        (compressed == true) ? SOIL_FLAG_COMPRESS_TO_DXT : SOIL_FLAG_ORIGINAL_TEXTURE_FORMAT
+    );
+    
+    SOIL_free_image_data( texture.pData );
+    
+    texture.pData = nullptr;
+    
+    if( texture.GetID() == 0 )
+        throw NExcept::CCriticalException("Load Texture Error!",
+            boost::str( boost::format("Error loading texture (%s).\n\n%s\nLine: %s")
+                % stbi_failure_reason() % __FUNCTION__ % __LINE__ ));
+    
+}   // CreateTexture
 
 
 /************************************************************************

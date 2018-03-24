@@ -50,6 +50,9 @@ void CObjectData3D::LoadFromNode( const XMLNode & node, const std::string & grou
 
     // Load the visual data
     m_visualData.LoadFromNode( node );
+    
+    // Load the image data from file
+    //m_visualData.LoadImage( group );
 
     // Load the physics data
     m_physicsData.LoadFromNode( node );
@@ -62,7 +65,7 @@ void CObjectData3D::LoadFromNode( const XMLNode & node, const std::string & grou
 ************************************************************************/
 void CObjectData3D::CreateFromData( const std::string & group )
 {
-    // Create the visuales
+    // Create the visuals
     m_visualData.CreateFromData( group );
 
     // Calculate the radii

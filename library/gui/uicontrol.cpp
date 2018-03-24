@@ -21,7 +21,6 @@
 #include <objectdata/objectdata2d.h>
 #include <system/device.h>
 #include <managers/actionmanager.h>
-#include <managers/signalmanager.h>
 #include <common/fontproperties.h>
 
 // Boost lib dependencies
@@ -568,14 +567,8 @@ void CUIControl::Init()
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto & iter : m_spriteDeq )
-    {
         if( iter.GetVisualComponent().IsFontSprite() )
-        {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
-            
             iter.GetVisualComponent().CreateFontString();
-        }
-    }
     
     // Call any init scripts
     PrepareSpriteScriptFunction( NUIControl::ECS_INIT );
@@ -591,14 +584,8 @@ void CUIControl::CleanUp()
     // Free the font VBO
     // This allows for early VBO delete so that the menu manager can be freed from the load screen
     for( auto & iter : m_spriteDeq )
-    {
         if( iter.GetVisualComponent().IsFontSprite() )
-        {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
-            
             iter.GetVisualComponent().DeleteFontVBO();
-        }
-    }
     
 }   // CleanUp
 

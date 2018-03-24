@@ -145,7 +145,10 @@ void CMenuManager::InitGroup( const std::string & group )
     if( menuMapIter != m_menuMapMap.end() )
     {
         for( auto & iter : menuMapIter->second )
+        {
+            CSignalMgr::Instance().Broadcast_LoadSignal();
             iter.second.Init();
+        }
     }
     else
     {
@@ -163,6 +166,8 @@ void CMenuManager::InitGroup( const std::string & group )
  ************************************************************************/
 void CMenuManager::CleanUpGroup( const std::string & group )
 {
+    CSignalMgr::Instance().Broadcast_LoadSignal();
+    
     auto menuMapIter = m_menuMapMap.find( group );
     if( menuMapIter != m_menuMapMap.end() )
     {

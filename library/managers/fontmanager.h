@@ -27,7 +27,10 @@ public:
     }
 
     // Load the material from file path
-    void LoadFromXML( const std::string & filePath );
+    void LoadFromXML( const std::string & filePath, const bool createFromData = true );
+    
+    // Create the font texture from data
+    void CreateFromData();
 
     // Get the font
     const CFont & GetFont( const std::string & name ) const;

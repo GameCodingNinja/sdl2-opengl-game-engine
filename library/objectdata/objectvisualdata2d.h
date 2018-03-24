@@ -42,6 +42,9 @@ public:
 
     // Load thes object data from node
     void LoadFromNode( const XMLNode & objectNode );
+    
+    // Load the image data from file
+    void LoadImage( const std::string & group );
 
     // Create the object from data
     void CreateFromData( const std::string & group, CSize<int> & rSize );
@@ -84,8 +87,8 @@ public:
 
 private:
     
-    // Try to load the texture if one exists
-    void LoadTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize );
+    // Create the texture from loaded image data
+    void CreateTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize );
     
     // Generate a quad
     void GenerateQuad( const std::string & group );

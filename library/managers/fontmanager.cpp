@@ -38,7 +38,7 @@ CFontMgr::~CFontMgr()
 * 
 *    return: bool - false on fail
 ************************************************************************/
-void CFontMgr::LoadFromXML( const std::string & filePath )
+void CFontMgr::LoadFromXML( const std::string & filePath, const bool createFromData )
 {
     // open this file and parse
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "fontLst" );
@@ -58,7 +58,7 @@ void CFontMgr::LoadFromXML( const std::string & filePath )
         const std::string name = fontNode.getAttribute( "name" );
 
         // Add the font to our list
-        auto iter = m_fontMap.emplace( std::piecewise_construct, std::forward_as_tuple(name), std::forward_as_tuple() );
+        auto iter = m_fontMap.emplace( name, std::string(fontNode.getAttribute( "file" )) );
         if( !iter.second )
         {
             throw NExcept::CCriticalException("Font Manager Error!",
@@ -67,10 +67,24 @@ void CFontMgr::LoadFromXML( const std::string & filePath )
         }
 
         // Load the character info from file
-        iter.first->second.LoadFromXML( m_group, std::string(fontNode.getAttribute( "file" )) );
+        iter.first->second.LoadFromXML( m_group );
+        
+        if( createFromData )
+            iter.first->second.CreateFromData( m_group );
     }
 
 }   // LoadFromFile
+
+
+/************************************************************************
+ *    desc:  Create the font texture from data
+ ************************************************************************/
+void CFontMgr::CreateFromData()
+{
+    for( auto & iter : m_fontMap )
+        iter.second.CreateFromData( m_group );
+
+}   // CreateFromData
 
 
 /************************************************************************

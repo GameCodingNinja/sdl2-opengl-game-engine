@@ -119,17 +119,9 @@ void CSector2D::Init()
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto iter : m_pSpriteVec )
-    {
         if( iter->IsSprite2D() )
-        {
             if( dynamic_cast<CSprite2D *>(iter)->GetVisualComponent().IsFontSprite() )
-            {
-                CSignalMgr::Instance().Broadcast_LoadSignal();
-
                 dynamic_cast<CSprite2D *>(iter)->GetVisualComponent().CreateFontString();
-            }
-        }
-    }
     
 }   // Init
 
@@ -142,17 +134,9 @@ void CSector2D::CleanUp()
     // Free the font VBO
     // This allows for early VBO delete so that the font can be freed from the load screen
     for( auto iter : m_pSpriteVec )
-    {
         if( iter->IsSprite2D() )
-        {
             if( dynamic_cast<CSprite2D *>(iter)->GetVisualComponent().IsFontSprite() )
-            {
-                CSignalMgr::Instance().Broadcast_LoadSignal();
-
                 dynamic_cast<CSprite2D *>(iter)->GetVisualComponent().DeleteFontVBO();
-            }
-        }
-    }
     
 }   // CleanUp
 

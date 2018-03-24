@@ -34,17 +34,9 @@
 #include <utilities/highresolutiontimer.h>
 #include <utilities/settings.h>
 #include <utilities/exceptionhandling.h>
-#include <soil/stb_image_aug.h>
 
 // Standard lib dependencies
 #include <thread>
-
-extern "C" SoilLoadCallBackFuncPtr SoilLoadCallBackFunc;
-
-void SoilLoadCallBack()
-{
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-}
 
 /************************************************************************
 *    desc:  Constructer
@@ -63,8 +55,6 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
 ************************************************************************/
 CLoadState::~CLoadState()
 {
-    SoilLoadCallBackFunc = NULL;
-    
     CSignalMgr::Instance().Disconnect_Load();
     
     CObjectDataMgr::Instance().FreeGroup2D( "(loadingScreen)" );
@@ -89,12 +79,12 @@ void CLoadState::Init()
     // Set the position
     m_upSprite->SetPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
     m_upSprite->Transform(); 
-    
-    SoilLoadCallBackFunc = &SoilLoadCallBack;
-    
-    CSignalMgr::Instance().Connect_Load( boost::bind(&CLoadState::Animate, this) );
-    
+
+    // Setup the fade in
     CShaderMgr::Instance().SetShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );
+    
+    // Bind the signal callback to animate during critical load/unload
+    CSignalMgr::Instance().Connect_Load( boost::bind(&CLoadState::Animate, this) );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -299,7 +289,7 @@ bool CLoadState::DoStateChange()
         throw NExcept::CCriticalException(m_errorTitle, m_errorMsg);
     
     CriticalInit();
-
+    
     return true;
 
 }   // DoStateChange

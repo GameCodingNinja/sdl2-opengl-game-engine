@@ -17,7 +17,6 @@
 #include <managers/texturemanager.h>
 #include <managers/vertexbuffermanager.h>
 #include <managers/spritesheetmanager.h>
-#include <managers/signalmanager.h>
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
 #include <utilities/exceptionhandling.h>
@@ -213,8 +212,46 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     % __FUNCTION__ % __LINE__ ));
         }
     }
-
 }   // LoadFromNode
+
+
+/************************************************************************
+*    desc:  Load the image data from file
+************************************************************************/
+void CObjectVisualData2D::LoadImage( const std::string & group )
+{
+    if( !m_textureFilePath.empty() )
+    {
+        if( m_textureSequenceCount > 0 )
+        {
+            m_textureIDVec.reserve( m_textureSequenceCount );
+
+            for( int i = 0; i < m_textureSequenceCount; ++i )
+            {
+                const std::string file = boost::str( boost::format(m_textureFilePath) % i );
+
+                std::string filePath = file;
+
+                // Add in the resource swap file extension if needed
+                if( !m_resExt.empty() )
+                    NGenFunc::AddFileExt( file, filePath, m_resExt );
+
+                CTextureMgr::Instance().LoadImageFor2D( group, filePath );
+            }
+        }
+        else
+        {
+            std::string filePath = m_textureFilePath;
+
+            // Add in the resource swap file extension if needed
+            if( !m_resExt.empty() )
+                NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
+
+            CTextureMgr::Instance().LoadImageFor2D( group, filePath );
+        }
+    }
+    
+}   // LoadImage
 
 
 /************************************************************************
@@ -224,10 +261,8 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
 {
     CTexture texture;
 
-    // Try to load the texture if one exists
-    LoadTexture( group, texture, rSize );
-    
-    CSignalMgr::Instance().Broadcast_LoadSignal();
+    // Create the texture from loaded image data
+    CreateTexture( group, texture, rSize );
 
     if( m_genType == NDefs::EGT_QUAD )
     {
@@ -307,9 +342,9 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
 
 
 /************************************************************************
-*    desc:  Try to load the texture if one exists
+*    desc:  Create the texture from loaded image data
 ************************************************************************/
-void CObjectVisualData2D::LoadTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize )
+void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize )
 {
     if( !m_textureFilePath.empty() )
     {
@@ -319,8 +354,6 @@ void CObjectVisualData2D::LoadTexture( const std::string & group, CTexture & rTe
             
             for( int i = 0; i < m_textureSequenceCount; ++i )
             {
-                CSignalMgr::Instance().Broadcast_LoadSignal();
-                
                 const std::string file = boost::str( boost::format(m_textureFilePath) % i );
                 
                 std::string filePath = file;
@@ -329,30 +362,28 @@ void CObjectVisualData2D::LoadTexture( const std::string & group, CTexture & rTe
                 if( !m_resExt.empty() )
                     NGenFunc::AddFileExt( file, filePath, m_resExt );
                 
-                rTexture = CTextureMgr::Instance().LoadFor2D( group, filePath, m_compressed );
+                rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
                 m_textureIDVec.push_back( rTexture.GetID() );
             }
         }
         else
         {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
-            
             std::string filePath = m_textureFilePath;
             
             // Add in the resource swap file extension if needed
             if( !m_resExt.empty() )
                 NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
             
-            rTexture = CTextureMgr::Instance().LoadFor2D( group, filePath, m_compressed );
+            rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
             m_textureIDVec.push_back( rTexture.GetID() );
         }
-
+        
         // If the passed in size reference is empty, set it to the texture size
         if( rSize.IsEmpty() )
             rSize = rTexture.GetSize();
     }
     
-}   // LoadTexture
+}   // CreateTexture
 
 
 /************************************************************************
@@ -569,8 +600,6 @@ void CObjectVisualData2D::LoadMeshFromXML(
 
         for( int i = 0; i < vboNode.nChildNode(); ++i )
         {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
-            
             // Load the 2D vert
             vert = NParseHelper::LoadVertex2d( vboNode.getChildNode( "vert", i ) );
 
@@ -589,8 +618,6 @@ void CObjectVisualData2D::LoadMeshFromXML(
     {            
         for( int i = 0; i < iboNode.nChildNode(); ++i )
         {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
-            
             const XMLNode iNode = iboNode.getChildNode( "i", i );
 
             rIboVec.push_back( iboOffset + std::atoi(iNode.getText()) );

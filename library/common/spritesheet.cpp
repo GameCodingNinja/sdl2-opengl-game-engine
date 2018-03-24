@@ -12,7 +12,6 @@
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
 #include <utilities/exceptionhandling.h>
-#include <managers/signalmanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -56,8 +55,6 @@ void CSpriteSheet::SetGlyphColumns( uint columns )
 ************************************************************************/
 void CSpriteSheet::Build( const CSize<int> & sheetSize )
 {
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-    
     if( (m_glyphCount != 0) && (m_columns != 0) )
     {
         m_size = sheetSize;
@@ -107,8 +104,6 @@ void CSpriteSheet::Build( const CSize<int> & sheetSize )
 ************************************************************************/
 void CSpriteSheet::LoadFromXML( const std::string & filePath )
 {
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-    
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "spriteSheet" );
     if( !node.isEmpty() )
@@ -242,8 +237,6 @@ void CSpriteSheet::Set( CSpriteSheet & rSpriteSheet, const std::string & glyphId
 ************************************************************************/
 void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec ) const
 {
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-    
     if( strIdVec.empty() )
     {
         for( auto & iter: m_glyphVec )

@@ -2,6 +2,31 @@
 //
 
 #include <iostream>
+#include <future>
+#include <thread>
+
+int main()
+{
+    auto sleep = [](){
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+        return 1;
+    };
+    
+    std::packaged_task<int()> task(sleep);
+
+    auto f = task.get_future();
+    
+    std::thread thread(std::move(task));
+    thread.detach();
+    
+    std::cout << "Thread started. Waiting on future" << std::endl;
+    
+    std::cout << "Future returned: " << f.get() << std::endl;
+
+    return 0;
+}
+
+/*#include <iostream>
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/matrix.h>
@@ -38,7 +63,7 @@ int main()
     std::cout << "Execution time: " << CHighResTimer::Instance().TimerStop() << std::endl;
     
     return 0;
-}
+}*/
 
 /*#include <utilities/xmlParser.h>
 
