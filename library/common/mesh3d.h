@@ -9,9 +9,13 @@
 
 // Game lib dependencies
 #include <common/mesh.h>
+#include <common/point.h>
+#include <common/normal.h>
+#include <common/uv.h>
 
 // Standard lib dependencies
 #include <vector>
+#include <memory>
 
 class CMesh3D
 {
@@ -46,8 +50,68 @@ public:
     
     const std::vector<CMesh> & getVec() const
     { return m_meshVec; }
+    
+    CMeshBinaryFileHeader & getFileHeader()
+    { return m_fileHeader; }
+    
+    uint32_t getVerifyValue()
+    { return m_fileHeader.file_header; }
+    
+    uint16_t getVertCount()
+    { return m_fileHeader.vert_count; }
+    
+    uint16_t getUVCount()
+    { return m_fileHeader.uv_count; }
+    
+    uint16_t getNormCount()
+    { return m_fileHeader.vert_norm_count; }
+    
+    uint16_t getFaceGroupCount()
+    { return m_fileHeader.face_group_count; }
+    
+    uint16_t getTextCount()
+    { return m_fileHeader.text_count; }
+    
+    uint16_t getJointCount()
+    { return m_fileHeader.joint_count; }
+    
+    void allocateArrays()
+    {
+        m_spVert.reset( new CPoint<float>[getVertCount()] );
+        m_spVNormal.reset( new CNormal<float>[getNormCount()] );
+        
+        if( getUVCount() != 0 )
+            m_spUV.reset( new CUV[getUVCount()] );
+    }
+    
+    void clearArrays()
+    {
+        m_spVert.reset();
+        m_spVNormal.reset();
+        m_spUV.reset();
+        
+        for( auto & iter : m_meshVec )
+            iter.clearArrays();
+    }
+    
+    CPoint<float> * getVertAry()
+    { return m_spVert.get(); }
+    
+    CNormal<float> * getNormalAry()
+    { return m_spVNormal.get(); }
+    
+    CUV * getUVAry()
+    { return m_spUV.get(); }
 
 private:
+    
+    // Mesh file header
+    CMeshBinaryFileHeader m_fileHeader;
+    
+    // Data arrays
+    std::shared_ptr<CPoint<float>> m_spVert;
+    std::shared_ptr<CNormal<float>> m_spVNormal;
+    std::shared_ptr<CUV> m_spUV;
     
     // Loaded mesh data
     std::vector<CMesh> m_meshVec;

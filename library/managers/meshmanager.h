@@ -75,7 +75,6 @@ private:
     // Load 3d mesh file with textures
     void LoadFromFile(
         SDL_RWops * pFile,
-        const CMeshBinaryFileHeader & fileHeader,
         const std::string & group,
         const std::string & filePath,
         CMesh3D & mesh3d );
@@ -83,7 +82,6 @@ private:
     // Load 3d mesh file without textures
     void LoadFromFile(
         SDL_RWops * pFile,
-        const CMeshBinaryFileHeader & fileHeader,
         const std::string & filePath,
         CMesh3D & mesh3d );
 
