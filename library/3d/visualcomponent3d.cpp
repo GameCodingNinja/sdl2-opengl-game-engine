@@ -85,7 +85,7 @@ CVisualComponent3D::~CVisualComponent3D()
 ************************************************************************/
 void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalMatrix )
 {
-    for( auto & meshIter : m_meshVec )
+    for( auto & meshIter : m_meshVec.meshVec )
     {
         // Increment our stat counter to keep track of what is going on.
         CStatCounter::Instance().IncDisplayCounter();

@@ -106,7 +106,7 @@ bool CObjectVisualData3D::IsActive() const
 /************************************************************************
  *    desc:  Get the mesh3d vector
  ************************************************************************/
-const std::vector<CMesh3D> & CObjectVisualData3D::GetMesh3D() const
+const CMesh3D & CObjectVisualData3D::GetMesh3D() const
 {
     return m_meshVec;
 }

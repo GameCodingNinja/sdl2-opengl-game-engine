@@ -42,7 +42,7 @@ public:
     void LoadFromFile(
         const std::string & group,
         const std::string & filePath,
-        std::vector<CMesh3D> & meshVec );
+        CMesh3D & mesh3d );
 
     // Load collision mesh from file
     void LoadFromFile(
@@ -65,7 +65,7 @@ private:
     void LoadFrom3DM(
         const std::string & group,
         const std::string & filePath,
-        std::vector<CMesh3D> & meshVec );
+        CMesh3D & mesh3d );
     
     // Load 3d collision mesh file
     void LoadFrom3DM(
@@ -78,14 +78,14 @@ private:
         const CMeshBinaryFileHeader & fileHeader,
         const std::string & group,
         const std::string & filePath,
-        std::vector<CMesh3D> & meshVec );
+        CMesh3D & mesh3d );
 
     // Load 3d mesh file without textures
     void LoadFromFile(
         SDL_RWops * pFile,
         const CMeshBinaryFileHeader & fileHeader,
         const std::string & filePath,
-        std::vector<CMesh3D> & meshVec );
+        CMesh3D & mesh3d );
 
     // Do the tag check to insure we are in the correct spot
     void TagCheck( SDL_RWops * file, const std::string & filePath );
@@ -93,7 +93,7 @@ private:
 private:
 
     // Map containing a group array of vbo, ibo and texture id's
-    std::map< const std::string, std::map< const std::string, std::vector<CMesh3D> > > m_meshBufMapMapVec;
+    std::map< const std::string, std::map< const std::string, CMesh3D > > m_meshBufMapMapVec;
 
     // Map for collision mesh
     std::map< const std::string, std::map< const std::string, CCollisionMesh3D > > m_collisionMeshBufMapMap;

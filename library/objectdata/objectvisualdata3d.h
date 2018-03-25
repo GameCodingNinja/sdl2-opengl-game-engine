@@ -56,11 +56,11 @@ public:
     bool IsActive() const;
 
     // Get the mesh3d vector
-    const std::vector<CMesh3D> & GetMesh3D() const;
+    const CMesh3D & GetMesh3D() const;
     
 private:
 
-    std::vector<CMesh3D> m_meshVec;
+    CMesh3D m_meshVec;
 
     // Name of the shader
     std::string m_shaderID;

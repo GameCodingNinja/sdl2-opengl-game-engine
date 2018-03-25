@@ -17,10 +17,6 @@
 #include <gui/uibutton.h>
 #include <gui/uimeter.h>
 #include <managers/spritestrategymanager.h>
-#include <slot/slotmathmanager.h>
-#include <slot/symbolsetviewmanager.h>
-#include <slot/betmanager.h>
-#include <slot/simplecycleresults.h>
 
 // SDL lib dependencies
 #include <SDL.h>
@@ -31,7 +27,6 @@
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
         m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
-        //m_slotGame( "(title_screen)" )
         m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cube" ) )
 {
 }   // Constructor
@@ -50,28 +45,6 @@ void CTitleScreenState::Init()
     
     m_camera.SetPosXYZ( 0, 0, 20 );
     m_camera.SetRotXYZ( 10, 0, 0 );
-    
-    // Set the line bet and the total numvber of lines bet
-    /*CBetMgr::Instance().SetLineBet(1);
-    CBetMgr::Instance().SetTotalLines(1);
-    
-    // Hook the Play button to the reel group
-    CUIButton & rPlayBtn = CMenuManager::Instance().GetMenuControl<CUIButton>( "title_screen_menu", "new_game_btn" );
-    rPlayBtn.Connect_ExecutionAction( boost::bind(&CSlotGame::PlayGame, &m_slotGame, _1) );
-    
-    // Create the slot group
-    m_slotGame.CreateSlotGroup(
-        NSlotDefs::ED_WHEEL,
-        "wheel_strip",
-        "wheel_paytable",
-        CSlotMathMgr::Instance().GetSlotMath( "(title_screen)", "slot_wheel" ),
-        CXMLPreloader::Instance().GetNode( std::get<0>(NTitleScreenState::reelGrpCfg) ),
-        CXMLPreloader::Instance().GetNode( std::get<0>(NTitleScreenState::spinProfileCfg) ),
-        CSymbolSetViewMgr::Instance().Get( "(title_screen)", "wheel_wedges" ),
-        std::move(std::unique_ptr<iCycleResults>(new CSimpleCycleresults)) );
-    
-    // Clear any preloaded XML files
-    CXMLPreloader::Instance().Clear();*/
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -105,7 +78,6 @@ void CTitleScreenState::HandleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CTitleScreenState::MiscProcess()
 {
-    //m_slotGame.ProcessGameState();
     
 }   // MiscProcess
 
@@ -118,11 +90,9 @@ void CTitleScreenState::Update()
     CCommonState::Update();
     
     m_scriptComponent.Update();
-    
-    //m_slotGame.Update();
 
     float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
-    m_cube.IncRotXYZ( 0, rot, 0 );
+    m_cube.IncRotXYZ( rot, rot, rot );
 
 }   // Update
 
@@ -135,7 +105,7 @@ void CTitleScreenState::Transform()
     CCommonState::Transform();
 
     m_background.Transform();
-    //m_slotGame.Transform();
+    
     m_cube.Transform();
     
     m_camera.Transform();
@@ -150,7 +120,6 @@ void CTitleScreenState::PreRender()
 {
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
-    //m_slotGame.Render( orthoMatrix );
     
     CCommonState::PreRender();
     
@@ -186,15 +155,6 @@ namespace NTitleScreenState
     
     void Load()
     {
-        // Load the slot group stuff
-        //CSymbolSetViewMgr::Instance().LoadGroup( "(title_screen)" );
-        //CSlotMathMgr::Instance().LoadGroup( "(title_screen)" );
-        //CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_wheel.cfg" );
-        
-        // Preload some needed XML files
-        //CXMLPreloader::Instance().Clear();
-        //CXMLPreloader::Instance().Load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
-        //CXMLPreloader::Instance().Load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
         
     }   // ThreadLoad
     
@@ -212,15 +172,10 @@ namespace NTitleScreenState
     {
         CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)" );
         CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
-        
-        // Unload the slot group stuff. Could be using fonts
-        //CSymbolSetViewMgr::Instance().Clear();
     }
     
     void Unload()
     {
-        // Unload the slot group stuff
-        //CSlotMathMgr::Instance().Clear();
         
     }   // Unload
 

@@ -8,7 +8,7 @@
 #define __mesh_3d_h__
 
 // Game lib dependencies
-#include <common/texture.h>
+#include <common/mesh.h>
 
 // Standard lib dependencies
 #include <vector>
@@ -17,17 +17,20 @@ class CMesh3D
 {
 public:
 
+    bool meshEmpty() const
+    { return meshVec.empty(); }
+    
+    bool textEmpty() const
+    { return meshVec.back().m_textureVec.empty(); }
+    
+    size_t size() const
+    { return meshVec.size(); }
+    
+    const CMesh & back() const
+    { return meshVec.back(); }
+
     // Loaded texture data
-    std::vector<CTexture> m_textureVec;
-
-    // VBO
-    GLuint m_vbo = 0;
-
-    // IBO
-    GLuint m_ibo = 0;
-
-    // Number of IBO needed for rendering
-    GLuint m_iboCount = 0;
+    std::vector<CMesh> meshVec;
 
 };
 
