@@ -75,7 +75,7 @@ void CObjectVisualData3D::CreateFromData( const std::string & group )
 {
     // Temporary implementation to just get cube on screen - remove
     if( !m_meshFile.empty() )
-        CMeshMgr::Instance().LoadFromFile( group, m_meshFile, m_meshVec );
+        CMeshMgr::Instance().LoadFromFile( group, m_meshFile, m_mesh3d );
 
 }   // CreateFromData
 
@@ -108,5 +108,5 @@ bool CObjectVisualData3D::IsActive() const
  ************************************************************************/
 const CMesh3D & CObjectVisualData3D::GetMesh3D() const
 {
-    return m_meshVec;
+    return m_mesh3d;
 }

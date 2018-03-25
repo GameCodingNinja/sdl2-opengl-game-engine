@@ -60,7 +60,7 @@ public:
     
 private:
 
-    CMesh3D m_meshVec;
+    CMesh3D m_mesh3d;
 
     // Name of the shader
     std::string m_shaderID;

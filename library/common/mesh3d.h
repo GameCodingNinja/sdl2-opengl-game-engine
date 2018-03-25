@@ -18,19 +18,39 @@ class CMesh3D
 public:
 
     bool meshEmpty() const
-    { return meshVec.empty(); }
+    { return m_meshVec.empty(); }
     
     bool textEmpty() const
-    { return meshVec.back().m_textureVec.empty(); }
+    { return m_meshVec.back().m_textureVec.empty(); }
     
     size_t size() const
-    { return meshVec.size(); }
+    { return m_meshVec.size(); }
+    
+    CMesh & back()
+    { return m_meshVec.back(); }
     
     const CMesh & back() const
-    { return meshVec.back(); }
+    { return m_meshVec.back(); }
 
-    // Loaded texture data
-    std::vector<CMesh> meshVec;
+    void reserve( size_t value )
+    { m_meshVec.reserve(value); }
+    
+    void emplace_back()
+    { m_meshVec.emplace_back(); }
+    
+    void emplace_back( const CMesh & mesh )
+    { m_meshVec.emplace_back( mesh ); }
+    
+    std::vector<CMesh> & getVec()
+    { return m_meshVec; }
+    
+    const std::vector<CMesh> & getVec() const
+    { return m_meshVec; }
+
+private:
+    
+    // Loaded mesh data
+    std::vector<CMesh> m_meshVec;
 
 };
 

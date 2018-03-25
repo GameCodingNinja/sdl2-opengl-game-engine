@@ -50,7 +50,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 	m_normalMatrixLocation( -1 ),
 	m_meshVec( visualData.GetMesh3D() ),
 	m_color( visualData.GetColor() ),
-    m_VERTEX_BUF_SIZE( visualData.GetMesh3D().size() == 0 || visualData.GetMesh3D().back().m_textureVec.empty() ? sizeof(CVertex3D_no_txt) : sizeof(CVertex3D) )
+        m_VERTEX_BUF_SIZE( visualData.GetMesh3D().meshEmpty() || visualData.GetMesh3D().textEmpty() ? sizeof(CVertex3D_no_txt) : sizeof(CVertex3D) )
 {
     if( visualData.IsActive() )
     {
@@ -85,7 +85,7 @@ CVisualComponent3D::~CVisualComponent3D()
 ************************************************************************/
 void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalMatrix )
 {
-    for( auto & meshIter : m_meshVec.meshVec )
+    for( auto & meshIter : m_meshVec.getVec() )
     {
         // Increment our stat counter to keep track of what is going on.
         CStatCounter::Instance().IncDisplayCounter();

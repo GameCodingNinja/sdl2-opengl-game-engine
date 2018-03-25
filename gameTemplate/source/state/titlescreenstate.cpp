@@ -92,7 +92,7 @@ void CTitleScreenState::Update()
     m_scriptComponent.Update();
 
     float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
-    m_cube.IncRotXYZ( rot, rot, rot );
+    m_cube.IncRotXYZ( rot, rot, 0 );
 
 }   // Update
 

@@ -93,7 +93,7 @@ private:
 private:
 
     // Map containing a group array of vbo, ibo and texture id's
-    std::map< const std::string, std::map< const std::string, CMesh3D > > m_meshBufMapMapVec;
+    std::map< const std::string, std::map< const std::string, CMesh3D > > m_meshBufMapMap;
 
     // Map for collision mesh
     std::map< const std::string, std::map< const std::string, CCollisionMesh3D > > m_collisionMeshBufMapMap;
