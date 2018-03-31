@@ -48,7 +48,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 	m_colorLocation( -1 ),
 	m_matrixLocation( -1 ),
 	m_normalMatrixLocation( -1 ),
-	m_meshVec( visualData.GetMesh3D() ),
+	m_mesh3d( visualData.GetMesh3D() ),
 	m_color( visualData.GetColor() ),
         m_VERTEX_BUF_SIZE( visualData.GetMesh3D().meshEmpty() || visualData.GetMesh3D().textEmpty() ? sizeof(CVertex3D_no_txt) : sizeof(CVertex3D) )
 {
@@ -62,7 +62,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
         m_normalMatrixLocation = m_pShaderData->GetUniformLocation( "normalMatrix" );
         m_colorLocation = m_pShaderData->GetUniformLocation( "color" );
 
-        if( !m_meshVec.back().m_textureVec.empty() )
+        if( !m_mesh3d.back().m_textureVec.empty() )
         {
             m_uvLocation = m_pShaderData->GetAttributeLocation( "in_uv" );
             m_text0Location = m_pShaderData->GetUniformLocation( "text0" );
@@ -85,7 +85,7 @@ CVisualComponent3D::~CVisualComponent3D()
 ************************************************************************/
 void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalMatrix )
 {
-    for( auto & meshIter : m_meshVec.getVec() )
+    for( auto & meshIter : m_mesh3d.getMeshVec() )
     {
         // Increment our stat counter to keep track of what is going on.
         CStatCounter::Instance().IncDisplayCounter();

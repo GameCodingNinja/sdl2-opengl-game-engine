@@ -2,6 +2,39 @@
 //
 
 #include <iostream>
+#include <thread>
+#include <managers/signalmanager.h>
+
+void threadFunc()
+{
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    
+    std::cout << "threadFunc call signal manager: " << std::this_thread::get_id() << std::endl;
+    
+    CSignalMgr::Instance().Broadcast_LoadSignal();
+    
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+void TestFunc()
+{
+    std::cout << "TestFunc called by signal manager: " << std::this_thread::get_id() << std::endl;
+}
+
+int main()
+{
+    CSignalMgr::Instance().Connect_Load( TestFunc );
+    
+    std::cout << "Main thread: " << std::this_thread::get_id() << std::endl;
+    
+    std::thread thread(threadFunc);
+    
+    thread.join();
+    
+    return 0;
+}
+
+/*#include <iostream>
 #include <future>
 #include <thread>
 
@@ -24,7 +57,7 @@ int main()
     std::cout << "Future returned: " << f.get() << std::endl;
 
     return 0;
-}
+}*/
 
 /*#include <iostream>
 #include <stdint.h>

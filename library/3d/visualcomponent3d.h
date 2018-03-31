@@ -75,7 +75,7 @@ private:
     GLint m_normalMatrixLocation;
 
     // Copy of 3D mesh data
-    const CMesh3D & m_meshVec;
+    const CMesh3D & m_mesh3d;
 
     // Color
     CColor m_color;

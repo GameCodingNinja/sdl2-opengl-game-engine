@@ -41,15 +41,23 @@ public:
     // Load mesh from file
     void LoadFromFile(
         const std::string & group,
-        const std::string & filePath,
-        CMesh3D & mesh3d );
+        const std::string & filePath );
 
     // Load collision mesh from file
     void LoadFromFile(
         const std::string & group,
         const std::string & filePath,
         CCollisionMesh3D & collisionMesh );
-
+    
+    void CreateFromData(
+        const std::string & group,
+        const std::string & filePath,
+        CMesh3D & mesh3d );
+    
+    void CreateFromData(
+        const std::string & group,
+        CMesh3D & mesh3d );
+    
     // Delete mesh buffer group
     void DeleteBufferGroup(const std::string & group);
 
@@ -75,6 +83,7 @@ private:
     // Load 3d mesh file with textures
     void LoadFromFile(
         SDL_RWops * pFile,
+        const CMeshBinaryFileHeader & fileHeader,
         const std::string & group,
         const std::string & filePath,
         CMesh3D & mesh3d );
@@ -82,6 +91,7 @@ private:
     // Load 3d mesh file without textures
     void LoadFromFile(
         SDL_RWops * pFile,
+        const CMeshBinaryFileHeader & fileHeader,
         const std::string & filePath,
         CMesh3D & mesh3d );
 

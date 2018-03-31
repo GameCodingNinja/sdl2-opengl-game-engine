@@ -42,6 +42,9 @@ public:
 
     // Load thes object data from node
     void LoadFromNode( const XMLNode & objectNode );
+    
+    // Load the mesh data from file
+    void LoadMeshData( const std::string & group );
 
     // Create the object from data
     void CreateFromData( const std::string & group );

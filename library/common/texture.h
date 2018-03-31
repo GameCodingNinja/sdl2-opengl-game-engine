@@ -42,10 +42,13 @@ public:
     CSize<int> m_size;
     
     // Texture channels
-    int channels = 0;
+    int m_channels = 0;
     
     // Texture byte data
-    unsigned char * pData = nullptr;
+    unsigned char * m_pData = nullptr;
+    
+    // Texture file path
+    std::string m_textFilePath;
 
     GLuint GetID() const {return m_id;}
     const CSize<int> & GetSize() const {return m_size;}

@@ -18,7 +18,6 @@
 #include <managers/vertexbuffermanager.h>
 #include <managers/texturemanager.h>
 #include <managers/meshmanager.h>
-#include <managers/signalmanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -151,10 +150,7 @@ void CObjectDataMgr::CreateFromData2D( const std::string & group )
     if( groupMapIter != m_objectData2DMapMap.end() )
     {
         for( auto & iter : groupMapIter->second )
-        {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
             iter.second.CreateFromData( group );
-        }
     }
     else
     {

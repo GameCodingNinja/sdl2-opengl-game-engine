@@ -51,8 +51,8 @@ void CObjectData3D::LoadFromNode( const XMLNode & node, const std::string & grou
     // Load the visual data
     m_visualData.LoadFromNode( node );
     
-    // Load the image data from file
-    //m_visualData.LoadImage( group );
+    // Load the mesh data from file
+    m_visualData.LoadMeshData( group );
 
     // Load the physics data
     m_physicsData.LoadFromNode( node );

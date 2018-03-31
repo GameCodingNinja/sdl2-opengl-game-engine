@@ -32,13 +32,10 @@ public:
         static CTextureMgr textMgr;
         return textMgr;
     }
-
-    // Load the texture from file path
-    const CTexture & LoadFor3D( const std::string & group, const std::string & filePath, bool compressed = false );
     
     // Load the image from file path
-    const void LoadImageFor2D( const std::string & group, const std::string & filePath );
-    const CTexture & LoadImageFor3D( const std::string & group, const std::string & filePath );
+    void LoadImageFor2D( const std::string & group, const std::string & filePath );
+    void LoadImageFor3D( const std::string & group, const std::string & filePath );
     
     // Create the texture from file path
     const CTexture & CreateTextureFor2D( const std::string & group, const std::string & filePath, bool compressed = false );

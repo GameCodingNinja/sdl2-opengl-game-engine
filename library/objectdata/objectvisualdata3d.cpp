@@ -68,6 +68,18 @@ void CObjectVisualData3D::LoadFromNode( const XMLNode & objectNode )
 
 }   // LoadFromNode
 
+
+/************************************************************************
+ *    desc:  Load the mesh data from file
+ ************************************************************************/
+void CObjectVisualData3D::LoadMeshData( const std::string & group )
+{
+    // Temporary implementation to just get cube on screen - remove
+    if( !m_meshFile.empty() )
+        CMeshMgr::Instance().LoadFromFile( group, m_meshFile );
+
+}   // CreateFromData
+
 /************************************************************************
  *    desc:  Create the object from data
  ************************************************************************/
@@ -75,7 +87,7 @@ void CObjectVisualData3D::CreateFromData( const std::string & group )
 {
     // Temporary implementation to just get cube on screen - remove
     if( !m_meshFile.empty() )
-        CMeshMgr::Instance().LoadFromFile( group, m_meshFile, m_mesh3d );
+        CMeshMgr::Instance().CreateFromData( group, m_meshFile, m_mesh3d );
 
 }   // CreateFromData
 

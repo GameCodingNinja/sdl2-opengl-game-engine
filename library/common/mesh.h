@@ -21,7 +21,7 @@ class CMesh
 {
 public:
     
-    void allocateArrays()
+    void allocateBuffers()
     {
         if( m_faceGroup.textureCount != 0 )
         {
@@ -34,13 +34,16 @@ public:
         m_spIndexBuf.reset( new uint16_t[m_faceGroup.indexBufCount] );
     }
     
-    void clearArrays()
+    void clearBuffers()
     {
         m_spVBO.reset();
         m_spVBONoTxt.reset();
         m_spIndexBuf.reset();
         m_spTextIndexBuf.reset();
     }
+    
+    bool allowCreate()
+    { return (m_vbo == 0); }
     
 public:
 
