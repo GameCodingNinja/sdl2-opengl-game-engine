@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.view.View;
 
-import com.google.android.gms.ads.AdRequest;
+/*import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.MobileAds;*/
 
 import org.libsdl.app.SDLActivity;
 
@@ -23,7 +23,7 @@ public class PachinkoChallengeActivity extends SDLActivity
         this.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
 
         // Add AdMob support
-        String adId = "ca-app-pub-3940256099942544/6300978111";
+        /*String adId = "ca-app-pub-3940256099942544/6300978111";
         MobileAds.initialize(this, adId);
         AdView mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.SMART_BANNER);
@@ -40,6 +40,6 @@ public class PachinkoChallengeActivity extends SDLActivity
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         mAdView.setLayoutParams(params);
 
-        mLayout.addView(mAdView);
+        mLayout.addView(mAdView);*/
     }
 }

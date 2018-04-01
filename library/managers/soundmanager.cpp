@@ -36,15 +36,25 @@ CSoundMgr::CSoundMgr() :
     m_maxMixChannels(MIX_CHANNELS)
 {
     // Init for the OGG compressed file format
-    Mix_Init(MIX_INIT_OGG);
+    if( Mix_Init(MIX_INIT_OGG) == 0 )
+    {
+        throw NExcept::CCriticalException("Error initializing sound mixer!",
+                boost::str( boost::format("Sound mixer init error (%s).\n\n%s\nLine: %s") 
+                    % SDL_GetError() % __FUNCTION__ % __LINE__ ));
+    }
 
     // Setup the audio format
     // High frenquency plus low chunk size = low latency audio playback
-    Mix_OpenAudio(
+    if( Mix_OpenAudio(
         CSettings::Instance().GetFrequency(),     // Usually 22050 or 44100
         MIX_DEFAULT_FORMAT,
         CSettings::Instance().GetSoundChannels(), // mono, stero, quad, suround, etc
-        CSettings::Instance().GetChunkSize() );
+        CSettings::Instance().GetChunkSize() ) == 0 )
+    {
+            throw NExcept::CCriticalException("Error opening sound mixer!",
+                    boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s") 
+                        % SDL_GetError() % __FUNCTION__ % __LINE__ ));
+    }
             
     if( CSettings::Instance().GetMixChannels() != m_maxMixChannels )
         m_maxMixChannels = Mix_AllocateChannels( CSettings::Instance().GetMixChannels() );

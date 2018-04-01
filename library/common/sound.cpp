@@ -97,10 +97,10 @@ void CSound::LoadFromNode( const XMLNode & node )
 
     if( m_pVoid == nullptr )
         throw NExcept::CCriticalException("Sound load Error!",
-            boost::str( boost::format("Error loading sound (%s).\n\n%s\nLine: %s")
-                % file % __FUNCTION__ % __LINE__ ));
+            boost::str( boost::format("Error loading sound (%s)(%s).\n\n%s\nLine: %s")
+                % SDL_GetError() % file % __FUNCTION__ % __LINE__ ));
 
-}   // Load
+}   // LoadFromNode
 
 
 /************************************************************************

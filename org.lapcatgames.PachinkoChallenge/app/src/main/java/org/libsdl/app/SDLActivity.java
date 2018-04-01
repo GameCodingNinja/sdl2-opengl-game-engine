@@ -27,11 +27,6 @@ import android.hardware.*;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ApplicationInfo;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.AdSize;
-
 
 /**
     SDL Activity
