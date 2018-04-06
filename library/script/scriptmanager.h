@@ -72,7 +72,7 @@ public:
     void Prepare(
         const std::string & group,
         const std::string & funcName,
-        const std::vector<CScriptParam> & paramVec );
+        const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>() );
     
     // Prepare the spawn script function to run
     void PrepareSpawn( const std::string & funcName );

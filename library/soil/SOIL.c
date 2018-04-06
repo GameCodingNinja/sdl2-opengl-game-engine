@@ -1970,7 +1970,7 @@ int query_DXT_capability( void )
     /*	check for the capability	*/
     if( has_DXT_capability == SOIL_CAPABILITY_UNKNOWN )
     {
-        char const * pChar = glGetString( GL_EXTENSIONS );
+        char const * pChar = (char const *)glGetString( GL_EXTENSIONS );
 
         /*	we haven't yet checked for the capability, do so	*/
         if( (NULL == strstr(pChar, "GL_OES_texture_compression_S3TC" )) &&

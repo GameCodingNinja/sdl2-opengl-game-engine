@@ -2,6 +2,30 @@
 //
 
 #include <iostream>
+#include <script/scriptmanager.h>
+#include <script/scriptglobals.h>
+
+#include <scriptstdstring/scriptstdstring.h>
+
+int main()
+{
+    // Load the script list table
+    CScriptManager::Instance().LoadListTable( "scriptListTable.lst" );
+    
+    // Register the script items
+    RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
+    NScriptGlobals::Register( CScriptManager::Instance().GetEnginePtr() );
+
+    CScriptManager::Instance().LoadGroup("(test)");
+
+    CScriptManager::Instance().Prepare("(test)", "Script_Run");
+    
+    CScriptManager::Instance().Update();
+    
+    return 0;
+}
+
+/*#include <iostream>
 #include <thread>
 #include <managers/signalmanager.h>
 
@@ -32,7 +56,7 @@ int main()
     thread.join();
     
     return 0;
-}
+}*/
 
 /*#include <iostream>
 #include <future>
@@ -58,8 +82,8 @@ int main()
 
     return 0;
 }*/
-
-/*#include <iostream>
+/*
+#include <iostream>
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/matrix.h>
@@ -68,6 +92,7 @@ int main()
 {
     uint64_t value = 0;
     uint64_t test;
+    uint64_t maxValue = 1000000;
     
     CMatrix matrix1, matrix2;
    
@@ -91,7 +116,7 @@ int main()
         while (test > 1);
     }
     //while ((test > 0) && (value < 100000000));
-    while (++value < 100000000);
+    while (++value < maxValue);
     
     std::cout << "Execution time: " << CHighResTimer::Instance().TimerStop() << std::endl;
     
