@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptcolor.h
+*    FILE NAME:       scriptobject.h
 *
-*    DESCRIPTION:     CColor script object registration
+*    DESCRIPTION:     CObject script object registration
 ************************************************************************/
 
-#ifndef __script_color_h__
-#define __script_color_h__
+#ifndef __script_object_h__
+#define __script_object_h__
 
-namespace NScriptColor
+namespace NScriptObject
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_color_h__
+#endif  // __script_object_h__
 
 

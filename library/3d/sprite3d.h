@@ -22,7 +22,6 @@
 // Forward declaration(s)
 class CObjectData3D;
 class CColor;
-class asIScriptEngine;
 
 class CSprite3D : public iSprite3D, boost::noncopyable
 {
@@ -33,11 +32,6 @@ public:
 
     // Destructor
     virtual ~CSprite3D();
-    
-    //////////////////////////////////////////////////////
-    // Register CScriptComponent2d Object with AngelScript
-    //////////////////////////////////////////////////////
-    static void Register( asIScriptEngine * pEngine );
 
     // Get the object data
     const CObjectData3D & GetObjectData() const;

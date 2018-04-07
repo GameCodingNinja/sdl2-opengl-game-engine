@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptcolor.h
+*    FILE NAME:       scriptsound.h
 *
-*    DESCRIPTION:     CColor script object registration
+*    DESCRIPTION:     CSound script object registration
 ************************************************************************/
 
-#ifndef __script_color_h__
-#define __script_color_h__
+#ifndef __script_sound_h__
+#define __script_sound_h__
 
-namespace NScriptColor
+namespace NScriptSound
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_color_h__
+#endif  // __script_sound_h__
 
 

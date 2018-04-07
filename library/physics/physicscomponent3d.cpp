@@ -18,9 +18,6 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/matrix.h>
 
-// AngelScript lib dependencies
-#include <angelscript.h>
-
 // Bullet Physics lib dependencies
 #include <btBulletCollisionCommon.h>
 

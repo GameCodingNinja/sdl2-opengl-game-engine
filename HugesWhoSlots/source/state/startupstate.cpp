@@ -34,8 +34,14 @@
 #include <common/build_defs.h>
 #include <script/scriptmanager.h>
 #include <script/scriptcolor.h>
+#include <script/scriptsound.h>
+#include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
+#include <script/scriptsprite2d.h>
+#include <script/scriptsoundmanager.h>
+#include <script/scriptmenu.h>
+#include <script/scriptshadermanager.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
 #include <gui/menu.h>
@@ -187,16 +193,15 @@ void CStartUpState::AssetLoad()
     auto pScriptEngine = CScriptManager::Instance().GetEnginePtr();
     RegisterStdString( pScriptEngine );
     RegisterScriptArray( pScriptEngine, false );
-    NScriptGlobals::Register( pScriptEngine );
-    NScriptColor::Register( pScriptEngine );
-    NScriptPoint::Register( pScriptEngine );
-    NScriptSound::Register( pScriptEngine );
-    NScriptPlayLst::Register( pScriptEngine );
-    NScriptSoundMgr::Register( pScriptEngine );
-    CSprite2D::Register( pScriptEngine );
-    CObject::Register( pScriptEngine );
-    CMenu::Register( pScriptEngine );
-    CShaderMgr::Register( pScriptEngine );
+    NScriptGlobals::Register();
+    NScriptColor::Register();
+    NScriptPoint::Register();
+    NScriptSprite2D::Register();
+    NScriptSound::Register();
+    NScriptPlayLst::Register();
+    NScriptSoundManager::Register();
+    NScriptMenu::Register();
+    NScriptShaderManager::Register();
     
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");

@@ -2,21 +2,18 @@
 /************************************************************************
 *    FILE NAME:       scriptglobals.h
 *
-*    DESCRIPTION:     AngelScript global function registration
+*    DESCRIPTION:     Global function registration
 ************************************************************************/
 
 #ifndef __script_globals_h__
 #define __script_globals_h__
 
-// Forward declaration(s)
-class asIScriptEngine;
-
 namespace NScriptGlobals
 {
     void Throw( int value );
     
-    // Register Script CColor Object
-    void Register( asIScriptEngine * pEngine );
+    // Register Script Object
+    void Register();
 }
 
 #endif  // __script_globals_h__

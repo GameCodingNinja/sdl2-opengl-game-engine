@@ -18,13 +18,9 @@
 // Game lib dependencies
 #include <utilities/exceptionhandling.h>
 #include <utilities/genfunc.h>
-#include <script/scriptglobals.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
-
-// AngelScript lib dependencies
-#include <angelscript.h>
 
 // Standard lib dependencies
 #include <memory>
@@ -435,16 +431,3 @@ void CShaderMgr::SetAllShaderColor( const std::string & locationId, CColor color
         SetShaderColor( iter.second, locationId, color );
     
 }   // SetAllShaderColor
-
-
-/************************************************************************
-*    desc:  Register the class with AngelScript
-************************************************************************/
-void CShaderMgr::Register( asIScriptEngine * pEngine )
-{
-    using namespace NScriptGlobals;
-    
-    // Global calls
-    Throw( pEngine->RegisterGlobalFunction("void SetAllShaderColor( string &in, CColor color )", asMETHOD(CShaderMgr, SetAllShaderColor), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
-    
-}   // Register

@@ -27,7 +27,6 @@
 // Forward declaration(s)
 class CObjectData2D;
 class CColor;
-class asIScriptEngine;
 class CSpriteData;
 struct XMLNode;
 
@@ -54,11 +53,6 @@ public:
     // Load the sprite data
     void Load( const XMLNode & node );
     void Load( const CSpriteData & spriteData );
-    
-    //////////////////////////////////////////////////////
-    // Register the class with AngelScript
-    //////////////////////////////////////////////////////
-    static void Register( asIScriptEngine * pEngine );
 
     // Get the object data
     const CObjectData2D & GetObjectData() const;

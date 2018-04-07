@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptcolor.h
+*    FILE NAME:       scriptsprite2d.h
 *
-*    DESCRIPTION:     CColor script object registration
+*    DESCRIPTION:     Sprite2D script object registration
 ************************************************************************/
 
-#ifndef __script_color_h__
-#define __script_color_h__
+#ifndef __script_sprite2d_h__
+#define __script_sprite2d_h__
 
-namespace NScriptColor
+namespace NScriptSprite2D
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_color_h__
+#endif  // __script_sprite2d_h__
 
 

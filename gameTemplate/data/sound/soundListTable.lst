@@ -4,8 +4,8 @@
     <file path="data/sound/menuSound.lst"/>
   </groupList>
   
-  <groupList groupName="(effects)">
+  <!--<groupList groupName="(effects)">
     <file path="data/sound/effectsSound.lst"/>
-  </groupList>
+  </groupList>-->
   
 </listTable>

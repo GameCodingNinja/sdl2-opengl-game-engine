@@ -10,13 +10,11 @@
 
 // Game lib dependencies
 #include <common/point.h>
-#include <utilities/exceptionhandling.h>
+#include <script/scriptmanager.h>
+#include <script/scriptglobals.h>
 
 // AngelScript lib dependencies
 #include <angelscript.h>
-
-// Boost lib dependencies
-#include <boost/format.hpp>
 
 namespace NScriptPoint
 {
@@ -56,21 +54,14 @@ namespace NScriptPoint
     }
 
     /************************************************************************
-     *    desc:  Throw an exception for values less then 0
+     *    desc:  Register the class with AngelScript
      ************************************************************************/
-    void Throw( int value )
+    void Register()
     {
-        if( value < 0 )
-            throw NExcept::CCriticalException("Error Registering CPoint type!",
-                boost::str( boost::format("CPoint type could not be created.\n\n%s\nLine: %s")
-                    % __FUNCTION__ % __LINE__ ));
-    }
-
-    /************************************************************************
-     *    desc:  Register the type
-     ************************************************************************/
-    void Register( asIScriptEngine * pEngine )
-    {
+        using namespace NScriptGlobals; // Used for Throw
+        
+        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        
         // Register type
         Throw( pEngine->RegisterObjectType("CPoint", sizeof(CPoint<float>), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS | asOBJ_APP_CLASS_CONSTRUCTOR | asOBJ_APP_CLASS_COPY_CONSTRUCTOR | asOBJ_APP_CLASS_DESTRUCTOR ) );
 

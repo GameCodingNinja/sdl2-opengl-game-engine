@@ -14,16 +14,12 @@
 #include <utilities/genfunc.h>
 #include <utilities/settings.h>
 #include <common/defs.h>
-#include <script/scriptglobals.h>
 
 // SDL lib dependencies
 #include <SDL_mixer.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
-
-// AngelScript lib dependencies
-#include <angelscript.h>
 
 // Standard lib dependencies
 #include <cstring>
@@ -38,9 +34,8 @@ CSoundMgr::CSoundMgr() :
     // Init for the OGG compressed file format
     if( Mix_Init(MIX_INIT_OGG) == 0 )
     {
-        throw NExcept::CCriticalException("Error initializing sound mixer!",
-                boost::str( boost::format("Sound mixer init error (%s).\n\n%s\nLine: %s") 
-                    % SDL_GetError() % __FUNCTION__ % __LINE__ ));
+        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer init error (%s).\n\n%s\nLine: %s") 
+                    % SDL_GetError() % __FUNCTION__ % __LINE__ ) );
     }
 
     // Setup the audio format
@@ -51,9 +46,8 @@ CSoundMgr::CSoundMgr() :
         CSettings::Instance().GetSoundChannels(), // mono, stero, quad, suround, etc
         CSettings::Instance().GetChunkSize() ) == 0 )
     {
-            throw NExcept::CCriticalException("Error opening sound mixer!",
-                    boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s") 
-                        % SDL_GetError() % __FUNCTION__ % __LINE__ ));
+        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s") 
+                        % SDL_GetError() % __FUNCTION__ % __LINE__ ) );
     }
             
     if( CSettings::Instance().GetMixChannels() != m_maxMixChannels )
@@ -231,12 +225,18 @@ CSound & CSoundMgr::GetSound( const std::string & group, const std::string & sou
 
     auto soundMapIter = m_soundMapMap.find( group );
     if( soundMapIter == m_soundMapMap.end() )
+    {
         NGenFunc::PostDebugMsg( boost::str( boost::format("Sound group can't be found (%s).") % group ) );
+        return m_dummySound;
+    }
 
     auto iter = soundMapIter->second.find( soundID );
     if( iter == soundMapIter->second.end() )
+    {
         NGenFunc::PostDebugMsg( boost::str( boost::format("Sound ID can't be found (%s - %s).") % group % soundID ) );
-
+        return m_dummySound;
+    }
+        
     return iter->second;
 
 }   // GetSound
@@ -386,29 +386,3 @@ void CSoundMgr::PauseMusic()
         Mix_PauseMusic();
 
 }   // PauseMusic
-
-
-namespace NScriptSoundMgr
-{
-    /************************************************************************
-    *    desc:  Register the class with AngelScript
-    ************************************************************************/
-    void Register( asIScriptEngine * pEngine )
-    {
-        using namespace NScriptGlobals;
-
-        // Global sound calls
-        Throw( pEngine->RegisterGlobalFunction("void PlaySound( string &in, string &in, int loopCount = 0 )", asMETHOD(CSoundMgr, Play), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void PauseSound( string &in, string &in )", asMETHOD(CSoundMgr, Pause), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void ResumeSound( string &in, string &in )", asMETHOD(CSoundMgr, Resume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void StopSound( string &in, string &in )", asMETHOD(CSoundMgr, Stop), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void SetVolume( string &in, string &in, int volume )", asMETHOD(CSoundMgr, SetVolume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("int GetVolume( string &in, string &in )", asMETHOD(CSoundMgr, GetVolume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool IsSoundPlaying( string &in, string &in )", asMETHOD(CSoundMgr, IsPlaying), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool IsSoundPaused( string &in, string &in )", asMETHOD(CSoundMgr, IsPaused), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("int GetNextSoundChannel()",               asMETHOD(CSoundMgr, GetNextChannel), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CSound & GetSound( string &in, string &in )", asMETHOD(CSoundMgr, GetSound), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CPlayList & GetPlayList( string &in, string &in )", asMETHOD(CSoundMgr, GetPlayList), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-
-    }   // Register
-}

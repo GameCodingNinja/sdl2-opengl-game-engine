@@ -34,8 +34,14 @@
 #include <common/color.h>
 #include <script/scriptmanager.h>
 #include <script/scriptcolor.h>
+#include <script/scriptsound.h>
+#include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
+#include <script/scriptsprite2d.h>
+#include <script/scriptsoundmanager.h>
+#include <script/scriptmenu.h>
+#include <script/scriptshadermanager.h>
 #include <2d/sprite2d.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
@@ -184,16 +190,15 @@ void CStartUpState::AssetLoad()
     // Register the script items
     RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
     RegisterScriptArray( CScriptManager::Instance().GetEnginePtr(), false );
-    NScriptGlobals::Register( CScriptManager::Instance().GetEnginePtr() );
-    NScriptColor::Register( CScriptManager::Instance().GetEnginePtr() );
-    NScriptPoint::Register( CScriptManager::Instance().GetEnginePtr() );
-    NScriptSound::Register( CScriptManager::Instance().GetEnginePtr() );
-    NScriptPlayLst::Register( CScriptManager::Instance().GetEnginePtr() );
-    NScriptSoundMgr::Register( CScriptManager::Instance().GetEnginePtr() );
-    CSprite2D::Register( CScriptManager::Instance().GetEnginePtr() );
-    CObject::Register( CScriptManager::Instance().GetEnginePtr() );
-    CMenu::Register( CScriptManager::Instance().GetEnginePtr() );
-    CShaderMgr::Register( CScriptManager::Instance().GetEnginePtr() );
+    NScriptGlobals::Register();
+    NScriptColor::Register();
+    NScriptPoint::Register();
+    NScriptSprite2D::Register();
+    NScriptSound::Register();
+    NScriptPlayLst::Register();
+    NScriptSoundManager::Register();
+    NScriptMenu::Register();
+    NScriptShaderManager::Register();
     
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");

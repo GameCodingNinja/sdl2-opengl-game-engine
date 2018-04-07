@@ -11,12 +11,6 @@
     <load id="select_1" file="data/sound/menu/select1.ogg"/>
     <load id="select_2" file="data/sound/menu/select2.ogg"/>
     <load id="select_3" file="data/sound/menu/select3.ogg"/>
-    
-    <!-- Just here for test purposes-->
-    <!--<stream id="echoes" file="data/sound/music/echoes.ogg"/>
-    <stream id="edgeOfReality" file="data/sound/music/edgeOfReality.ogg"/>
-    <stream id="moonlightSynthesis" file="data/sound/music/moonlightSynthesis.ogg"/>
-    <stream id="sonataOfTheUnseen" file="data/sound/music/sonataOfTheUnseen.ogg"/>-->
   </soundFiles>
 
   <playlistSet>

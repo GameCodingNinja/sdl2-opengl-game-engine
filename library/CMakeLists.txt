@@ -31,6 +31,14 @@ add_library(
         script/scriptcolor.cpp
         script/scriptpoint.cpp
         script/scriptcomponent.cpp
+        script/scriptsprite2d.cpp
+        script/scriptsound.cpp
+        script/scriptplaylist.cpp
+        script/scriptsoundmanager.cpp
+        script/scriptobject.cpp
+        script/scriptmenu.cpp
+        script/scriptshadermanager.cpp
+        script/scriptsprite3d.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp

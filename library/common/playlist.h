@@ -19,7 +19,6 @@
 #include <cstdint>
 
 // Forward declaration(s)
-class asIScriptEngine;
 struct XMLNode;
 
 class CPlayList
@@ -90,15 +89,11 @@ private:
 
     // vector of sounds
     std::vector<CSound> m_soundVec;
+    
+    // Dummy sound
+    CSound m_DummySound;
 
 };
-
-
-namespace NScriptPlayLst
-{
-    // Register Script Object
-    void Register(asIScriptEngine * pEngine);
-}
 
 #endif  // __play_list_h__
 

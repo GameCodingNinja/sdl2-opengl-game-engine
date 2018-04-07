@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptcolor.h
+*    FILE NAME:       scriptmenu.h
 *
-*    DESCRIPTION:     CColor script object registration
+*    DESCRIPTION:     CMenu script object registration
 ************************************************************************/
 
-#ifndef __script_color_h__
-#define __script_color_h__
+#ifndef __script_menu_h__
+#define __script_menu_h__
 
-namespace NScriptColor
+namespace NScriptMenu
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_color_h__
+#endif  // __script_menu_h__
 
 

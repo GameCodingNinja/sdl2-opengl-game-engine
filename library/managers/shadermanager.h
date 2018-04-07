@@ -20,9 +20,6 @@
 #include <string>
 #include <map>
 
-// Forward declaration(s)
-class asIScriptEngine;
-
 class CShaderMgr
 {
 public:
@@ -60,11 +57,6 @@ public:
     
     // Connect to the Init Shader signal
     void Connect_InitShader( const InitShaderSignal::slot_type & slot );
-    
-    //////////////////////////////////////////////////////
-    // Register CSoundMgr Object with AngelScript
-    //////////////////////////////////////////////////////
-    static void Register( asIScriptEngine * pEngine );
 
 private:
 
@@ -118,5 +110,3 @@ private:
 };
 
 #endif  // __shader_manager_h__
-
-

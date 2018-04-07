@@ -30,9 +30,6 @@
 #include <utilities/statcounter.h>
 #include <utilities/deletefuncs.h>
 
-// AngelScript lib dependencies
-#include <angelscript.h>
-
 // Boost lib dependencies
 #include <boost/format.hpp>
 

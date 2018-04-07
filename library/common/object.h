@@ -18,7 +18,6 @@
 
 // Forward declaration(s)
 struct XMLNode;
-class asIScriptEngine;
 
 class CObject
 {
@@ -30,11 +29,6 @@ public:
 
     // Load the transform data from node
     void LoadTransFromNode( const XMLNode & node );
-    
-    //////////////////////////////////////////////////////
-    // Register CScriptComponent2d Object with AngelScript
-    //////////////////////////////////////////////////////
-    static void Register( asIScriptEngine * pEngine );
 
     // Set/Get the object's position
     void SetPos( const CPoint<CWorldValue> & position );

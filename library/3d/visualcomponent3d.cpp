@@ -27,9 +27,6 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/statcounter.h>
 
-// AngelScript lib dependencies
-#include <angelscript.h>
-
 // Boost lib dependencies
 #include <boost/format.hpp>
 

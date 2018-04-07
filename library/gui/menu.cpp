@@ -23,15 +23,11 @@
 #include <gui/ismartguibase.h>
 #include <gui/messagecracker.h>
 #include <managers/actionmanager.h>
-#include <script/scriptglobals.h>
 #include <2d/sprite2d.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
 #include <boost/bind.hpp>
-
-// AngelScript lib dependencies
-#include <angelscript.h>
 
 /************************************************************************
 *    DESC:  Constructor
@@ -1010,21 +1006,3 @@ bool CMenu::IsActive()
     return (m_state == NMenu::EMS_ACTIVE);
     
 }   // IsActive
-
-
-/************************************************************************
-*    desc:  Register the class with AngelScript
-************************************************************************/
-void CMenu::Register( asIScriptEngine * pEngine )
-{
-    using namespace NScriptGlobals;
-    
-    // Register CScriptComponent2d reference and methods
-    Throw( pEngine->RegisterObjectType(  "CMenu", 0, asOBJ_REF|asOBJ_NOCOUNT) );
-    Throw( pEngine->RegisterObjectMethod("CMenu", "void SetAlpha(float alpha)",  asMETHOD(CMenu, SetAlpha), asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CMenu", "float GetAlpha()",            asMETHOD(CMenu, GetAlpha), asCALL_THISCALL) );
-    
-    // Need to use CObject for the below to compile under MSVSC++
-    Throw( pEngine->RegisterObjectMethod("CMenu", "void SetVisible(bool visible)", asMETHOD(CObject, SetVisible), asCALL_THISCALL) );
-    
-}   // Register

@@ -13,11 +13,7 @@
 #include <objectdata/objectphysicsdata3d.h>
 #include <utilities/exceptionhandling.h>
 #include <common/color.h>
-#include <script/scriptglobals.h>
 #include <2d/iaibase2d.h>
-
-// AngelScript lib dependencies
-#include <angelscript.h>
 
 // Bullet Physics lib dependencies
 #include <btBulletCollisionCommon.h>
@@ -265,28 +261,3 @@ float CSprite3D::GetDefaultAlpha() const
     return m_objectData.GetVisualData().GetColor().GetA();
 
 }   // GetDefaultAlpha
-
-
-/************************************************************************
- *    desc:  Register the class with AngelScript
- ************************************************************************/
-void CSprite3D::Register( asIScriptEngine * pEngine )
-{
-    using namespace NScriptGlobals;
-    
-    // Register CScriptComponent2d reference and methods
-    Throw( pEngine->RegisterObjectType(  "CSprite3d", 0, asOBJ_REF | asOBJ_NOCOUNT) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetVisible(bool visible)",                    asMETHOD(CObject,   SetVisible),         asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetColor(const CColor & in)",                 asMETHOD(CSprite3D, SetColor),           asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetRGBA(float r, float g, float b, float a)", asMETHOD(CSprite3D, SetRGBA),            asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetDefaultColor()",                           asMETHOD(CSprite3D, SetDefaultColor),    asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "const CColor & GetColor()",                        asMETHOD(CSprite3D, GetColor),           asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "const CColor & GetDefaultColor()",                 asMETHOD(CSprite3D, GetDefaultColor),    asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetAlpha(float alpha)",                       asMETHOD(CSprite3D, SetAlpha),           asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "float GetAlpha()",                                 asMETHOD(CSprite3D, GetAlpha),           asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "float GetDefaultAlpha()",                          asMETHOD(CSprite3D, GetDefaultAlpha),    asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "CPoint GetPos()",                                  asMETHOD(CObject,   GetPos_AngelScript), asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetPos(CPoint & in)",                         asMETHOD(CObject,   SetPos_AngelScript), asCALL_THISCALL) );
-    Throw( pEngine->RegisterObjectMethod("CSprite3d", "void IncRot(CPoint & in)",                         asMETHOD(CObject,   IncRot),             asCALL_THISCALL) );
-
-}   // Register

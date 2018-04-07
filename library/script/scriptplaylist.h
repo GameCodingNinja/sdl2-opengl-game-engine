@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptcolor.h
+*    FILE NAME:       scriptplaylist.h
 *
-*    DESCRIPTION:     CColor script object registration
+*    DESCRIPTION:     CPlayList script object registration
 ************************************************************************/
 
-#ifndef __script_color_h__
-#define __script_color_h__
+#ifndef __script_playlist_h__
+#define __script_playlist_h__
 
-namespace NScriptColor
+namespace NScriptPlayLst
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_color_h__
+#endif  // __script_playlist_h__
 
 

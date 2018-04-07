@@ -2,7 +2,7 @@
 /************************************************************************
 *    FILE NAME:       scriptglobals.cpp
 *
-*    DESCRIPTION:     AngelScript global function registration
+*    DESCRIPTION:     Global function registration
 ************************************************************************/
 
 // Physical component dependency
@@ -12,7 +12,6 @@
 #include <utilities/highresolutiontimer.h>
 #include <utilities/genfunc.h>
 #include <utilities/exceptionhandling.h>
-#include <managers/soundmanager.h>
 #include <managers/signalmanager.h>
 #include <script/scriptmanager.h>
 
@@ -53,8 +52,10 @@ namespace NScriptGlobals
     /************************************************************************
     *    desc:  Register the global functions
     ************************************************************************/
-    void Register( asIScriptEngine * pEngine )
+    void Register()
     {
+        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        
         Throw( pEngine->RegisterGlobalFunction("double GetElapsedTime()", asMETHOD(CHighResTimer, GetElapsedTime), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("void TimerStart()", asMETHOD(CHighResTimer, TimerStart), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("float TimerStop()", asMETHOD(CHighResTimer, TimerStop), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );

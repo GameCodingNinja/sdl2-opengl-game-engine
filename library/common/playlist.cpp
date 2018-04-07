@@ -9,7 +9,6 @@
 #include <common/playlist.h>
 
 // Game lib dependencies
-#include <script/scriptglobals.h>
 #include <utilities/xmlParser.h>
 #include <utilities/exceptionhandling.h>
 
@@ -19,9 +18,6 @@
 // Standard lib dependencies
 #include <algorithm>
 #include <cstring>
-
-// AngelScript lib dependencies
-#include <angelscript.h>
 
 /************************************************************************
 *    desc:  Constructor
@@ -105,14 +101,19 @@ void CPlayList::LoadFromNode(
 ************************************************************************/
 CSound & CPlayList::GetSound()
 {
-    // Is it time to shuffle?
-    if( (m_type == EST_RANDOM) && (m_counter == 0) )
-        Shuffle();
+    if( !m_soundVec.empty() )
+    {
+        // Is it time to shuffle?
+        if( (m_type == EST_RANDOM) && (m_counter == 0) )
+            Shuffle();
 
-    m_current = m_counter;
-    m_counter = (m_counter + 1) % m_soundVec.size();
+        m_current = m_counter;
+        m_counter = (m_counter + 1) % m_soundVec.size();
 
-    return m_soundVec[m_current];
+        return m_soundVec[m_current];
+    }
+    
+    return m_DummySound;
 
 }   // GetSound
 
@@ -122,12 +123,15 @@ CSound & CPlayList::GetSound()
 ************************************************************************/
 void CPlayList::Play( int channel, int loopCount )
 {
-    if( (m_type == EST_RANDOM) && (m_counter == 0) )
-        Shuffle();
+    if( !m_soundVec.empty() )
+    {
+        if( (m_type == EST_RANDOM) && (m_counter == 0) )
+            Shuffle();
 
-    m_current = m_counter;
-    m_soundVec[m_current].Play( channel, loopCount );
-    m_counter = (m_counter + 1) % m_soundVec.size();
+        m_current = m_counter;
+        m_soundVec[m_current].Play( channel, loopCount );
+        m_counter = (m_counter + 1) % m_soundVec.size();
+    }
 
 }   // Play
 
@@ -137,7 +141,8 @@ void CPlayList::Play( int channel, int loopCount )
 ************************************************************************/
 void CPlayList::Stop()
 {
-    m_soundVec[m_current].Stop();
+    if( !m_soundVec.empty() )
+        m_soundVec[m_current].Stop();
 
 }   // Stop
 
@@ -147,7 +152,8 @@ void CPlayList::Stop()
 ************************************************************************/
 void CPlayList::Pause()
 {
-    m_soundVec[m_current].Pause();
+    if( !m_soundVec.empty() )
+        m_soundVec[m_current].Pause();
 
 }   // Pause
 
@@ -157,7 +163,8 @@ void CPlayList::Pause()
 ************************************************************************/
 void CPlayList::Resume()
 {
-    m_soundVec[m_current].Resume();
+    if( !m_soundVec.empty() )
+        m_soundVec[m_current].Resume();
 
 }   // Resume
 
@@ -167,13 +174,17 @@ void CPlayList::Resume()
 ************************************************************************/
 void CPlayList::SetVolume( int volume )
 {
-    m_soundVec[m_current].SetVolume( volume );
+    if( !m_soundVec.empty() )
+        m_soundVec[m_current].SetVolume( volume );
     
 }   // SetVolume
 
 int CPlayList::GetVolume()
 {
-    return m_soundVec[m_current].GetVolume();
+    if( !m_soundVec.empty() )
+        return m_soundVec[m_current].GetVolume();
+    
+    return m_DummySound.GetVolume();
     
 }   // GetVolume
 
@@ -183,7 +194,10 @@ int CPlayList::GetVolume()
 ************************************************************************/
 bool CPlayList::IsPlaying()
 {
-    return m_soundVec[m_current].IsPlaying();
+    if( !m_soundVec.empty() )
+        return m_soundVec[m_current].IsPlaying();
+    
+    return m_DummySound.IsPlaying();
 
 }   // IsPlaying
 
@@ -193,7 +207,10 @@ bool CPlayList::IsPlaying()
 ************************************************************************/
 bool CPlayList::IsPaused()
 {
-    return m_soundVec[m_current].IsPaused();
+    if( !m_soundVec.empty() )
+        return m_soundVec[m_current].IsPaused();
+    
+    return m_DummySound.IsPaused();
 
 }   // IsPaused
 
@@ -223,60 +240,3 @@ void CPlayList::Shuffle()
     }
     
 }   // Shuffle
-
-
-namespace NScriptPlayLst
-{
-    /************************************************************************
-    *    desc:  Constructor
-    ************************************************************************/
-    void Constructor(void * thisPointer)
-    {
-        new(thisPointer) CPlayList();
-    }
-
-    /************************************************************************
-    *    desc:  Copy Constructor
-    ************************************************************************/
-    void CopyConstructor(const CPlayList & other, void * pThisPointer)
-    {
-        new(pThisPointer) CPlayList(other);
-    }
-
-    /************************************************************************
-    *    desc:  Destructor
-    ************************************************************************/
-    void Destructor(void * pThisPointer)
-    {
-        ((CPlayList*)pThisPointer)->~CPlayList();
-    }
-    
-    /************************************************************************
-    *    desc:  Register the class with AngelScript
-    ************************************************************************/
-    void Register( asIScriptEngine * pEngine )
-    {
-        using namespace NScriptGlobals;
-
-        // Register CScriptComponent2d reference and methods
-        Throw( pEngine->RegisterObjectType("CPlayList", sizeof(CPlayList), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS | asOBJ_APP_CLASS_CONSTRUCTOR | asOBJ_APP_CLASS_COPY_CONSTRUCTOR | asOBJ_APP_CLASS_DESTRUCTOR ) );
-
-        // Register the object constructor
-        Throw( pEngine->RegisterObjectBehaviour("CPlayList", asBEHAVE_CONSTRUCT, "void f()",                  asFUNCTION(NScriptPlayLst::Constructor), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectBehaviour("CPlayList", asBEHAVE_CONSTRUCT, "void f(const CSound & in)", asFUNCTION(NScriptPlayLst::CopyConstructor), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectBehaviour("CPlayList", asBEHAVE_DESTRUCT,  "void f()",                  asFUNCTION(NScriptPlayLst::Destructor), asCALL_CDECL_OBJLAST) );
-
-        // assignment operator
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "CPlayList & opAssign(const CPlayList & in)", asMETHODPR(CPlayList, operator =, (const CPlayList &), CPlayList &), asCALL_THISCALL) );
-
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Play( int channel = -1, int loopCount = 0 )", asMETHOD(CPlayList, Play),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Stop()",                                      asMETHOD(CPlayList, Stop),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Pause()",                                     asMETHOD(CPlayList, Pause),     asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Resume()",                                    asMETHOD(CPlayList, Resume),    asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void SetVolume( int volume )",                     asMETHOD(CPlayList, SetVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "int GetVolume()",                                  asMETHOD(CPlayList, GetVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPlaying()",                                 asMETHOD(CPlayList, IsPlaying), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPaused()",                                  asMETHOD(CPlayList, IsPaused),  asCALL_THISCALL) );
-
-    }   // Register
-}

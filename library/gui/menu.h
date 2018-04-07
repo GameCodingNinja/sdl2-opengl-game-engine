@@ -106,11 +106,6 @@ public:
     // Is the menu active
     bool IsActive();
     
-    //////////////////////////////////////////////////////
-    // Register the class with AngelScript
-    //////////////////////////////////////////////////////
-    static void Register( asIScriptEngine * pEngine );
-    
     // Set/Get the alpha value of this menu
     void SetAlpha( float alpha );
     float GetAlpha();

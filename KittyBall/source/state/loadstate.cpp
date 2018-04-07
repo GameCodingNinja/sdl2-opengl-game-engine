@@ -39,13 +39,6 @@
 // Standard lib dependencies
 #include <thread>
 
-extern "C" SoilLoadCallBackFuncPtr SoilLoadCallBackFunc;
-
-void SoilLoadCallBack()
-{
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-}
-
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
@@ -63,8 +56,6 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
 ************************************************************************/
 CLoadState::~CLoadState()
 {
-    SoilLoadCallBackFunc = NULL;
-    
     CSignalMgr::Instance().Disconnect_Load();
     
     CObjectDataMgr::Instance().FreeGroup2D( "(loadingScreen)" );
@@ -89,8 +80,6 @@ void CLoadState::Init()
     // Set the position
     m_upSprite->SetPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
     m_upSprite->Transform(); 
-    
-    SoilLoadCallBackFunc = &SoilLoadCallBack;
     
     CSignalMgr::Instance().Connect_Load( boost::bind(&CLoadState::Animate, this) );
     

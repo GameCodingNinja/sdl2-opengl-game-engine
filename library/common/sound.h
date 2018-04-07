@@ -12,7 +12,6 @@
 #include <cstdint>
 
 // Forward declaration(s)
-class asIScriptEngine;
 struct XMLNode;
 
 class CSound
@@ -81,13 +80,6 @@ private:
     // Sounds current volume
     int16_t m_volume;
 };
-
-
-namespace NScriptSound
-{
-    // Register Script Object
-    void Register(asIScriptEngine * pEngine);
-}
 
 #endif  // __sound_h__
 

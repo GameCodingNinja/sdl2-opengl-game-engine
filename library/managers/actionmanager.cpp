@@ -325,7 +325,7 @@ bool CActionMgr::WasAction( const SDL_Event & rEvent, const std::string & action
 ************************************************************************/
 NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::string & actionStr )
 {
-	NDefs::EActionPress result( NDefs::EAP_IDLE);
+    NDefs::EActionPress result( NDefs::EAP_IDLE);
     
     if( m_allowAction )
     {

@@ -30,6 +30,14 @@
 /PachinkoChallenge/nbproject/
 /PachinkoChallenge/build/
 
+/scriptGameTemplate/Win32/
+/scriptGameTemplate/AS_DEBUG/
+/scriptGameTemplate/.vs/
+/scriptGameTemplate/KittyBall.sdf
+/scriptGameTemplate/KittyBall.VC.opendb
+/scriptGameTemplate/nbproject/
+/scriptGameTemplate/build/
+
 /KittyBall/Win32/
 /KittyBall/AS_DEBUG/
 /KittyBall/.vs/

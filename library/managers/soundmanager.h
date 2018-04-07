@@ -15,7 +15,6 @@
 #include <common/sound.h>
 #include <common/playlist.h>
 
-
 class CSoundMgr : public CManagerBase
 {
 public:
@@ -104,15 +103,8 @@ private:
     
     // dummys
     CPlayList m_dummyPlayLst;
+    CSound m_dummySound;
 
 };
-
-
-namespace NScriptSoundMgr
-{
-    // Register Script Object
-    void Register(asIScriptEngine * pEngine);
-}
-
 
 #endif  // __sound_manager_h__

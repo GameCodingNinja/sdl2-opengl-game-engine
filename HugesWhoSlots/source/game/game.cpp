@@ -340,7 +340,7 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
     
     else if( rEvent.type == SDL_WINDOWEVENT )
     {
-        if( NBDefs::IsDebugMode() && (rEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) && upDebugDisplay )
+        if( (rEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) && upDebugDisplay )
         {
             const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
             upDebugDisplay->SetPos( CPoint<float>( -(rSize.w-5), rSize.h-7 ) );
