@@ -8,12 +8,6 @@
 #ifndef __visual_component_2d_h__
 #define __visual_component_2d_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <utilities/matrix.h>
 #include <common/color.h>
@@ -117,21 +111,21 @@ private:
     CShaderData * m_pShaderData;
 
     // VBO
-    GLuint m_vbo;
+    uint32_t m_vbo;
 
     // IBO
-    GLuint m_ibo;
+    uint32_t m_ibo;
 
     // Loaded texture data
-    GLuint m_textureID;
+    uint32_t m_textureID;
 
     // shader location data
-    GLint m_vertexLocation;
-    GLint m_uvLocation;
-    GLint m_text0Location;
-    GLint m_colorLocation;
-    GLint m_matrixLocation;
-    GLint m_glyphLocation;
+    int32_t m_vertexLocation;
+    int32_t m_uvLocation;
+    int32_t m_text0Location;
+    int32_t m_colorLocation;
+    int32_t m_matrixLocation;
+    int32_t m_glyphLocation;
 
     // Generation type
     const NDefs::EGenerationType GENERATION_TYPE;
@@ -149,13 +143,13 @@ private:
     uint16_t m_iboCount;
 
     // OpenGL draw mode
-    GLenum m_drawMode;
+    uint32_t m_drawMode;
 
     // IBO indice type
-    GLenum m_indiceType;
+    uint32_t m_indiceType;
     
     // Sprite sheet Glyph UV
-    CRect<GLfloat> m_glyphUV;
+    CRect<float> m_glyphUV;
     
     // Frame index
     uint16_t m_frameIndex;

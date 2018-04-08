@@ -80,7 +80,7 @@ void CDevice::Create()
     #if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
     // Initialize GLEW
     glewExperimental = GL_TRUE;
-    GLenum glewError = glewInit();
+    uint32_t glewError = glewInit();
     if( glewError != GLEW_OK )
         throw NExcept::CCriticalException("Error initializing GLEW!", 
             boost::str( boost::format("Error initializing GLEW (%s).\n\n%s\nLine: %s")

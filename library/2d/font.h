@@ -65,7 +65,7 @@ public:
     const CSize<int> & GetTextureSize() const;
 
     // Get the texture ID
-    GLuint GetTextureID() const;
+    uint32_t GetTextureID() const;
 
 private:
 

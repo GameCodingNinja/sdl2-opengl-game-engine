@@ -8,12 +8,6 @@
 #ifndef __mesh_manager_h__
 #define __mesh_manager_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <common/mesh3d.h>
 #include <common/collisionmesh3d.h>
@@ -107,10 +101,10 @@ private:
     std::map< const std::string, std::map< const std::string, CCollisionMesh3D > > m_collisionMeshBufMapMap;
 
     // Current vbo ID
-    GLuint m_currentVBOID;
+    uint32_t m_currentVBOID;
 
     // Current IBO ID
-    GLuint m_currentIBOID;
+    uint32_t m_currentIBOID;
 
 };
 

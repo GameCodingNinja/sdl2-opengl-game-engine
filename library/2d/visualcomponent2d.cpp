@@ -5,9 +5,11 @@
 *    DESCRIPTION:     Class for handling the visual part of the sprite
 ************************************************************************/
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-// Glew dependencies (have to be defined first)
-#include <GL/glew.h>
+#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+#include "SDL_opengles2.h"
+#else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
+#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
 
 // Physical component dependency
@@ -141,7 +143,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
 {
     if( AllowRender() )
     {
-        const GLsizei VERTEX_BUF_SIZE( sizeof(CVertex2D) );
+        const int32_t VERTEX_BUF_SIZE( sizeof(CVertex2D) );
             
         // Increment our stat counter to keep track of what is going on.
         CStatCounter::Instance().IncDisplayCounter();
@@ -158,7 +160,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
         // Are we rendering with a texture?
         if( m_textureID > 0 )
         {
-            const GLbyte UV_OFFSET( sizeof(CPoint<float>) );
+            const int8_t UV_OFFSET( sizeof(CPoint<float>) );
             
             // Bind the texture
             CTextureMgr::Instance().Bind( m_textureID );
@@ -169,7 +171,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
         }
 
         // Send the color to the shader
-        glUniform4fv( m_colorLocation, 1, (GLfloat*)&m_color );
+        glUniform4fv( m_colorLocation, 1, (float*)&m_color );
 
         // If this is a quad, we need to take into account the vertex scale
         if( GENERATION_TYPE == NDefs::EGT_QUAD )
@@ -196,7 +198,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
             glUniformMatrix4fv( m_matrixLocation, 1, GL_FALSE, finalMatrix() );
             
             // Send the glyph rect
-            glUniform4fv( m_glyphLocation, 1, (GLfloat*)&m_glyphUV );
+            glUniform4fv( m_glyphLocation, 1, (float*)&m_glyphUV );
         }
         // this is for scaled frame and font rendering
         else
@@ -299,11 +301,11 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
         std::unique_ptr<CQuad2D[]> upQuadBuf( new CQuad2D[charCount] );
 
         // Create a buffer to hold the indices
-        std::unique_ptr<GLushort[]> upIndxBuf;
+        std::unique_ptr<uint16_t[]> upIndxBuf;
         
         // Should we build or rebuild the font IBO
         if( BUILD_FONT_IBO )
-            upIndxBuf.reset( new GLushort[m_iboCount] );
+            upIndxBuf.reset( new uint16_t[m_iboCount] );
 
         float xOffset = 0.f;
         float width = 0.f;

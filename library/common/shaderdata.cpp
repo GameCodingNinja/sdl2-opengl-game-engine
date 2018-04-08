@@ -46,13 +46,13 @@ CShaderData::~CShaderData()
 /************************************************************************
 *    desc:  Set/Get the program ID
 ************************************************************************/
-void CShaderData::SetProgramID( GLuint location )
+void CShaderData::SetProgramID( uint32_t location )
 {
     m_programID = location;
 
 }   // SetProgramID
 
-GLuint CShaderData::GetProgramID() const
+uint32_t CShaderData::GetProgramID() const
 {
     return m_programID;
 
@@ -62,13 +62,13 @@ GLuint CShaderData::GetProgramID() const
 /************************************************************************
 *    desc:  Set/Get the vertex ID
 ************************************************************************/
-void CShaderData::SetVertexID( GLuint location )
+void CShaderData::SetVertexID( uint32_t location )
 {
     m_vertexID = location;
 
 }   // SetVertexID
 
-GLuint CShaderData::GetVertexID() const
+uint32_t CShaderData::GetVertexID() const
 {
     return m_vertexID;
 
@@ -78,13 +78,13 @@ GLuint CShaderData::GetVertexID() const
 /************************************************************************
 *    desc:  Set/Get the fragment ID
 ************************************************************************/
-void CShaderData::SetFragmentID( GLuint location )
+void CShaderData::SetFragmentID( uint32_t location )
 {
     m_fragmentID = location;
 
 }   // SetFragmentID
 
-GLuint CShaderData::GetFragmentID() const
+uint32_t CShaderData::GetFragmentID() const
 {
     return m_fragmentID;
 
@@ -94,7 +94,7 @@ GLuint CShaderData::GetFragmentID() const
 /************************************************************************
 *    desc:  Set/Get the attribute location
 ************************************************************************/
-void CShaderData::SetAttributeLocation( const std::string & name, GLint location )
+void CShaderData::SetAttributeLocation( const std::string & name, int32_t location )
 {
     auto iter = m_attributeMap.find( name );
     if( iter != m_attributeMap.end() )
@@ -107,7 +107,7 @@ void CShaderData::SetAttributeLocation( const std::string & name, GLint location
 
 }   // SetAttributeLocation
 
-GLint CShaderData::GetAttributeLocation( const std::string & name ) const
+int32_t CShaderData::GetAttributeLocation( const std::string & name ) const
 {
     auto iter = m_attributeMap.find( name );
     if( iter == m_attributeMap.end() )
@@ -124,7 +124,7 @@ GLint CShaderData::GetAttributeLocation( const std::string & name ) const
 /************************************************************************
 *    desc:  Set/Get the uniform location
 ************************************************************************/
-void CShaderData::SetUniformLocation( const std::string & name, GLint location )
+void CShaderData::SetUniformLocation( const std::string & name, int32_t location )
 {
     auto iter = m_uniformMap.find( name );
     if( iter != m_uniformMap.end() )
@@ -137,7 +137,7 @@ void CShaderData::SetUniformLocation( const std::string & name, GLint location )
 
 }   // SetUniformLocation
 
-GLint CShaderData::GetUniformLocation( const std::string & name ) const
+int32_t CShaderData::GetUniformLocation( const std::string & name ) const
 {
     auto iter = m_uniformMap.find( name );
     if( iter == m_uniformMap.end() )

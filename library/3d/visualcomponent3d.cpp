@@ -5,9 +5,11 @@
 *    DESCRIPTION:     Class for handling the visual part of the sprite
 ************************************************************************/
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-// Glew dependencies (have to be defined first)
-#include <GL/glew.h>
+#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+#include "SDL_opengles2.h"
+#else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
+#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
 
 // Physical component dependency
@@ -114,7 +116,7 @@ void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalM
         }
 
         // Send the color to the shader
-        glUniform4fv( m_colorLocation, 1, (GLfloat*)&m_color );
+        glUniform4fv( m_colorLocation, 1, (float*)&m_color );
 
         glUniformMatrix4fv( m_matrixLocation, 1, GL_FALSE, matrix() );
         glUniformMatrix4fv( m_normalMatrixLocation, 1, GL_FALSE, normalMatrix() );

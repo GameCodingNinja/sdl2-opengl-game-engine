@@ -323,7 +323,7 @@ void CTextureMgr::DeleteTextureGroupFor3D( const std::string & group )
 *    desc:  Function call used to manage what texture is currently bound.
 *           This insures that we don't keep rebinding the same texture
 ************************************************************************/
-void CTextureMgr::Bind( GLuint textureID )
+void CTextureMgr::Bind( uint32_t textureID )
 {
     if( m_currentTextureID != textureID )
     {
@@ -353,7 +353,7 @@ void CTextureMgr::Unbind()
 ************************************************************************/
 void CTextureMgr::InitAnisotropic()
 {
-    GLint maxAnisotropicLevel(0);
+    int32_t maxAnisotropicLevel(0);
     glGetIntegerv( GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropicLevel );
 
     if( maxAnisotropicLevel < 0 )

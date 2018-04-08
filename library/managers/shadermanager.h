@@ -70,7 +70,7 @@ private:
     void CreateShader( const XMLNode & node );
 
     // Create the shader
-    void CreateShader( GLenum shaderType, const std::string & filePath );
+    void CreateShader( uint32_t shaderType, const std::string & filePath );
 
     // Create the shader program
     void CreateProgram();

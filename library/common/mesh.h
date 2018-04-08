@@ -58,13 +58,13 @@ public:
     std::shared_ptr<uint16_t> m_spTextIndexBuf;
 
     // VBO
-    GLuint m_vbo = 0;
+    uint32_t m_vbo = 0;
 
     // IBO
-    GLuint m_ibo = 0;
+    uint32_t m_ibo = 0;
 
     // Number of IBO needed for rendering
-    GLuint m_iboCount = 0;
+    uint32_t m_iboCount = 0;
 };
 
 #endif  // __mesh_h__

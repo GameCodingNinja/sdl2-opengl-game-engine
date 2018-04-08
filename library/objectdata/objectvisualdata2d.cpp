@@ -5,9 +5,11 @@
 *    DESCRIPTION:     Class containing the 2D object's visual data
 ************************************************************************/
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-// Glew dependencies (have to be defined first)
-#include <GL/glew.h>
+#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+#include "SDL_opengles2.h"
+#else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
+#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
 
 // Physical component dependency
@@ -391,7 +393,7 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
 ************************************************************************/
 void CObjectVisualData2D::GenerateQuad( const std::string & group )
 {
-    GLubyte indexData[] = {0, 1, 2, 3};
+    uint8_t indexData[] = {0, 1, 2, 3};
     
     // VBO data
     // The order of the verts is counter clockwise
@@ -456,7 +458,7 @@ void CObjectVisualData2D::GenerateScaledFrame(
     m_vbo = CVertBufMgr::Instance().CreateScaledFrame(
         group, vboName, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, std::vector<CVertex2D>() );
 
-    GLubyte indexData[] = {
+    uint8_t indexData[] = {
         0,1,2,     0,3,1,
         2,4,5,     2,1,4,
         1,6,4,     1,7,6,
@@ -498,7 +500,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     // Construct the name used for vbo and ibo
     std::string name = "scaled_frame_mesh_" + m_meshFilePath;
 
-    std::vector<GLubyte> iboVec = {
+    std::vector<uint8_t> iboVec = {
         0,1,2,     0,3,1,
         2,4,5,     2,1,4,
         1,6,4,     1,7,6,
@@ -510,7 +512,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
 
     if( m_scaledFrame.m_centerQuad )
     {
-        std::vector<GLubyte> exraVec = { 3,7,1, 3,10,7 };
+        std::vector<uint8_t> exraVec = { 3,7,1, 3,10,7 };
         iboVec.insert( iboVec.end(), exraVec.begin(), exraVec.end() );
     }
 
@@ -529,7 +531,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     }
 
     // Create the unique IBO buffer
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(GLubyte)*iboVec.size() );
+    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
 
 }   // GenerateScaledFrameMeshFile
@@ -541,7 +543,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
 void CObjectVisualData2D::GenerateFromMeshFile( 
     const std::string & group, const CSize<int> & textureSize, const CSize<int> & size )
 {
-    std::vector<GLubyte> iboVec;
+    std::vector<uint8_t> iboVec;
     
     // Construct the name used for vbo and ibo
     std::string name = "mesh_file_" + m_meshFilePath;
@@ -560,7 +562,7 @@ void CObjectVisualData2D::GenerateFromMeshFile(
     }
     
     // Create the unique IBO buffer
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(GLubyte)*iboVec.size() );
+    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
 
 }   // GenerateFromMeshFile
@@ -576,7 +578,7 @@ void CObjectVisualData2D::LoadMeshFromXML(
     const CRect<float> & textureOffset,
     int iboOffset,
     std::vector<CVertex2D> & rVertVec,
-    std::vector<GLubyte> & rIboVec )
+    std::vector<uint8_t> & rIboVec )
 {
     float additionalOffsetX = 0;
     if( (int)size.GetW() % 2 != 0 )
@@ -639,7 +641,7 @@ NDefs::EGenerationType CObjectVisualData2D::GetGenerationType() const
 /************************************************************************
 *    desc:  Get the texture ID
 ************************************************************************/
-GLuint CObjectVisualData2D::GetTextureID( uint index ) const 
+uint32_t CObjectVisualData2D::GetTextureID( uint index ) const 
 {
     if( m_textureIDVec.empty() )
         return 0;
@@ -669,7 +671,7 @@ const CColor & CObjectVisualData2D::GetColor() const
 /************************************************************************
 *    desc:  Get the VBO
 ************************************************************************/
-GLuint CObjectVisualData2D::GetVBO() const 
+uint32_t CObjectVisualData2D::GetVBO() const 
 {
     return m_vbo;
 }
@@ -678,7 +680,7 @@ GLuint CObjectVisualData2D::GetVBO() const
 /************************************************************************
 *    desc:  Get the IBO
 ************************************************************************/
-GLuint CObjectVisualData2D::GetIBO() const 
+uint32_t CObjectVisualData2D::GetIBO() const 
 {
     return m_ibo;
 }

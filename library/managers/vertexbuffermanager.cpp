@@ -5,9 +5,11 @@
 *    DESCRIPTION:     vertex buffer manager class singleton
 ************************************************************************/
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-// Glew dependencies (have to be defined first)
-#include <GL/glew.h>
+#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+#include "SDL_opengles2.h"
+#else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
+#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
 
 // Physical component dependency
@@ -61,7 +63,7 @@ CVertBufMgr::~CVertBufMgr()
 /************************************************************************
 *    desc: Create VBO
 ************************************************************************/
-GLuint CVertBufMgr::CreateVBO( 
+uint32_t CVertBufMgr::CreateVBO( 
     const std::string & group,
     const std::string & name,
     const std::vector<CVertex2D> & vertVec )
@@ -69,7 +71,7 @@ GLuint CVertBufMgr::CreateVBO(
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_vertexBuf2DMapMap.find( group );
     if( mapMapIter == m_vertexBuf2DMapMap.end() )
-        mapMapIter = m_vertexBuf2DMapMap.emplace( group, std::map<const std::string, GLuint>() ).first;
+        mapMapIter = m_vertexBuf2DMapMap.emplace( group, std::map<const std::string, uint32_t>() ).first;
 
     // See if this vertex buffer ID has already been loaded
     auto mapIter = mapMapIter->second.find( name );
@@ -77,7 +79,7 @@ GLuint CVertBufMgr::CreateVBO(
     // If it's not found, create the vertex buffer and add it to the list
     if( mapIter == mapMapIter->second.end() )
     {
-        GLuint vboID = 0;
+        uint32_t vboID = 0;
         glGenBuffers( 1, &vboID );
         glBindBuffer( GL_ARRAY_BUFFER, vboID );
         glBufferData( GL_ARRAY_BUFFER, sizeof(CVertex2D)*vertVec.size(), vertVec.data(), GL_STATIC_DRAW );
@@ -97,12 +99,12 @@ GLuint CVertBufMgr::CreateVBO(
 /************************************************************************
 *    desc:  Create a IBO buffer
 ************************************************************************/
-GLuint CVertBufMgr::CreateIBO( const std::string & group, const std::string & name, GLubyte indexData[], int sizeInBytes )
+uint32_t CVertBufMgr::CreateIBO( const std::string & group, const std::string & name, uint8_t indexData[], int sizeInBytes )
 {
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_indexBuf2DMapMap.find( group );
     if( mapMapIter == m_indexBuf2DMapMap.end() )
-            mapMapIter = m_indexBuf2DMapMap.emplace( group, std::map<const std::string, GLuint>() ).first;
+            mapMapIter = m_indexBuf2DMapMap.emplace( group, std::map<const std::string, uint32_t>() ).first;
 
     // See if this intex buffer ID has already been loaded
     auto mapIter = mapMapIter->second.find( name );
@@ -110,7 +112,7 @@ GLuint CVertBufMgr::CreateIBO( const std::string & group, const std::string & na
     // If it's not found, create the intex buffer and add it to the list
     if( mapIter == mapMapIter->second.end() )
     {
-        GLuint iboID = 0;
+        uint32_t iboID = 0;
         glGenBuffers( 1, &iboID );
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, iboID );
         glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeInBytes, indexData, GL_STATIC_DRAW );
@@ -130,12 +132,12 @@ GLuint CVertBufMgr::CreateIBO( const std::string & group, const std::string & na
 /************************************************************************
 *    desc:  Create a dynamic font IBO buffer
 ************************************************************************/
-GLuint CVertBufMgr::CreateDynamicFontIBO( const std::string & group, const std::string & name, GLushort * pIndexData, int maxIndicies )
+uint32_t CVertBufMgr::CreateDynamicFontIBO( const std::string & group, const std::string & name, uint16_t * pIndexData, int maxIndicies )
 {
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_indexBuf2DMapMap.find( group );
     if( mapMapIter == m_indexBuf2DMapMap.end() )
-        mapMapIter = m_indexBuf2DMapMap.emplace( group, std::map<const std::string, GLuint>() ).first;
+        mapMapIter = m_indexBuf2DMapMap.emplace( group, std::map<const std::string, uint32_t>() ).first;
 
     // See if this intex buffer ID has already been loaded
     auto mapIter = mapMapIter->second.find( name );
@@ -143,7 +145,7 @@ GLuint CVertBufMgr::CreateDynamicFontIBO( const std::string & group, const std::
     // If it's not found, create the intex buffer and add it to the list
     if( mapIter == mapMapIter->second.end() )
     {
-        GLuint iboID = 0;
+        uint32_t iboID = 0;
         glGenBuffers( 1, &iboID );
         
         // Insert the new intex buffer info
@@ -154,7 +156,7 @@ GLuint CVertBufMgr::CreateDynamicFontIBO( const std::string & group, const std::
     if( maxIndicies > m_currentMaxFontIndices )
     {
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mapIter->second );
-        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * maxIndicies, pIndexData, GL_STATIC_DRAW );
+        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16_t) * maxIndicies, pIndexData, GL_STATIC_DRAW );
 
         // unbind the buffer
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
@@ -172,7 +174,7 @@ GLuint CVertBufMgr::CreateDynamicFontIBO( const std::string & group, const std::
 *    NOTE: This is a bit of a brute force implementation but writing an
 *          algorithm that takes into account an index buffer is difficult
 ************************************************************************/
-GLuint CVertBufMgr::CreateScaledFrame( 
+uint32_t CVertBufMgr::CreateScaledFrame( 
     const std::string & group,
     const std::string & name,
     const CScaledFrame & scaledFrame,
@@ -185,7 +187,7 @@ GLuint CVertBufMgr::CreateScaledFrame(
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_vertexBuf2DMapMap.find( group );
     if( mapMapIter == m_vertexBuf2DMapMap.end() )
-        mapMapIter = m_vertexBuf2DMapMap.emplace( group, std::map<const std::string, GLuint>() ).first;
+        mapMapIter = m_vertexBuf2DMapMap.emplace( group, std::map<const std::string, uint32_t>() ).first;
 
     // See if this vertex buffer ID has already been loaded
     auto mapIter = mapMapIter->second.find( name );
@@ -203,7 +205,7 @@ GLuint CVertBufMgr::CreateScaledFrame(
         if( !vertVecTmp.empty() )
             vertVecTmp.insert( vertVecTmp.end(), vertVec.begin(), vertVec.end() );
 
-        GLuint vboID = 0;
+        uint32_t vboID = 0;
         glGenBuffers( 1, &vboID );
         glBindBuffer( GL_ARRAY_BUFFER, vboID );
         glBufferData( GL_ARRAY_BUFFER, sizeof(CVertex2D)*vertVecTmp.size(), vertVecTmp.data(), GL_STATIC_DRAW );
@@ -396,7 +398,7 @@ void CVertBufMgr::CreateQuad(
 /************************************************************************
 *    desc: See if a VBO already exists
 ************************************************************************/
-GLuint CVertBufMgr::IsVBO( const std::string & group, const std::string & name )
+uint32_t CVertBufMgr::IsVBO( const std::string & group, const std::string & name )
 {
     // See if the group exists
     auto mapMapIter = m_vertexBuf2DMapMap.find( group );
@@ -416,7 +418,7 @@ GLuint CVertBufMgr::IsVBO( const std::string & group, const std::string & name )
 *    desc:  Function call used to manage what buffer is currently bound.
 *           This insures that we don't keep rebinding the same buffer
 ************************************************************************/
-void CVertBufMgr::Bind( GLuint vboID, GLuint iboID )
+void CVertBufMgr::Bind( uint32_t vboID, uint32_t iboID )
 {
     if( m_currentVBOID != vboID )
     {

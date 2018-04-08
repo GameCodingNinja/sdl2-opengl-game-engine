@@ -5,9 +5,11 @@
  *    DESCRIPTION:     mesh manager class singleton
  ************************************************************************/
 
-#if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
-// Glew dependencies (have to be defined first)
-#include <GL/glew.h>
+#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+#include "SDL_opengles2.h"
+#else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
+#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
 
 // Physical component dependency
@@ -321,7 +323,7 @@ void CMeshMgr::CreateFromData(
         // Create the IBO - It's saved in the binary file as needed. Don't need to build it.
         glGenBuffers( 1, &iter.m_ibo );
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, iter.m_ibo );
-        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * iter.m_faceGroup.indexBufCount, iter.m_spIndexBuf.get(), GL_STATIC_DRAW );
+        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16_t) * iter.m_faceGroup.indexBufCount, iter.m_spIndexBuf.get(), GL_STATIC_DRAW );
 
         // unbind the buffer
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
@@ -409,7 +411,7 @@ void CMeshMgr::LoadFromFile(
         // Create the IBO - It's saved in the binary file as needed. Don't need to build it.
         glGenBuffers( 1, &mesh3d.back().m_ibo );
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh3d.back().m_ibo );
-        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * mesh.m_faceGroup.indexBufCount, mesh.m_spIndexBuf.get(), GL_STATIC_DRAW );
+        glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16_t) * mesh.m_faceGroup.indexBufCount, mesh.m_spIndexBuf.get(), GL_STATIC_DRAW );
 
         // unbind the buffer
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );

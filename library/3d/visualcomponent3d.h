@@ -8,12 +8,6 @@
 #ifndef __visual_component_3d_h__
 #define __visual_component_3d_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <utilities/matrix.h>
 #include <common/color.h>
@@ -66,13 +60,13 @@ private:
     CShaderData * m_pShaderData;
 
     // shader location data
-    GLint m_vertexLocation;
-    GLint m_normalLocation;
-    GLint m_uvLocation;
-    GLint m_text0Location;
-    GLint m_colorLocation;
-    GLint m_matrixLocation;
-    GLint m_normalMatrixLocation;
+    int32_t m_vertexLocation;
+    int32_t m_normalLocation;
+    int32_t m_uvLocation;
+    int32_t m_text0Location;
+    int32_t m_colorLocation;
+    int32_t m_matrixLocation;
+    int32_t m_normalMatrixLocation;
 
     // Copy of 3D mesh data
     const CMesh3D & m_mesh3d;
@@ -81,7 +75,7 @@ private:
     CColor m_color;
     
     // Vertex buffer sizes
-    const GLbyte m_VERTEX_BUF_SIZE;
+    const int8_t m_VERTEX_BUF_SIZE;
 };
 
 #endif  // __visual_component_3d_h__

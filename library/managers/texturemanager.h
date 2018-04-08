@@ -8,12 +8,6 @@
 #ifndef __texture_manager_h__
 #define __texture_manager_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <common/texture.h>
 
@@ -46,7 +40,7 @@ public:
     void DeleteTextureGroupFor3D( const std::string & group );
 
     // Function call used to manage what texture is currently bound
-    void Bind( GLuint textureID );
+    void Bind( uint32_t textureID );
 
     // Unbind the texture and reset the flag
     void Unbind();
@@ -78,10 +72,10 @@ private:
     std::map< const std::string, std::map< const std::string, CTexture > > m_textureFor3DMapMap;
 
     // Current texture ID
-    GLuint m_currentTextureID;
+    uint32_t m_currentTextureID;
     
     // Largest possible anisotropic value
-    GLint m_anisotropicLevel;
+    int32_t m_anisotropicLevel;
 };
 
 #endif  // __texture_manager_h__

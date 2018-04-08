@@ -8,12 +8,6 @@
 #ifndef __object_visual_data_2d_h__
 #define __object_visual_data_2d_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <common/size.h>
 #include <common/color.h>
@@ -53,7 +47,7 @@ public:
     NDefs::EGenerationType GetGenerationType() const;
 
     // Get the texture ID
-    GLuint GetTextureID( uint index = 0 ) const;
+    uint32_t GetTextureID( uint index = 0 ) const;
 
     // Get the name of the shader ID
     const std::string & GetShaderID() const;
@@ -65,10 +59,10 @@ public:
     const CSize<float> & GetVertexScale() const;
 
     // Get the VBO
-    GLuint GetVBO() const;
+    uint32_t GetVBO() const;
 
     // Get the IBO
-    GLuint GetIBO() const;
+    uint32_t GetIBO() const;
 
     // Get the ibo count
     int GetIBOCount() const;
@@ -121,18 +115,18 @@ private:
         const CRect<float> & textureOffset,
         int iboOffset,
         std::vector<CVertex2D> & rVertVec,
-        std::vector<GLubyte> & rIboVec );
+        std::vector<uint8_t> & rIboVec );
     
 private:
 
     // Loaded texture data
-    std::vector<GLuint> m_textureIDVec;
+    std::vector<uint32_t> m_textureIDVec;
 
     // VBO
-    GLuint m_vbo;
+    uint32_t m_vbo;
 
     // IBO
-    GLuint m_ibo;
+    uint32_t m_ibo;
 
     // VBO/IBO generation type
     NDefs::EGenerationType m_genType;

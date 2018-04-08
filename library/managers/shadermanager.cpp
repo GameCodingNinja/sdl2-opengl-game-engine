@@ -122,10 +122,10 @@ void CShaderMgr::CreateShader( const XMLNode & node )
 /************************************************************************
 *    desc:  Create the shader
 ************************************************************************/
-void CShaderMgr::CreateShader( GLenum shaderType, const std::string & filePath )
+void CShaderMgr::CreateShader( uint32_t shaderType, const std::string & filePath )
 {
     // Create the shader
-    GLuint shaderID = glCreateShader( shaderType );
+    uint32_t shaderID = glCreateShader( shaderType );
     if( shaderID == 0 )
     {
         throw NExcept::CCriticalException("Create Shader Error!", 
@@ -147,11 +147,11 @@ void CShaderMgr::CreateShader( GLenum shaderType, const std::string & filePath )
     glCompileShader( shaderID );
 
     // Check shader for errors
-    GLint success( GL_FALSE );
+    int32_t success( GL_FALSE );
     glGetShaderiv( shaderID, GL_COMPILE_STATUS, &success );
     if( success != GL_TRUE )
     {
-        GLint maxLength = 0;
+        int32_t maxLength = 0;
         glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
 
         std::unique_ptr<char[]> upError( new char[maxLength] );
@@ -207,9 +207,9 @@ void CShaderMgr::BindAttributeLocation( const XMLNode & vertexNode )
             m_Iter->second.SetAttributeLocation( attributeName, location );
 
             // Bind a constant attribute location for positions of vertices
-            glBindAttribLocation( m_Iter->second.GetProgramID(), (GLuint)location, attributeName.c_str() );
+            glBindAttribLocation( m_Iter->second.GetProgramID(), (uint32_t)location, attributeName.c_str() );
 
-            GLenum error(glGetError());
+            uint32_t error(glGetError());
             if( error != GL_NO_ERROR)
                 throw NExcept::CCriticalException("Create Shader Error!", 
                     boost::str( boost::format("Error binding attribute (%s).\n\n%s\nLine: %s")
@@ -229,7 +229,7 @@ void CShaderMgr::LinkProgram()
     glLinkProgram( m_Iter->second.GetProgramID() );
 
     // Check for errors
-    GLint success( GL_TRUE );
+    int32_t success( GL_TRUE );
     glGetProgramiv( m_Iter->second.GetProgramID(), GL_LINK_STATUS, &success );
     if( success != GL_TRUE )
     {
@@ -271,7 +271,7 @@ void CShaderMgr::GetUniformLocation( const XMLNode & node )
 {
     std::string name = node.getAttribute("name");
 
-    GLint location = glGetUniformLocation( m_Iter->second.GetProgramID(), name.c_str() );
+    int32_t location = glGetUniformLocation( m_Iter->second.GetProgramID(), name.c_str() );
 
     m_Iter->second.SetUniformLocation( name, location );
 
@@ -407,7 +407,7 @@ void CShaderMgr::SetShaderColor( CShaderData & shaderData, const std::string & l
     if( shaderData.HasUniformLocation( locationId ) )
     {
         // Get the location of the additive
-        GLint location = shaderData.GetUniformLocation( locationId );
+        int32_t location = shaderData.GetUniformLocation( locationId );
 
         // Bind the shader so that we can change the value of the member
         Bind( &shaderData );

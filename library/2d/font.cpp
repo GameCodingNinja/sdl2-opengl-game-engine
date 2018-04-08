@@ -178,7 +178,7 @@ const CSize<int> & CFont::GetTextureSize() const
 /************************************************************************
 *    desc:  Get the texture ID
 ************************************************************************/
-GLuint CFont::GetTextureID() const
+uint32_t CFont::GetTextureID() const
 {
     return m_texture.GetID();
 

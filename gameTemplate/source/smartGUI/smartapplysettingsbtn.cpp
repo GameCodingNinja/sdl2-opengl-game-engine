@@ -5,14 +5,15 @@
 *    DESCRIPTION:     Class CSmartExitBtn
 ************************************************************************/
 
-// Physical component dependency
-#include "smartapplysettingsbtn.h"
-
 #if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
 #include "SDL_opengles2.h"
 #else
+#include <GL/glew.h>     // Glew dependencies (have to be defined first)
 #include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
 #endif
+
+// Physical component dependency
+#include "smartapplysettingsbtn.h"
 
 // Game dependencies local
 #include "smartresolutionbtn.h"

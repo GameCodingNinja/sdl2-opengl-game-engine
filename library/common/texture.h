@@ -8,12 +8,6 @@
 #ifndef __texture_h__
 #define __texture_h__
 
-#if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
-#include "SDL_opengles2.h"
-#else
-#include <SDL_opengl.h>  // SDL/OpenGL lib dependencies
-#endif
-
 // Game lib dependencies
 #include <common/size.h>
 
@@ -33,7 +27,7 @@ class CTexture
 public:
 
     // OpenGL texture ID
-    GLuint m_id = 0;
+    uint32_t m_id = 0;
     
     // Texture type
     ETextureType m_type = ETT_DIFFUSE;
@@ -50,7 +44,7 @@ public:
     // Texture file path
     std::string m_textFilePath;
 
-    GLuint GetID() const {return m_id;}
+    uint32_t GetID() const {return m_id;}
     const CSize<int> & GetSize() const {return m_size;}
 };
 

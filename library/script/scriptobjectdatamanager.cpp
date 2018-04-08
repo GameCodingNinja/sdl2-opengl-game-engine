@@ -1,6 +1,6 @@
 
 /************************************************************************
-*    FILE NAME:       scriptshadermanager.cpp
+*    FILE NAME:       scriptobjectdatamanager.cpp
 *
 *    DESCRIPTION:     CShaderMgr script object registration
 ************************************************************************/
