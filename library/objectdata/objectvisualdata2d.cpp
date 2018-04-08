@@ -737,7 +737,7 @@ const CSpriteSheet & CObjectVisualData2D::GetSpriteSheet() const
 /************************************************************************
 *    desc:  Access functions for the default scale
 ************************************************************************/
-const float CObjectVisualData2D::GetDefaultUniformScale() const 
+float CObjectVisualData2D::GetDefaultUniformScale() const 
 {
     return m_defaultUniformScale;
 

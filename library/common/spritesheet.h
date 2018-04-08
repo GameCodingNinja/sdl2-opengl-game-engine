@@ -41,10 +41,7 @@ public:
     const CSpriteSheetGlyph & FindGlyph( const std::string & glyphId ) const;
    
     // Get the number of gylphs in this sprite sheet
-    const size_t GetCount() const;
-    
-    // Get the size of this sprite sheet
-    const CSize<int> GetSize() const;
+    size_t GetCount() const;
     
     // Set/Get the default index
     void SetDefaultIndex( uint defaultIndex );

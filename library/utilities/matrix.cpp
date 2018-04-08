@@ -1259,7 +1259,7 @@ CMatrix CMatrix::operator = ( const float mat[4][4] )
 *
 *    return: float
 ************************************************************************/
-const float CMatrix::operator [] ( uint index ) const
+float CMatrix::operator [] ( uint index ) const
 {
     if( index >= mMax )
         throw NExcept::CCriticalException("Index out of range",

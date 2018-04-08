@@ -77,7 +77,7 @@ public:
     const CSpriteSheet & GetSpriteSheet() const;
     
     // Access functions for the default uniform scale
-    const float GetDefaultUniformScale() const;
+    float GetDefaultUniformScale() const;
 
 private:
     

@@ -119,7 +119,7 @@ public:
     CMatrix operator * ( const CMatrix & obj ) const;
     CMatrix operator *= ( const CMatrix & obj );
     CMatrix operator = ( const float mat[4][4] );
-    const float operator [] ( uint index ) const;
+    float operator [] ( uint index ) const;
     float & operator [] ( uint index );
     const float * operator () () const;
 

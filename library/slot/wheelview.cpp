@@ -225,6 +225,8 @@ void CWheelView::Update()
                 m_saftyCheckDegree = m_degreePerWedge / m_spinProfile.GetSafetyCheckDivisor();
                 m_spinTimer.Set( m_spinProfile.GetStartDelay() );
                 m_spinState = NSlotDefs::ESS_SPIN_STARTING;
+                
+                break;
             }
             
             case NSlotDefs::ESS_SPIN_STARTING:

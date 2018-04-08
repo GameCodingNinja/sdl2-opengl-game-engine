@@ -177,7 +177,7 @@ const CSpriteSheetGlyph & CSpriteSheet::FindGlyph( const std::string & glyphId )
 /************************************************************************
 *    desc:  Get the number of gylphs in this sprite sheet
 ************************************************************************/
-const size_t CSpriteSheet::GetCount() const
+size_t CSpriteSheet::GetCount() const
 {
     size_t count = m_glyphMap.size();
     const size_t vecCount = m_glyphVec.size();
