@@ -101,5 +101,4 @@ namespace NScriptColor
         Throw( pEngine->RegisterObjectMethod("CColor", "void TransformHSV( float hue, float sat, float val )", asMETHOD(CColor, TransformHSV), asCALL_THISCALL) );
 	Throw( pEngine->RegisterObjectMethod("CColor", "void Convert()", asMETHOD( CColor, Convert ), asCALL_THISCALL ) );
     }
-
-}   // NScriptColor
+}

@@ -175,7 +175,7 @@ void Control_Selected_frame_highlight( CSprite2d & sprite )
 {
     Ctrl_Selected( sprite, 1.7, .6 );
 
-    sprite.SetRGBA( 1, 1, 1, 1 );
+    sprite.SetColor( 1, 1, 1, 1 );
 }
 
 

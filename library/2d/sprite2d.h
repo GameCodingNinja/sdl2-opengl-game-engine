@@ -99,7 +99,7 @@ public:
     
     // Set/Get the color
     void SetColor( const CColor & color );
-    void SetRGBA( float r, float g, float b, float a );
+    void SetColor( float r, float g, float b, float a );
     void SetDefaultColor();
     const CColor & GetColor() const;
     const CColor & GetDefaultColor() const;

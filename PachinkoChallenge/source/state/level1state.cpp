@@ -254,7 +254,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
         
         else if( (spriteAid == STRAWBERRY) || (spriteBid == STRAWBERRY) )
         {
-            m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, STRAWBERRY );
+            m_rStrategy.SetToDestroy( STRAWBERRY );
             
             m_rMultiplierLabel.CreateFontString( std::to_string(++m_multiplier) + "x" );
             
@@ -265,7 +265,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
             
             // Add another strawberry
             m_rStrawberryData.SetPosXYZ( multiPos, -1450.f );
-            m_rStrategy.HandleMessage( NDefs::ESM_CREATE_SPRITE, "strawberry" );
+            m_rStrategy.SetToCreate( "strawberry" );
         }
     }
     
@@ -341,8 +341,8 @@ namespace NLevel1State
         CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
         
         // Load the sprite strategies
-        CSpriteStrategyMgr::Instance().Load( "(level1_spriteStrategy)", new CBasicSpriteStrategy2D(1000) );
-        CSpriteStrategyMgr::Instance().Load( "(level1_stage1Strategy)", new CBasicStageStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy2D(1000) );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy2D );
     }
     
     void CriticalInit()

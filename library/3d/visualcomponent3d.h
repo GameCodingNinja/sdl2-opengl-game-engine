@@ -43,7 +43,7 @@ public:
 
     // Set/Get the color
     void SetColor( const CColor & color );
-    void SetRGBA( float r, float g, float b, float a );
+    void SetColor( float r, float g, float b, float a );
     const CColor & GetColor() const;
     void SetDefaultColor();
 

@@ -401,6 +401,12 @@ void CShaderMgr::SetShaderColor( const std::string & shaderId, const std::string
     
 }   // SetShaderColor
 
+void CShaderMgr::SetShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a )
+{
+    SetShaderColor( GetShaderData( shaderId ), locationId, CColor(r,g,b,a) );
+    
+}   // SetShaderColor
+
 void CShaderMgr::SetShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color )
 {
     // Check for the shader location
@@ -429,5 +435,12 @@ void CShaderMgr::SetAllShaderColor( const std::string & locationId, CColor color
 {
     for( auto & iter : m_shaderMap )
         SetShaderColor( iter.second, locationId, color );
+    
+}   // SetAllShaderColor
+
+void CShaderMgr::SetAllShaderColor( const std::string & locationId, float r, float g, float b, float a )
+{
+    for( auto & iter : m_shaderMap )
+        SetShaderColor( iter.second, locationId, CColor(r,g,b,a) );
     
 }   // SetAllShaderColor

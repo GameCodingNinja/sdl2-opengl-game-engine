@@ -2,18 +2,18 @@
 /************************************************************************
 *    FILE NAME:       scriptobjectdatamanager.h
 *
-*    DESCRIPTION:     CShaderMgr script object registration
+*    DESCRIPTION:     CObjectDataMgr script object registration
 ************************************************************************/
 
-#ifndef __script_shader_manager_h__
-#define __script_shader_manager_h__
+#ifndef __script_object_data_manager_h__
+#define __script_object_data_manager_h__
 
-namespace NScriptShaderManager
+namespace NScriptObjectDataManager
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_shader_manager_h__
+#endif  // __script_object_data_manager_h__
 
 

@@ -24,9 +24,6 @@ public:
 
     // Destructor
     virtual ~CCommonState();
-    
-    // Do any pre-game loop init's
-    virtual void Init() override;
 
     // Handle events
     virtual void HandleEvent( const SDL_Event & rEvent ) override;

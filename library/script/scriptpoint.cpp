@@ -126,5 +126,4 @@ namespace NScriptPoint
         Throw( pEngine->RegisterObjectMethod("CPoint", "float GetDotProduct2D( const CPoint & in )",  asMETHOD(CPoint<float>, GetDotProduct2DFloat), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CPoint", "CPoint GetCrossProduct( const CPoint & in )", asMETHOD(CPoint<float>, GetCrossProduct), asCALL_THISCALL) );
     }
-
-}   // NScriptColor
+}

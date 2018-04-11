@@ -51,10 +51,10 @@ void CLevel1State::Init()
     
     // Create the actors
     CSpriteStrategyMgr::Instance().Create("(actor)", "enemy_ship");
-    const int id = CSpriteStrategyMgr::Instance().Create("(actor)", "player_ship");
+    m_pPlayerShip = CSpriteStrategyMgr::Instance().CreateSprite<CActorSprite2D>("(actor)", "player_ship");
     
     // Get pointer to the player ship
-    m_pPlayerShip = &CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)").Get<CActorSprite2D>(id);
+    //m_pPlayerShip = &CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)").Get<CActorSprite2D>(id);
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -201,8 +201,8 @@ namespace NLevel_1
     
     void Load()
     {
-        CSpriteStrategyMgr::Instance().Load( "(actor)", new CBasicSpriteStrategy2D );
-        CSpriteStrategyMgr::Instance().Load( "(stage1)", new CLoopStageStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(actor)", new CBasicSpriteStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CLoopStageStrategy2D );
         
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(actor)");

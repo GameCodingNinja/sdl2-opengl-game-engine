@@ -25,9 +25,11 @@ public:
     // Destructor
     virtual ~CBaseStrategy();
     
-    // Handle messages
-    void HandleMessage( int msg, int code ) override;
-    void HandleMessage( int msg, const std::string & code ) override;
+    // Set to Destroy the sprite
+    void SetToDestroy( int spriteIndex ) override;
+    
+    // Set to create the sprite
+    void SetToCreate( const std::string & name ) override;
     
     // Load the data from file
     virtual void MiscProcess() override;

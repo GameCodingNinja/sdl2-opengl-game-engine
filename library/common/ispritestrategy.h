@@ -15,6 +15,9 @@
 // Standard lib dependencies
 #include <string>
 
+// Forward Declarations
+class iSprite2D;
+
 class iSpriteStrategy
 {
 public:
@@ -27,21 +30,37 @@ public:
 
     // Load the data from file
     virtual void LoadFromFile( const std::string & file ) = 0;
-
-    // Allow player sprite to respond to input
-    virtual void HandleEvent( const union SDL_Event & rEvent ){}
     
-    // Handle messages
-    virtual void HandleMessage( int msg, int code ){}
-    virtual void HandleMessage( int msg, const std::string & code ){}
+    // Set to Destroy the sprite
+    virtual void SetToDestroy( int spriteIndex ){}
+    
+    // Set to create the sprite
+    virtual void SetToCreate( const std::string & name ){}
     
     // Create the sprite
-    virtual int Create(
+    virtual iSprite2D * Create(
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
-        const CPoint<float> & scale ){ return -1; }
+        const CPoint<float> & scale ){ return nullptr; }
+    
+    virtual iSprite2D * Create(
+        const std::string & group,
+        const std::string & name,
+        const int id,
+        const CPoint<CWorldValue> & pos,
+        const CPoint<float> & rot,
+        const CPoint<float> & scale ){ return nullptr; }
+
+    virtual iSprite2D * Create(
+        const std::string & name,
+        const int id ){ return nullptr; }
+    
+    virtual iSprite2D * Create(
+        const std::string & group,
+        const std::string & name,
+        const int id ){ return nullptr; }
     
     // Do any pre-loop init
     virtual void Init(){}

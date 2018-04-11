@@ -34,24 +34,33 @@ public:
         return spriteStrategyMgr;
     }
     
-    // Load strategy data from id
-    void Load( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
+    // Add strategy
+    void AddStrategy( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
     
     // create the sprite and provide a unique id number for each one
-    const std::vector<int> & Create(
+    iSprite2D * Create(
         const std::string & strategyId,
-        const std::string & name,
-        const int count,
-        const CPoint<CWorldValue> & pos = CPoint<CWorldValue>(),
+        const std::string & dataName,
+        const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
     
-    int Create(
+    iSprite2D * Create(
         const std::string & strategyId,
+        const std::string & group,
         const std::string & name,
-        const CPoint<CWorldValue> & pos = CPoint<CWorldValue>(),
+        const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
+    
+    iSprite2D * Create(
+        const std::string & strategyId,
+        const std::string & dataName );
+    
+    iSprite2D * Create(
+        const std::string & strategyId,
+        const std::string & group,
+        const std::string & name );
 
     // Delete all the sprites
     void Clear();
@@ -120,6 +129,47 @@ public:
         
         return *pStrategy;
     }
+    
+    // Create templates
+    template <typename target>
+    target * CreateSprite(
+        const std::string & strategyId,
+        const std::string & name,
+        const CPoint<CWorldValue> & pos,
+        const CPoint<float> & rot = CPoint<float>(),
+        const CPoint<float> & scale = CPoint<float>(1,1,1) )
+    {
+        return dynamic_cast<target *>(Create( strategyId, name, pos, rot, scale ));
+    }
+    
+    template <typename target>
+    target * CreateSprite(
+        const std::string & strategyId,
+        const std::string & group,
+        const std::string & name,
+        const CPoint<CWorldValue> & pos,
+        const CPoint<float> & rot = CPoint<float>(),
+        const CPoint<float> & scale = CPoint<float>(1,1,1) )
+    {
+        return dynamic_cast<target *>(Create( strategyId, group, name, pos, rot, scale ));
+    }
+    
+    template <typename target>
+    target * CreateSprite(
+        const std::string & strategyId,
+        const std::string & name )
+    {
+        return dynamic_cast<target *>(Create( strategyId, name ));
+    }
+    
+    template <typename target>
+    target * CreateSprite(
+        const std::string & strategyId,
+        const std::string & group,
+        const std::string & name )
+    {
+        return dynamic_cast<target *>(Create( strategyId, group, name ));
+    }
 
 private:
 
@@ -144,7 +194,7 @@ private:
     int m_spriteInc;
     
     // Temporary vector to hold the return ids
-    std::vector<int> m_incReturn;
+    std::vector<iSprite2D *> m_incReturn;
 
 };
 

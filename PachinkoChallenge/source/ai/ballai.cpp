@@ -60,6 +60,6 @@ void CBallAI::Init()
 void CBallAI::Update()
 {
     if( m_sprite.GetPos().y < -1650.0f )
-        m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, m_sprite.GetId() );
+        m_rStrategy.SetToDestroy( m_sprite.GetId() );
         
 }   // Update

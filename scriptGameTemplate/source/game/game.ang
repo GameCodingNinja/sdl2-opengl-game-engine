@@ -1,0 +1,41 @@
+
+/************************************************************************
+*    FILE NAME:       game.ang
+*
+*    DESCRIPTION:     CGame class
+************************************************************************/
+
+class CGame
+{
+    //
+    // Init the game
+    //
+    void Init()
+    {
+        // Load the object data list table
+        ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
+        
+        // Load the shader
+        Shader_Load( "data/shaders/shader.cfg" );
+        Shader_SetAllShaderColor( "additive", 1, 1, 1, 1 );
+        
+        // Load the start up animation group
+        ObjectData_LoadGroup2D( "(title_screen)" );
+        
+        // Create a basic strategy
+        Strategy_CreateBasicSpriteStrategy( "spriteStrategy" );
+        
+        Strategy_Create( "spriteStrategy", "(title_screen)", "background" );
+        Strategy_Create( "spriteStrategy", "(title_screen)", "wheel" );
+    }
+    
+    //
+    // Main game loop
+    //
+    void GameLoop()
+    {
+
+    }
+};
+
+

@@ -30,8 +30,8 @@ namespace NScriptSprite2D
         // Register type
         Throw( pEngine->RegisterObjectType(  "CSprite2d", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetColor(const CColor &in)",                    asMETHOD(CSprite2D, SetColor),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetRGBA(float r, float g, float b, float a)",   asMETHOD(CSprite2D, SetRGBA),              asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetColor(const CColor &in)",                    asMETHODPR(CSprite2D, SetColor, (const CColor &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetColor(float r, float g, float b, float a)",  asMETHODPR(CSprite2D, SetColor, (float,float,float,float), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetDefaultColor()",                             asMETHOD(CSprite2D, SetDefaultColor),      asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2d", "const CColor & GetColor()",                          asMETHOD(CSprite2D, GetColor),             asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2d", "const CColor & GetDefaultColor()",                   asMETHOD(CSprite2D, GetDefaultColor),      asCALL_THISCALL) );
@@ -66,5 +66,4 @@ namespace NScriptSprite2D
         Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
     }
-
-}   // NScriptColor
+}

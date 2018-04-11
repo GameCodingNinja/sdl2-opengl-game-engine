@@ -77,6 +77,6 @@ void CProjectileAI::Update()
 
     // Delete if goes out of view
     if( m_sprite.GetTransPos().GetLengthSquared2D() > 250000.f )
-        m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, m_sprite.GetId() );
+        m_rStrategy.SetToDestroy( m_sprite.GetId() );
 
 }   // Update

@@ -148,8 +148,8 @@ namespace NRunState
     {
 	// All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
-        CSpriteStrategyMgr::Instance().Load( "(stage1)", new CBasicStageStrategy2D );
-        CSpriteStrategyMgr::Instance().Load( "(sprite)", new CBasicSpriteStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CBasicStageStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(sprite)", new CBasicSpriteStrategy2D );
     }
     
     void CriticalInit()

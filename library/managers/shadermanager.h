@@ -51,9 +51,11 @@ public:
     
     // Set the shader member variable
     void SetShaderColor( const std::string & shaderId, const std::string & locationId, CColor color );
+    void SetShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a );
     
     // Set all the shaders using this color location
     void SetAllShaderColor( const std::string & locationId, CColor color );
+    void SetAllShaderColor( const std::string & locationId, float r, float g, float b, float a );
     
     // Connect to the Init Shader signal
     void Connect_InitShader( const InitShaderSignal::slot_type & slot );

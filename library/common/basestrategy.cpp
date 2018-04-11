@@ -31,23 +31,23 @@ CBaseStrategy::~CBaseStrategy()
 
 
 /************************************************************************
- *    desc:  Handle messages
+ *    desc:  Set to Destroy the sprite
  ************************************************************************/
-void CBaseStrategy::HandleMessage( int msg, int code )
+void CBaseStrategy::SetToDestroy( int spriteIndex )
 {
-    // Add to the delete index
-    if( msg == NDefs::ESM_KILL_SPRITE )
-        m_deleteSet.insert( code );
+    m_deleteSet.insert( spriteIndex );
 
-}   // HandleMessage
+}   // SetToDestroy
 
-void CBaseStrategy::HandleMessage( int msg, const std::string & code )
+
+/************************************************************************
+ *    desc:  Set to create the sprite
+ ************************************************************************/
+void CBaseStrategy::SetToCreate( const std::string & name )
 {
-    // Add the create name
-    if( msg == NDefs::ESM_CREATE_SPRITE )
-        m_createSet.insert( code );
+    m_createSet.insert( name );
 
-}   // HandleMessage
+}   // SetToCreate
 
 
 /************************************************************************

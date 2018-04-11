@@ -406,11 +406,18 @@ void CScriptManager::Update( std::vector<asIScriptContext *> & pContextVec )
             
             // Execute the script and check for errors
             // Since the script can be suspended, this also is used to continue execution
-            if( pContext->Execute() < 0 )
+            const int execReturnCode = pContext->Execute();
+            if( execReturnCode == asEXECUTION_ERROR )
+            {
+                throw NExcept::CCriticalException(
+                    "Error Calling Spawn Script!",
+                    "There was an error executing the script.");
+            }
+            else if( execReturnCode == asEXECUTION_EXCEPTION )
             {
                 throw NExcept::CCriticalException("Error Calling Spawn Script!",
-                    boost::str( boost::format("There was an error executing the script.\n\n%s\nLine: %s")
-                        % __FUNCTION__ % __LINE__ ));
+                    boost::str( boost::format("There was an error executing the script (%s).")
+                        % pContext->GetExceptionString() ));
             }
             
             // If this execution spawned any local contexts, they will be in this vector.

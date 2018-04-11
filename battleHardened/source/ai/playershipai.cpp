@@ -110,7 +110,7 @@ void CPlayerShipAI::HandleShooting()
 
         // Create the projectile actor
         CSpriteStrategyMgr::Instance().Create(
-            "(actor)", "player_projectile", 1, m_sprite.GetPos() + projectileOffset, CPoint<float>(0,0,m_gunRotation) );
+            "(actor)", "player_projectile", m_sprite.GetPos() + projectileOffset, CPoint<float>(0,0,m_gunRotation) );
 
         m_playerShootTimer.Reset();
     }

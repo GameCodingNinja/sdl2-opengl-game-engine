@@ -68,5 +68,4 @@ namespace NScriptGlobals
         Throw( pEngine->RegisterGlobalFunction("void DispatchEvent(int type, int code = 0)", asFUNCTION(NGenFunc::DispatchEvent), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in)", asMETHOD(CScriptManager, PrepareSpawn), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
     }
-
-}   // NScriptGlobals
+}

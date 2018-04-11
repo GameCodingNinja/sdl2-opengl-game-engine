@@ -40,9 +40,9 @@ CSpriteStrategyMgr::~CSpriteStrategyMgr()
 
 
 /************************************************************************
- *    desc:  Load strategy data from id
+ *    desc:  Add strategy
  ************************************************************************/
-void CSpriteStrategyMgr::Load( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
+void CSpriteStrategyMgr::AddStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
 {
     auto mapIter = m_pStrategyMap.emplace( strategyId, pSpriteStrategy );
     
@@ -54,29 +54,24 @@ void CSpriteStrategyMgr::Load( const std::string & strategyId, iSpriteStrategy *
                 % strategyId % __FUNCTION__ % __LINE__ ));
     }
     
-    // Make sure the group we are looking has been defined in the list table file
+    // See if there is any files associated with the strategy id in the list table
     auto listTableIter = m_listTableMap.find( strategyId );
-    if( listTableIter == m_listTableMap.end() )
-        throw NExcept::CCriticalException("Sprite Manager List Load Group Data Error!",
-            boost::str( boost::format("Sprite Manager list id name can't be found (%s).\n\n%s\nLine: %s")
-                % strategyId % __FUNCTION__ % __LINE__ ));
-
-    for( auto & filePathIter : listTableIter->second ) 
-        mapIter.first->second->LoadFromFile( filePathIter );
+    if( listTableIter != m_listTableMap.end() )
+        for( auto & filePathIter : listTableIter->second ) 
+            mapIter.first->second->LoadFromFile( filePathIter );
     
     // Add the strategy pointer to the vector for rendering
     m_pStrategyVec.push_back( pSpriteStrategy );
 
-}   // Load
+}   // AddStrategy
 
 
 /************************************************************************
 *    desc:  create the sprite and provide a unique id number for each one
 ************************************************************************/
-const std::vector<int> & CSpriteStrategyMgr::Create(
+iSprite2D * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
-    const std::string & name,
-    const int count,
+    const std::string & dataName,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
     const CPoint<float> & scale )
@@ -85,22 +80,16 @@ const std::vector<int> & CSpriteStrategyMgr::Create(
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
-            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
-                % strategyId % __FUNCTION__ % __LINE__ ));
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s") 
+                % strategyId % dataName % __FUNCTION__ % __LINE__ ));
     
-    m_incReturn.clear();
-    m_incReturn.reserve(count);
-    
-    // Create the requested number of sprites
-    for( int i = 0; i < count; ++i )
-        m_incReturn.push_back( mapIter->second->Create( name, ++m_spriteInc, pos, rot, scale ) );
-    
-    return m_incReturn;
+    return mapIter->second->Create( dataName, ++m_spriteInc, pos, rot, scale );
 
 }   // Create
 
-int CSpriteStrategyMgr::Create(
+iSprite2D * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
+    const std::string & group,
     const std::string & name,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
@@ -113,7 +102,38 @@ int CSpriteStrategyMgr::Create(
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
                 % strategyId % __FUNCTION__ % __LINE__ ));
     
-    return mapIter->second->Create( name, ++m_spriteInc, pos, rot, scale );
+    return mapIter->second->Create( group, name, ++m_spriteInc, pos, rot, scale );
+
+}   // Create
+
+iSprite2D * CSpriteStrategyMgr::Create(
+    const std::string & strategyId,
+    const std::string & dataName )
+{
+    // Make sure the strategy we are looking for is available
+    auto mapIter = m_pStrategyMap.find( strategyId );
+    if( mapIter == m_pStrategyMap.end() )
+        throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s") 
+                % strategyId % dataName % __FUNCTION__ % __LINE__ ));
+    
+    return mapIter->second->Create( dataName, ++m_spriteInc );
+
+}   // Create
+
+iSprite2D * CSpriteStrategyMgr::Create(
+    const std::string & strategyId,
+    const std::string & group,
+    const std::string & name )
+{
+    // Make sure the strategy we are looking for is available
+    auto mapIter = m_pStrategyMap.find( strategyId );
+    if( mapIter == m_pStrategyMap.end() )
+        throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
+                % strategyId % __FUNCTION__ % __LINE__ ));
+    
+    return mapIter->second->Create( group, name, ++m_spriteInc );
 
 }   // Create
 

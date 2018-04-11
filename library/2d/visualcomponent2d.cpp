@@ -666,12 +666,12 @@ void CVisualComponent2D::SetColor( const CColor & color )
 
 }   // SetColor
 
-void CVisualComponent2D::SetRGBA( float r, float g, float b, float a )
+void CVisualComponent2D::SetColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
     m_color.Set( r, g, b, a );
 
-}   // SetRGBA
+}   // SetColor
 
 const CColor & CVisualComponent2D::GetColor() const
 {

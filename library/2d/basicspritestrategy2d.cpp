@@ -121,15 +121,15 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
 *    desc:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
-int CBasicSpriteStrategy2D::Create(
-    const std::string & name,
+iSprite2D * CBasicSpriteStrategy2D::Create(
+    const std::string & dataName,
     const int id,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
     const CPoint<float> & scale )
 {
     std::string aiName;
-    const CSpriteDataContainer & rSpriteDataContainer = GetData( name );
+    const CSpriteDataContainer & rSpriteDataContainer = GetData( dataName );
     
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
@@ -166,7 +166,7 @@ int CBasicSpriteStrategy2D::Create(
     {
         throw NExcept::CCriticalException("Sprite Create Error!",
             boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
-                % name % id % __FUNCTION__ % __LINE__ ));
+                % dataName % id % __FUNCTION__ % __LINE__ ));
     }
 
     // Use passed in transforms if specified
@@ -186,7 +186,130 @@ int CBasicSpriteStrategy2D::Create(
     if( !aiName.empty() )
         CSignalMgr::Instance().Broadcast( aiName, m_iter.first->second );
     
-    return spriteId;
+    return m_iter.first->second;
+
+}   // Create
+
+iSprite2D * CBasicSpriteStrategy2D::Create(
+    const std::string & dataName,
+    const int id )
+{
+    std::string aiName;
+    const CSpriteDataContainer & rSpriteDataContainer = GetData( dataName );
+    
+    // If the sprite defined a unique id then use that
+    int spriteId( (id + m_idOffset) * m_idDir );
+    
+    // Create the sprite
+    if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
+    {
+        const auto & rData = rSpriteDataContainer.Get<CSpriteData>();
+        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.GetId();
+        
+        // Allocate the sprite
+        m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
+        
+        // Load the rest from sprite data
+        dynamic_cast<CSprite2D *>(m_iter.first->second)->Load( rData );
+        
+        aiName = rData.GetAIName();
+    }
+    else if( rSpriteDataContainer.GetType() == NDefs::ACTOR2D )
+    {
+        const auto & rData = rSpriteDataContainer.Get<CActorData>();
+        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.GetId();
+        
+        // Allocate the actor sprite
+        m_iter = m_spriteMap.emplace( spriteId, new CActorSprite2D( rData, spriteId ) );
+        
+        aiName = rData.GetAIName();
+    }
+    
+    // Init the physics
+    m_iter.first->second->InitPhysics();
+
+    // Check for duplicate id's
+    if( !m_iter.second )
+    {
+        throw NExcept::CCriticalException("Sprite Create Error!",
+            boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
+                % dataName % id % __FUNCTION__ % __LINE__ ));
+    }
+    
+    // Broadcast the signal to create the sprite AI
+    if( !aiName.empty() )
+        CSignalMgr::Instance().Broadcast( aiName, m_iter.first->second );
+    
+    return m_iter.first->second;
+
+}   // Create
+
+iSprite2D * CBasicSpriteStrategy2D::Create(
+    const std::string & group,
+    const std::string & name,
+    const int id,
+    const CPoint<CWorldValue> & pos,
+    const CPoint<float> & rot,
+    const CPoint<float> & scale )
+{
+    // If the sprite defined a unique id then use that
+    int spriteId( (id + m_idOffset) * m_idDir );
+    
+    // Allocate the sprite
+    auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
+    m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
+        
+    // Check for duplicate id's
+    if( !m_iter.second )
+    {
+        throw NExcept::CCriticalException("Sprite Create Error!",
+            boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
+                % name % id % __FUNCTION__ % __LINE__ ));
+    }
+
+    // Use passed in transforms if specified
+    if( !pos.IsEmpty() )
+        m_iter.first->second->SetPos(pos);
+
+    if( !rot.IsEmpty() )
+        m_iter.first->second->SetRot(rot, false);
+
+    if( scale != CPoint<float>(1,1,1) )
+        m_iter.first->second->SetScale(scale);
+
+    // Init the physics
+    m_iter.first->second->InitPhysics();
+    
+    return m_iter.first->second;
+
+}   // Create
+
+iSprite2D * CBasicSpriteStrategy2D::Create(
+    const std::string & group,
+    const std::string & name,
+    const int id )
+{
+    // If the sprite defined a unique id then use that
+    int spriteId( (id + m_idOffset) * m_idDir );
+    
+    // Allocate the sprite
+    auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
+    m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
+        
+    // Check for duplicate id's
+    if( !m_iter.second )
+    {
+        throw NExcept::CCriticalException("Sprite Create Error!",
+            boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
+                % name % id % __FUNCTION__ % __LINE__ ));
+    }
+    
+    // Init the physics
+    m_iter.first->second->InitPhysics();
+    
+    return m_iter.first->second;
 
 }   // Create
 

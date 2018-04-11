@@ -54,5 +54,4 @@ namespace NScriptObject
         Throw( pEngine->RegisterObjectMethod("CObject", "void SetVisible(bool visible)", asMETHOD(CObject, SetVisible),           asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CObject", "bool IsVisible()",              asMETHOD(CObject, IsVisible),            asCALL_THISCALL) );
     }
-
-}   // NScriptColor
+}

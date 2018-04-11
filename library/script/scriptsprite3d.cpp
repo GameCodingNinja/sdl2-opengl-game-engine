@@ -31,8 +31,8 @@ namespace NScriptSprite3D
         Throw( pEngine->RegisterObjectType(  "CSprite3d", 0, asOBJ_REF | asOBJ_NOCOUNT) );
         
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetVisible(bool visible)",                    asMETHOD(CObject,   SetVisible),         asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetColor(const CColor & in)",                 asMETHOD(CSprite3D, SetColor),           asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetRGBA(float r, float g, float b, float a)", asMETHOD(CSprite3D, SetRGBA),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetColor(const CColor &in)",                 asMETHODPR(CSprite3D, SetColor, (const CColor &), void),  asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetColor(float r, float g, float b, float a)", asMETHODPR(CSprite3D, SetColor, (float,float,float,float), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetDefaultColor()",                           asMETHOD(CSprite3D, SetDefaultColor),    asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "const CColor & GetColor()",                        asMETHOD(CSprite3D, GetColor),           asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "const CColor & GetDefaultColor()",                 asMETHOD(CSprite3D, GetDefaultColor),    asCALL_THISCALL) );
@@ -43,5 +43,4 @@ namespace NScriptSprite3D
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "void SetPos(CPoint & in)",                         asMETHOD(CObject,   SetPos_AngelScript), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite3d", "void IncRot(CPoint & in)",                         asMETHOD(CObject,   IncRot),             asCALL_THISCALL) );
     }
-
-}   // NScriptColor
+}

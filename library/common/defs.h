@@ -121,12 +121,6 @@ namespace NDefs
         EAP_UP
     };
 
-    enum ESpriteMsg
-    {
-        ESM_KILL_SPRITE = 0,
-        ESM_CREATE_SPRITE,
-    };
-
     enum ETextFilter
     {
         ETF_ANISOTROPIC_0X = 0,

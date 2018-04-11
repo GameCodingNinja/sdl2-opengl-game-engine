@@ -39,6 +39,8 @@ add_library(
         script/scriptmenu.cpp
         script/scriptshadermanager.cpp
         script/scriptsprite3d.cpp
+        script/scriptobjectdatamanager.cpp
+        script/scriptstrategymanager.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp

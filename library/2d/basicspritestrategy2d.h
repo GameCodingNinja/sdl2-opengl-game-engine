@@ -43,12 +43,29 @@ public:
     void LoadFromFile( const std::string & file ) override;
 
     // Create the sprite
-    virtual int Create(
+    virtual iSprite2D * Create(
+        const std::string & dataName,
+        const int id,
+        const CPoint<CWorldValue> & pos,
+        const CPoint<float> & rot,
+        const CPoint<float> & scale ) override;
+    
+    virtual iSprite2D * Create(
+        const std::string & group,
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
+    
+    virtual iSprite2D * Create(
+        const std::string & dataName,
+        const int id ) override;
+    
+    virtual iSprite2D * Create(
+        const std::string & group,
+        const std::string & name,
+        const int id ) override;
 
     // Update the sprites
     void Update() override;

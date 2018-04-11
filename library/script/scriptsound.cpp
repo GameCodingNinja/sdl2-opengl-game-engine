@@ -71,6 +71,5 @@ namespace NScriptSound
         Throw( pEngine->RegisterObjectMethod("CSound", "bool IsPlaying()",                                 asMETHOD(CSound, IsPlaying), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSound", "bool IsPaused()",                                  asMETHOD(CSound, IsPaused),  asCALL_THISCALL) );
 
-    }   // Register
-    
-}   // NScriptColor
+    }
+}

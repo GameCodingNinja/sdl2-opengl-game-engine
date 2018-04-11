@@ -279,12 +279,12 @@ void CSprite2D::SetColor( const CColor & color )
 
 }   // SetColor
 
-void CSprite2D::SetRGBA( float r, float g, float b, float a )
+void CSprite2D::SetColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
-    m_visualComponent.SetRGBA( r, g, b, a );
+    m_visualComponent.SetColor( r, g, b, a );
 
-}   // SetRGBA
+}   // SetColor
 
 
 /************************************************************************

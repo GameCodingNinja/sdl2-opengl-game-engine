@@ -71,6 +71,5 @@ namespace NScriptPlayLst
         Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPlaying()",                                 asMETHOD(CPlayList, IsPlaying), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPaused()",                                  asMETHOD(CPlayList, IsPaused),  asCALL_THISCALL) );
 
-    }   // Register
-    
-}   // NScriptColor
+    }
+}

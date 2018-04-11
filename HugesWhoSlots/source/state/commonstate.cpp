@@ -12,7 +12,6 @@
 #include <gui/menumanager.h>
 #include <system/device.h>
 #include <utilities/exceptionhandling.h>
-#include <common/build_defs.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -38,20 +37,6 @@ CCommonState::CCommonState( const NGameDefs::EGameState gameState, const NGameDe
 CCommonState::~CCommonState()
 {
 }   // Destructer
-
-
-/************************************************************************
-*    desc:  Do any pre-game loop init's
-************************************************************************/
-void CCommonState::Init()
-{
-    if( NBDefs::IsDebugMode() && NBDefs::IsMobileDevice() )
-    {
-        CMenuManager::Instance().ActivateTree( "dev_options_btn_tree");
-        CMenuManager::Instance().ActivateTree( "dev_options_tree");
-    }
-    
-}   // Init
 
 
 /***************************************************************************

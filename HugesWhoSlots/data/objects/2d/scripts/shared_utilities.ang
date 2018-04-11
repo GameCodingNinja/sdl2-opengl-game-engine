@@ -49,13 +49,13 @@ shared void ShaderColorTo( float time, CColor current, CColor &in final, const s
         
         if( time < 0 )
         {
-            SetAllShaderColor( shaderMember, final );
+            Shader_SetAllShaderColor( shaderMember, final );
         }
         else
         {
             current += inc * GetElapsedTime();
             
-            SetAllShaderColor( shaderMember, current );
+            Shader_SetAllShaderColor( shaderMember, current );
         }
 
         Suspend();
