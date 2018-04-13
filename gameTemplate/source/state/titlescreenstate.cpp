@@ -41,10 +41,10 @@ void CTitleScreenState::Init()
     CMenuManager::Instance().Allow();
     CMenuManager::Instance().ActivateTree( "title_screen_tree" );
 
-    m_cube.SetScaleXYZ( 3, 3, 3 );
+    m_cube.SetScale( 3, 3, 3 );
     
-    m_camera.SetPosXYZ( 0, 0, 20 );
-    m_camera.SetRotXYZ( 10, 0, 0 );
+    m_camera.SetPos( 0, 0, 20 );
+    m_camera.SetRot( 10, 0, 0 );
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -92,7 +92,7 @@ void CTitleScreenState::Update()
     m_scriptComponent.Update();
 
     float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
-    m_cube.IncRotXYZ( rot, rot, 0 );
+    m_cube.IncRot( rot, rot, 0 );
 
 }   // Update
 

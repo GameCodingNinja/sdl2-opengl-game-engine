@@ -359,7 +359,7 @@ void CWheelView::IncSpin( float velocity )
     if( m_rotation >= m_PI_2 )
         m_rotation -= m_PI_2;
 
-    SetRotXYZ( 0, 0, m_rotation * m_spinDirVector, false );
+    SetRot( 0, 0, m_rotation * m_spinDirVector, false );
         
 }   // IncSpin
 

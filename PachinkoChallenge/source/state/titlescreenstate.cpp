@@ -46,10 +46,10 @@ void CTitleScreenState::Init()
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
     
     // Transform what doesn't change
-    m_background.SetRotXYZ(0,0,90);
+    m_background.SetRot(0,0,90);
     m_background.Transform();
     
-    m_title.SetPosXYZ( 0, 700 );
+    m_title.SetPos( 0, 700 );
     m_title.Transform();
     
     // Reset the elapsed time before entering game loop

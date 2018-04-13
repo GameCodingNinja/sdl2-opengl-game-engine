@@ -32,38 +32,34 @@ public:
 
     // Set/Get the object's position
     void SetPos( const CPoint<CWorldValue> & position );
-    void SetPosXYZ( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void SetPos( const CPoint<float> & position );
+    void SetPos( float x = 0, float y = 0, float z = 0 );
     const CPoint<CWorldValue> & GetPos() const;
-
-    // For AngelScript
-    void SetPos_AngelScript( const CPoint<float> & position );
-    CPoint<float> GetPos_AngelScript() const;
+    CPoint<float> GetPosFloat();
 
     // Increment the object's position
     void IncPos( const CPoint<CWorldValue> & position );
-    void IncPosXYZ( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
-    
-    // For AngelScript
-    void IncPos_AngelScript( const CPoint<float> & position );
+    void IncPos( const CPoint<float> & position );
+    void IncPos( float x = 0, float y = 0, float z = 0 );
 
     // Set/Get the object's rotation
     // NOTE: Rotation is stored as radians
     void SetRot( const CPoint<float> & rotation, bool convertToRadians = true );
-    void SetRotXYZ( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
+    void SetRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
     const CPoint<float> & GetRot() const;
 
     // Increment the object's rotation
     // NOTE: Rotation is stored as radians
     void IncRot( const CPoint<float> & rotation, bool convertToRadians = true );
-    void IncRotXYZ( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
+    void IncRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
 
     // Set the object's scale
     void SetScale( const CPoint<float> & scale );
-    void SetScaleXYZ( float x = 0, float y = 0, float z = 0 );
+    void SetScale( float x = 1, float y = 1, float z = 1 );
 
     // Increment the object's scale
     void IncScale( const CPoint<float> & scale );
-    void IncScaleXYZ( float x = 0, float y = 0, float z = 0 );
+    void IncScale( float x = 1, float y = 1, float z = 1 );
 
     // Get the object's scale
     const CPoint<float> & GetScale() const;

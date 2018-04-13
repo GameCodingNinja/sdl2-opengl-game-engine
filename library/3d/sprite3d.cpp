@@ -58,7 +58,7 @@ void CSprite3D::SetTransform( const btTransform & trans )
     
     // Set the position
     const btVector3 & btVec = trans.getOrigin();
-    SetPosXYZ( btVec.x(), btVec.y(), btVec.z() );
+    SetPos( btVec.x(), btVec.y(), btVec.z() );
     
     // Set the rotation
     const btMatrix3x3 & btMat = trans.getBasis();

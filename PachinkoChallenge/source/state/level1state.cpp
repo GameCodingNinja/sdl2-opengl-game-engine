@@ -264,7 +264,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
             m_multiIndexPos = std::find(m_multiXPosVec.back().begin(), m_multiXPosVec.back().end(), multiPos) - m_multiXPosVec.back().begin();
             
             // Add another strawberry
-            m_rStrawberryData.SetPosXYZ( multiPos, -1450.f );
+            m_rStrawberryData.SetPos( multiPos, -1450.f );
             m_rStrategy.SetToCreate( "strawberry" );
         }
     }

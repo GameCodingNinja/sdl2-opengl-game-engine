@@ -47,21 +47,32 @@ namespace NScriptSprite2D
         // Need to use CObject for the below to compile under MSVSC++
         Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetVisible(bool visible)",                      asMETHOD(CObject,   SetVisible),           asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2d", "bool IsVisible()",                                   asMETHOD(CObject,   IsVisible),            asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "CPoint GetPos()",                                    asMETHOD(CObject,   GetPos_AngelScript),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetPos(CPoint &in)",                            asMETHOD(CObject,   SetPos_AngelScript),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetRot(CPoint &in, bool convertToRadians = true)", asMETHOD(CObject,   SetRot),            asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncRot(CPoint &in, bool convertToRadians = true)", asMETHOD(CObject,   IncRot),            asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetScale(CPoint &in)",                          asMETHOD(CObject,   SetScale),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "const CPoint & GetScale()",                          asMETHOD(CObject,   GetScale),             asCALL_THISCALL) );
+        
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetPos(CPoint &in)",                 asMETHODPR(CObject,   SetPos, (const CPoint<float> &), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, SetPos, (float,float,float), void), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncPos(CPoint & in)",                asMETHODPR(CObject, IncPos, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, IncPos, (float,float,float), void), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "CPoint GetPos()",               asMETHOD(CObject, GetPosFloat),   asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetPosXYZ(float x, float y, float z)",          asMETHOD(CObject,   SetPosXYZ),            asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncPosXYZ(float x, float y, float z)",          asMETHOD(CObject,   IncPosXYZ),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   SetRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject,   SetRot, (float, float, float, bool), void), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   IncRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject, IncRot, (float, float, float, bool), void), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "const CPoint & GetRot()",       asMETHOD(CObject, GetRot),               asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetScale(CPoint & in)",                asMETHODPR(CObject, SetScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, SetScale, (float,float,float), void), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncScale(CPoint & in)",                asMETHODPR(CObject, IncScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, IncScale, (float,float,float), void), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetRotXYZ(float x, float y, float z, bool convertToRadians = true)", asMETHOD(CObject, SetRotXYZ), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncRotXYZ(float x, float y, float z, bool convertToRadians = true)", asMETHOD(CObject, IncRotXYZ), asCALL_THISCALL) );
-
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void SetScaleXYZ(float x, float y, float z)",        asMETHOD(CObject,   SetScaleXYZ),          asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSprite2d", "void IncScaleXYZ(float x, float y, float z)",        asMETHOD(CObject,   IncScaleXYZ),          asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSprite2d", "const CPoint & GetScale()",     asMETHOD(CObject, GetScale),             asCALL_THISCALL) );
+        
 
         Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, CSprite2d @)", asMETHOD(CScriptManager, PrepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );

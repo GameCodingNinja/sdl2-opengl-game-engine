@@ -28,8 +28,8 @@ public:
     // Set/Inc the camera's world position
     void SetPos( const CPoint<CWorldValue> & position );
     void IncPos( const CPoint<CWorldValue> & position );
-    void SetPosXYZ( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
-    void IncPosXYZ( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void SetPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void IncPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
     
     // Generate a custom orthographic projection for this camera
     void GenerateOrthographicProjection( float scale );

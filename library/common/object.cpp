@@ -48,12 +48,12 @@ const CPoint<CWorldValue> & CObject::GetPos() const
 
 }   // GetPos
 
-// For AngelScript
-CPoint<float> CObject::GetPos_AngelScript() const
+
+CPoint<float> CObject::GetPosFloat()
 {
     return m_pos;
 
-}   // GetPos_AngelScript
+}   // GetPos
 
 
 /************************************************************************
@@ -67,20 +67,21 @@ void CObject::SetPos( const CPoint<CWorldValue> & position )
 
 }   // SetPos
 
-// For AngelScript
-void CObject::SetPos_AngelScript( const CPoint<float> & position )
+void CObject::SetPos( const CPoint<float> & position )
 {
-    SetPos( position );
+    m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
-}   // SetPos_AngelScript
+    m_pos = position;
 
-void CObject::SetPosXYZ( CWorldValue x, CWorldValue y, CWorldValue z )
+}   // SetPos
+
+void CObject::SetPos( float x, float y, float z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos.Set( x, y, z );
 
-}   // SetPosXYZ
+}   // SetPos
 
 
 /************************************************************************
@@ -95,21 +96,21 @@ void CObject::IncPos( const CPoint<CWorldValue> & position )
 }   // IncPos
 
 // For AngelScript
-void CObject::IncPos_AngelScript( const CPoint<float> & position )
+void CObject::IncPos( const CPoint<float> & position )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos += position;
 
-}   // SetPos_AngelScript
+}   // SetPos
 
-void CObject::IncPosXYZ( CWorldValue x, CWorldValue y, CWorldValue z )
+void CObject::IncPos( float x, float y, float z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos.Inc( x, y, z );
 
-}   // IncPosXYZ
+}   // IncPos
 
 
 /************************************************************************
@@ -129,7 +130,7 @@ void CObject::SetRot( const CPoint<float> & rotation, bool convertToRadians )
 
 }   // SetRot
 
-void CObject::SetRotXYZ( float x, float y, float z, bool convertToRadians )
+void CObject::SetRot( float x, float y, float z, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
@@ -138,7 +139,7 @@ void CObject::SetRotXYZ( float x, float y, float z, bool convertToRadians )
     else
         m_rot.Set( x, y, z );
 
-}   // SetRotXYZ
+}   // SetRot
 
 
 /************************************************************************
@@ -158,7 +159,7 @@ void CObject::IncRot( const CPoint<float> & rotation, bool convertToRadians )
 
 }   // IncRot
 
-void CObject::IncRotXYZ( float x, float y, float z, bool convertToRadians )
+void CObject::IncRot( float x, float y, float z, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
@@ -167,7 +168,7 @@ void CObject::IncRotXYZ( float x, float y, float z, bool convertToRadians )
     else
         m_rot.Inc( x, y, z );
 
-}   // IncRotXYZ
+}   // IncRot
 
 
 /************************************************************************
@@ -192,13 +193,13 @@ void CObject::SetScale( const CPoint<float> & scale )
 
 }   // SetScale
 
-void CObject::SetScaleXYZ( float x, float y, float z )
+void CObject::SetScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale.Set( x, y, z );
 
-}   // SetScaleXYZ
+}   // SetScale
 
 
 /************************************************************************
@@ -212,13 +213,13 @@ void CObject::IncScale( const CPoint<float> & scale )
 
 }   // IncScale
 
-void CObject::IncScaleXYZ( float x, float y, float z )
+void CObject::IncScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale.Inc( x, y, z );
 
-}   // IncScaleXYZ
+}   // IncScale
 
 
 /************************************************************************

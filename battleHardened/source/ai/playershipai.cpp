@@ -87,7 +87,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
 void CPlayerShipAI::Update()
 {
     m_gunRotation = atan2( m_gunXY.y, m_gunXY.x );
-    m_gunSprite.SetRotXYZ( 0, 0, m_gunRotation - m_sprite.GetRot().z, false );
+    m_gunSprite.SetRot( 0, 0, m_gunRotation - m_sprite.GetRot().z, false );
 
 }   // Update
 

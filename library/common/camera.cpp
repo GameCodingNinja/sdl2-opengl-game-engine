@@ -98,9 +98,9 @@ void CCamera::SetPos( const CPoint<CWorldValue> & position )
 
 }   // SetPos
 
-void CCamera::SetPosXYZ( CWorldValue x, CWorldValue y, CWorldValue z )
+void CCamera::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject::SetPosXYZ( -x, -y, -z );
+    CObject::SetPos( -x, -y, -z );
 
 }   // SetPosXYZ
 
@@ -114,8 +114,8 @@ void CCamera::IncPos( const CPoint<CWorldValue> & position )
 
 }   // IncPos
 
-void CCamera::IncPosXYZ( CWorldValue x, CWorldValue y, CWorldValue z )
+void CCamera::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject::IncPosXYZ( -x, -y, -z );
+    CObject::IncPos( -x, -y, -z );
 
 }   // IncPosXYZ

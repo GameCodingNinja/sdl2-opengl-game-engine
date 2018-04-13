@@ -1,0 +1,8 @@
+<listTable>
+
+  <groupList groupName="(main)">
+    <file path="source/game/main.ang"/>
+    <file path="source/game/game.ang"/>
+  </groupList>
+
+</listTable>

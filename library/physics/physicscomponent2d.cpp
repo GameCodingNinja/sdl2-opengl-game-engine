@@ -336,8 +336,8 @@ void CPhysicsComponent2D::Update( CSprite2D * pSprite )
         {
             const b2Vec2 & pos = m_pBody->GetPosition();
             const float angle = m_pBody->GetAngle();
-            pSprite->SetPosXYZ( pos.x * METERS_TO_PIXELS, -(pos.y * METERS_TO_PIXELS) );
-            pSprite->SetRotXYZ( 0, 0, -angle, false );
+            pSprite->SetPos( pos.x * METERS_TO_PIXELS, -(pos.y * METERS_TO_PIXELS) );
+            pSprite->SetRot( 0, 0, -angle, false );
         }
     }
 
