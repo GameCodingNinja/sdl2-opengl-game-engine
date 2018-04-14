@@ -66,10 +66,6 @@ public:
     // Set/Get the AI pointer
     void SetAI( iAIBase2D * pAIBase ) override;
     
-    //////////////////////////////////
-    // Functions accessed via script
-    //////////////////////////////////
-    
     // Set/Get the color
     void SetColor( const CColor & color );
     void SetColor( float r, float g, float b, float a );

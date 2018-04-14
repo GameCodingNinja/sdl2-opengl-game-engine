@@ -143,6 +143,9 @@ iSprite2D * CSpriteStrategyMgr::Create(
 ************************************************************************/
 void CSpriteStrategyMgr::Clear()
 {
+    // Do the pre-delete cleanup
+    CleanUp();
+    
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
     m_pStrategyVec.clear();

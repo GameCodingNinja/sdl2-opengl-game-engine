@@ -49,7 +49,7 @@ void CBallAI::Init()
     pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
     
     // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
-    m_sprite.GetPhysicsComponent().GetBody()->ApplyAngularImpulse( m_angularImpulse(m_generator), false );
+    pBody->ApplyAngularImpulse( m_angularImpulse(m_generator), false );
     
 }   // Init
 

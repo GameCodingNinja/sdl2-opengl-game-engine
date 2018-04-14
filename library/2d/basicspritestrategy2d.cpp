@@ -16,6 +16,7 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/xmlParser.h>
 #include <utilities/deletefuncs.h>
+#include <utilities/genfunc.h>
 #include <managers/signalmanager.h>
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
@@ -115,6 +116,28 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
     return iter->second;
 
 }   // GetData
+
+
+/************************************************************************
+*    desc:  Do any pre-game loop init's
+************************************************************************/
+void CBasicSpriteStrategy2D::Init()
+{
+    for( auto & iter : m_spriteMap )
+        iter.second->Init();
+    
+}   // Init
+
+
+/************************************************************************
+*    desc:  Do some cleanup
+************************************************************************/
+void CBasicSpriteStrategy2D::CleanUp()
+{
+    for( auto & iter : m_spriteMap )
+        iter.second->CleanUp();
+
+}   // CleanUp
 
 
 /************************************************************************
@@ -326,6 +349,7 @@ void CBasicSpriteStrategy2D::CreateObj( const std::string & name )
 
 /***************************************************************************
 *    desc:  Handle the deleting of any sprites
+*           NOTE: Do not call from a destructor!
 ****************************************************************************/
 void CBasicSpriteStrategy2D::DeleteObj( int index )
 {
@@ -333,17 +357,18 @@ void CBasicSpriteStrategy2D::DeleteObj( int index )
     const auto iter = m_spriteMap.find( index );
     if( iter != m_spriteMap.end() )
     {
-        // Specificly delete the physics body before deleting the sprite
-        iter->second->GetPhysicsComponent().DestroyBody();
+        // specifically delete the physics body before deleting the sprite
+        // Deleting the physics always needs to be done externally and
+        // under the right conditions
+        iter->second->CleanUp();
         
         NDelFunc::Delete( iter->second );
         m_spriteMap.erase( iter );
     }
     else
     {
-        throw NExcept::CCriticalException("Error Deleting Sprite!",
-            boost::str( boost::format("Sprite index can't be found (%d).\n\n%s\nLine: %s")
-                % index % __FUNCTION__ % __LINE__ ));
+        NGenFunc::PostDebugMsg( boost::str( boost::format("Sprite index can't be found (%s).\n\n%s\nLine: %s") 
+            % index % __FUNCTION__ % __LINE__ ) );
     }
 
 }   // DeleteObj

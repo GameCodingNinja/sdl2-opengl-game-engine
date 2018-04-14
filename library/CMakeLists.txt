@@ -29,16 +29,17 @@ add_library(
         script/scriptmanager.cpp
         script/scriptglobals.cpp
         script/scriptcolor.cpp
-        script/scriptpoint.cpp
         script/scriptcomponent.cpp
+        script/scriptpoint.cpp
+        script/scriptisprite2d.cpp
         script/scriptsprite2d.cpp
+        script/scriptsprite3d.cpp
         script/scriptsound.cpp
         script/scriptplaylist.cpp
         script/scriptsoundmanager.cpp
         script/scriptobject.cpp
         script/scriptmenu.cpp
         script/scriptshadermanager.cpp
-        script/scriptsprite3d.cpp
         script/scriptobjectdatamanager.cpp
         script/scriptstrategymanager.cpp
         system/basegame.cpp

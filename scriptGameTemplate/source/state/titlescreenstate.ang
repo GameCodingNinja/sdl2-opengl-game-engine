@@ -1,0 +1,26 @@
+
+/************************************************************************
+*    FILE NAME:       titlescreenstate.ang
+*
+*    DESCRIPTION:     Title screen state
+************************************************************************/
+
+final class CTitleScreenState : iGameState
+{
+    //
+    // Constructor
+    //
+    CTitleScreenState()
+    {
+        super( EGS_TITLE_SCREEN, EGS_GAME_LOAD );
+    }
+    
+    //
+    // Init the state
+    //
+    void Init() override
+    {
+        
+    }
+};
+

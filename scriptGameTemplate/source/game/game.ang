@@ -7,26 +7,57 @@
 
 class CGame
 {
+    // State handle
+    iGameState@ m_gameState;
+    
     //
     // Init the game
     //
     void Init()
     {
-        // Load the object data list table
-        ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
-        
-        // Load the shader
-        Shader_Load( "data/shaders/shader.cfg" );
-        Shader_SetAllShaderColor( "additive", 1, 1, 1, 1 );
-        
-        // Load the start up animation group
-        ObjectData_LoadGroup2D( "(title_screen)" );
-        
         // Create a basic strategy
-        Strategy_CreateBasicSpriteStrategy( "spriteStrategy" );
+        Strategy_CreateBasicSpriteStrategy( "basicStrategy" );
         
-        Strategy_Create( "spriteStrategy", "(title_screen)", "background" );
-        Strategy_Create( "spriteStrategy", "(title_screen)", "wheel" );
+        // Create the startup state
+        @m_gameState = CStartUpState();
+        m_gameState.Init();
+
+        
+        
+        
+        
+        //Strategy_Create( "basicStrategy", "(title_screen)", "background" );
+        //Strategy_Create( "basicStrategy", "(title_screen)", "wheel" );
+    }
+    
+    //
+    // Handle the state change
+    //
+    void HandleStateChange()
+    {
+        if( m_gameState.DoStateChange() )
+        {
+            // Get the game state we are moving to
+            const EGameState curState = m_gameState.GetState();
+
+            // Get the game state we are moving to
+            const EGameState nextState = m_gameState.GetNextState();
+
+            // Get the message to the next state
+            const CStateMessage stateMessage = m_gameState.GetStateMessage();
+
+            if( nextState == EGS_TITLE_SCREEN )
+                @m_gameState = CTitleScreenState();
+
+            //else if( nextState == NGameDefs::EGS_GAME_LOAD )
+            //    upGameState.reset( new CLoadState( stateMessage ) );
+
+            //else if( nextState == NGameDefs::EGS_RUN )
+                //upGameState.reset( new CRunState );
+
+            // Do any pre-game loop init's
+            m_gameState.Init();
+        }
     }
     
     //
@@ -34,8 +65,10 @@ class CGame
     //
     void GameLoop()
     {
-
+        HandleStateChange();
+        
+        m_gameState.Update();
     }
+    
+    
 };
-
-

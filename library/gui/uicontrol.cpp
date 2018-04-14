@@ -567,8 +567,7 @@ void CUIControl::Init()
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto & iter : m_spriteDeq )
-        if( iter.GetVisualComponent().IsFontSprite() )
-            iter.GetVisualComponent().CreateFontString();
+        iter.Init();
     
     // Call any init scripts
     PrepareSpriteScriptFunction( NUIControl::ECS_INIT );
@@ -577,15 +576,14 @@ void CUIControl::Init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup. Currently only for font usage
+*    desc:  Do some cleanup
 ************************************************************************/
 void CUIControl::CleanUp()
 {
     // Free the font VBO
     // This allows for early VBO delete so that the menu manager can be freed from the load screen
     for( auto & iter : m_spriteDeq )
-        if( iter.GetVisualComponent().IsFontSprite() )
-            iter.GetVisualComponent().DeleteFontVBO();
+        iter.CleanUp();
     
 }   // CleanUp
 

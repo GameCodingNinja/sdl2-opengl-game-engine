@@ -55,7 +55,7 @@ shared void Screen_FadeOut()
 /************************************************************************
 *    desc:  Script for common menu buttons
 ************************************************************************/
-shared void MenuBtnActOver_Selected( CSprite2d & sprite )
+shared void MenuBtnActOver_Selected( CSprite2D & sprite )
 {
     sprite.SetVisible( true );
     
@@ -76,7 +76,7 @@ shared void MenuBtnActOver_Selected( CSprite2d & sprite )
     DispatchEvent( EGE_MENU_REACTIVATE );
 }
 
-shared void MenuBtnActOver_FastSelected( CSprite2d & sprite )
+shared void MenuBtnActOver_FastSelected( CSprite2D & sprite )
 {
     sprite.SetVisible( true );
     
@@ -90,7 +90,7 @@ shared void MenuBtnActOver_FastSelected( CSprite2d & sprite )
     DispatchEvent( EGE_MENU_REACTIVATE );
 }
 
-shared void MenuBtnActOver_Active( CSprite2d & sprite )
+shared void MenuBtnActOver_Active( CSprite2D & sprite )
 {
     sprite.SetAlpha( 0 );
     sprite.SetVisible( true );
@@ -102,25 +102,25 @@ shared void MenuBtnActOver_Active( CSprite2d & sprite )
     }
 }
 
-shared void MenuBtnActOver_Inactive( CSprite2d & sprite )
+shared void MenuBtnActOver_Inactive( CSprite2D & sprite )
 {
     sprite.SetVisible( false );
     sprite.SetAlpha( 0 );
 }
 
-shared void MenuBtnActOver_Disabled( CSprite2d & sprite )
+shared void MenuBtnActOver_Disabled( CSprite2D & sprite )
 {
     sprite.SetVisible( false );
     sprite.SetAlpha( 0 );
 }
 
-shared void MenuBtn_Init( CSprite2d & sprite )
+shared void MenuBtn_Init( CSprite2D & sprite )
 {
     sprite.SetVisible( false );
     sprite.SetAlpha( 0 );
 }
 
-shared void MenuBtnDisOver_InactiveAnim( CSprite2d & sprite )
+shared void MenuBtnDisOver_InactiveAnim( CSprite2D & sprite )
 {
     if( sprite.IsVisible() )
     {
@@ -129,20 +129,20 @@ shared void MenuBtnDisOver_InactiveAnim( CSprite2d & sprite )
     }
 }
 
-shared void MenuBtnDisOver_DisabledAnim( CSprite2d & sprite )
+shared void MenuBtnDisOver_DisabledAnim( CSprite2D & sprite )
 {
     sprite.SetAlpha( 0 );
     sprite.SetVisible( true );
     AlphaTo( 200, 1, sprite );
 }
 
-shared void MenuBtnDisOver_Inactive( CSprite2d & sprite )
+shared void MenuBtnDisOver_Inactive( CSprite2D & sprite )
 {
     sprite.SetAlpha( 0 );
     sprite.SetVisible( false );
 }
 
-shared void MenuBtnDisOver_Disabled( CSprite2d & sprite )
+shared void MenuBtnDisOver_Disabled( CSprite2D & sprite )
 {
     sprite.SetAlpha( 1 );
     sprite.SetVisible( true );

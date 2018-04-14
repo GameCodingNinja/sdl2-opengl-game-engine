@@ -53,10 +53,13 @@ public:
     bool IsActive();
     
     // Set the physics position and rotation
-    void SetTransform( const float x, const float y, const float angle = 0, const bool resetVelocity = true );
+    void SetTransform( float x, float y = 0, float angle = 0, bool resetVelocity = true );
     
     // Set the linear velocity
-    void SetLinearVelocity( const float x, const float y );
+    void SetLinearVelocity( float x, float y );
+    
+    // Set the linear velocity
+    void SetAngularVelocity( float angle );
     
     // Get the body
     b2Body * GetBody();

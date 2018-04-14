@@ -1,8 +1,4 @@
 <listTable>
-
-    <groupList groupName="(debug)">
-        <file path="data/objects/2d/objectDataList/debug.lst"/>
-    </groupList>
     
     <groupList groupName="(startup)">
         <file path="data/objects/2d/objectDataList/startupDataList.lst"/>

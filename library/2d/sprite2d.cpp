@@ -79,6 +79,35 @@ void CSprite2D::Load( const CSpriteData & spriteData )
 
 
 /************************************************************************
+*    desc:  Init the sprite
+*           NOTE: Do not call from a constructor!
+************************************************************************/
+void CSprite2D::Init()
+{
+    if( m_visualComponent.IsFontSprite() )
+        m_visualComponent.CreateFontString();
+    
+} // Init
+
+
+/************************************************************************
+*    desc:  Clean up the sprite
+*           NOTE: Do not call from a destructor!
+************************************************************************/
+void CSprite2D::CleanUp()
+{
+    // This is handled in the destructor but it doesn't hurt to handle it here as well.
+    if( m_visualComponent.IsFontSprite() )
+        m_visualComponent.DeleteFontVBO();
+    
+    // Deleting the physics always needs to be done externally and
+    // under the right conditions
+    m_physicsComponent.DestroyBody();
+    
+} // CleanUp
+
+
+/************************************************************************
 *    desc:  Init the script functions and add them to the map
 *           This function loads the attribute info reguardless of what it is
 ************************************************************************/
@@ -414,3 +443,13 @@ const CSize<float> & CSprite2D::GetFontSize() const
     return m_visualComponent.GetFontSize();
 
 }   // CreateFontString
+
+
+/************************************************************************
+*    desc:  Set the physics position and rotation
+************************************************************************/
+void CSprite2D::SetPhysicsTransform( float x, float y, float angle, bool resetVelocity )
+{
+    m_physicsComponent.SetTransform( x, y, angle, resetVelocity );
+    
+}   // SetPhysicsTransform

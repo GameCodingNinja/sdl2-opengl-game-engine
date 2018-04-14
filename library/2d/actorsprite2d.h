@@ -38,6 +38,12 @@ public:
     // Destructor
     virtual ~CActorSprite2D();
     
+    // Init the sprite
+    void Init() override;
+    
+    // Clean up the sprite
+    void CleanUp() override;
+    
     // Init the physics
     void InitPhysics() override;
     

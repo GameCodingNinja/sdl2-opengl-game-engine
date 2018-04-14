@@ -59,13 +59,9 @@ void CBallAI::InitPhysics()
     std::uniform_int_distribution<int> m_RandY(600,1000);
     std::uniform_int_distribution<int> m_RandR(0,360);
     
-    m_sprite.GetPhysicsComponent().SetTransform(
+    m_sprite.SetPhysicsTransform(
         m_RandX(m_generator),
         m_RandY(m_generator),
-        m_RandR(m_generator),
-        true );
-    
-    // Reposition the sprite based on the new physics position and rotation
-    m_sprite.PhysicsUpdate();
+        m_RandR(m_generator) );
     
 }   // InitPhysics

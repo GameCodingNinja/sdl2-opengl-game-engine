@@ -70,6 +70,7 @@ CLevel1State::CLevel1State() :
 ************************************************************************/
 CLevel1State::~CLevel1State()
 {
+    m_rPhysicsWorld.GetWorld().SetDestructionListener(nullptr);
     m_rPhysicsWorld.GetWorld().SetContactListener(nullptr);
     CSignalMgr::Instance().Disconnect_ResolutionChange();
     

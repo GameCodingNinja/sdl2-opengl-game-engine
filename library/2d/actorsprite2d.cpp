@@ -131,6 +131,30 @@ void CActorSprite2D::Create( const CActorData & actorData )
 
 
 /************************************************************************
+*    desc:  Init the sprite
+*           NOTE: Do not call from a constructor!
+************************************************************************/
+void CActorSprite2D::Init()
+{
+    for( auto & iter : m_spriteDeq )
+        iter.Init();
+    
+} // Init
+
+
+/************************************************************************
+*    desc:  Clean up the sprite
+*           NOTE: Do not call from a destructor!
+************************************************************************/
+void CActorSprite2D::CleanUp()
+{
+    for( auto & iter : m_spriteDeq )
+        iter.CleanUp();
+    
+} // CleanUp
+
+
+/************************************************************************
 *    desc:  Init the physics                                                           
 ************************************************************************/
 void CActorSprite2D::InitPhysics()

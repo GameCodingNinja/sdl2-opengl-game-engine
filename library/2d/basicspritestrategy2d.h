@@ -66,6 +66,11 @@ public:
         const std::string & group,
         const std::string & name,
         const int id ) override;
+    
+    // Do any pre-game loop init's
+    void Init() override;
+    
+    void CleanUp() override;
 
     // Update the sprites
     void Update() override;

@@ -18,7 +18,7 @@
 /************************************************************************
 *    desc:  Color to the final color in time
 ************************************************************************/
-shared void ColorTo( float time, CColor &in final, CSprite2d & sprite )
+shared void ColorTo( float time, CColor &in final, CSprite2D & sprite )
 {
     CColor current = sprite.GetColor();
     CColor inc = (final - current) / time;
@@ -76,7 +76,7 @@ shared void ShaderColorTo( float time, CColor current, CColor &in final, const s
 /************************************************************************
 *    desc:  Alpha to the final alpha
 ************************************************************************/
-shared void AlphaTo( float time, float final, CSprite2d & sprite )
+shared void AlphaTo( float time, float final, CSprite2D & sprite )
 {
     // Convert from RGB value to normalized value
     if( final > 1.5 )
@@ -173,7 +173,7 @@ shared void VolumeTo( float time, int final, CSound &in sound )
 /************************************************************************
 *    desc:  Play the animation
 ************************************************************************/
-shared void Play( int fps, CSprite2d & sprite, bool loop = false )
+shared void Play( int fps, CSprite2D & sprite, bool loop = false )
 {
     float time = 1000.0 / fps;
     uint frameCount = sprite.GetFrameCount();

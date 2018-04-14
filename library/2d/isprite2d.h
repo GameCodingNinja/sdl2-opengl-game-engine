@@ -20,6 +20,12 @@ class iSprite2D : public CObject2D
 {
 public:
     
+    // Init the sprite
+    virtual void Init() = 0;
+    
+    // Clean up the sprite
+    virtual void CleanUp() = 0;
+    
     // Init the physics
     virtual void InitPhysics() = 0;
     

@@ -59,6 +59,11 @@ CPhysicsComponent2D::CPhysicsComponent2D() :
 ************************************************************************/
 CPhysicsComponent2D::~CPhysicsComponent2D()
 {
+    // NEVER delete Box2D members from the constructor.
+    // Only delete externally under the right conditions because Box2D
+    // does it's own internal cleanup and deleting here could end
+    // up trying to delete a dangling pointer.
+    
 }   // destructor
 
 
@@ -372,7 +377,7 @@ void CPhysicsComponent2D::DestroyBody()
 /************************************************************************
 *    desc:  Set the physics position and rotation
 ************************************************************************/
-void CPhysicsComponent2D::SetTransform( const float x, const float y, const float angle, const bool resetVelocity )
+void CPhysicsComponent2D::SetTransform( float x, float y, float angle, bool resetVelocity )
 {
     if( m_pBody != nullptr )
     {
@@ -391,12 +396,23 @@ void CPhysicsComponent2D::SetTransform( const float x, const float y, const floa
 /************************************************************************
 *    desc:  Set the linear velocity
 ************************************************************************/
-void CPhysicsComponent2D::SetLinearVelocity( const float x, const float y )
+void CPhysicsComponent2D::SetLinearVelocity( float x, float y )
 {
     if( m_pBody != nullptr )
         m_pBody->SetLinearVelocity( b2Vec2( x * PIXELS_TO_METERS, -(y * PIXELS_TO_METERS) ) );
 
 }   // SetLinearVelocity
+
+
+/************************************************************************
+*    desc:  Set the angular velocity
+************************************************************************/
+void CPhysicsComponent2D::SetAngularVelocity( float value )
+{
+    if( m_pBody != nullptr )
+        m_pBody->SetAngularVelocity( value );
+
+}   // SetAngularVelocity
 
 
 /************************************************************************

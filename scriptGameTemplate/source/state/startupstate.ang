@@ -1,0 +1,38 @@
+
+/************************************************************************
+*    FILE NAME:       startupstate.ang
+*
+*    DESCRIPTION:     Start up game state
+************************************************************************/
+
+final class CStartUpState : iGameState
+{
+    //
+    // Constructor
+    //
+    CStartUpState()
+    {
+        super( EGS_STARTUP, EGS_TITLE_SCREEN );
+    }
+    
+    //
+    // Init the state
+    //
+    void Init() override
+    {
+        // Load the object data list table
+        ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
+        
+        // Load the shaders
+        Shader_Load( "data/shaders/shader.cfg" );
+        Shader_SetAllShaderColor( "additive", 1, 1, 1, 1 );
+        
+        // Load the start up animation group
+        ObjectData_LoadGroup2D( "(startup)" );
+        
+        // Add the logo
+        iSprite2D @ sprite = Strategy_Create( "basicStrategy", "(startup)", "logo" );
+        Print("Sprite Test: " + sprite.GetId());
+    }
+};
+

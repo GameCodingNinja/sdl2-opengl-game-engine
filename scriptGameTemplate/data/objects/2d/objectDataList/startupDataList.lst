@@ -36,7 +36,7 @@
             </object>
         -->
         
-        <object name="waffles">
+        <object name="logo">
             <visual>
                 <texture file="data/textures/startup/waffles.png"/>
             </visual>

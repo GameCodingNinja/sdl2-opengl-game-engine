@@ -53,6 +53,12 @@ public:
     // Load the sprite data
     void Load( const XMLNode & node );
     void Load( const CSpriteData & spriteData );
+    
+    // Init the sprite
+    void Init() override;
+    
+    // Clean up the sprite
+    void CleanUp() override;
 
     // Get the object data
     const CObjectData2D & GetObjectData() const;
@@ -93,9 +99,8 @@ public:
     // Copy over the script functions
     void CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
     
-    //////////////////////////////////
-    // Functions accessed via script
-    //////////////////////////////////
+    // Set the physics position and rotation
+    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true );
     
     // Set/Get the color
     void SetColor( const CColor & color );

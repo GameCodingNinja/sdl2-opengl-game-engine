@@ -54,6 +54,7 @@
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
+#include <script/scriptisprite2d.h>
 #include <script/scriptsprite2d.h>
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
@@ -203,6 +204,7 @@ void CGame::Init()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
+    NScriptiSprite2D::Register();
     NScriptSprite2D::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
@@ -261,14 +263,14 @@ bool CGame::GameLoop()
     // Get our elapsed time
     CHighResTimer::Instance().CalcElapsedTime();
     
+    // Main script update
+    CScriptManager::Instance().Update();
+    
     if( m_gameRunning )
     {
-        CScriptManager::Instance().Update();
         
         CSpriteStrategyMgr::Instance().MiscProcess();
-
         CSpriteStrategyMgr::Instance().Update();
-        
         CSpriteStrategyMgr::Instance().Transform();
         
         const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
