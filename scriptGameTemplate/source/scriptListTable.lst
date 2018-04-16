@@ -8,6 +8,7 @@
     <file path="source/state/igamestate.ang"/>
     <file path="source/state/startupstate.ang"/>
     <file path="source/state/titlescreenstate.ang"/>
+    <file path="source/utilities.ang"/>
   </groupList>
 
 </listTable>

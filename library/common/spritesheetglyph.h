@@ -30,6 +30,12 @@ public:
         m_uv( uv )
     {}
     
+    CSpriteSheetGlyph( const CSpriteSheetGlyph & glyph ) :
+        m_size( glyph.m_size ),
+        m_uv( glyph.m_uv ),
+        m_cropOffset( glyph.m_cropOffset )
+    {}
+    
     // Get the size
     const CSize<int> & GetSize() const
     { return m_size; }

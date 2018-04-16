@@ -44,16 +44,26 @@ public:
     size_t GetCount() const;
     
     // Set/Get the default index
-    void SetDefaultIndex( uint defaultIndex );
+    void SetDefaultIndex( uint index );
     uint GetDefaultIndex() const;
     
-    // Copy over the gylph data
-    void CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec ) const;
+    // Set/Get the start index for when loading from format code
+    void SetFormatCodeOffset( uint index );
+    int GetFormatCodeOffset() const;
     
+    // Copy over the gylph data
+    void CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec, bool loadAllGlyphs = false ) const;
+    
+    // Clear out the data
+    void Clear();
+    
+private:
+
     // Set the gylph data
     void Set( const CSpriteSheetGlyph & rGlyph );
-    void Set( CSpriteSheet & rSpriteSheet, const std::string & glyphId ) const;
-
+    void Set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const;
+    void Set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec );
+    
 private:
 
     // Sprite Sheet default index
@@ -64,6 +74,9 @@ private:
 
     // Sprite Sheet columns
     uint m_columns;
+    
+    // Starting offset for loading with a format code
+    int m_formatCodeOffset;
     
     // Size of the sprite sheet
     CSize<int> m_size;

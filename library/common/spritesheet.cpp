@@ -25,13 +25,14 @@
 CSpriteSheet::CSpriteSheet() :
     m_defaultIndex(0),
     m_glyphCount(0),
-    m_columns(0)
+    m_columns(0),
+    m_formatCodeOffset(0)
 {
 }
 
 
 /************************************************************************
-*    desc:  Set the glyph count
+*    desc:  Set/Get the glyph count
 ************************************************************************/
 void CSpriteSheet::SetGlyphCount( uint glyphCount)
 {
@@ -127,16 +128,7 @@ void CSpriteSheet::LoadFromXML( const std::string & filePath )
             const CSize<int> cropOffset(
                 std::atoi( rectNode.getAttribute( "cx" ) ),
                 std::atoi( rectNode.getAttribute( "cy" ) ) );
-            
-            // cropOffset only uses bytes so check that the limits on sloppy image cropping
-            if( cropOffset.w < std::numeric_limits<int8_t>::min() || cropOffset.w > std::numeric_limits<int8_t>::max() ||
-                cropOffset.h < std::numeric_limits<int8_t>::min() || cropOffset.h > std::numeric_limits<int8_t>::max() )
-            {
-                throw NExcept::CCriticalException("Crop offsets out of range!",
-                    boost::str( boost::format("Crop offsets exceed byte values.\n\n%s\nLine: %s")
-                        % __FUNCTION__ % __LINE__ ));
-            }
-            
+
             // Add the gylph to the map
             std::string strId = rectNode.getAttribute( "name" );
             m_glyphMap.emplace( std::piecewise_construct, std::forward_as_tuple(strId), std::forward_as_tuple(glyphSize, uv, cropOffset) );
@@ -144,6 +136,77 @@ void CSpriteSheet::LoadFromXML( const std::string & filePath )
     }
     
 }   // LoadFromXML
+
+
+/************************************************************************
+*    desc:  Set the gylph data
+************************************************************************/
+void CSpriteSheet::Set( const CSpriteSheetGlyph & rGlyph )
+{
+    m_glyphVec.push_back( rGlyph );
+    
+}   // Set
+
+void CSpriteSheet::Set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const
+{
+    rSpriteSheet.Set( FindGlyph( rGlyphId ) );
+
+}   // Set
+
+void CSpriteSheet::Set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec )
+{
+    // Copy over the map entries
+    for( auto & iter: rStrIdVec )
+    {
+        auto & rGlyph = rSpriteSheet.FindGlyph( iter );
+        m_glyphMap.emplace( iter, rGlyph );
+        m_glyphVec.push_back( rGlyph );
+    }
+}   // Set
+
+
+/************************************************************************
+*    desc:  Copy over the gylph data
+************************************************************************/
+void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec, bool loadAllGlyphs ) const
+{
+    if( rStrIdVec.empty() )
+    {
+        if( loadAllGlyphs )
+        {
+            rSpriteSheet.Clear();
+            
+            for( auto & iter : m_glyphMap )
+                rSpriteSheet.Set( iter.second );
+        }
+    }
+    else if( !m_glyphMap.empty() )
+    {
+        // Init the sprite sheet class with an animation that is one glyph defined with a format code
+        // Should only be one entry
+        if ((rStrIdVec.size() == 1) && (rStrIdVec.back().find('%') != std::string::npos))
+        {
+            const int formatCodeOffset = rSpriteSheet.GetFormatCodeOffset();
+            for( uint i = 0; i < rSpriteSheet.GetCount(); ++i )
+            {
+                std::string glyphStr = boost::str( boost::format(rStrIdVec.back()) % (formatCodeOffset+i) );
+                Set( rSpriteSheet, glyphStr );
+            }
+        }
+        // Init the sprite sheet class when each glyph is defined in the object data
+        else if( rSpriteSheet.GetCount() == 0 )
+        {
+            rSpriteSheet.Set( *this, rStrIdVec );
+        }
+        else
+        {
+            throw NExcept::CCriticalException("Sprite Sheet Error!",
+                boost::str( boost::format("Incorrect configuration.\n\n%s\nLine: %s")
+                    % __FUNCTION__ % __LINE__ ));
+        }
+    }
+    
+}   // CopyTo
 
 
 /************************************************************************
@@ -194,11 +257,11 @@ size_t CSpriteSheet::GetCount() const
 
 
 /************************************************************************
-*    desc:  Set the default index
+*    desc:  Set/Get the default index
 ************************************************************************/
-void CSpriteSheet::SetDefaultIndex( uint defaultIndex )
+void CSpriteSheet::SetDefaultIndex( uint index )
 {
-    m_defaultIndex = defaultIndex;
+    m_defaultIndex = index;
 }
 
 uint CSpriteSheet::GetDefaultIndex() const
@@ -208,67 +271,25 @@ uint CSpriteSheet::GetDefaultIndex() const
 
 
 /************************************************************************
-*    desc:  Set the gylph data
+*    desc:  Set/Get the offset for loading with a format code
 ************************************************************************/
-void CSpriteSheet::Set( const CSpriteSheetGlyph & rGlyph )
+void CSpriteSheet::SetFormatCodeOffset( uint index )
 {
-    m_glyphVec.push_back( rGlyph );
-    
-}   // Set
+    m_formatCodeOffset = index;
+}
 
-void CSpriteSheet::Set( CSpriteSheet & rSpriteSheet, const std::string & glyphId ) const
+int CSpriteSheet::GetFormatCodeOffset() const
 {
-    auto mapIter = m_glyphMap.find( glyphId );
-    if( mapIter != m_glyphMap.end() )
-    {
-        rSpriteSheet.Set( mapIter->second );
-    }
-    else
-    {
-        throw NExcept::CCriticalException("Sprite Sheet Error!",
-            boost::str( boost::format("Glyph name is missing (%s).\n\n%s\nLine: %s")
-                % glyphId % __FUNCTION__ % __LINE__ ));
-    }
-}   // Set
+    return m_formatCodeOffset;
+}
 
 
 /************************************************************************
-*    desc:  Copy over the gylph data
+*    desc:  Clear out the data
 ************************************************************************/
-void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec ) const
+void CSpriteSheet::Clear()
 {
-    if( strIdVec.empty() )
-    {
-        for( auto & iter: m_glyphVec )
-            rSpriteSheet.Set( iter );
-    }
-    else if( !m_glyphMap.empty() )
-    {
-        // Init the sprite sheet class when each glyph is defined in the object data
-        if( rSpriteSheet.GetCount() == 0 )
-        {
-            for( auto & iter: strIdVec )
-                Set( rSpriteSheet, iter );
-        }
-        // Init the sprite sheet class with an animation that is one glyph defined with a format code
-        else
-        {
-            // Should only be one entry
-            if( strIdVec.size() == 1 )
-            {
-                for( uint i = 0; i < rSpriteSheet.GetCount(); ++i )
-                {
-                    std::string glyphStr = boost::str( boost::format(strIdVec.back()) % i );
-                    Set( rSpriteSheet, glyphStr );
-                }
-            }
-            else
-            {
-                throw NExcept::CCriticalException("Sprite Sheet Error!",
-                    boost::str( boost::format("Incorrect configuration.\n\n%s\nLine: %s")
-                        % __FUNCTION__ % __LINE__ ));
-            }
-        }
-    }
+    m_glyphVec.clear();
+    m_glyphMap.clear();
     
-}   // CopyTo
+}   // Clear

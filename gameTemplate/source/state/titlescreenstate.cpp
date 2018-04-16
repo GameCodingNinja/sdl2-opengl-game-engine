@@ -27,6 +27,7 @@
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
         m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
+        //m_spriteSheetTest( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "spriteSheetTest2" ) ),
         m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cube" ) )
 {
 }   // Constructor
@@ -106,6 +107,8 @@ void CTitleScreenState::Transform()
 
     m_background.Transform();
     
+    //m_spriteSheetTest.Transform();
+    
     m_cube.Transform();
     
     m_camera.Transform();
@@ -121,11 +124,13 @@ void CTitleScreenState::PreRender()
     const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     m_background.Render( orthoMatrix );
     
+    //m_spriteSheetTest.Render( orthoMatrix );
+    
     CCommonState::PreRender();
     
     const CMatrix & perMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE );
     m_cube.Render( m_camera.GetMatrix() * perMatrix, m_camera.GetRotMatrix() );
-
+    
 }   // PreRender
 
 

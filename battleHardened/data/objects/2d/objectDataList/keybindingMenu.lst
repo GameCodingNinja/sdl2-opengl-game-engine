@@ -4,10 +4,9 @@
     <default  name="">
         <visual>
             <texture count="0" file="" compressed="false"/>
-            <mesh genType="quad">
+            <mesh genType="quad" file="">
                 <spriteSheet defIndex="0" glyphCount="0" columns="0"/>
                 <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
-                <file name=""/>
             </mesh>
             <color r="1" g="1" b="1" a="1"/>
             <shader id="shader_2d"/>
@@ -65,9 +64,8 @@
         <object name="key_binding_button_frame">
             <visual>
                 <texture file="data/textures/menu/16x16_3_pixel_frame.png"/>
-                <mesh genType="scaled_frame">
+                <mesh genType="scaled_frame" file="data/objects/2d/menu/mesh/key_binding_button_frame.2dm">
                     <scaledFrame thicknessWidth="5" thicknessHeight="5" centerQuad="false"/>
-                    <file name="data/objects/2d/menu/mesh/key_binding_button_frame.2dm"/>
                 </mesh>
                 <color r="48" g="97" b="153" a="217"/>
             </visual>

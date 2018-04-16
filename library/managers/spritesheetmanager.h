@@ -28,10 +28,7 @@ public:
     }
     
     // Load the glyph data from XML file
-    const CSpriteSheet & LoadFromXML( const std::string & filePath );
-    
-    // Delete the sprite sheet data
-    void DeleteSpriteSheetData( const std::string & filePath );
+    const CSpriteSheet & Load( const std::string & filePath );
     
     // Clear all the sprite sheet data
     void Clear();

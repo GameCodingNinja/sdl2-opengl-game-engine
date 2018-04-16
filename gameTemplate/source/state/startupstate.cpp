@@ -215,9 +215,6 @@ void CStartUpState::AssetLoad()
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().LoadGroup2D("(menu)");
     
-    // Free the sprite sheet data because it's no longer needed
-    CSpriteSheetMgr::Instance().Clear();
-    
     // Load the menu group
     CMenuManager::Instance().LoadGroup("(menu)");
     

@@ -7,10 +7,9 @@
                 <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
             </resSwap>
             <texture count="0" file="" compressed="false"/>
-            <mesh genType="quad">
+            <mesh genType="quad" file="">
                 <spriteSheet defIndex="0" glyphCount="0" columns="0"/>
                 <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
-                <file name=""/>
             </mesh>
             <color r="1" g="1" b="1" a="1"/>
             <shader id="shader_2d"/>

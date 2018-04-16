@@ -25,14 +25,22 @@ final class CStartUpState : iGameState
         
         // Load the shaders
         Shader_Load( "data/shaders/shader.cfg" );
-        Shader_SetAllShaderColor( "additive", 1, 1, 1, 1 );
+        Shader_SetAllShaderColor( "additive", 0, 0, 0, 1 );
         
         // Load the start up animation group
         ObjectData_LoadGroup2D( "(startup)" );
         
         // Add the logo
-        iSprite2D @ sprite = Strategy_Create( "basicStrategy", "(startup)", "logo" );
-        Print("Sprite Test: " + sprite.GetId());
+        CSprite2D @ sprite = Strategy_CreateSprite( "basicStrategy", "(startup)", "logo" );
+        
+        Spawn( "Screen_FadeIn" );
+        
+        Hold(3000);
+        
+        Screen_FadeOut();
+        
+        Strategy_DeleteSprite( "basicStrategy", sprite.GetId() );
+        Print("Sprite Hold Test: ");
     }
 };
 

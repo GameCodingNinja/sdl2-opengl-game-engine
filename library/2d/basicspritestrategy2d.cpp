@@ -119,28 +119,6 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
-************************************************************************/
-void CBasicSpriteStrategy2D::Init()
-{
-    for( auto & iter : m_spriteMap )
-        iter.second->Init();
-    
-}   // Init
-
-
-/************************************************************************
-*    desc:  Do some cleanup
-************************************************************************/
-void CBasicSpriteStrategy2D::CleanUp()
-{
-    for( auto & iter : m_spriteMap )
-        iter.second->CleanUp();
-
-}   // CleanUp
-
-
-/************************************************************************
 *    desc:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
@@ -157,6 +135,8 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
     
+    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    
     // Create the sprite
     if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
     {
@@ -209,6 +189,9 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     if( !aiName.empty() )
         CSignalMgr::Instance().Broadcast( aiName, m_iter.first->second );
     
+    // Add the sprite pointer to the vector for rendering
+    m_pSpriteVec.push_back( m_iter.first->second );
+    
     return m_iter.first->second;
 
 }   // Create
@@ -222,6 +205,8 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
+    
+    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
     
     // Create the sprite
     if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
@@ -264,6 +249,9 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
         CSignalMgr::Instance().Broadcast( aiName, m_iter.first->second );
+    
+    // Add the sprite pointer to the vector for rendering
+    m_pSpriteVec.push_back( m_iter.first->second );
     
     return m_iter.first->second;
 
@@ -280,6 +268,8 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
     
+    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    
     // Allocate the sprite
     auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
     m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
@@ -305,6 +295,9 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // Init the physics
     m_iter.first->second->InitPhysics();
     
+    // Add the sprite pointer to the vector for rendering
+    m_pSpriteVec.push_back( m_iter.first->second );
+    
     return m_iter.first->second;
 
 }   // Create
@@ -319,7 +312,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     
     // Allocate the sprite
     auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
-    m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
+    auto m_iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
         
     // Check for duplicate id's
     if( !m_iter.second )
@@ -331,6 +324,9 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     
     // Init the physics
     m_iter.first->second->InitPhysics();
+    
+    // Add the sprite pointer to the vector for rendering
+    m_pSpriteVec.push_back( m_iter.first->second );
     
     return m_iter.first->second;
 
@@ -359,8 +355,12 @@ void CBasicSpriteStrategy2D::DeleteObj( int index )
     {
         // specifically delete the physics body before deleting the sprite
         // Deleting the physics always needs to be done externally and
-        // under the right conditions
+        // under the right conditions. NEVER call from destructor
         iter->second->CleanUp();
+        
+        auto spriteIter = std::find( m_pSpriteVec.begin(), m_pSpriteVec.end(), iter->second );
+        if( spriteIter != m_pSpriteVec.end() )
+            m_pSpriteVec.erase( spriteIter );
         
         NDelFunc::Delete( iter->second );
         m_spriteMap.erase( iter );
@@ -374,15 +374,37 @@ void CBasicSpriteStrategy2D::DeleteObj( int index )
 }   // DeleteObj
 
 
+/************************************************************************
+*    desc:  Do any pre-game loop init's
+************************************************************************/
+void CBasicSpriteStrategy2D::Init()
+{
+    for( auto iter : m_pSpriteVec )
+        iter->Init();
+    
+}   // Init
+
+
+/************************************************************************
+*    desc:  Do some cleanup
+************************************************************************/
+void CBasicSpriteStrategy2D::CleanUp()
+{
+    for( auto iter : m_pSpriteVec )
+        iter->CleanUp();
+
+}   // CleanUp
+
+
 /***************************************************************************
 *    desc:  Update the sprites
 ****************************************************************************/
 void CBasicSpriteStrategy2D::Update()
 {
-    for( auto & iter : m_spriteMap )
+    for( auto iter : m_pSpriteVec )
     {
-        iter.second->Update();
-        iter.second->PhysicsUpdate();
+        iter->Update();
+        iter->PhysicsUpdate();
     }
 
 }   // Update
@@ -393,8 +415,8 @@ void CBasicSpriteStrategy2D::Update()
 ************************************************************************/
 void CBasicSpriteStrategy2D::Transform()
 {
-    for( auto & iter : m_spriteMap )
-        iter.second->Transform();
+    for( auto iter : m_pSpriteVec )
+        iter->Transform();
 
 }   // Transform
 
@@ -404,8 +426,8 @@ void CBasicSpriteStrategy2D::Transform()
 ****************************************************************************/
 void CBasicSpriteStrategy2D::Render( const CMatrix & matrix )
 {
-    for( auto & iter : m_spriteMap )
-        iter.second->Render( matrix );
+    for( auto iter : m_pSpriteVec )
+        iter->Render( matrix );
 
 }   // Render
 

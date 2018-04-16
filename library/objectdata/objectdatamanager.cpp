@@ -22,6 +22,8 @@
 // Boost lib dependencies
 #include <boost/format.hpp>
 
+#include "spritesheetmanager.h"
+
 /************************************************************************
  *    desc:  Constructor                                                             
  ************************************************************************/
@@ -73,6 +75,9 @@ void CObjectDataMgr::LoadGroup2D( const std::string & group, const bool createFr
             boost::str( boost::format("Object data list group has already been loaded (%s).\n\n%s\nLine: %s")
                 % group % __FUNCTION__ % __LINE__ ));
     }
+    
+    // Free the sprite sheet data because it's no longer needed
+    CSpriteSheetMgr::Instance().Clear();
 
 }   // LoadGroup2D
 
@@ -136,6 +141,9 @@ void CObjectDataMgr::LoadFromXML2D( const std::string & group, const std::string
         if( createFromData )
             iter.first->second.CreateFromData( group );
     }
+    
+    // If the sprite sheets were used, It's work is now done.
+    CSpriteSheetMgr::Instance().Clear();
 
 }   // LoadFromXML2D
 

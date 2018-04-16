@@ -67,6 +67,41 @@ void CSpriteStrategyMgr::AddStrategy( const std::string & strategyId, iSpriteStr
 
 
 /************************************************************************
+ *    desc:  Delete strategy
+ ************************************************************************/
+void CSpriteStrategyMgr::DeleteStrategy( const std::string & strategyId )
+{
+    // Make sure the strategy we are looking for is available
+    auto mapIter = m_pStrategyMap.find( strategyId );
+    if( mapIter != m_pStrategyMap.end() )
+    {
+        mapIter->second->CleanUp();
+        
+        auto strategyIter = std::find( m_pStrategyVec.begin(), m_pStrategyVec.end(), mapIter->second );
+        if( strategyIter != m_pStrategyVec.end() )
+            m_pStrategyVec.erase( strategyIter );
+        
+        NDelFunc::Delete( mapIter->second );
+        m_pStrategyMap.erase( mapIter );
+    }
+        
+}   // DeleteStrategy
+
+
+/************************************************************************
+ *    desc:  Delete sprite
+ ************************************************************************/
+void CSpriteStrategyMgr::DeleteSprite( const std::string & strategyId, int spriteId )
+{
+    // Make sure the strategy we are looking for is available
+    auto mapIter = m_pStrategyMap.find( strategyId );
+    if( mapIter != m_pStrategyMap.end() )
+        mapIter->second->SetToDestroy( spriteId );
+        
+}   // DeleteSprite
+
+
+/************************************************************************
 *    desc:  create the sprite and provide a unique id number for each one
 ************************************************************************/
 iSprite2D * CSpriteStrategyMgr::Create(

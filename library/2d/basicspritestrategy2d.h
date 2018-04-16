@@ -22,6 +22,7 @@
 
 // Standard lib dependencies
 #include <string>
+#include <vector>
 #include <map>
 
 // Forward Declarations
@@ -113,8 +114,8 @@ protected:
     // Map of all the sprites
     std::map<const int, iSprite2D *> m_spriteMap;
     
-    // iterator for easy access to the last created sprite
-    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    // Vector of iSprite2D pointers
+    std::vector<iSprite2D *> m_pSpriteVec;
 };
 
 #endif  // __basic_sprite_strategy_2d_h__

@@ -37,6 +37,12 @@ public:
     // Add strategy
     void AddStrategy( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
     
+    // Delete strategy
+    void DeleteStrategy( const std::string & strategyId );
+    
+    // Delete sprite
+    void DeleteSprite( const std::string & strategyId, int spriteId );
+    
     // create the sprite and provide a unique id number for each one
     iSprite2D * Create(
         const std::string & strategyId,
@@ -184,10 +190,10 @@ private:
 
 private:
 
-    // Map of unique strategy pointers
+    // Map of strategy pointers
     std::map<std::string, iSpriteStrategy *> m_pStrategyMap;
     
-    // Vector of unique strategy pointers for
+    // Vector of strategy pointers
     std::vector<iSpriteStrategy *> m_pStrategyVec;
     
     // Sprite Id incrementor

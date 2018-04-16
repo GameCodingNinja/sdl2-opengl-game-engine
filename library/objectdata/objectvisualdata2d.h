@@ -167,6 +167,9 @@ private:
     // String of glyph ids
     std::vector<std::string> m_glyphIDs;
     
+    // Load all glyphs flag
+    bool m_loadAllGlyphs;
+    
     // Default scale
     float m_defaultUniformScale;
     

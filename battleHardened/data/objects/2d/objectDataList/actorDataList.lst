@@ -8,7 +8,7 @@
                 <res heightOrLess="800" defaultUniformScale="1.5" ext="_720"/>
             </graphicResSwap>
             <texture file="data/textures/actor/actor_spriteSheet.png"/>
-            <mesh genType="sprite_sheet">
+            <mesh genType="sprite_sheet" file="">
                 <spriteSheet file="data/objects/2d/mesh/actor.xml">
                     <!--
                     <glyph id="weaponicons (2)"/>

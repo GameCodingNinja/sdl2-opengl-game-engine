@@ -4,8 +4,8 @@
     <default  name="">
         <visual>
             <texture count="0" file="" compressed="false"/>
-            <mesh genType="quad">
-                <spriteSheet defIndex="0" glyphCount="0" columns="0">
+            <mesh genType="quad" file="" >
+                <spriteSheet defIndex="0" glyphCount="0" columns="0" formatCodeOffset="0" loadAllGlyphs="false" file="">
                     <!--
                     <glyph id="weaponicons (2)"/>
                     <glyph id="hero001"/>
@@ -14,7 +14,6 @@
                     <glyph id="pomel (14)"/> -->
                 </spriteSheet>
                 <scaledFrame thicknessWidth="" thicknessHeight="" centerQuad="" frameBottom=""/>
-                <file name=""/>
             </mesh>
             <color r="1" g="1" b="1" a="1"/>
             <shader id="shader_2d"/>
@@ -68,40 +67,48 @@
             </visual>
         </object>
         
-        <!--
-        <object name="spriteSheetTest">
+<!--
+        <object name="spriteSheetTest1">
             <visual>
                 <texture file="data/textures/spriteSheet/test_complex.png" compressed="true"/>
                 <mesh genType="sprite_sheet">
-                    <spriteSheet defIndex="15" glyphCount="16">
+                    <spriteSheet defIndex="8" glyphCount="16" file="data/objects/2d/mesh/titleScreen/test_complex.xml">
                         <glyph id="weaponicons (%d)"/>
                     </spriteSheet>
-                    <file name="data/objects/2d/mesh/titleScreen/test_complex.xml"/>
                 </mesh>
                 <shader id="shader_2d_spriteSheet"/>
             </visual>
         </object>
-        -->
-        <!--
-        <object name="spriteSheetTest">
+        
+        <object name="spriteSheetTest2">
             <visual>
                 <texture file="data/textures/spriteSheet/test_complex.png" compressed="true"/>
                 <mesh genType="sprite_sheet">
-                    <spriteSheet defIndex="3">
+                    <spriteSheet defIndex="2" glyphCount="8" formatCodeOffset="8" file="data/objects/2d/mesh/titleScreen/test_complex.xml">
+                        <glyph id="weaponicons (%d)"/>
+                    </spriteSheet>
+                </mesh>
+                <shader id="shader_2d_spriteSheet"/>
+            </visual>
+        </object>
+
+        <object name="spriteSheetTest3">
+            <visual>
+                <texture file="data/textures/spriteSheet/test_complex.png" compressed="true"/>
+                <mesh genType="sprite_sheet">
+                    <spriteSheet defIndex="3" file="data/objects/2d/mesh/titleScreen/test_complex.xml">
                         <glyph id="weaponicons (2)"/>
                         <glyph id="hero001"/>
                         <glyph id="hero3down001"/>
                         <glyph id="ship (3)"/>
                         <glyph id="pomel (14)"/>
                     </spriteSheet>
-                    <file name="data/objects/2d/mesh/titleScreen/test_complex.xml"/>
                 </mesh>
                 <shader id="shader_2d_spriteSheet"/>
             </visual>
         </object>
-        -->
-        <!--
-        <object name="spriteSheetTest">
+
+        <object name="spriteSheetTest4">
             <visual>
                 <texture file="data/textures/spriteSheet/cat.png" compressed="true"/>
                 <mesh genType="sprite_sheet">
@@ -110,20 +117,17 @@
                 <shader id="shader_2d_spriteSheet"/>
             </visual>
         </object>
-        -->
-        <!--
-        <object name="spriteSheetTest">
+
+        <object name="spriteSheetTest5">
             <visual>
                 <texture file="data/textures/spriteSheet/test_simple.png" compressed="true"/>
                 <mesh genType="sprite_sheet">
-                    <spriteSheet defIndex="2"/>
-                    <file name="data/objects/2d/mesh/titleScreen/test_simple.xml"/>
+                    <spriteSheet defIndex="2" file="data/objects/2d/mesh/titleScreen/test_simple.xml" loadAllGlyphs="true"/>
                 </mesh>
                 <shader id="shader_2d_spriteSheet"/>
             </visual>
         </object>
-        -->
-        
+-->
     </objectList>
 
 </objectDataList2D>

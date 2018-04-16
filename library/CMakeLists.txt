@@ -31,7 +31,7 @@ add_library(
         script/scriptcolor.cpp
         script/scriptcomponent.cpp
         script/scriptpoint.cpp
-        script/scriptisprite2d.cpp
+        script/scriptactorsprite2d.cpp
         script/scriptsprite2d.cpp
         script/scriptsprite3d.cpp
         script/scriptsound.cpp
@@ -66,6 +66,7 @@ add_library(
 	managers/meshmanager.cpp
         managers/spritestrategymanager.cpp
         managers/spritesheetmanager.cpp
+        managers/cameramanager.cpp
         physics/physicsworldmanager2d.cpp
         physics/physicsworldmanager3d.cpp
         physics/physicsworld2d.cpp

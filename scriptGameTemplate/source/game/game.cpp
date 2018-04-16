@@ -54,7 +54,7 @@
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
-#include <script/scriptisprite2d.h>
+#include <script/scriptactorsprite2d.h>
 #include <script/scriptsprite2d.h>
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
@@ -204,7 +204,7 @@ void CGame::Init()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
-    NScriptiSprite2D::Register();
+    NScriptActorSprite2D::Register();
     NScriptSprite2D::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
@@ -272,6 +272,9 @@ bool CGame::GameLoop()
         CSpriteStrategyMgr::Instance().MiscProcess();
         CSpriteStrategyMgr::Instance().Update();
         CSpriteStrategyMgr::Instance().Transform();
+        
+        // Clear the buffers
+        glClear( m_clearBufferMask );
         
         const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
         CSpriteStrategyMgr::Instance().Render( matrix );//m_camera.GetMatrix() * m_camera.GetProjectionMatrix() );

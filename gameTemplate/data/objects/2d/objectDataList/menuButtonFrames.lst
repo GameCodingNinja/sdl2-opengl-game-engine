@@ -130,11 +130,10 @@
 
         <object name="key_binding_button_frame">
             <visual>
-                <mesh>
+                <mesh file="data/objects/2d/mesh/menu/key_binding_button_frame.2dm">
                     <spriteSheet>
                         <glyph id="16x16_3_pixel_frame"/>
                     </spriteSheet>
-                    <file name="data/objects/2d/mesh/menu/key_binding_button_frame.2dm"/>
                 </mesh>
             </visual>
             <size width="908" height="40"/>

@@ -54,14 +54,13 @@ public:
     
 private:
 
-    // The script conponent
+    // The script component
     CScriptComponent m_scriptComponent;
     
     // title screen background
     CSprite2D m_background;
     
-    // Slot game class
-    //CSlotGame m_slotGame;
+    //CSprite2D m_spriteSheetTest;
     
     CSprite3D m_cube;
     

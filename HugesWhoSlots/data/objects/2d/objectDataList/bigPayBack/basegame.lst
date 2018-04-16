@@ -22,7 +22,6 @@
             <visual>
                 <texture file="data/textures/bigPayBack/background.jpg"/>
                 <mesh genType="quad">
-                    <file name=""/>
                 </mesh>
                 <shader id="shader_2d"/>
             </visual>
@@ -32,7 +31,6 @@
             <visual>
                 <texture file="data/textures/bigPayBack/JB.png"/>
                 <mesh genType="quad">
-                    <file name=""/>
                 </mesh>
                 <shader id="shader_2d"/>
             </visual>

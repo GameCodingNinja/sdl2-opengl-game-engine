@@ -16,7 +16,6 @@
         <object name="meter_font">
             <visual>
                 <mesh genType="font">
-                    <file name=""/>
                 </mesh>
                 <color r="143" g="179" b="218" a="1"/>
             </visual>
@@ -25,7 +24,6 @@
         <object name="cycle_results_font">
             <visual>
                 <mesh genType="font">
-                    <file name=""/>
                 </mesh>
             </visual>
         </object>

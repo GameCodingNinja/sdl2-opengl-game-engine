@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       scriptisprite2d.cpp
+*    FILE NAME:       scriptsprite2d.cpp
 *
-*    DESCRIPTION:     Sprite2D interface script object registration
+*    DESCRIPTION:     Sprite2D script object registration
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptisprite2d.h>
+#include <script/scriptsprite2d.h>
 
 // Game lib dependencies
 #include <2d/sprite2d.h>
@@ -30,6 +30,7 @@ namespace NScriptSprite2D
         // Register type
         Throw( pEngine->RegisterObjectType(  "CSprite2D", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
+        Throw( pEngine->RegisterObjectMethod("CSprite2D", "int GetId()",                                        asMETHOD(CSprite2D,   GetId),            asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2D", "void SetColor(const CColor &in)",                    asMETHODPR(CSprite2D, SetColor, (const CColor &), void),   asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2D", "void SetColor(float, float, float, float)",          asMETHODPR(CSprite2D, SetColor, (float,float,float,float), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CSprite2D", "void SetDefaultColor()",                             asMETHOD(CSprite2D, SetDefaultColor),      asCALL_THISCALL) );

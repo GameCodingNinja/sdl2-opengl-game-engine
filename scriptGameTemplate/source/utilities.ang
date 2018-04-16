@@ -1,0 +1,224 @@
+
+/************************************************************************
+*    FILE NAME:       shared_utilities.ang
+*
+*    DESCRIPTION:     General purpose shared utility scripts
+*                     The keyword "shared" allows for only one copy to
+*                     loaded and used among all modules
+************************************************************************/
+
+/************************************************************************
+*    desc:  Color to the final color in time
+************************************************************************/
+void ColorTo( float time, CColor &in final, CSprite2D & sprite )
+{
+    CColor current = sprite.GetColor();
+    CColor inc = (final - current) / time;
+
+    do
+    {
+        time -= GetElapsedTime();
+
+        if( time < 0 )
+        {
+            sprite.SetColor( final );
+        }
+        else
+        {
+            current += inc * GetElapsedTime();
+            sprite.SetColor( current );
+        }
+
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // ColorTo
+
+
+/************************************************************************
+*    desc:  Shader color to the final color in time
+************************************************************************/
+void ShaderColorTo( float time, CColor current, CColor &in final, const string &in shaderMember )
+{
+    CColor inc = (final - current) / time;
+
+    do
+    {
+        time -= GetElapsedTime();
+        
+        if( time < 0 )
+        {
+            Shader_SetAllShaderColor( shaderMember, final );
+        }
+        else
+        {
+            current += inc * GetElapsedTime();
+            
+            Shader_SetAllShaderColor( shaderMember, current );
+        }
+
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // ShaderColorTo
+
+
+/************************************************************************
+*    desc:  Alpha to the final alpha
+************************************************************************/
+void AlphaTo( float time, float final, CSprite2D & sprite )
+{
+    // Convert from RGB value to normalized value
+    if( final > 1.5 )
+        final *= 0.00390625f;
+
+    float current = sprite.GetAlpha();
+    float inc = (final - current) / time;
+
+    do
+    {
+        time -= GetElapsedTime();
+
+        if( time < 0 )
+        {
+            sprite.SetAlpha( final );
+        }
+        else
+        {
+            current += inc * GetElapsedTime();
+            sprite.SetAlpha( current );
+        }
+
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // AlphaTo
+
+void AlphaTo( float time, float final, CMenu & menu )
+{
+    // Convert from RGB value to normalized value
+    if( final > 1.5 )
+        final *= 0.00390625f;
+
+    float current = menu.GetAlpha();
+    float inc = (final - current) / time;
+
+    do
+    {
+        time -= GetElapsedTime();
+
+        if( time < 0 )
+        {
+            menu.SetAlpha( final );
+        }
+        else
+        {
+            current += inc * GetElapsedTime();
+            menu.SetAlpha( current );
+        }
+
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // AlphaTo
+
+
+/************************************************************************
+*    desc:  Volume to the final volume
+************************************************************************/
+void VolumeTo( float time, int final, CSound &in sound )
+{
+    float current = sound.GetVolume();
+    float inc = (float(final) - current) / time;
+    int lastVolume = int(current);
+
+    do
+    {
+        time -= GetElapsedTime();
+
+        if( time < 0 )
+        {
+            sound.SetVolume( int(final) );
+        }
+        else
+        {
+            current += inc * GetElapsedTime();
+        
+            if( lastVolume != int(current) )
+            {
+                sound.SetVolume( int(current) );
+                lastVolume = int(current);
+            }
+        }
+        
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // VolumeTo
+
+
+/************************************************************************
+*    desc:  Play the animation
+************************************************************************/
+void Play( int fps, CSprite2D & sprite, bool loop = false )
+{
+    float time = 1000.0 / fps;
+    uint frameCount = sprite.GetFrameCount();
+
+    do
+    {
+        for( uint i = 0; i < frameCount; ++i )
+        {
+            sprite.SetFrame( i );
+
+            Hold( time );
+        }
+    }
+    while( loop );
+
+}   // Play
+
+
+/************************************************************************
+*    desc:  Hold the sprite execution in time
+************************************************************************/
+void Hold( float time )
+{
+    do
+    {
+        time -= GetElapsedTime();
+
+        Suspend();
+    }
+    while( time > 0 );
+
+}   // Hold
+
+
+/************************************************************************
+*    desc:  Screen fade in script
+************************************************************************/
+void Screen_FadeIn()
+{
+    CColor current(0,0,0,1);
+    CColor final(1,1,1,1);
+    ShaderColorTo( 500, current, final, "additive" );
+    
+}   // Screen_FadeIn
+
+
+/************************************************************************
+*    desc:  Screen fade out script
+************************************************************************/
+void Screen_FadeOut()
+{
+    CColor current(1,1,1,1);
+    CColor final(0,0,0,1);
+    ShaderColorTo( 500, current, final, "additive" );
+    
+}   // Screen_FadeOut

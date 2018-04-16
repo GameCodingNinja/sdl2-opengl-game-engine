@@ -135,6 +135,9 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     m_genType = NDefs::EGT_FONT;
             }
             
+            if( meshNode.isAttributeSet("file") )
+                m_meshFilePath = meshNode.getAttribute( "file" );
+            
             if( meshNode.isAttributeSet("mirror") )
             {
                 std::string mirrorTypeStr = meshNode.getAttribute( "mirror" );
@@ -166,6 +169,13 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     }
                 }
                 
+                if( spriteSheetNode.isAttributeSet("formatCodeOffset") )
+                    m_spriteSheet.SetFormatCodeOffset( std::atoi( spriteSheetNode.getAttribute( "formatCodeOffset" ) ) );
+
+                bool loadAllGlyphs(false);
+                if( spriteSheetNode.isAttributeSet("loadAllGlyphs") )
+                    loadAllGlyphs = ( std::strcmp( spriteSheetNode.getAttribute("loadAllGlyphs"), "true" ) == 0 );
+
                 // Get the sprite sheet glyph file
                 if( spriteSheetNode.isAttributeSet("file") )
                     m_spriteSheetFilePath = spriteSheetNode.getAttribute( "file" );
@@ -174,6 +184,23 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 m_glyphIDs.reserve(spriteSheetNode.nChildNode());
                 for( int i = 0; i < spriteSheetNode.nChildNode(); ++i )
                     m_glyphIDs.push_back( spriteSheetNode.getChildNode(i).getAttribute( "id" ) );
+                
+                // Build the sprite sheet from XML data
+                if( !m_spriteSheetFilePath.empty() )
+                {
+                    // Make a copy of the file path because we may need to add a resource extension to it
+                    std::string filePath = m_spriteSheetFilePath;
+
+                    // Add in the resource swap file extension if needed
+                    if( !m_resExt.empty() )
+                        NGenFunc::AddFileExt( m_spriteSheetFilePath, filePath, m_resExt );
+
+                    // This will return the sprite sheet
+                    auto rSpriteSheet = CSpriteSheetMgr::Instance().Load( filePath );
+
+                    // Copy the needed glyph data from the manager
+                    rSpriteSheet.CopyTo( m_spriteSheet, m_glyphIDs, loadAllGlyphs );
+                }
             }
 
             const XMLNode scaledFrameNode = meshNode.getChildNode( "scaledFrame" );
@@ -187,12 +214,6 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 
                 if( scaledFrameNode.isAttributeSet("frameBottom") )
                     m_scaledFrame.m_bottomFrame = (std::strcmp(scaledFrameNode.getAttribute( "frameBottom" ), "false") != 0);
-            }
-
-            const XMLNode fileNode = meshNode.getChildNode( "file" );
-            if( !fileNode.isEmpty() )
-            {
-                m_meshFilePath = fileNode.getAttribute( "name" );
             }
         }
 
@@ -281,27 +302,7 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
     {
         // Build the simple (grid) sprite sheet from XML data
         if( m_spriteSheetFilePath.empty() )
-        {
             m_spriteSheet.Build( rSize );
-        }
-        // Load complex sprite sheet data to the manager. It's assumed
-        // that string Id's are for complex sprite sheets that are shared
-        // among many sprites
-        else
-        {
-            // Make a copy of the file path because we may need to add a resource extension to it
-            std::string filePath = m_spriteSheetFilePath;
-
-            // Add in the resource swap file extension if needed
-            if( !m_resExt.empty() )
-                NGenFunc::AddFileExt( m_spriteSheetFilePath, filePath, m_resExt );
-        
-            // This will return the sprite sheet
-            auto rSpriteSheet = CSpriteSheetMgr::Instance().LoadFromXML( filePath );
-            
-            // Copy the needed glyph data from the manager
-            rSpriteSheet.CopyTo( m_spriteSheet, m_glyphIDs );
-        }
         
         // Generate a quad
         GenerateQuad( group );
@@ -313,18 +314,8 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
     {
         if( !m_glyphIDs.empty() && !m_spriteSheetFilePath.empty() )
         {
-            // Make a copy of the file path because we may need to add a resource extension to it
-            std::string filePath = m_spriteSheetFilePath;
-
-            // Add in the resource swap file extension if needed
-            if( !m_resExt.empty() )
-                NGenFunc::AddFileExt( m_spriteSheetFilePath, filePath, m_resExt );
-            
-            // This will return the sprite sheet
-            auto rSpriteSheet = CSpriteSheetMgr::Instance().LoadFromXML( filePath );
-            
             // Get the glyph to make the frame with
-            auto rGlyph = rSpriteSheet.FindGlyph( m_glyphIDs.back() );
+            auto rGlyph = m_spriteSheet.FindGlyph( m_glyphIDs.back() );
             
             // Create the scaled frame using glyph info
             if( m_meshFilePath.empty() )
