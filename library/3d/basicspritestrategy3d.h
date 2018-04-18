@@ -34,7 +34,7 @@ class CBasicSpriteStrategy3D : public CBaseStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CBasicSpriteStrategy3D( int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy3D( const std::string & cameraId = "", int idOffset = 0, int idDir = 1 );
 
     // Destructor
     virtual ~CBasicSpriteStrategy3D();

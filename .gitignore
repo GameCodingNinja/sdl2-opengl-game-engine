@@ -54,9 +54,26 @@
 /consoleTestAp/nbproject/
 /consoleTestAp/build/
 
-/com.hugheswhoproductions.hugheswhoslots
-/org.lapcatgames.PachinkoChallenge
-/org.lapcatgames.template
+/org.howiesfunware.PachinkoChallenge/build
+/org.howiesfunware.PachinkoChallenge/gradle
+/org.howiesfunware.PachinkoChallenge/app/build
+/org.howiesfunware.PachinkoChallenge/.gradle
+/org.howiesfunware.PachinkoChallenge/.idea
+/org.howiesfunware.PachinkoChallenge/app/.externalNativeBuild
+
+/com.hugheswhoproductions.hugheswhoslots/build
+/com.hugheswhoproductions.hugheswhoslots/gradle
+/com.hugheswhoproductions.hugheswhoslots/app/build
+/com.hugheswhoproductions.hugheswhoslots/.gradle
+/com.hugheswhoproductions.hugheswhoslots/.idea
+/com.hugheswhoproductions.hugheswhoslots/app/.externalNativeBuild
+
+/org.lapcatgames.template/build
+/org.lapcatgames.template/gradle
+/org.lapcatgames.template/app/build
+/org.lapcatgames.template/.gradle
+/org.lapcatgames.template/.idea
+/org.lapcatgames.template/app/.externalNativeBuild
 
 /library/Win32/
 

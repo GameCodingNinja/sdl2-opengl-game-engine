@@ -88,8 +88,12 @@ public:
     void Transform( const class CObject2D & object );
 
     // Render the sprites
+    void Render();
     void Render( const class CMatrix & matrix );
     void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix );
+    
+    // Process all states
+    void ProcessAllStates();
     
     // Get a reference to the strategy
     template <typename target>

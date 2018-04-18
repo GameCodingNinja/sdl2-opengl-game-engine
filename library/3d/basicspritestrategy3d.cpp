@@ -26,9 +26,11 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CBasicSpriteStrategy3D::CBasicSpriteStrategy3D( int idOffset, int idDir ) :
+CBasicSpriteStrategy3D::CBasicSpriteStrategy3D( const std::string & cameraId, int idOffset, int idDir ) :
     CBaseStrategy( idOffset, idDir )
 {
+    m_cameraId = cameraId;
+    
 }   // constructor
 
 

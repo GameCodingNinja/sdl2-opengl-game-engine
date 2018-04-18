@@ -9,7 +9,7 @@
 #include "smartresolutionbtn.h"
 
 // Game lib dependencies
-#include <system/device.h>
+#include <managers/cameramanager.h>
 #include <gui/uibuttonlist.h>
 #include <gui/uicontrol.h>
 #include <utilities/settings.h>
@@ -110,7 +110,7 @@ void CSmartResolutionBtn::SetResolutionChange()
 
     CSettings::Instance().SetSize( m_resVec[m_resIndex] );
     CSettings::Instance().CalcRatio();
-    CDevice::Instance().CreateProjMatrix();
+    CCameraMgr::Instance().CreateProjMatrix();
 
 }   // SetResolutionChange
 

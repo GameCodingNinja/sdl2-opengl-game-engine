@@ -110,9 +110,6 @@ private:
     std::default_random_engine m_generator;
     std::uniform_int_distribution<int> m_ballRand;
     
-    // local camera
-    CCamera m_camera;
-    
     // Ball type string
     std::vector<std::string> m_ballVec;
 

@@ -30,6 +30,7 @@
 #include <managers/signalmanager.h>
 #include <managers/spritestrategymanager.h>
 #include <managers/spritesheetmanager.h>
+#include <managers/cameramanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>
@@ -122,7 +123,7 @@ void CStartUpState::Fade(
     CColor current = cur;
     
     // Need the projection matrix
-    const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
+    const CMatrix & matrix = CCameraMgr::Instance().GetDefaultProjMatrix();
 
     do
     {

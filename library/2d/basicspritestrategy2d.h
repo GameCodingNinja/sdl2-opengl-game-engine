@@ -35,7 +35,7 @@ class CBasicSpriteStrategy2D : public CBaseStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CBasicSpriteStrategy2D( int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy2D( const std::string & cameraId = "", int idOffset = 0, int idDir = 1 );
 
     // Destructor
     virtual ~CBasicSpriteStrategy2D();
@@ -80,6 +80,7 @@ public:
     void Transform() override;
 
     // Render the sprites
+    void Render() override;
     void Render( const CMatrix & matrix ) override;
     
     // Get the reference to the sprite

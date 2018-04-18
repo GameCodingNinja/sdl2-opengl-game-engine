@@ -10,7 +10,7 @@
 
 // Game lib dependencies
 #include <gui/menumanager.h>
-#include <system/device.h>
+#include <managers/cameramanager.h>
 #include <utilities/exceptionhandling.h>
 
 // Boost lib dependencies
@@ -99,8 +99,7 @@ void CCommonState::Transform()
 ****************************************************************************/
 void CCommonState::PreRender()
 {
-    const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    CMenuManager::Instance().RenderInterface( matrix );
+    CMenuManager::Instance().RenderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -110,8 +109,7 @@ void CCommonState::PreRender()
 ****************************************************************************/
 void CCommonState::PostRender()
 {
-    const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    CMenuManager::Instance().Render( matrix );
+    CMenuManager::Instance().Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PostRender
 

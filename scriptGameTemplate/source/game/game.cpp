@@ -37,6 +37,7 @@
 #include <managers/vertexbuffermanager.h>
 #include <managers/meshmanager.h>
 #include <managers/spritestrategymanager.h>
+#include <managers/cameramanager.h>
 #include <gui/menumanager.h>
 #include <gui/uicontrol.h>
 #include <gui/menu.h>
@@ -268,16 +269,11 @@ bool CGame::GameLoop()
     
     if( m_gameRunning )
     {
-        
-        CSpriteStrategyMgr::Instance().MiscProcess();
-        CSpriteStrategyMgr::Instance().Update();
-        CSpriteStrategyMgr::Instance().Transform();
-        
         // Clear the buffers
         glClear( m_clearBufferMask );
         
-        const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-        CSpriteStrategyMgr::Instance().Render( matrix );//m_camera.GetMatrix() * m_camera.GetProjectionMatrix() );
+        // Process all game loop states
+        CSpriteStrategyMgr::Instance().ProcessAllStates();
         
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );

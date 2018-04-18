@@ -17,6 +17,7 @@
 #include <system/device.h>
 #include <physics/physicsworld2d.h>
 #include <managers/spritestrategymanager.h>
+#include <managers/cameramanager.h>
 #include <common/camera.h>
 #include <script/scriptmanager.h>
 #include <2d/basicspritestrategy2d.h>
@@ -167,11 +168,8 @@ void CLevel1State::Transform()
 void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
-
-    const CMatrix matrix = 
-        CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
     
-    CSpriteStrategyMgr::Instance().Render( matrix );
+    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PreRender
 

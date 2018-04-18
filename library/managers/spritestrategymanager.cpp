@@ -254,6 +254,13 @@ void CSpriteStrategyMgr::Transform( const CObject2D & object )
 /***************************************************************************
 *    desc:  Render the sprites
 ****************************************************************************/
+void CSpriteStrategyMgr::Render()
+{
+    for( auto iter : m_pStrategyVec )
+        iter->Render();
+
+}   // Render
+
 void CSpriteStrategyMgr::Render( const CMatrix & matrix )
 {
     for( auto iter : m_pStrategyVec )
@@ -267,6 +274,22 @@ void CSpriteStrategyMgr::Render( const CMatrix & projMatrix, const CMatrix & cam
         iter->Render( projMatrix, cameraMatrix );
 
 }   // Render
+
+
+/***************************************************************************
+*    desc:  Process all states
+****************************************************************************/
+void CSpriteStrategyMgr::ProcessAllStates()
+{
+    for( auto iter : m_pStrategyVec )
+    {
+        iter->MiscProcess();
+        iter->Update();
+        iter->Transform();
+        iter->Render();
+    }
+        
+}   // ProcessAllStates
 
 
 /************************************************************************

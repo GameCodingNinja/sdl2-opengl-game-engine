@@ -29,6 +29,7 @@
 #include <managers/vertexbuffermanager.h>
 #include <managers/actionmanager.h>
 #include <managers/signalmanager.h>
+#include <managers/cameramanager.h>
 #include <2d/sprite2d.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/settings.h>
@@ -104,16 +105,13 @@ void CLoadState::Animate()
         
     if( m_time > 83.f )
     {
-        // Need the projection matrix
-        const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-
         // Clear the screen
         glClear( GL_COLOR_BUFFER_BIT );
 
         m_upSprite->SetFrame( m_frame );
         m_frame = (m_frame + 1) % m_upSprite->GetFrameCount();
 
-        m_upSprite->Render( matrix );
+        m_upSprite->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 

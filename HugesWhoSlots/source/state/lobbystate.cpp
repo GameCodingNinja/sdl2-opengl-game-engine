@@ -27,6 +27,7 @@
 #include <script/scriptmanager.h>
 #include <managers/soundmanager.h>
 #include <managers/spritesheetmanager.h>
+#include <managers/cameramanager.h>
 
 // Boost lib dependencies
 #include <boost/bind.hpp>
@@ -154,8 +155,7 @@ void CLobbyState::Transform()
 ****************************************************************************/
 void CLobbyState::PreRender()
 {
-    const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    m_background.Render( orthoMatrix );
+    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
     
     CCommonState::PreRender();
 

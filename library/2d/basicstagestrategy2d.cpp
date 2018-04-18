@@ -10,6 +10,7 @@
 
 // Game lib dependencies
 #include <utilities/xmlParser.h>
+#include <managers/cameramanager.h>
 
 /************************************************************************
 *    desc:  Constructor
@@ -124,6 +125,15 @@ void CBasicStageStrategy2D::Transform( const CObject2D & object )
 ****************************************************************************/
 void CBasicStageStrategy2D::Render( const CMatrix & matrix )
 {
+    for( auto & iter : m_sectorDeq )
+        iter.Render( matrix );
+
+}   // Render
+
+void CBasicStageStrategy2D::Render()
+{
+    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+
     for( auto & iter : m_sectorDeq )
         iter.Render( matrix );
 

@@ -12,7 +12,7 @@
 #include <objectdata/objectdatamanager.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/xmlpreloader.h>
-#include <system/device.h>
+#include <managers/cameramanager.h>
 #include <gui/menumanager.h>
 #include <gui/uibutton.h>
 #include <gui/uimeter.h>
@@ -44,8 +44,9 @@ void CTitleScreenState::Init()
 
     m_cube.SetScale( 3, 3, 3 );
     
-    m_camera.SetPos( 0, 0, 20 );
-    m_camera.SetRot( 10, 0, 0 );
+    CCameraMgr::Instance().AddPerspectiveCamera( "cube" );
+    CCameraMgr::Instance().SetActiveCameraPos( 0, 0, 20 );
+    CCameraMgr::Instance().SetActiveCameraRot( 10, 0, 0 );
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -107,11 +108,11 @@ void CTitleScreenState::Transform()
 
     m_background.Transform();
     
+    CCameraMgr::Instance().Transform();
+    
     //m_spriteSheetTest.Transform();
     
     m_cube.Transform();
-    
-    m_camera.Transform();
 
 }   // Transform
 
@@ -121,15 +122,15 @@ void CTitleScreenState::Transform()
 ****************************************************************************/
 void CTitleScreenState::PreRender()
 {
-    const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    m_background.Render( orthoMatrix );
+    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
     
     //m_spriteSheetTest.Render( orthoMatrix );
     
     CCommonState::PreRender();
     
-    const CMatrix & perMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_PERSPECTIVE );
-    m_cube.Render( m_camera.GetMatrix() * perMatrix, m_camera.GetRotMatrix() );
+    auto & camera = CCameraMgr::Instance().GetActiveCamera();
+    
+    m_cube.Render( camera.GetFinalMatrix(), camera.GetRotMatrix() );
     
 }   // PreRender
 

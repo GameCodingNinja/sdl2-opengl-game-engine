@@ -2,7 +2,7 @@
 /************************************************************************
 *    FILE NAME:       ispritestrategy.h
 *
-*    DESCRIPTION:     Sprite Strategy Interface Class - Represents a group of sprites
+*    DESCRIPTION:     Sprite Strategy Interface Class - Represents a layer of sprites
 ************************************************************************/
 
 #ifndef __i_sprite_strategy_h__
@@ -23,10 +23,10 @@ class iSpriteStrategy
 public:
 
     // Constructor
-    iSpriteStrategy(){};
+    iSpriteStrategy();
 
     // Destructor
-    virtual ~iSpriteStrategy(){};
+    virtual ~iSpriteStrategy();
 
     // Load the data from file
     virtual void LoadFromFile( const std::string & file ) = 0;
@@ -36,6 +36,9 @@ public:
     
     // Set to create the sprite
     virtual void SetToCreate( const std::string & name ){}
+    
+    // Set to create the sprite
+    void SetCameraId( const std::string & cameraId );
     
     // Create the sprite
     virtual iSprite2D * Create(
@@ -78,7 +81,8 @@ public:
     virtual void Transform() = 0;
     virtual void Transform( const class CObject2D & object ){}
 
-    // Render the sprite
+    // Render the sprites
+    virtual void Render() {}
     virtual void Render( const class CMatrix & matrix ) {}
     virtual void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) {}
     
@@ -86,6 +90,11 @@ protected:
     
     // Delete any sprites scheduled to die
     virtual void HandleDelete(){}
+    
+protected:
+    
+    // camera id
+    std::string m_cameraId;
 
 };
 

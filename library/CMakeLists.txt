@@ -105,6 +105,7 @@ add_library(
         common/spritedatacontainer.cpp
         common/fontdata.cpp
         common/fontproperties.cpp
+        common/ispritestrategy.cpp
         slot/symbol2d.cpp
         slot/symbolsetview.cpp
         slot/symbolsetviewmanager.cpp

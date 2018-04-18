@@ -14,6 +14,7 @@
 #include <gui/uicontrol.h>
 #include <utilities/settings.h>
 #include <utilities/genfunc.h>
+#include <managers/cameramanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -22,7 +23,7 @@
 #include <string>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartResolutionBtn::CSmartResolutionBtn( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl ),
@@ -110,7 +111,7 @@ void CSmartResolutionBtn::SetResolutionChange()
 
     CSettings::Instance().SetSize( m_resVec[m_resIndex] );
     CSettings::Instance().CalcRatio();
-    CDevice::Instance().CreateProjMatrix();
+    CCameraMgr::Instance().CreateProjMatrix();
 
 }   // SetResolutionChange
 

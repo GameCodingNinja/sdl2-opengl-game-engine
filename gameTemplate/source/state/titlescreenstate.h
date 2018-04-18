@@ -16,7 +16,6 @@
 #include <3d/sprite3d.h>
 #include <slot/slotgame.h>
 #include <script/scriptcomponent.h>
-#include <common/camera.h>
 
 // Standard lib dependencies
 #include <tuple>
@@ -63,8 +62,6 @@ private:
     //CSprite2D m_spriteSheetTest;
     
     CSprite3D m_cube;
-    
-    CCamera m_camera;
 };
 
 

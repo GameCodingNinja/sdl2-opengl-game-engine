@@ -16,7 +16,6 @@
 #include <utilities/settings.h>
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
-#include <system/device.h>
 #include <physics/physicsworldmanager2d.h>
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
@@ -25,6 +24,7 @@
 #include <2d/sprite2d.h>
 #include <managers/spritestrategymanager.h>
 #include <managers/soundmanager.h>
+#include <managers/cameramanager.h>
 #include <script/scriptmanager.h>
 #include <managers/signalmanager.h>
 #include <common/camera.h>
@@ -108,7 +108,8 @@ void CLevel1State::Init()
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
     
     // Set the initial camera scale
-    m_camera.GenerateOrthographicProjection( 1.65 );
+    CCameraMgr::Instance().AddOrthographicCamera("game", 5.f, 1000.f, 1.65);
+    CCameraMgr::Instance().TransformActiveCamera();
     
     // Reset the camera
     //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
@@ -152,8 +153,9 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     {
         if( !CMenuManager::Instance().IsMenuActive() )
         {
-            const float ratio = 1.f / m_camera.GetOrthoHeightAspectRatio();
-            const float x = (ratio * (float)rEvent.motion.x) - m_camera.GetOrthoProjSizeHalf().w;
+            auto camera = CCameraMgr::Instance().GetActiveCamera();
+            const float ratio = 1.f / camera.GetOrthoHeightAspectRatio();
+            const float x = (ratio * (float)rEvent.motion.x) - camera.GetOrthoProjSizeHalf().w;
 
             CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
         }
@@ -226,10 +228,9 @@ void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
     
-    const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    CSpriteStrategyMgr::Instance().Render( m_camera.GetMatrix() * m_camera.GetProjectionMatrix() );
+    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().GetActiveCameraMatrix() );
 
-    CMenuManager::Instance().RenderInterface( matrix );
+    CMenuManager::Instance().RenderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PreRender
 

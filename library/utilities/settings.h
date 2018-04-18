@@ -132,6 +132,9 @@ public:
     // Get the projection type
     NDefs::EProjectionType GetProjectionType() const;
     
+    // Get the projection scale
+    float GetProjectionScale() const;
+    
     // Set/Get debug string visible
     void SetDebugStrVisible( bool value );
     bool GetDebugStrVisible() const;
@@ -167,6 +170,9 @@ private:
 
     // Precalculated aspect ratios for orthographic projection
     CSize<float> m_orthoAspectRatio;
+    
+    // Projection scale
+    float m_projectionScale;
 
     // Full screen flag loaded from file
     bool m_fullScreen;

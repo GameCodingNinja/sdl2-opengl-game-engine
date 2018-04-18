@@ -27,6 +27,7 @@
 #include <managers/signalmanager.h>
 #include <managers/shadermanager.h>
 #include <managers/fontmanager.h>
+#include <managers/cameramanager.h>
 #include <gui/menumanager.h>
 #include <gui/uicontrol.h>
 #include <gui/menu.h>
@@ -411,12 +412,12 @@ void CGame::Render()
         if( NBDefs::IsMobileDevice() )
         {
             if( CSettings::Instance().GetDebugStrVisible() && upDebugDisplay )
-                upDebugDisplay->Render( CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC ) );
+                upDebugDisplay->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
         }
         else
         {
             if( CSettings::Instance().GetFullScreen() )
-                upDebugDisplay->Render( CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC ) );
+                upDebugDisplay->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
         }
     }
 

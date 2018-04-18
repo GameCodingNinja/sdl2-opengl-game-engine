@@ -16,7 +16,9 @@ class CGame
     void Init()
     {
         // Create a basic strategy
-        Strategy_CreateBasicSpriteStrategy( "basicStrategy" );
+        Strategy_CreateBasicSpriteStrategy( "basicStrategy", "" );
+        
+        Strategy_SetCameraId( "basicStrategy", "" );
         
         // Create the startup state
         @m_gameState = CStartUpState();

@@ -9,12 +9,12 @@
 #include "smartresolutionbtn.h"
 
 // Game lib dependencies
-#include <system/device.h>
 #include <gui/uibuttonlist.h>
 #include <gui/uicontrol.h>
 #include <utilities/settings.h>
 #include <utilities/genfunc.h>
 #include <managers/signalmanager.h>
+#include <managers/cameramanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
@@ -111,7 +111,7 @@ void CSmartResolutionBtn::SetResolutionChange()
 
     CSettings::Instance().SetSize( m_resVec[m_resIndex] );
     CSettings::Instance().CalcRatio();
-    CDevice::Instance().CreateProjMatrix();
+    CCameraMgr::Instance().CreateProjMatrix();
     
     // Make sure this is always last
     CSignalMgr::Instance().Broadcast_ResolutionChange();

@@ -14,8 +14,26 @@
 *    desc:  Constructor
 ************************************************************************/
 CCamera::CCamera() :
+    m_orthoHeightAspectRatio(0.f),
+    m_projType(NDefs::EPT_NULL),
+    m_angle(0),
+    m_minZDist(0),
+    m_maxZDist(0),
+    m_scale(0)
+{
+}   // constructor
+
+CCamera::CCamera( float minZDist, float maxZDist, float scale ) :
     m_orthoHeightAspectRatio(0.f)
 {
+    GenerateOrthographicProjection( minZDist, maxZDist, scale ); 
+}   // constructor
+
+CCamera::CCamera( float angle, float minZDist, float maxZDist, float scale ) :
+    m_orthoHeightAspectRatio(0.f)
+{
+    GeneratePerspectiveProjection( angle, minZDist, maxZDist, scale );
+    
 }   // constructor
 
 
@@ -28,10 +46,49 @@ CCamera::~CCamera()
 
 
 /************************************************************************
+*    desc:  Recreate the projection matrix
+************************************************************************/
+void CCamera::RecreateProjMatrix()
+{
+    if( m_projType == NDefs::EPT_PERSPECTIVE )
+        GeneratePerspectiveProjection( m_angle, m_minZDist, m_maxZDist, m_scale );
+    else
+        GenerateOrthographicProjection( m_minZDist, m_maxZDist, m_scale );
+    
+}   // RecreateProjMatrix
+
+
+/************************************************************************
+*    desc:  Generate a custom perspective projection for this camera
+************************************************************************/  
+void CCamera::GeneratePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale )
+{
+    m_projType = NDefs::EPT_PERSPECTIVE;
+    m_angle = angle;
+    m_minZDist = minZDist;
+    m_maxZDist = maxZDist;
+    m_scale = scale;
+    
+    m_projectionMatrix.PerspectiveFovRH(
+        angle,
+        CSettings::Instance().GetScreenAspectRatio().w * scale,
+        minZDist,
+        maxZDist );
+    
+    CalcFinalMatrix();
+    
+}   // GeneratePerspectiveProjection
+
+
+/************************************************************************
 *    desc:  Generate a custom orthographic projection for this camera
 ************************************************************************/  
-void CCamera::GenerateOrthographicProjection( float scale )
+void CCamera::GenerateOrthographicProjection( float minZDist, float maxZDist, float scale )
 {
+    m_projType = NDefs::EPT_ORTHOGRAPHIC;
+    m_minZDist = minZDist;
+    m_maxZDist = maxZDist;
+    m_scale = scale;
     const auto defSize = CSettings::Instance().GetDefaultSize();
     
     // Calc the new width and height
@@ -44,8 +101,10 @@ void CCamera::GenerateOrthographicProjection( float scale )
     m_projectionMatrix.OrthographicRH(
         m_orthoProjSize.w,
         m_orthoProjSize.h,
-        CSettings::Instance().GetMinZdist(),
-        CSettings::Instance().GetMaxZdist() );
+        minZDist,
+        maxZDist );
+    
+    CalcFinalMatrix();
     
 }   // GenerateOrthographicProjection
 
@@ -102,7 +161,7 @@ void CCamera::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     CObject::SetPos( -x, -y, -z );
 
-}   // SetPosXYZ
+}   // SetPos
 
 
 /************************************************************************
@@ -118,4 +177,41 @@ void CCamera::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     CObject::IncPos( -x, -y, -z );
 
-}   // IncPosXYZ
+}   // IncPos
+
+
+/************************************************************************
+*    desc:  Transform
+************************************************************************/
+void CCamera::Transform()
+{
+    const bool wasTransformed( m_parameters.IsSet( NDefs::TRANSFORM ) );
+    
+    CObject3D::Transform();
+    
+    if( wasTransformed )
+        CalcFinalMatrix();
+
+}   // Transform
+
+
+/************************************************************************
+*    desc:  Calculate the final matrix
+************************************************************************/
+void CCamera::CalcFinalMatrix()
+{
+    m_finalMatrix.InitilizeMatrix();
+    m_finalMatrix.MergeMatrix( m_matrix );
+    m_finalMatrix.MergeMatrix( m_projectionMatrix );
+    
+}   // CalcFinalMatrix
+
+
+/************************************************************************
+*    desc:  Get the final matrix
+************************************************************************/  
+const CMatrix & CCamera::GetFinalMatrix() const
+{
+    return m_finalMatrix;
+    
+}   // GetFinalMatrix

@@ -41,6 +41,7 @@ public:
     void Transform( const CObject2D & object ) override;
 
     // Render the actors
+    void Render() override;
     void Render( const CMatrix & matrix ) override;
     
 protected:

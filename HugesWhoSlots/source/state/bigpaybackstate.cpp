@@ -16,7 +16,6 @@
 #include <utilities/xmlpreloader.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/settings.h>
-#include <system/device.h>
 #include <gui/menumanager.h>
 #include <gui/uilabel.h>
 #include <gui/uibutton.h>
@@ -33,6 +32,7 @@
 #include <script/scriptmanager.h>
 #include <managers/soundmanager.h>
 #include <managers/spritesheetmanager.h>
+#include <managers/cameramanager.h>
 #include <common/build_defs.h>
 
 // Boost lib dependencies
@@ -240,7 +240,7 @@ void CBigPayBackState::Transform()
 ****************************************************************************/
 void CBigPayBackState::PreRender()
 {
-    const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
+    const CMatrix & orthoMatrix = CCameraMgr::Instance().GetDefaultProjMatrix();
     m_background.Render( orthoMatrix );
     m_slotGame.Render( orthoMatrix );
     m_pig.Render( orthoMatrix );

@@ -13,6 +13,7 @@
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
 #include <utilities/settings.h>
+#include <managers/cameramanager.h>
 #include <2d/sector2d.h>
 
 // Standard lib dependencies
@@ -186,6 +187,15 @@ void CLinearStageStrategy2D::Transform( const CObject2D & object )
 ****************************************************************************/
 void CLinearStageStrategy2D::Render( const CMatrix & matrix )
 {
+    for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
+        m_sectorDeq.at(i).Render( matrix );
+
+}   // Render
+
+void CLinearStageStrategy2D::Render()
+{
+    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
         m_sectorDeq.at(i).Render( matrix );
 

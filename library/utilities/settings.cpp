@@ -27,6 +27,7 @@ CSettings::CSettings() :
     m_size(1280,768),
     m_default_size(1280,768),
     m_orientation(NDefs::EO_LANDSCAPE),
+    m_projectionScale(1),
     m_fullScreen(false),
     m_vSync(false),
     m_major(2),
@@ -189,6 +190,9 @@ void CSettings::LoadXML()
                 if( projNode.isAttributeSet("projectType") &&
                     std::strcmp( projNode.getAttribute("projectType"), "orthographic" ) == 0 )
                     m_projectionType = NDefs::EPT_ORTHOGRAPHIC;
+                
+                if( projNode.isAttributeSet("scale") )
+                    m_projectionScale = std::atof(projNode.getAttribute("scale"));
             }
             
             // Convert to radians
@@ -655,6 +659,20 @@ NDefs::EProjectionType CSettings::GetProjectionType() const
 {
     return m_projectionType;
 }
+
+
+
+
+/************************************************************************
+*    desc:  Get the projection scale
+************************************************************************/
+float CSettings::GetProjectionScale() const
+{
+    return m_projectionScale;
+}
+
+
+
 
 
 /************************************************************************

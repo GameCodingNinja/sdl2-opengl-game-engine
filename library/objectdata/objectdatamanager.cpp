@@ -18,11 +18,10 @@
 #include <managers/vertexbuffermanager.h>
 #include <managers/texturemanager.h>
 #include <managers/meshmanager.h>
+#include <managers/spritesheetmanager.h>
 
 // Boost lib dependencies
 #include <boost/format.hpp>
-
-#include "spritesheetmanager.h"
 
 /************************************************************************
  *    desc:  Constructor                                                             

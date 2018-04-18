@@ -23,6 +23,10 @@
 #include <vector>
 #include <deque>
 
+// Forward Declarations
+class CObject2D;
+class CMatrix;
+
 class CBasicStageStrategy2D : public iSpriteStrategy, boost::noncopyable
 {
 public:
@@ -47,10 +51,11 @@ public:
 
     // Transform the actor
     virtual void Transform() override;
-    virtual void Transform( const class CObject2D & object ) override;
+    virtual void Transform( const CObject2D & object ) override;
 
     // Render the actors
-    virtual void Render( const class CMatrix & matrix ) override;
+    virtual void Render() override;
+    virtual void Render( const CMatrix & matrix ) override;
     
     // Find if the sprite exists
     bool Find( iSprite2D * piSprite );

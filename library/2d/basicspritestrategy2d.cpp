@@ -17,6 +17,7 @@
 #include <utilities/xmlParser.h>
 #include <utilities/deletefuncs.h>
 #include <utilities/genfunc.h>
+#include <managers/cameramanager.h>
 #include <managers/signalmanager.h>
 #include <objectdata/objectdata2d.h>
 #include <objectdata/objectdatamanager.h>
@@ -27,9 +28,11 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( int idOffset, int idDir ) :
+CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( const std::string & cameraId, int idOffset, int idDir ) :
     CBaseStrategy( idOffset, idDir )
 {
+    m_cameraId = cameraId;
+    
 }   // constructor
 
 
@@ -422,10 +425,19 @@ void CBasicSpriteStrategy2D::Transform()
 
 
 /***************************************************************************
-*    desc:  Render the spriies
+*    desc:  Render the sprites
 ****************************************************************************/
 void CBasicSpriteStrategy2D::Render( const CMatrix & matrix )
 {
+    for( auto iter : m_pSpriteVec )
+        iter->Render( matrix );
+
+}   // Render
+
+void CBasicSpriteStrategy2D::Render()
+{
+    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+
     for( auto iter : m_pSpriteVec )
         iter->Render( matrix );
 

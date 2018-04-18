@@ -29,8 +29,7 @@
 ************************************************************************/
 CDevice::CDevice() :
     m_pWindow(nullptr),
-    m_context(nullptr),
-    m_pScreenSurface(nullptr)
+    m_context(nullptr)
 {
 }   // constructor
 
@@ -107,9 +106,6 @@ void CDevice::Create()
 
     // Init current gamepads plugged in at startup
     InitStartupGamepads();
-            
-    // Create the projection matrixes
-    CreateProjMatrix();
     
 }   // Create
 
@@ -125,37 +121,7 @@ void CDevice::EnableVSync( bool enable )
 }   // EnableVSync
 
 
-/************************************************************************
-*    desc:  Create the projection matrixes
-************************************************************************/
-void CDevice::CreateProjMatrix()
-{
-    m_perspectiveMatrix.PerspectiveFovRH(
-        CSettings::Instance().GetViewAngle(),
-        CSettings::Instance().GetScreenAspectRatio().w,
-        CSettings::Instance().GetMinZdist(),
-        CSettings::Instance().GetMaxZdist() );
 
-    m_orthographicMatrix.OrthographicRH(
-        CSettings::Instance().GetDefaultSize().GetW(),
-        CSettings::Instance().GetDefaultSize().GetH(),
-        CSettings::Instance().GetMinZdist(),
-        CSettings::Instance().GetMaxZdist() );
-
-}   // CreateProjMatrix
-
-
-/************************************************************************
-*    desc:  Get the projection matrix
-************************************************************************/
-const CMatrix & CDevice::GetProjectionMatrix( NDefs::EProjectionType type ) const
-{
-    if( type == NDefs::EPT_PERSPECTIVE )
-        return m_perspectiveMatrix;
-    else
-        return m_orthographicMatrix;
-
-}   // GetProjectionMatrix
 
 
 /***************************************************************************
@@ -205,28 +171,6 @@ SDL_Window * CDevice::GetWindow()
     return m_pWindow;
 
 }   // GetWindow
-
-
-/***************************************************************************
-*   desc:  Get the SDL window surface
- ****************************************************************************/
-SDL_Surface * CDevice::GetSurface()
-{
-    // Create the window surface. We don't own the surface so DON'T FREE
-    // This is for 2D software rendering for loading screens
-    if( m_pScreenSurface == nullptr )
-    {
-        if( m_pWindow == nullptr )
-            throw NExcept::CCriticalException("Game window has not be created!", SDL_GetError() );
-        
-        m_pScreenSurface = SDL_GetWindowSurface( m_pWindow );
-        if( m_pScreenSurface == nullptr )
-            throw NExcept::CCriticalException("Surface Creation error!", SDL_GetError());
-    }
-    
-    return m_pScreenSurface;
-
-}   // GetSurface
 
 
 /***************************************************************************

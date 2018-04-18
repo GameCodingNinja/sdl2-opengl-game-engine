@@ -11,7 +11,7 @@
 // Game lib dependencies
 #include <objectdata/objectdatamanager.h>
 #include <utilities/highresolutiontimer.h>
-#include <system/device.h>
+#include <managers/cameramanager.h>
 #include <gui/menumanager.h>
 #include <common/camera.h>
 
@@ -132,8 +132,7 @@ void CTitleScreenState::PreRender()
 {
     CCommonState::PreRender();
 
-    const CMatrix & orthoMatrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
-    m_background.Render( orthoMatrix );
+    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix()  );
 
 }   // PreRender
 

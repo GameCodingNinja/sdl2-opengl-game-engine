@@ -30,6 +30,7 @@
 #include <managers/signalmanager.h>
 #include <managers/spritestrategymanager.h>
 #include <managers/spritesheetmanager.h>
+#include <managers/cameramanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>
@@ -119,9 +120,6 @@ void CStartUpState::Fade(
 {
     CColor inc = (finalColor - cur) / time;
     CColor current = cur;
-    
-    // Need the projection matrix
-    const CMatrix & matrix = CDevice::Instance().GetProjectionMatrix( NDefs::EPT_ORTHOGRAPHIC );
 
     do
     {
@@ -138,7 +136,7 @@ void CStartUpState::Fade(
         glClear( GL_COLOR_BUFFER_BIT );
 
         CShaderMgr::Instance().SetShaderColor( "shader_2d", "additive", current );
-        sprite.Render( matrix );
+        sprite.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 
