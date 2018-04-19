@@ -74,13 +74,11 @@ add_library(
         physics/physicscomponent2d.cpp
         physics/physicscomponent3d.cpp
         2d/font.cpp
-        2d/isprite2d.cpp
         2d/sprite2d.cpp
         2d/spritechild2d.cpp
         2d/visualcomponent2d.cpp
         2d/object2d.cpp
         2d/actorsprite2d.cpp
-        2d/iaibase2d.cpp
         2d/sector2d.cpp
         2d/basicspritestrategy2d.cpp
         2d/basicstagestrategy2d.cpp
@@ -106,6 +104,8 @@ add_library(
         common/fontdata.cpp
         common/fontproperties.cpp
         common/ispritestrategy.cpp
+        common/isprite.cpp
+        common/iaibase.cpp
         slot/symbol2d.cpp
         slot/symbolsetview.cpp
         slot/symbolsetviewmanager.cpp

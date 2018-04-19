@@ -14,7 +14,7 @@ int main()
     
     // Register the script items
     RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
-    NScriptGlobals::Register( CScriptManager::Instance().GetEnginePtr() );
+    NScriptGlobals::Register();
 
     CScriptManager::Instance().LoadGroup("(test)");
 

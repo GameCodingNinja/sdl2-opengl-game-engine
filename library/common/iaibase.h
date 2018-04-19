@@ -1,25 +1,25 @@
 
 /************************************************************************
-*    FILE NAME:       iaibase2d.h
+*    FILE NAME:       iaibase.h
 *
 *    DESCRIPTION:     iAIBase interface Class
 ************************************************************************/
 
-#ifndef __i_ai_base_2d_h__
-#define __i_ai_base_2d_h__
+#ifndef __i_ai_base_h__
+#define __i_ai_base_h__
 
 // Forward declaration(s)
 union SDL_Event;
 
-class iAIBase2D
+class iAIBase
 {
 public:
 
     // Constructor
-    iAIBase2D();
+    iAIBase();
 
     // Destructor
-    virtual ~iAIBase2D();
+    virtual ~iAIBase();
     
     // Do any initializing
     virtual void Init();

@@ -132,7 +132,7 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 /***************************************************************************
 *    decs:  Call back function to create actor ai
 ****************************************************************************/
-void CGame::AICreateCallBack( const std::string & aiName, iSprite2D * pSprite )
+void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 {
     if( aiName == "player_ship" )
         pSprite->SetAI( new CPlayerShipAI( pSprite ) );

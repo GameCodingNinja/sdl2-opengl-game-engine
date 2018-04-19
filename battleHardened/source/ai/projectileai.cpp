@@ -19,7 +19,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CProjectileAI::CProjectileAI( iSprite2D * pSprite ) :
+CProjectileAI::CProjectileAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CSprite2D *>(pSprite) ),
     m_firstUpdate(true),
     m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)"))

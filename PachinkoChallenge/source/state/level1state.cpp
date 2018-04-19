@@ -109,7 +109,7 @@ void CLevel1State::Init()
     
     // Set the initial camera scale
     CCameraMgr::Instance().AddOrthographicCamera("game", 5.f, 1000.f, 1.65);
-    CCameraMgr::Instance().TransformActiveCamera();
+    CCameraMgr::Instance().Transform();
     
     // Reset the camera
     //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );

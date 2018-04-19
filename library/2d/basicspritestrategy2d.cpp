@@ -35,6 +35,11 @@ CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( const std::string & cameraId, in
     
 }   // constructor
 
+CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( int idOffset, int idDir ) :
+    CBaseStrategy( idOffset, idDir )
+{
+}   // constructor
+
 
 /************************************************************************
 *    desc:  destructor                                                             
@@ -125,7 +130,7 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
 *    desc:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
-iSprite2D * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy2D::Create(
     const std::string & dataName,
     const int id,
     const CPoint<CWorldValue> & pos,
@@ -138,7 +143,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
     
-    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    std::pair<std::map<const int, iSprite *>::iterator, bool> m_iter;
     
     // Create the sprite
     if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
@@ -199,7 +204,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite2D * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy2D::Create(
     const std::string & dataName,
     const int id )
 {
@@ -209,7 +214,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
     
-    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    std::pair<std::map<const int, iSprite *>::iterator, bool> m_iter;
     
     // Create the sprite
     if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
@@ -260,7 +265,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite2D * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy2D::Create(
     const std::string & group,
     const std::string & name,
     const int id,
@@ -271,7 +276,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
     // If the sprite defined a unique id then use that
     int spriteId( (id + m_idOffset) * m_idDir );
     
-    std::pair<std::map<const int, iSprite2D *>::iterator, bool> m_iter;
+    std::pair<std::map<const int, iSprite *>::iterator, bool> m_iter;
     
     // Allocate the sprite
     auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
@@ -305,7 +310,7 @@ iSprite2D * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite2D * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy2D::Create(
     const std::string & group,
     const std::string & name,
     const int id )
@@ -447,7 +452,7 @@ void CBasicSpriteStrategy2D::Render()
 /************************************************************************
 *    desc:  Get the pointer to the sprite
 ************************************************************************/
-iSprite2D * CBasicSpriteStrategy2D::get( const int id )
+iSprite * CBasicSpriteStrategy2D::get( const int id )
 {
     // See if this sprite has already been created
     auto iter = m_spriteMap.find( id );
@@ -464,7 +469,7 @@ iSprite2D * CBasicSpriteStrategy2D::get( const int id )
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CBasicSpriteStrategy2D::Find( iSprite2D * piSprite )
+bool CBasicSpriteStrategy2D::Find( iSprite * piSprite )
 {
     // See if this sprite has already been created
     auto iter = m_spriteMap.find( piSprite->GetId() );

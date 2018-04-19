@@ -19,7 +19,7 @@
 #include <map>
 
 // Forward Declarations
-class iSprite2D;
+class iSprite;
 
 class CSector2D : public CObject2D, boost::noncopyable
 {
@@ -57,10 +57,10 @@ public:
     bool InView();
     
     // Find if the sprite exists
-    bool Find( iSprite2D * piSprite );
+    bool Find( iSprite * piSprite );
     
     // Get the pointer to the sprite
-    iSprite2D * Get( const std::string & spriteName );
+    iSprite * Get( const std::string & spriteName );
     
 private:
     
@@ -73,10 +73,10 @@ private:
 private:
     
     // sprite allocation vector
-    std::vector<iSprite2D *> m_pSpriteVec;
+    std::vector<iSprite *> m_pSpriteVec;
     
     // sprites with names
-    std::map<const std::string, iSprite2D *> m_pSpriteMap;
+    std::map<const std::string, iSprite *> m_pSpriteMap;
     
     // The projection type
     NDefs::EProjectionType m_projectionType;

@@ -13,7 +13,7 @@
 #include <objectdata/objectphysicsdata3d.h>
 #include <utilities/exceptionhandling.h>
 #include <common/color.h>
-#include <2d/iaibase2d.h>
+#include <common/iaibase.h>
 
 // Bullet Physics lib dependencies
 #include <btBulletCollisionCommon.h>
@@ -122,10 +122,10 @@ void CSprite3D::PhysicsUpdate()
 /************************************************************************
  *    desc:  do the render                                                            
  ************************************************************************/
-void CSprite3D::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
+void CSprite3D::Render( const CMatrix & projMatrix, const CMatrix & normalMatrix )
 {
     if( IsVisible() )
-        m_visualComponent.Render( m_matrix * projMatrix, m_rotMatrix * cameraMatrix );
+        m_visualComponent.Render( m_matrix * projMatrix, m_rotMatrix * normalMatrix );
 
 }   // Render
 
@@ -173,7 +173,7 @@ const CObjectData3D & CSprite3D::GetObjectData() const
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CSprite3D::SetAI( iAIBase2D * pAIBase )
+void CSprite3D::SetAI( iAIBase * pAIBase )
 {
     m_upAI.reset( pAIBase );
 
@@ -181,6 +181,16 @@ void CSprite3D::SetAI( iAIBase2D * pAIBase )
     m_upAI->Init();
 
 }   // SetAI
+
+
+/************************************************************************
+*    desc:  Get the unique id number
+************************************************************************/
+int CSprite3D::GetId() const
+{
+    return m_id;
+
+}   // GetId
 
 
 /************************************************************************

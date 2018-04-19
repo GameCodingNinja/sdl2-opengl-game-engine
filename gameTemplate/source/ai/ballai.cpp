@@ -14,7 +14,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CBallAI::CBallAI( iSprite2D * pSprite ) :
+CBallAI::CBallAI( iSprite * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
     m_generator(std::random_device{}())
 {

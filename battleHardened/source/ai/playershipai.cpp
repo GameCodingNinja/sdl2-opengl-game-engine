@@ -21,7 +21,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CPlayerShipAI::CPlayerShipAI( iSprite2D * pSprite ) :
+CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CActorSprite2D *>(pSprite) ),
     m_fireTailSprite( m_sprite.GetSprite("player_fire_tail") ),
     m_gunSprite( m_sprite.GetSprite("ship_gun") ),

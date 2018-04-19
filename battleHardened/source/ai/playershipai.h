@@ -9,7 +9,7 @@
 #define __player_ship_ai_h__
 
 // Physical component dependency
-#include <2d/iaibase2d.h>
+#include <common/iaibase.h>
 
 // Game lib dependencies
 #include <common/point.h>
@@ -18,14 +18,14 @@
 // Forward declaration(s)
 class CActorSprite2D;
 class CSprite2D;
-class iSprite2D;
+class iSprite;
 
-class CPlayerShipAI : public iAIBase2D
+class CPlayerShipAI : public iAIBase
 {
 public:
 
     // Constructor
-    CPlayerShipAI( iSprite2D * pSprite );
+    CPlayerShipAI( iSprite * pSprite );
 
     // Destructor
     virtual ~CPlayerShipAI();

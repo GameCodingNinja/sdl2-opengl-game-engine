@@ -9,27 +9,27 @@
 #define __projectile_ai_h__
 
 // Physical component dependency
-#include <2d/iaibase2d.h>
+#include <common/iaibase.h>
 
 // Game lib dependencies
 #include <common/point.h>
 
 // Forward declaration(s)
 class CSprite2D;
-class iSprite2D;
+class iSprite;
 class CBasicSpriteStrategy2D;
 
-class CProjectileAI : public iAIBase2D
+class CProjectileAI : public iAIBase
 {
 public:
 
     // Constructor
-    CProjectileAI( iSprite2D * pSprite );
+    CProjectileAI( iSprite * pSprite );
 
     // Destructor
     virtual ~CProjectileAI();
     
-    // Do any initalizing
+    // Do any initializing
     void Init() override;
     
     // Update animations, move sprites, etc.
@@ -49,7 +49,7 @@ private:
     // A flag for the first update of this projectile
     bool m_firstUpdate;
     
-    // pointer to sprite trategy. We don't won this pointer
+    // Reference to sprite strategy.
     CBasicSpriteStrategy2D & m_rStrategy;
 
 };

@@ -104,7 +104,7 @@ void CSpriteStrategyMgr::DeleteSprite( const std::string & strategyId, int sprit
 /************************************************************************
 *    desc:  create the sprite and provide a unique id number for each one
 ************************************************************************/
-iSprite2D * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
     const std::string & dataName,
     const CPoint<CWorldValue> & pos,
@@ -122,7 +122,7 @@ iSprite2D * CSpriteStrategyMgr::Create(
 
 }   // Create
 
-iSprite2D * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name,
@@ -141,7 +141,7 @@ iSprite2D * CSpriteStrategyMgr::Create(
 
 }   // Create
 
-iSprite2D * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
     const std::string & dataName )
 {
@@ -156,7 +156,7 @@ iSprite2D * CSpriteStrategyMgr::Create(
 
 }   // Create
 
-iSprite2D * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::Create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name )

@@ -14,7 +14,7 @@
 // Forward declaration(s)
 class btTransform;
 
-class CObject3D : public CObject2D
+class CObject3D : public virtual CObject2D
 {
 public:
 
@@ -36,7 +36,7 @@ protected:
 protected:
 
     // Matrix for rotations only
-    // Basicly used for normal calculations
+    // Basically used for normal calculations
     CMatrix m_rotMatrix;
 
 };

@@ -32,7 +32,7 @@
 #include <utilities/exceptionhandling.h>
 #include <utilities/settings.h>
 #include <utilities/statcounter.h>
-#include <2d/isprite2d.h>
+#include <common/isprite.h>
 #include <common/color.h>
 #include <common/build_defs.h>
 #include <objectdata/objectdatamanager.h>
@@ -133,7 +133,7 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 /***************************************************************************
 *    decs:  Call back function to create sprite ai
 ****************************************************************************/
-void CGame::AICreateCallBack( const std::string & aiName, iSprite2D * pSprite )
+void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 {
     if( aiName == "aiBall" )
         pSprite->SetAI( new CBallAI( pSprite ) );

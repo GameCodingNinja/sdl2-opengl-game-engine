@@ -39,7 +39,7 @@ public:
     ~CVisualComponent3D();
 
     // do the render
-    void Render( const CMatrix & matrix, const CMatrix & normalMatrix );
+    void Render( const CMatrix & matrix, const CMatrix & ropMatrix );
 
     // Set/Get the color
     void SetColor( const CColor & color );

@@ -153,7 +153,7 @@ CObject & CBasicStageStrategy2D::GetDefaultCameraPos()
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CBasicStageStrategy2D::Find( iSprite2D * piSprite )
+bool CBasicStageStrategy2D::Find( iSprite * piSprite )
 {
     for( auto & iter : m_sectorDeq )
     {

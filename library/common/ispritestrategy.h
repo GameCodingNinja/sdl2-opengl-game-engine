@@ -16,7 +16,7 @@
 #include <string>
 
 // Forward Declarations
-class iSprite2D;
+class iSprite;
 
 class iSpriteStrategy
 {
@@ -41,14 +41,14 @@ public:
     void SetCameraId( const std::string & cameraId );
     
     // Create the sprite
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & name,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ){ return nullptr; }
     
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & group,
         const std::string & name,
         const int id,
@@ -56,11 +56,11 @@ public:
         const CPoint<float> & rot,
         const CPoint<float> & scale ){ return nullptr; }
 
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & name,
         const int id ){ return nullptr; }
     
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & group,
         const std::string & name,
         const int id ){ return nullptr; }

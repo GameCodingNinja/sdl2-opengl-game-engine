@@ -1,15 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       iaibase2d.cpp
+*    FILE NAME:       iaibase.cpp
 *
 *    DESCRIPTION:     iAIBase interface Class
 ************************************************************************/
 
 // Physical component dependency
-#include <2d/iaibase2d.h>
-
-// Game lib dependencies
-#include <2d/isprite2d.h>
+#include <common/iaibase.h>
 
 // SDL/OpenGL lib dependencies
 #include <SDL.h>
@@ -17,7 +14,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-iAIBase2D::iAIBase2D()
+iAIBase::iAIBase()
 {
 }   // constructor
 
@@ -25,7 +22,7 @@ iAIBase2D::iAIBase2D()
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-iAIBase2D::~iAIBase2D()
+iAIBase::~iAIBase()
 {
 }   // destructor
 
@@ -33,7 +30,7 @@ iAIBase2D::~iAIBase2D()
 /************************************************************************
 *    desc:  Do any initializing
 ************************************************************************/
-void iAIBase2D::Init()
+void iAIBase::Init()
 {
     // empty by design
 }
@@ -42,7 +39,7 @@ void iAIBase2D::Init()
 /************************************************************************
 *    desc:  Handle player related messages
 ************************************************************************/
-void iAIBase2D::HandleEvent( const SDL_Event & rEvent )
+void iAIBase::HandleEvent( const SDL_Event & rEvent )
 {
     // empty by design
 }
@@ -51,7 +48,7 @@ void iAIBase2D::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Update animations, move sprites, etc.
 ************************************************************************/
-void iAIBase2D::Update()
+void iAIBase::Update()
 {
     // empty by design
 }
@@ -59,7 +56,7 @@ void iAIBase2D::Update()
 /************************************************************************
 *    desc:  Update the physics
 ************************************************************************/
-void iAIBase2D::PhysicsUpdate()
+void iAIBase::PhysicsUpdate()
 {
     // empty by design
 }

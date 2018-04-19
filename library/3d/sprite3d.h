@@ -9,7 +9,8 @@
 #define __sprite_3d_h__
 
 // Physical component dependency
-#include <3d/isprite3d.h>
+#include <common/isprite.h>
+#include <3d/object3d.h>
 
 // Game lib dependencies
 #include <3d/visualcomponent3d.h>
@@ -23,7 +24,7 @@
 class CObjectData3D;
 class CColor;
 
-class CSprite3D : public iSprite3D, boost::noncopyable
+class CSprite3D : public iSprite, public CObject3D, boost::noncopyable
 {
 public:
 
@@ -40,7 +41,7 @@ public:
     CVisualComponent3D & GetVisualComponent();
 
     // Get the physics component
-    CPhysicsComponent3D & GetPhysicsComponent() override;
+    CPhysicsComponent3D & GetPhysicsComponent();
 
     // Get the scripting component
     CScriptComponent & GetScriptComponent();
@@ -58,13 +59,16 @@ public:
     void Update() override;
     
     // Update the physics
-    void PhysicsUpdate();
+    void PhysicsUpdate() override;
 
     // do the render
-    void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) override;
+    void Render( const CMatrix & projMatrix, const CMatrix & normalMatrix ) override;
 
     // Set/Get the AI pointer
-    void SetAI( iAIBase2D * pAIBase ) override;
+    void SetAI( iAIBase * pAIBase ) override;
+    
+    // Get the unique id number
+    int GetId() const override;
     
     // Set/Get the color
     void SetColor( const CColor & color );
@@ -93,7 +97,10 @@ private:
     CPhysicsComponent3D m_physicsComponent;
 
     // Base AI scoped pointer
-    std::unique_ptr<iAIBase2D> m_upAI;
+    std::unique_ptr<iAIBase> m_upAI;
+    
+    // Unique Id number
+    int m_id;
 
 };
 

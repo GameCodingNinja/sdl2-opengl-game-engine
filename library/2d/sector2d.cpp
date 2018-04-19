@@ -9,7 +9,7 @@
 #include <2d/sector2d.h>
 
 // Game lib dependencies
-#include <2d/isprite2d.h>
+#include <common/isprite.h>
 #include <2d/sprite2d.h>
 #include <2d/actorsprite2d.h>
 #include <utilities/settings.h>
@@ -256,7 +256,7 @@ bool CSector2D::InPerspectiveView()
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CSector2D::Find( iSprite2D * piSprite )
+bool CSector2D::Find( iSprite * piSprite )
 {
     for( auto iter : m_pSpriteVec )
     {
@@ -272,7 +272,7 @@ bool CSector2D::Find( iSprite2D * piSprite )
 /************************************************************************
 *    desc:  Get the pointer to the sprite
 ************************************************************************/
-iSprite2D * CSector2D::Get( const std::string & spriteName )
+iSprite * CSector2D::Get( const std::string & spriteName )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pSpriteMap.find( spriteName );

@@ -9,7 +9,8 @@
 #define __actor_sprite_2d_h__
 
 // Physical component dependency
-#include <2d/isprite2d.h>
+#include <common/isprite.h>
+#include <3d/object3d.h>
 
 // Game lib dependencies
 #include <common/defs.h>
@@ -28,7 +29,7 @@
 // Forward declaration(s)
 class CActorData;
 
-class CActorSprite2D : public iSprite2D, boost::noncopyable
+class CActorSprite2D : public iSprite, public CObject3D, boost::noncopyable
 {
 public:
 
@@ -37,6 +38,9 @@ public:
 
     // Destructor
     virtual ~CActorSprite2D();
+    
+    // Get the physics component
+    CPhysicsComponent2D & GetPhysicsComponent();
     
     // Init the sprite
     void Init() override;
@@ -64,11 +68,8 @@ public:
     // Render the actor
     void Render( const CMatrix & matrix ) override;
     
-    // Get the physics component
-    CPhysicsComponent2D & GetPhysicsComponent() override;
-    
     // Set/Get the AI pointer
-    void SetAI( iAIBase2D * pAIBase ) override;
+    void SetAI( iAIBase * pAIBase ) override;
 
     // Is the actor in view
     bool InView();
@@ -116,7 +117,7 @@ private:
     CPhysicsComponent2D m_physicsComponent;
     
     // Base AI scoped pointer
-    std::unique_ptr<iAIBase2D> m_upAI;
+    std::unique_ptr<iAIBase> m_upAI;
     
     // sprite allocation vector
     std::deque<CSprite2D> m_spriteDeq;

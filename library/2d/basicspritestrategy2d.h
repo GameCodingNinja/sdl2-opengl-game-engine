@@ -26,7 +26,7 @@
 #include <map>
 
 // Forward Declarations
-class iSprite2D;
+class iSprite;
 class CSpriteDataContainer;
 class CMatrix;
 
@@ -35,7 +35,8 @@ class CBasicSpriteStrategy2D : public CBaseStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CBasicSpriteStrategy2D( const std::string & cameraId = "", int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy2D( const std::string & cameraId, int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy2D( int idOffset = 0, int idDir = 1 );
 
     // Destructor
     virtual ~CBasicSpriteStrategy2D();
@@ -44,14 +45,14 @@ public:
     void LoadFromFile( const std::string & file ) override;
 
     // Create the sprite
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & dataName,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
     
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & group,
         const std::string & name,
         const int id,
@@ -59,11 +60,11 @@ public:
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
     
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & dataName,
         const int id ) override;
     
-    virtual iSprite2D * Create(
+    virtual iSprite * Create(
         const std::string & group,
         const std::string & name,
         const int id ) override;
@@ -91,7 +92,7 @@ public:
     }
     
     // Find if the sprite exists
-    bool Find( iSprite2D * piSprite );
+    bool Find( iSprite * piSprite );
     
     // Get the sprite data by name
     CSpriteDataContainer & GetData( const std::string & name );
@@ -105,7 +106,7 @@ protected:
     void CreateObj( const std::string & name ) override;
     
     // Get the pointer to the sprite
-    iSprite2D * get( const int id );
+    iSprite * get( const int id );
 
 protected:
     
@@ -113,10 +114,10 @@ protected:
     std::map<const std::string, CSpriteDataContainer> m_dataMap;
 
     // Map of all the sprites
-    std::map<const int, iSprite2D *> m_spriteMap;
+    std::map<const int, iSprite *> m_spriteMap;
     
-    // Vector of iSprite2D pointers
-    std::vector<iSprite2D *> m_pSpriteVec;
+    // Vector of iSprite pointers
+    std::vector<iSprite *> m_pSpriteVec;
 };
 
 #endif  // __basic_sprite_strategy_2d_h__

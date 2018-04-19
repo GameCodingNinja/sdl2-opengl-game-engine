@@ -17,8 +17,6 @@
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
 
-//add "basestrategy" class
-
 // Standard lib dependencies
 #include <vector>
 #include <deque>
@@ -58,7 +56,7 @@ public:
     virtual void Render( const CMatrix & matrix ) override;
     
     // Find if the sprite exists
-    bool Find( iSprite2D * piSprite );
+    bool Find( iSprite * piSprite );
     
     // Get the default camera position
     CObject & GetDefaultCameraPos();

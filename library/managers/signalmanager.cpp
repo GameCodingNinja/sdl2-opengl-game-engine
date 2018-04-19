@@ -14,7 +14,7 @@
 #include <common/defs.h>
 #include <gui/uicontrol.h>
 #include <gui/menu.h>
-#include <2d/isprite2d.h>
+#include <common/isprite.h>
 
 // SDL/OpenGL lib dependencies
 #include <SDL.h>
@@ -79,12 +79,6 @@ void CSignalMgr::Connect_AICreate( const AICreateSignal::slot_type & slot )
 
 }   // Connect_AISpriteCreate
 
-void CSignalMgr::Connect_AICreate3D( const AICreateSignal3D::slot_type & slot )
-{
-    m_aiCreateSignal3d.connect( slot );
-
-}   // Connect_AISpriteCreate
-
 void CSignalMgr::Disconnect_AICreate()
 {
     m_aiCreateSignal.disconnect_all_slots();
@@ -145,15 +139,9 @@ void CSignalMgr::Broadcast( CMenu * pMenu )
 /************************************************************************
 *    desc:  Broadcast AI Sprite create signal
 ************************************************************************/
-void CSignalMgr::Broadcast( const std::string & aiName, iSprite2D * pSprite )
+void CSignalMgr::Broadcast( const std::string & aiName, iSprite * pSprite )
 {
     m_aiCreateSignal(aiName, pSprite);
-
-}   // Broadcast
-
-void CSignalMgr::Broadcast( const std::string & aiName, iSprite3D * pSprite )
-{
-    m_aiCreateSignal3d( aiName, pSprite );
 
 }   // Broadcast
 

@@ -21,7 +21,7 @@
 #include <vector>
 
 // Forward Declarations
-class iSprite2D;
+class iSprite;
 
 class CSpriteStrategyMgr : public CManagerBase
 {
@@ -44,14 +44,14 @@ public:
     void DeleteSprite( const std::string & strategyId, int spriteId );
     
     // create the sprite and provide a unique id number for each one
-    iSprite2D * Create(
+    iSprite * Create(
         const std::string & strategyId,
         const std::string & dataName,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
     
-    iSprite2D * Create(
+    iSprite * Create(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name,
@@ -59,11 +59,11 @@ public:
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
     
-    iSprite2D * Create(
+    iSprite * Create(
         const std::string & strategyId,
         const std::string & dataName );
     
-    iSprite2D * Create(
+    iSprite * Create(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name );
@@ -104,7 +104,7 @@ public:
     
     // Get a pointer to the strategy based on if the sprite can be found
     template <typename target>
-    target & Find( iSprite2D * piSprite )
+    target & Find( iSprite * piSprite )
     {
         target * pStrategy = nullptr;
         
@@ -204,7 +204,7 @@ private:
     int m_spriteInc;
     
     // Temporary vector to hold the return ids
-    std::vector<iSprite2D *> m_incReturn;
+    std::vector<iSprite *> m_incReturn;
 
 };
 

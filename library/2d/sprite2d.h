@@ -9,7 +9,7 @@
 #define __sprite_2d_h__
 
 // Physical component dependency
-#include <2d/isprite2d.h>
+#include <common/isprite.h>
 
 // Game lib dependencies
 #include <2d/visualcomponent2d.h>
@@ -28,9 +28,10 @@
 class CObjectData2D;
 class CColor;
 class CSpriteData;
+class iAIBase;
 struct XMLNode;
 
-class CSprite2D : public iSprite2D, boost::noncopyable
+class CSprite2D : public iSprite, boost::noncopyable
 {
 public:
 
@@ -67,7 +68,7 @@ public:
     CVisualComponent2D & GetVisualComponent();
 
     // Get the physics component
-    CPhysicsComponent2D & GetPhysicsComponent() override;
+    CPhysicsComponent2D & GetPhysicsComponent();
 
     // Get the scripting component
     CScriptComponent & GetScriptComponent();
@@ -91,7 +92,7 @@ public:
     int GetId() const override;
     
     // Set/Get the AI pointer
-    void SetAI( iAIBase2D * pAIBase ) override;
+    void SetAI( iAIBase * pAIBase ) override;
     
     // Get the font size
     const CSize<float> & GetFontSize() const;
@@ -145,7 +146,7 @@ protected:
     int m_id;
     
     // Base AI scoped pointer
-    std::unique_ptr<iAIBase2D> m_upAI;
+    std::unique_ptr<iAIBase> m_upAI;
     
     // Script function map. Tie events to script functions
     std::map<const std::string, std::string> m_scriptFunctionMap;

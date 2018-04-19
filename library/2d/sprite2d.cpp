@@ -14,8 +14,8 @@
 #include <utilities/exceptionhandling.h>
 #include <common/color.h>
 #include <common/spritedata.h>
+#include <common/iaibase.h>
 #include <utilities/xmlParser.h>
-#include <2d/iaibase2d.h>
 
 /************************************************************************
 *    desc:  Constructor
@@ -289,7 +289,7 @@ int CSprite2D::GetId() const
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CSprite2D::SetAI( iAIBase2D * pAIBase )
+void CSprite2D::SetAI( iAIBase * pAIBase )
 {
     m_upAI.reset( pAIBase );
 

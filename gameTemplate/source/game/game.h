@@ -19,7 +19,7 @@ class CSprite2D;
 class CUIControl;
 class iGameState;
 class CMenu;
-class iSprite2D;
+class iSprite;
 
 class CGame : public CBaseGame
 {
@@ -66,7 +66,7 @@ private:
     void SmartMenuCreateCallBack( CMenu * pMenu );
     
     // Call back function to create sprite ai
-    void AICreateCallBack( const std::string & aiName, iSprite2D * pSprite );
+    void AICreateCallBack( const std::string & aiName, iSprite * pSprite );
     
     // Callback for shader init
     void ShaderInitCallBack( const std::string & shaderId );

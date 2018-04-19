@@ -9,7 +9,7 @@
 #define __ball_ai_h__
 
 // Physical component dependency
-#include <2d/iaibase2d.h>
+#include <common/iaibase.h>
 
 // Game lib dependencies
 #include <common/point.h>
@@ -18,16 +18,16 @@
 #include <random>
 
 // Forward declaration(s)
-class iSprite2D;
+class iSprite;
 class CSprite2D;
 class CBasicSpriteStrategy2D;
 
-class CBallAI : public iAIBase2D
+class CBallAI : public iAIBase
 {
 public:
 
     // Constructor
-    CBallAI( iSprite2D * pSprite );
+    CBallAI( iSprite * pSprite );
 
     // Destructor
     virtual ~CBallAI();

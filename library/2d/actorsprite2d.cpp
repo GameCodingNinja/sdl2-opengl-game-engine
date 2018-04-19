@@ -13,7 +13,7 @@
 #include <utilities/settings.h>
 #include <common/actordata.h>
 #include <common/size.h>
-#include <2d/iaibase2d.h>
+#include <common/iaibase.h>
 #include <objectdata/objectdatamanager.h>
 #include <objectdata/objectdata2d.h>
 
@@ -54,7 +54,7 @@ CActorSprite2D::~CActorSprite2D()
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CActorSprite2D::SetAI( iAIBase2D * pAIBase )
+void CActorSprite2D::SetAI( iAIBase * pAIBase )
 {
     m_upAI.reset(pAIBase);
 
