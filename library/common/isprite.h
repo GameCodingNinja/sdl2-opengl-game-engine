@@ -14,7 +14,7 @@
 // Forward declaration(s)
 union SDL_Event;
 class iAIBase;
-class CPhysicsComponent2D;
+class CCamera;
 
 class iSprite : public virtual CObject2D
 {
@@ -39,8 +39,9 @@ public:
     virtual void PhysicsUpdate() = 0;
 
     // do the render
+    virtual void Render( const CCamera & camera ){};
     virtual void Render( const CMatrix & matrix ){};
-    virtual void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ){};
+    virtual void Render( const CMatrix & matrix, const CMatrix & rotMatrix ){};
     
     // Get the unique id number
     virtual int GetId() const = 0;

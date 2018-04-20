@@ -12,7 +12,7 @@
 #include <2d/sprite2d.h>
 #include <managers/soundmanager.h>
 #include <spritestrategy/spritestrategymanager.h>
-#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/basicspritestrategy.h>
 #include <utilities/settings.h>
 #include <utilities/highresolutiontimer.h>
 
@@ -21,7 +21,7 @@
 ************************************************************************/
 CBallAI::CBallAI( iSprite * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
-    m_rStrategy(CSpriteStrategyMgr::Instance().Find<CBasicSpriteStrategy2D>("_spriteStrategy")), // Find the strategy that has this ball
+    m_rStrategy(CSpriteStrategyMgr::Instance().Find<CBasicSpriteStrategy>("_spriteStrategy")), // Find the strategy that has this ball
     m_generator(std::random_device{}()),
     m_angularImpulse(-1, 1),
     m_rotation(-M_PI, M_PI)

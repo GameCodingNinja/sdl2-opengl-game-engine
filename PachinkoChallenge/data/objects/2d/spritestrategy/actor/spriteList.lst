@@ -1,62 +1,62 @@
 <spriteList defaultGroup="(level1)" defaultAIName="aiBall">
         
-    <sprite name="square_green" objectName="square_green">
+    <sprite2d name="square_green" objectName="square_green">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
 
-    <sprite name="square_blue" objectName="square_blue">
+    <sprite2d name="square_blue" objectName="square_blue">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
 
-    <sprite name="square_red" objectName="square_red">
+    <sprite2d name="square_red" objectName="square_red">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
 
-    <sprite name="triangle_green" objectName="triangle_green">
+    <sprite2d name="triangle_green" objectName="triangle_green">
     <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
     
-    <sprite name="triangle_blue" objectName="triangle_blue">
+    <sprite2d name="triangle_blue" objectName="triangle_blue">
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
     
-    <sprite name="triangle_red" objectName="triangle_red">
+    <sprite2d name="triangle_red" objectName="triangle_red">
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
 
-    <sprite name="circle_green" objectName="circle_green">
+    <sprite2d name="circle_green" objectName="circle_green">
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
     
-    <sprite name="circle_blue" objectName="circle_blue">
+    <sprite2d name="circle_blue" objectName="circle_blue">
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
     
-    <sprite name="circle_red" objectName="circle_red">
+    <sprite2d name="circle_red" objectName="circle_red">
         <scriptLst>
             <script fadeIn="Ball_FadeIn"/>
         </scriptLst>
-    </sprite>
+    </sprite2d>
 
-    <sprite name="strawberry" objectName="strawberry" id="0" aiName=""/>
+    <sprite2d name="strawberry" objectName="strawberry" id="0" aiName=""/>
  
 </spriteList>

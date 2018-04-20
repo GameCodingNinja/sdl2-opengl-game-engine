@@ -100,8 +100,8 @@ private:
     CMatrix m_perspectiveMatrix;
     CMatrix m_orthographicMatrix;
     
-    // Dummp camera
-    CCamera m_dummyCamera;
+    // Default camera
+    CCamera m_defaultCamera;
     
     // Active camera pointer
     CCamera * m_pActiveCamera;

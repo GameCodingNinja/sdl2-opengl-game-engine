@@ -1,23 +1,23 @@
 
 /************************************************************************
-*    FILE NAME:       loopstagestrategy2d.h
+*    FILE NAME:       loopstagestrategy.h
 *
-*    DESCRIPTION:     Loop 2D stage strategy
+*    DESCRIPTION:     Loop stage strategy
 *                     Strategy is optimized to move in a looping fassion
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/loopstagestrategy2d.h>
+#include <spritestrategy/loopstagestrategy.h>
 
 // Game lib dependencies
 #include <utilities/highresolutiontimer.h>
 #include <utilities/xmlparsehelper.h>
-#include <spritestrategy/sector2d.h>
+#include <spritestrategy/sector.h>
 
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CLoopStageStrategy2D::CLoopStageStrategy2D()
+CLoopStageStrategy::CLoopStageStrategy()
 {
     //m_loopEnd.x.i = -1;
     //m_loopInc.x = -0.05f;
@@ -30,7 +30,7 @@ CLoopStageStrategy2D::CLoopStageStrategy2D()
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-CLoopStageStrategy2D::~CLoopStageStrategy2D()
+CLoopStageStrategy::~CLoopStageStrategy()
 {
 }   // destructor
 
@@ -38,9 +38,9 @@ CLoopStageStrategy2D::~CLoopStageStrategy2D()
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CLoopStageStrategy2D::LoadFromNode( const XMLNode & node )
+void CLoopStageStrategy::LoadFromNode( const XMLNode & node )
 {
-    CLinearStageStrategy2D::LoadFromNode( node );
+    CLinearStageStrategy::LoadFromNode( node );
 
     const XMLNode loopStageNode = node.getChildNode( "loopingStage" );
 
@@ -68,7 +68,7 @@ void CLoopStageStrategy2D::LoadFromNode( const XMLNode & node )
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CLoopStageStrategy2D::Transform()
+void CLoopStageStrategy::Transform()
 {
     if( m_dirType > ESD_NULL )
     {
@@ -93,9 +93,9 @@ void CLoopStageStrategy2D::Transform()
 
         m_loopOffset.Transform();
 
-        CLinearStageStrategy2D::Transform( m_loopOffset );
+        CLinearStageStrategy::Transform( m_loopOffset );
     }
     else
-        CLinearStageStrategy2D::Transform();
+        CLinearStageStrategy::Transform();
 
 }   // Transform

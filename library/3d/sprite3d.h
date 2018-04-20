@@ -62,7 +62,8 @@ public:
     void PhysicsUpdate() override;
 
     // do the render
-    void Render( const CMatrix & projMatrix, const CMatrix & normalMatrix ) override;
+    void Render( const CCamera & camera ) override;
+    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
 
     // Set/Get the AI pointer
     void SetAI( iAIBase * pAIBase ) override;

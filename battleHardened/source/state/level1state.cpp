@@ -19,8 +19,8 @@
 #include <managers/cameramanager.h>
 #include <common/camera.h>
 #include <script/scriptmanager.h>
-#include <spritestrategy/basicspritestrategy2d.h>
-#include <spritestrategy/loopstagestrategy2d.h>
+#include <spritestrategy/basicspritestrategy.h>
+#include <spritestrategy/loopstagestrategy.h>
 #include <spritestrategy/spritestrategymanager.h>
 #include <2d/actorsprite2d.h>
 
@@ -199,8 +199,8 @@ namespace NLevel_1
     
     void Load()
     {
-        CSpriteStrategyMgr::Instance().AddStrategy( "(actor)", new CBasicSpriteStrategy2D );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CLoopStageStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(actor)", new CBasicSpriteStrategy );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CLoopStageStrategy );
         
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(actor)");

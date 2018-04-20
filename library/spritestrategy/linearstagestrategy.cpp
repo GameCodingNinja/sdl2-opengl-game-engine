@@ -1,20 +1,20 @@
 
 /************************************************************************
-*    FILE NAME:       linearstagestrategy2d.h
+*    FILE NAME:       linearstagestrategy.h
 *
-*    DESCRIPTION:     Linear 2D stage strategy
-*                     Strategy is optimized to move in a linear fassion
+*    DESCRIPTION:     Linear stage strategy
+*                     Strategy is optimized to move in a linear fashion
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/linearstagestrategy2d.h>
+#include <spritestrategy/linearstagestrategy.h>
 
 // Game lib dependencies
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
 #include <utilities/settings.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/sector2d.h>
+#include <spritestrategy/sector.h>
 
 // Standard lib dependencies
 #include <cstring>
@@ -22,7 +22,7 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CLinearStageStrategy2D::CLinearStageStrategy2D() :
+CLinearStageStrategy::CLinearStageStrategy() :
     m_startIndex(0),
     m_dirType(ESD_NULL)
 {
@@ -32,7 +32,7 @@ CLinearStageStrategy2D::CLinearStageStrategy2D() :
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-CLinearStageStrategy2D::~CLinearStageStrategy2D()
+CLinearStageStrategy::~CLinearStageStrategy()
 {
 }   // destructor
 
@@ -40,9 +40,9 @@ CLinearStageStrategy2D::~CLinearStageStrategy2D()
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CLinearStageStrategy2D::LoadFromNode( const XMLNode & node )
+void CLinearStageStrategy::LoadFromNode( const XMLNode & node )
 {
-    CBasicStageStrategy2D::LoadFromNode( node );
+    CBasicStageStrategy::LoadFromNode( node );
 
     const XMLNode linearStageNode = node.getChildNode( "linearStage" );
     if( !linearStageNode.isEmpty() )
@@ -74,7 +74,7 @@ void CLinearStageStrategy2D::LoadFromNode( const XMLNode & node )
 /************************************************************************
 *    desc:  Init the range of sectors to check
 ************************************************************************/
-void CLinearStageStrategy2D::InitRange()
+void CLinearStageStrategy::InitRange()
 {
     m_firstIndex = m_startIndex;
 
@@ -88,7 +88,7 @@ void CLinearStageStrategy2D::InitRange()
 /***************************************************************************
 *    desc:  Set the range based on the sector's visibility
 ****************************************************************************/
-bool CLinearStageStrategy2D::SetRange( const size_t index )
+bool CLinearStageStrategy::SetRange( const size_t index )
 {
     if( !m_sectorDeq.at(index).InView() )
     {
@@ -126,7 +126,7 @@ bool CLinearStageStrategy2D::SetRange( const size_t index )
 /***************************************************************************
 *    desc:  Update the actors
 ****************************************************************************/
-void CLinearStageStrategy2D::Update()
+void CLinearStageStrategy::Update()
 {
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
         m_sectorDeq.at(i).Update();
@@ -137,7 +137,7 @@ void CLinearStageStrategy2D::Update()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CLinearStageStrategy2D::Transform()
+void CLinearStageStrategy::Transform()
 {
     size_t tmpFirstIndex = m_firstIndex;
 
@@ -159,7 +159,7 @@ void CLinearStageStrategy2D::Transform()
 
 }   // Transform
 
-void CLinearStageStrategy2D::Transform( const CObject2D & object )
+void CLinearStageStrategy::Transform( const CObject2D & object )
 {
     size_t tmpFirstIndex = m_firstIndex;
 
@@ -185,18 +185,18 @@ void CLinearStageStrategy2D::Transform( const CObject2D & object )
 /***************************************************************************
 *    desc:  Render the actors
 ****************************************************************************/
-void CLinearStageStrategy2D::Render( const CMatrix & matrix )
+void CLinearStageStrategy::Render( const CMatrix & matrix )
 {
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
         m_sectorDeq.at(i).Render( matrix );
 
 }   // Render
 
-void CLinearStageStrategy2D::Render()
+void CLinearStageStrategy::Render()
 {
-    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+    auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
 
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
-        m_sectorDeq.at(i).Render( matrix );
+        m_sectorDeq.at(i).Render( camera );
 
 }   // Render

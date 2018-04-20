@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       linearstagestrategy2d.h
+*    FILE NAME:       linearstagestrategy.h
 *
-*    DESCRIPTION:     Linear 2D stage strategy
-*                     Strategy is optimized to move in a linear fassion
+*    DESCRIPTION:     Linear stage strategy
+*                     Strategy is optimized to move in a linear fashion
 ************************************************************************/
 
-#ifndef __linear_stage_strategy_2d_h__
-#define __linear_stage_strategy_2d_h__
+#ifndef __linear_stage_strategy_h__
+#define __linear_stage_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/basicstagestrategy2d.h>
+#include <spritestrategy/basicstagestrategy.h>
 
 // Game lib dependencies
-#include <spritestrategy/sector2d.h>
+#include <spritestrategy/sector.h>
 
 // Standard lib dependencies
 #include <vector>
@@ -23,15 +23,15 @@
 class CObject2D;
 class CMatrix;
 
-class CLinearStageStrategy2D : public CBasicStageStrategy2D
+class CLinearStageStrategy : public CBasicStageStrategy
 {
 public:
 
     // Constructor
-    CLinearStageStrategy2D();
+    CLinearStageStrategy();
 
     // Destructor
-    virtual ~CLinearStageStrategy2D();
+    virtual ~CLinearStageStrategy();
 
     // Update the actors
     void Update() override;
@@ -79,4 +79,4 @@ protected:
     EStageDirection m_dirType;
 };
 
-#endif  // __linear_stage_strategy_2d_h__
+#endif  // __linear_stage_strategy_h__

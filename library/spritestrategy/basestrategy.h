@@ -20,6 +20,7 @@ class CBaseStrategy : public iSpriteStrategy
 public:
 
     // Constructor
+    CBaseStrategy( const std::string & cameraId, int idOffset, int idDir );
     CBaseStrategy( int idOffset, int idDir );
 
     // Destructor

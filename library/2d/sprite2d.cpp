@@ -15,6 +15,7 @@
 #include <common/color.h>
 #include <common/spritedata.h>
 #include <common/iaibase.h>
+#include <common/camera.h>
 #include <utilities/xmlParser.h>
 
 /************************************************************************
@@ -232,6 +233,13 @@ void CSprite2D::Render( const CMatrix & matrix )
 {
     if( IsVisible() )
         m_visualComponent.Render( m_matrix, matrix );
+
+}   // Render
+
+void CSprite2D::Render( const CCamera & camera )
+{
+    if( IsVisible() )
+        m_visualComponent.Render( m_matrix, camera.GetFinalMatrix() );
 
 }   // Render
 

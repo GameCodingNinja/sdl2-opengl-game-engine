@@ -55,6 +55,19 @@ void CCameraMgr::CreateProjMatrix()
     for( auto & iter : m_cameraMap )
         iter.second.RecreateProjMatrix();
     
+    // Generate the default camera
+    if( CSettings::Instance().GetProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
+        m_defaultCamera.GenerateOrthographicProjection(
+            CSettings::Instance().GetMinZdist(),
+            CSettings::Instance().GetMaxZdist(),
+            CSettings::Instance().GetProjectionScale() );
+    else
+        m_defaultCamera.GeneratePerspectiveProjection(
+            CSettings::Instance().GetViewAngle(),
+            CSettings::Instance().GetMinZdist(),
+            CSettings::Instance().GetMaxZdist(),
+            CSettings::Instance().GetProjectionScale() );
+    
 }   // CreateProjMatrix
 
 
@@ -139,11 +152,7 @@ CCamera & CCameraMgr::GetCamera( const std::string & id )
     if( iter != m_cameraMap.end() )
         return iter->second;
     
-    throw NExcept::CCriticalException("Get Camera Error!", 
-        boost::str( boost::format("Camera id does not exist (%s).\n\n%s\nLine: %s")
-            % id % __FUNCTION__ % __LINE__ ));
-    
-    return m_dummyCamera;
+    return m_defaultCamera;
     
 }   // GetCamera
 
@@ -153,11 +162,7 @@ const CCamera & CCameraMgr::GetCamera( const std::string & id ) const
     if( iter != m_cameraMap.end() )
         return iter->second;
     
-    throw NExcept::CCriticalException("Get Camera Error!", 
-        boost::str( boost::format("Camera id does not exist (%s).\n\n%s\nLine: %s")
-            % id % __FUNCTION__ % __LINE__ ));
-    
-    return m_dummyCamera;
+    return m_defaultCamera;
     
 }   // GetCamera
 

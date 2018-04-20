@@ -1,31 +1,31 @@
 
 /************************************************************************
-*    FILE NAME:       loopstagestrategy2d.h
+*    FILE NAME:       loopstagestrategy.h
 *
-*    DESCRIPTION:     Loop 2D stage strategy
+*    DESCRIPTION:     Loop stage strategy
 *                     Strategy is optimized to move in a looping fassion
 ************************************************************************/
 
-#ifndef __loop_stage_strategy_2d_h__
-#define __loop_stage_strategy_2d_h__
+#ifndef __loop_stage_strategy_h__
+#define __loop_stage_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/linearstagestrategy2d.h>
+#include <spritestrategy/linearstagestrategy.h>
 
 // Game lib dependencies
 #include <common/worldvalue.h>
 #include <common/point.h>
 #include <2d/object2d.h>
 
-class CLoopStageStrategy2D : public CLinearStageStrategy2D
+class CLoopStageStrategy : public CLinearStageStrategy
 {
 public:
 
     // Constructor
-    CLoopStageStrategy2D();
+    CLoopStageStrategy();
 
     // Destructor
-    virtual ~CLoopStageStrategy2D();
+    virtual ~CLoopStageStrategy();
     
     // Load thes actor data from node
     void LoadFromNode( const XMLNode & node ) override;
@@ -48,4 +48,4 @@ private:
     CObject2D m_loopOffset;
 };
 
-#endif  // __loop_stage_strategy_2d_h__
+#endif  // __loop_stage_strategy_h__

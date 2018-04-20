@@ -268,10 +268,10 @@ void CSpriteStrategyMgr::Render( const CMatrix & matrix )
 
 }   // Render
 
-void CSpriteStrategyMgr::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
+void CSpriteStrategyMgr::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     for( auto iter : m_pStrategyVec )
-        iter->Render( projMatrix, cameraMatrix );
+        iter->Render( matrix, rotMatrix );
 
 }   // Render
 

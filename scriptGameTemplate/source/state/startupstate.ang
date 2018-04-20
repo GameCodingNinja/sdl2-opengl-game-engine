@@ -20,6 +20,9 @@ final class CStartUpState : iGameState
     //
     void Init() override
     {
+        // Create a basic strategy
+        Strategy_CreateBasicSpriteStrategy( "basicStrategy", "" );
+        
         // Load the object data list table
         ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
         

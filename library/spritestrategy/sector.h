@@ -5,11 +5,11 @@
 *    DESCRIPTION:     Class the creates & renders all the sector sprites
 ************************************************************************/
 
-#ifndef __sector_2d_h__
-#define __sector_2d_h__
+#ifndef __sector_h__
+#define __sector_h__
 
 // Physical component dependency
-#include <2d/object2d.h>
+#include <3d/object3d.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
@@ -20,16 +20,17 @@
 
 // Forward Declarations
 class iSprite;
+class CCamera;
 
-class CSector2D : public CObject2D, boost::noncopyable
+class CSector : public CObject3D, boost::noncopyable
 {
 public:
 
     // Constructor
-    CSector2D();
+    CSector();
 
     // Destructor
-    virtual ~CSector2D();
+    virtual ~CSector();
     
     // Load the sector data from node
     void LoadFromNode( const struct XMLNode & node );
@@ -51,7 +52,9 @@ public:
     void Transform( const CObject2D & object ) override;
 
     // Render the actor
+    void Render( const CCamera & camera );
     void Render( const CMatrix & matrix );
+    void Render( const CMatrix & matrix, const CMatrix & rotMatrix );
 
     // Is the actor in view
     bool InView();
@@ -86,6 +89,6 @@ private:
 
 };
 
-#endif  // __sector_2d_h__
+#endif  // __sector_h__
 
 

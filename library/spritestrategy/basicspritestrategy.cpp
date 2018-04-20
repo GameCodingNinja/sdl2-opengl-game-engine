@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       basicspritestrategy2d.cpp
+*    FILE NAME:       basicspritestrategy.cpp
 *
 *    DESCRIPTION:     Basic sprite strategy 2d class
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/basicspritestrategy.h>
 
 // Game lib dependencies
 #include <common/spritedata.h>
@@ -28,14 +28,12 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( const std::string & cameraId, int idOffset, int idDir ) :
-    CBaseStrategy( idOffset, idDir )
+CBasicSpriteStrategy::CBasicSpriteStrategy( const std::string & cameraId, int idOffset, int idDir ) :
+    CBaseStrategy( cameraId, idOffset, idDir )
 {
-    m_cameraId = cameraId;
-    
 }   // constructor
 
-CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( int idOffset, int idDir ) :
+CBasicSpriteStrategy::CBasicSpriteStrategy( int idOffset, int idDir ) :
     CBaseStrategy( idOffset, idDir )
 {
 }   // constructor
@@ -44,7 +42,7 @@ CBasicSpriteStrategy2D::CBasicSpriteStrategy2D( int idOffset, int idDir ) :
 /************************************************************************
 *    desc:  destructor                                                             
 ************************************************************************/
-CBasicSpriteStrategy2D::~CBasicSpriteStrategy2D()
+CBasicSpriteStrategy::~CBasicSpriteStrategy()
 {
     for( auto & iter : m_spriteMap )
         NDelFunc::Delete( iter.second );
@@ -55,7 +53,7 @@ CBasicSpriteStrategy2D::~CBasicSpriteStrategy2D()
 /************************************************************************
  *    desc:  Load the sprite data from node
  ************************************************************************/
-void CBasicSpriteStrategy2D::LoadFromFile( const std::string & file )
+void CBasicSpriteStrategy::LoadFromFile( const std::string & file )
 {
     // open and parse the XML file:
     XMLNode spriteListNode = XMLNode::openFileHelper( file.c_str(), "spriteList" );
@@ -86,11 +84,23 @@ void CBasicSpriteStrategy2D::LoadFromFile( const std::string & file )
             bool duplicate(false);
             
             // Load the sprite data into the map
-            if( tag == "sprite" )
-                duplicate = !m_dataMap.emplace( name, new CSpriteData( spriteNode, defGroup, defObjName, defAIName ) ).second;
+            if( tag == "sprite2d" )
+                duplicate = !m_dataMap.emplace( 
+                    std::piecewise_construct,
+                    std::forward_as_tuple(name),
+                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::SPRITE2D) ).second;
             
-            else if( tag == "actor" )
-                duplicate = !m_dataMap.emplace( name, new CActorData( spriteNode, defGroup, defObjName, defAIName ) ).second;
+            else if( tag == "sprite3d" )
+                duplicate = !m_dataMap.emplace( 
+                    std::piecewise_construct,
+                    std::forward_as_tuple(name),
+                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::SPRITE3D) ).second;
+            
+            else if( tag == "actor2d" )
+                duplicate = !m_dataMap.emplace( 
+                    std::piecewise_construct,
+                    std::forward_as_tuple(name),
+                    std::forward_as_tuple(new CActorData(spriteNode, defGroup, defObjName, defAIName), NDefs::ACTOR2D) ).second;
             
             else
                 throw NExcept::CCriticalException("Sprite Load Error!",
@@ -113,7 +123,7 @@ void CBasicSpriteStrategy2D::LoadFromFile( const std::string & file )
 /************************************************************************
  *    desc:  Get the sprite data container by name
  ************************************************************************/
-CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name )
+CSpriteDataContainer & CBasicSpriteStrategy::GetData( const std::string & name )
 {
     auto iter = m_dataMap.find( name );
     if( iter == m_dataMap.end() )
@@ -130,7 +140,7 @@ CSpriteDataContainer & CBasicSpriteStrategy2D::GetData( const std::string & name
 *    desc:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
-iSprite * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy::Create(
     const std::string & dataName,
     const int id,
     const CPoint<CWorldValue> & pos,
@@ -204,7 +214,7 @@ iSprite * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy::Create(
     const std::string & dataName,
     const int id )
 {
@@ -265,7 +275,7 @@ iSprite * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy::Create(
     const std::string & group,
     const std::string & name,
     const int id,
@@ -310,7 +320,7 @@ iSprite * CBasicSpriteStrategy2D::Create(
 
 }   // Create
 
-iSprite * CBasicSpriteStrategy2D::Create(
+iSprite * CBasicSpriteStrategy::Create(
     const std::string & group,
     const std::string & name,
     const int id )
@@ -344,7 +354,7 @@ iSprite * CBasicSpriteStrategy2D::Create(
 /***************************************************************************
 *    desc:  Handle the deleting of any sprites
 ****************************************************************************/
-void CBasicSpriteStrategy2D::CreateObj( const std::string & name )
+void CBasicSpriteStrategy::CreateObj( const std::string & name )
 {
     Create( name, 0, CPoint<float>(), CPoint<float>(), CPoint<float>(1,1,1) );
     
@@ -355,7 +365,7 @@ void CBasicSpriteStrategy2D::CreateObj( const std::string & name )
 *    desc:  Handle the deleting of any sprites
 *           NOTE: Do not call from a destructor!
 ****************************************************************************/
-void CBasicSpriteStrategy2D::DeleteObj( int index )
+void CBasicSpriteStrategy::DeleteObj( int index )
 {
     // Find the sprite, delete it and remove entry from map
     const auto iter = m_spriteMap.find( index );
@@ -385,7 +395,7 @@ void CBasicSpriteStrategy2D::DeleteObj( int index )
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CBasicSpriteStrategy2D::Init()
+void CBasicSpriteStrategy::Init()
 {
     for( auto iter : m_pSpriteVec )
         iter->Init();
@@ -396,7 +406,7 @@ void CBasicSpriteStrategy2D::Init()
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CBasicSpriteStrategy2D::CleanUp()
+void CBasicSpriteStrategy::CleanUp()
 {
     for( auto iter : m_pSpriteVec )
         iter->CleanUp();
@@ -407,7 +417,7 @@ void CBasicSpriteStrategy2D::CleanUp()
 /***************************************************************************
 *    desc:  Update the sprites
 ****************************************************************************/
-void CBasicSpriteStrategy2D::Update()
+void CBasicSpriteStrategy::Update()
 {
     for( auto iter : m_pSpriteVec )
     {
@@ -421,7 +431,7 @@ void CBasicSpriteStrategy2D::Update()
 /************************************************************************
 *    desc:  Transform the sprites
 ************************************************************************/
-void CBasicSpriteStrategy2D::Transform()
+void CBasicSpriteStrategy::Transform()
 {
     for( auto iter : m_pSpriteVec )
         iter->Transform();
@@ -432,19 +442,26 @@ void CBasicSpriteStrategy2D::Transform()
 /***************************************************************************
 *    desc:  Render the sprites
 ****************************************************************************/
-void CBasicSpriteStrategy2D::Render( const CMatrix & matrix )
+void CBasicSpriteStrategy::Render( const CMatrix & matrix )
 {
     for( auto iter : m_pSpriteVec )
         iter->Render( matrix );
 
 }   // Render
 
-void CBasicSpriteStrategy2D::Render()
+void CBasicSpriteStrategy::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
-    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+    for( auto iter : m_pSpriteVec )
+        iter->Render( matrix, rotMatrix );
+
+}   // Render
+
+void CBasicSpriteStrategy::Render()
+{
+    const auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
 
     for( auto iter : m_pSpriteVec )
-        iter->Render( matrix );
+        iter->Render( camera );
 
 }   // Render
 
@@ -452,7 +469,7 @@ void CBasicSpriteStrategy2D::Render()
 /************************************************************************
 *    desc:  Get the pointer to the sprite
 ************************************************************************/
-iSprite * CBasicSpriteStrategy2D::get( const int id )
+iSprite * CBasicSpriteStrategy::get( const int id )
 {
     // See if this sprite has already been created
     auto iter = m_spriteMap.find( id );
@@ -469,7 +486,7 @@ iSprite * CBasicSpriteStrategy2D::get( const int id )
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CBasicSpriteStrategy2D::Find( iSprite * piSprite )
+bool CBasicSpriteStrategy::Find( iSprite * piSprite )
 {
     // See if this sprite has already been created
     auto iter = m_spriteMap.find( piSprite->GetId() );

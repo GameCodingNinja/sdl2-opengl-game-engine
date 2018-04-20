@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       basicstagestrategy2d.cpp
+*    FILE NAME:       basicstagestrategy.cpp
 *
-*    DESCRIPTION:     Basic 2D stage strategy
+*    DESCRIPTION:     Basic stage strategy
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/basicstagestrategy2d.h>
+#include <spritestrategy/basicstagestrategy.h>
 
 // Game lib dependencies
 #include <utilities/xmlParser.h>
@@ -15,7 +15,13 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CBasicStageStrategy2D::CBasicStageStrategy2D()
+CBasicStageStrategy::CBasicStageStrategy( const std::string & cameraId ) :
+    iSpriteStrategy(cameraId)
+{
+}   // constructor
+
+CBasicStageStrategy::CBasicStageStrategy() :
+    iSpriteStrategy()
 {
 }   // constructor
 
@@ -23,7 +29,7 @@ CBasicStageStrategy2D::CBasicStageStrategy2D()
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-CBasicStageStrategy2D::~CBasicStageStrategy2D()
+CBasicStageStrategy::~CBasicStageStrategy()
 {
 }   // destructor
 
@@ -31,7 +37,7 @@ CBasicStageStrategy2D::~CBasicStageStrategy2D()
 /************************************************************************
 *    desc:  Load the sector data from file
 ************************************************************************/
-void CBasicStageStrategy2D::LoadFromFile( const std::string & file )
+void CBasicStageStrategy::LoadFromFile( const std::string & file )
 {
     // open and parse the XML file:
     XMLNode node = XMLNode::openFileHelper( file.c_str(), "stage" );
@@ -49,7 +55,7 @@ void CBasicStageStrategy2D::LoadFromFile( const std::string & file )
 /************************************************************************
 *    desc:  Load thes sector data from node
 ************************************************************************/
-void CBasicStageStrategy2D::LoadFromNode( const XMLNode & node )
+void CBasicStageStrategy::LoadFromNode( const XMLNode & node )
 {
     XMLNode sectorsNode = node.getChildNode( "sectors" );
     if( !sectorsNode.isEmpty() )
@@ -72,7 +78,7 @@ void CBasicStageStrategy2D::LoadFromNode( const XMLNode & node )
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CBasicStageStrategy2D::Init()
+void CBasicStageStrategy::Init()
 {
     for( auto & iter : m_sectorDeq )
         iter.Init();
@@ -83,7 +89,7 @@ void CBasicStageStrategy2D::Init()
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CBasicStageStrategy2D::CleanUp()
+void CBasicStageStrategy::CleanUp()
 {
     for( auto & iter : m_sectorDeq )
         iter.CleanUp();
@@ -94,7 +100,7 @@ void CBasicStageStrategy2D::CleanUp()
 /***************************************************************************
 *    desc:  Update the sector
 ****************************************************************************/
-void CBasicStageStrategy2D::Update()
+void CBasicStageStrategy::Update()
 {
     for( auto & iter : m_sectorDeq )
         iter.Update();
@@ -105,14 +111,14 @@ void CBasicStageStrategy2D::Update()
 /************************************************************************
 *    desc:  Transform the sector
 ************************************************************************/
-void CBasicStageStrategy2D::Transform()
+void CBasicStageStrategy::Transform()
 {
     for( auto & iter : m_sectorDeq )
         iter.Transform();
 
 }   // Transform
 
-void CBasicStageStrategy2D::Transform( const CObject2D & object )
+void CBasicStageStrategy::Transform( const CObject2D & object )
 {
     for( auto & iter : m_sectorDeq )
         iter.Transform( object );
@@ -123,19 +129,26 @@ void CBasicStageStrategy2D::Transform( const CObject2D & object )
 /***************************************************************************
 *    desc:  Render the sector
 ****************************************************************************/
-void CBasicStageStrategy2D::Render( const CMatrix & matrix )
+void CBasicStageStrategy::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_sectorDeq )
         iter.Render( matrix );
 
 }   // Render
 
-void CBasicStageStrategy2D::Render()
+void CBasicStageStrategy::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
-    auto & matrix = CCameraMgr::Instance().GetCameraMatrix( m_cameraId );
+    for( auto & iter : m_sectorDeq )
+        iter.Render( matrix, rotMatrix );
+
+}   // Render
+
+void CBasicStageStrategy::Render()
+{
+    const auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
 
     for( auto & iter : m_sectorDeq )
-        iter.Render( matrix );
+        iter.Render( camera );
 
 }   // Render
 
@@ -143,7 +156,7 @@ void CBasicStageStrategy2D::Render()
 /************************************************************************
 *    desc:  Get the default camera position
 ************************************************************************/
-CObject & CBasicStageStrategy2D::GetDefaultCameraPos()
+CObject & CBasicStageStrategy::GetDefaultCameraPos()
 {
     return m_defaultCameraPos;
     
@@ -153,7 +166,7 @@ CObject & CBasicStageStrategy2D::GetDefaultCameraPos()
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CBasicStageStrategy2D::Find( iSprite * piSprite )
+bool CBasicStageStrategy::Find( iSprite * piSprite )
 {
     for( auto & iter : m_sectorDeq )
     {

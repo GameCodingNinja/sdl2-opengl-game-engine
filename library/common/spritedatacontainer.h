@@ -20,8 +20,8 @@ class CSpriteDataContainer
 public:
 
     // constructor
-    CSpriteDataContainer( CSpriteData * pData );
-    CSpriteDataContainer( CActorData * pData );
+    CSpriteDataContainer( CSpriteData * pData, int type );
+    CSpriteDataContainer( CActorData * pData, int type );
 
     // destructor
     ~CSpriteDataContainer();

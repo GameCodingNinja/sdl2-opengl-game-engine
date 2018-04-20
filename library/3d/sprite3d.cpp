@@ -13,6 +13,7 @@
 #include <objectdata/objectphysicsdata3d.h>
 #include <utilities/exceptionhandling.h>
 #include <common/color.h>
+#include <common/camera.h>
 #include <common/iaibase.h>
 
 // Bullet Physics lib dependencies
@@ -28,6 +29,9 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData ) :
 {
     // If there's no visual data, set the hide flag
     SetVisible( objectData.GetVisualData().IsActive() );
+    
+    // Set the sprite type
+    m_parameters.Add( NDefs::SPRITE3D );
 
 }   // constructor
 
@@ -122,10 +126,17 @@ void CSprite3D::PhysicsUpdate()
 /************************************************************************
  *    desc:  do the render                                                            
  ************************************************************************/
-void CSprite3D::Render( const CMatrix & projMatrix, const CMatrix & normalMatrix )
+void CSprite3D::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     if( IsVisible() )
-        m_visualComponent.Render( m_matrix * projMatrix, m_rotMatrix * normalMatrix );
+        m_visualComponent.Render( m_matrix * matrix, m_rotMatrix * rotMatrix );
+
+}   // Render
+
+void CSprite3D::Render( const CCamera & camera )
+{
+    if( IsVisible() )
+        m_visualComponent.Render( camera.GetFinalMatrix(), m_rotMatrix * camera.GetRotMatrix() );
 
 }   // Render
 

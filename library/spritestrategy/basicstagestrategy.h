@@ -1,18 +1,18 @@
 
 /************************************************************************
-*    FILE NAME:       basicstagestrategy2d.h
+*    FILE NAME:       basicstagestrategy.h
 *
-*    DESCRIPTION:     Basic 2D stage strategy
+*    DESCRIPTION:     Basic stage strategy
 ************************************************************************/
 
-#ifndef __basic_stage_strategy_2d_h__
-#define __basic_stage_strategy_2d_h__
+#ifndef __basic_stage_strategy_h__
+#define __basic_stage_strategy_h__
 
 // Physical component dependency
 #include <spritestrategy/ispritestrategy.h>
 
 // Game lib dependencies
-#include <spritestrategy/sector2d.h>
+#include <spritestrategy/sector.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
@@ -25,15 +25,16 @@
 class CObject2D;
 class CMatrix;
 
-class CBasicStageStrategy2D : public iSpriteStrategy, boost::noncopyable
+class CBasicStageStrategy : public iSpriteStrategy, boost::noncopyable
 {
 public:
 
     // Constructor
-    CBasicStageStrategy2D();
+    CBasicStageStrategy( const std::string & cameraId );
+    CBasicStageStrategy();
 
     // Destructor
-    virtual ~CBasicStageStrategy2D();
+    virtual ~CBasicStageStrategy();
 
     // Load the sector data from file
     virtual void LoadFromFile( const std::string & file ) override;
@@ -52,8 +53,9 @@ public:
     virtual void Transform( const CObject2D & object ) override;
 
     // Render the actors
-    virtual void Render() override;
-    virtual void Render( const CMatrix & matrix ) override;
+    void Render() override;
+    void Render( const CMatrix & matrix ) override;
+    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
     
     // Find if the sprite exists
     bool Find( iSprite * piSprite );
@@ -75,11 +77,11 @@ protected:
     
 protected:
 
-    // Deque of the sector 2d sprites
-    std::deque<CSector2D> m_sectorDeq;
+    // Deque of the sector sprites
+    std::deque<CSector> m_sectorDeq;
     
     // default camera position
     CObject m_defaultCameraPos;
 };
 
-#endif  // __basic_stage_strategy_2d_h__
+#endif  // __basic_stage_strategy_h__

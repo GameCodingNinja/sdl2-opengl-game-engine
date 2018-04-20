@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       basicspritestrategy2d.h
+*    FILE NAME:       basicspritestrategy.h
 *
-*    DESCRIPTION:     Basic sprite strategy 2d class
+*    DESCRIPTION:     Basic sprite strategy class
 ************************************************************************/
 
-#ifndef __basic_sprite_strategy_2d_h__
-#define __basic_sprite_strategy_2d_h__
+#ifndef __basic_sprite_strategy_h__
+#define __basic_sprite_strategy_h__
 
 // Physical component dependency
 #include <spritestrategy/basestrategy.h>
@@ -30,16 +30,16 @@ class iSprite;
 class CSpriteDataContainer;
 class CMatrix;
 
-class CBasicSpriteStrategy2D : public CBaseStrategy, boost::noncopyable
+class CBasicSpriteStrategy : public CBaseStrategy, boost::noncopyable
 {
 public:
 
     // Constructor
-    CBasicSpriteStrategy2D( const std::string & cameraId, int idOffset = 0, int idDir = 1 );
-    CBasicSpriteStrategy2D( int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy( const std::string & cameraId, int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy( int idOffset = 0, int idDir = 1 );
 
     // Destructor
-    virtual ~CBasicSpriteStrategy2D();
+    virtual ~CBasicSpriteStrategy();
     
     // Load the sprite data from file
     void LoadFromFile( const std::string & file ) override;
@@ -83,6 +83,7 @@ public:
     // Render the sprites
     void Render() override;
     void Render( const CMatrix & matrix ) override;
+    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
     
     // Get the reference to the sprite
     template<typename target>
@@ -120,6 +121,6 @@ protected:
     std::vector<iSprite *> m_pSpriteVec;
 };
 
-#endif  // __basic_sprite_strategy_2d_h__
+#endif  // __basic_sprite_strategy_h__
 
 

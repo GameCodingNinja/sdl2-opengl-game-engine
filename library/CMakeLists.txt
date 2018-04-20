@@ -83,11 +83,11 @@ add_library(
         3d/object3d.cpp
         3d/light.cpp
         3d/lightlist.cpp
-        spritestrategy/sector2d.cpp
-        spritestrategy/basicspritestrategy2d.cpp
-        spritestrategy/basicstagestrategy2d.cpp
-        spritestrategy/linearstagestrategy2d.cpp
-        spritestrategy/loopstagestrategy2d.cpp
+        spritestrategy/sector.cpp
+        spritestrategy/basicspritestrategy.cpp
+        spritestrategy/basicstagestrategy.cpp
+        spritestrategy/linearstagestrategy.cpp
+        spritestrategy/loopstagestrategy.cpp
         spritestrategy/spritestrategymanager.cpp
         spritestrategy/ispritestrategy.cpp
         spritestrategy/basestrategy.cpp

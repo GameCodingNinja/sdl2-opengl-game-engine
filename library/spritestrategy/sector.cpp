@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       sector2d.cpp
+*    FILE NAME:       sector.cpp
 *
 *    DESCRIPTION:     Class the creates & renders all the sector sprites
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/sector2d.h>
+#include <spritestrategy/sector.h>
 
 // Game lib dependencies
 #include <common/isprite.h>
@@ -19,11 +19,12 @@
 #include <managers/signalmanager.h>
 #include <common/spritedata.h>
 #include <common/actordata.h>
+#include <common/camera.h>
 
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSector2D::CSector2D() :
+CSector::CSector() :
     m_projectionType(CSettings::Instance().GetProjectionType()),
     m_sectorSizeHalf(CSettings::Instance().GetSectorSizeHalf())
 {
@@ -33,7 +34,7 @@ CSector2D::CSector2D() :
 /************************************************************************
 *    desc:  destructor
 ************************************************************************/
-CSector2D::~CSector2D()
+CSector::~CSector()
 {
 }   // destructor
 
@@ -41,7 +42,7 @@ CSector2D::~CSector2D()
 /************************************************************************
 *    desc:  Load the sector data from node
 ************************************************************************/
-void CSector2D::LoadFromNode( const XMLNode & node )
+void CSector::LoadFromNode( const XMLNode & node )
 {
     // open and parse the XML file:
     const std::string filePath = node.getAttribute( "file" );
@@ -74,7 +75,7 @@ void CSector2D::LoadFromNode( const XMLNode & node )
             std::string aiName;
 
             // Allocate the sprite and add it to the vector
-            if( tag == "sprite" )
+            if( tag == "sprite2d" )
             {
                 // Allocate the sprite
                 CSpriteData data( spriteNode, defGroup, defObjName, defAIName, defId );
@@ -86,7 +87,7 @@ void CSector2D::LoadFromNode( const XMLNode & node )
                 aiName = data.GetAIName();
                 spriteName = data.GetName();
             }
-            else if( tag == "actor" )
+            else if( tag == "actor2d" )
             {
                 // Allocate the actor sprite
                 CActorData data( spriteNode, defGroup, defObjName, defAIName, defId );
@@ -114,7 +115,7 @@ void CSector2D::LoadFromNode( const XMLNode & node )
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CSector2D::Init()
+void CSector::Init()
 {
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
@@ -127,7 +128,7 @@ void CSector2D::Init()
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CSector2D::CleanUp()
+void CSector::CleanUp()
 {
     // Free the font VBO
     // This allows for early VBO delete so that the font can be freed from the load screen
@@ -140,7 +141,7 @@ void CSector2D::CleanUp()
 /************************************************************************
 *    desc:  Destroy this sector
 ************************************************************************/
-void CSector2D::Destroy()
+void CSector::Destroy()
 {
     m_pSpriteVec.clear();
     
@@ -150,7 +151,7 @@ void CSector2D::Destroy()
 /************************************************************************
 *    desc:  Update the actor
 ************************************************************************/
-void CSector2D::Update()
+void CSector::Update()
 {
     for( auto & iter : m_pSpriteVec )
         iter->Update();
@@ -161,7 +162,7 @@ void CSector2D::Update()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CSector2D::Transform()
+void CSector::Transform()
 {
     CObject2D::Transform();
 
@@ -170,7 +171,7 @@ void CSector2D::Transform()
     
 }   // Transform
 
-void CSector2D::Transform( const CObject2D & object )
+void CSector::Transform( const CObject2D & object )
 {
     CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
 
@@ -183,7 +184,18 @@ void CSector2D::Transform( const CObject2D & object )
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-void CSector2D::Render( const CMatrix & matrix )
+void CSector::Render( const CCamera & camera )
+{
+    // Render in reverse order
+    if( InView() )
+    {
+        for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
+            (*it)->Render( camera.GetFinalMatrix(), camera.GetRotMatrix() );
+    }
+    
+}   // Render
+
+void CSector::Render( const CMatrix & matrix )
 {
     // Render in reverse order
     if( InView() )
@@ -194,11 +206,22 @@ void CSector2D::Render( const CMatrix & matrix )
     
 }   // Render
 
+void CSector::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
+{
+    // Render in reverse order
+    if( InView() )
+    {
+        for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
+            (*it)->Render( matrix, rotMatrix );
+    }
+    
+}   // Render
+
 
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-bool CSector2D::InView()
+bool CSector::InView()
 {
     if( m_projectionType == NDefs::EPT_ORTHOGRAPHIC )
         return InOrthographicView();
@@ -214,7 +237,7 @@ bool CSector2D::InView()
 /************************************************************************
  *    desc:  Check the sector object is within the orthographic view frustum
  ************************************************************************/
-bool CSector2D::InOrthographicView()
+bool CSector::InOrthographicView()
 {
     const CSize<float> & defaultSizeHalf = CSettings::Instance().GetDefaultSizeHalf();
     
@@ -235,7 +258,7 @@ bool CSector2D::InOrthographicView()
 /************************************************************************
  *    desc:  Check the sector object is within the perspective view frustum
  ************************************************************************/
-bool CSector2D::InPerspectiveView()
+bool CSector::InPerspectiveView()
 {
     const CSize<float> & aspectRatio = CSettings::Instance().GetScreenAspectRatio();
 
@@ -256,7 +279,7 @@ bool CSector2D::InPerspectiveView()
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CSector2D::Find( iSprite * piSprite )
+bool CSector::Find( iSprite * piSprite )
 {
     for( auto iter : m_pSpriteVec )
     {
@@ -272,7 +295,7 @@ bool CSector2D::Find( iSprite * piSprite )
 /************************************************************************
 *    desc:  Get the pointer to the sprite
 ************************************************************************/
-iSprite * CSector2D::Get( const std::string & spriteName )
+iSprite * CSector::Get( const std::string & spriteName )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pSpriteMap.find( spriteName );

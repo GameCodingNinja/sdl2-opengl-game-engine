@@ -27,7 +27,7 @@
 
 // Forward declaration(s)
 class CPhysicsWorld2D;
-class CBasicSpriteStrategy2D;
+class CBasicSpriteStrategy;
 class CUIMeter;
 class CUILabel;
 class CSpriteData;
@@ -84,7 +84,7 @@ private:
     CPhysicsWorld2D & m_rPhysicsWorld;
     
     // Sprite strategy
-    CBasicSpriteStrategy2D & m_rStrategy;
+    CBasicSpriteStrategy & m_rStrategy;
     
     // Strawberry data reference
     CSpriteData & m_rStrawberryData;

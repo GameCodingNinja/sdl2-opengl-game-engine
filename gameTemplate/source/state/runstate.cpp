@@ -18,8 +18,8 @@
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/basicstagestrategy2d.h>
-#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/basicstagestrategy.h>
+#include <spritestrategy/basicspritestrategy.h>
 #include <spritestrategy/spritestrategymanager.h>
 
 // Standard lib dependencies
@@ -148,8 +148,8 @@ namespace NRunState
     {
 	// All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CBasicStageStrategy2D );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(sprite)", new CBasicSpriteStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CBasicStageStrategy );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(sprite)", new CBasicSpriteStrategy );
     }
     
     void CriticalInit()

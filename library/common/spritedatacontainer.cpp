@@ -16,14 +16,14 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData ) :
-    m_type(NDefs::SPRITE2D),
+CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData, int type ) :
+    m_type(type),
     m_data(pData)
 {
 }   // constructor
 
-CSpriteDataContainer::CSpriteDataContainer( CActorData * pData ) :
-    m_type(NDefs::ACTOR2D),
+CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, int type ) :
+    m_type(type),
     m_data(pData)
 {
 }   // constructor

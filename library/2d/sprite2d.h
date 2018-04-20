@@ -86,7 +86,8 @@ public:
     void PhysicsUpdate() override;
 
     // do the render
-    virtual void Render( const CMatrix & matrix ) override;
+    void Render( const CCamera & camera ) override;
+    void Render( const CMatrix & matrix ) override;
     
     // Get the unique id number
     int GetId() const override;

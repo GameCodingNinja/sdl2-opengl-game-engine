@@ -17,7 +17,7 @@
 // Forward declaration(s)
 class CSprite2D;
 class iSprite;
-class CBasicSpriteStrategy2D;
+class CBasicSpriteStrategy;
 
 class CProjectileAI : public iAIBase
 {
@@ -50,7 +50,7 @@ private:
     bool m_firstUpdate;
     
     // Reference to sprite strategy.
-    CBasicSpriteStrategy2D & m_rStrategy;
+    CBasicSpriteStrategy & m_rStrategy;
 
 };
 

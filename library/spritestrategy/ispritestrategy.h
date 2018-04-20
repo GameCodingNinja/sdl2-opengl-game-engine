@@ -23,6 +23,7 @@ class iSpriteStrategy
 public:
 
     // Constructor
+    iSpriteStrategy( const std::string & cameraId );
     iSpriteStrategy();
 
     // Destructor
@@ -84,7 +85,7 @@ public:
     // Render the sprites
     virtual void Render() {}
     virtual void Render( const class CMatrix & matrix ) {}
-    virtual void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) {}
+    virtual void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) {}
     
 protected:
     

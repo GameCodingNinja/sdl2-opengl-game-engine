@@ -20,7 +20,7 @@
 // Forward declaration(s)
 class iSprite;
 class CSprite2D;
-class CBasicSpriteStrategy2D;
+class CBasicSpriteStrategy;
 
 class CBallAI : public iAIBase
 {
@@ -44,7 +44,7 @@ private:
     CSprite2D & m_sprite;
     
     // Reference to sprite strategy
-    CBasicSpriteStrategy2D & m_rStrategy;
+    CBasicSpriteStrategy & m_rStrategy;
     
     std::default_random_engine m_generator;
     std::uniform_real_distribution<float> m_angularImpulse;

@@ -20,8 +20,8 @@
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
 #include <2d/sprite2d.h>
-#include <spritestrategy/basicstagestrategy2d.h>
-#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/basicstagestrategy.h>
+#include <spritestrategy/basicspritestrategy.h>
 #include <spritestrategy/spritestrategymanager.h>
 #include <managers/soundmanager.h>
 #include <managers/cameramanager.h>
@@ -47,7 +47,7 @@
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
-        m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(level1_spriteStrategy)")),
+        m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").Get<CSpriteData>()),
         m_rMultiplierLabel(CMenuManager::Instance().GetMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
         m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
@@ -343,8 +343,8 @@ namespace NLevel1State
         CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
         
         // Load the sprite strategies
-        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy2D(1000) );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy2D );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
+        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy );
     }
     
     void CriticalInit()

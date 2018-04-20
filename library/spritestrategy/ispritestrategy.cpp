@@ -11,6 +11,11 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
+iSpriteStrategy::iSpriteStrategy(const std::string & cameraId) :
+    m_cameraId(cameraId)
+{
+}   // constructor
+
 iSpriteStrategy::iSpriteStrategy()
 {
 }   // constructor
