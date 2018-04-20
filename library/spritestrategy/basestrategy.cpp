@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <common/basestrategy.h>
+#include <spritestrategy/basestrategy.h>
 
 // Game lib dependencies
 #include <managers/signalmanager.h>

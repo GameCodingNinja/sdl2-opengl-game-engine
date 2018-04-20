@@ -9,11 +9,11 @@
 #include <script/scriptstrategymanager.h>
 
 // Game lib dependencies
-#include <managers/spritestrategymanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 #include <script/scriptmanager.h>
 #include <script/scriptglobals.h>
-#include <2d/basicstagestrategy2d.h>
-#include <2d/basicspritestrategy2d.h>
+#include <spritestrategy/basicstagestrategy2d.h>
+#include <spritestrategy/basicspritestrategy2d.h>
 #include <2d/sprite2d.h>
 #include <2d/actorsprite2d.h>
 #include <utilities/exceptionhandling.h>

@@ -28,9 +28,9 @@
 #include <managers/soundmanager.h>
 #include <managers/actionmanager.h>
 #include <managers/signalmanager.h>
-#include <managers/spritestrategymanager.h>
 #include <managers/spritesheetmanager.h>
 #include <managers/cameramanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>

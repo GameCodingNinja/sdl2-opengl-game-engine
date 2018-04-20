@@ -9,10 +9,10 @@
 #define __basic_stage_strategy_2d_h__
 
 // Physical component dependency
-#include <common/ispritestrategy.h>
+#include <spritestrategy/ispritestrategy.h>
 
 // Game lib dependencies
-#include <2d/sector2d.h>
+#include <spritestrategy/sector2d.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>

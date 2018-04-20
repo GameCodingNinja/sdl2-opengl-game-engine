@@ -16,12 +16,12 @@
 #include <objectdata/objectdatamanager.h>
 #include <system/device.h>
 #include <physics/physicsworld2d.h>
-#include <managers/spritestrategymanager.h>
 #include <managers/cameramanager.h>
 #include <common/camera.h>
 #include <script/scriptmanager.h>
-#include <2d/basicspritestrategy2d.h>
-#include <2d/loopstagestrategy2d.h>
+#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/loopstagestrategy2d.h>
+#include <spritestrategy/spritestrategymanager.h>
 #include <2d/actorsprite2d.h>
 
 /************************************************************************

@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <common/ispritestrategy.h>
+#include <spritestrategy/ispritestrategy.h>
 
 /************************************************************************
 *    desc:  Constructor

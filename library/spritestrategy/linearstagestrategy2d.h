@@ -10,10 +10,10 @@
 #define __linear_stage_strategy_2d_h__
 
 // Physical component dependency
-#include <2d/basicstagestrategy2d.h>
+#include <spritestrategy/basicstagestrategy2d.h>
 
 // Game lib dependencies
-#include <2d/sector2d.h>
+#include <spritestrategy/sector2d.h>
 
 // Standard lib dependencies
 #include <vector>

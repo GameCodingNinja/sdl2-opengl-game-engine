@@ -9,7 +9,7 @@
 #define __base_strategy_h__
 
 // Physical component dependency
-#include <common/ispritestrategy.h>
+#include <spritestrategy/ispritestrategy.h>
 
 // Standard lib dependencies
 #include <set>

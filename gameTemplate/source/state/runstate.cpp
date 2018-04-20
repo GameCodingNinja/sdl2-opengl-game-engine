@@ -17,10 +17,10 @@
 #include <physics/physicsworldmanager2d.h>
 #include <physics/physicsworld2d.h>
 #include <physics/physicscomponent2d.h>
-#include <managers/spritestrategymanager.h>
 #include <managers/cameramanager.h>
-#include <2d/basicstagestrategy2d.h>
-#include <2d/basicspritestrategy2d.h>
+#include <spritestrategy/basicstagestrategy2d.h>
+#include <spritestrategy/basicspritestrategy2d.h>
+#include <spritestrategy/spritestrategymanager.h>
 
 // Standard lib dependencies
 #include <vector>

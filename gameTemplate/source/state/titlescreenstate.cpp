@@ -16,7 +16,7 @@
 #include <gui/menumanager.h>
 #include <gui/uibutton.h>
 #include <gui/uimeter.h>
-#include <managers/spritestrategymanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 
 // SDL lib dependencies
 #include <SDL.h>

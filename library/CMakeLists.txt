@@ -64,7 +64,6 @@ add_library(
         managers/actionmanager.cpp
         managers/signalmanager.cpp
 	managers/meshmanager.cpp
-        managers/spritestrategymanager.cpp
         managers/spritesheetmanager.cpp
         managers/cameramanager.cpp
         physics/physicsworldmanager2d.cpp
@@ -79,16 +78,19 @@ add_library(
         2d/visualcomponent2d.cpp
         2d/object2d.cpp
         2d/actorsprite2d.cpp
-        2d/sector2d.cpp
-        2d/basicspritestrategy2d.cpp
-        2d/basicstagestrategy2d.cpp
-        2d/linearstagestrategy2d.cpp
-        2d/loopstagestrategy2d.cpp
 	3d/sprite3d.cpp
         3d/visualcomponent3d.cpp
         3d/object3d.cpp
         3d/light.cpp
         3d/lightlist.cpp
+        spritestrategy/sector2d.cpp
+        spritestrategy/basicspritestrategy2d.cpp
+        spritestrategy/basicstagestrategy2d.cpp
+        spritestrategy/linearstagestrategy2d.cpp
+        spritestrategy/loopstagestrategy2d.cpp
+        spritestrategy/spritestrategymanager.cpp
+        spritestrategy/ispritestrategy.cpp
+        spritestrategy/basestrategy.cpp
         common/sound.cpp
         common/playlist.cpp
         common/worldvalue.cpp
@@ -99,11 +101,9 @@ add_library(
         common/actordata.cpp
         common/spritesheet.cpp
         common/build_defs.cpp
-        common/basestrategy.cpp
         common/spritedatacontainer.cpp
         common/fontdata.cpp
         common/fontproperties.cpp
-        common/ispritestrategy.cpp
         common/isprite.cpp
         common/iaibase.cpp
         slot/symbol2d.cpp

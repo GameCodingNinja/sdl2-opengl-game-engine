@@ -7,12 +7,12 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <2d/loopstagestrategy2d.h>
+#include <spritestrategy/loopstagestrategy2d.h>
 
 // Game lib dependencies
 #include <utilities/highresolutiontimer.h>
 #include <utilities/xmlparsehelper.h>
-#include <2d/sector2d.h>
+#include <spritestrategy/sector2d.h>
 
 /************************************************************************
 *    desc:  Constructor

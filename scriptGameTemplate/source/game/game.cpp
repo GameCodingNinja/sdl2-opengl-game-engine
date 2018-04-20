@@ -36,8 +36,8 @@
 #include <managers/texturemanager.h>
 #include <managers/vertexbuffermanager.h>
 #include <managers/meshmanager.h>
-#include <managers/spritestrategymanager.h>
 #include <managers/cameramanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 #include <gui/menumanager.h>
 #include <gui/uicontrol.h>
 #include <gui/menu.h>

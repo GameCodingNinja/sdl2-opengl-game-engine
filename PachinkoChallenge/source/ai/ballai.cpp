@@ -10,9 +10,9 @@
 
 // Game lib dependencies
 #include <2d/sprite2d.h>
-#include <2d/basicspritestrategy2d.h>
 #include <managers/soundmanager.h>
-#include <managers/spritestrategymanager.h>
+#include <spritestrategy/spritestrategymanager.h>
+#include <spritestrategy/basicspritestrategy2d.h>
 #include <utilities/settings.h>
 #include <utilities/highresolutiontimer.h>
 

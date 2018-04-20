@@ -13,7 +13,7 @@
 #include <2d/sprite2d.h>
 #include <utilities/settings.h>
 #include <managers/actionmanager.h>
-#include <managers/spritestrategymanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 
 // SDL/OpenGL lib dependencies
 #include <SDL.h>

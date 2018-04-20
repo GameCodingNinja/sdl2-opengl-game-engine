@@ -6,12 +6,12 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <managers/spritestrategymanager.h>
+#include <spritestrategy/spritestrategymanager.h>
 
 // Game lib dependencies
 #include <2d/object2d.h>
 #include <utilities/deletefuncs.h>
-#include <common/ispritestrategy.h>
+#include <spritestrategy/ispritestrategy.h>
 #include <utilities/exceptionhandling.h>
 
 // Boost lib dependencies

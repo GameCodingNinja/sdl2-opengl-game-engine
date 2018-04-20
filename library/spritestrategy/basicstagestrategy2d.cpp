@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <2d/basicstagestrategy2d.h>
+#include <spritestrategy/basicstagestrategy2d.h>
 
 // Game lib dependencies
 #include <utilities/xmlParser.h>
