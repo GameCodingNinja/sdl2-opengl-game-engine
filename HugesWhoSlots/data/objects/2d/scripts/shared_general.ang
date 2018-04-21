@@ -55,9 +55,9 @@ shared void Screen_FadeOut()
 /************************************************************************
 *    desc:  Script for common menu buttons
 ************************************************************************/
-shared void MenuBtnActOver_Selected( CSprite2D & sprite )
+shared void MenuBtnActOver_Selected( iSprite & sprite )
 {
-    sprite.SetVisible( true );
+    sprite.setVisible( true );
     
     AlphaTo( 40, 0, sprite );
     Hold( 25 );
@@ -70,30 +70,30 @@ shared void MenuBtnActOver_Selected( CSprite2D & sprite )
     Hold( 50 );
     AlphaTo( 40, 0, sprite );
     
-    sprite.SetVisible( false );
+    sprite.setVisible( false );
 
     DispatchEvent( EGE_MENU_SELECT_EXECUTE );
     DispatchEvent( EGE_MENU_REACTIVATE );
 }
 
-shared void MenuBtnActOver_FastSelected( CSprite2D & sprite )
+shared void MenuBtnActOver_FastSelected( iSprite & sprite )
 {
-    sprite.SetVisible( true );
+    sprite.setVisible( true );
     
     AlphaTo( 30, 1, sprite );
     Hold( 50 );
     AlphaTo( 30, 0, sprite );
     
-    sprite.SetVisible( false );
+    sprite.setVisible( false );
 
     DispatchEvent( EGE_MENU_SELECT_EXECUTE );
     DispatchEvent( EGE_MENU_REACTIVATE );
 }
 
-shared void MenuBtnActOver_Active( CSprite2D & sprite )
+shared void MenuBtnActOver_Active( iSprite & sprite )
 {
-    sprite.SetAlpha( 0 );
-    sprite.SetVisible( true );
+    sprite.setAlpha( 0 );
+    sprite.setVisible( true );
     
     while(true)
     {
@@ -102,48 +102,48 @@ shared void MenuBtnActOver_Active( CSprite2D & sprite )
     }
 }
 
-shared void MenuBtnActOver_Inactive( CSprite2D & sprite )
+shared void MenuBtnActOver_Inactive( iSprite & sprite )
 {
-    sprite.SetVisible( false );
-    sprite.SetAlpha( 0 );
+    sprite.setVisible( false );
+    sprite.setAlpha( 0 );
 }
 
-shared void MenuBtnActOver_Disabled( CSprite2D & sprite )
+shared void MenuBtnActOver_Disabled( iSprite & sprite )
 {
-    sprite.SetVisible( false );
-    sprite.SetAlpha( 0 );
+    sprite.setVisible( false );
+    sprite.setAlpha( 0 );
 }
 
-shared void MenuBtn_Init( CSprite2D & sprite )
+shared void MenuBtn_Init( iSprite & sprite )
 {
-    sprite.SetVisible( false );
-    sprite.SetAlpha( 0 );
+    sprite.setVisible( false );
+    sprite.setAlpha( 0 );
 }
 
-shared void MenuBtnDisOver_InactiveAnim( CSprite2D & sprite )
+shared void MenuBtnDisOver_InactiveAnim( iSprite & sprite )
 {
-    if( sprite.IsVisible() )
+    if( sprite.isVisible() )
     {
         AlphaTo( 200, 0, sprite );
-        sprite.SetVisible( false );
+        sprite.setVisible( false );
     }
 }
 
-shared void MenuBtnDisOver_DisabledAnim( CSprite2D & sprite )
+shared void MenuBtnDisOver_DisabledAnim( iSprite & sprite )
 {
-    sprite.SetAlpha( 0 );
-    sprite.SetVisible( true );
+    sprite.setAlpha( 0 );
+    sprite.setVisible( true );
     AlphaTo( 200, 1, sprite );
 }
 
-shared void MenuBtnDisOver_Inactive( CSprite2D & sprite )
+shared void MenuBtnDisOver_Inactive( iSprite & sprite )
 {
-    sprite.SetAlpha( 0 );
-    sprite.SetVisible( false );
+    sprite.setAlpha( 0 );
+    sprite.setVisible( false );
 }
 
-shared void MenuBtnDisOver_Disabled( CSprite2D & sprite )
+shared void MenuBtnDisOver_Disabled( iSprite & sprite )
 {
-    sprite.SetAlpha( 1 );
-    sprite.SetVisible( true );
+    sprite.setAlpha( 1 );
+    sprite.setVisible( true );
 }

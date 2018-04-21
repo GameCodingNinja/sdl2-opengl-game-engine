@@ -11,7 +11,7 @@ class iGameState
     private bool m_changeState = false;
         
     // Message to send to next state
-    CStateMessage m_stateMessage;
+    private CStateMessage m_stateMessage;
         
     // This objects current game state value
     private EGameState m_gameState = EGS_NULL;
@@ -44,8 +44,12 @@ class iGameState
         // Empty member to be overwritten
     }
     
+    // 
+    void DoChangeState()
+    { m_changeState = true; }
+    
     // Is the state done
-    bool DoStateChange()
+    bool IsStateChange()
     { return m_changeState; };
     
     // Get the current game state

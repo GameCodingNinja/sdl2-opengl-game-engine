@@ -44,7 +44,7 @@ void CTitleScreenState::Init()
 
     m_cube.SetScale( 3, 3, 3 );
     
-    CCameraMgr::Instance().AddPerspectiveCamera( "cube" );
+    CCameraMgr::Instance().CreatePerspective( "cube" );
     CCameraMgr::Instance().SetActiveCameraPos( 0, 0, 20 );
     CCameraMgr::Instance().SetActiveCameraRot( 10, 0, 0 );
     

@@ -41,8 +41,6 @@ CObjectDataMgr::~CObjectDataMgr()
 
 /************************************************************************
  *    desc:  Load all of the meshes and materials of a specific data group
- *
- *    param: string & group - specified group of meshes and materials to load
  ************************************************************************/
 void CObjectDataMgr::LoadGroup2D( const std::string & group, const bool createFromData )
 {
@@ -207,12 +205,25 @@ void CObjectDataMgr::FreeOpenGL2D( const std::string & group )
 
 
 /************************************************************************
+ *    desc:  Is this group and name part of 2d data?
+ ************************************************************************/
+bool CObjectDataMgr::IsData2D( const std::string & group, const std::string & name ) const
+{
+    auto groupMapIter = m_objectData2DMapMap.find( group );
+    if( groupMapIter != m_objectData2DMapMap.end() )
+    {
+        auto dataMapIter = groupMapIter->second.find( name );
+        if( dataMapIter != groupMapIter->second.end() )
+            return true;
+    }
+
+    return false;
+
+}   // IsData2D
+
+
+/************************************************************************
  *    desc:  Get a specific 2D object's data
- *
- *    param: string & group - the group the 2D object belongs to
- *			string & name  - name of the 2D object
- *
- *	 ret:	CObjectData2D & - 2D object
  ************************************************************************/
 const CObjectData2D & CObjectDataMgr::GetData2D( const std::string & group, const std::string & name ) const
 {
@@ -241,8 +252,6 @@ const CObjectData2D & CObjectDataMgr::GetData2D( const CSpriteData & spriteData 
 
 /************************************************************************
  *    desc:  Load all of the meshes and materials of a specific data group
- *
- *    param: string & group - specified group of meshes and materials to load
  ************************************************************************/
 void CObjectDataMgr::LoadGroup3D( const std::string & group, const bool createFromData )
 {
@@ -296,8 +305,6 @@ void CObjectDataMgr::CreateFromData3D( const std::string & group )
 
 /************************************************************************
  *    desc:  Load all object information from an xml
- *
- *	 param:	string & filePath - file path of the object data list XML
  ************************************************************************/
 void CObjectDataMgr::LoadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData )
 {
@@ -360,8 +367,6 @@ void CObjectDataMgr::LoadFromXML3D( const std::string & group, const std::string
 
 /************************************************************************
  *    desc:  Free all of the meshes and materials of a specific data group
- *
- *    param: string & group - specified group of meshes and materials to load
  ************************************************************************/
 void CObjectDataMgr::FreeGroup3D( const std::string & group, const bool freeOpenGLObjects )
 {
@@ -401,11 +406,6 @@ void CObjectDataMgr::FreeOpenGL3D( const std::string & group )
 
 /************************************************************************
  *    desc:  Get a specific 3D object's data
- *
- *    param: string & group - the group the 3D object belongs to
- *			string & name  - name of the 3D object
- *
- *	 ret:	CObjectData3D & - 3D object
  ************************************************************************/
 const CObjectData3D & CObjectDataMgr::GetData3D( const std::string & group, const std::string & name ) const
 {
@@ -424,3 +424,21 @@ const CObjectData3D & CObjectDataMgr::GetData3D( const std::string & group, cons
     return dataMapIter->second;
 
 }   // GetData3D
+
+
+/************************************************************************
+ *    desc:  Get a specific 3D object's data
+ ************************************************************************/
+bool CObjectDataMgr::IsData3D( const std::string & group, const std::string & name ) const
+{
+    auto groupMapIter = m_objectData3DMapMap.find( group );
+    if( groupMapIter != m_objectData3DMapMap.end() )
+    {
+        auto dataMapIter = groupMapIter->second.find( name );
+        if( dataMapIter != groupMapIter->second.end() )
+            return true;
+    }
+
+    return false;
+
+}   // IsData3D

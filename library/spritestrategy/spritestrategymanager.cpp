@@ -276,22 +276,6 @@ void CSpriteStrategyMgr::Render( const CMatrix & matrix, const CMatrix & rotMatr
 }   // Render
 
 
-/***************************************************************************
-*    desc:  Process all states
-****************************************************************************/
-void CSpriteStrategyMgr::ProcessAllStates()
-{
-    for( auto iter : m_pStrategyVec )
-    {
-        iter->MiscProcess();
-        iter->Update();
-        iter->Transform();
-        iter->Render();
-    }
-        
-}   // ProcessAllStates
-
-
 /************************************************************************
 *    desc:  Get the pointer to the strategy
 ************************************************************************/

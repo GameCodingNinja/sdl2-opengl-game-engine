@@ -7,6 +7,8 @@
 
 final class CStartUpState : iGameState
 {
+    iSprite @m_logo;
+    
     //
     // Constructor
     //
@@ -20,10 +22,10 @@ final class CStartUpState : iGameState
     //
     void Init() override
     {
-        // Create a basic strategy
-        Strategy_CreateBasicSpriteStrategy( "basicStrategy", "" );
+        // Create a basic strategy for 2d sprites
+        Strategy_CreateBasicSpriteStrategy( "strategyFor2D" );
         
-        // Load the object data list table
+        // Load the 2d object data list tables
         ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
         
         // Load the shaders
@@ -34,16 +36,27 @@ final class CStartUpState : iGameState
         ObjectData_LoadGroup2D( "(startup)" );
         
         // Add the logo
-        CSprite2D @ sprite = Strategy_CreateSprite( "basicStrategy", "(startup)", "logo" );
+        @m_logo = Strategy_CreateSprite( "strategyFor2D", "(startup)", "logo" );
         
-        Spawn( "Screen_FadeIn" );
+        // Do the fade in
+        Screen_FadeIn();
         
-        Hold(3000);
+        // Load the 3d object data list tables
+        ObjectData_LoadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
         
+        // Load the start up animation group
+        ObjectData_LoadGroup2D( "(title_screen)" );
+        ObjectData_LoadGroup3D( "(cube)" );
+        
+        Hold(1000);
+
         Screen_FadeOut();
         
-        Strategy_DeleteSprite( "basicStrategy", sprite.GetId() );
+        ObjectData_FreeGroup2D( "(startup)" );
+        Strategy_DeleteSprite( "strategyFor2D", m_logo.getId() );
         Print("Sprite Hold Test: ");
+        
+        DoChangeState();
     }
 };
 

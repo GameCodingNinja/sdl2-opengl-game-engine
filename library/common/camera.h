@@ -75,7 +75,7 @@ private:
     // Custom projection matrix
     CMatrix m_finalMatrix;
     
-    // Precalculated aspect ratios for orthographic projection
+    // Pre-calculated aspect ratios for orthographic projection
     float m_orthoHeightAspectRatio;
     
     // Orthographic projection size

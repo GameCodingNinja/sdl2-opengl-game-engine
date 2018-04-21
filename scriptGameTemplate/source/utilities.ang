@@ -10,9 +10,9 @@
 /************************************************************************
 *    desc:  Color to the final color in time
 ************************************************************************/
-void ColorTo( float time, CColor &in final, CSprite2D & sprite )
+void ColorTo( float time, CColor &in final, iSprite & sprite )
 {
-    CColor current = sprite.GetColor();
+    CColor current = sprite.getColor();
     CColor inc = (final - current) / time;
 
     do
@@ -21,12 +21,12 @@ void ColorTo( float time, CColor &in final, CSprite2D & sprite )
 
         if( time < 0 )
         {
-            sprite.SetColor( final );
+            sprite.setColor( final );
         }
         else
         {
             current += inc * GetElapsedTime();
-            sprite.SetColor( current );
+            sprite.setColor( current );
         }
 
         Suspend();
@@ -68,13 +68,13 @@ void ShaderColorTo( float time, CColor current, CColor &in final, const string &
 /************************************************************************
 *    desc:  Alpha to the final alpha
 ************************************************************************/
-void AlphaTo( float time, float final, CSprite2D & sprite )
+void AlphaTo( float time, float final, iSprite & sprite )
 {
     // Convert from RGB value to normalized value
     if( final > 1.5 )
         final *= 0.00390625f;
 
-    float current = sprite.GetAlpha();
+    float current = sprite.getAlpha();
     float inc = (final - current) / time;
 
     do
@@ -83,12 +83,12 @@ void AlphaTo( float time, float final, CSprite2D & sprite )
 
         if( time < 0 )
         {
-            sprite.SetAlpha( final );
+            sprite.setAlpha( final );
         }
         else
         {
             current += inc * GetElapsedTime();
-            sprite.SetAlpha( current );
+            sprite.setAlpha( current );
         }
 
         Suspend();
@@ -165,7 +165,7 @@ void VolumeTo( float time, int final, CSound &in sound )
 /************************************************************************
 *    desc:  Play the animation
 ************************************************************************/
-void Play( int fps, CSprite2D & sprite, bool loop = false )
+/*void Play( int fps, iSprite & sprite, bool loop = false )
 {
     float time = 1000.0 / fps;
     uint frameCount = sprite.GetFrameCount();
@@ -181,7 +181,7 @@ void Play( int fps, CSprite2D & sprite, bool loop = false )
     }
     while( loop );
 
-}   // Play
+}*/   // Play
 
 
 /************************************************************************

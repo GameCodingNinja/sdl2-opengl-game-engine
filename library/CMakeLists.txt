@@ -29,19 +29,19 @@ add_library(
         script/scriptmanager.cpp
         script/scriptglobals.cpp
         script/scriptcolor.cpp
+        script/scriptcamera.cpp
         script/scriptcomponent.cpp
         script/scriptpoint.cpp
         script/scriptactorsprite2d.cpp
-        script/scriptsprite2d.cpp
-        script/scriptsprite3d.cpp
+        script/scriptsprite.cpp
         script/scriptsound.cpp
         script/scriptplaylist.cpp
         script/scriptsoundmanager.cpp
-        script/scriptobject.cpp
         script/scriptmenu.cpp
         script/scriptshadermanager.cpp
         script/scriptobjectdatamanager.cpp
         script/scriptstrategymanager.cpp
+        script/scriptcameramanager.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp

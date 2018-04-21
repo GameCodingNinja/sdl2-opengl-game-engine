@@ -27,10 +27,10 @@
 *    desc:  Constructor
 ************************************************************************/
 CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
+    iSprite(id),
     m_radius(0),
     m_scaledRadius(0),
     m_projectionType(CSettings::Instance().GetProjectionType()),
-    m_id(id),
     m_collisionGroup(0),
     m_collisionMask(0)
 {
@@ -338,16 +338,6 @@ bool CActorSprite2D::InPerspectiveView()
     return true;
 
 }   // InPerspectiveView
-
-
-/************************************************************************
-*    desc:  Get the unique id number
-************************************************************************/
-int CActorSprite2D::GetId() const
-{
-    return m_id;
-
-}   // GetId
 
 
 /************************************************************************

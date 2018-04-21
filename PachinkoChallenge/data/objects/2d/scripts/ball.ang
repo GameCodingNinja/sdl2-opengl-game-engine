@@ -7,9 +7,9 @@
 /************************************************************************
 *    desc:  Fade in the ball
 ************************************************************************/
-void Ball_FadeIn( CSprite2D & sprite )
+void Ball_FadeIn( iSprite & sprite )
 {
-    sprite.SetAlpha(0);
+    sprite.setAlpha(0);
     
     AlphaTo( 500, 1, sprite );
 }

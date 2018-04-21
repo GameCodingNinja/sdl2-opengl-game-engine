@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptsprite2d.h>
+#include <script/scriptsprite.h>
 
 // Game lib dependencies
 #include <2d/actorsprite2d.h>
@@ -38,10 +38,10 @@ namespace NScriptActorSprite2D
         
         
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(CPoint &in)",                             asMETHODPR(CObject,   SetPos, (const CPoint<float> &), void), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, SetPos, (float,float,float), void), asCALL_THISCALL) );
+        //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, SetPos, (float,float,float), void), asCALL_THISCALL) );
         
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(CPoint & in)",                            asMETHODPR(CObject, IncPos, (const CPoint<float> &), void),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, IncPos, (float,float,float), void), asCALL_THISCALL) );
+        //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, IncPos, (float,float,float), void), asCALL_THISCALL) );
         
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "CPoint GetPos()",                                       asMETHOD(CObject, GetPosFloat),   asCALL_THISCALL) );
 

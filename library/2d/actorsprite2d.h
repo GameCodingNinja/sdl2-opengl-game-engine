@@ -80,9 +80,6 @@ public:
     // Get the sprite group
     CSprite2D & GetSprite( const std::string & name );
     
-    // Get the unique id number
-    int GetId() const override;
-    
     // Get the collision group
     uint GetCollisionGroup() const;
     
@@ -91,6 +88,34 @@ public:
     
     // Check for collision against other actor sprite
     bool IsCollision( CActorSprite2D & rPlayerActor );
+    
+    
+    // Set/Get the color
+    void SetColor( const CColor & color ) override {}
+    void SetColor( float r, float g, float b, float a ) override {}
+    void SetDefaultColor() override {}
+    const CColor & GetColor() const override {}
+    const CColor & GetDefaultColor() const override {}
+
+    // Set/Get the alpha
+    void SetAlpha( float alpha ) override {}
+    float GetAlpha() const override {}
+    void SetDefaultAlpha() override {}
+    float GetDefaultAlpha() const override {}
+
+    // Get the frame count
+    uint GetFrameCount() const override {}
+
+    // Set the texture ID from index
+    void SetFrame( uint index ) override {}
+    
+    // Get the current frame
+    uint GetCurrentFrame() const override {}
+    
+    // Create the font string
+    void CreateFontString( const std::string & fontString ) override {}
+    
+    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
     
 protected:
     
@@ -133,9 +158,6 @@ private:
     
     // The projection type
     NDefs::EProjectionType m_projectionType;
-    
-    // Unique Id number
-    int m_id;
     
     // Collision group
     uint m_collisionGroup;

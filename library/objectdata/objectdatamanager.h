@@ -51,6 +51,10 @@ public:
     // Free all OpenGL objects created from these groups
     void FreeOpenGL2D( const std::string & group );
     void FreeOpenGL3D( const std::string & group );
+    
+    // Is data part of 2d/3d
+    bool IsData2D( const std::string & group, const std::string & name ) const;
+    bool IsData3D( const std::string & group, const std::string & name ) const;
 
 private:
 

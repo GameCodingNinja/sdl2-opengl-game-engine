@@ -153,13 +153,13 @@ const CMatrix & CCamera::GetProjectionMatrix() const
 ************************************************************************/  
 void CCamera::SetPos( const CPoint<CWorldValue> & position )
 {
-    CObject::SetPos( -position );
+    CObject3D::SetPos( -position );
 
 }   // SetPos
 
 void CCamera::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject::SetPos( -x, -y, -z );
+    CObject3D::SetPos( -x, -y, -z );
 
 }   // SetPos
 
@@ -169,13 +169,13 @@ void CCamera::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 ************************************************************************/  
 void CCamera::IncPos( const CPoint<CWorldValue> & position )
 {
-    CObject::IncPos( -position );
+    CObject3D::IncPos( -position );
 
 }   // IncPos
 
 void CCamera::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject::IncPos( -x, -y, -z );
+    CObject3D::IncPos( -x, -y, -z );
 
 }   // IncPos
 

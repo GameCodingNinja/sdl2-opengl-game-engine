@@ -33,14 +33,14 @@ public:
     // Set/Get the object's position
     void SetPos( const CPoint<CWorldValue> & position );
     void SetPos( const CPoint<float> & position );
-    void SetPos( float x = 0, float y = 0, float z = 0 );
+    void SetPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
     const CPoint<CWorldValue> & GetPos() const;
     CPoint<float> GetPosFloat();
 
     // Increment the object's position
     void IncPos( const CPoint<CWorldValue> & position );
     void IncPos( const CPoint<float> & position );
-    void IncPos( float x = 0, float y = 0, float z = 0 );
+    void IncPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
 
     // Set/Get the object's rotation
     // NOTE: Rotation is stored as radians

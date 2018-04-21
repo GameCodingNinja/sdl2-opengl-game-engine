@@ -22,10 +22,10 @@
 *    desc:  Constructor
 ************************************************************************/
 CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
-    m_rObjectData( objectData ),
-    m_visualComponent( objectData.GetVisualData() ),
-    m_physicsComponent( objectData.GetPhysicsData() ),
-    m_id(id)
+    iSprite(id),
+    m_rObjectData(objectData),
+    m_visualComponent(objectData.GetVisualData()),
+    m_physicsComponent(objectData.GetPhysicsData())
 {
     // If there's no visual data, set the hide flag
     SetVisible( objectData.GetVisualData().IsActive() );
@@ -282,16 +282,6 @@ const CObjectData2D & CSprite2D::GetObjectData() const
     return m_rObjectData;
 
 }   // GetObjectData
-
-
-/************************************************************************
-*    desc:  Get the unique id number
-************************************************************************/
-int CSprite2D::GetId() const
-{
-    return m_id;
-
-}   // GetId
 
 
 /************************************************************************

@@ -75,7 +75,7 @@ void CObject::SetPos( const CPoint<float> & position )
 
 }   // SetPos
 
-void CObject::SetPos( float x, float y, float z )
+void CObject::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
@@ -104,7 +104,7 @@ void CObject::IncPos( const CPoint<float> & position )
 
 }   // SetPos
 
-void CObject::IncPos( float x, float y, float z )
+void CObject::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 

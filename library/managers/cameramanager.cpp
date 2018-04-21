@@ -98,29 +98,33 @@ const CMatrix & CCameraMgr::GetProjectionMatrix( NDefs::EProjectionType type ) c
 
 
 /************************************************************************
-*    desc:  Add an orthographic camera
+*    desc:  Create an orthographic camera
 ************************************************************************/
-void CCameraMgr::AddOrthographicCamera( const std::string & id, float minZDist, float maxZDist, float scale )
+CCamera & CCameraMgr::CreateOrthographic( const std::string & id, float minZDist, float maxZDist, float scale )
 {
     auto iter = m_cameraMap.emplace(
         std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(minZDist, maxZDist, scale) );
     
     m_pActiveCamera = &iter.first->second;
     
-}   // AddOrthographicCamera
+    return iter.first->second;
+    
+}   // CreateOrthographic
 
 
 /************************************************************************
-*    desc:  Add a perspective camera
+*    desc:  Create a perspective camera
 ************************************************************************/
-void CCameraMgr::AddPerspectiveCamera( const std::string & id, float angle, float minZDist, float maxZDist, float scale )
+CCamera & CCameraMgr::CreatePerspective( const std::string & id, float angle, float minZDist, float maxZDist, float scale )
 {
     auto iter = m_cameraMap.emplace(
         std::piecewise_construct, std::forward_as_tuple(id), std::forward_as_tuple(angle, minZDist, maxZDist, scale) );
     
     m_pActiveCamera = &iter.first->second;
     
-}   // AddPerspectiveCamera
+    return iter.first->second;
+    
+}   // CreatePerspective
 
 
 /************************************************************************
@@ -321,12 +325,27 @@ const CMatrix & CCameraMgr::GetCameraMatrix( const std::string & id ) const
 
 
 /************************************************************************
-*    desc:  Transform the active camera
+*    desc:  Transform the all cameras
 ************************************************************************/  
 void CCameraMgr::Transform()
 {
     for( auto & iter : m_cameraMap )
         iter.second.Transform();
     
-}   // TransformActiveCamera
+}   // Transform
+
+
+/************************************************************************
+*    desc:  Transform the camera
+************************************************************************/  
+void CCameraMgr::TransformCamera( const std::string & id )
+{
+    if( !id.empty() )
+    {
+        auto iter = m_cameraMap.find( id );
+        if( iter != m_cameraMap.end() )
+            return iter->second.Transform();
+    }
+    
+}   // Transform
 

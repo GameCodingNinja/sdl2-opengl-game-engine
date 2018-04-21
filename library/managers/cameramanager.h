@@ -38,11 +38,11 @@ public:
     // Get the projection matrix
     const CMatrix & GetProjectionMatrix( NDefs::EProjectionType type ) const;
     
-    // Add an orthographic camera
-    void AddOrthographicCamera( const std::string & id, float minZDist = 5, float maxZDist = 1000, float scale = 1.f );
+    // Create an orthographic camera
+    CCamera & CreateOrthographic( const std::string & id, float minZDist = 5, float maxZDist = 1000, float scale = 1.f );
     
-    // Add a perspective camera
-    void AddPerspectiveCamera( const std::string & id, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f );
+    // Create a perspective camera
+    CCamera & CreatePerspective( const std::string & id, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f );
     
     // Set/Get the active camera
     void SetActiveCamera( const std::string & id );
@@ -83,8 +83,9 @@ public:
     // Get the final matrix
     const CMatrix & GetActiveCameraMatrix() const;
     
-    // Transform the active camera
+    // Transform all the cameras
     void Transform();
+    void TransformCamera( const std::string & id );
 
 private:
 

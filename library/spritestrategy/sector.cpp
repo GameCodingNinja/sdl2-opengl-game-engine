@@ -87,7 +87,7 @@ void CSector::LoadFromNode( const XMLNode & node )
                 aiName = data.GetAIName();
                 spriteName = data.GetName();
             }
-            else if( tag == "actor2d" )
+            /*else if( tag == "actor2d" )
             {
                 // Allocate the actor sprite
                 CActorData data( spriteNode, defGroup, defObjName, defAIName, defId );
@@ -95,7 +95,7 @@ void CSector::LoadFromNode( const XMLNode & node )
                 
                 aiName = data.GetAIName();
                 spriteName = data.GetName();
-            }
+            }*/
             
             // If there is a name, add it to the map
             if( !spriteName.empty() )

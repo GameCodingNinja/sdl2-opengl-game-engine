@@ -108,7 +108,7 @@ void CLevel1State::Init()
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
     
     // Set the initial camera scale
-    CCameraMgr::Instance().AddOrthographicCamera("game", 5.f, 1000.f, 1.65);
+    CCameraMgr::Instance().CreateOrthographic("game", 5.f, 1000.f, 1.65);
     CCameraMgr::Instance().Transform();
     
     // Reset the camera

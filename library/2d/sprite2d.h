@@ -89,9 +89,6 @@ public:
     void Render( const CCamera & camera ) override;
     void Render( const CMatrix & matrix ) override;
     
-    // Get the unique id number
-    int GetId() const override;
-    
     // Set/Get the AI pointer
     void SetAI( iAIBase * pAIBase ) override;
     
@@ -102,32 +99,32 @@ public:
     void CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
     
     // Set the physics position and rotation
-    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true );
+    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override;
     
     // Set/Get the color
-    void SetColor( const CColor & color );
-    void SetColor( float r, float g, float b, float a );
-    void SetDefaultColor();
-    const CColor & GetColor() const;
-    const CColor & GetDefaultColor() const;
+    void SetColor( const CColor & color ) override;
+    void SetColor( float r, float g, float b, float a ) override;
+    void SetDefaultColor() override;
+    const CColor & GetColor() const override;
+    const CColor & GetDefaultColor() const override;
 
     // Set/Get the alpha
-    void SetAlpha( float alpha );
-    float GetAlpha() const;
-    void SetDefaultAlpha();
-    float GetDefaultAlpha() const;
+    void SetAlpha( float alpha ) override;
+    float GetAlpha() const override;
+    void SetDefaultAlpha() override;
+    float GetDefaultAlpha() const override;
 
     // Get the frame count
-    uint GetFrameCount() const;
+    uint GetFrameCount() const override;
 
     // Set the texture ID from index
-    void SetFrame( uint index );
+    void SetFrame( uint index ) override;
     
     // Get the current frame
-    uint GetCurrentFrame() const;
+    uint GetCurrentFrame() const override;
     
     // Create the font string
-    void CreateFontString( const std::string & fontString );
+    void CreateFontString( const std::string & fontString ) override;
 
 protected:
 
@@ -142,9 +139,6 @@ protected:
 
     // The physics part of the 2d sprite
     CPhysicsComponent2D m_physicsComponent;
-    
-    // Unique Id number
-    int m_id;
     
     // Base AI scoped pointer
     std::unique_ptr<iAIBase> m_upAI;

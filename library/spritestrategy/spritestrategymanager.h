@@ -92,9 +92,6 @@ public:
     void Render( const class CMatrix & matrix );
     void Render( const CMatrix & matrix, const CMatrix & cameraMatrix );
     
-    // Process all states
-    void ProcessAllStates();
-    
     // Get a reference to the strategy
     template <typename target>
     target & Get( const std::string & strategyId )

@@ -29,7 +29,7 @@ class CSprite3D : public iSprite, public CObject3D, boost::noncopyable
 public:
 
     // Constructor
-    CSprite3D( const CObjectData3D & objectData );
+    CSprite3D( const CObjectData3D & objectData, int id = defs_SPRITE_DEFAULT_ID );
 
     // Destructor
     virtual ~CSprite3D();
@@ -68,20 +68,21 @@ public:
     // Set/Get the AI pointer
     void SetAI( iAIBase * pAIBase ) override;
     
-    // Get the unique id number
-    int GetId() const override;
+    // Set the physics position and rotation
+    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
     
     // Set/Get the color
-    void SetColor( const CColor & color );
-    void SetColor( float r, float g, float b, float a );
-    void SetDefaultColor();
-    const CColor & GetColor() const;
-    const CColor & GetDefaultColor() const;
+    void SetColor( const CColor & color ) override;
+    void SetColor( float r, float g, float b, float a ) override;
+    void SetDefaultColor() override;
+    const CColor & GetColor() const override;
+    const CColor & GetDefaultColor() const override;
 
     // Set/Get the alpha
-    void SetAlpha( float alpha );
-    float GetAlpha() const;
-    float GetDefaultAlpha() const;
+    void SetAlpha( float alpha ) override;
+    float GetAlpha() const override;
+    void SetDefaultAlpha() override;
+    float GetDefaultAlpha() const override;
 
 private:
 
@@ -99,9 +100,6 @@ private:
 
     // Base AI scoped pointer
     std::unique_ptr<iAIBase> m_upAI;
-    
-    // Unique Id number
-    int m_id;
 
 };
 

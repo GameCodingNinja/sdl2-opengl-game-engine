@@ -22,10 +22,11 @@
 /************************************************************************
  *    desc:  Constructor
  ************************************************************************/
-CSprite3D::CSprite3D( const CObjectData3D & objectData ) :
-    m_objectData( objectData ),
-    m_visualComponent( objectData.GetVisualData() ),
-    m_physicsComponent( objectData.GetPhysicsData() )
+CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
+    iSprite(id),
+    m_objectData(objectData),
+    m_visualComponent(objectData.GetVisualData()),
+    m_physicsComponent(objectData.GetPhysicsData())
 {
     // If there's no visual data, set the hide flag
     SetVisible( objectData.GetVisualData().IsActive() );
@@ -136,7 +137,7 @@ void CSprite3D::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 void CSprite3D::Render( const CCamera & camera )
 {
     if( IsVisible() )
-        m_visualComponent.Render( camera.GetFinalMatrix(), m_rotMatrix * camera.GetRotMatrix() );
+        m_visualComponent.Render( m_matrix * camera.GetFinalMatrix(), m_rotMatrix * camera.GetRotMatrix() );
 
 }   // Render
 
@@ -192,16 +193,6 @@ void CSprite3D::SetAI( iAIBase * pAIBase )
     m_upAI->Init();
 
 }   // SetAI
-
-
-/************************************************************************
-*    desc:  Get the unique id number
-************************************************************************/
-int CSprite3D::GetId() const
-{
-    return m_id;
-
-}   // GetId
 
 
 /************************************************************************
@@ -282,3 +273,13 @@ float CSprite3D::GetDefaultAlpha() const
     return m_objectData.GetVisualData().GetColor().GetA();
 
 }   // GetDefaultAlpha
+
+
+/************************************************************************
+*    desc:  Set the default alpha
+************************************************************************/
+void CSprite3D::SetDefaultAlpha()
+{
+    m_visualComponent.SetAlpha( m_objectData.GetVisualData().GetColor().GetA() );
+
+}   // SetDefaultAlpha

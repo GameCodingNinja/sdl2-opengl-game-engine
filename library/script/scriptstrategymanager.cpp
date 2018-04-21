@@ -14,8 +14,7 @@
 #include <script/scriptglobals.h>
 #include <spritestrategy/basicstagestrategy.h>
 #include <spritestrategy/basicspritestrategy.h>
-#include <2d/sprite2d.h>
-#include <2d/actorsprite2d.h>
+#include <common/isprite.h>
 #include <utilities/exceptionhandling.h>
 
 // AngelScript lib dependencies
@@ -31,6 +30,22 @@ namespace NScriptStrategyManager
         try
         {
             CSpriteStrategyMgr::Instance().AddStrategy( strategyId, new CBasicSpriteStrategy( cameraId, idOffset, idDir ) );
+        }
+        catch( NExcept::CCriticalException & ex )
+        {
+            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+        }
+        catch( std::exception const & ex )
+        {
+            asGetActiveContext()->SetException(ex.what());
+        }
+    }
+    
+    void CreateBasicSpriteStrategy( const std::string & strategyId, int idOffset, int idDir )
+    {
+        try
+        {
+            CSpriteStrategyMgr::Instance().AddStrategy( strategyId, new CBasicSpriteStrategy( idOffset, idDir ) );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -83,11 +98,11 @@ namespace NScriptStrategyManager
     /************************************************************************
     *    desc:  Create a basic stage strategy                                                            
     ************************************************************************/
-    CSprite2D * CreateSprite( const std::string & strategyId, const std::string & group, const std::string & name )
+    iSprite * CreateSprite( const std::string & strategyId, const std::string & group, const std::string & name )
     {
         try
         {
-            return CSpriteStrategyMgr::Instance().CreateSprite<CSprite2D>( strategyId, group, name );
+            return CSpriteStrategyMgr::Instance().Create( strategyId, group, name );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -101,11 +116,11 @@ namespace NScriptStrategyManager
         return nullptr;
     }
     
-    CSprite2D * CreateSprite( const std::string & strategyId, const std::string & name )
+    iSprite * CreateSprite( const std::string & strategyId, const std::string & name )
     {
         try
         {
-            return CSpriteStrategyMgr::Instance().CreateSprite<CSprite2D>( strategyId, name );
+            return CSpriteStrategyMgr::Instance().Create( strategyId, name );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -122,7 +137,7 @@ namespace NScriptStrategyManager
     /************************************************************************
     *    desc:  Create a basic stage strategy                                                            
     ************************************************************************/
-    CActorSprite2D * CreateActorSprite( const std::string & strategyId, const std::string & group, const std::string & name )
+    /*CActorSprite2D * CreateActorSprite( const std::string & strategyId, const std::string & group, const std::string & name )
     {
         try
         {
@@ -156,7 +171,7 @@ namespace NScriptStrategyManager
         }
         
         return nullptr;
-    }
+    }*/
     
     
     /************************************************************************
@@ -188,14 +203,15 @@ namespace NScriptStrategyManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, string &in, int idOffset = 0, int idDir = 1)", asFUNCTION(CreateBasicSpriteStrategy), asCALL_CDECL) );
+        Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, string &in, int idOffset = 0, int idDir = 1)", asFUNCTIONPR(CreateBasicSpriteStrategy, (const std::string &, const std::string &, int, int), void), asCALL_CDECL) );
+        Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, int idOffset = 0, int idDir = 1)", asFUNCTIONPR(CreateBasicSpriteStrategy, (const std::string &, int, int), void), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateStageStrategy(string &in, string &in)", asFUNCTION(CreateBasicStageStrategy), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_DeleteStrategy(string &in)", asFUNCTION(DeleteStrategy), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_DeleteSprite(string &in, int)", asMETHOD(CSpriteStrategyMgr, DeleteSprite), asCALL_THISCALL_ASGLOBAL, &CSpriteStrategyMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CSprite2D & Strategy_CreateSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &, const std::string &), CSprite2D *), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("CSprite2D & Strategy_CreateSprite(string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &), CSprite2D *), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("CActorSprite2D & Strategy_CreateActorSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateActorSprite, (const std::string &, const std::string &, const std::string &), CActorSprite2D *), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("CActorSprite2D & Strategy_CreateActorSprite(string &in, string &in)", asFUNCTIONPR(CreateActorSprite, (const std::string &, const std::string &), CActorSprite2D *), asCALL_CDECL) );
+        Throw( pEngine->RegisterGlobalFunction("iSprite & Strategy_CreateSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &, const std::string &), iSprite *), asCALL_CDECL) );
+        Throw( pEngine->RegisterGlobalFunction("iSprite & Strategy_CreateSprite(string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &), iSprite *), asCALL_CDECL) );
+        //Throw( pEngine->RegisterGlobalFunction("CActorSprite2D & Strategy_CreateActorSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateActorSprite, (const std::string &, const std::string &, const std::string &), CActorSprite2D *), asCALL_CDECL) );
+        //Throw( pEngine->RegisterGlobalFunction("CActorSprite2D & Strategy_CreateActorSprite(string &in, string &in)", asFUNCTIONPR(CreateActorSprite, (const std::string &, const std::string &), CActorSprite2D *), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_SetCameraId(string &in, string &in)", asFUNCTION(SetCameraId), asCALL_CDECL) );
     }
 }

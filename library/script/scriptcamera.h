@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       scriptsprite2d.h
+*    FILE NAME:       scriptcamera.h
 *
-*    DESCRIPTION:     Sprite2D script object registration
+*    DESCRIPTION:     Camera script object registration
 ************************************************************************/
 
-#ifndef __script_sprite2d_h__
-#define __script_sprite2d_h__
+#ifndef __script_camera_h__
+#define __script_camera_h__
 
-namespace NScriptSprite2D
+namespace NScriptCamera
 {
     // Register Script Object
     void Register();
 }
 
-#endif  // __script_sprite2d_h__
+#endif  // __script_camera_h__
 
 

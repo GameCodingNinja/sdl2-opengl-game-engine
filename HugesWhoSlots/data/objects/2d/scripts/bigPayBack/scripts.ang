@@ -12,9 +12,9 @@ bool g_doubleFlicker = true;
 /************************************************************************
 *    desc:  Script for setting the play button
 ************************************************************************/
-void PlayBtnActOver_Selected( CSprite2D & sprite )
+void PlayBtnActOver_Selected( iSprite & sprite )
 {
-    sprite.SetVisible( true );
+    sprite.setVisible( true );
     
     AlphaTo( 20, 0, sprite );
     Hold( 25 );
@@ -33,16 +33,16 @@ void PlayBtnActOver_Selected( CSprite2D & sprite )
         AlphaTo( 40, 0, sprite );
     }
     
-    sprite.SetVisible( false );
+    sprite.setVisible( false );
     
     DispatchEvent( EGE_MENU_SELECT_EXECUTE );
     DispatchEvent( EGE_MENU_REACTIVATE );
 }
 
-void PlayBtnActOver_Active( CSprite2D & sprite )
+void PlayBtnActOver_Active( iSprite & sprite )
 {
-    sprite.SetAlpha( 0 );
-    sprite.SetVisible( true );
+    sprite.setAlpha( 0 );
+    sprite.setVisible( true );
     
     while(true)
     {
@@ -51,29 +51,29 @@ void PlayBtnActOver_Active( CSprite2D & sprite )
     }
 }
 
-void PlayBtnTxt_Selected( CSprite2D & sprite )
+void PlayBtnTxt_Selected( iSprite & sprite )
 {
-    if( sprite.GetCurrentFrame() == 0 )
+    if( sprite.getCurrentFrame() == 0 )
     {
         Hold( 350 );
-        sprite.SetFrame( 1 );
+        sprite.setFrame( 1 );
     }
 }
 
-void PlayBtnTxt_PlayReady( CSprite2D & sprite )
+void PlayBtnTxt_PlayReady( iSprite & sprite )
 {
     DispatchEvent( EGE_MENU_REACTIVATE );
     g_playBtnSparkle = true;
     g_doubleFlicker = true;
-    sprite.SetFrame( 0 );
+    sprite.setFrame( 0 );
 }
 
-void PlayBtnSparkle_Init( CSprite2D & sprite )
+void PlayBtnSparkle_Init( iSprite & sprite )
 {
-    sprite.SetVisible( false );
+    sprite.setVisible( false );
 }
 
-void PlayBtnSparkle_Selected( CSprite2D & sprite )
+void PlayBtnSparkle_Selected( iSprite & sprite )
 {
     if( g_playBtnSparkle )
     {
@@ -83,23 +83,23 @@ void PlayBtnSparkle_Selected( CSprite2D & sprite )
     }
 }
 
-void PlayBtnSparkle_Animate( CSprite2D & sprite )
+void PlayBtnSparkle_Animate( iSprite & sprite )
 {
-    sprite.SetVisible( true );
+    sprite.setVisible( true );
 
     Play( 12, sprite );
 
-    sprite.SetVisible( false );
+    sprite.setVisible( false );
 }
 
 
 /************************************************************************
 *    desc:  Script for the total bet meter
 ************************************************************************/
-void TotalBetActOver_Active( CSprite2D & sprite )
+void TotalBetActOver_Active( iSprite & sprite )
 {
-    sprite.SetAlpha( 0 );
-    sprite.SetVisible( true );
+    sprite.setAlpha( 0 );
+    sprite.setVisible( true );
     
     while(true)
     {
@@ -112,19 +112,19 @@ void TotalBetActOver_Active( CSprite2D & sprite )
 /************************************************************************
 *    desc:  Meter on init
 ************************************************************************/
-void Meter_Init( CSprite2D & sprite )
+void Meter_Init( iSprite & sprite )
 {
-    sprite.SetVisible( false );
-    sprite.SetAlpha( 0 );
+    sprite.setVisible( false );
+    sprite.setAlpha( 0 );
 }
 
 
 /************************************************************************
 *    desc:  Meter on start
 ************************************************************************/
-void Meter_Start( CSprite2D & sprite )
+void Meter_Start( iSprite & sprite )
 {
-    sprite.SetVisible( true );
+    sprite.setVisible( true );
     AlphaTo( 300, 1, sprite );
 }
 
@@ -132,7 +132,7 @@ void Meter_Start( CSprite2D & sprite )
 /************************************************************************
 *    desc:  Meter on stop
 ************************************************************************/
-void Meter_Stop( CSprite2D & sprite )
+void Meter_Stop( iSprite & sprite )
 {
 }
 
@@ -140,13 +140,13 @@ void Meter_Stop( CSprite2D & sprite )
 /************************************************************************
 *    desc:  Meter on clear
 ************************************************************************/
-void Meter_Clear( CSprite2D & sprite, uint value )
+void Meter_Clear( iSprite & sprite, uint value )
 {
-    if( sprite.IsVisible() )
+    if( sprite.isVisible() )
     {
         AlphaTo( 250, 0, sprite );
-        sprite.SetVisible( false );
-        sprite.CreateFontString( "" + value );
+        sprite.setVisible( false );
+        sprite.createFontString( "" + value );
     }
 }
 
@@ -202,28 +202,28 @@ void SlotGame_FastStopSpinMusic()
 /************************************************************************
 *    desc:  Script for setting the look of the disabled state
 ************************************************************************/
-void Control_Disabled( CSprite2D & sprite )
+void Control_Disabled( iSprite & sprite )
 {
-    CColor color = sprite.GetDefaultColor();
+    CColor color = sprite.getDefaultColor();
     color.TransformHSV( 0, 0, 1 );
 
-    sprite.SetColor( color );
+    sprite.setColor( color );
 }
 
 
 /************************************************************************
 *    desc:  Script for setting the look of the inactive state
 ************************************************************************/
-void Control_Inactive( CSprite2D & sprite )
+void Control_Inactive( iSprite & sprite )
 {
-    sprite.SetDefaultColor();
+    sprite.setDefaultColor();
 }
 
 
 /************************************************************************
 *    desc:  Script for animating a symbol
 ************************************************************************/
-void Symbol_Animate( CSprite2D & sprite )
+void Symbol_Animate( iSprite & sprite )
 {
     Play( 18, sprite );
 }
@@ -232,7 +232,7 @@ void Symbol_Animate( CSprite2D & sprite )
 /************************************************************************
 *    desc:  Script for animating a symbol
 ************************************************************************/
-void Symbol_Hold( CSprite2D & sprite )
+void Symbol_Hold( iSprite & sprite )
 {
     Hold( 1000 );
 }

@@ -55,9 +55,10 @@
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
-#include <script/scriptactorsprite2d.h>
-#include <script/scriptsprite2d.h>
+#include <script/scriptsprite.h>
 #include <script/scriptsoundmanager.h>
+#include <script/scriptcamera.h>
+#include <script/scriptcameramanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
 #include <script/scriptobjectdatamanager.h>
@@ -205,8 +206,8 @@ void CGame::Init()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
-    NScriptActorSprite2D::Register();
-    NScriptSprite2D::Register();
+    NScriptCamera::Register();
+    NScriptSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
     NScriptSoundManager::Register();
@@ -214,6 +215,7 @@ void CGame::Init()
     NScriptShaderManager::Register();
     NScriptObjectDataManager::Register();
     NScriptStrategyManager::Register();
+    NScriptCameraManager::Register();
 
     CScriptManager::Instance().LoadGroup("(main)");
     CScriptManager::Instance().Prepare("(main)", "main");
@@ -272,8 +274,12 @@ bool CGame::GameLoop()
         // Clear the buffers
         glClear( m_clearBufferMask );
         
-        // Process all game loop states
-        CSpriteStrategyMgr::Instance().ProcessAllStates();
+        // Process all game states
+        CSpriteStrategyMgr::Instance().MiscProcess();
+        CSpriteStrategyMgr::Instance().Update();
+        CSpriteStrategyMgr::Instance().Transform();
+        CCameraMgr::Instance().Transform();
+        CSpriteStrategyMgr::Instance().Render();
         
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );

@@ -7,6 +7,8 @@
 
 final class CTitleScreenState : iGameState
 {
+    iSprite @cube;
+    
     //
     // Constructor
     //
@@ -20,7 +22,26 @@ final class CTitleScreenState : iGameState
     //
     void Init() override
     {
+        Strategy_CreateSprite( "strategyFor2D", "(title_screen)", "background" );
         
+        Strategy_CreateBasicSpriteStrategy( "strategyFor3D", "camera3D" );
+        
+        CCamera @camera = Camera_CreatePerspective("camera3D");
+        camera.setPos( 0, 0, 20 );
+     
+        @cube = Strategy_CreateSprite( "strategyFor3D", "(cube)", "cube" );
+        cube.setScale(3,3,3);
+        
+        Spawn("Screen_FadeIn");
+    }
+    
+    //
+    // Update the state
+    //
+    void Update() override
+    {
+        float rot = GetElapsedTime() * 0.04;
+        cube.incRot( rot, rot, 0 );
     }
 };
 
