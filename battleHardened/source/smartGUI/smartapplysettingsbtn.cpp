@@ -118,8 +118,8 @@ void CSmartApplySettingsBtn::Execute()
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        mode.w = CSettings::Instance().GetSize().GetW();
-        mode.h = CSettings::Instance().GetSize().GetH();
+        mode.w = CSettings::Instance().GetSize().getW();
+        mode.h = CSettings::Instance().GetSize().getH();
         mode.refresh_rate = 0;
 
         SDL_SetWindowDisplayMode( CDevice::Instance().GetWindow(), &mode );
@@ -129,8 +129,8 @@ void CSmartApplySettingsBtn::Execute()
 
         SDL_SetWindowSize(
             CDevice::Instance().GetWindow(),
-            CSettings::Instance().GetSize().GetW(),
-            CSettings::Instance().GetSize().GetH() );
+            CSettings::Instance().GetSize().getW(),
+            CSettings::Instance().GetSize().getH() );
 
         SDL_SetWindowPosition(
             CDevice::Instance().GetWindow(),
@@ -144,7 +144,7 @@ void CSmartApplySettingsBtn::Execute()
         CMenuManager::Instance().ResetDynamicOffset();
 
         // Need to reset the view port the changing the resolution
-        glViewport(0, 0, CSettings::Instance().GetSize().GetW(), CSettings::Instance().GetSize().GetH());
+        glViewport(0, 0, CSettings::Instance().GetSize().getW(), CSettings::Instance().GetSize().getH());
     }
     else if( fullScreenChanged )
     {

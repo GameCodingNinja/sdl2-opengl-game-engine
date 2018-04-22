@@ -301,7 +301,7 @@ void CLevel1State::SayGoodbye(b2Fixture* fixture)
 {
     CSprite2D * pSprite = reinterpret_cast<CSprite2D *>(fixture->GetUserData());
     
-    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->GetPos().GetX() ) < 720.f) )
+    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->GetPos().getX() ) < 720.f) )
     {
         m_totalWin += m_multiplier;
         m_rWinMeter.StartBangUp( m_totalWin );

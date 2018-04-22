@@ -58,7 +58,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
     {
         // Get the position of the gun
         const CPoint<float> pos = m_sprite.GetSprite(-1).GetTransPos();
-        const float ratio = 1 / CSettings::Instance().GetOrthoAspectRatio().GetH();
+        const float ratio = 1 / CSettings::Instance().GetOrthoAspectRatio().getH();
         m_gunXY.x = ((ratio * (float)rEvent.motion.x) - pos.x) - CSettings::Instance().GetDefaultSizeHalf().w;
         m_gunXY.y = CSettings::Instance().GetDefaultSizeHalf().h - ((ratio * (float)rEvent.motion.y) + pos.y);
     }

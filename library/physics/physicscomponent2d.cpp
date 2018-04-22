@@ -98,8 +98,8 @@ void CPhysicsComponent2D::CreateBody( const CSprite2D & sprite )
         bodyDef.linearDamping = physicsData.GetLinearDamping();
         bodyDef.angularDamping = physicsData.GetAngularDamping();
         bodyDef.fixedRotation = physicsData.IsRotationFixed();
-        bodyDef.position.Set( sprite.GetPos().GetX() * PIXELS_TO_METERS, -(sprite.GetPos().GetY() * PIXELS_TO_METERS) );
-        bodyDef.angle = -sprite.GetRot().GetZ();
+        bodyDef.position.Set( sprite.GetPos().getX() * PIXELS_TO_METERS, -(sprite.GetPos().getY() * PIXELS_TO_METERS) );
+        bodyDef.angle = -sprite.GetRot().getZ();
         bodyDef.userData = (void*)&sprite;
 
         // Create the body
@@ -141,7 +141,7 @@ void CPhysicsComponent2D::CreateFixture( const CSprite2D & sprite )
 void CPhysicsComponent2D::CreateCircularShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
     b2CircleShape shape;
-    shape.m_radius = (fixture.m_radius * sprite.GetScale().GetX()) * PIXELS_TO_METERS;
+    shape.m_radius = (fixture.m_radius * sprite.GetScale().getX()) * PIXELS_TO_METERS;
 
     b2FixtureDef f;
     f.shape = &shape;
@@ -173,7 +173,7 @@ void CPhysicsComponent2D::CreateEdgeShapeFixture( const CSprite2D & sprite, cons
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
     const CSize<float> objectSize = sprite.GetObjectData().GetSize();
-    const CSize<float> scale( sprite.GetScale().GetX(), sprite.GetScale().GetY() );
+    const CSize<float> scale( sprite.GetScale().getX(), sprite.GetScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
     // Convert the points to world location in meters
@@ -208,7 +208,7 @@ void CPhysicsComponent2D::CreatePolygonShapeFixture( const CSprite2D & sprite, c
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
     const CSize<float> objectSize = sprite.GetObjectData().GetSize();
-    const CSize<float> scale( sprite.GetScale().GetX(), sprite.GetScale().GetY() );
+    const CSize<float> scale( sprite.GetScale().getX(), sprite.GetScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
     // Is this polygon shape defined by a vector of points?
@@ -279,7 +279,7 @@ void CPhysicsComponent2D::CreateChainShapeFixture( const CSprite2D & sprite, con
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
     const CSize<float> objectSize = sprite.GetObjectData().GetSize();
-    const CSize<float> scale( sprite.GetScale().GetX(), sprite.GetScale().GetY() );
+    const CSize<float> scale( sprite.GetScale().getX(), sprite.GetScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
     // Convert the points to world location in meters

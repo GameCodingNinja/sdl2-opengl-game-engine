@@ -74,7 +74,7 @@ void CGame::Init()
     CBaseGame::Init();
 
     // Setup the message filtering
-    SDL_SetEventFilter(FilterEvents, 0);
+    //SDL_SetEventFilter(FilterEvents, 0);
     
     // Handle some events on startup
     PollEvents();
@@ -305,11 +305,8 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
         // Analog stick max values -32768 to 32767
         const int deadZone = CSettings::Instance().GetGamePadStickDeadZone() * 
             defs_ANALOG_PERCENTAGE_CONVERTION;
-
-        if( ((pEvent->caxis.axis >= SDL_CONTROLLER_AXIS_LEFTX) &&
-            (pEvent->caxis.axis <= SDL_CONTROLLER_AXIS_RIGHTY)) &&
-            (((pEvent->caxis.value >= 0) && (pEvent->caxis.value < deadZone)) ||
-            ((pEvent->caxis.value <= 0) && (pEvent->caxis.value > -deadZone))) )
+        
+        if( std::abs(pEvent->caxis.value) < deadZone )
             return 0;
     }
 

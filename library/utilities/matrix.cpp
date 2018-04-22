@@ -211,21 +211,21 @@ void CMatrix::Rotate( const CPoint<float> & radian )
     InitIdentityMatrix( rMatrix );
 
     // Apply Z rotation
-    if( !radian.IsZEmpty() )
+    if( !radian.isZEmpty() )
     {
         RotateZ( rMatrix, radian.z, flags );
         flags |= ROT_Z;
     }
 
     // Apply Y rotation
-    if( !radian.IsYEmpty() )
+    if( !radian.isYEmpty() )
     {
         RotateY( rMatrix, radian.y, flags );
         flags |= ROT_Y;
     }
 
     // Apply X rotation
-    if( !radian.IsXEmpty() )
+    if( !radian.isXEmpty() )
     {
         RotateX( rMatrix, radian.x, flags );
         flags |= ROT_X;
@@ -883,20 +883,20 @@ void CMatrix::Set( const CQuaternion & quat )
 void CMatrix::LookAt( const CPoint<float> & pos, const CPoint<float> & target, const CPoint<float> & cameraUp )
 {
     CPoint<float> zAxis = target - pos;
-    zAxis.Normalize();
+    zAxis.normalize();
 
-    CPoint<float> xAxis = cameraUp.GetCrossProduct( zAxis );
-    xAxis.Normalize();
+    CPoint<float> xAxis = cameraUp.getCrossProduct( zAxis );
+    xAxis.normalize();
 
-    CPoint<float> yAxis = zAxis.GetCrossProduct( xAxis );
+    CPoint<float> yAxis = zAxis.getCrossProduct( xAxis );
 
     matrix[m00] = xAxis.x;  matrix[m01] = yAxis.x;  matrix[m02] = zAxis.x;  matrix[m03] = 0.f;
     matrix[m10] = xAxis.y;  matrix[m11] = yAxis.y;  matrix[m12] = zAxis.y;  matrix[m13] = 0.f;
     matrix[m20] = xAxis.z;  matrix[m21] = yAxis.z;  matrix[m22] = zAxis.z;  matrix[m23] = 0.f;
 
-    matrix[m30] = -pos.GetDotProduct(xAxis);
-    matrix[m31] = -pos.GetDotProduct(yAxis);
-    matrix[m32] = -pos.GetDotProduct(zAxis);
+    matrix[m30] = -pos.getDotProduct(xAxis);
+    matrix[m31] = -pos.getDotProduct(yAxis);
+    matrix[m32] = -pos.getDotProduct(zAxis);
     matrix[m33] = 1.f;
 
 }   // LookAt

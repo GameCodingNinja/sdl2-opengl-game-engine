@@ -41,6 +41,9 @@ final class CStartUpState : iGameState
         // Do the fade in
         Screen_FadeIn();
         
+        // Load the action manager - Must be loaded before memu system
+        Action_Load( "data/settings/controllerMapping.cfg" );
+        
         // Load the 3d object data list tables
         ObjectData_LoadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
         

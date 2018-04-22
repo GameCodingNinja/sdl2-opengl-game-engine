@@ -140,7 +140,7 @@ void CVisualComponent3D::SetColor( const CColor & color )
 void CVisualComponent3D::SetColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
-    m_color.Set( r, g, b, a );
+    m_color.set( r, g, b, a );
 
 }   // SetColor
 

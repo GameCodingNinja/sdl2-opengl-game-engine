@@ -208,18 +208,18 @@ void CUIControl::Transform( const CObject2D & object )
 ************************************************************************/
 void CUIControl::TransformCollision()
 {
-    if( WasWorldPosTranformed() && !m_size.IsEmpty() )
+    if( WasWorldPosTranformed() && !m_size.isEmpty() )
     {
         CMatrix finalMatrix( GetMatrix() );
-        finalMatrix.Scale( CSettings::Instance().GetOrthoAspectRatio().GetH() );
+        finalMatrix.Scale( CSettings::Instance().GetOrthoAspectRatio().getH() );
         finalMatrix.InvertY();
 
         // Get half the screen size to convert to screen coordinates
         CSize<float> screenHalf = CSettings::Instance().GetSizeHalf();
 
         // Create the rect of the control based on half it's size
-        float halfwidth = m_size.GetW() * 0.5f;
-        float halfHeight = m_size.GetH() * 0.5f;
+        float halfwidth = m_size.getW() * 0.5f;
+        float halfHeight = m_size.getH() * 0.5f;
 
         CQuad quad;
         quad.point[0].x = -halfwidth + -m_sizeModifier.x1;
@@ -234,20 +234,20 @@ void CUIControl::TransformCollision()
         finalMatrix.Transform( m_collisionQuad, quad );
 
         // Convert the translated rect to screen coordinates
-        m_collisionQuad.point[0].x += screenHalf.GetW();
-        m_collisionQuad.point[0].y += screenHalf.GetH();
-        m_collisionQuad.point[1].x += screenHalf.GetW();
-        m_collisionQuad.point[1].y += screenHalf.GetH();
-        m_collisionQuad.point[2].x += screenHalf.GetW();
-        m_collisionQuad.point[2].y += screenHalf.GetH();
-        m_collisionQuad.point[3].x += screenHalf.GetW();
-        m_collisionQuad.point[3].y += screenHalf.GetH();
+        m_collisionQuad.point[0].x += screenHalf.getW();
+        m_collisionQuad.point[0].y += screenHalf.getH();
+        m_collisionQuad.point[1].x += screenHalf.getW();
+        m_collisionQuad.point[1].y += screenHalf.getH();
+        m_collisionQuad.point[2].x += screenHalf.getW();
+        m_collisionQuad.point[2].y += screenHalf.getH();
+        m_collisionQuad.point[3].x += screenHalf.getW();
+        m_collisionQuad.point[3].y += screenHalf.getH();
 
         finalMatrix.Transform( m_collisionCenter, CPoint<float>() );
 
         // Convert to screen coordinates
-        m_collisionCenter.x += screenHalf.GetW();
-        m_collisionCenter.y += screenHalf.GetH();
+        m_collisionCenter.x += screenHalf.getW();
+        m_collisionCenter.y += screenHalf.getH();
     }
 
 }   // TransformCollision
@@ -416,7 +416,7 @@ void CUIControl::OnReactivate( const SDL_Event & rEvent )
         
         // Don't animate the control if the mouse was used
         if( !CActionMgr::Instance().WasLastDeviceMouse() ||
-            IsPointInControl( CActionMgr::Instance().GetLastMousePos() ) )
+            IsPointInControl( CActionMgr::Instance().GetMouseAbsolutePos() ) )
         {
             RecycleContext();
             SetDisplayState();

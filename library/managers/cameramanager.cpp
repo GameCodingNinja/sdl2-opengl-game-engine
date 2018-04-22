@@ -47,8 +47,8 @@ void CCameraMgr::CreateProjMatrix()
         CSettings::Instance().GetMaxZdist() );
 
     m_orthographicMatrix.OrthographicRH(
-        CSettings::Instance().GetDefaultSize().GetW(),
-        CSettings::Instance().GetDefaultSize().GetH(),
+        CSettings::Instance().GetDefaultSize().getW(),
+        CSettings::Instance().GetDefaultSize().getH(),
         CSettings::Instance().GetMinZdist(),
         CSettings::Instance().GetMaxZdist() );
     

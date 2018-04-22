@@ -192,10 +192,10 @@ iSprite * CBasicSpriteStrategy::Create(
     }
 
     // Use passed in transforms if specified
-    if( !pos.IsEmpty() )
+    if( !pos.isEmpty() )
         iter.first->second->SetPos(pos);
 
-    if( !rot.IsEmpty() )
+    if( !rot.isEmpty() )
         iter.first->second->SetRot(rot, false);
 
     if( scale != CPoint<float>(1,1,1) )
@@ -310,10 +310,10 @@ iSprite * CBasicSpriteStrategy::Create(
     }
 
     // Use passed in transforms if specified
-    if( !pos.IsEmpty() )
+    if( !pos.isEmpty() )
         iter.first->second->SetPos(pos);
 
-    if( !rot.IsEmpty() )
+    if( !rot.isEmpty() )
         iter.first->second->SetRot(rot, false);
 
     if( scale != CPoint<float>(1,1,1) )

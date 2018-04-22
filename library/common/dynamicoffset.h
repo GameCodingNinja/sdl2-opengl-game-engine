@@ -51,7 +51,7 @@ public:
         CPoint<float> pos;
         
         // Strip out any fractional component for correct rendering
-        defaultHalfSize.Round();
+        defaultHalfSize.round();
 
         if( m_parameters.IsSet( CDynamicOffset::EDO_LEFT ) )
             pos.x = -(defaultHalfSize.w - point.x);

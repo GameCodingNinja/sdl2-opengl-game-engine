@@ -43,7 +43,7 @@ public:
 
     // Was this an action
     bool WasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress );
-	NDefs::EActionPress WasAction( const SDL_Event & rEvent, const std::string & actionStr );
+    NDefs::EActionPress WasAction( const SDL_Event & rEvent, const std::string & actionStr );
 
     // What was the last devic
     bool WasLastDeviceGamepad();
@@ -54,8 +54,13 @@ public:
     // Reset the last used device
     void ResetLastUsedDevice();
 
-    // Get the last mouse position
-    const CPoint<float> & GetLastMousePos() const;
+    // Get the mouse position
+    const CPoint<float> & GetMouseAbsolutePos() const;
+    const CPoint<float> & GetMouseRelativePos() const;
+    
+    // Get the last controller position
+    const CPoint<float> & GetControllerPosLeft() const;
+    const CPoint<float> & GetControllerPosRight() const;
     
     // Get the action/component strings for the give device id
     bool GetDeviceActionStr( 
@@ -81,6 +86,20 @@ public:
     
     // Reset all the key bindings to their default settings
     void ResetKeyBindingsToDefault();
+    
+    // Queue the event
+    void QueueEvent( const SDL_Event & rEvent );
+    
+    // Clear the queue
+    void ClearQueue();
+    
+    // Was this an event in the Queue
+    bool WasEvent( const std::string & actionStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    
+    // Device specific key checks
+    bool WasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool WasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool WasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
 
 private:
 
@@ -175,8 +194,13 @@ private:
     // Last device used
     NDefs::EDeviceId m_lastDeviceUsed;
 
-    // Last mouse pos
-    CPoint<float> m_lastMousePos;
+    // Mouse pos
+    CPoint<float> m_mouseAbsolutePos;
+    CPoint<float> m_mouseRelativePos;
+    
+    // Last controller pos
+    CPoint<float> m_lastAnalogLeft;
+    CPoint<float> m_lastAnalogRight;
 
     // Flag to indicate analog state as button
     std::array<NDefs::EActionPress,16> m_analogLXButtonStateAry;
@@ -197,6 +221,9 @@ private:
     
     // flag for xml action changes
     bool m_xmlActionChange;
+    
+    // Que of event message
+    std::vector<SDL_Event> m_eventQueue;
 
 };
 

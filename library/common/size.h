@@ -46,10 +46,10 @@ public:
     /************************************************************************
     *    desc:  Get functions
     ************************************************************************/
-    type GetW() const
+    type getW() const
     { return w; }
 
-    type GetH() const
+    type getH() const
     { return h; }
 
 
@@ -170,13 +170,9 @@ public:
         return *this;
     }
 
-
+    
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  CSize & size - size to add
-    *
-    *    return: CSize - added size
     ************************************************************************/
     CSize operator + ( const CSize & size ) const
     {
@@ -185,15 +181,10 @@ public:
         tmp.h = h + size.h;
 
         return tmp;
-
-    }   // operator +
+    }
 
     /************************************************************************
     *    desc:  The subtraction operator
-    *
-    *    param:  CSize & size - size to subtract
-    *
-    *    return: CSize - subtracted size
     ************************************************************************/
     CSize operator - ( const CSize & size ) const
     {
@@ -202,15 +193,10 @@ public:
         tmp.h = h - size.h;
 
         return tmp;
-
-    }   // operator -
+    }
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  CSize & size - size to add
-    *
-    *    return: CSize - added size
     ************************************************************************/
     CSize operator += ( const CSize & size )
     {
@@ -218,15 +204,10 @@ public:
         h += size.h;
 
         return *(this);
-
-    }   // operator +=
+    }
 
     /************************************************************************
     *    desc:  The subtraction operator
-    *
-    *    param:  CSize & size - size to subtract
-    *
-    *    return: CSize - subtracted size
     ************************************************************************/
     CSize operator -= ( const CSize & size )
     {
@@ -234,15 +215,10 @@ public:
         h -= size.h;
 
         return *(this);
-
-    }   // operator -=
+    }
 
     /************************************************************************
     *    desc:  The equate operator
-    *
-    *    param:  CSize & size - size to compair
-    *
-    *    return: bool
     ************************************************************************/
     bool operator == ( const CSize & size ) const
     {
@@ -250,15 +226,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator ==
+    }
 
     /************************************************************************
     *    desc:  The equate operator
-    *
-    *    param:  CSize & size - size to compair
-    *
-    *    return: bool
     ************************************************************************/
     bool operator != ( const CSize & size ) const
     {
@@ -266,15 +237,10 @@ public:
             return false;
 
         return true;
-
-    }   // operator !=
+    }
     
     /************************************************************************
     *    desc:  Greater than operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator > ( const CSize & size ) const
     {
@@ -282,15 +248,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator >
+    }
     
     /************************************************************************
     *    desc:  Greater than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator >= ( const CSize & size ) const
     {
@@ -298,15 +259,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
     /************************************************************************
     *    desc:  Less than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator < ( const CSize & size ) const
     {
@@ -314,15 +270,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator <
+    }
     
     /************************************************************************
     *    desc:  Less than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator <= ( const CSize & size ) const
     {
@@ -330,38 +281,33 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
 
     /************************************************************************
     *    desc:  Does this size not have any data?
-    *
-    *    return: bool
     ************************************************************************/
-    bool IsEmpty() const
+    bool isEmpty() const
     {
-        return ( IsWEmpty() && IsHEmpty() );
+        return ( isWEmpty() && isHEmpty() );
     }
 
-    bool IsWEmpty() const
+    bool isWEmpty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == w) || (*(int*)&w == 0) );
+    }
 
-    }   // IsWEmpty
-
-    bool IsHEmpty() const
+    bool isHEmpty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == h) || (*(int*)&h == 0) );
-
-    }   // IsWEmpty
+    }
 
     /************************************************************************
     *    desc:  Reset the data
     ************************************************************************/
-    void Reset()
+    void reset()
     {
         w = 0;
         h = 0;
@@ -370,17 +316,16 @@ public:
     /************************************************************************
     *    desc:  Set the size data
     ************************************************************************/
-    void Set( type _w, type _h )
+    void set( type _w, type _h )
     {
         w = _w;
         h = _h;
-
-    }   // Set
+    }
 
     /************************************************************************
     *    desc:  Round out the floating point number
     ************************************************************************/
-    void Round()
+    void round()
     {
         w = floor(w + 0.5);
         h = floor(h + 0.5);
@@ -389,31 +334,28 @@ public:
     /************************************************************************
     *    desc:  Get the squared length of the size from the origin
     ************************************************************************/
-    type GetLengthSquared() const
+    type getLengthSquared() const
     {
         return ( w * w ) +  ( h * h );
-
-    }   // GetLengthSquared
+    }
 
     /************************************************************************
     *    desc:  Get the length of the size from the origin
     ************************************************************************/
-    type GetLength() const
+    type getLength() const
     {
-        return std::sqrt( GetLengthSquared() );
-
-    }   // GetLength
+        return std::sqrt( getLengthSquared() );
+    }
     
     /************************************************************************
     *    desc:  Swap the width and height
     ************************************************************************/
-    void Swap()
+    void swap()
     {
         type tmp = w;
         w = h;
         h = tmp;
-
-    }   // Swap
+    }
 };
 
 #endif  // __size_h__

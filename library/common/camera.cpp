@@ -92,7 +92,7 @@ void CCamera::GenerateOrthographicProjection( float minZDist, float maxZDist, fl
     const auto defSize = CSettings::Instance().GetDefaultSize();
     
     // Calc the new width and height
-    m_orthoProjSize.Set( defSize.GetW() * scale, defSize.GetH() * scale );
+    m_orthoProjSize.set( defSize.getW() * scale, defSize.getH() * scale );
     m_orthoProjSizeHalf = m_orthoProjSize / 2.f;
     
     // Calc the new height aspect ratio

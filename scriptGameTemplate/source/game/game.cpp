@@ -37,6 +37,7 @@
 #include <managers/vertexbuffermanager.h>
 #include <managers/meshmanager.h>
 #include <managers/cameramanager.h>
+#include <managers/actionmanager.h>
 #include <spritestrategy/spritestrategymanager.h>
 #include <gui/menumanager.h>
 #include <gui/uicontrol.h>
@@ -45,6 +46,7 @@
 #include <utilities/settings.h>
 #include <utilities/statcounter.h>
 #include <utilities/highresolutiontimer.h>
+#include <utilities/genfunc.h>
 #include <common/isprite.h>
 #include <common/color.h>
 #include <common/build_defs.h>
@@ -63,6 +65,7 @@
 #include <script/scriptshadermanager.h>
 #include <script/scriptobjectdatamanager.h>
 #include <script/scriptstrategymanager.h>
+#include <script/scriptactionmanager.h>
 #include <system/device.h>
 
 // AngelScript lib dependencies
@@ -192,7 +195,7 @@ void CGame::Init()
     OpenGLInit();
 
     // Setup the message filtering
-    SDL_SetEventFilter(FilterEvents, 0);
+    //SDL_SetEventFilter(FilterEvents, 0);
     
     // Handle some events on startup
     PollEvents();
@@ -216,6 +219,7 @@ void CGame::Init()
     NScriptObjectDataManager::Register();
     NScriptStrategyManager::Register();
     NScriptCameraManager::Register();
+    NScriptActionManager::Register();
 
     CScriptManager::Instance().LoadGroup("(main)");
     CScriptManager::Instance().Prepare("(main)", "main");
@@ -235,10 +239,14 @@ void CGame::PollEvents()
 {
     // Event handler
     SDL_Event msgEvent;
+    
+    CActionMgr::Instance().ClearQueue();
 
     // Handle events on queue
     while( SDL_PollEvent( &msgEvent ) )
     {
+        CActionMgr::Instance().QueueEvent( msgEvent );
+        
         // let the game handle the event
         // turns true on quit
         if( HandleEvent( msgEvent ) )
@@ -363,12 +371,12 @@ void CGame::StatStringCallBack( const std::string & statStr )
 *    desc:  Handle events
 ************************************************************************/
 bool CGame::HandleEvent( const SDL_Event & rEvent )
-{
+{  
     if( (rEvent.type == SDL_QUIT) || (rEvent.type == SDL_APP_TERMINATING) )
         return true;
 
     // Filter out these events. Can't do this through the normal event filter
-    /*if( (rEvent.type >= SDL_JOYAXISMOTION) && (rEvent.type <= SDL_JOYBUTTONUP) )
+    if( (rEvent.type >= SDL_JOYAXISMOTION) && (rEvent.type <= SDL_JOYBUTTONUP) )
         return false;
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEADDED )
@@ -382,7 +390,7 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
     
     // In a traditional game, want the pause menu to display when the game is sent to the background
     else if( (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().IsMenuActive() )
-        NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );*/
+        NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );
 
     return false;
 

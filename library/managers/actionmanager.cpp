@@ -281,7 +281,7 @@ void CActionMgr::LoadActionFromNode(
 
             // See if we can find the string that represents the key code id
             std::string componentIdStr = actionNode.getAttribute( "componetId" );
-            auto keyCodeIter = keyCodeMap.left.find( componentIdStr );
+            const auto keyCodeIter = keyCodeMap.left.find( componentIdStr );
 
             // Add it in if we found it
             if( keyCodeIter != keyCodeMap.left.end() )
@@ -365,8 +365,8 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
             {
                 result = NDefs::EAP_UP;
 
-                m_lastMousePos.x = rEvent.button.x;
-                m_lastMousePos.y = rEvent.button.y;
+                m_mouseAbsolutePos.x = rEvent.button.x;
+                m_mouseAbsolutePos.y = rEvent.button.y;
 
                 if( rEvent.type == SDL_MOUSEBUTTONDOWN )
                 {
@@ -558,11 +558,30 @@ void CActionMgr::ResetLastUsedDevice()
 
 
 /************************************************************************
-*    desc:  Get the last mouse position
+*    desc:  Get the mouse position
 ************************************************************************/
-const CPoint<float> & CActionMgr::GetLastMousePos() const
+const CPoint<float> & CActionMgr::GetMouseAbsolutePos() const
 {
-    return m_lastMousePos;
+    return m_mouseAbsolutePos;
+}
+
+const CPoint<float> & CActionMgr::GetMouseRelativePos() const
+{
+    return m_mouseRelativePos;
+}
+
+
+/************************************************************************
+*    desc:  Get the last controller position
+************************************************************************/
+const CPoint<float> & CActionMgr::GetControllerPosLeft() const
+{
+    return m_lastAnalogLeft;
+}
+
+const CPoint<float> & CActionMgr::GetControllerPosRight() const
+{
+    return m_lastAnalogRight;
 }
 
 
@@ -817,3 +836,155 @@ void CActionMgr::ResetKeyBindingsToDefault()
     m_mainNode.writeToFile(m_saveFilePath.c_str(), "utf-8");
 
 }   // ResetKeyBindingsToDefault
+
+
+/************************************************************************
+*    desc:  Queue the event
+************************************************************************/
+void CActionMgr::QueueEvent( const SDL_Event & rEvent )
+{
+    if( m_allowAction )
+    {
+        m_eventQueue.emplace_back( rEvent );
+        
+        if( rEvent.type == SDL_MOUSEMOTION )
+        {
+            m_mouseAbsolutePos.x = rEvent.motion.x;
+            m_mouseAbsolutePos.y = rEvent.motion.y;
+            
+            m_mouseRelativePos.x += rEvent.motion.xrel;
+            m_mouseRelativePos.y += rEvent.motion.yrel;
+        }
+        else if( rEvent.type == SDL_CONTROLLERAXISMOTION )
+        {
+            if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_LEFTX )
+                m_lastAnalogLeft.x += rEvent.caxis.value;
+
+            else if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_LEFTY )
+                m_lastAnalogLeft.y += rEvent.caxis.value;
+            
+            if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTX )
+                m_lastAnalogRight.x += rEvent.caxis.value;
+
+            else if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTY )
+                m_lastAnalogRight.y += rEvent.caxis.value;
+        }
+    }
+}   // QueueEvent
+
+
+/************************************************************************
+*    desc:  Clear the queue
+************************************************************************/
+void CActionMgr::ClearQueue()
+{
+    m_eventQueue.clear();
+    
+    m_lastAnalogLeft.clear();
+    m_lastAnalogRight.clear();
+    m_mouseRelativePos.clear();
+}
+
+
+/************************************************************************
+*    desc:  Was this an event in the Queue
+************************************************************************/
+bool CActionMgr::WasEvent( const std::string & actionStr, NDefs::EActionPress actionPress )
+{
+    if( m_allowAction )
+    {
+        for( auto & iter : m_eventQueue )
+            if( WasAction( iter, actionStr ) == actionPress )
+                return true;
+    }
+
+    return false;
+
+}   // WasEvent
+
+
+/************************************************************************
+*    desc:  Device specific key checks
+************************************************************************/
+bool CActionMgr::WasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+{
+    if( m_allowAction )
+    {
+        const auto keyCodeIter = m_keyboardKeyCodeMap.left.find( componentIdStr );
+        
+        if( keyCodeIter != m_keyboardKeyCodeMap.left.end() )
+        {
+            for( auto & iter : m_eventQueue )
+            {
+                if( (actionPress == NDefs::EAP_DOWN) &&
+                    (iter.type == SDL_KEYDOWN) &&
+                    (iter.key.repeat == 0) &&
+                    (iter.key.keysym.sym == keyCodeIter->second) )
+                    return true;
+
+                else if( (actionPress == NDefs::EAP_UP) &&
+                    (iter.type == SDL_KEYUP) &&
+                    (iter.key.repeat == 0) &&
+                    (iter.key.keysym.sym == keyCodeIter->second) )
+                    return true;
+            }
+        }
+    }
+
+    return false;
+
+}   // WasKeyboard
+
+bool CActionMgr::WasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+{
+    if( m_allowAction )
+    {
+        const auto keyCodeIter = m_mouseKeyCodeMap.left.find( componentIdStr );
+        
+        if( keyCodeIter != m_mouseKeyCodeMap.left.end() )
+        {
+            for( auto & iter : m_eventQueue )
+            {
+                if( (actionPress == NDefs::EAP_DOWN) &&
+                    (iter.type == SDL_MOUSEBUTTONDOWN) &&
+                    (iter.button.button == keyCodeIter->second) )
+                    return true;
+
+                else if( (actionPress == NDefs::EAP_UP) &&
+                    (iter.type == SDL_MOUSEBUTTONUP) &&
+                    (iter.button.button == keyCodeIter->second) )
+                    return true;
+            }
+        }
+    }
+
+    return false;
+
+}   // WasMouse
+
+bool CActionMgr::WasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+{
+    if( m_allowAction )
+    {
+        const auto keyCodeIter = m_gamepadKeyCodeMap.left.find( componentIdStr );
+        
+        if( keyCodeIter != m_gamepadKeyCodeMap.left.end() )
+        {
+            for( auto & iter : m_eventQueue )
+            {
+                if( (actionPress == NDefs::EAP_DOWN) &&
+                    (iter.type == SDL_CONTROLLERBUTTONDOWN) &&
+                    (iter.cbutton.button == keyCodeIter->second) )
+                    return true;
+
+                else if( (actionPress == NDefs::EAP_UP) &&
+                    (iter.type == SDL_CONTROLLERBUTTONUP) &&
+                    (iter.cbutton.button == keyCodeIter->second) )
+                    return true;
+            }
+        }
+    }
+
+    return false;
+
+}   // WasGamepad

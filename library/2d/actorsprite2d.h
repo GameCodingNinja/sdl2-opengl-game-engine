@@ -94,23 +94,23 @@ public:
     void SetColor( const CColor & color ) override {}
     void SetColor( float r, float g, float b, float a ) override {}
     void SetDefaultColor() override {}
-    const CColor & GetColor() const override {}
-    const CColor & GetDefaultColor() const override {}
+    const CColor & GetColor() const override {return m_dummy;}
+    const CColor & GetDefaultColor() const override {return m_dummy;}
 
     // Set/Get the alpha
     void SetAlpha( float alpha ) override {}
-    float GetAlpha() const override {}
+    float GetAlpha() const override {return 0;}
     void SetDefaultAlpha() override {}
-    float GetDefaultAlpha() const override {}
+    float GetDefaultAlpha() const override {return 0;}
 
     // Get the frame count
-    uint GetFrameCount() const override {}
+    uint GetFrameCount() const override {return 0;}
 
     // Set the texture ID from index
     void SetFrame( uint index ) override {}
     
     // Get the current frame
-    uint GetCurrentFrame() const override {}
+    uint GetCurrentFrame() const override {return 0;}
     
     // Create the font string
     void CreateFontString( const std::string & fontString ) override {}
@@ -170,6 +170,8 @@ private:
     
     // Collision radius
     float m_collisionRadius;
+    
+    CColor m_dummy;
 
 };
 

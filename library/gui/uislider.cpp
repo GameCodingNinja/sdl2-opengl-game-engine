@@ -170,7 +170,7 @@ bool CUISlider::OnMouseMove( const SDL_Event & rEvent )
     
     if( IsActive() && (m_pressType == NDefs::EAP_DOWN) )
     {
-        const float oneOverAspectRatio(1.f / CSettings::Instance().GetOrthoAspectRatio().GetH());
+        const float oneOverAspectRatio(1.f / CSettings::Instance().GetOrthoAspectRatio().getH());
         
         if( m_orientation == EO_HORIZONTAL )
             IncSliderMovePos( (float)rEvent.motion.xrel * oneOverAspectRatio );
@@ -203,7 +203,7 @@ bool CUISlider::HandleSelectAction( const CSelectMsgCracker & msgCracker )
 
             CPoint<float> dif =
                 (msgCracker.GetPos() - GetSubControl()->GetCollisionPos()) * 
-                    (1.f / CSettings::Instance().GetOrthoAspectRatio().GetH());
+                    (1.f / CSettings::Instance().GetOrthoAspectRatio().getH());
 
             if( m_orientation == EO_HORIZONTAL )
                 IncSliderMovePos( dif.x );

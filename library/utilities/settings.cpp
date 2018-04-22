@@ -125,7 +125,7 @@ void CSettings::LoadXML()
                     m_orientation = NDefs::EO_PORTRAIT;
                     
                     #if !defined(__ANDROID__)
-                    m_size.Swap();
+                    m_size.swap();
                     #endif
                 }
             }

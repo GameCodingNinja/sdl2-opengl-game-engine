@@ -79,7 +79,7 @@ void CObject::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
-    m_pos.Set( x, y, z );
+    m_pos.set( x, y, z );
 
 }   // SetPos
 
@@ -108,7 +108,7 @@ void CObject::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
-    m_pos.Inc( x, y, z );
+    m_pos.inc( x, y, z );
 
 }   // IncPos
 
@@ -135,9 +135,9 @@ void CObject::SetRot( float x, float y, float z, bool convertToRadians )
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
     if( convertToRadians )
-        m_rot.Set( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
+        m_rot.set( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
     else
-        m_rot.Set( x, y, z );
+        m_rot.set( x, y, z );
 
 }   // SetRot
 
@@ -155,7 +155,7 @@ void CObject::IncRot( const CPoint<float> & rotation, bool convertToRadians )
     else
         m_rot += rotation;
 
-    m_rot.Cap(360.0f * defs_DEG_TO_RAD);
+    m_rot.cap(360.0f * defs_DEG_TO_RAD);
 
 }   // IncRot
 
@@ -164,9 +164,9 @@ void CObject::IncRot( float x, float y, float z, bool convertToRadians )
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
     if( convertToRadians )
-        m_rot.Inc( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
+        m_rot.inc( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
     else
-        m_rot.Inc( x, y, z );
+        m_rot.inc( x, y, z );
 
 }   // IncRot
 
@@ -197,7 +197,7 @@ void CObject::SetScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
-    m_scale.Set( x, y, z );
+    m_scale.set( x, y, z );
 
 }   // SetScale
 
@@ -217,7 +217,7 @@ void CObject::IncScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
-    m_scale.Inc( x, y, z );
+    m_scale.inc( x, y, z );
 
 }   // IncScale
 
@@ -259,7 +259,7 @@ void CObject::SetCenterPosXYZ( float x, float y, float z )
 {
     m_parameters.Add( NDefs::CENTER_POINT | NDefs::TRANSFORM );
 
-    m_centerPos.Set( x, y, z );
+    m_centerPos.set( x, y, z );
 
 }   // SetCenterPosXYZ
 
@@ -269,7 +269,7 @@ void CObject::SetCenterPosXYZ( float x, float y, float z )
 ************************************************************************/
 void CObject::SetCropOffset( const CSize<int16_t> & offset )
 {
-    if( !m_centerPos.IsEmpty() || !offset.IsEmpty() )
+    if( !m_centerPos.isEmpty() || !offset.isEmpty() )
     {
         m_parameters.Add( NDefs::CROP_OFFSET | NDefs::TRANSFORM );
 

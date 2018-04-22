@@ -275,7 +275,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
         !m_pFontData->m_fontProp.m_fontName.empty() &&
         ((fontString != m_pFontData->m_fontString) || (m_vbo == 0)) )
     {
-        m_pFontData->m_fontStrSize.Reset();
+        m_pFontData->m_fontStrSize.reset();
         float lastCharDif(0.f);
         
         const CFont & font = CFontMgr::Instance().GetFont( m_pFontData->m_fontProp.m_fontName );
@@ -669,7 +669,7 @@ void CVisualComponent2D::SetColor( const CColor & color )
 void CVisualComponent2D::SetColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
-    m_color.Set( r, g, b, a );
+    m_color.set( r, g, b, a );
 
 }   // SetColor
 

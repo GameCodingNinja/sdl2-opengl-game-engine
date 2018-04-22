@@ -270,7 +270,7 @@ float CSprite3D::GetAlpha() const
  ************************************************************************/
 float CSprite3D::GetDefaultAlpha() const
 {
-    return m_objectData.GetVisualData().GetColor().GetA();
+    return m_objectData.GetVisualData().GetColor().getA();
 
 }   // GetDefaultAlpha
 
@@ -280,6 +280,6 @@ float CSprite3D::GetDefaultAlpha() const
 ************************************************************************/
 void CSprite3D::SetDefaultAlpha()
 {
-    m_visualComponent.SetAlpha( m_objectData.GetVisualData().GetColor().GetA() );
+    m_visualComponent.SetAlpha( m_objectData.GetVisualData().GetColor().getA() );
 
 }   // SetDefaultAlpha

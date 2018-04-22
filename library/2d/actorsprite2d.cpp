@@ -116,7 +116,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
 
     // Convert the largest width and height to a radius
     largestSize /= 2;
-    m_radius = largestSize.GetLength();
+    m_radius = largestSize.getLength();
     m_scaledRadius = m_radius;
     
     // Set the collision filter info
@@ -401,7 +401,7 @@ bool CActorSprite2D::IsCollision( CActorSprite2D & rActor )
 bool CActorSprite2D::CheckBroadPhase( CActorSprite2D & rActor )
 {
     const float radius = m_collisionRadius + rActor.GetCollisionRadius();
-    const float length = m_transPos.GetLength2D( rActor.GetTransPos() );
+    const float length = m_transPos.getLength2D( rActor.GetTransPos() );
     
     return (length < radius);
     

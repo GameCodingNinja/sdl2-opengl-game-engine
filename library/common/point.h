@@ -28,7 +28,7 @@ public:
     ************************************************************************/
     CPoint() : x(0), y(0), z(0)
     {
-    }	// Constructor
+    }
 
     // Needs to be done like this to avoid recursion
     template <typename U>
@@ -42,23 +42,23 @@ public:
 
     CPoint( type _x, type _y ) : x(_x), y(_y), z(0)
     {
-    }	// Constructor
+    }
 
 
     /************************************************************************
     *    desc:  Get functions for const calls
     ************************************************************************/
-    type GetX() const
+    type getX() const
     {
         return x;
     }
 
-    type GetY() const
+    type getY() const
     {
         return y;
     }
 
-    type GetZ() const
+    type getZ() const
     {
         return z;
     }
@@ -67,7 +67,7 @@ public:
     /************************************************************************
     *    desc:  Clear the x
     ************************************************************************/
-    void ClearX()
+    void clearX()
     {
         x = 0.0f;
     }
@@ -75,7 +75,7 @@ public:
     /************************************************************************
     *    desc:  Clear the y
     ************************************************************************/
-    void ClearY()
+    void clearY()
     {
         y = 0.0f;
     }
@@ -83,7 +83,7 @@ public:
     /************************************************************************
     *    desc:  Clear the z
     ************************************************************************/
-    void ClearZ()
+    void clearZ()
     {
         z = 0.0f;
     }
@@ -91,7 +91,7 @@ public:
     /************************************************************************
     *    desc:  Clear the values
     ************************************************************************/
-    void Clear()
+    void clear()
     {
         x = 0.0f;
         y = 0.0f;
@@ -111,8 +111,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator ==
+    }
 
     /************************************************************************
     *    desc:  The inequality operator
@@ -127,8 +126,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator !=
+    }
     
     
     /************************************************************************
@@ -144,8 +142,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >
+    }
     
     bool operator > ( const type value ) const
     {
@@ -153,8 +150,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >
+    }
     
     
     /************************************************************************
@@ -170,8 +166,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
     bool operator >= ( const type value ) const
     {
@@ -179,8 +174,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
     
     /************************************************************************
@@ -196,8 +190,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator <
+    }
     
     bool operator < ( const type value ) const
     {
@@ -205,8 +198,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator <
+    }
     
     
     /************************************************************************
@@ -222,8 +214,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
     bool operator <= ( const type value ) const
     {
@@ -231,8 +222,7 @@ public:
             return true;
 
         return false;
-
-    }   // operator >=
+    }
     
     
     /************************************************************************
@@ -250,8 +240,7 @@ public:
         tmp.z = z - point.z;
 
         return tmp;
-
-    }   // operator -
+    }
 
     /************************************************************************
     *    desc:  The subtraction operator
@@ -268,8 +257,7 @@ public:
         tmp.z = z - value;
 
         return tmp;
-
-    }   // operator -
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -286,8 +274,7 @@ public:
         tmp.z = z + point.z;
 
         return tmp;
-
-    }   // operator +
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -304,8 +291,7 @@ public:
         tmp.z = z + value;
 
         return tmp;
-
-    }   // operator +
+    }
 
     /************************************************************************
     *    desc:  The division operator
@@ -322,8 +308,7 @@ public:
         tmp.z = z / point.z;
 
         return tmp;
-
-    }   // operator /
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -340,8 +325,7 @@ public:
         tmp.z = z / value;
 
         return tmp;
-
-    }   // operator /
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -357,8 +341,7 @@ public:
         z += point.z;
 
         return *this;
-
-    }   // operator +=
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -374,8 +357,7 @@ public:
         z += value;
 
         return *this;
-
-    }   // operator +=
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -391,8 +373,7 @@ public:
         z -= point.z;
 
         return *this;
-
-    }   // operator -=
+    }
 
     /************************************************************************
     *    desc:  The addition operator
@@ -408,8 +389,7 @@ public:
         z -= value;
 
         return *this;
-
-    }   // operator -=
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -426,8 +406,7 @@ public:
         tmp.z = z * point.z;
 
         return tmp;
-
-    }   // operator *
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -444,8 +423,7 @@ public:
         tmp.z = z * value;
 
         return tmp;
-
-    }   // operator *
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -463,8 +441,7 @@ public:
         tmp.z = x * pMat[2] + y * pMat[6] + z * pMat[10];
 
         return tmp;
-
-    }   // operator *=
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -480,8 +457,7 @@ public:
         z *= point.z;
 
         return *this;
-
-    }   // operator *=
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -497,8 +473,7 @@ public:
         z *= value;
 
         return *this;
-
-    }   // operator *=
+    }
 
     /************************************************************************
     *    desc:  The multiplication operator
@@ -520,8 +495,7 @@ public:
         z = tmp.z;
 
         return *this;
-
-    }   // operator *=
+    }
 
     /************************************************************************
     *    desc:  The division operator
@@ -537,8 +511,7 @@ public:
         z /= point.z;
 
         return *this;
-
-    }   // operator *=
+    }
 
     /************************************************************************
     *    desc:  The division operator
@@ -554,45 +527,41 @@ public:
         z /= value;
 
         return *this;
-
-    }   // operator *=
+    }
     
 
     /************************************************************************
     *    desc:  Set the point data
     ************************************************************************/
-    void Set( type _x, type _y, type _z )
+    void set( type _x, type _y, type _z )
     {
         x = _x;
         y = _y;
         z = _z;
+    }
 
-    }   // Set
-
-    void Set( type value )
+    void set( type value )
     {
         x = value;
         y = value;
         z = value;
-
-    }   // Set
+    }
     
     
     /************************************************************************
     *    desc:  Inc the point data
     ************************************************************************/
-    void Inc( type _x, type _y, type _z )
+    void inc( type _x, type _y, type _z )
     {
         x += _x;
         y += _y;
         z += _z;
-
-    }   // Set
+    }
 
     /************************************************************************
     *    desc:  Cap the value
     ************************************************************************/
-    void Cap( type value )
+    void cap( type value )
     {
         if( value > 0.0f )
         {
@@ -652,13 +621,12 @@ public:
                 z -= value;
             }
         }
-
-    }   // Cap
+    }
 
     // For AngelScript
-    void CapFloat( float value )
+    void capFloat( float value )
     {
-            Cap( value );
+        cap( value );
     }
 
     /************************************************************************
@@ -666,38 +634,34 @@ public:
     *
     *    return: bool
     ************************************************************************/
-    bool IsEmpty() const
+    bool isEmpty() const
     {
         // This looks at the bits of the data as an int
-        return ( IsXEmpty() && IsYEmpty() && IsZEmpty() );
+        return ( isXEmpty() && isYEmpty() && isZEmpty() );
+    }
 
-    }   // IsEmpty
-
-    bool IsXEmpty() const
+    bool isXEmpty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == x) || (*(int*)&x == 0) );
+    }
 
-    }   // IsEmpty
-
-    bool IsYEmpty() const
+    bool isYEmpty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == y) || (*(int*)&y == 0) );
+    }
 
-    }   // IsEmpty
-
-    bool IsZEmpty() const
+    bool isZEmpty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == z) || (*(int*)&z == 0) );
-
-    }   // IsEmpty
+    }
 
     /************************************************************************
     *    desc:  Check if two floating points are equil enough
     ************************************************************************/
-    bool IsEquilEnough( const CPoint & point, type range )
+    bool isEquilEnough( const CPoint & point, type range )
     {
         if( std::fabs(x - point.x) < range )
             if( std::fabs(y - point.y) < range )
@@ -705,75 +669,68 @@ public:
                     return true;
 
         return false;
-
-    }   // IsEquilEnough
+    }
 
     // For AngelScript
-    bool IsEquilEnoughFloat( const CPoint & point, float range )
+    bool isEquilEnoughFloat( const CPoint & point, float range )
     {
-            return IsEquilEnough( point, range );
+        return isEquilEnough( point, range );
     }
 
     /************************************************************************
     *    desc:  Invert the values of this point
     ************************************************************************/
-    void Invert()
+    void invert()
     {
         x = -x;
         y = -y;
         z = -z;
-
-    }   // Invert
+    }
 
     /************************************************************************
     *    desc:  Invert a copy of this point and return it
     ************************************************************************/
-    CPoint GetInvert()
+    CPoint getInvert()
     {
         CPoint tmp(*this);
-        tmp.Invert();
+        tmp.invert();
 
         return tmp;
-
-    }   // Invert
+    }
 
     /************************************************************************
     *    desc:  Invert the values of this point
     ************************************************************************/
-    void InvertX()
+    void invertX()
     {
         x = -x;
-
-    }   // Invert
+    }
 
     /************************************************************************
     *    desc:  Invert the values of this point
     ************************************************************************/
-    void InvertY()
+    void invertY()
     {
         y = -y;
-
-    }   // Invert
+    }
 
     /************************************************************************
     *    desc:  Invert the values of this point
     ************************************************************************/
-    void InvertZ()
+    void invertZ()
     {
         z = -z;
-
-    }   // Invert
+    }
 
     /************************************************************************
     *    desc:  Get the length of the point from the origin
     *
     *    ret:	float - length of point
     ************************************************************************/
-    type GetLength() const
+    type getLength() const
     {
-        return std::sqrt( GetLengthSquared() );
-
-    }   // GetLength
+        return std::sqrt( getLengthSquared() );
+    }
 
 
     /************************************************************************
@@ -783,11 +740,10 @@ public:
     *
     *    ret:	float - distance between two points
     ************************************************************************/
-    type GetLength( const CPoint & point ) const
+    type getLength( const CPoint & point ) const
     {
-        return std::sqrt( GetLengthSquared( point ) );
-
-    }   // GetLength
+        return std::sqrt( getLengthSquared( point ) );
+    }
 
 
     /************************************************************************
@@ -796,17 +752,15 @@ public:
     *
     *    ret:	float - length of point
     ************************************************************************/
-    type GetLength2D() const
+    type getLength2D() const
     {
-        return std::sqrt( GetLengthSquared2D() );
-
-    }   // GetLength2D
+        return std::sqrt( getLengthSquared2D() );
+    }
     
-    type GetLength2D( const CPoint & point ) const
+    type getLength2D( const CPoint & point ) const
     {
-        return std::sqrt( GetLengthSquared2D( point ) );
-
-    }   // GetLength2D
+        return std::sqrt( getLengthSquared2D( point ) );
+    }
 
     /************************************************************************
     *    desc:  Get the squared length between two points
@@ -815,39 +769,35 @@ public:
     *
     *    ret:	float - squared distance between two points
     ************************************************************************/
-    type GetLengthSquared( const CPoint & point ) const
+    type getLengthSquared( const CPoint & point ) const
     {
-        return (*this - point).GetLengthSquared();
-
-    }   // GetLengthSquared
+        return (*this - point).getLengthSquared();
+    }
 
     /************************************************************************
     *    desc:  Get the squared length of the point from the origin
     *
     *    return: type - length of point
     ************************************************************************/
-    type GetLengthSquared() const
+    type getLengthSquared() const
     {
         return ( x * x ) +  ( y * y ) + ( z * z );
-
-    }   // GetLengthSquared
+    }
 
     /************************************************************************
     *    desc:  Get the squared length of the point from the origin
     *
     *    return: type - length of point
     ************************************************************************/
-    type GetLengthSquared2D() const
+    type getLengthSquared2D() const
     {
         return ( x * x ) + ( y * y );
-
-    }   // GetLengthSquared2D
+    }
     
-    type GetLengthSquared2D( const CPoint & point ) const
+    type getLengthSquared2D( const CPoint & point ) const
     {
-        return (*this - point).GetLengthSquared2D();
-
-    }   // GetLengthSquared2D
+        return (*this - point).getLengthSquared2D();
+    }
 
     /************************************************************************
     *    desc:  Get the dot product
@@ -856,34 +806,34 @@ public:
     *
     *    return: type - distance between two points
     ************************************************************************/
-    type GetDotProduct( const CPoint & point ) const
+    type getDotProduct( const CPoint & point ) const
     {
         return ( x * point.x ) + ( y * point.y ) + ( z * point.z );
 
-    }   // GetDotProduct
+    }
 
-    type GetDotProduct2D( const CPoint & point ) const
+    type getDotProduct2D( const CPoint & point ) const
     {
         return ( x * point.x ) + ( y * point.y );
 
-    }   // GetDotProduct
+    }
 
     // For AngelScript
-    float GetDotProductFloat( const CPoint & point ) const
+    float getDotProductFloat( const CPoint & point ) const
     {
-        return GetDotProduct( point );
+        return getDotProduct( point );
     }
-    float GetDotProduct2DFloat( const CPoint & point ) const
+    float getDotProduct2DFloat( const CPoint & point ) const
     {
-        return GetDotProductFloat( point );
+        return getDotProductFloat( point );
     }
 
     /************************************************************************
     *    desc:  normalize this point
     ************************************************************************/
-    void Normalize()
+    void normalize()
     {
-        type length = GetLength();
+        type length = getLength();
 
         if( length != 0.0f )
         {
@@ -891,35 +841,32 @@ public:
             y /= length;
             z /= length;
         }
+    }
 
-    }	// Normalize
-
-    void Normalize2D()
+    void normalize2D()
     {
-        type length = GetLength2D();
+        type length = getLength2D();
 
         if( length != 0.0f )
         {
             x /= length;
             y /= length;
         }
-
-    }	// Normalize
+    }
 
     /************************************************************************
     *    desc:  Get the cross product
     ************************************************************************/
-    CPoint GetCrossProduct( const CPoint & point ) const
+    CPoint getCrossProduct( const CPoint & point ) const
     {
         CPoint tmp;
         tmp.x = (y * point.z) - (point.y * z);
         tmp.y = (z * point.x) - (point.z * x);
         tmp.z = (x * point.y) - (point.x * y);
-        tmp.Normalize();
+        tmp.normalize();
 
         return tmp;
-
-    }	// GetCrossProduct
+    }
 
     /************************************************************************
     *    desc:  Create a displacement vector
@@ -929,15 +876,14 @@ public:
     *
     *    return: CPoint - the dislacement vector
     ************************************************************************/
-    CPoint GetDisplacement( const CPoint & point, type amount ) const
+    CPoint getDisplacement( const CPoint & point, type amount ) const
     {
         CPoint displacement( *this - point );
-        displacement.Normalize();
+        displacement.normalize();
         CPoint tmp = *this + (displacement * amount);
 
         return tmp;
-
-    }	// GetDisplacement
+    }
 
 
     /***********************************************************************************
@@ -951,8 +897,7 @@ public:
     CPoint operator - () const
     {
         return CPoint(-x,-y,-z);
-
-    }	// operator -
+    }
 
 };
 

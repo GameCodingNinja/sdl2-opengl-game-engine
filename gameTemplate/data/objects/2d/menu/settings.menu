@@ -88,7 +88,7 @@
         <control name="settings_dead_zone_slider" controlType="slider" defaultState="inactive" mouseSelectDown="true">
             <filePath file="data/objects/2d/menu/control/deadzone_slider.ctrl"/>
             <position x="0" y="-85" z="0"/>
-            <settings orientation="HORZ" minValue="0" maxValue="90" defValue="0" incValue="1" displayValueAsInt="true"/>
+            <settings orientation="HORZ" minValue="0" maxValue="30" defValue="0" incValue="1" displayValueAsInt="true"/>
             <fontStringLst>
                 <string text="GPad Deadzone: %d%%"/>
             </fontStringLst>

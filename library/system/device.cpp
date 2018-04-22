@@ -67,7 +67,7 @@ void CDevice::Create()
     const CSize<int> size( CSettings::Instance().GetSize() );
 
     // Create window
-    m_pWindow = SDL_CreateWindow( "", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.GetW(), size.GetH(), SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN );
+    m_pWindow = SDL_CreateWindow( "", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.getW(), size.getH(), SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN );
     if( m_pWindow == nullptr )
         throw NExcept::CCriticalException("Game window could not be created!", SDL_GetError() );
 
@@ -178,8 +178,9 @@ SDL_Window * CDevice::GetWindow()
  ****************************************************************************/
 void CDevice::InitStartupGamepads()
 {
-    int newMappings = SDL_GameControllerAddMappingsFromFile("data/settings/gamecontrollerdb.txt");
-    NGenFunc::PostDebugMsg( boost::str( boost::format("New controller mappings found: %d - Number of controllers found: %d") % newMappings % (int)SDL_NumJoysticks() ) );
+    // May not need this anymore
+    //int newMappings = SDL_GameControllerAddMappingsFromFile("data/settings/gamecontrollerdb.txt");
+    //NGenFunc::PostDebugMsg( boost::str( boost::format("New controller mappings found: %d - Number of controllers found: %d") % newMappings % (int)SDL_NumJoysticks() ) );
     
     for( int i = 0; i < SDL_NumJoysticks(); ++i )
         AddGamepad( i );

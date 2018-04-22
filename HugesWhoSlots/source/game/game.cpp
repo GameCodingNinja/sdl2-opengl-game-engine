@@ -81,7 +81,7 @@ void CGame::Init()
     CBaseGame::Init();
 
     // Setup the message filtering
-    SDL_SetEventFilter(FilterEvents, 0);
+    //SDL_SetEventFilter(FilterEvents, 0);
     
     // Handle some events on startup
     PollEvents();

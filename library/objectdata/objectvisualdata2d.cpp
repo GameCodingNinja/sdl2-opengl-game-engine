@@ -83,7 +83,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     const int heightOrLess = std::atoi( resNode.getAttribute( "heightOrLess" ) );
 
                     // If the current render resolution is less then or equil to the heightOrLess value, we found the swap res
-                    if( static_cast<int>(CSettings::Instance().GetSize().GetH()) <= heightOrLess )
+                    if( static_cast<int>(CSettings::Instance().GetSize().getH()) <= heightOrLess )
                     {
                         m_defaultUniformScale = std::atof( resNode.getAttribute( "defaultUniformScale" ) );
                         
@@ -372,7 +372,7 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
         }
         
         // If the passed in size reference is empty, set it to the texture size
-        if( rSize.IsEmpty() )
+        if( rSize.isEmpty() )
             rSize = rTexture.GetSize();
     }
     
@@ -572,11 +572,11 @@ void CObjectVisualData2D::LoadMeshFromXML(
     std::vector<uint8_t> & rIboVec )
 {
     float additionalOffsetX = 0;
-    if( (int)size.GetW() % 2 != 0 )
+    if( (int)size.getW() % 2 != 0 )
         additionalOffsetX = 0.5f;
 
     float additionalOffsetY = 0;
-    if( (int)size.GetH() % 2 != 0 )
+    if( (int)size.getH() % 2 != 0 )
         additionalOffsetY = 0.5f;
 
     // This converts the data to a center aligned vertex buffer
