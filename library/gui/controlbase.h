@@ -36,33 +36,33 @@ public:
     virtual ~CControlBase();
     
     // Load the initial info from XML node
-    virtual void LoadFromNode( const XMLNode & node );
+    virtual void loadFromNode( const XMLNode & node );
     
     // Get the object group name
-    const std::string & GetGroup() const;
+    const std::string & getGroup() const;
     
     // Get/Set the control name
-    const std::string & GetName() const;
+    const std::string & getName() const;
     
     // Get the control type
-    NUIControl::EControlType GetType() const;
+    NUIControl::EControlType getType() const;
     
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) = 0;
+    virtual void loadControlFromNode( const XMLNode & node ) = 0;
     
     // Set the dynamic position
-    void SetDynamicPos();
+    void setDynamicPos();
     
     // Get the faction name
-    const std::string & GetFaction() const;
+    const std::string & getFaction() const;
     
 private:
     
     // Load the dynamic offset data from node
-    void LoadDynamicOffsetFromNode( const XMLNode & node );
+    void loadDynamicOffsetFromNode( const XMLNode & node );
     
     // Load a sprite from an XML node
-    virtual void LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount ) = 0;
+    virtual void loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount ) = 0;
     
 protected:
         

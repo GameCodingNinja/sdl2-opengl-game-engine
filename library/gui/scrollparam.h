@@ -22,19 +22,19 @@ public:
     CScrollParam();
     
     // Load the scroll data from node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
 
     // Does this menu or control support scrolling this message?
-    bool CanScroll( int msg );
+    bool canScroll( int msg );
 
     // Get/Set Start delay
-    int GetStartDelay();
+    int getStartDelay();
 
     // Get/Set scroll delay
-    int GetScrollDelay();
+    int getScrollDelay();
 
     // Get the message
-    int GetMsg();
+    int getMsg();
 
 private:
 

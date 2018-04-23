@@ -64,7 +64,7 @@ void CSlotGroupView::Create(
     m_upCycleResultsTxtSprite->loadTransFromNode( cycleResultsTxtNode );
     
     // Load the font properties from XML node
-    m_upCycleResultsTxtSprite->getVisualComponent().LoadFontPropFromNode( cycleResultsTxtNode );
+    m_upCycleResultsTxtSprite->getVisualComponent().loadFontPropFromNode( cycleResultsTxtNode );
     
 }   // Create
 
@@ -92,7 +92,7 @@ void CSlotGroupView::SetCycleResultText( bool visible, const CPay * pPay )
                 text = boost::str( boost::format("Scatter Pays %d") % pPay->GetFinalAward() );
         }
         
-        m_upCycleResultsTxtSprite->getVisualComponent().CreateFontString(text);
+        m_upCycleResultsTxtSprite->getVisualComponent().createFontString(text);
     }
     
 }   // SetCycleResultText

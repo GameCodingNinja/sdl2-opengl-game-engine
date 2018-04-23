@@ -19,8 +19,7 @@ public:
     CSmartConfirmBtn( CUIControl * pUIControl );
 
     // Called when the control is executed
-    void Execute();
-
+    void execute() override;
 };
 
 #endif  // __smart_exit_btn_h__

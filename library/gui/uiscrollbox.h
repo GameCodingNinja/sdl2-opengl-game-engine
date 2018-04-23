@@ -35,125 +35,125 @@ public:
     virtual ~CUIScrollBox();
     
     // Load the initial info from XML node
-    void LoadFromNode( const XMLNode & node ) override;
+    void loadFromNode( const XMLNode & node ) override;
     
     // Init control
-    void Init() override;
+    void init() override;
     
     // Do some cleanup
-    void CleanUp() override;
+    void cleanUp() override;
 
     // Update the control
-    void Update() override;
+    void update() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Transform the control
     void transform( const CObject2D & object ) override;
 
     // Render the control
-    void Render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix ) override;
 
     // Set the first inactive control to be active
-    bool ActivateFirstInactiveControl() override;
+    bool activateFirstInactiveControl() override;
     
     // Handle the mouse move
-    bool OnMouseMove( const SDL_Event & rEvent ) override;
+    bool onMouseMove( const SDL_Event & rEvent ) override;
     
     // Only deactivate sub controls
-    void DeactivateControl() override;
+    void deactivateControl() override;
 
     // Get the scroll control vector
-    const std::vector<CUIControl *> & GetScrollCtrlVec();
+    const std::vector<CUIControl *> & getScrollCtrlVec();
     
     // Set the alpha value of this menu
-    void SetAlpha( float alpha ) override;
+    void setAlpha( float alpha ) override;
     
     // Get the pointer to the active control
-    CUIControl * GetPtrToActiveControl() override;
+    CUIControl * getPtrToActiveControl() override;
 
 protected:
 
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) override;
+    virtual void loadControlFromNode( const XMLNode & node ) override;
 
     // Add the scroll control from node
-    CUIControl * AddScrollControlFromNode( const XMLNode & node );
+    CUIControl * addScrollControlFromNode( const XMLNode & node );
     
     // Handle Action messages
-    void OnUpAction( const SDL_Event & rEvent ) override;
-    void OnDownAction( const SDL_Event & rEvent ) override;
+    void onUpAction( const SDL_Event & rEvent ) override;
+    void onDownAction( const SDL_Event & rEvent ) override;
     
     // Handle Scroll messages
-    void OnUpScroll( const SDL_Event & rEvent ) override;
-    void OnDownScroll( const SDL_Event & rEvent ) override;
+    void onUpScroll( const SDL_Event & rEvent ) override;
+    void onDownScroll( const SDL_Event & rEvent ) override;
     
     // Handle Tab messages
-    void OnTabLeft( const SDL_Event & rEvent ) override;
-    void OnTabRight( const SDL_Event & rEvent ) override;
+    void onTabLeft( const SDL_Event & rEvent ) override;
+    void onTabRight( const SDL_Event & rEvent ) override;
     
     // Handle the select action
-    bool HandleSelectAction( const CSelectMsgCracker & msgCracker ) override;
+    bool handleSelectAction( const CSelectMsgCracker & msgCracker ) override;
     
     // Handle the keyboard/Gamepad scrolling
-    void HandleKeyboardGamepadScroll( int scrollVector );
+    void handleKeyboardGamepadScroll( int scrollVector );
     
     // Handle the page scrolling
-    void HandlePageScroll( int scrollVector );
+    void handlePageScroll( int scrollVector );
     
     // Handle the sub control mouse move
-    bool OnSubControlMouseMove( const SDL_Event & rEvent ) override;
+    bool onSubControlMouseMove( const SDL_Event & rEvent ) override;
     
     // Get the pointer to the subcontrol if found
-    CUIControl * FindSubControl( const std::string & name ) override;
+    CUIControl * findSubControl( const std::string & name ) override;
     
     // Find the sub control via is pointer
-    CUIControl * FindSubControl( void * pVoid ) override;
+    CUIControl * findSubControl( void * pVoid ) override;
     
     // Deactivate the sub control
-    void DeactivateSubControl() override;
+    void deactivateSubControl() override;
     
     // Set the start and end positions
-    void SetStartEndPos();
+    void setStartEndPos();
     
     // Reposition the scroll controls
-    void RepositionScrollControls();
+    void repositionScrollControls();
 
 private:
     
     // Handle the time based Scrolling of the contents of the scroll box
-    void HandleScrollUpdate();
+    void handleScrollUpdate();
     
     // Align the scroll box to it's proper stopping point
-    void AlignScrollPostion();
+    void alignScrollPostion();
     
     // Select the next control
-    CBitmask<uint> SelectNextControl( int scrollVector );
+    CBitmask<uint> selectNextControl( int scrollVector );
     
     // Select the paged control
-    void SelectPagedControl( int scrollVector );
+    void selectPagedControl( int scrollVector );
     
     // Set the active control to the viewable area
-    bool SetActiveCtrlToViewableArea( int scrollVector );
+    bool setActiveCtrlToViewableArea( int scrollVector );
     
     // Scroll to the next control in the viewable area
-    CBitmask<uint> ScrollToTheNextCtrlInViewableArea( int scrollVector );
+    CBitmask<uint> scrollToTheNextCtrlInViewableArea( int scrollVector );
     
     // Is the scroll index in view
-    bool InView( int scrollIndex, int scrollVector );
+    bool inView( int scrollIndex, int scrollVector );
     
     // Init the variables that scroll the contents of the scroll box
-    void InitScrolling( int scrollVector, float distance, bool endScrollSelection = true, bool paging = false );
+    void initScrolling( int scrollVector, float distance, bool endScrollSelection = true, bool paging = false );
     
     // Get the fractional amount the controls are off within the scroll box
-    float GetControlAlignment();
+    float getControlAlignment();
     
     // See if we can activate this scroll control
-    bool ActivateScrollCtrl( int scrollControlIndex );
+    bool activateScrollCtrl( int scrollControlIndex );
     
     // Do we need to select and reposition the control
-    bool SelectAndRepositionCtrl( int scrollVector );
+    bool selectAndRepositionCtrl( int scrollVector );
     
 private:
     

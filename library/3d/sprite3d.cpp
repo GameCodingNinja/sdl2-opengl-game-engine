@@ -125,13 +125,13 @@ void CSprite3D::physicsUpdate()
 void CSprite3D::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     if( isVisible() )
-        m_visualComponent.Render( m_matrix * matrix, m_rotMatrix * rotMatrix );
+        m_visualComponent.render( m_matrix * matrix, m_rotMatrix * rotMatrix );
 }
 
 void CSprite3D::render( const CCamera & camera )
 {
     if( isVisible() )
-        m_visualComponent.Render( m_matrix * camera.getFinalMatrix(), m_rotMatrix * camera.getRotMatrix() );
+        m_visualComponent.render( m_matrix * camera.getFinalMatrix(), m_rotMatrix * camera.getRotMatrix() );
 }
 
 
@@ -188,13 +188,13 @@ void CSprite3D::setAI( iAIBase * pAIBase )
  ************************************************************************/
 void CSprite3D::setColor( const CColor & color )
 {
-    m_visualComponent.SetColor( color );
+    m_visualComponent.setColor( color );
 }
 
 void CSprite3D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
-    m_visualComponent.SetColor( r, g, b, a );
+    m_visualComponent.setColor( r, g, b, a );
 }
 
 
@@ -203,7 +203,7 @@ void CSprite3D::setColor( float r, float g, float b, float a )
  ************************************************************************/
 void CSprite3D::setDefaultColor()
 {
-    m_visualComponent.SetColor( m_objectData.GetVisualData().GetColor() );
+    m_visualComponent.setColor( m_objectData.GetVisualData().GetColor() );
 }
 
 
@@ -212,7 +212,7 @@ void CSprite3D::setDefaultColor()
  ************************************************************************/
 const CColor & CSprite3D::getColor() const
 {
-    return m_visualComponent.GetColor();
+    return m_visualComponent.getColor();
 }
 
 
@@ -233,7 +233,7 @@ void CSprite3D::setAlpha( float alpha )
     if( alpha > 1.5 )
         alpha *= defs_RGB_TO_DEC;
 
-    m_visualComponent.SetAlpha( alpha );
+    m_visualComponent.setAlpha( alpha );
 }
 
 
@@ -242,7 +242,7 @@ void CSprite3D::setAlpha( float alpha )
  ************************************************************************/
 float CSprite3D::getAlpha() const
 {
-    return m_visualComponent.GetAlpha();
+    return m_visualComponent.getAlpha();
 }
 
 
@@ -260,5 +260,5 @@ float CSprite3D::getDefaultAlpha() const
 ************************************************************************/
 void CSprite3D::setDefaultAlpha()
 {
-    m_visualComponent.SetAlpha( m_objectData.GetVisualData().GetColor().getA() );
+    m_visualComponent.setAlpha( m_objectData.GetVisualData().GetColor().getA() );
 }

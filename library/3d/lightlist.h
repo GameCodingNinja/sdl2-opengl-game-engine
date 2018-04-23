@@ -28,7 +28,7 @@ public:
     virtual ~CLightLst();
     
     // Add a light
-    void Add(
+    void add(
         const std::string & name,
         NDefs::ELightType lightType,
         const CColor & color,
@@ -37,7 +37,7 @@ public:
         float radius = 0.f );
     
     // Turn the light on or off
-    void Enable( const std::string & name, bool enable = true );
+    void enable( const std::string & name, bool enable = true );
     
 private:
     

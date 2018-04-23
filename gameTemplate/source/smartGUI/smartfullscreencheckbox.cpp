@@ -19,32 +19,24 @@
 CSmartScrnCheckBox::CSmartScrnCheckBox( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
 *    decs:  Handle events
 ****************************************************************************/
-void CSmartScrnCheckBox::HandleEvent( const SDL_Event & rEvent )
+void CSmartScrnCheckBox::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
-        (*dynamic_cast<CUICheckBox *>(m_pUIControl)).SetToggleState( CSettings::Instance().GetFullScreen() );
-
-}   // HandleEvent
+        (*dynamic_cast<CUICheckBox *>(m_pUIControl)).setToggleState( CSettings::Instance().GetFullScreen() );
+}
 
 
 /***************************************************************************
 *    decs:  Called when the control is executed - Enable/disable the apply btn
 ****************************************************************************/
-void CSmartScrnCheckBox::Execute()
+void CSmartScrnCheckBox::execute()
 {
-    EnableDisableApplyBtn();
+    enableDisableApplyBtn();
 
-}   // Execute
-
-
-
-
-
-
-
+}

@@ -19,11 +19,10 @@ public:
     CSmartApplySettingsBtn( CUIControl * pUIControl );
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Called when the control is to excute
-    void Execute();
-
+    void execute() override;
 };
 
 #endif  // __smart_apply_settings_btn_h__

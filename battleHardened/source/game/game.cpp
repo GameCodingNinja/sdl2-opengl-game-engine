@@ -14,12 +14,6 @@
 #include "../state/loadstate.h"
 #include "../state/level1state.h"
 #include "../smartGUI/smartconfirmbtn.h"
-#include "../smartGUI/smartresolutionbtn.h"
-#include "../smartGUI/smartapplysettingsbtn.h"
-#include "../smartGUI/smartfullscreencheckbox.h"
-#include "../smartGUI/smartvsynccheckbox.h"
-#include "../smartGUI/smartdeadzoneslider.h"
-#include "../smartGUI/smartkeybindbtn.h"
 
 // Game lib dependencies
 #include <system/device.h>
@@ -96,27 +90,9 @@ void CGame::Init()
 ************************************************************************/
 void CGame::SmartGuiControlCreateCallBack( CUIControl * pUIControl )
 {
-    if( pUIControl->GetFaction() == "decision_btn" )
-        pUIControl->SetSmartGui( new CSmartConfirmBtn( pUIControl ) );
+    if( pUIControl->getFaction() == "decision_btn" )
+        pUIControl->setSmartGui( new CSmartConfirmBtn( pUIControl ) );
     
-    else if( pUIControl->GetFaction() == "key_binding_btn" )
-        pUIControl->SetSmartGui( new CSmartKeyBindBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "resolution_btn_lst" )
-        pUIControl->SetSmartGui( new CSmartResolutionBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "settings_apply_btn" )
-        pUIControl->SetSmartGui( new CSmartApplySettingsBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "full_screen_check_box" )
-        pUIControl->SetSmartGui( new CSmartScrnCheckBox( pUIControl ) );
-
-    else if( pUIControl->GetName() == "v-sync_check_box" )
-            pUIControl->SetSmartGui( new CSmartVSyncCheckBox( pUIControl ) );
-
-    else if( pUIControl->GetName() == "settings_dead_zone_slider" )
-            pUIControl->SetSmartGui( new CSmartDeadZoneSlider( pUIControl ) );
-
 }   // SmartGuiControlCreate
 
 
@@ -231,7 +207,7 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
         DisplayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
     
     // In a traditional game, want the pause menu to display when the game is sent to the background
-    else if( NBDefs::IsDebugMode() && (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().IsMenuActive() )
+    else if( NBDefs::IsDebugMode() && (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().isMenuActive() )
         NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );
 
     // Handle events

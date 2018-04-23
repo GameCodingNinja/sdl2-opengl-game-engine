@@ -22,7 +22,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartSettingsMenuBtn::CSmartSettingsMenuBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
@@ -33,15 +33,15 @@ CSmartSettingsMenuBtn::CSmartSettingsMenuBtn( CUIControl * pUIControl ) :
 /***************************************************************************
 *    decs:  Enable/disable the apply btn
 ****************************************************************************/
-void CSmartSettingsMenuBtn::EnableDisableApplyBtn()
+void CSmartSettingsMenuBtn::enableDisableApplyBtn()
 {
     // Get the settings menu
-    CMenu & rMenu = CMenuManager::Instance().GetActiveMenu();
+    CMenu & rMenu = CMenuManager::Instance().getActiveMenu();
 
-    if( WasSettingsButtonsChanged() )
-        rMenu.GetPtrToControl( "settings_apply_btn" )->ChangeState(NUIControl::ECS_INACTIVE);
+    if( wasSettingsButtonsChanged() )
+        rMenu.getPtrToControl( "settings_apply_btn" )->changeState(NUIControl::ECS_INACTIVE);
     else
-        rMenu.GetPtrToControl( "settings_apply_btn" )->ChangeState(NUIControl::ECS_DISABLED);
+        rMenu.getPtrToControl( "settings_apply_btn" )->changeState(NUIControl::ECS_DISABLED);
 
 }   // EnableDisableSettingsApplyBtn
 
@@ -49,32 +49,32 @@ void CSmartSettingsMenuBtn::EnableDisableApplyBtn()
 /***************************************************************************
 *    decs:  Were the buttons in the settings menu changed
 ****************************************************************************/
-bool CSmartSettingsMenuBtn::WasSettingsButtonsChanged()
+bool CSmartSettingsMenuBtn::wasSettingsButtonsChanged()
 {
     // Get the settings menu
-    CMenu & rMenu = CMenuManager::Instance().GetActiveMenu();
+    CMenu & rMenu = CMenuManager::Instance().getActiveMenu();
 
     // Get the control
     CUIControl * pControl;
 
     // Check for the resolution button list
-    pControl = rMenu.GetPtrToControl( "resolution_btn_lst" );
-    if( (*dynamic_cast<CSmartResolutionBtn *>(pControl->GetSmartGuiPtr())).WasResolutionChanged() )
+    pControl = rMenu.getPtrToControl( "resolution_btn_lst" );
+    if( (*dynamic_cast<CSmartResolutionBtn *>(pControl->getSmartGuiPtr())).wasResolutionChanged() )
         return true;
 
     // Check for the full screen check box
-    pControl = rMenu.GetPtrToControl( "full_screen_check_box" );
-    if( CSettings::Instance().GetFullScreen() != (*dynamic_cast<CUICheckBox *>(pControl)).GetToggleState() )
+    pControl = rMenu.getPtrToControl( "full_screen_check_box" );
+    if( CSettings::Instance().GetFullScreen() != (*dynamic_cast<CUICheckBox *>(pControl)).getToggleState() )
         return true;
 
     // Check for the v-sync check box
-    pControl = rMenu.GetPtrToControl( "v-sync_check_box" );
-    if( CSettings::Instance().GetVSync() != (*dynamic_cast<CUICheckBox *>(pControl)).GetToggleState() )
+    pControl = rMenu.getPtrToControl( "v-sync_check_box" );
+    if( CSettings::Instance().GetVSync() != (*dynamic_cast<CUICheckBox *>(pControl)).getToggleState() )
         return true;
 
     // Check for dead zone slider
-    pControl = rMenu.GetPtrToControl( "settings_dead_zone_slider" );
-    if( CSettings::Instance().GetGamePadStickDeadZone() != (int)(*dynamic_cast<CUISlider *>(pControl)).GetValue() )
+    pControl = rMenu.getPtrToControl( "settings_dead_zone_slider" );
+    if( CSettings::Instance().GetGamePadStickDeadZone() != (int)(*dynamic_cast<CUISlider *>(pControl)).getValue() )
         return true;
 
     return false;

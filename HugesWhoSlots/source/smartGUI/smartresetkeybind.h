@@ -19,7 +19,7 @@ public:
     CSmartResetKeyBindBtn( CUIControl * pUIControl );
 
     // Called when the control is executed
-    void Execute();
+    void execute() override;
 
 };
 

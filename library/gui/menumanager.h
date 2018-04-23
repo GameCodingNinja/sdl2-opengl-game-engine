@@ -43,87 +43,87 @@ public:
     }
     
     // Load the menu action list from XML
-    void LoadMenuActionFromXML( const std::string & filePath );
+    void loadMenuActionFromXML( const std::string & filePath );
     
     // Load the menu group
-    void LoadGroup( const std::string & group, const bool initGroup = true );
+    void loadGroup( const std::string & group, const bool doInit = true );
     
     // Free the menu group
-    void FreeGroup( const std::string & group );
+    void freeGroup( const std::string & group );
     
     // Init a menu group
-    void InitGroup( const std::string & group );
+    void initGroup( const std::string & group );
     
     // Clean up a menu group
-    void CleanUpGroup( const std::string & group );
+    void cleanUpGroup( const std::string & group );
     
     // Activate a menu
-    void ActivateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName );
-    void ActivateMenu( const std::string & treeStr, const std::string & menuName );
+    void activateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName );
+    void activateMenu( const std::string & treeStr, const std::string & menuName );
 
     // Activate a tree to be used
-    void ActivateTree( const std::string & group, const std::string & treeStr );
-    void ActivateTree( const std::string & treeStr );
+    void activateTree( const std::string & group, const std::string & treeStr );
+    void activateTree( const std::string & treeStr );
     
     // Deactivate a tree that's in use
-    void DeactivateTree( const std::string & group, const std::string & treeStr );
-    void DeactivateTree( const std::string & treeStr );
+    void deactivateTree( const std::string & group, const std::string & treeStr );
+    void deactivateTree( const std::string & treeStr );
 
     // Clear the active trees
-    void ClearActiveTrees();
+    void clearActiveTrees();
 
     // Handle input events and dispatch menu events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent );
 
     // Update the menu
-    void Update();
+    void update();
     
     // Do the transform
-    void TransformMenu();
-    void TransformMenu( const CObject2D & object );
-    void TransformInterface();
-    void TransformInterface( const CObject2D & object );
+    void transformMenu();
+    void transformMenu( const CObject2D & object );
+    void transformInterface();
+    void transformInterface( const CObject2D & object );
 
     // Render menus
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
     
     // Render interface menus  
-    void RenderInterface( const CMatrix & matrix );
+    void renderInterface( const CMatrix & matrix );
 
     // Get reference to the menu in questionn
-    CMenu & GetMenu( const std::string & nameStr );
+    CMenu & getMenu( const std::string & nameStr );
     
     // Get reference to the active menu
-    CMenu & GetActiveMenu();
+    CMenu & getActiveMenu();
 
     // Get the reference to the control in question
     template <typename Target>
-    Target & GetMenuControl( const std::string & menuName, const std::string & controlName );
+    Target & getMenuControl( const std::string & menuName, const std::string & controlName );
 
     // Get the pointer to the active control - can return null
     template <typename Target>
-    Target * GetPtrToActiveControl( const std::string & menuName );
+    Target * getPtrToActiveControl( const std::string & menuName );
 
     // Is this menu system active
-    bool IsActive();
+    bool isActive();
     
     // Is this standard menu system active?
-    bool IsMenuActive();
+    bool isMenuActive();
 
     // Is a menu item active
-    bool IsMenuItemActive();
+    bool isMenuItemActive();
     
     // Is a interface item active
-    bool IsInterfaceItemActive();
+    bool isInterfaceItemActive();
 
     // Reset the transform
-    void ResetTransform();
+    void resetTransform();
 
     // Reset the dynamic positions of menus
-    void ResetDynamicOffset();
+    void resetDynamicOffset();
     
     // Allow message processing
-    void Allow( bool allow = true );
+    void allow( bool allow = true );
 
 private:
     
@@ -134,39 +134,39 @@ private:
     ~CMenuManager();
     
     // Load the menu info from file
-    void LoadFromXML( const std::string & group, const std::string & filePath );
+    void loadFromXML( const std::string & group, const std::string & filePath );
 
     // Load the from node
-    void LoadMenusFromNode( const std::string & group, const XMLNode & node );
+    void loadMenusFromNode( const std::string & group, const XMLNode & node );
     
     // Load the trees from node
-    void LoadTreesFromNode( const std::string & group, const XMLNode & node );
+    void loadTreesFromNode( const std::string & group, const XMLNode & node );
 
     // Set the active state
-    void SetActiveState();
+    void setActiveState();
 
     // Timer call back function
-    static Uint32 ScrollTimerCallbackFunc( Uint32 interval, void *param );
+    static Uint32 scrollTimerCallbackFunc( Uint32 interval, void *param );
     
     // Handle input events depending on if this is a menu or interface tree
-    void HandleEventForTrees( const SDL_Event & rEvent );
+    void handleEventForTrees( const SDL_Event & rEvent );
     
     // Handle input events depending on if this is a menu or interface tree
-    void HandleEventForScrolling( const SDL_Event & rEvent );
+    void handleEventForScrolling( const SDL_Event & rEvent );
     
     // Handle input events for menu scrolling
-    bool HandleMenuScrolling( 
+    bool handleMenuScrolling( 
         const SDL_Event & rEvent, const std::vector<CMenuTree *> & activeTreeVec );
     
     // Update the menu
-    bool UpdateMenu( const std::vector<CMenuTree *> & activeTreeVec );
+    bool updateMenu( const std::vector<CMenuTree *> & activeTreeVec );
     
     // Transform the menu
-    void Transform( const std::vector<CMenuTree *> & activeTreeVec );
-    void Transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object );
+    void transform( const std::vector<CMenuTree *> & activeTreeVec );
+    void transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object );
     
     // Get a pointer to the active tree
-    CMenuTree * GetActiveTree();
+    CMenuTree * getActiveTree();
 
 private:
 
@@ -210,10 +210,10 @@ private:
 *    desc:  Get the reference to the control in question
 ************************************************************************/
 template <typename Target>
-Target & CMenuManager::GetMenuControl( const std::string & menuName, const std::string & controlName )
+Target & CMenuManager::getMenuControl( const std::string & menuName, const std::string & controlName )
 {
-    CMenu & rMenu = CMenuManager::Instance().GetMenu(menuName);
-    Target * pControl = NGenFunc::DynCast<Target>(rMenu.GetPtrToControl(controlName));
+    CMenu & rMenu = getMenu(menuName);
+    Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToControl(controlName));
     assert( pControl != nullptr );
 
     return *pControl;
@@ -223,10 +223,10 @@ Target & CMenuManager::GetMenuControl( const std::string & menuName, const std::
 *    desc:  Get the pointer to the active control - can return null
 ************************************************************************/
 template <typename Target>
-Target * CMenuManager::GetPtrToActiveControl( const std::string & menuName )
+Target * CMenuManager::getPtrToActiveControl( const std::string & menuName )
 {
-    CMenu & rMenu = CMenuManager::Instance().GetMenu(menuName);
-    Target * pControl = NGenFunc::DynCast<Target>(rMenu.GetPtrToActiveControl());
+    CMenu & rMenu = getMenu(menuName);
+    Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToActiveControl());
 
     return pControl;
 }

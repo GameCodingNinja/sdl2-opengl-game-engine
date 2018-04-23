@@ -38,16 +38,15 @@ CUIProgressBar::CUIProgressBar( const std::string & group ) :
     m_orentation(NDefs::EO_HORZ)
 {
     m_type = NUIControl::ECT_PROGRESS_BAR;
-    
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CUIProgressBar::~CUIProgressBar()
 {
-}   // destructor
+}
 
 
 /************************************************************************
@@ -55,40 +54,40 @@ CUIProgressBar::~CUIProgressBar()
 *
 *    param: node - XML node
 ************************************************************************/
-void CUIProgressBar::LoadFromNode( const XMLNode & node )
+void CUIProgressBar::loadFromNode( const XMLNode & node )
 {
-    CUIControl::LoadFromNode( node );
-            
+    CUIControl::loadFromNode( node );
+
     // See if a range of values was specified
     const XMLNode rangeNode = node.getChildNode( "range" );
     if( !rangeNode.isEmpty() )
     {
         if( rangeNode.isAttributeSet( "cur" ) )
             m_curValue = std::atof( rangeNode.getAttribute( "cur" ) );
-        
+
         if( rangeNode.isAttributeSet( "min" ) )
             m_minValue = std::atof( rangeNode.getAttribute( "min" ) );
-        
+
         if( rangeNode.isAttributeSet( "max" ) )
             m_maxValue = std::atof( rangeNode.getAttribute( "max" ) );
     }
-    
+
     const XMLNode orentNode = node.getChildNode( "orentation" );
     if( !orentNode.isEmpty() )
     {
         if( orentNode.isAttributeSet("type") )
             if( std::strcmp( orentNode.getAttribute("type"), "vert") == 0 )
                 m_orentation = NDefs::EO_VERT;
-        
+
         if( orentNode.isAttributeSet("alignment") )
         {
             const char * pAlign = orentNode.getAttribute("alignment");
-            
+
             if( m_orentation == NDefs::EO_HORZ )
             {
                 if( std::strcmp( pAlign, "right") == 0 )
                     m_alignment.horz = NDefs::EHA_HORZ_RIGHT;
-                
+
                 else if( std::strcmp( pAlign, "center") == 0 )
                     m_alignment.horz = NDefs::EHA_HORZ_CENTER;
             }
@@ -96,49 +95,48 @@ void CUIProgressBar::LoadFromNode( const XMLNode & node )
             {
                 if( std::strcmp( pAlign, "bottom") == 0 )
                     m_alignment.vert = NDefs::EVA_VERT_BOTTOM;
-                
+
                 else if( std::strcmp( pAlign, "center") == 0 )
                     m_alignment.vert = NDefs::EVA_VERT_CENTER;
             }
         }
     }
-    
+
     // Calculate the progress bar size and position
-    SetSizePos();
-    
-}   // LoadFromNode
+    setSizePos();
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
-*  
+*
 *    param: controlNode - XML node
 ************************************************************************/
-void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
+void CUIProgressBar::loadControlFromNode( const XMLNode & controlNode )
 {
-    CUIControl::LoadControlFromNode( controlNode );
-            
+    CUIControl::loadControlFromNode( controlNode );
+
     // Get the stencil mask node
     const XMLNode stencilMaskNode = controlNode.getChildNode( "stencilMask" );
     if( !stencilMaskNode.isEmpty() )
     {
         const std::string objectName = stencilMaskNode.getAttribute( "objectName" );
-        
+
         m_spriteApplyIndex = std::atoi(stencilMaskNode.getAttribute( "spriteIndex" ));
 
         if( !objectName.empty() )
         {
-            m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( GetGroup(), objectName ) ) );
+            m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( getGroup(), objectName ) ) );
 
             // Load the transform data
             m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
-            
+
             // Get the size
             m_size = m_upStencilMaskSprite->getObjectData().GetSize();
-            
+
             // Get the initial position
             m_pos = m_upStencilMaskSprite->getPos();
-            
+
             // Get the initial scale
             m_scale = m_upStencilMaskSprite->getScale();
         }
@@ -146,16 +144,15 @@ void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
         {
             // Get the size
             m_size = m_spriteDeq.at(m_spriteApplyIndex).getObjectData().GetSize();
-            
+
             // Get the initial position
             m_pos = m_spriteDeq.at(m_spriteApplyIndex).getPos();
-            
+
             // Get the initial scale
             m_scale = m_spriteDeq.at(m_spriteApplyIndex).getScale();
         }
     }
-    
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
@@ -164,18 +161,17 @@ void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
 void CUIProgressBar::transform( const CObject2D & object )
 {
     CUIControl::transform( object );
-    
+
     if( m_upStencilMaskSprite )
         m_upStencilMaskSprite->transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // DoTransform
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CUIProgressBar::Render( const CMatrix & matrix )
-{ 
+void CUIProgressBar::render( const CMatrix & matrix )
+{
     if( m_upStencilMaskSprite )
     {
         for( size_t i  = 0; i < m_spriteDeq.size(); ++i )
@@ -207,9 +203,9 @@ void CUIProgressBar::Render( const CMatrix & matrix )
 
                 // Disable any writing to the stencil buffer
                 glDepthMask(GL_TRUE);
-                
+
                 m_spriteDeq[i].render( matrix );
-                
+
                 // Finished using stencil
                 glDisable( GL_STENCIL_TEST );
             }
@@ -219,28 +215,27 @@ void CUIProgressBar::Render( const CMatrix & matrix )
     }
     else
     {
-        CUIControl::Render( matrix );
+        CUIControl::render( matrix );
     }
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Calculate the progress bar size and position
 ************************************************************************/
-void CUIProgressBar::SetSizePos()
+void CUIProgressBar::setSizePos()
 {
     CPoint<float> scale(m_scale);
     CPoint<float> pos(m_pos);
-    
+
     // Calculate the new scale for the progress bar
     float scaler = (m_curValue - m_minValue) / (m_maxValue - m_minValue);
-    
+
     if( m_orentation == NDefs::EO_HORZ )
     {
         scale.x *= scaler;
         float offset = m_size.w * scaler;
-        
+
         if( m_alignment.horz == NDefs::EHA_HORZ_LEFT )
             pos.x -= (m_size.w - offset) / 2;
 
@@ -251,14 +246,14 @@ void CUIProgressBar::SetSizePos()
     {
         scale.y *= scaler;
         float offset = m_size.h * scaler;
-        
+
         if( m_alignment.vert == NDefs::EVA_VERT_TOP )
             pos.y += (m_size.h - offset) / 2;
 
         else if( m_alignment.vert == NDefs::EVA_VERT_BOTTOM )
             pos.y -= (m_size.h - offset) / 2;
     }
-    
+
     if( m_upStencilMaskSprite )
     {
         m_upStencilMaskSprite->setScale( scale );
@@ -269,59 +264,51 @@ void CUIProgressBar::SetSizePos()
         m_spriteDeq.at(m_spriteApplyIndex).setScale( scale );
         m_spriteDeq.at(m_spriteApplyIndex).setPos( pos );
     }
-    
-}   // SetSizePos
+}
 
 
 /************************************************************************
 *    desc:  Set/Get/Inc current value
 ************************************************************************/
-void CUIProgressBar::SetCurValue( float value )
+void CUIProgressBar::setCurValue( float value )
 {
     m_curValue = value;
+}
 
-}   // SetCurValue
-
-float CUIProgressBar::GetCurValue()
+float CUIProgressBar::getCurValue()
 {
     return m_curValue;
+}
 
-}   // GetCurValue
-
-void CUIProgressBar::IncCurValue( float value )
+void CUIProgressBar::incCurValue( float value )
 {
     m_curValue += value;
-    
-}   // IncCurValue
+}
 
 
 /************************************************************************
 *    desc:  Set/Get min value
 ************************************************************************/
-void CUIProgressBar::SetMinValue( float value )
+void CUIProgressBar::setMinValue( float value )
 {
     m_minValue = value;
+}
 
-}   // SetMinValue
-
-float CUIProgressBar::GetMinValue()
+float CUIProgressBar::getMinValue()
 {
     return m_minValue;
-
-}   // GetMinValue
+}
 
 
 /************************************************************************
 *    desc:  Set/Get max value
 ************************************************************************/
-void CUIProgressBar::SetMaxValue( float value )
+void CUIProgressBar::setMaxValue( float value )
 {
     m_maxValue = value;
+}
 
-}   // SetMaxValue
-
-float CUIProgressBar::GetMaxValue()
+float CUIProgressBar::getMaxValue()
 {
     return m_maxValue;
-
-}   // GetMaxValue
+}

@@ -37,11 +37,11 @@ public:
     {}
 
     // Get UI Control
-    CUIControl * GetControl()
+    CUIControl * getControl()
     { return m_pUIControl; }
 
     // Set/Get Right Node
-    void SetNode( ENavNode navNode, CUIControlNavNode * pNode )
+    void setNode( ENavNode navNode, CUIControlNavNode * pNode )
     {
         if( navNode == ENAV_NODE_UP )
             m_pUpNode = pNode;
@@ -53,7 +53,7 @@ public:
             m_pRightNode = pNode;
     }
 
-    CUIControlNavNode * GetNode( ENavNode navNode )
+    CUIControlNavNode * getNode( ENavNode navNode )
     {
         if( navNode == ENAV_NODE_UP )
             return m_pUpNode;

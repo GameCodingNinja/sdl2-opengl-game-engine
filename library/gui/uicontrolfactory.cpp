@@ -28,8 +28,6 @@ namespace NUIControlFactory
 {
     /************************************************************************
     *    desc:  Load the control info from XML node
-    *  
-    *    param: node - XML node
     ************************************************************************/
     CUIControl * Create( const XMLNode & node, const std::string & group )
     {
@@ -72,16 +70,15 @@ namespace NUIControlFactory
                     % ctrlType % __FUNCTION__ % __LINE__ ));
 
         // Have the control load it's share
-        pControl->LoadFromNode( node );
+        pControl->loadFromNode( node );
 
         // Broadcast signal to let the game handle smart gui inits
         CSignalMgr::Instance().Broadcast( pControl );
 
         // Do any smart gui Create
-        pControl->SmartCreate();
+        pControl->smartCreate();
 
         return pControl;
+    }
 
-    }	// Create
-
-}   // namespace NUIControlFactory
+}   // NUIControlFactory

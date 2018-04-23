@@ -67,10 +67,10 @@ void CFontMgr::LoadFromXML( const std::string & filePath, const bool createFromD
         }
 
         // Load the character info from file
-        iter.first->second.LoadFromXML( m_group );
+        iter.first->second.loadFromXML( m_group );
         
         if( createFromData )
-            iter.first->second.CreateFromData( m_group );
+            iter.first->second.createFromData( m_group );
     }
 
 }   // LoadFromFile
@@ -82,7 +82,7 @@ void CFontMgr::LoadFromXML( const std::string & filePath, const bool createFromD
 void CFontMgr::CreateFromData()
 {
     for( auto & iter : m_fontMap )
-        iter.second.CreateFromData( m_group );
+        iter.second.createFromData( m_group );
 
 }   // CreateFromData
 

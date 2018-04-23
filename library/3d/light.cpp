@@ -8,15 +8,6 @@
 // Physical component dependency
 #include <3d/light.h>
 
-// Game dependencies
-
-// Game lib dependencies
-
-// Boost lib dependencies
-
-// Standard lib dependencies
-
-
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
@@ -25,7 +16,7 @@ CLight::CLight( NDefs::ELightType lightType ) :
     m_radius(0.f),
     m_enable(false)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -33,13 +24,13 @@ CLight::CLight( NDefs::ELightType lightType ) :
 ************************************************************************/
 CLight::~CLight()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Enable/disable light
 ************************************************************************/
-void CLight::Enable( bool value )
+void CLight::enable( bool value )
 {
     m_enable = value;
 }
@@ -48,12 +39,12 @@ void CLight::Enable( bool value )
 /************************************************************************
 *    desc:  Set/Get the position / direction
 ************************************************************************/
-void CLight::SetPosDir( CPoint<float> & value )
+void CLight::setPosDir( CPoint<float> & value )
 {
     m_posDir = value;
 }
 
-const CPoint<float> & CLight::GetPosDir() const
+const CPoint<float> & CLight::getPosDir() const
 {
     return m_posDir;
 }
@@ -62,13 +53,12 @@ const CPoint<float> & CLight::GetPosDir() const
 /************************************************************************
 *    desc:  Set/Get the color
 ************************************************************************/
-void CLight::SetColor( CPoint<float> & value )
+void CLight::setColor( CPoint<float> & value )
 {
     m_color = value;
 }
 
-const CPoint<float> & CLight::GetColor() const
+const CPoint<float> & CLight::getColor() const
 {
     return m_color;
 }
-

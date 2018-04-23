@@ -40,7 +40,7 @@ CUIControl::CUIControl( const std::string & group ) :
     m_actionType(NUIControl::ECAT_NULL),
     m_mouseSelectType(NDefs::EAP_UP)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -48,7 +48,7 @@ CUIControl::CUIControl( const std::string & group ) :
 ************************************************************************/
 CUIControl::~CUIControl()
 {
-}   // destructor
+}
 
 
 /************************************************************************
@@ -56,13 +56,13 @@ CUIControl::~CUIControl()
 *
 *    param: node - XML node
 ************************************************************************/
-void CUIControl::LoadFromNode( const XMLNode & node )
+void CUIControl::loadFromNode( const XMLNode & node )
 {
-    CControlBase::LoadFromNode( node );
+    CControlBase::loadFromNode( node );
 
     // Set the default state of the control
     if( node.isAttributeSet( "defaultState" ) )
-        SetDefaultState( std::string( node.getAttribute( "defaultState" ) ) );
+        setDefaultState( std::string( node.getAttribute( "defaultState" ) ) );
 
     // Set if mouse selection is the down message
     if( node.isAttributeSet( "mouseSelectDown" ) )
@@ -75,11 +75,11 @@ void CUIControl::LoadFromNode( const XMLNode & node )
     {
         // Set the action type
         if( actionNode.isAttributeSet( "actionType" ) )
-            SetActionType( actionNode.getAttribute( "actionType" ) );
+            setActionType( actionNode.getAttribute( "actionType" ) );
 
         // Set the execution action.
         if( actionNode.isAttributeSet( "executionAction" ) )
-            SetExecutionAction( std::string(actionNode.getAttribute( "executionAction" )) );
+            setExecutionAction( std::string(actionNode.getAttribute( "executionAction" )) );
     }
 
     // Setup the action
@@ -88,10 +88,10 @@ void CUIControl::LoadFromNode( const XMLNode & node )
     {
         if( stateScriptNode.isAttributeSet( "onDisabled" ) )
             m_scriptFunction.emplace( NUIControl::ECS_DISABLED, stateScriptNode.getAttribute( "onDisabled" ) );
-        
+
         if( stateScriptNode.isAttributeSet( "onInactive" ) )
             m_scriptFunction.emplace( NUIControl::ECS_INACTIVE, stateScriptNode.getAttribute( "onInactive" ) );
-        
+
         if( stateScriptNode.isAttributeSet( "onActive" ) )
             m_scriptFunction.emplace( NUIControl::ECS_ACTIVE, stateScriptNode.getAttribute( "onActive" ) );
 
@@ -100,21 +100,20 @@ void CUIControl::LoadFromNode( const XMLNode & node )
     }
 
     // Load the scroll data from node
-    m_scrollParam.LoadFromNode( node.getChildNode( "scroll" ) );
+    m_scrollParam.loadFromNode( node.getChildNode( "scroll" ) );
 
     // Get the size modifier info
     m_sizeModifier = NParseHelper::LoadRect( node );
 
     // Init to the default state
-    RevertToDefaultState();
-
-}   // LoadFromNode
+    revertToDefaultState();
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
 ************************************************************************/
-void CUIControl::LoadControlFromNode( const XMLNode & node )
+void CUIControl::loadControlFromNode( const XMLNode & node )
 {
     // Get the list of object data associated with this button
     const XMLNode spriteLstNode = node.getChildNode( "spriteList" );
@@ -128,17 +127,16 @@ void CUIControl::LoadControlFromNode( const XMLNode & node )
             const XMLNode spriteNode = spriteLstNode.getChildNode( i );
 
             // Load the sprite from node
-            LoadSpriteFromNode( spriteNode, fontSpriteCount );
+            loadSpriteFromNode( spriteNode, fontSpriteCount );
         }
     }
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load a sprite from an XML node
 ************************************************************************/
-void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount )
+void CUIControl::loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount )
 {
     // Get the type of object
     std::string objectName = node.getAttribute( "objectName" );
@@ -151,11 +149,11 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     rSprite.load( node );
 
     // See if this sprite is used for rendering a font string
-    if( rSprite.getVisualComponent().IsFontSprite() )
+    if( rSprite.getVisualComponent().isFontSprite() )
     {
         // Set the font string to be created later
         if( !m_stringVec.empty() && (fontSpriteCount < m_stringVec.size()) )
-            rSprite.getVisualComponent().SetFontString( m_stringVec.at(fontSpriteCount) );
+            rSprite.getVisualComponent().setFontString( m_stringVec.at(fontSpriteCount) );
 
         ++fontSpriteCount;
     }
@@ -171,21 +169,19 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
         if( height > m_size.h )
             m_size.h = height;
     }
-
-}   // LoadSpriteFromNode
+}
 
 
 /************************************************************************
 *    desc:  Update the control
 ************************************************************************/
-void CUIControl::Update()
+void CUIControl::update()
 {
     m_scriptComponent.Update();
 
     for( auto & iter : m_spriteDeq )
         iter.update();
-
-}   // Update
+}
 
 
 /************************************************************************
@@ -198,15 +194,14 @@ void CUIControl::transform( const CObject2D & object )
     for( auto & iter : m_spriteDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
 
-    TransformCollision();
-
-}   // Transform
+    transformCollision();
+}
 
 
 /************************************************************************
 *    desc:  Transform the collision
 ************************************************************************/
-void CUIControl::TransformCollision()
+void CUIControl::transformCollision()
 {
     if( wasWorldPosTranformed() && !m_size.isEmpty() )
     {
@@ -249,115 +244,109 @@ void CUIControl::TransformCollision()
         m_collisionCenter.x += screenHalf.getW();
         m_collisionCenter.y += screenHalf.getH();
     }
-
-}   // TransformCollision
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CUIControl::Render( const CMatrix & matrix )
+void CUIControl::render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
         iter.render( matrix );
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CUIControl::HandleEvent( const SDL_Event & rEvent )
+void CUIControl::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == NMenu::EGE_MENU_CONTROL_STATE_CHANGE )
     {
-        OnStateChange( rEvent );
+        onStateChange( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_SELECT_EXECUTE )
     {
-        OnSelectExecute( rEvent );
+        onSelectExecute( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_SET_ACTIVE_CONTROL )
     {
-        OnSetActiveControl( rEvent );
+        onSetActiveControl( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_REACTIVATE )
     {
-        OnReactivate( rEvent );
+        onReactivate( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
     {
-        OnTransIn( rEvent );
+        onTransIn( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_TRANS_OUT )
     {
-        OnTransOut( rEvent );
+        onTransOut( rEvent );
     }
 
     // Do any smart event handling
-    SmartHandleEvent( rEvent );
-
-}   // HandleEvent
+    smartHandleEvent( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Handle OnTransIn message
 ************************************************************************/
-void CUIControl::OnTransIn( const SDL_Event & rEvent )
+void CUIControl::onTransIn( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
         // Set the script functions for the current displayed state
         if( m_lastState != m_state )
-            SetDisplayState();
+            setDisplayState();
     }
-
-}   // OnTransIn
+}
 
 /************************************************************************
 *    desc:  Handle OnTransOut message
 ************************************************************************/
-void CUIControl::OnTransOut( const SDL_Event & rEvent )
+void CUIControl::onTransOut( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
         // Reset the control
-        Reset();
+        reset();
 
         // Recycle the contexts
-        RecycleContext();
+        recycleContext();
 
         // Set the script functions for the current displayed state
         if( m_lastState != m_state )
-            SetDisplayState();
+            setDisplayState();
     }
-
-}   // OnTransOut
+}
 
 /************************************************************************
 *    desc:  Handle OnStateChange message
 ************************************************************************/
-void CUIControl::OnStateChange( const SDL_Event & rEvent )
+void CUIControl::onStateChange( const SDL_Event & rEvent )
 {
     // This control is the focus of the state change
     // The control's "this" pointer is used as a means of identification
     if( rEvent.user.data1 == (void *)this )
-        ChangeState( NUIControl::EControlState(rEvent.user.code) );
+        changeState( NUIControl::EControlState(rEvent.user.code) );
     else
-        DeactivateControl();
-
-}   // OnStateChange
+        deactivateControl();
+}
 
 /************************************************************************
 *    desc:  Handle OnSelectExecute message
 ************************************************************************/
-void CUIControl::OnSelectExecute( const SDL_Event & rEvent )
+void CUIControl::onSelectExecute( const SDL_Event & rEvent )
 {
     if( m_state == NUIControl::ECS_SELECTED )
     {
         if( m_actionType == NUIControl::ECAT_TO_TREE )
             NGenFunc::DispatchEvent( NMenu::EGE_MENU_TO_TREE, 0, &m_executionAction );
-        
+
         else if( m_actionType == NUIControl::ECAT_TO_MENU )
             NGenFunc::DispatchEvent( NMenu::EGE_MENU_TO_MENU, 0, &m_executionAction, this );
 
@@ -374,19 +363,18 @@ void CUIControl::OnSelectExecute( const SDL_Event & rEvent )
             NGenFunc::DispatchEvent( SDL_QUIT );
 
         // Smart gui execution
-        SmartExecuteAction();
-        
+        smartExecuteAction();
+
         // Boost signal execute action
         m_executionActionSignal(this);
     }
-
-}   // OnSelectExecute
+}
 
 
 /************************************************************************
 *    desc:  Handle OnSetActiveControl message
 ************************************************************************/
-void CUIControl::OnSetActiveControl( const SDL_Event & rEvent )
+void CUIControl::onSetActiveControl( const SDL_Event & rEvent )
 {
     // Set the last active control to be active again
     if( (rEvent.user.code == NMenu::EAC_LAST_ACTIVE_CONTROL) &&
@@ -397,48 +385,46 @@ void CUIControl::OnSetActiveControl( const SDL_Event & rEvent )
         // Don't animate the control if the mouse was used
         if( !CActionMgr::Instance().WasLastDeviceMouse() )
         {
-            RecycleContext();
-            SetDisplayState();
+            recycleContext();
+            setDisplayState();
         }
     }
-
-}   // OnSetActiveControl
+}
 
 /************************************************************************
 *    desc:  Handle OnReactivate message
 ************************************************************************/
-void CUIControl::OnReactivate( const SDL_Event & rEvent )
+void CUIControl::onReactivate( const SDL_Event & rEvent )
 {
     // Set the last active control to be active again
     if( m_state > NUIControl::ECS_INACTIVE )
     {
         m_lastState = m_state = NUIControl::ECS_ACTIVE;
-        
+
         // Don't animate the control if the mouse was used
         if( !CActionMgr::Instance().WasLastDeviceMouse() ||
-            IsPointInControl( CActionMgr::Instance().GetMouseAbsolutePos() ) )
+            isPointInControl( CActionMgr::Instance().GetMouseAbsolutePos() ) )
         {
-            RecycleContext();
-            SetDisplayState();
+            recycleContext();
+            setDisplayState();
         }
     }
-
-}   // OnReactivate
+}
 
 
 /************************************************************************
 *    desc:  Handle the mouse move
 ************************************************************************/
-bool CUIControl::OnMouseMove( const SDL_Event & rEvent )
+bool CUIControl::onMouseMove( const SDL_Event & rEvent )
 {
     bool result(false);
 
-    if( !IsDisabled() && IsPointInControl( rEvent.motion.x, rEvent.motion.y ) )
+    if( !isDisabled() && isPointInControl( rEvent.motion.x, rEvent.motion.y ) )
     {
         result = true;
 
         // Only send the message if it's not already active
-        if( !IsActive() )
+        if( !isActive() )
         {
             NGenFunc::DispatchEvent(
                 NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
@@ -448,154 +434,145 @@ bool CUIControl::OnMouseMove( const SDL_Event & rEvent )
     }
 
     return result;
-
-}   // OnMouseMove
+}
 
 
 /************************************************************************
 *    desc:  Change the control state
 ************************************************************************/
-void CUIControl::ChangeState( NUIControl::EControlState state )
+void CUIControl::changeState( NUIControl::EControlState state )
 {
     if( m_state != state )
     {
         m_state = state;
 
         // Prepare any script functions associated with the state change
-        PrepareControlScriptFunction( m_state );
+        prepareControlScriptFunction( m_state );
 
-        RecycleContext();
-        SetDisplayState();
+        recycleContext();
+        setDisplayState();
 
         m_lastState = m_state;
     }
-
-}   // ChangeState
+}
 
 
 /************************************************************************
 *    desc:  Activate the control
 ************************************************************************/
-bool CUIControl::ActivateControl()
+bool CUIControl::activateControl()
 {
     // The focus has switched to this control
-    if( !IsDisabled() )
+    if( !isDisabled() )
     {
         m_lastState = m_state = NUIControl::ECS_ACTIVE;
 
-        RecycleContext();
-        SetDisplayState();
+        recycleContext();
+        setDisplayState();
 
         return true;
     }
 
     return false;
-
-}   // ActivateControl
+}
 
 
 /************************************************************************
 *    desc:  Deactivate the control
 ************************************************************************/
-void CUIControl::DeactivateControl()
+void CUIControl::deactivateControl()
 {
     // The focus has switched away from this control
     if( (m_lastState == NUIControl::ECS_NULL) ||
         (m_lastState > NUIControl::ECS_INACTIVE) )
     {
         // Reset the control
-        Reset();
+        reset();
 
-        RecycleContext();
-        SetDisplayState();
+        recycleContext();
+        setDisplayState();
 
         m_lastState = m_state;
     }
-
-}   // DeactivateControl
+}
 
 
 /************************************************************************
 *    desc:  Disable the control
 ************************************************************************/
-void CUIControl::DisableControl()
+void CUIControl::disableControl()
 {
     if( (m_lastState == NUIControl::ECS_NULL) ||
         (m_lastState > NUIControl::ECS_DISABLED) )
     {
         m_lastState = m_state = NUIControl::ECS_DISABLED;
 
-        RecycleContext();
-        SetDisplayState();
+        recycleContext();
+        setDisplayState();
     }
-
-}   // DisableControl
+}
 
 
 /************************************************************************
 *    desc:  Enable the control to the inactive state
 ************************************************************************/
-void CUIControl::EnableControl()
+void CUIControl::enableControl()
 {
     if( m_lastState <= NUIControl::ECS_DISABLED )
     {
         m_lastState = m_state = NUIControl::ECS_INACTIVE;
 
-        RecycleContext();
-        SetDisplayState();
+        recycleContext();
+        setDisplayState();
     }
-
-}   // EnableControl
+}
 
 
 /************************************************************************
 *    desc:  Set the sprite's display based on it's current state
 ************************************************************************/
-void CUIControl::SetDisplayState()
+void CUIControl::setDisplayState()
 {
     // Set the script function
-    PrepareSpriteScriptFunction( m_state );
-
-}   // SetControlState
+    prepareSpriteScriptFunction( m_state );
+}
 
 
 /************************************************************************
 *    desc:  Init the control
 ************************************************************************/
-void CUIControl::Init()
+void CUIControl::init()
 {
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto & iter : m_spriteDeq )
         iter.init();
-    
+
     // Call any init scripts
-    PrepareSpriteScriptFunction( NUIControl::ECS_INIT );
-    
-}   // Init
+    prepareSpriteScriptFunction( NUIControl::ECS_INIT );
+}
 
 
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CUIControl::CleanUp()
+void CUIControl::cleanUp()
 {
     // Free the font VBO
     // This allows for early VBO delete so that the menu manager can be freed from the load screen
     for( auto & iter : m_spriteDeq )
         iter.cleanUp();
-    
-}   // CleanUp
+}
 
 
 /************************************************************************
 *    desc:  Prepare the sprite script function
 ************************************************************************/
-void CUIControl::PrepareSpriteScriptFunction( NUIControl::EControlState controlState )
+void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlState )
 {
     std::string scriptFuncMapKey;
     bool forceUpdate(false);
-    
+
     switch( controlState )
     {
         case NUIControl::ECS_NULL:
@@ -603,90 +580,85 @@ void CUIControl::PrepareSpriteScriptFunction( NUIControl::EControlState controlS
                 boost::str( boost::format("Control state can't be NULL!\n\n%s\nLine: %s")
                     %  __FUNCTION__ % __LINE__ ));
         break;
-            
+
         case NUIControl::ECS_INIT:
             scriptFuncMapKey = "init";
             forceUpdate = true;
         break;
-        
+
         case NUIControl::ECS_DISABLED:
             scriptFuncMapKey = "disabled";
             forceUpdate = true;
         break;
-        
+
         case NUIControl::ECS_INACTIVE:
             scriptFuncMapKey = "inactive";
             forceUpdate = true;
         break;
-        
+
         case NUIControl::ECS_ACTIVE:
             scriptFuncMapKey = "active";
         break;
-        
+
         case NUIControl::ECS_SELECTED:
             scriptFuncMapKey = "selected";
         break;
     };
-    
-    // Force an update for states that just change settings and don't animate
-    CallSpriteScriptFuncKey( scriptFuncMapKey, forceUpdate );
 
-}   // PrepareSpriteScriptFunction
+    // Force an update for states that just change settings and don't animate
+    callSpriteScriptFuncKey( scriptFuncMapKey, forceUpdate );
+}
 
 
 /************************************************************************
 *    desc:  Call a script function map key for sprite
 ************************************************************************/
-void CUIControl::CallSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate )
-{    
+void CUIControl::callSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate )
+{
     for( auto & iter : m_spriteDeq )
         iter.prepareFuncId( scriptFuncMapKey, forceUpdate );
-    
-}   // CallCustomSpriteScript
+}
 
 
 /************************************************************************
 *    desc:  Prepare the script function to run
 ************************************************************************/
-void CUIControl::PrepareControlScriptFunction( NUIControl::EControlState controlState )
+void CUIControl::prepareControlScriptFunction( NUIControl::EControlState controlState )
 {
     auto iter = m_scriptFunction.find( controlState );
 
     if( iter != m_scriptFunction.end() )
         m_scriptComponent.Prepare(m_group, iter->second);
-
-}   // PrepareControlScriptFunction
+}
 
 
 /************************************************************************
 *    desc:  Reset and recycle the contexts
 ************************************************************************/
-void CUIControl::Reset( bool complete )
+void CUIControl::reset( bool complete )
 {
     if( m_state > NUIControl::ECS_INACTIVE )
         m_state = NUIControl::ECS_INACTIVE;
 
     if( complete )
         m_lastState = m_state;
-
-}   // Reset
+}
 
 
 /************************************************************************
 *    desc:  Recycle the contexts
 ************************************************************************/
-void CUIControl::RecycleContext()
+void CUIControl::recycleContext()
 {
     for( auto & iter : m_spriteDeq )
         iter.getScriptComponent().ResetAndRecycle();
-
-}   // RecycleContext
+}
 
 
 /************************************************************************
 *    desc:  Set the default state of this control
 ************************************************************************/
-void CUIControl::SetDefaultState( const std::string & value )
+void CUIControl::setDefaultState( const std::string & value )
 {
     if( value == "inactive" )
         m_defaultState = NUIControl::ECS_INACTIVE;
@@ -699,114 +671,102 @@ void CUIControl::SetDefaultState( const std::string & value )
 
     else if( value == "selected" )
         m_defaultState = NUIControl::ECS_SELECTED;
+}
 
-}   // SetDefaultState
-
-void CUIControl::SetDefaultState( NUIControl::EControlState value )
+void CUIControl::setDefaultState( NUIControl::EControlState value )
 {
     m_defaultState = value;
-
-}   // SetDefaultState
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the smart control pointer. This class owns the pointer
 ************************************************************************/
-void CUIControl::SetSmartGui( CSmartGuiControl * pSmartGuiControl )
+void CUIControl::setSmartGui( CSmartGuiControl * pSmartGuiControl )
 {
     m_upSmartGui.reset( pSmartGuiControl );
+}
 
-}   // SetSmartGui
-
-CSmartGuiControl * CUIControl::GetSmartGuiPtr()
+CSmartGuiControl * CUIControl::getSmartGuiPtr()
 {
     return m_upSmartGui.get();
-
-}   // GetActionType
+}
 
 
 /************************************************************************
 *    desc:  Do any smart create
 ************************************************************************/
-void CUIControl::SmartCreate()
+void CUIControl::smartCreate()
 {
     if( m_upSmartGui )
-        m_upSmartGui->Create();
-
-}   // SmartCreate
+        m_upSmartGui->create();
+}
 
 
 /************************************************************************
 *    desc:  Do any smart event handling
 ************************************************************************/
-void CUIControl::SmartHandleEvent( const SDL_Event & rEvent )
+void CUIControl::smartHandleEvent( const SDL_Event & rEvent )
 {
     if( m_upSmartGui )
-        m_upSmartGui->HandleEvent( rEvent );
-
-}   // SmartHandleEvent
+        m_upSmartGui->handleEvent( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Smart execute the action
 ************************************************************************/
-void CUIControl::SmartExecuteAction()
+void CUIControl::smartExecuteAction()
 {
     if( m_upSmartGui )
-        m_upSmartGui->Execute();
-
-}   // SmartExecuteAction
+        m_upSmartGui->execute();
+}
 
 
 /************************************************************************
 *    desc:  Set the control to their default behavior
 ************************************************************************/
-void CUIControl::RevertToDefaultState()
+void CUIControl::revertToDefaultState()
 {
     m_state = m_defaultState;
-
-}   // RevertToDefaultState
+}
 
 
 /************************************************************************
 *    desc:  Get/Set the state of this control
 ************************************************************************/
-NUIControl::EControlState CUIControl::GetState() const
+NUIControl::EControlState CUIControl::getState() const
 {
     return m_state;
+}
 
-}   // GetState
-
-void CUIControl::SetState( NUIControl::EControlState state, bool setLastState )
+void CUIControl::setState( NUIControl::EControlState state, bool setLastState )
 {
     m_state = state;
 
     if( setLastState )
         m_lastState = state;
-
-}   // SetState
+}
 
 
 /************************************************************************
 *    desc:  Get/Set the control's action type
 ************************************************************************/
-NUIControl::EControlActionType CUIControl::GetActionType()
+NUIControl::EControlActionType CUIControl::getActionType()
 {
     return m_actionType;
+}
 
-}   // GetActionType
-
-void CUIControl::SetActionType( NUIControl::EControlActionType value )
+void CUIControl::setActionType( NUIControl::EControlActionType value )
 {
     m_actionType = value;
+}
 
-}   // SetActionType
-
-void CUIControl::SetActionType( const std::string & value )
+void CUIControl::setActionType( const std::string & value )
 {
     if( value == "action" )
         m_actionType = NUIControl::ECAT_ACTION;
-    
+
     else if( value == "to_tree" )
         m_actionType = NUIControl::ECAT_TO_TREE;
 
@@ -827,85 +787,79 @@ void CUIControl::SetActionType( const std::string & value )
 
     else if( value == "quit_game" )
         m_actionType = NUIControl::ECAT_QUIT_GAME;
-
-}   // SetActionType
+}
 
 
 /************************************************************************
 *    desc:  Get/Set the execution action
 ************************************************************************/
-const std::string & CUIControl::GetExecutionAction()
+const std::string & CUIControl::getExecutionAction()
 {
     return m_executionAction;
+} 
 
-}   // GetExecutionAction
-
-void CUIControl::SetExecutionAction( const std::string & action )
+void CUIControl::setExecutionAction( const std::string & action )
 {
     m_executionAction = action;
-
-}   // SetExecutionAction
+}
 
 
 /************************************************************************
 *    desc:  Create the font string
 ************************************************************************/
-void CUIControl::CreateFontString( const std::string & fontString, int spriteIndex )
+void CUIControl::createFontString( const std::string & fontString, int spriteIndex )
 {
     int fontSpriteCounter(0);
 
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.getVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().isFontSprite() )
         {
             if( fontSpriteCounter == spriteIndex )
             {
-                iter.getVisualComponent().CreateFontString( fontString );
+                iter.getVisualComponent().createFontString( fontString );
                 break;
             }
 
             ++fontSpriteCounter;
         }
     }
-    
-}   // CreateFontString
+}
 
-void CUIControl::CreateFontString( int stringIndex, int spriteIndex )
+void CUIControl::createFontString( int stringIndex, int spriteIndex )
 {
     if( !m_stringVec.empty() )
-        CreateFontString( m_stringVec[stringIndex], spriteIndex );
-
-}   // CreateFontString
+        createFontString( m_stringVec[stringIndex], spriteIndex );
+}
 
 
 /************************************************************************
 *    desc:  Set the font string
 ************************************************************************/
-void CUIControl::SetFontString( const std::string & fontString, int spriteIndex )
+void CUIControl::setFontString( const std::string & fontString, int spriteIndex )
 {
     int fontSpriteCounter(0);
 
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.getVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().isFontSprite() )
         {
             if( fontSpriteCounter == spriteIndex )
             {
-                iter.getVisualComponent().SetFontString( fontString );
+                iter.getVisualComponent().setFontString( fontString );
                 break;
             }
 
             ++fontSpriteCounter;
         }
     }
-
-}   // SetFontString
+}
 
 
 /************************************************************************
 *    desc:  Get the string vector
 ************************************************************************/
-const std::vector<std::string> & CUIControl::GetStringVec() const
+const std::vector<std::string> & CUIControl::getStringVec() const
 {
     return m_stringVec;
 }
@@ -915,14 +869,14 @@ const std::vector<std::string> & CUIControl::GetStringVec() const
 *    desc:  Handle the select action
 *           Only process this message if it's keyboard/gamepad down or mouse up
 ************************************************************************/
-bool CUIControl::HandleSelectAction( const CSelectMsgCracker & msgCracker )
+bool CUIControl::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
-    if( (IsSelectable() &&
-        msgCracker.IsDeviceMouse() &&
-        (msgCracker.GetPressType() == m_mouseSelectType) &&
-        IsPointInControl( msgCracker.GetPos() ) ) ||
+    if( (isSelectable() &&
+        msgCracker.isDeviceMouse() &&
+        (msgCracker.getPressType() == m_mouseSelectType) &&
+        isPointInControl( msgCracker.getPos() ) ) ||
 
-        (IsActive() && !msgCracker.IsDeviceMouse() && msgCracker.IsPressDown()) )
+        (isActive() && !msgCracker.isDeviceMouse() && msgCracker.isPressDown()) )
     {
         NGenFunc::DispatchEvent(
             NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
@@ -933,22 +887,21 @@ bool CUIControl::HandleSelectAction( const CSelectMsgCracker & msgCracker )
     }
 
     return false;
-
-}   // HandleSelectAction
+}
 
 
 /************************************************************************
 *    desc: Set the first inactive control to be active
 *    NOTE: This is mainly here to be virtual for sub controls
 ************************************************************************/
-bool CUIControl::ActivateFirstInactiveControl()
+bool CUIControl::activateFirstInactiveControl()
 {
     // If a mouse was used, set the control as active but don't animate it.
     // This allows us to use the keys to scroll when pressed
     #if !(defined(__IOS__) || defined(__ANDROID__))
     if( CActionMgr::Instance().WasLastDeviceMouse() )
     {
-        if( !IsDisabled() )
+        if( !isDisabled() )
         {
             m_lastState = m_state = NUIControl::ECS_ACTIVE;
 
@@ -959,25 +912,22 @@ bool CUIControl::ActivateFirstInactiveControl()
     }
     #endif
 
-    return ActivateControl();
-
-}   // ActivateInactiveControl
+    return activateControl();
+}
 
 
 /************************************************************************
 *    desc:  Is the point in the control
 ************************************************************************/
-bool CUIControl::IsPointInControl( int x, int y )
+bool CUIControl::isPointInControl( int x, int y )
 {
     return m_collisionQuad.isPointInQuad( x, y );
+}
 
-}   // IsPointInControl
-
-bool CUIControl::IsPointInControl( const CPoint<float> & pos )
+bool CUIControl::isPointInControl( const CPoint<float> & pos )
 {
     return m_collisionQuad.isPointInQuad( pos.x, pos.y );
-
-}   // IsPointInControl
+}
 
 
 /************************************************************************
@@ -985,160 +935,142 @@ bool CUIControl::IsPointInControl( const CPoint<float> & pos )
 *
 *    NOTE: These function is mainly for sub controls
 ************************************************************************/
-CUIControl * CUIControl::FindControl( const std::string & name )
+CUIControl * CUIControl::findControl( const std::string & name )
 {
     if( m_name == name )
         return this;
 
     return nullptr;
+}
 
-}   // FindControl
-
-CUIControl * CUIControl::FindControl( void * pVoid )
+CUIControl * CUIControl::findControl( void * pVoid )
 {
     if( pVoid == (void *)this )
         return this;
 
     return nullptr;
-
-}   // FindControl
+}
 
 
 /************************************************************************
 *    desc:  Set the string to vector
 ************************************************************************/
-void CUIControl::SetStringToList( const std::string & str )
+void CUIControl::setStringToList( const std::string & str )
 {
     m_stringVec.push_back( str );
-
-}   // SetToFontStringList
+}
 
 
 /************************************************************************
 *    desc:  Is this control disabled/active/selected
 ************************************************************************/
-bool CUIControl::IsDisabled()
+bool CUIControl::isDisabled()
 {
     return m_state == NUIControl::ECS_DISABLED;
+}
 
-}   // IsDisabled
-
-bool CUIControl::IsInactive()
+bool CUIControl::isInactive()
 {
     return m_state == NUIControl::ECS_INACTIVE;
+}
 
-}   // IsInactive
-
-bool CUIControl::IsActive()
+bool CUIControl::isActive()
 {
     return (m_state == NUIControl::ECS_ACTIVE);
+}
 
-}   // IsActive
-
-bool CUIControl::IsSelected()
+bool CUIControl::isSelected()
 {
     return (m_state == NUIControl::ECS_SELECTED);
+}
 
-}   // IsSelected
-
-bool CUIControl::IsSelectable()
+bool CUIControl::isSelectable()
 {
     return ((m_state == NUIControl::ECS_INACTIVE) || (m_state == NUIControl::ECS_ACTIVE));
-
-}   // IsSelected
-
-
+}
 
 
 /************************************************************************
 *    desc:  Get the collision position
 ************************************************************************/
-const CPoint<float> & CUIControl::GetCollisionPos() const
+const CPoint<float> & CUIControl::getCollisionPos() const
 {
     return m_collisionCenter;
-
-}	// GetCollisionPos
+}
 
 
 /************************************************************************
 *    desc:  Get the scroll params
 ************************************************************************/
-CScrollParam & CUIControl::GetScrollParam()
+CScrollParam & CUIControl::getScrollParam()
 {
     return m_scrollParam;
-
-}   // GetScrollParam
+}
 
 
 /************************************************************************
 *    desc:  Check if control is a sub control
 ************************************************************************/
-bool CUIControl::IsSubControl() const
+bool CUIControl::isSubControl() const
 {
     return false;
-
-}   // IsSubControl
+}
 
 
 /************************************************************************
 *    desc:  Connect to the execution action signal
 ************************************************************************/
-void CUIControl::Connect_ExecutionAction( const ExecutionActionSignal::slot_type & slot )
+void CUIControl::connect_executionAction( const ExecutionActionSignal::slot_type & slot )
 {
     m_executionActionSignal.connect(slot);
-    
-}   // Connect_ExecutionAction
+}
 
 
 /************************************************************************
 *    desc:  Set the alpha value of this control
 ************************************************************************/
-void CUIControl::SetAlpha( float alpha )
+void CUIControl::setAlpha( float alpha )
 {
     for( auto & iter : m_spriteDeq )
         iter.setAlpha( alpha );
-
-}   // SetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the active control
 *           This is mostly needed for sub controls
 ************************************************************************/
-CUIControl * CUIControl::GetPtrToActiveControl()
+CUIControl * CUIControl::getPtrToActiveControl()
 {
     return this;
-    
-}   // GetPtrToActiveControl
+}
 
 
 /************************************************************************
 *    desc:  Get the mouse select type
 ************************************************************************/
-NDefs::EActionPress CUIControl::GetMouseSelectType() const
+NDefs::EActionPress CUIControl::getMouseSelectType() const
 {
     return m_mouseSelectType;
-    
-}   // GetMouseSelectType
+}
 
 
 /************************************************************************
 *    desc:  Get the size of this control
 ************************************************************************/
-const CSize<float> & CUIControl::GetSize() const
+const CSize<float> & CUIControl::getSize() const
 {
     return m_size;
-    
-}   // GetSize
+}
 
 
 /************************************************************************
 *    desc:  Can this control scroll?
 ************************************************************************/
-bool CUIControl::CanScroll( int msg )
+bool CUIControl::canScroll( int msg )
 {
-    if( IsActive() && m_scrollParam.CanScroll(msg) )
+    if( isActive() && m_scrollParam.canScroll(msg) )
         return true;
-    
+
     return false;
 }

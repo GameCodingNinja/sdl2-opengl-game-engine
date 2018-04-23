@@ -22,15 +22,15 @@ public:
     virtual ~CUICheckBox();
 
     // Set or get the Select state of this control
-    void SetToggleState( bool value );
-    bool GetToggleState();
+    void setToggleState( bool value );
+    bool getToggleState();
 
     // Render the button
-    virtual void Render( const CMatrix & matrix );
+    virtual void render( const CMatrix & matrix ) override;
 
 protected:
 
-    virtual void OnSelectExecute( const SDL_Event & rEvent );
+    virtual void onSelectExecute( const SDL_Event & rEvent ) override;
     
 private:
 

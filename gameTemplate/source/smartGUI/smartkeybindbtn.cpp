@@ -25,17 +25,17 @@
 CSmartKeyBindBtn::CSmartKeyBindBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
 *    decs:  Called when the control is created
 *           Sets the action ID string for the given device
 ****************************************************************************/
-void CSmartKeyBindBtn::Create()
+void CSmartKeyBindBtn::create()
 {
     uint disableCounter(0);
-    const std::string actionNameStr = m_pUIControl->GetStringVec().back();
+    const std::string actionNameStr = m_pUIControl->getStringVec().back();
     
     CUISubControl * pSubControl = NGenFunc::DynCast<CUISubControl>(m_pUIControl);
     
@@ -45,52 +45,50 @@ void CSmartKeyBindBtn::Create()
         bool configurable;
         
         // Get the pointer to the sub control label associated with the device
-        CUIControl * pControl = pSubControl->GetSubControl(i);
+        CUIControl * pControl = pSubControl->getSubControl(i);
     
         // If the ID is defined in the controller mapping XML, set it's string Id
         if( CActionMgr::Instance().GetDeviceActionStr(NDefs::EDeviceId(i), actionNameStr, idStr, configurable) )
         {
-            pControl->CreateFontString( idStr );
+            pControl->createFontString( idStr );
             
             if( !configurable )
             {
                 disableCounter++;
-                pControl->SetState( NUIControl::ECS_DISABLED );
+                pControl->setState( NUIControl::ECS_DISABLED );
             }
         }
         else
         {
             disableCounter++;
-            pControl->SetState( NUIControl::ECS_DISABLED );
-            pControl->CreateFontString( "NA" );
+            pControl->setState( NUIControl::ECS_DISABLED );
+            pControl->createFontString( "NA" );
         }
     }
     
     // If all 3 device types are not configuable, disable the button
     if( disableCounter == NDefs::MAX_UNIQUE_DEVICES )
-        m_pUIControl->SetState( NUIControl::ECS_DISABLED );
-
-}   // Create
+        m_pUIControl->setState( NUIControl::ECS_DISABLED );
+}
 
 
 /***************************************************************************
 *    decs:  Called when the control is executed
 ****************************************************************************/
-void CSmartKeyBindBtn::Execute()
+void CSmartKeyBindBtn::execute()
 {
     // Disable all action checking so that most buttons can be key mapped
     // without being acted on
     CActionMgr::Instance().EnableAction(false);
-    
-}   // Execute
+}
 
 
 /***************************************************************************
 *    decs:  Handle events
 ****************************************************************************/
-void CSmartKeyBindBtn::HandleEvent( const SDL_Event & rEvent )
+void CSmartKeyBindBtn::handleEvent( const SDL_Event & rEvent )
 {
-    if( m_pUIControl->IsSelected() && 
+    if( m_pUIControl->isSelected() && 
         ((rEvent.type == SDL_KEYUP) ||
          (rEvent.type == SDL_MOUSEBUTTONUP) ||
          (rEvent.type == SDL_CONTROLLERBUTTONUP)) )
@@ -107,17 +105,17 @@ void CSmartKeyBindBtn::HandleEvent( const SDL_Event & rEvent )
         else
         {
             std::string idStr;
-            const std::string actionNameStr = m_pUIControl->GetStringVec().back();
+            const std::string actionNameStr = m_pUIControl->getStringVec().back();
             NDefs::EDeviceId deviceId = CActionMgr::Instance().ResetAction( rEvent, actionNameStr, idStr );
 
             if( deviceId != NDefs::DEVICE_NULL )
             {
                 // Get the sub control holding the string
                 CUISubControl * pSubControl = NGenFunc::DynCast<CUISubControl>(m_pUIControl);
-                CUIControl * pControl = pSubControl->GetSubControl( deviceId );
+                CUIControl * pControl = pSubControl->getSubControl( deviceId );
 
                 // Reset the string Id
-                pControl->CreateFontString( idStr );
+                pControl->createFontString( idStr );
                 
                 // Save the key binding changes to file
                 CActionMgr::Instance().SaveToFile();
@@ -130,5 +128,4 @@ void CSmartKeyBindBtn::HandleEvent( const SDL_Event & rEvent )
             }
         }
     }
-    
-}   // HandleEvent
+}

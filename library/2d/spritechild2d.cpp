@@ -66,5 +66,5 @@ void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 void CSpriteChild2D::render( const CMatrix & matrix )
 {
     if( isVisible() )
-        m_visualComponent.Render( m_finalMatrix, matrix );
+        m_visualComponent.render( m_finalMatrix, matrix );
 }

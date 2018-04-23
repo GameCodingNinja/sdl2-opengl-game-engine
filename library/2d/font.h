@@ -41,31 +41,31 @@ public:
     ~CFont();
 
     // Load from XML file
-    void LoadFromXML( const std::string & group );
+    void loadFromXML( const std::string & group );
     
     // Create the font texture from data
-    void CreateFromData( const std::string & group );
+    void createFromData( const std::string & group );
 
     // Get the data for this character
-    const CCharData & GetCharData( char id ) const;
+    const CCharData & getCharData( char id ) const;
 
     // Get the line height
-    float GetLineHeight() const;
+    float getLineHeight() const;
 
     // Get the baseline offset
-    float GetBaselineOffset() const;
+    float getBaselineOffset() const;
 
     // Get the horzontal padding
-    float GetHorzPadding() const;
+    float getHorzPadding() const;
 
     // Get the vertical padding
-    float GetVertPadding() const;
+    float getVertPadding() const;
 
     // Get the texture size
-    const CSize<int> & GetTextureSize() const;
+    const CSize<int> & getTextureSize() const;
 
     // Get the texture ID
-    uint32_t GetTextureID() const;
+    uint32_t getTextureID() const;
 
 private:
 

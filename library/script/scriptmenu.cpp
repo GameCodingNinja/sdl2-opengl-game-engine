@@ -30,8 +30,8 @@ namespace NScriptMenu
         // Register type
         Throw( pEngine->RegisterObjectType(  "CMenu", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("CMenu", "void SetAlpha(float alpha)",  asMETHOD(CMenu, SetAlpha), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CMenu", "float GetAlpha()",            asMETHOD(CMenu, GetAlpha), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CMenu", "void SetAlpha(float alpha)",  asMETHOD(CMenu, setAlpha), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CMenu", "float GetAlpha()",            asMETHOD(CMenu, getAlpha), asCALL_THISCALL) );
 
         // Need to use CObject for the below to compile under MSVSC++
         Throw( pEngine->RegisterObjectMethod("CMenu", "void SetVisible(bool visible)", asMETHOD(CObject, setVisible), asCALL_THISCALL) );

@@ -17,7 +17,7 @@
 #include <utilities/genfunc.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartResetKeyBindBtn::CSmartResetKeyBindBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
@@ -28,25 +28,17 @@ CSmartResetKeyBindBtn::CSmartResetKeyBindBtn( CUIControl * pUIControl ) :
 /***************************************************************************
 *    decs:  Called when the control is executed - quits the game
 ****************************************************************************/
-void CSmartResetKeyBindBtn::Execute()
+void CSmartResetKeyBindBtn::execute()
 {
     // Reset the key bindings for all controls and save
     CActionMgr::Instance().ResetKeyBindingsToDefault();
     
     // Get a pointer to the scroll box
-    CMenu & rMenu = CMenuManager::Instance().GetActiveMenu();
-    CUIScrollBox * pScrollBoxCtrl = NGenFunc::DynCast<CUIScrollBox>(rMenu.GetPtrToControl("key_binding_scroll_box"));
+    CMenu & rMenu = CMenuManager::Instance().getMenu( "key_bindings_menu" );
+    CUIScrollBox * pScrollBoxCtrl = NGenFunc::DynCast<CUIScrollBox>(rMenu.getPtrToControl("key_binding_scroll_box"));
     
     // Reset all the key binding buttons
-    const auto & scrollCtrlVec = pScrollBoxCtrl->GetScrollCtrlVec();
+    const auto & scrollCtrlVec = pScrollBoxCtrl->getScrollCtrlVec();
     for( auto iter : scrollCtrlVec )
-        iter->SmartCreate();
-
-}   // Execute
-
-
-
-
-
-
-
+        iter->smartCreate();
+}

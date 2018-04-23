@@ -53,13 +53,13 @@ void CFrontPanel::SetMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter )
 void CFrontPanel::InitGame( uint credits )
 {
     if( m_pWinMeter != nullptr )
-        m_pWinMeter->Clear();
+        m_pWinMeter->clear();
     
     if( m_pCreditMeter != nullptr )
-        m_pCreditMeter->Set( credits );
+        m_pCreditMeter->set( credits );
     
     for( auto iter : m_pOtherBtnVec )
-        iter->DisableControl();
+        iter->disableControl();
 
 }   // InitGame
 
@@ -70,10 +70,10 @@ void CFrontPanel::InitGame( uint credits )
 void CFrontPanel::StartBangUp( uint win, uint credits )
 {
     if( m_pWinMeter != nullptr )
-        m_pWinMeter->StartBangUp( win );
+        m_pWinMeter->startBangUp( win );
     
     if( m_pCreditMeter != nullptr )
-        m_pCreditMeter->StartBangUp( credits );
+        m_pCreditMeter->startBangUp( credits );
 
 }   // StartBangUp
 
@@ -86,10 +86,10 @@ bool CFrontPanel::IsBanging()
     bool result(false);
     
     if( m_pWinMeter != nullptr )
-        result |= m_pWinMeter->IsBanging();
+        result |= m_pWinMeter->isBanging();
     
     if( m_pCreditMeter != nullptr )
-        result |= m_pCreditMeter->IsBanging();
+        result |= m_pCreditMeter->isBanging();
     
     return result;
     
@@ -102,10 +102,10 @@ bool CFrontPanel::IsBanging()
 void CFrontPanel::FastBang()
 {
     if( m_pWinMeter != nullptr )
-        m_pWinMeter->FastBang();
+        m_pWinMeter->fastBang();
     
     if( m_pCreditMeter != nullptr )
-        m_pCreditMeter->FastBang();
+        m_pCreditMeter->fastBang();
     
 }   // FastBang
 
@@ -116,9 +116,9 @@ void CFrontPanel::FastBang()
 void CFrontPanel::EnableButtons( bool allowPlay )
 {
     for( auto iter : m_pOtherBtnVec )
-        iter->EnableControl();
+        iter->enableControl();
     
     if( (m_pPlayBtn != nullptr) && allowPlay )
-        m_pPlayBtn->CallSpriteScriptFuncKey( "playReady", true );
+        m_pPlayBtn->callSpriteScriptFuncKey( "playReady", true );
 
 }   // EnableButtons

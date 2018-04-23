@@ -31,28 +31,26 @@ CUISubControl::CUISubControl( const std::string & group ) :
     m_respondsToSelectMsg(false)
 {
     m_type = NUIControl::ECT_SUB_CONTROL;
-
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CUISubControl::~CUISubControl()
 {
     NDelFunc::DeleteVectorPointers( m_pControlNodeVec );
     NDelFunc::DeleteVectorPointers( m_pSubControlVec );
-
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
 ************************************************************************/
-void CUISubControl::LoadControlFromNode( const XMLNode & node )
+void CUISubControl::loadControlFromNode( const XMLNode & node )
 {
     // Have the parent load it's stuff
-    CUIControl::LoadControlFromNode( node );
+    CUIControl::loadControlFromNode( node );
 
     // Get the sub-control settings
     XMLNode subControlSettingsNode = node.getChildNode( "subControlSettings" );
@@ -75,10 +73,10 @@ void CUISubControl::LoadControlFromNode( const XMLNode & node )
             XMLNode controlNode = controlListNode.getChildNode( "control", i );
 
             // The pointer is placed within a vector for all controls
-            m_pSubControlVec.push_back( NUIControlFactory::Create( controlNode, GetGroup() ) );
+            m_pSubControlVec.push_back( NUIControlFactory::Create( controlNode, getGroup() ) );
 
             // Get the control name
-            const std::string controlName = m_pSubControlVec.back()->GetName();
+            const std::string controlName = m_pSubControlVec.back()->getName();
 
             // Does this control have a name then create a node and add it to the map
             if( !controlName.empty() )
@@ -98,46 +96,43 @@ void CUISubControl::LoadControlFromNode( const XMLNode & node )
                 XMLNode controlNode = controlListNode.getChildNode( "control", i );
 
                 // Find the reference nodes
-                FindNodes( controlNode, i, navNodeMap );
+                findNodes( controlNode, i, navNodeMap );
             }
         }
     }
-
-}	// LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Init the control
 ************************************************************************/
-void CUISubControl::Init()
+void CUISubControl::init()
 {
-    CUIControl::Init();
-    
+    CUIControl::init();
+
     // Init all controls
     for( auto iter : m_pSubControlVec )
-        iter->Init();
-    
-}   // Init
+        iter->init();
+}
 
 
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CUISubControl::CleanUp()
+void CUISubControl::cleanUp()
 {
-    CUIControl::CleanUp();
-    
+    CUIControl::cleanUp();
+
     // Init all controls
     for( auto iter : m_pSubControlVec )
-        iter->CleanUp();
-    
-}   // CleanUp
+        iter->cleanUp();
+}
 
 
 /************************************************************************
 *    desc:  Find the reference nodes
 ************************************************************************/
-void CUISubControl::FindNodes(
+void CUISubControl::findNodes(
     const XMLNode & node,
     int nodeIndex,
     NavHelperMap & navNodeMap )
@@ -145,19 +140,18 @@ void CUISubControl::FindNodes(
     const XMLNode navNode = node.getChildNode( "navigate" );
     if( !navNode.isEmpty() )
     {
-        SetNodes( navNode, nodeIndex, "up", CUIControlNavNode::ENAV_NODE_UP, navNodeMap );
-        SetNodes( navNode, nodeIndex, "down", CUIControlNavNode::ENAV_NODE_DOWN, navNodeMap );
-        SetNodes( navNode, nodeIndex, "left", CUIControlNavNode::ENAV_NODE_LEFT, navNodeMap );
-        SetNodes( navNode, nodeIndex, "right", CUIControlNavNode::ENAV_NODE_RIGHT, navNodeMap );
+        setNodes( navNode, nodeIndex, "up", CUIControlNavNode::ENAV_NODE_UP, navNodeMap );
+        setNodes( navNode, nodeIndex, "down", CUIControlNavNode::ENAV_NODE_DOWN, navNodeMap );
+        setNodes( navNode, nodeIndex, "left", CUIControlNavNode::ENAV_NODE_LEFT, navNodeMap );
+        setNodes( navNode, nodeIndex, "right", CUIControlNavNode::ENAV_NODE_RIGHT, navNodeMap );
     }
-
-}   // FindNodes
+}
 
 
 /************************************************************************
 *    desc:  Find the reference nodes
 ************************************************************************/
-void CUISubControl::SetNodes(
+void CUISubControl::setNodes(
     const XMLNode & node,
     int nodeIndex,
     std::string attr,
@@ -170,7 +164,7 @@ void CUISubControl::SetNodes(
         auto iter = navNodeMap.find( name );
         if( iter != navNodeMap.end() )
         {
-            m_pControlNodeVec[nodeIndex]->SetNode( navNode, iter->second );
+            m_pControlNodeVec[nodeIndex]->setNode( navNode, iter->second );
         }
         else
         {
@@ -179,23 +173,21 @@ void CUISubControl::SetNodes(
                     % name % __FUNCTION__ % __LINE__ ));
         }
     }
-
-}   // SetNodes
+}
 
 
 /************************************************************************
 *    desc:  Update the control
 ************************************************************************/
-void CUISubControl::Update()
+void CUISubControl::update()
 {
     // Call the parent
-    CUIControl::Update();
+    CUIControl::update();
 
     // Update all controls
     for( auto iter : m_pSubControlVec )
-        iter->Update();
-
-}   // Update
+        iter->update();
+}
 
 
 /************************************************************************
@@ -205,59 +197,57 @@ void CUISubControl::transform( const CObject2D & object )
 {
     // Call the parent
     CUIControl::transform( object );
-    
+
     // Update all controls
     for( auto iter : m_pSubControlVec )
         iter->transform( *this );
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Render the sub control
 ************************************************************************/
-void CUISubControl::Render( const CMatrix & matrix )
+void CUISubControl::render( const CMatrix & matrix )
 {
     // Call the parent
-    CUIControl::Render( matrix );
+    CUIControl::render( matrix );
 
     for( auto iter : m_pSubControlVec )
-        iter->Render( matrix );
-
-}   // Render
+        iter->render( matrix );
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CUISubControl::HandleEvent( const SDL_Event & rEvent )
+void CUISubControl::handleEvent( const SDL_Event & rEvent )
 {
     // Call the parent
-    CUIControl::HandleEvent( rEvent );
+    CUIControl::handleEvent( rEvent );
 
     for( auto iter : m_pSubControlVec )
-        iter->HandleEvent( rEvent );
+        iter->handleEvent( rEvent );
 
-    if( IsActive() )
+    if( isActive() )
     {
         if( (rEvent.type >= NMenu::EGE_MENU_UP_ACTION) &&
             (rEvent.type <= NMenu::EGE_MENU_RIGHT_ACTION) )
         {
             if( rEvent.type == NMenu::EGE_MENU_UP_ACTION )
             {
-                OnUpAction( rEvent );
+                onUpAction( rEvent );
             }
             else if( rEvent.type == NMenu::EGE_MENU_DOWN_ACTION )
             {
-                OnDownAction( rEvent );
+                onDownAction( rEvent );
             }
             if( rEvent.type == NMenu::EGE_MENU_LEFT_ACTION )
             {
-                OnLeftAction( rEvent );
+                onLeftAction( rEvent );
             }
             else if( rEvent.type == NMenu::EGE_MENU_RIGHT_ACTION )
             {
-                OnRightAction( rEvent );
+                onRightAction( rEvent );
             }
         }
         else if( (rEvent.type >= NMenu::EGE_MENU_SCROLL_UP) &&
@@ -265,262 +255,245 @@ void CUISubControl::HandleEvent( const SDL_Event & rEvent )
         {
             if( rEvent.type == NMenu::EGE_MENU_SCROLL_UP )
             {
-                OnUpScroll( rEvent );
+                onUpScroll( rEvent );
             }
             else if( rEvent.type == NMenu::EGE_MENU_SCROLL_DOWN )
             {
-                OnDownScroll( rEvent );
+                onDownScroll( rEvent );
             }
             else if( rEvent.type == NMenu::EGE_MENU_SCROLL_LEFT )
             {
-                OnLeftScroll( rEvent );
+                onLeftScroll( rEvent );
             }
             else if( rEvent.type == NMenu::EGE_MENU_SCROLL_RIGHT )
             {
-                OnRightScroll( rEvent );
+                onRightScroll( rEvent );
             }
         }
         else if( rEvent.type == NMenu::EGE_MENU_TAB_LEFT )
         {
-            OnTabLeft( rEvent );
+            onTabLeft( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_TAB_RIGHT )
         {
-            OnTabRight( rEvent );
+            onTabRight( rEvent );
         }
     }
-
-}   // HandleEvent
+}
 
 
 /************************************************************************
 *    desc:  Handle OnUpAction message
 ************************************************************************/
-void CUISubControl::OnUpAction( const SDL_Event & rEvent )
+void CUISubControl::onUpAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_UP );
-
-}   // OnUpAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_UP );
+}
 
 /************************************************************************
 *    desc:  Handle OnMenuDown message
 ************************************************************************/
-void CUISubControl::OnDownAction( const SDL_Event & rEvent )
+void CUISubControl::onDownAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
-
-}   // OnUpAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
+}
 
 /************************************************************************
 *    desc:  Handle OnMenuLeft message
 ************************************************************************/
-void CUISubControl::OnLeftAction( const SDL_Event & rEvent )
+void CUISubControl::onLeftAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
-
-}   // OnLeftAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightAction message
 ************************************************************************/
-void CUISubControl::OnRightAction( const SDL_Event & rEvent )
+void CUISubControl::onRightAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
-
-}   // OnRightAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
+}
 
 /************************************************************************
 *    desc:  Handle OnUpScroll message
 ************************************************************************/
-void CUISubControl::OnUpScroll( const SDL_Event & rEvent )
+void CUISubControl::onUpScroll( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_UP );
-
-}   // OnUpScroll
+    navigateMenu( CUIControlNavNode::ENAV_NODE_UP );
+}
 
 /************************************************************************
 *    desc:  Handle OnUpScroll message
 ************************************************************************/
-void CUISubControl::OnDownScroll( const SDL_Event & rEvent )
+void CUISubControl::onDownScroll( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
-
-}   // OnDownScroll
+    navigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightScroll message
 ************************************************************************/
-void CUISubControl::OnLeftScroll( const SDL_Event & rEvent )
+void CUISubControl::onLeftScroll( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
-
-}   // OnLeftScrol
+    navigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightScroll message
 ************************************************************************/
-void CUISubControl::OnRightScroll( const SDL_Event & rEvent )
+void CUISubControl::onRightScroll( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
-
-}   // OnRightScroll
+    navigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
+}
 
 /************************************************************************
 *    desc:  Handle OnTabLeft message
 ************************************************************************/
-void CUISubControl::OnTabLeft( const SDL_Event & rEvent )
+void CUISubControl::onTabLeft( const SDL_Event & rEvent )
 {
     // Do nothing
-    
-}   // OnTabLeft
+}
 
 /************************************************************************
 *    desc:  Handle OnTabRight message
 ************************************************************************/
-void CUISubControl::OnTabRight( const SDL_Event & rEvent )
+void CUISubControl::onTabRight( const SDL_Event & rEvent )
 {
     // Do nothing
-    
-}   // OnTabRight
+}
 
 
 /************************************************************************
 *    desc:  Navigate the menu. Find the next control node that isn't
 *           disabled and make it the active control node
 ************************************************************************/
-void CUISubControl::NavigateMenu( CUIControlNavNode::ENavNode navNode )
+void CUISubControl::navigateMenu( CUIControlNavNode::ENavNode navNode )
 {
     if( m_pActiveNode != nullptr )
     {
         CUIControlNavNode * pNavNode = m_pActiveNode;
-        
+
         do
         {
-            pNavNode = pNavNode->GetNode( navNode );
-            
+            pNavNode = pNavNode->getNode( navNode );
+
             if( pNavNode == nullptr )
             {
                 break;
             }
-            else if( !m_pActiveNode->GetControl()->IsDisabled() )
+            else if( !m_pActiveNode->getControl()->isDisabled() )
             {
                 m_pActiveNode = pNavNode;
 
-                NGenFunc::DispatchEvent( 
+                NGenFunc::DispatchEvent(
                     NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
                     NUIControl::ECS_ACTIVE,
-                    pNavNode->GetControl() );
+                    pNavNode->getControl() );
 
                 break;
             }
         }
         while( true );
     }
-
-}   // NavigateMenu
+}
 
 
 /************************************************************************
 *    desc:  Handle OnStateChange message
 ************************************************************************/
-void CUISubControl::OnStateChange( const SDL_Event & rEvent )
+void CUISubControl::onStateChange( const SDL_Event & rEvent )
 {
     if( m_respondsToSelectMsg )
     {
-        CUIControl::OnStateChange( rEvent );
+        CUIControl::onStateChange( rEvent );
     }
     else
     {
         NUIControl::EControlState state = NUIControl::EControlState(rEvent.user.code);
 
-        CUIControl * pCtrl = FindSubControl( rEvent.user.data1 );
+        CUIControl * pCtrl = findSubControl( rEvent.user.data1 );
 
         // Restart the active state of the sub control if something
         // changed in the child controls or their children controls
         if( (state == NUIControl::ECS_ACTIVE) && (pCtrl != nullptr) )
         {
-            if( pCtrl->GetState() != state )
+            if( pCtrl->getState() != state )
             {
-                SetState(state, true);
+                setState(state, true);
 
-                RecycleContext();
+                recycleContext();
 
-                SetDisplayState();
+                setDisplayState();
             }
         }
         // The sub control doesn't respond to selected message
         else if( state < NUIControl::ECS_SELECTED )
-            CUIControl::OnStateChange( rEvent );
+            CUIControl::onStateChange( rEvent );
     }
-
-}   // OnStateChange
+}
 
 
 /************************************************************************
 *    desc:  Reset and recycle the contexts
 ************************************************************************/
-void CUISubControl::Reset( bool complete )
+void CUISubControl::reset( bool complete )
 {
-    CUIControl::Reset( complete );
+    CUIControl::reset( complete );
 
     for( auto iter : m_pSubControlVec )
-        iter->Reset( complete );
-
-}   // Reset
+        iter->reset( complete );
+}
 
 
 /************************************************************************
 *    desc:  Handle the mouse move
 ************************************************************************/
-bool CUISubControl::OnMouseMove( const SDL_Event & rEvent )
+bool CUISubControl::onMouseMove( const SDL_Event & rEvent )
 {
-    bool result = CUIControl::OnMouseMove( rEvent );
+    bool result = CUIControl::onMouseMove( rEvent );
 
-    bool found = OnSubControlMouseMove( rEvent );
+    bool found = onSubControlMouseMove( rEvent );
 
     // If the sub control is not found, deactivate them
     if( result && !found )
-        DeactivateSubControl();
+        deactivateSubControl();
 
     return result || found;
-
-}   // HandleMouseMove
+}
 
 
 /************************************************************************
 *    desc:  Handle the sub control mouse move
 ************************************************************************/
-bool CUISubControl::OnSubControlMouseMove( const SDL_Event & rEvent )
+bool CUISubControl::onSubControlMouseMove( const SDL_Event & rEvent )
 {
     bool result(false);
-    
+
     for( size_t i = 0; i < m_pSubControlVec.size() && !result; ++i )
-        result = m_pSubControlVec[i]->OnMouseMove( rEvent );
+        result = m_pSubControlVec[i]->onMouseMove( rEvent );
 
     return result;
-
-}   // HandleSubControlMouseMove
+}
 
 
 /************************************************************************
 *    desc:  Handle the select action
 ************************************************************************/
-bool CUISubControl::HandleSelectAction( const CSelectMsgCracker & msgCracker )
+bool CUISubControl::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
     if( m_respondsToSelectMsg )
     {
-        return CUIControl::HandleSelectAction( msgCracker );
+        return CUIControl::handleSelectAction( msgCracker );
     }
     else
     {
         for( auto iter : m_pSubControlVec )
-            if( iter->HandleSelectAction( msgCracker ) )
+            if( iter->handleSelectAction( msgCracker ) )
                 return true;
     }
 
     return false;
-
-}   // HandleSelectAction
+}
 
 
 /************************************************************************
@@ -528,27 +501,25 @@ bool CUISubControl::HandleSelectAction( const CSelectMsgCracker & msgCracker )
 *
 *    NOTE: This function is mainly for sub controls
 ************************************************************************/
-CUIControl * CUISubControl::FindControl( const std::string & name )
+CUIControl * CUISubControl::findControl( const std::string & name )
 {
-    CUIControl * pCtrl = CUIControl::FindControl( name );
+    CUIControl * pCtrl = CUIControl::findControl( name );
 
     if( pCtrl == nullptr )
-        pCtrl = FindSubControl( name );
+        pCtrl = findSubControl( name );
 
     return pCtrl;
+}
 
-}   // FindControl
-
-CUIControl * CUISubControl::FindControl( void * pVoid )
+CUIControl * CUISubControl::findControl( void * pVoid )
 {
-    CUIControl * pCtrl = CUIControl::FindControl( pVoid );
+    CUIControl * pCtrl = CUIControl::findControl( pVoid );
 
     if( pCtrl == nullptr )
-        pCtrl = FindSubControl( pVoid );
+        pCtrl = findSubControl( pVoid );
 
     return pCtrl;
-
-}   // FindControl
+}
 
 
 /************************************************************************
@@ -556,37 +527,35 @@ CUIControl * CUISubControl::FindControl( void * pVoid )
 *
 *    NOTE: This function is mainly for sub controls
 ************************************************************************/
-CUIControl * CUISubControl::FindSubControl( const std::string & name )
+CUIControl * CUISubControl::findSubControl( const std::string & name )
 {
     CUIControl * pCtrl( nullptr );
-    
+
     for( auto iter : m_pSubControlVec )
-        if( (pCtrl = iter->FindControl( name )) != nullptr )
+        if( (pCtrl = iter->findControl( name )) != nullptr )
             break;
 
     return pCtrl;
+}
 
-}   // FindSubControl
-
-CUIControl * CUISubControl::FindSubControl( void * pVoid )
+CUIControl * CUISubControl::findSubControl( void * pVoid )
 {
     CUIControl * pCtrl( nullptr );
-    
+
     for( auto iter : m_pSubControlVec )
-        if( (pCtrl = iter->FindControl( pVoid )) != nullptr )
+        if( (pCtrl = iter->findControl( pVoid )) != nullptr )
             break;
 
     return pCtrl;
-
-}   // FindSubControl
+}
 
 
 /************************************************************************
 *    desc:  Get the sub control via index
-*  
+*
 *    ret:	CUIControl &
 ************************************************************************/
-CUIControl * CUISubControl::GetSubControl( uint index )
+CUIControl * CUISubControl::getSubControl( uint index )
 {
     if( index >= m_pSubControlVec.size() )
         throw NExcept::CCriticalException("Index out of range",
@@ -594,31 +563,30 @@ CUIControl * CUISubControl::GetSubControl( uint index )
                 % index % m_pSubControlVec.size() % __FUNCTION__ % __LINE__ ));
 
     return m_pSubControlVec.at(index);
-
-}   // GetSubControl
+}
 
 
 /************************************************************************
 *    desc: Set the first inactive control to be active
 *    NOTE: This is mainly here to be virtual for sub controls
 ************************************************************************/
-bool CUISubControl::ActivateFirstInactiveControl()
+bool CUISubControl::activateFirstInactiveControl()
 {
-    if( CUIControl::ActivateFirstInactiveControl() )
+    if( CUIControl::activateFirstInactiveControl() )
     {
         bool found(false);
-        
+
         for( auto iter : m_pControlNodeVec )
         {
-            if( !found && iter->GetControl()->ActivateFirstInactiveControl() )
+            if( !found && iter->getControl()->activateFirstInactiveControl() )
             {
                 m_pActiveNode = iter;
-                
+
                 found = true;
             }
             else
             {
-                iter->GetControl()->DeactivateControl();
+                iter->getControl()->deactivateControl();
             }
         }
 
@@ -626,100 +594,91 @@ bool CUISubControl::ActivateFirstInactiveControl()
     }
 
     return false;
-
-}   // ActivateFirstInactiveControl
+}
 
 
 /************************************************************************
 *    desc:  Deactivate the control
 ************************************************************************/
-void CUISubControl::DeactivateControl()
+void CUISubControl::deactivateControl()
 {
-    CUIControl::DeactivateControl();
-    
-    DeactivateSubControl();
+    CUIControl::deactivateControl();
 
-}   // DeactivateControl
+    deactivateSubControl();
+}
 
 
 /************************************************************************
 *    desc:  Deactivate the sub control
 ************************************************************************/
-void CUISubControl::DeactivateSubControl()
+void CUISubControl::deactivateSubControl()
 {
     for( auto iter : m_pSubControlVec )
-        iter->DeactivateControl();
-
-}   // DeactivateSubControl
+        iter->deactivateControl();
+}
 
 
 /************************************************************************
 *    desc:  Check if control is a sub control
 ************************************************************************/
-bool CUISubControl::IsSubControl() const
+bool CUISubControl::isSubControl() const
 {
     return true;
-
-}   // IsSubControl
-
+}
 
 
 /************************************************************************
 *    desc:  Disable the control
 ************************************************************************/
-void CUISubControl::DisableControl()
+void CUISubControl::disableControl()
 {
-    CUIControl::DisableControl();
-    
-    for( auto iter : m_pSubControlVec )
-        iter->DisableControl();
+    CUIControl::disableControl();
 
-}   // DisableControl
+    for( auto iter : m_pSubControlVec )
+        iter->disableControl();
+}
 
 
 /************************************************************************
 *    desc:  Enable the control to the inactive state
 ************************************************************************/
-void CUISubControl::EnableControl()
+void CUISubControl::enableControl()
 {
-    CUIControl::EnableControl();
-    
-    for( auto iter : m_pSubControlVec )
-        iter->EnableControl();
+    CUIControl::enableControl();
 
-}   // EnableControl
+    for( auto iter : m_pSubControlVec )
+        iter->enableControl();
+}
 
 
 /************************************************************************
 *    desc:  Set the alpha value of this control
 ************************************************************************/
-void CUISubControl::SetAlpha( float alpha )
+void CUISubControl::setAlpha( float alpha )
 {
-    CUIControl::SetAlpha( alpha );
-            
-    for( auto iter : m_pSubControlVec )
-        iter->SetAlpha( alpha );
+    CUIControl::setAlpha( alpha );
 
-}   // SetAlpha
+    for( auto iter : m_pSubControlVec )
+        iter->setAlpha( alpha );
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the active control
 *           This is mostly needed for sub controls
 ************************************************************************/
-CUIControl * CUISubControl::GetPtrToActiveControl()
+CUIControl * CUISubControl::getPtrToActiveControl()
 {
     CUIControl * pResult(nullptr);
-    
+
     for( auto iter : m_pSubControlVec )
     {
-        if( iter->GetState() > NUIControl::ECS_INACTIVE )
+        if( iter->getState() > NUIControl::ECS_INACTIVE )
         {
-            pResult = iter->GetPtrToActiveControl();
+            pResult = iter->getPtrToActiveControl();
             break;
         }
     }
-    
+
     return pResult;
-    
-}   // GetPtrToActiveControl
+} 

@@ -170,7 +170,7 @@ void CStartUpState::AssetLoad()
     CMenuManager::Instance().LoadListTable( "data/objects/2d/menu/menuListTable.lst" );
     
     // Load the menu action list
-    CMenuManager::Instance().LoadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
+    CMenuManager::Instance().loadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
     
     // Load sound resources for the menu
     CSoundMgr::Instance().LoadListTable( "data/sound/soundListTable.lst" );
@@ -205,7 +205,7 @@ void CStartUpState::AssetLoad()
     CScriptManager::Instance().LoadGroup("(menu)");
 
     // Create the menu system
-    CMenuManager::Instance().LoadGroup("(menu)");
+    CMenuManager::Instance().loadGroup("(menu)");
     
     // Do the state specific load
     NTitleScreenState::ObjectDataLoad();

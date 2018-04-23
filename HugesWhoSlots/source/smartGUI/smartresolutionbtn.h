@@ -25,19 +25,19 @@ public:
     CSmartResolutionBtn( CUIControl * pUIControl );
 
     // Called when the control is created
-    void Create();
+    void create() override;
 
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Called when the control is executed
-    void Execute();
+    void execute() override;
 
     // Set the resolution change
-    void SetResolutionChange();
+    void setResolutionChange();
 
     // Was the resolution changed
-    bool WasResolutionChanged();
+    bool wasResolutionChanged();
 
 private:
 

@@ -5,14 +5,6 @@ add_executable(
     game/game.cpp
     game/main.cpp
     smartGUI/smartconfirmbtn.cpp
-    smartGUI/smartresolutionbtn.cpp
-    smartGUI/smartsettingsmenubtn.cpp
-    smartGUI/smartapplysettingsbtn.cpp
-    smartGUI/smartfullscreencheckbox.cpp
-    smartGUI/smartvsynccheckbox.cpp
-    smartGUI/smartdeadzoneslider.cpp
-    smartGUI/smartkeybindbtn.cpp
-    smartGUI/smartresetkeybind.cpp
     state/commonstate.cpp
     state/startupstate.cpp
     state/titlescreenstate.cpp

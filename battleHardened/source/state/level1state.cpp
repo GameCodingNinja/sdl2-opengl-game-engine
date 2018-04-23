@@ -41,8 +41,8 @@ void CLevel1State::Init()
     CCommonState::Init();
     
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().Allow();
-    CMenuManager::Instance().ActivateTree("pause_tree");
+    CMenuManager::Instance().allow();
+    CMenuManager::Instance().activateTree("pause_tree");
     
     // Reset the camera
     //CCamera::Instance().SetPos( CStageMgr::Instance().GetDefaultCameraPos().GetPos() );
@@ -70,7 +70,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
 {
     CCommonState::HandleEvent( rEvent );
     
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
     {
         m_pPlayerShip->handleEvent( rEvent );
     }
@@ -123,7 +123,7 @@ void CLevel1State::MiscProcess()
 ****************************************************************************/
 void CLevel1State::Physics()
 {
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
     {
 
     }
@@ -140,7 +140,7 @@ void CLevel1State::Update()
     
     m_scriptComponent.Update();
 
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
     {
         //CCamera::Instance().IncPos( CPoint<float>( -0.05f * CHighResTimer::Instance().GetElapsedTime(), 0.f ) );
         CSpriteStrategyMgr::Instance().Update();

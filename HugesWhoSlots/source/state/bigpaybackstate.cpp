@@ -62,22 +62,22 @@ void CBigPayBackState::Init()
     CCommonState::Init();
     
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().Allow();
-    CMenuManager::Instance().ActivateTree( "menu_tree");
-    CMenuManager::Instance().ActivateTree( "confirmation_tree");
-    CMenuManager::Instance().ActivateTree( "buy_tree");
-    CMenuManager::Instance().ActivateTree( "base_game_tree");
+    CMenuManager::Instance().allow();
+    CMenuManager::Instance().activateTree( "menu_tree");
+    CMenuManager::Instance().activateTree( "confirmation_tree");
+    CMenuManager::Instance().activateTree( "buy_tree");
+    CMenuManager::Instance().activateTree( "base_game_tree");
     
     // Hook the Play button to the reel group
-    CUIButton & rPlayBtn = CMenuManager::Instance().GetMenuControl<CUIButton>( "base_game_menu", "play_btn" );
-    rPlayBtn.Connect_ExecutionAction( boost::bind(&CSlotGame::PlayGame, &m_slotGame, _1) );
+    CUIButton & rPlayBtn = CMenuManager::Instance().getMenuControl<CUIButton>( "base_game_menu", "play_btn" );
+    rPlayBtn.connect_executionAction( boost::bind(&CSlotGame::PlayGame, &m_slotGame, _1) );
 
     // Hook the total bet call back function to the total bet meter
-    auto & rTotalBetMeter = CMenuManager::Instance().GetMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
-    auto & rTotalBetDecBtn = *rTotalBetMeter.FindSubControl( std::string("total_bet_dec_btn") );
-    auto & rTotalBetIncBtn = *rTotalBetMeter.FindSubControl( std::string("total_bet_inc_btn") );
-    rTotalBetDecBtn.Connect_ExecutionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
-    rTotalBetIncBtn.Connect_ExecutionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
+    auto & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
+    auto & rTotalBetDecBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_dec_btn") );
+    auto & rTotalBetIncBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_inc_btn") );
+    rTotalBetDecBtn.connect_executionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
+    rTotalBetIncBtn.connect_executionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
     
     // Create a play result
     auto & rPlayResult = m_slotGame.CreatePlayResult();
@@ -97,15 +97,15 @@ void CBigPayBackState::Init()
     
     // Init the front panel
     std::vector<CUIControl *> btnVec = {
-        &CMenuManager::Instance().GetMenuControl<CUIControl>( "base_game_menu", "home_btn" ),
-        &CMenuManager::Instance().GetMenuControl<CUIControl>( "base_game_menu", "menu_btn" ),
-        &CMenuManager::Instance().GetMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
+        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "home_btn" ),
+        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "menu_btn" ),
+        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
         &rTotalBetMeter };
     m_frontPanel.SetButtons( &rPlayBtn, btnVec );
     
     m_frontPanel.SetMeters(
-        &CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
-        &CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
+        &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
+        &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
     
     // Add slot game component
     m_slotGame.SetFrontPanel( &m_frontPanel );
@@ -114,7 +114,7 @@ void CBigPayBackState::Init()
     m_pig.setPos( CPoint<float>(-875,-200,0) );
     
     // Init the credit meter
-    CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).Set( CBetMgr::Instance().GetCredits()  );
+    CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().GetCredits()  );
     
     // Clear any preloaded XML files
     CXMLPreloader::Instance().Clear();
@@ -159,8 +159,8 @@ void CBigPayBackState::AllowStopSounds( bool allow )
 ****************************************************************************/
 void CBigPayBackState::TotalBetCallBack(CUIControl *)
 {
-    const CUIButtonList & rTotalBetMeter = CMenuManager::Instance().GetMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
-    CBetMgr::Instance().SetLineBet( rTotalBetMeter.GetActiveIndex() + 1 );
+    const CUIButtonList & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
+    CBetMgr::Instance().SetLineBet( rTotalBetMeter.getActiveIndex() + 1 );
     
 }   // TotalBetCallBack
 
@@ -214,7 +214,7 @@ void CBigPayBackState::Update()
     
     m_baseGameMusic.Update();
     
-    if( !CMenuManager::Instance().IsMenuActive() )
+    if( !CMenuManager::Instance().isMenuActive() )
         m_slotGame.Update();
 
 }   // Update
@@ -227,7 +227,7 @@ void CBigPayBackState::Transform()
 {
     CCommonState::Transform();
 
-    CMenuManager::Instance().TransformInterface();
+    CMenuManager::Instance().transformInterface();
     m_background.transform();
     m_pig.transform();
     m_slotGame.Transform();
@@ -273,7 +273,7 @@ namespace NBigPayBack
     void Load()
     {
         // Load the state specific menu group
-        CMenuManager::Instance().LoadGroup("(big_pay_back)", CMenuManager::DONT_INIT_GROUP);
+        CMenuManager::Instance().loadGroup("(big_pay_back)", CMenuManager::DONT_INIT_GROUP);
         
         // Load sound resources for the game
         CSoundMgr::Instance().LoadGroup("(big_pay_back)");
@@ -303,7 +303,7 @@ namespace NBigPayBack
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
-        CMenuManager::Instance().InitGroup("(big_pay_back)");
+        CMenuManager::Instance().initGroup("(big_pay_back)");
     }
 
 
@@ -313,7 +313,7 @@ namespace NBigPayBack
     ****************************************************************************/
     void CriticalUnload()
     {
-        CMenuManager::Instance().CleanUpGroup("(big_pay_back)");
+        CMenuManager::Instance().cleanUpGroup("(big_pay_back)");
         CObjectDataMgr::Instance().FreeGroup2D( "(big_pay_back)" );
         
         // Unload the slot group stuff
@@ -323,7 +323,7 @@ namespace NBigPayBack
     void Unload()
     {
         // Unload the state specific menu group
-        CMenuManager::Instance().FreeGroup("(big_pay_back)");
+        CMenuManager::Instance().freeGroup("(big_pay_back)");
         
         // Unload the slot group stuff
         CSlotMathMgr::Instance().Clear();

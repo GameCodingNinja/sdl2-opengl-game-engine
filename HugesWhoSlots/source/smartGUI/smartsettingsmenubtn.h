@@ -21,10 +21,10 @@ public:
 protected:
 
     // Enable/disable the apply btn
-    void EnableDisableApplyBtn();
+    void enableDisableApplyBtn();
 
     // Were the buttons in the settings menu changed
-    bool WasSettingsButtonsChanged();
+    bool wasSettingsButtonsChanged();
 
 };
 

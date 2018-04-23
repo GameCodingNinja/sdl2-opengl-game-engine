@@ -15,15 +15,12 @@
 // Boost lib dependencies
 #include <boost/format.hpp>
 
-// Standard lib dependencies
-
-
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
 CLightLst::CLightLst()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -31,13 +28,13 @@ CLightLst::CLightLst()
 ************************************************************************/
 CLightLst::~CLightLst()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Add a light
 ************************************************************************/
-void CLightLst::Add(
+void CLightLst::add(
     const std::string & name,
     NDefs::ELightType lightType,
     const CColor & color,
@@ -54,19 +51,16 @@ void CLightLst::Add(
             boost::str( boost::format("Duplicate light name id (%s).\n\n%s\nLine: %s")
                 % name % __FUNCTION__ % __LINE__ ));
     }
-
-}   // Add
+}
 
 
 /************************************************************************
 *    desc:  Turn the light on or off
 ************************************************************************/
-void CLightLst::Enable( const std::string & name, bool enable )
+void CLightLst::enable( const std::string & name, bool enable )
 {
     auto iter = m_lightMap.find(name);
 
     if( iter != m_lightMap.end() )
-        iter->second.Enable( enable );
-
-}   // Enable
-
+        iter->second.enable( enable );
+}

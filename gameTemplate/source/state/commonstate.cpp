@@ -46,7 +46,7 @@ CCommonState::~CCommonState()
 void CCommonState::HandleEvent( const SDL_Event & rEvent )
 {
     // Have the menu manager handle events
-    CMenuManager::Instance().HandleEvent( rEvent );
+    CMenuManager::Instance().handleEvent( rEvent );
     
     // Check for the "game change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
@@ -54,7 +54,7 @@ void CCommonState::HandleEvent( const SDL_Event & rEvent )
         if( rEvent.user.code == NMenu::ETC_BEGIN )
         {
             // Block all message processing in the menu manager
-            CMenuManager::Instance().Allow( false );
+            CMenuManager::Instance().allow( false );
             
             // Set the message to load and unload the states
             m_stateMessage.SetMsg( GetLoadState( rEvent.user.data1 ), m_gameState );
@@ -62,7 +62,7 @@ void CCommonState::HandleEvent( const SDL_Event & rEvent )
         else if( rEvent.user.code == NMenu::ETC_END )
         {
             // Clear out all the trees
-            CMenuManager::Instance().ClearActiveTrees();
+            CMenuManager::Instance().clearActiveTrees();
             
             // Set the flag to change the state
             m_changeState = true;
@@ -78,7 +78,7 @@ void CCommonState::HandleEvent( const SDL_Event & rEvent )
 void CCommonState::Update()
 {
     // Update the menus
-    CMenuManager::Instance().Update();
+    CMenuManager::Instance().update();
 
 }   // Update
 
@@ -89,7 +89,7 @@ void CCommonState::Update()
 void CCommonState::Transform()
 {
     // Transform the menus
-    CMenuManager::Instance().TransformMenu();
+    CMenuManager::Instance().transformMenu();
 
 }   // Transform
 
@@ -99,7 +99,7 @@ void CCommonState::Transform()
 ****************************************************************************/
 void CCommonState::PreRender()
 {
-    CMenuManager::Instance().RenderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -109,7 +109,7 @@ void CCommonState::PreRender()
 ****************************************************************************/
 void CCommonState::PostRender()
 {
-    CMenuManager::Instance().Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PostRender
 

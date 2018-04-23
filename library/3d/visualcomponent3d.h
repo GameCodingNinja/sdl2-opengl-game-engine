@@ -39,17 +39,17 @@ public:
     ~CVisualComponent3D();
 
     // do the render
-    void Render( const CMatrix & matrix, const CMatrix & ropMatrix );
+    void render( const CMatrix & matrix, const CMatrix & ropMatrix );
 
     // Set/Get the color
-    void SetColor( const CColor & color );
-    void SetColor( float r, float g, float b, float a );
-    const CColor & GetColor() const;
-    void SetDefaultColor();
+    void setColor( const CColor & color );
+    void setColor( float r, float g, float b, float a );
+    const CColor & getColor() const;
+    void setDefaultColor();
 
     // Set/Get the alpha
-    void SetAlpha( float alpha );
-    float GetAlpha() const;
+    void setAlpha( float alpha );
+    float getAlpha() const;
 
 private:
 

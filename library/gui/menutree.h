@@ -46,58 +46,58 @@ public:
     ~CMenuTree();
 
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent );
     
     // Activate a menu
-    void ActivateMenu( const std::string & menuName );
+    void activateMenu( const std::string & menuName );
 
     // Update the menu tree
-    void Update();
+    void update();
 
     // Transform the menu tree
-    void Transform();
-    void Transform( const CObject2D & object );
+    void transform();
+    void transform( const CObject2D & object );
 
     // do the render
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
 
     // Is a menu active
-    bool IsActive();
+    bool isActive();
 
     // Does this tee have a root menu
-    bool HasRootMenu();
+    bool hasRootMenu();
 
     // Init the tree for use
-    void Init();
+    void init();
 
     // Get the active menu
-    CMenu & GetActiveMenu();
+    CMenu & getActiveMenu();
 
     // Get the scroll param data
-    CScrollParam & GetScrollParam( int msg );
+    CScrollParam & getScrollParam( int msg );
 
     // Is a menu item active
-    bool IsMenuItemActive();
+    bool isMenuItemActive();
     
     // Is this an interface tree
-    bool IsInterfaceTree() const;
+    bool isInterfaceTree() const;
     
     // Get the name of the tree
-    std::string & GetName();
+    std::string & getName();
 
 private:
 
     // Transition the menu
-    void TransitionMenu();
+    void transitionMenu();
 
     // Handle message
-    void OnEscape( const SDL_Event & rEvent );
-    void OnToggle( const SDL_Event & rEvent );
-    void OnBack( const SDL_Event & rEvent );
-    void OnToTree( const SDL_Event & rEvent );
-    void OnToMenu( const SDL_Event & rEvent );
-    void OnTransOut( const SDL_Event & rEvent );
-    void OnTransIn( const SDL_Event & rEvent );
+    void onEscape( const SDL_Event & rEvent );
+    void onToggle( const SDL_Event & rEvent );
+    void onBack( const SDL_Event & rEvent );
+    void onToTree( const SDL_Event & rEvent );
+    void onToMenu( const SDL_Event & rEvent );
+    void onTransOut( const SDL_Event & rEvent );
+    void onTransIn( const SDL_Event & rEvent );
 
 private:
     

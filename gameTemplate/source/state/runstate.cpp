@@ -41,8 +41,8 @@ CRunState::CRunState() :
 void CRunState::Init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().Allow();
-    CMenuManager::Instance().ActivateTree("pause_tree");
+    CMenuManager::Instance().allow();
+    CMenuManager::Instance().activateTree("pause_tree");
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -76,7 +76,7 @@ void CRunState::HandleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CRunState::Physics()
 {
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
     {
         m_rPhysicsWorld.FixedTimeStep();
     }
@@ -93,7 +93,7 @@ void CRunState::Update()
     
     m_scriptComponent.Update();
     
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
         CSpriteStrategyMgr::Instance().Update();
 
 }   // Update
@@ -106,7 +106,7 @@ void CRunState::Transform()
 {
     CCommonState::Transform();
     
-    if( !CMenuManager::Instance().IsActive() )
+    if( !CMenuManager::Instance().isActive() )
         CSpriteStrategyMgr::Instance().Transform();
 
 }   // Transform

@@ -30,7 +30,7 @@ CScrollParam::CScrollParam() :
 /************************************************************************
 *    desc:  Load the scroll data from node
 ************************************************************************/
-void CScrollParam::LoadFromNode( const XMLNode & node )
+void CScrollParam::loadFromNode( const XMLNode & node )
 {
     if( !node.isEmpty() )
     {
@@ -56,7 +56,7 @@ void CScrollParam::LoadFromNode( const XMLNode & node )
 /************************************************************************
 *    desc:  Clear out the data
 ************************************************************************/
-bool CScrollParam::CanScroll( int msg )
+bool CScrollParam::canScroll( int msg )
 {
     m_msg = -1;
 
@@ -75,7 +75,7 @@ bool CScrollParam::CanScroll( int msg )
 /************************************************************************
 *    desc:  Clear out the data
 ************************************************************************/
-int CScrollParam::GetStartDelay()
+int CScrollParam::getStartDelay()
 {
     return m_startDelay;
 }
@@ -84,7 +84,7 @@ int CScrollParam::GetStartDelay()
 /************************************************************************
 *    desc:  Clear out the data
 ************************************************************************/
-int CScrollParam::GetScrollDelay()
+int CScrollParam::getScrollDelay()
 {
     return m_scrollDelay;
 }
@@ -93,7 +93,7 @@ int CScrollParam::GetScrollDelay()
 /************************************************************************
 *    desc:  Get the message
 ************************************************************************/
-int CScrollParam::GetMsg()
+int CScrollParam::getMsg()
 {
     return m_msg;
 }

@@ -49,8 +49,8 @@ CLevel1State::CLevel1State() :
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").get<CSpriteData>()),
-        m_rMultiplierLabel(CMenuManager::Instance().GetMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
-        m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
+        m_rMultiplierLabel(CMenuManager::Instance().getMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
+        m_rWinMeter(CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_multiIndexPos(0),
         m_totalWin(0),
         m_multiplier(1),
@@ -83,9 +83,9 @@ CLevel1State::~CLevel1State()
 void CLevel1State::Init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().Allow();
-    CMenuManager::Instance().ActivateTree("pause_tree");
-    CMenuManager::Instance().ActivateTree("base_game_tree");
+    CMenuManager::Instance().allow();
+    CMenuManager::Instance().activateTree("pause_tree");
+    CMenuManager::Instance().activateTree("base_game_tree");
     
     //CMenuManager::Instance().ActivateMenu("pause_tree", "confirmation_menu");
     
@@ -116,7 +116,7 @@ void CLevel1State::Init()
     //m_camera.Transform();
     
     // Since these interface elements don't move only need to transform them once.
-    CMenuManager::Instance().TransformInterface();
+    CMenuManager::Instance().transformInterface();
     
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
@@ -151,7 +151,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     }
     else if( rEvent.type == SDL_MOUSEBUTTONUP)
     {
-        if( !CMenuManager::Instance().IsMenuActive() )
+        if( !CMenuManager::Instance().isMenuActive() )
         {
             auto camera = CCameraMgr::Instance().GetActiveCamera();
             const float ratio = 1.f / camera.getOrthoHeightAspectRatio();
@@ -169,7 +169,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CLevel1State::MiscProcess()
 {
-    if( !CMenuManager::Instance().IsMenuActive() )
+    if( !CMenuManager::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().MiscProcess();
     }
@@ -182,7 +182,7 @@ void CLevel1State::MiscProcess()
 ****************************************************************************/
 void CLevel1State::Physics()
 {
-    if( !CMenuManager::Instance().IsMenuActive() )
+    if( !CMenuManager::Instance().isMenuActive() )
     {
         m_rPhysicsWorld.VariableTimeStep();
     }
@@ -201,7 +201,7 @@ void CLevel1State::Update()
     
     CScriptManager::Instance().Update();
     
-    if( !CMenuManager::Instance().IsMenuActive() )
+    if( !CMenuManager::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().Update();
     }
@@ -230,7 +230,7 @@ void CLevel1State::PreRender()
     
     CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().GetActiveCameraMatrix() );
 
-    CMenuManager::Instance().RenderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -258,7 +258,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
         {
             m_rStrategy.SetToDestroy( STRAWBERRY );
             
-            m_rMultiplierLabel.CreateFontString( std::to_string(++m_multiplier) + "x" );
+            m_rMultiplierLabel.createFontString( std::to_string(++m_multiplier) + "x" );
             
             // Randomly pick the new position of the multiplier
             std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.at(m_multiIndexPos).size()-1);
@@ -304,7 +304,7 @@ void CLevel1State::SayGoodbye(b2Fixture* fixture)
     if( (pSprite->getId() > 1000) && (std::fabs( pSprite->getPos().getX() ) < 720.f) )
     {
         m_totalWin += m_multiplier;
-        m_rWinMeter.StartBangUp( m_totalWin );
+        m_rWinMeter.startBangUp( m_totalWin );
     }
     
 }   // SayGoodbye
@@ -335,7 +335,7 @@ namespace NLevel1State
     void Load()
     {
         // Load the state specific menu group
-        CMenuManager::Instance().LoadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
+        CMenuManager::Instance().loadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
         
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(level1)");
@@ -350,7 +350,7 @@ namespace NLevel1State
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
-        CMenuManager::Instance().InitGroup("(levels)");
+        CMenuManager::Instance().initGroup("(levels)");
         
         CSpriteStrategyMgr::Instance().Init();
     }
@@ -362,7 +362,7 @@ namespace NLevel1State
     ****************************************************************************/
     void CriticalUnload()
     {        
-        CMenuManager::Instance().CleanUpGroup("(levels)");
+        CMenuManager::Instance().cleanUpGroup("(levels)");
         CSpriteStrategyMgr::Instance().CleanUp();
         CObjectDataMgr::Instance().FreeGroup2D( "(level1)" );
         CObjectDataMgr::Instance().FreeGroup2D( "(levels)" );
@@ -371,7 +371,7 @@ namespace NLevel1State
     void Unload()
     {
         // Unload the state specific menu group
-        CMenuManager::Instance().FreeGroup("(levels)");
+        CMenuManager::Instance().freeGroup("(levels)");
         
         // Unload the strategy group stuff
         CSpriteStrategyMgr::Instance().Clear();

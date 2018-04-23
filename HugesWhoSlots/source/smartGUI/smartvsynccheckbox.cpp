@@ -14,7 +14,7 @@
 #include <utilities/genfunc.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartVSyncCheckBox::CSmartVSyncCheckBox( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )
@@ -25,10 +25,10 @@ CSmartVSyncCheckBox::CSmartVSyncCheckBox( CUIControl * pUIControl ) :
 /***************************************************************************
 *    decs:  Handle events
 ****************************************************************************/
-void CSmartVSyncCheckBox::HandleEvent( const SDL_Event & rEvent )
+void CSmartVSyncCheckBox::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
-        (*dynamic_cast<CUICheckBox *>(m_pUIControl)).SetToggleState( CSettings::Instance().GetVSync() );
+        (*dynamic_cast<CUICheckBox *>(m_pUIControl)).setToggleState( CSettings::Instance().GetVSync() );
 
 }   // HandleEvent
 
@@ -36,9 +36,9 @@ void CSmartVSyncCheckBox::HandleEvent( const SDL_Event & rEvent )
 /***************************************************************************
 *    decs:  Called when the control is executed - Enable/disable the apply btn
 ****************************************************************************/
-void CSmartVSyncCheckBox::Execute()
+void CSmartVSyncCheckBox::execute()
 {
-    EnableDisableApplyBtn();
+    enableDisableApplyBtn();
 
 }   // Execute
 

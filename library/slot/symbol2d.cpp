@@ -26,10 +26,10 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
         
         m_spriteDeq.back().setVisible( iter.isVisible() );
         
-        if( m_spriteDeq.back().getVisualComponent().IsFontSprite() )
+        if( m_spriteDeq.back().getVisualComponent().isFontSprite() )
         {
-            m_spriteDeq.back().getVisualComponent().SetFontProperties( iter.getFontData()->m_fontProp );
-            m_spriteDeq.back().getVisualComponent().CreateFontString( iter.getFontData()->m_fontString );
+            m_spriteDeq.back().getVisualComponent().setFontProperties( iter.getFontData()->m_fontProp );
+            m_spriteDeq.back().getVisualComponent().createFontString( iter.getFontData()->m_fontString );
         }
         
         m_spriteDeq.back().copyTransform( &iter );

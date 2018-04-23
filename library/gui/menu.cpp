@@ -41,8 +41,7 @@ CMenu::CMenu( const std::string & name, const std::string & group ) :
 {
     // The menu needs to default hidden
     setVisible(false);
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -55,23 +54,22 @@ CMenu::~CMenu()
 
     NDelFunc::DeleteVectorPointers( m_pControlNodeVec );
     NDelFunc::DeleteVectorPointers( m_pControlVec );
-
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the menu info from file
 ************************************************************************/
-void CMenu::LoadFromXML( const std::string & filePath )
+void CMenu::loadFromXML( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "menu" );
-    
+
     // Init the script functions
-    InitScriptFunctions( mainNode );
+    initScriptFunctions( mainNode );
 
     // Load the scroll data from node
-    m_scrollParam.LoadFromNode( mainNode.getChildNode( "scroll" ) );
+    m_scrollParam.loadFromNode( mainNode.getChildNode( "scroll" ) );
 
     // Get the static sprite groups
     const XMLNode staticSpriteNode = mainNode.getChildNode( "spriteList" );
@@ -82,7 +80,7 @@ void CMenu::LoadFromXML( const std::string & filePath )
             XMLNode spriteNode = staticSpriteNode.getChildNode( "sprite", i );
 
             // Load in the static sprite
-            LoadStaticSpriteFromNode( spriteNode );
+            loadStaticSpriteFromNode( spriteNode );
         }
     }
 
@@ -91,14 +89,14 @@ void CMenu::LoadFromXML( const std::string & filePath )
     if( !staticControlsNode.isEmpty() )
     {
         m_pStaticControlVec.reserve( staticControlsNode.nChildNode() );
-                
+
         for( int i = 0; i < staticControlsNode.nChildNode(); ++i )
         {
             // Get the menu controls
             XMLNode controlNode = staticControlsNode.getChildNode( "control", i );
 
             // Load static controls from an XML node
-            LoadStaticControlFromNode( controlNode );
+            loadStaticControlFromNode( controlNode );
         }
     }
 
@@ -107,14 +105,14 @@ void CMenu::LoadFromXML( const std::string & filePath )
     if( !mouseOnlyMenuControlsNode.isEmpty() )
     {
         m_pMouseOnlyControlVec.reserve( mouseOnlyMenuControlsNode.nChildNode() );
-                
+
         for( int i = 0; i < mouseOnlyMenuControlsNode.nChildNode(); ++i )
         {
             // Get the menu controls
             XMLNode controlNode = mouseOnlyMenuControlsNode.getChildNode( "control", i );
 
             // Load static controls from an XML node
-            LoadMouseOnlyControlFromNode( controlNode );
+            loadMouseOnlyControlFromNode( controlNode );
         }
     }
 
@@ -124,7 +122,7 @@ void CMenu::LoadFromXML( const std::string & filePath )
     {
         // map to help setup the node pointers
         NavHelperMap navNodeMap;
-        
+
         m_pControlVec.reserve( menuControlsNode.nChildNode() );
 
         // Load the controls
@@ -133,7 +131,7 @@ void CMenu::LoadFromXML( const std::string & filePath )
             XMLNode controlNode = menuControlsNode.getChildNode( "control", i );
 
             // Load in the control
-            LoadControlFromNode( controlNode, navNodeMap );
+            loadControlFromNode( controlNode, navNodeMap );
         }
 
         // Map the controls to their respective nodes
@@ -142,18 +140,17 @@ void CMenu::LoadFromXML( const std::string & filePath )
             XMLNode controlNode = menuControlsNode.getChildNode( "control", i );
 
             // Find the reference nodes
-            FindNodes( controlNode, i, navNodeMap );
+            findNodes( controlNode, i, navNodeMap );
         }
     }
-
-}   // LoadFromXML
+}
 
 
 /************************************************************************
 *    desc:  Init the script functions and add them to the map
 *           This function loads the attribute info reguardless of what it is
 ************************************************************************/
-void CMenu::InitScriptFunctions( const XMLNode & node )
+void CMenu::initScriptFunctions( const XMLNode & node )
 {
     // Check for scripting - Add an empty string for scripts not defined
     XMLNode scriptLstNode = node.getChildNode( "scriptLst" );
@@ -162,7 +159,7 @@ void CMenu::InitScriptFunctions( const XMLNode & node )
         for( int i = 0; i < scriptLstNode.nChildNode(); ++i )
         {
             const XMLNode scriptNode = scriptLstNode.getChildNode(i);
-            
+
             // Only the first attribute is used
             const XMLAttribute attribute = scriptNode.getAttribute(0);
             const std::string attrName = attribute.lpszName;
@@ -173,14 +170,13 @@ void CMenu::InitScriptFunctions( const XMLNode & node )
                 m_scriptFunctionMap.emplace( attrName, attrValue );
         }
     }
-    
-}   // InitScriptFunctions
+}
 
 
 /************************************************************************
 *    desc:  Load a static sprite from an XML node
 ************************************************************************/
-void CMenu::LoadStaticSpriteFromNode( const XMLNode & node )
+void CMenu::loadStaticSpriteFromNode( const XMLNode & node )
 {
     // Get the type of object
     std::string objectName = node.getAttribute( "objectName" );
@@ -193,53 +189,50 @@ void CMenu::LoadStaticSpriteFromNode( const XMLNode & node )
 
     // Init the script functions
     m_spriteDeq.back().initScriptFunctions( node );
-
-}   // LoadStaticSpriteFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load static controls from an XML node
 ************************************************************************/
-void CMenu::LoadStaticControlFromNode( XMLNode & node )
+void CMenu::loadStaticControlFromNode( XMLNode & node )
 {
     // New up the control with its respected control type
     m_pStaticControlVec.push_back( NUIControlFactory::Create( node, m_group ) );
 
     // Does this control have a name then add it to the map
-    if( !m_pStaticControlVec.back()->GetName().empty() )
+    if( !m_pStaticControlVec.back()->getName().empty() )
     {
         // Map of menu controls
-        m_pControlMap.emplace( m_pStaticControlVec.back()->GetName(), m_pStaticControlVec.back() );
+        m_pControlMap.emplace( m_pStaticControlVec.back()->getName(), m_pStaticControlVec.back() );
     }
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load mouse only controls from an XML node
 ************************************************************************/
-void CMenu::LoadMouseOnlyControlFromNode( const XMLNode & node )
+void CMenu::loadMouseOnlyControlFromNode( const XMLNode & node )
 {
     // New up the control with its respected control type
     m_pMouseOnlyControlVec.push_back( NUIControlFactory::Create( node, m_group ) );
-    
-    // Does this control have a name then add it to the map
-    if( !m_pMouseOnlyControlVec.back()->GetName().empty() )
-        m_pControlMap.emplace( m_pMouseOnlyControlVec.back()->GetName(), m_pMouseOnlyControlVec.back() );
 
-}   // LoadMouseOnlyControlFromNode
+    // Does this control have a name then add it to the map
+    if( !m_pMouseOnlyControlVec.back()->getName().empty() )
+        m_pControlMap.emplace( m_pMouseOnlyControlVec.back()->getName(), m_pMouseOnlyControlVec.back() );
+}
 
 
 /************************************************************************
 *    desc:  Load a control from an XML node
 ************************************************************************/
-void CMenu::LoadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap )
+void CMenu::loadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap )
 {
     // Add the control to the vector
     m_pControlVec.push_back( NUIControlFactory::Create( node, m_group ) );
 
     // Get the control name
-    const std::string controlName = m_pControlVec.back()->GetName();
+    const std::string controlName = m_pControlVec.back()->getName();
 
     // Does this control have a name then add it to the map
     if( !controlName.empty() )
@@ -261,59 +254,55 @@ void CMenu::LoadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap )
         // Map of menu control nodes
         navNodeMap.emplace( controlName, m_pControlNodeVec.back() );
     }
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the dynamic offset data from node
 ************************************************************************/
-void CMenu::LoadDynamicOffsetFromNode( const XMLNode & node )
+void CMenu::loadDynamicOffsetFromNode( const XMLNode & node )
 {
     // Load the dynamic offset
     m_dynamicOffset = NParseHelper::LoadDynamicOffset( node );
 
     // Set the dynamic position
-    SetDynamicPos();
-
-}   // LoadDynamicOffsetFromNode
+    setDynamicPos();
+}
 
 
 /************************************************************************
 *    desc:  Set the dynamic position
 ************************************************************************/
-void CMenu::SetDynamicPos()
+void CMenu::setDynamicPos()
 {
     // Position the menu based on the dynamic offset
     if( !m_dynamicOffset.isEmpty() )
         setPos( m_dynamicOffset.getPos( CSettings::Instance().GetDefaultSizeHalf() ) );
-
-}   // SetDynamicPos
+}
 
 
 /************************************************************************
 *    desc:  Reset the dynamic position
 ************************************************************************/
-void CMenu::ResetDynamicPos()
+void CMenu::resetDynamicPos()
 {
-    SetDynamicPos();
-    
+    setDynamicPos();
+
     for( auto iter : m_pStaticControlVec )
-        iter->SetDynamicPos();
+        iter->setDynamicPos();
 
     for( auto iter : m_pMouseOnlyControlVec )
-        iter->SetDynamicPos();
+        iter->setDynamicPos();
 
     for( auto iter : m_pControlVec )
-        iter->SetDynamicPos();
-
-}   // ResetDynamicPos
+        iter->setDynamicPos();
+}
 
 
 /************************************************************************
 *    desc:  Find the reference nodes
 ************************************************************************/
-void CMenu::FindNodes(
+void CMenu::findNodes(
     const XMLNode & node,
     int nodeIndex,
     NavHelperMap & navNodeMap )
@@ -321,19 +310,18 @@ void CMenu::FindNodes(
     const XMLNode navNode = node.getChildNode( "navigate" );
     if( !navNode.isEmpty() )
     {
-        SetNodes( navNode, nodeIndex, "up",    CUIControlNavNode::ENAV_NODE_UP,    navNodeMap );
-        SetNodes( navNode, nodeIndex, "down",  CUIControlNavNode::ENAV_NODE_DOWN,  navNodeMap );
-        SetNodes( navNode, nodeIndex, "left",  CUIControlNavNode::ENAV_NODE_LEFT,  navNodeMap );
-        SetNodes( navNode, nodeIndex, "right", CUIControlNavNode::ENAV_NODE_RIGHT, navNodeMap );
+        setNodes( navNode, nodeIndex, "up",    CUIControlNavNode::ENAV_NODE_UP,    navNodeMap );
+        setNodes( navNode, nodeIndex, "down",  CUIControlNavNode::ENAV_NODE_DOWN,  navNodeMap );
+        setNodes( navNode, nodeIndex, "left",  CUIControlNavNode::ENAV_NODE_LEFT,  navNodeMap );
+        setNodes( navNode, nodeIndex, "right", CUIControlNavNode::ENAV_NODE_RIGHT, navNodeMap );
     }
-
-}   // FindNodes
+}
 
 
 /************************************************************************
 *    desc:  Find the reference nodes
 ************************************************************************/
-void CMenu::SetNodes(
+void CMenu::setNodes(
     const XMLNode & node,
     int nodeIndex,
     std::string attr,
@@ -346,7 +334,7 @@ void CMenu::SetNodes(
         auto iter = navNodeMap.find( name );
         if( iter != navNodeMap.end() )
         {
-            m_pControlNodeVec.at(nodeIndex)->SetNode( navNode, iter->second );
+            m_pControlNodeVec.at(nodeIndex)->setNode( navNode, iter->second );
         }
         else
         {
@@ -355,80 +343,75 @@ void CMenu::SetNodes(
                     % name % __FUNCTION__ % __LINE__ ));
         }
     }
-
-}   // SetNodes
+}
 
 
 /************************************************************************
 *    desc:  Init the menu controls
 ************************************************************************/
-void CMenu::Init()
+void CMenu::init()
 {
     for( auto iter : m_pStaticControlVec )
-        iter->Init();
+        iter->init();
 
     for( auto iter : m_pMouseOnlyControlVec )
-        iter->Init();
+        iter->init();
 
     for( auto iter : m_pControlVec )
-        iter->Init();
-    
-}   // Init
+        iter->init();
+}
 
 
 /************************************************************************
 *    desc:  Cleanup the menu controls. Currently only for font usage
 ************************************************************************/
-void CMenu::CleanUp()
+void CMenu::cleanUp()
 {
     for( auto iter : m_pStaticControlVec )
-        iter->CleanUp();
+        iter->cleanUp();
 
     for( auto iter : m_pMouseOnlyControlVec )
-        iter->CleanUp();
+        iter->cleanUp();
 
     for( auto iter : m_pControlVec )
-        iter->CleanUp();
-    
-}   // CleanUp
+        iter->cleanUp();
+}
 
 
 /************************************************************************
 *    desc:  Activate this menu because it's probably a root menu
 ************************************************************************/
-void CMenu::ActivateMenu()
+void CMenu::activateMenu()
 {
     m_state = NMenu::EMS_IDLE;
     setVisible(true);
-    SetAlpha(1.f);
-    ActivateFirstInactiveControl();
-
-}   // ActivateMenu
+    setAlpha(1.f);
+    activateFirstInactiveControl();
+}
 
 
 /************************************************************************
 *    desc:  Update the menu
 ************************************************************************/
-void CMenu::Update()
+void CMenu::update()
 {
     m_scriptComponent.Update();
-    
+
     if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
             iter.update();
 
         for( auto iter : m_pStaticControlVec )
-            iter->Update();
+            iter->update();
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->Update();
+            iter->update();
 
         for( auto iter : m_pControlVec )
-            iter->Update();
+            iter->update();
     }
-
-}   // Update
+}
 
 
 /************************************************************************
@@ -452,8 +435,7 @@ void CMenu::transform()
         for( auto iter : m_pControlVec )
             iter->transform( *this );
     }
-
-}   // Transform
+}
 
 void CMenu::transform( const CObject2D & object )
 {
@@ -473,14 +455,13 @@ void CMenu::transform( const CObject2D & object )
         for( auto iter : m_pControlVec )
             iter->transform( *this );
     }
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CMenu::Render( const CMatrix & matrix )
+void CMenu::render( const CMatrix & matrix )
 {
     if( isVisible() )
     {
@@ -488,81 +469,79 @@ void CMenu::Render( const CMatrix & matrix )
             iter.render( matrix );
 
         for( auto iter : m_pStaticControlVec )
-            iter->Render( matrix );
+            iter->render( matrix );
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->Render( matrix );
+            iter->render( matrix );
 
         for( auto iter : m_pControlVec )
-            iter->Render( matrix );
+            iter->render( matrix );
     }
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Get the name of the menu
 ************************************************************************/
-const std::string & CMenu::GetName() const
+const std::string & CMenu::getName() const
 {
     return m_name;
-
-}   // GetName
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CMenu::HandleEvent( const SDL_Event & rEvent )
+void CMenu::handleEvent( const SDL_Event & rEvent )
 {
     // Have the controls handle events
     for( auto iter : m_pControlVec )
-        iter->HandleEvent( rEvent );
+        iter->handleEvent( rEvent );
 
     for( auto iter : m_pMouseOnlyControlVec )
-        iter->HandleEvent( rEvent );
+        iter->handleEvent( rEvent );
 
     if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
     {
-        OnTransIn( rEvent );
+        onTransIn( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_TRANS_OUT )
     {
-        OnTransOut( rEvent );
+        onTransOut( rEvent );
     }
     else if( rEvent.type == NMenu::EGE_MENU_REACTIVATE )
     {
-        OnReactivate( rEvent );
+        onReactivate( rEvent );
     }
     else if( m_state == NMenu::EMS_IDLE )
     {
         if( rEvent.type == NMenu::EGE_MENU_SELECT_ACTION )
         {
-            OnSelectAction( rEvent );
+            onSelectAction( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_SET_ACTIVE_CONTROL )
         {
-            OnSetActiveControl( rEvent );
+            onSetActiveControl( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_SCROLL_UP )
         {
-            OnUpAction( rEvent );
+            onUpAction( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_SCROLL_DOWN )
         {
-            OnDownAction( rEvent );
+            onDownAction( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_SCROLL_LEFT )
         {
-            OnLeftAction( rEvent );
+            onLeftAction( rEvent );
         }
         else if( rEvent.type == NMenu::EGE_MENU_SCROLL_RIGHT )
         {
-            OnRightAction( rEvent );
+            onRightAction( rEvent );
         }
         else if( rEvent.type == SDL_MOUSEMOTION )
         {
-            OnMouseMove( rEvent );
+            onMouseMove( rEvent );
         }
         else if( (rEvent.type >= NMenu::EGE_MENU_UP_ACTION) &&
                  (rEvent.type <= NMenu::EGE_MENU_RIGHT_ACTION) )
@@ -571,71 +550,66 @@ void CMenu::HandleEvent( const SDL_Event & rEvent )
             {
                 if( rEvent.type == NMenu::EGE_MENU_UP_ACTION )
                 {
-                    OnUpAction( rEvent );
+                    onUpAction( rEvent );
                 }
                 else if( rEvent.type == NMenu::EGE_MENU_DOWN_ACTION )
                 {
-                    OnDownAction( rEvent );
+                    onDownAction( rEvent );
                 }
                 if( rEvent.type == NMenu::EGE_MENU_LEFT_ACTION )
                 {
-                    OnLeftAction( rEvent );
+                    onLeftAction( rEvent );
                 }
                 else if( rEvent.type == NMenu::EGE_MENU_RIGHT_ACTION )
                 {
-                    OnRightAction( rEvent );
+                    onRightAction( rEvent );
                 }
             }
         }
     }
 
     // Handle any smart menu events
-    SmartHandleEvent( rEvent );
-
-}   // HandleEvent
+    smartHandleEvent( rEvent );
+}
 
 /************************************************************************
 *    desc:  Handle OnUpAction message
 ************************************************************************/
-void CMenu::OnUpAction( const SDL_Event & rEvent )
+void CMenu::onUpAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_UP );
-
-}   // OnUpAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_UP );
+}
 
 /************************************************************************
 *    desc:  Handle OnMenuDown message
 ************************************************************************/
-void CMenu::OnDownAction( const SDL_Event & rEvent )
+void CMenu::onDownAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
-
-}   // OnDownAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_DOWN );
+}
 
 /************************************************************************
 *    desc:  Handle OnMenuLeft message
 ************************************************************************/
-void CMenu::OnLeftAction( const SDL_Event & rEvent )
+void CMenu::onLeftAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
-
-}   // OnLeftAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_LEFT );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightAction message
 ************************************************************************/
-void CMenu::OnRightAction( const SDL_Event & rEvent )
+void CMenu::onRightAction( const SDL_Event & rEvent )
 {
-    NavigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
-
-}   // OnRightAction
+    navigateMenu( CUIControlNavNode::ENAV_NODE_RIGHT );
+}
 
 
 /************************************************************************
 *    desc:  Navigate the menu. Find the next control node that isn't
 *           disabled and make it the active control node
 ************************************************************************/
-void CMenu::NavigateMenu( CUIControlNavNode::ENavNode navNodeAction )
+void CMenu::navigateMenu( CUIControlNavNode::ENavNode navNodeAction )
 {
     if( m_pActiveNode != nullptr )
     {
@@ -643,103 +617,101 @@ void CMenu::NavigateMenu( CUIControlNavNode::ENavNode navNodeAction )
 
         do
         {
-            pNavNode = pNavNode->GetNode( navNodeAction );
-            
+            pNavNode = pNavNode->getNode( navNodeAction );
+
             if( pNavNode == nullptr )
             {
                 break;
             }
-            else if( !pNavNode->GetControl()->IsDisabled() )
+            else if( !pNavNode->getControl()->isDisabled() )
             {
                 m_pActiveNode = pNavNode;
 
                 NGenFunc::DispatchEvent(
                     NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
                     NUIControl::ECS_ACTIVE,
-                    pNavNode->GetControl() );
-                
+                    pNavNode->getControl() );
+
                 break;
             }
         }
         while( true );
     }
-
-}   // NavigateMenu
+}
 
 
 /************************************************************************
 *    desc:  Handle OnMouseMove message
 ************************************************************************/
-void CMenu::OnMouseMove( const SDL_Event & rEvent )
+void CMenu::onMouseMove( const SDL_Event & rEvent )
 {
     for( auto iter : m_pControlNodeVec )
     {
-        if( iter->GetControl()->OnMouseMove( rEvent ) )
+        if( iter->getControl()->onMouseMove( rEvent ) )
             m_pActiveNode = iter;
         else
-            iter->GetControl()->DeactivateControl();
+            iter->getControl()->deactivateControl();
     }
 
     for( auto iter : m_pMouseOnlyControlVec )
-        if( !iter->OnMouseMove( rEvent ) )
-            iter->DeactivateControl();
-
-}   // OnMouseMove
+        if( !iter->onMouseMove( rEvent ) )
+            iter->deactivateControl();
+}
 
 
 /************************************************************************
 *    desc:  Handle OnSelectAction message
 ************************************************************************/
-void CMenu::OnSelectAction( const SDL_Event & rEvent )
+void CMenu::onSelectAction( const SDL_Event & rEvent )
 {
     bool selectionFound(false);
     CSelectMsgCracker msgCracker;
-    msgCracker.SetPackedUnit( rEvent.user.code );
+    msgCracker.setPackedUnit( rEvent.user.code );
 
     if( (m_pActiveNode != nullptr) &&
-        (m_pActiveNode->GetControl()->HandleSelectAction( msgCracker )) )
+        (m_pActiveNode->getControl()->handleSelectAction( msgCracker )) )
     {
         selectionFound = true;
-        
+
         // Set the state to active which will block all messages until the state is reset to idle
-        if( m_pActiveNode->GetControl()->GetActionType() > NUIControl::ECAT_NULL )
+        if( m_pActiveNode->getControl()->getActionType() > NUIControl::ECAT_NULL )
             m_state = NMenu::EMS_ACTIVE;
     }
-    else if( msgCracker.IsDeviceMouse() )
+    else if( msgCracker.isDeviceMouse() )
     {
         // For mouse only controls
         for( auto iter : m_pMouseOnlyControlVec )
         {
-            if( iter->HandleSelectAction( msgCracker ) )
+            if( iter->handleSelectAction( msgCracker ) )
             {
                 selectionFound = true;
-                
+
                 // Set the state to active which will block all messages until the state is reset to idle
-                if( iter->GetActionType() > NUIControl::ECAT_NULL )
+                if( iter->getActionType() > NUIControl::ECAT_NULL )
                     m_state = NMenu::EMS_ACTIVE;
 
                 break;
             }
         }
     }
-    
+
     // Try to handle touch presses on a non-active control
     // The mouse just happends to be clicked over a non-active control
-    if( !selectionFound && msgCracker.IsDeviceMouse() )
+    if( !selectionFound && msgCracker.isDeviceMouse() )
     {
         // Deactivate the control that should be active
         if( (m_pActiveNode != nullptr) &&
-            (msgCracker.GetPressType() == m_pActiveNode->GetControl()->GetMouseSelectType()) )
+            (msgCracker.getPressType() == m_pActiveNode->getControl()->getMouseSelectType()) )
         {
-            m_pActiveNode->GetControl()->DeactivateControl();
-            
+            m_pActiveNode->getControl()->deactivateControl();
+
             // Go through all the controls on this menu to try to find the one clicked on
             for( auto iter : m_pControlVec )
             {
-                if( iter->HandleSelectAction( msgCracker ) )
+                if( iter->handleSelectAction( msgCracker ) )
                 {
                     // Set the state to active which will block all messages until the state is reset to idle
-                    if( m_pActiveNode->GetControl()->GetActionType() > NUIControl::ECAT_NULL )
+                    if( m_pActiveNode->getControl()->getActionType() > NUIControl::ECAT_NULL )
                         m_state = NMenu::EMS_ACTIVE;
 
                     break;
@@ -747,89 +719,83 @@ void CMenu::OnSelectAction( const SDL_Event & rEvent )
             }
         }
     }
-
-}   // OnSelectAction
+}
 
 /************************************************************************
 *    desc:  Handle OnSetActiveControl message
 ************************************************************************/
-void CMenu::OnSetActiveControl( const SDL_Event & rEvent )
+void CMenu::onSetActiveControl( const SDL_Event & rEvent )
 {
     // Set the first inactive control to active
     if( rEvent.user.code == NMenu::EAC_FIRST_ACTIVE_CONTROL )
-        ActivateFirstInactiveControl();
-
-}   // OnSetActiveControl
+        activateFirstInactiveControl();
+}
 
 /************************************************************************
 *    desc:  Handle OnReactivate message
 ************************************************************************/
-void CMenu::OnReactivate( const SDL_Event & rEvent )
+void CMenu::onReactivate( const SDL_Event & rEvent )
 {
     m_state = NMenu::EMS_IDLE;
-
-}   // OnReactivate
+}
 
 /************************************************************************
 *    desc:  Handle OnTransIn message
 ************************************************************************/
-void CMenu::OnTransIn( const SDL_Event & rEvent )
+void CMenu::onTransIn( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
-        Prepare( "transIn" );
-        
+        prepare( "transIn" );
+
         m_state = NMenu::EMS_ACTIVE;
     }
     else if( rEvent.user.code == NMenu::ETC_END )
     {
         m_state = NMenu::EMS_IDLE;
     }
-
-}   // OnTransIn
+}
 
 /************************************************************************
 *    desc:  Handle OnTransOut message
 ************************************************************************/
-void CMenu::OnTransOut( const SDL_Event & rEvent )
+void CMenu::onTransOut( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
-        Prepare( "transOut" );
-        
+        prepare( "transOut" );
+
         m_state = NMenu::EMS_ACTIVE;
     }
     else if( rEvent.user.code == NMenu::ETC_END )
     {
         m_state = NMenu::EMS_INACTIVE;
     }
-
-}   // OnTransOut
+}
 
 
 /************************************************************************
 *    desc:  Prepare the script function to run
 ************************************************************************/
-void CMenu::Prepare( const std::string & scriptFuncId )
+void CMenu::prepare( const std::string & scriptFuncId )
 {
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
         m_scriptComponent.Prepare(m_group, iter->second, {this});
-
-}   // Prepare
+}
 
 
 /************************************************************************
 *    desc:  Set the first inactive control to be active
 ************************************************************************/
-void CMenu::ActivateFirstInactiveControl()
+void CMenu::activateFirstInactiveControl()
 {
     bool found(false);
 
     // Activate the first control found and deactivate all the rest
     for( auto iter : m_pControlNodeVec )
     {
-        if( !found && iter->GetControl()->ActivateFirstInactiveControl() )
+        if( !found && iter->getControl()->activateFirstInactiveControl() )
         {
             m_pActiveNode = iter;
 
@@ -837,31 +803,29 @@ void CMenu::ActivateFirstInactiveControl()
         }
         else
         {
-            iter->GetControl()->DeactivateControl();
+            iter->getControl()->deactivateControl();
         }
     }
-
-}   // ActivateFirstInactiveControl
+}
 
 
 /************************************************************************
 *    desc:  Reset all controls
 ************************************************************************/
-void CMenu::Reset()
+void CMenu::reset()
 {
     for( auto iter : m_pControlVec )
-        iter->Reset( true );
+        iter->reset( true );
 
     for( auto iter : m_pMouseOnlyControlVec )
-        iter->Reset( true );
-
-}   // Reset
+        iter->reset( true );
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the control in question
 ************************************************************************/
-CUIControl * CMenu::GetPtrToControl( const std::string & name )
+CUIControl * CMenu::getPtrToControl( const std::string & name )
 {
     // See if the control can be found
     auto iter = m_pControlMap.find( name );
@@ -874,135 +838,124 @@ CUIControl * CMenu::GetPtrToControl( const std::string & name )
 
     // Pass back the pointer if found
     return iter->second;
-
-}   // GetPtrToControl
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the active control
 ************************************************************************/
-CUIControl * CMenu::GetPtrToActiveControl()
+CUIControl * CMenu::getPtrToActiveControl()
 {
     CUIControl * pResult(nullptr);
 
     for( auto iter : m_pControlVec )
     {
-        if( iter->GetState() > NUIControl::ECS_INACTIVE )
+        if( iter->getState() > NUIControl::ECS_INACTIVE )
         {
-            pResult = iter->GetPtrToActiveControl();
+            pResult = iter->getPtrToActiveControl();
             break;
         }
     }
 
     return pResult;
-
-}   // GetPtrToActiveControl
+}
 
 
 /************************************************************************
 *    desc:  Does this menu use dynamic offsets
 ************************************************************************/
-bool CMenu::IsDynamicOffset()
+bool CMenu::isDynamicOffset()
 {
     return !m_dynamicOffset.isEmpty();
-
-}   // IsDynamicOffset
+}
 
 
 /************************************************************************
 *    desc:  Get the scroll params
 ************************************************************************/
-CScrollParam & CMenu::GetScrollParam( int msg )
+CScrollParam & CMenu::getScrollParam( int msg )
 {
     if( (m_pActiveNode != nullptr) &&
-        m_pActiveNode->GetControl()->CanScroll(msg) )
+        m_pActiveNode->getControl()->canScroll(msg) )
     {
-        return m_pActiveNode->GetControl()->GetScrollParam();
+        return m_pActiveNode->getControl()->getScrollParam();
     }
 
     return m_scrollParam;
-
-}   // GetScrollParam
+}
 
 
 /************************************************************************
 *    desc:  Set the smart menu pointer. This class owns the pointer
 ************************************************************************/
-void CMenu::SetSmartGui( CSmartGuiMenu * pSmartGuiMenu )
+void CMenu::setSmartGui( CSmartGuiMenu * pSmartGuiMenu )
 {
     m_upSmartGui.reset( pSmartGuiMenu );
-
-}   // SetSmartGui
+}
 
 
 /************************************************************************
 *    desc:  Do any smart create
 ************************************************************************/
-void CMenu::SmartCreate()
+void CMenu::smartCreate()
 {
     if( m_upSmartGui )
-        m_upSmartGui->Create();
-
-}   // SmartCreate
+        m_upSmartGui->create();
+}
 
 
 /************************************************************************
 *    desc:  Do any smart event handling
 ************************************************************************/
-void CMenu::SmartHandleEvent( const SDL_Event & rEvent )
+void CMenu::smartHandleEvent( const SDL_Event & rEvent )
 {
     if( m_upSmartGui )
-        m_upSmartGui->HandleEvent( rEvent );
-
-}   // SmartHandleEvent
+        m_upSmartGui->handleEvent( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the alpha value of this menu
 ************************************************************************/
-void CMenu::SetAlpha( float alpha )
+void CMenu::setAlpha( float alpha )
 {
     if( isVisible() )
-    { 
+    {
         for( auto & iter : m_spriteDeq )
             iter.setAlpha( alpha );
 
         for( auto iter : m_pStaticControlVec )
-            iter->SetAlpha( alpha );
+            iter->setAlpha( alpha );
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->SetAlpha( alpha );
+            iter->setAlpha( alpha );
 
         for( auto iter : m_pControlVec )
-            iter->SetAlpha( alpha );
+            iter->setAlpha( alpha );
     }
 
     m_alpha = alpha;
-    
-}   // SetAlpha
+}
 
-float CMenu::GetAlpha()
+float CMenu::getAlpha()
 {
     return m_alpha;
-    
-}   // GetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Is the menu idle
 ************************************************************************/
-bool CMenu::IsIdle()
+bool CMenu::isIdle()
 {
     return (m_state == NMenu::EMS_IDLE);
-    
-}   // IsIdle
+}
 
 
 /************************************************************************
 *    desc:  Is the menu active
 ************************************************************************/
-bool CMenu::IsActive()
+bool CMenu::isActive()
 {
     return (m_state == NMenu::EMS_ACTIVE);
-    
-}   // IsActive
+}

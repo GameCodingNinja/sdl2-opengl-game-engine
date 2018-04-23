@@ -23,15 +23,15 @@ public:
     virtual ~CLight();
     
     // Enable/disable light
-    void Enable( bool value = true );
+    void enable( bool value = true );
     
     // Set/Get direction
-    void SetPosDir( CPoint<float> & value );
-    const CPoint<float> & GetPosDir() const;
+    void setPosDir( CPoint<float> & value );
+    const CPoint<float> & getPosDir() const;
     
     // Set/Get color
-    void SetColor( CPoint<float> & value );
-    const CPoint<float> & GetColor() const;
+    void setColor( CPoint<float> & value );
+    const CPoint<float> & getColor() const;
     
 private:
     

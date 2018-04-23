@@ -28,67 +28,67 @@ public:
     virtual ~CUISlider();
 
     // Load the initial info from XML node
-    virtual void LoadFromNode( const XMLNode & node ) override;
+    virtual void loadFromNode( const XMLNode & node ) override;
     
     // Init control
-    virtual void Init() override;
+    virtual void init() override;
 
     // Set the slider min value
-    void SetMinValue( float value );
+    void setMinValue( float value );
 
     // Set the slider max value
-    void SetMaxValue( float value );
+    void setMaxValue( float value );
 
     // Set the slider position
-    void SetSlider( float value = 0 );
+    void setSlider( float value = 0 );
 
     // Set the slider inc value
-    void IncSlider( float value = 0 );
+    void incSlider( float value = 0 );
 
     // Get the current value
-    float GetValue();
+    float getValue();
     
     // Is the mouse down
-    bool IsMouseDown();
+    bool isMouseDown();
     
     // Deactivate the control
-    virtual void DeactivateControl() override;
+    virtual void deactivateControl() override;
     
     // Handle the mouse move
-    virtual bool OnMouseMove( const SDL_Event & rEvent ) override;
+    virtual bool onMouseMove( const SDL_Event & rEvent ) override;
 
 protected:
 
     // Load the control info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) override;
+    virtual void loadControlFromNode( const XMLNode & node ) override;
 
     // Handle the select action
-    bool HandleSelectAction( const CSelectMsgCracker & msgCracker ) override;
+    bool handleSelectAction( const CSelectMsgCracker & msgCracker ) override;
 
 private:
 
     // Update the slider
-    void UpdateSlider();
+    void updateSlider();
 
     // Cap the slider value
-    void CapSliderValue();
+    void capSliderValue();
 
     // Set the position of the slider
-    void SetSliderPos();
+    void setSliderPos();
 
     // Inc/Set the slider based on mouse movement
-    void IncSliderMovePos( float value );
+    void incSliderMovePos( float value );
 
     // Handle Action messages
-    virtual void OnLeftAction( const SDL_Event & rEvent ) override;
-    virtual void OnRightAction( const SDL_Event & rEvent ) override;
+    virtual void onLeftAction( const SDL_Event & rEvent ) override;
+    virtual void onRightAction( const SDL_Event & rEvent ) override;
 
     // Handle Scroll messages
-    virtual void OnLeftScroll( const SDL_Event & rEvent ) override;
-    virtual void OnRightScroll( const SDL_Event & rEvent ) override;
+    virtual void onLeftScroll( const SDL_Event & rEvent ) override;
+    virtual void onRightScroll( const SDL_Event & rEvent ) override;
 
     // Handle the slider change
-    void HandleSliderChange( float value, bool prepareOnSelect = false );
+    void handleSliderChange( float value, bool prepareOnSelect = false );
 
 private:
 

@@ -70,7 +70,7 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
         m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
         m_matrixLocation = m_pShaderData->getUniformLocation( "cameraViewProjMatrix" );
         m_colorLocation = m_pShaderData->getUniformLocation( "color" );
-        
+
         // Do we have a texture? This could be a solid rect
         if( (m_textureID > 0) || (GENERATION_TYPE == NDefs::EGT_FONT) )
         {
@@ -82,18 +82,17 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
         if( GENERATION_TYPE == NDefs::EGT_SPRITE_SHEET )
         {
             m_glyphLocation = m_pShaderData->getUniformLocation( "glyphRect" );
-            
+
             m_glyphUV = visualData.GetSpriteSheet().getGlyph().getUV();
             m_frameIndex = visualData.GetSpriteSheet().getDefaultIndex();
         }
-        
+
         // Allocate the storage for the font if this is a font sprite
         // Using a normal pointer to keep the memory foot print as small as possible
         if( GENERATION_TYPE == NDefs::EGT_FONT )
             m_pFontData = new CFontData;
     }
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -102,25 +101,24 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
 CVisualComponent2D::~CVisualComponent2D()
 {
     NDelFunc::Delete(m_pFontData);
-    
+
     // Delete the VBO if this is a font
-    DeleteFontVBO();
+    deleteFontVBO();
 
     // The IBO for the font is managed by the vertex buffer manager.
     // Font IBO are all the same with the only difference being
     // length of the character string.
-
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Delete the custom VBO for this font
-*                
+*
 *           Added a VBO delete function so that deleting the VBO can be
-*           handled separately so that the sprite can be allocated and 
+*           handled separately so that the sprite can be allocated and
 *           freed from a thread
 ************************************************************************/
-void CVisualComponent2D::DeleteFontVBO()
+void CVisualComponent2D::deleteFontVBO()
 {
     // Delete the VBO if this is a font
     if( (GENERATION_TYPE == NDefs::EGT_FONT) && (m_vbo > 0) )
@@ -128,32 +126,31 @@ void CVisualComponent2D::DeleteFontVBO()
         glDeleteBuffers(1, &m_vbo);
         m_vbo = 0;
     }
-    
+
     // The IBO for the font is managed by the vertex buffer manager.
     // Font IBO are all the same with the only difference being
     // length of the character string.
-    
-}   // DeleteFontVBO
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matrix )
+void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matrix )
 {
-    if( AllowRender() )
+    if( allowRender() )
     {
         const int32_t VERTEX_BUF_SIZE( sizeof(CVertex2D) );
-            
+
         // Increment our stat counter to keep track of what is going on.
         CStatCounter::Instance().IncDisplayCounter();
-        
+
         // Bind the VBO and IBO
         CVertBufMgr::Instance().Bind( m_vbo, m_ibo );
 
         // Bind the shader. This must be done before glVertexAttribPointer
         CShaderMgr::Instance().Bind( m_pShaderData );
-        
+
         // Setup the vertex attribute shader data
         glVertexAttribPointer( m_vertexLocation, 3, GL_FLOAT, GL_FALSE, VERTEX_BUF_SIZE, (GLvoid*)0 );
 
@@ -161,7 +158,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
         if( m_textureID > 0 )
         {
             const int8_t UV_OFFSET( sizeof(CPoint<float>) );
-            
+
             // Bind the texture
             CTextureMgr::Instance().Bind( m_textureID );
             glUniform1i( m_text0Location, 0); // 0 = TEXTURE0
@@ -196,7 +193,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
 
             // Send the final matrix to the shader
             glUniformMatrix4fv( m_matrixLocation, 1, GL_FALSE, finalMatrix() );
-            
+
             // Send the glyph rect
             glUniform4fv( m_glyphLocation, 1, (float*)&m_glyphUV );
         }
@@ -207,59 +204,54 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
             CMatrix finalMatrix;
             finalMatrix *= objMatrix;
             finalMatrix *= matrix;
-            
+
             glUniformMatrix4fv( m_matrixLocation, 1, GL_FALSE, finalMatrix() );
         }
 
         // Render it
         glDrawElements( m_drawMode, m_iboCount, m_indiceType, nullptr );
     }
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Load the font properties from XML node
 ************************************************************************/
-void CVisualComponent2D::LoadFontPropFromNode( const XMLNode & node )
+void CVisualComponent2D::loadFontPropFromNode( const XMLNode & node )
 {
     if(m_pFontData)
         m_pFontData->loadFromNode( node );
-    
-}   // LoadFontPropFromNode
+}
 
 
 /************************************************************************
 *    desc:  Set the font data
 ************************************************************************/
-void CVisualComponent2D::SetFontData( const CFontData & fontData )
+void CVisualComponent2D::setFontData( const CFontData & fontData )
 {
     if(m_pFontData)
         m_pFontData->copy( fontData );
-    
-}   // SetFontData
+}
 
 
 /************************************************************************
 *    desc:  Set the font properties
 ************************************************************************/
-void CVisualComponent2D::SetFontProperties( const CFontProperties & fontProp )
+void CVisualComponent2D::setFontProperties( const CFontProperties & fontProp )
 {
     if(m_pFontData)
         m_pFontData->m_fontProp.copy( fontProp );
-    
-}   // SetFontProperties
+}
 
 
 /************************************************************************
 *    desc:  Create the font string
 ************************************************************************/
-void CVisualComponent2D::CreateFontString()
+void CVisualComponent2D::createFontString()
 {
     if( m_pFontData )
-        CreateFontString( m_pFontData->m_fontString );
-
-}   // CreateFontString
+        createFontString( m_pFontData->m_fontString );
+}
 
 
 /************************************************************************
@@ -267,7 +259,7 @@ void CVisualComponent2D::CreateFontString()
 *
 *    NOTE: Line wrap feature only supported for horizontal left
 ************************************************************************/
-void CVisualComponent2D::CreateFontString( const std::string & fontString )
+void CVisualComponent2D::createFontString( const std::string & fontString )
 {
     // Qualify if we want to build the font string
     if( m_pFontData &&
@@ -277,10 +269,10 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
     {
         m_pFontData->m_fontStrSize.reset();
         float lastCharDif(0.f);
-        
+
         const CFont & font = CFontMgr::Instance().GetFont( m_pFontData->m_fontProp.m_fontName );
 
-        m_textureID = font.GetTextureID();
+        m_textureID = font.getTextureID();
 
         m_pFontData->m_fontString = fontString;
 
@@ -293,7 +285,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
         // Size of the allocation
         int charCount = m_pFontData->m_fontString.size() - spaceCharCount - barCharCount;
         m_iboCount = charCount * 6;
-        
+
         // Set a flag to indicate if the IBO should be built
         const bool BUILD_FONT_IBO = (m_iboCount > CVertBufMgr::Instance().GetCurrentMaxFontIndices());
 
@@ -302,7 +294,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
 
         // Create a buffer to hold the indices
         std::unique_ptr<uint16_t[]> upIndxBuf;
-        
+
         // Should we build or rebuild the font IBO
         if( BUILD_FONT_IBO )
             upIndxBuf.reset( new uint16_t[m_iboCount] );
@@ -310,18 +302,18 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
         float xOffset = 0.f;
         float width = 0.f;
         float lineHeightOffset = 0.f;
-        float lineHeightWrap = font.GetLineHeight() + font.GetVertPadding() + m_pFontData->m_fontProp.m_lineWrapHeight;
-        float initialHeightOffset = font.GetBaselineOffset() + font.GetVertPadding();
-        float lineSpace = font.GetLineHeight() - font.GetBaselineOffset();
+        float lineHeightWrap = font.getLineHeight() + font.getVertPadding() + m_pFontData->m_fontProp.m_lineWrapHeight;
+        float initialHeightOffset = font.getBaselineOffset() + font.getVertPadding();
+        float lineSpace = font.getLineHeight() - font.getBaselineOffset();
 
         uint counter = 0;
         int lineCount = 0;
 
         // Get the size of the texture
-        CSize<float> textureSize = font.GetTextureSize();
+        CSize<float> textureSize = font.getTextureSize();
 
         // Handle the horizontal alignment
-        std::vector<float> lineWidthOffsetVec = CalcLineWidthOffset( font, m_pFontData->m_fontString );
+        std::vector<float> lineWidthOffsetVec = calcLineWidthOffset( font, m_pFontData->m_fontString );
 
         // Set the initial line offset
         xOffset = lineWidthOffsetVec[lineCount++];
@@ -332,15 +324,15 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
 
         if( m_pFontData->m_fontProp.m_vAlign == NDefs::EVA_VERT_CENTER )
         {
-            lineHeightOffset = -(initialHeightOffset - ((font.GetBaselineOffset()-lineSpace) / 2.f) - font.GetVertPadding());
+            lineHeightOffset = -(initialHeightOffset - ((font.getBaselineOffset()-lineSpace) / 2.f) - font.getVertPadding());
 
             if( lineWidthOffsetVec.size() > 1 )
-                lineHeightOffset = ((lineHeightWrap * lineWidthOffsetVec.size()) / 2.f) - font.GetBaselineOffset();
+                lineHeightOffset = ((lineHeightWrap * lineWidthOffsetVec.size()) / 2.f) - font.getBaselineOffset();
         }
 
         else if( m_pFontData->m_fontProp.m_vAlign == NDefs::EVA_VERT_BOTTOM )
         {
-            lineHeightOffset = -(initialHeightOffset - font.GetBaselineOffset() - font.GetVertPadding());
+            lineHeightOffset = -(initialHeightOffset - font.getBaselineOffset() - font.getVertPadding());
 
             if( lineWidthOffsetVec.size() > 1 )
                 lineHeightOffset += (lineHeightWrap * (lineWidthOffsetVec.size()-1));
@@ -366,14 +358,14 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
             else
             {
                 // See if we can find the character
-                const CCharData & charData = font.GetCharData(id);
+                const CCharData & charData = font.getCharData(id);
 
                 // Ignore space characters
                 if( id != ' ' )
                 {
                     CRect<float> rect = charData.rect;
 
-                    float yOffset = (font.GetLineHeight() - rect.y2 - charData.offset.h) + lineHeightOffset;
+                    float yOffset = (font.getLineHeight() - rect.y2 - charData.offset.h) + lineHeightOffset;
 
                     // Check if the width or height is odd. If so, we offset
                     // by 0.5 for proper orthographic rendering
@@ -386,7 +378,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
                         additionalOffsetY = 0.5f;
 
                     auto & quadBuf = upQuadBuf[counter];
-                    
+
                     // Calculate the first vertex of the first face
                     quadBuf.vert[0].vert.x = xOffset + charData.offset.w + additionalOffsetX;
                     quadBuf.vert[0].vert.y = yOffset + additionalOffsetY;
@@ -431,7 +423,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
                 }
 
                 // Inc the font position
-                float inc = charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.GetHorzPadding();
+                float inc = charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.getHorzPadding();
 
                 // Add in any additional spacing for the space character
                 if( id == ' ' )
@@ -439,12 +431,12 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
 
                 width += inc;
                 xOffset += inc;
-                
+
                 // Get the longest width of this font string
                 if( m_pFontData->m_fontStrSize.w < width )
                 {
                     m_pFontData->m_fontStrSize.w = width;
-                    
+
                     // This is the space between this character and the next.
                     // Save this difference so that it can be subtracted at the end
                     lastCharDif = inc - charData.rect.x2;
@@ -463,7 +455,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
                         if( id != '|' )
                         {
                             // See if we can find the character
-                            const CCharData & anotherCharData = font.GetCharData(id);
+                            const CCharData & anotherCharData = font.getCharData(id);
 
                             // Break here when space is found
                             // Don't add the space to the size of the next word
@@ -471,7 +463,7 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
                                 break;
 
                             // Don't count the
-                            nextWord += anotherCharData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.GetHorzPadding();
+                            nextWord += anotherCharData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.getHorzPadding();
                         }
                     }
 
@@ -485,10 +477,10 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
                 }
             }
         }
-        
+
         // Subtract the extra space after the last character
         m_pFontData->m_fontStrSize.w -= lastCharDif;
-        m_pFontData->m_fontStrSize.h = font.GetLineHeight();
+        m_pFontData->m_fontStrSize.h = font.getLineHeight();
 
         // Save the data
         // If one doesn't exist, create the VBO and IBO for this font
@@ -510,14 +502,13 @@ void CVisualComponent2D::CreateFontString( const std::string & fontString )
     {
         m_pFontData->m_fontString.clear();
     }
-
-}   // CreateFontString
+}
 
 
 /************************************************************************
 *    desc:  Add up all the character widths
 ************************************************************************/
-std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
+std::vector<float> CVisualComponent2D::calcLineWidthOffset(
     const CFont & font,
     const std::string & str )
 {
@@ -536,7 +527,7 @@ std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
         if( id == '|' )
         {
             // Add the line width to the vector based on horz alignment
-            AddLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width, firstCharOffset, lastCharOffset );
+            addLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width, firstCharOffset, lastCharOffset );
 
             counter = 0;
             width = 0;
@@ -544,12 +535,12 @@ std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
         else
         {
             // Get the next character
-            const CCharData & charData = font.GetCharData( id );
+            const CCharData & charData = font.getCharData( id );
 
             if(counter == 0)
                 firstCharOffset = charData.offset.w;
 
-            spaceWidth = charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.GetHorzPadding();
+            spaceWidth = charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.getHorzPadding();
 
             // Add in any additional spacing for the space character
             if( id == ' ' )
@@ -576,7 +567,7 @@ std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
                 if( id != '|' )
                 {
                     // See if we can find the character
-                    const CCharData & charData = font.GetCharData(id);
+                    const CCharData & charData = font.getCharData(id);
 
                     // Break here when space is found
                     // Don't add the space to the size of the next word
@@ -584,14 +575,14 @@ std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
                         break;
 
                     // Don't count the
-                    nextWord += charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.GetHorzPadding();
+                    nextWord += charData.xAdvance + m_pFontData->m_fontProp.m_kerning + font.getHorzPadding();
                 }
             }
 
             if( width + nextWord >= m_pFontData->m_fontProp.m_lineWrapWidth )
             {
                 // Add the line width to the vector based on horz alignment
-                AddLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width-spaceWidth, firstCharOffset, lastCharOffset );
+                addLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width-spaceWidth, firstCharOffset, lastCharOffset );
 
                 counter = 0;
                 width = 0;
@@ -600,17 +591,16 @@ std::vector<float> CVisualComponent2D::CalcLineWidthOffset(
     }
 
     // Add the line width to the vector based on horz alignment
-    AddLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width, firstCharOffset, lastCharOffset );
+    addLineWithToVec( font, lineWidthOffsetVec, m_pFontData->m_fontProp.m_hAlign, width, firstCharOffset, lastCharOffset );
 
     return lineWidthOffsetVec;
-
-}   // CalcLineWidthOffset
+}
 
 
 /************************************************************************
 *    desc:  Add the line width to the vector based on horz alignment
 ************************************************************************/
-void CVisualComponent2D::AddLineWithToVec(
+void CVisualComponent2D::addLineWithToVec(
     const CFont & font,
     std::vector<float> & lineWidthOffsetVec,
     const NDefs::EHorzAlignment hAlign,
@@ -619,24 +609,23 @@ void CVisualComponent2D::AddLineWithToVec(
     float lastCharOffset )
 {
     if( hAlign == NDefs::EHA_HORZ_LEFT )
-        lineWidthOffsetVec.push_back(-(firstCharOffset + font.GetHorzPadding()));
+        lineWidthOffsetVec.push_back(-(firstCharOffset + font.getHorzPadding()));
 
     else if( hAlign == NDefs::EHA_HORZ_CENTER )
-        lineWidthOffsetVec.push_back(-((width - font.GetHorzPadding()) / 2.f));
+        lineWidthOffsetVec.push_back(-((width - font.getHorzPadding()) / 2.f));
 
     else if( hAlign == NDefs::EHA_HORZ_RIGHT )
-        lineWidthOffsetVec.push_back(-(width - lastCharOffset - font.GetHorzPadding()));
+        lineWidthOffsetVec.push_back(-(width - lastCharOffset - font.getHorzPadding()));
 
     // Remove any fractional component of the last index
     lineWidthOffsetVec.back() = (int)lineWidthOffsetVec.back();
-
-}   // AddLineWithToVec
+}
 
 
 /************************************************************************
 *    desc:  Get/Set the displayed font string
 ************************************************************************/
-const std::string & CVisualComponent2D::GetFontString()
+const std::string & CVisualComponent2D::getFontString()
 {
     if( !m_pFontData )
     {
@@ -644,65 +633,58 @@ const std::string & CVisualComponent2D::GetFontString()
             boost::str( boost::format("Can't ask for the font string from a sprite that is not a sprite font.\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return m_pFontData->m_fontString;
+}
 
-}   // GetFontString
-
-void CVisualComponent2D::SetFontString( const std::string & fontString )
+void CVisualComponent2D::setFontString( const std::string & fontString )
 {
     if(m_pFontData)
         m_pFontData->m_fontString = fontString;
-
-}   // SetFontString
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the color
 ************************************************************************/
-void CVisualComponent2D::SetColor( const CColor & color )
+void CVisualComponent2D::setColor( const CColor & color )
 {
     m_color = color;
+}
 
-}   // SetColor
-
-void CVisualComponent2D::SetColor( float r, float g, float b, float a )
+void CVisualComponent2D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
     m_color.set( r, g, b, a );
+}
 
-}   // SetColor
-
-const CColor & CVisualComponent2D::GetColor() const
+const CColor & CVisualComponent2D::getColor() const
 {
     return m_color;
-
-}   // GetColor
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the alpha
 ************************************************************************/
-void CVisualComponent2D::SetAlpha( float alpha, bool allowToExceed )
+void CVisualComponent2D::setAlpha( float alpha, bool allowToExceed )
 {
     if( allowToExceed || (alpha < m_rVisualData.GetColor().a) )
         m_color.a = alpha;
     else
         alpha = m_rVisualData.GetColor().a;
+}
 
-}   // SetAlpha
-
-float CVisualComponent2D::GetAlpha() const
+float CVisualComponent2D::getAlpha() const
 {
     return m_color.a;
-
-}   // GetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Set the frame ID from index
 ************************************************************************/
-void CVisualComponent2D::SetFrame( uint index )
+void CVisualComponent2D::setFrame( uint index )
 {
     if( GENERATION_TYPE == NDefs::EGT_SPRITE_SHEET )
     {
@@ -714,55 +696,50 @@ void CVisualComponent2D::SetFrame( uint index )
         m_textureID = m_rVisualData.GetTextureID( index );
 
     m_frameIndex = index;
-
-}   // SetFrame
+}
 
 
 /************************************************************************
 *    desc:  Get the current frame index
 ************************************************************************/
-uint CVisualComponent2D::GetCurrentFrame() const 
+uint CVisualComponent2D::getCurrentFrame() const
 {
     return m_frameIndex;
-
-}   // GetFrameCount
+}
 
 
 /************************************************************************
 *    desc:  Set the default color
 ************************************************************************/
-void CVisualComponent2D::SetDefaultColor()
+void CVisualComponent2D::setDefaultColor()
 {
     m_color = m_rVisualData.GetColor();
-
-}   // SetDefaultColor
+}
 
 
 /************************************************************************
 *    desc:  Is rendering allowed?
 ************************************************************************/
-bool CVisualComponent2D::AllowRender()
+bool CVisualComponent2D::allowRender()
 {
     return ((GENERATION_TYPE > NDefs::EGT_NULL) && (GENERATION_TYPE < NDefs::EGT_FONT)) ||
            ((GENERATION_TYPE == NDefs::EGT_FONT) && !m_pFontData->m_fontString.empty() && (m_vbo > 0));
-
-}   // AllowRender
+}
 
 
 /************************************************************************
 *    desc:  Is this a font sprite
 ************************************************************************/
-bool CVisualComponent2D::IsFontSprite()
+bool CVisualComponent2D::isFontSprite()
 {
     return (GENERATION_TYPE == NDefs::EGT_FONT);
-
-}   // IsFontSprite
+}
 
 
 /************************************************************************
 *    desc:  Get the font size
 ************************************************************************/
-const CSize<float> & CVisualComponent2D::GetFontSize() const
+const CSize<float> & CVisualComponent2D::getFontSize() const
 {
     if( !m_pFontData )
     {
@@ -770,8 +747,6 @@ const CSize<float> & CVisualComponent2D::GetFontSize() const
             boost::str( boost::format("Can't ask for the font size from a sprite that is not a sprite font.\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return m_pFontData->m_fontStrSize;
-
-}   // GetFontSize
-
+}

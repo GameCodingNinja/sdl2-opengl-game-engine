@@ -105,7 +105,7 @@ void CGame::Init()
         const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
         CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->setPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
-        upDebugDisplay->getVisualComponent().SetFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
+        upDebugDisplay->getVisualComponent().setFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
         upDebugDisplay->transform();
     }
 
@@ -120,58 +120,58 @@ void CGame::Init()
 ************************************************************************/
 void CGame::SmartGuiControlCreateCallBack( CUIControl * pUIControl )
 {
-    if( pUIControl->GetFaction() == "decision_btn" )
-        pUIControl->SetSmartGui( new CSmartConfirmBtn( pUIControl ) );
+    if( pUIControl->getFaction() == "decision_btn" )
+        pUIControl->setSmartGui( new CSmartConfirmBtn( pUIControl ) );
     
-    else if( pUIControl->GetFaction() == "key_binding_btn" )
-        pUIControl->SetSmartGui( new CSmartKeyBindBtn( pUIControl ) );
+    else if( pUIControl->getFaction() == "key_binding_btn" )
+        pUIControl->setSmartGui( new CSmartKeyBindBtn( pUIControl ) );
 
-    else if( pUIControl->GetName() == "resolution_btn_lst" )
-        pUIControl->SetSmartGui( new CSmartResolutionBtn( pUIControl ) );
+    else if( pUIControl->getName() == "resolution_btn_lst" )
+        pUIControl->setSmartGui( new CSmartResolutionBtn( pUIControl ) );
 
-    else if( pUIControl->GetName() == "settings_apply_btn" )
-        pUIControl->SetSmartGui( new CSmartApplySettingsBtn( pUIControl ) );
+    else if( pUIControl->getName() == "settings_apply_btn" )
+        pUIControl->setSmartGui( new CSmartApplySettingsBtn( pUIControl ) );
 
-    else if( pUIControl->GetName() == "full_screen_check_box" )
-        pUIControl->SetSmartGui( new CSmartScrnCheckBox( pUIControl ) );
+    else if( pUIControl->getName() == "full_screen_check_box" )
+        pUIControl->setSmartGui( new CSmartScrnCheckBox( pUIControl ) );
 
-    else if( pUIControl->GetName() == "v-sync_check_box" )
-        pUIControl->SetSmartGui( new CSmartVSyncCheckBox( pUIControl ) );
+    else if( pUIControl->getName() == "v-sync_check_box" )
+        pUIControl->setSmartGui( new CSmartVSyncCheckBox( pUIControl ) );
 
-    else if( pUIControl->GetName() == "settings_dead_zone_slider" )
-        pUIControl->SetSmartGui( new CSmartDeadZoneSlider( pUIControl ) );
+    else if( pUIControl->getName() == "settings_dead_zone_slider" )
+        pUIControl->setSmartGui( new CSmartDeadZoneSlider( pUIControl ) );
     
-    else if( pUIControl->GetName() == "lobby_music_check_box" )
+    else if( pUIControl->getName() == "lobby_music_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->SetToggleState( CGameSave::Instance().GetPlayLobbyMusic() );
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlayLobbyMusic() );
         
-        pUIControl->Connect_ExecutionAction( boost::bind(&CGame::LobbyMusicCallBack, this, _1) );
+        pUIControl->connect_executionAction( boost::bind(&CGame::LobbyMusicCallBack, this, _1) );
     }
-    else if( pUIControl->GetName() == "spin_music_check_box" )
+    else if( pUIControl->getName() == "spin_music_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->SetToggleState( CGameSave::Instance().GetPlaySpinMusic() );
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlaySpinMusic() );
         
-        pUIControl->Connect_ExecutionAction( boost::bind(&CGame::SpinMusicCallBack, this, _1) );
+        pUIControl->connect_executionAction( boost::bind(&CGame::SpinMusicCallBack, this, _1) );
     }
-    else if( pUIControl->GetName() == "stop_sounds_check_box" )
+    else if( pUIControl->getName() == "stop_sounds_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->SetToggleState( CGameSave::Instance().GetPlayStopSounds() );
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlayStopSounds() );
         
-        pUIControl->Connect_ExecutionAction( boost::bind(&CGame::StopSoundsCallBack, this, _1) );
+        pUIControl->connect_executionAction( boost::bind(&CGame::StopSoundsCallBack, this, _1) );
     }
     
     // Dev Debug call backs
-    else if( pUIControl->GetName() == "dev-option-v-sync_check_box" )
+    else if( pUIControl->getName() == "dev-option-v-sync_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->SetToggleState( CSettings::Instance().GetVSync() );
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CSettings::Instance().GetVSync() );
         
-        pUIControl->Connect_ExecutionAction( boost::bind(&CGame::DevDebugVSyncCallBack, this, _1) );
+        pUIControl->connect_executionAction( boost::bind(&CGame::DevDebugVSyncCallBack, this, _1) );
     }
-    else if( pUIControl->GetName() == "debug_string_check_box" )
+    else if( pUIControl->getName() == "debug_string_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->SetToggleState( CSettings::Instance().GetDebugStrVisible() );
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CSettings::Instance().GetDebugStrVisible() );
         
-        pUIControl->Connect_ExecutionAction( boost::bind(&CGame::DevDebugStringCallBack, this, _1) );
+        pUIControl->connect_executionAction( boost::bind(&CGame::DevDebugStringCallBack, this, _1) );
     }
 
 }   // SmartGuiControlCreate
@@ -191,33 +191,33 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 void CGame::LobbyMusicCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlayLobbyMusic( pCtrl->GetToggleState() );
+    CGameSave::Instance().SetPlayLobbyMusic( pCtrl->getToggleState() );
     CGameSave::Instance().OpenSaveClose();
     
     if( (upGameState != nullptr) && (upGameState->GetState() == NGameDefs::EGS_LOBBY) )
-        upGameState->AllowMusic( pCtrl->GetToggleState() );
+        upGameState->AllowMusic( pCtrl->getToggleState() );
     
 }   // LobbyMusicCallBack
 
 void CGame::SpinMusicCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlaySpinMusic( pCtrl->GetToggleState() );
+    CGameSave::Instance().SetPlaySpinMusic( pCtrl->getToggleState() );
     CGameSave::Instance().OpenSaveClose();
     
     if( (upGameState != nullptr) && (upGameState->GetState() != NGameDefs::EGS_LOBBY) )
-        upGameState->AllowMusic( pCtrl->GetToggleState() );
+        upGameState->AllowMusic( pCtrl->getToggleState() );
     
 }   // SpinMusicCallBack
 
 void CGame::StopSoundsCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlayStopSounds( pCtrl->GetToggleState() );
+    CGameSave::Instance().SetPlayStopSounds( pCtrl->getToggleState() );
     CGameSave::Instance().OpenSaveClose();
     
     if( (upGameState != nullptr) && (upGameState->GetState() != NGameDefs::EGS_LOBBY) )
-        upGameState->AllowStopSounds( pCtrl->GetToggleState() );
+        upGameState->AllowStopSounds( pCtrl->getToggleState() );
     
 }   // SpinMusicCallBack
 
@@ -261,7 +261,7 @@ void CGame::DevDebugVSyncCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
     
-    CDevice::Instance().EnableVSync( pCtrl->GetToggleState() );
+    CDevice::Instance().EnableVSync( pCtrl->getToggleState() );
     
 }   // DevDebugVSyncCallBack
 
@@ -269,7 +269,7 @@ void CGame::DevDebugStringCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
     
-    CSettings::Instance().SetDebugStrVisible( pCtrl->GetToggleState() );
+    CSettings::Instance().SetDebugStrVisible( pCtrl->getToggleState() );
     
 }   // DevDebugVSyncCallBack
 

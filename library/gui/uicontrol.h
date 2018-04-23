@@ -49,182 +49,182 @@ public:
     virtual ~CUIControl();
 
     // Load the initial info from XML node
-    virtual void LoadFromNode( const XMLNode & node ) override;
+    virtual void loadFromNode( const XMLNode & node ) override;
     
     // Init control
-    virtual void Init();
+    virtual void init();
     
     // Do some cleanup. Currently only for font usage
-    virtual void CleanUp();
+    virtual void cleanUp();
 
     // Update the control
-    virtual void Update();
+    virtual void update();
 
     // Transform the control
     virtual void transform( const CObject2D & object ) override;
 
     // do the render
-    virtual void Render( const CMatrix & matrix );
+    virtual void render( const CMatrix & matrix );
 
     // Handle events
-    virtual void HandleEvent( const SDL_Event & rEvent );
+    virtual void handleEvent( const SDL_Event & rEvent );
 
     // Set the control to their default behavior
-    void RevertToDefaultState();
+    void revertToDefaultState();
 
     // Get/Set the state of this control
-    NUIControl::EControlState GetState() const;
-    void SetState( NUIControl::EControlState state, bool setLastState = false );
+    NUIControl::EControlState getState() const;
+    void setState( NUIControl::EControlState state, bool setLastState = false );
 
     // Get the type of action
-    NUIControl::EControlActionType GetActionType();
+    NUIControl::EControlActionType getActionType();
 
     // Get the execution action
-    const std::string & GetExecutionAction();
+    const std::string & getExecutionAction();
 
     // Reset the control to inactive if its not disabled
-    virtual void Reset( bool complete = false );
+    virtual void reset( bool complete = false );
 
     // Set/Get the Smart GUI pointer
-    void SetSmartGui( CSmartGuiControl * pSmartGuiControl );
-    CSmartGuiControl * GetSmartGuiPtr();
+    void setSmartGui( CSmartGuiControl * pSmartGuiControl );
+    CSmartGuiControl * getSmartGuiPtr();
 
     // Do any smart create
-    void SmartCreate();
+    void smartCreate();
 
     // Set the type of action
-    void SetActionType( NUIControl::EControlActionType value );
+    void setActionType( NUIControl::EControlActionType value );
 
     // Set the execution action
-    void SetExecutionAction( const std::string & action );
+    void setExecutionAction( const std::string & action );
 
     // Create the font string
-    void CreateFontString( const std::string & fontString, int spriteIndex = 0 );
-    void CreateFontString( int stringIndex = 0, int spriteIndex = 0 );
+    void createFontString( const std::string & fontString, int spriteIndex = 0 );
+    void createFontString( int stringIndex = 0, int spriteIndex = 0 );
     
     // Set the font string
-    void SetFontString( const std::string & fontString, int spriteIndex = 0 );
+    void setFontString( const std::string & fontString, int spriteIndex = 0 );
     
     // Handle the mouse move
-    virtual bool OnMouseMove( const SDL_Event & rEvent );
+    virtual bool onMouseMove( const SDL_Event & rEvent );
 
     // Handle the select action
-    virtual bool HandleSelectAction( const CSelectMsgCracker & msgCracker );
+    virtual bool handleSelectAction( const CSelectMsgCracker & msgCracker );
 
     // Set the first inactive control to be active
-    virtual bool ActivateFirstInactiveControl();
+    virtual bool activateFirstInactiveControl();
 
     // Get the pointer to the control if found
-    virtual CUIControl * FindControl( const std::string & name );
-    virtual CUIControl * FindControl( void * pVoid );
+    virtual CUIControl * findControl( const std::string & name );
+    virtual CUIControl * findControl( void * pVoid );
 
     // Set the string to vector
-    void SetStringToList( const std::string & str );
+    void setStringToList( const std::string & str );
 
     // Change the control state
-    void ChangeState( NUIControl::EControlState state );
+    void changeState( NUIControl::EControlState state );
 
     // Is this control active/selected
-    bool IsDisabled();
-    bool IsInactive();
-    bool IsActive();
-    bool IsSelected();
-    bool IsSelectable();
+    bool isDisabled();
+    bool isInactive();
+    bool isActive();
+    bool isSelected();
+    bool isSelectable();
 
     // Get the collision position
-    const CPoint<float> & GetCollisionPos() const;
+    const CPoint<float> & getCollisionPos() const;
 
     // Activate the control
-    bool ActivateControl();
+    bool activateControl();
 
     // Deactivate the control
-    virtual void DeactivateControl();
+    virtual void deactivateControl();
     
     // Disable the control
-    virtual void DisableControl();
+    virtual void disableControl();
     
     // Enable the control to the inactive state
-    virtual void EnableControl();
+    virtual void enableControl();
 
     // Get the scroll params
-    CScrollParam & GetScrollParam();
+    CScrollParam & getScrollParam();
     
     // Get the number of strings
-    const std::vector<std::string> & GetStringVec() const;
+    const std::vector<std::string> & getStringVec() const;
     
     // Check if control is a sub control
-    virtual bool IsSubControl() const;
+    virtual bool isSubControl() const;
     
     // Connect to the execution action signal
-    void Connect_ExecutionAction( const ExecutionActionSignal::slot_type & slot );
+    void connect_executionAction( const ExecutionActionSignal::slot_type & slot );
     
     // Call a script function map key for sprite
-    void CallSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate = false );
+    void callSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate = false );
     
     // Set the alpha value of this menu
-    virtual void SetAlpha( float alpha );
+    virtual void setAlpha( float alpha );
     
     // Get the pointer to the active control
-    virtual CUIControl * GetPtrToActiveControl();
+    virtual CUIControl * getPtrToActiveControl();
     
     // Get the mouse select type
-    NDefs::EActionPress GetMouseSelectType() const;
+    NDefs::EActionPress getMouseSelectType() const;
     
     // Get the size of this control
-    const CSize<float> & GetSize() const;
+    const CSize<float> & getSize() const;
     
     // an this control scroll?
-    bool CanScroll( int msg );
+    bool canScroll( int msg );
 
 protected:
 
     // Set the type of action
-    void SetActionType( const std::string & value );
+    void setActionType( const std::string & value );
 
     // Set the sprite's display based on it's current state
-    void SetDisplayState();
+    void setDisplayState();
 
     // Prepare the sprite script function
-    void PrepareSpriteScriptFunction( NUIControl::EControlState controlState );
+    void prepareSpriteScriptFunction( NUIControl::EControlState controlState );
 
     // Prepare the control script function to run
-    void PrepareControlScriptFunction( NUIControl::EControlState controlState );
+    void prepareControlScriptFunction( NUIControl::EControlState controlState );
 
     // Recycle the contexts
-    void RecycleContext();
+    void recycleContext();
 
     // Smart execute the action
-    void SmartExecuteAction();
+    void smartExecuteAction();
     
     // Do any smart event handling
-    void SmartHandleEvent( const SDL_Event & rEvent );
+    void smartHandleEvent( const SDL_Event & rEvent );
 
     // Handle message
-    virtual void OnStateChange( const SDL_Event & rEvent );
-    virtual void OnSelectExecute( const SDL_Event & rEvent );
-    void OnSetActiveControl( const SDL_Event & rEvent );
-    void OnReactivate( const SDL_Event & rEvent );
-    void OnTransIn( const SDL_Event & rEvent );
-    void OnTransOut( const SDL_Event & rEvent );
+    virtual void onStateChange( const SDL_Event & rEvent );
+    virtual void onSelectExecute( const SDL_Event & rEvent );
+    void onSetActiveControl( const SDL_Event & rEvent );
+    void onReactivate( const SDL_Event & rEvent );
+    void onTransIn( const SDL_Event & rEvent );
+    void onTransOut( const SDL_Event & rEvent );
     
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) override;
+    virtual void loadControlFromNode( const XMLNode & node ) override;
     
     // Is the point in the control
-    bool IsPointInControl( int x, int y );
-    bool IsPointInControl( const CPoint<float> & pos );
+    bool isPointInControl( int x, int y );
+    bool isPointInControl( const CPoint<float> & pos );
 
 private:
 
     // Load a sprite from an XML node
-    virtual void LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount ) override;
+    virtual void loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCount ) override;
 
     // Set the default state of this control
-    void SetDefaultState( NUIControl::EControlState value );
-    void SetDefaultState( const std::string & value );
+    void setDefaultState( NUIControl::EControlState value );
+    void setDefaultState( const std::string & value );
     
     // Transform the collision
-    void TransformCollision();
+    void transformCollision();
     
 protected:
     

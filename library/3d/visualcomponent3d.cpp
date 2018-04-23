@@ -67,8 +67,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
             m_text0Location = m_pShaderData->getUniformLocation( "text0" );
         }
     }
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -76,13 +75,13 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 ************************************************************************/
 CVisualComponent3D::~CVisualComponent3D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalMatrix )
+void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalMatrix )
 {
     for( auto & meshIter : m_mesh3d.getMeshVec() )
     {
@@ -124,54 +123,47 @@ void CVisualComponent3D::Render( const CMatrix & matrix, const CMatrix & normalM
         // Render it
         glDrawElements( GL_TRIANGLES, meshIter.m_iboCount, GL_UNSIGNED_SHORT, nullptr );
     }
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the color
 ************************************************************************/
-void CVisualComponent3D::SetColor( const CColor & color )
+void CVisualComponent3D::setColor( const CColor & color )
 {
     m_color = color;
+}
 
-}   // SetColor
-
-void CVisualComponent3D::SetColor( float r, float g, float b, float a )
+void CVisualComponent3D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
     m_color.set( r, g, b, a );
+}
 
-}   // SetColor
-
-const CColor & CVisualComponent3D::GetColor() const
+const CColor & CVisualComponent3D::getColor() const
 {
     return m_color;
-
-}   // GetColor
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the alpha
 ************************************************************************/
-void CVisualComponent3D::SetAlpha( float alpha )
+void CVisualComponent3D::setAlpha( float alpha )
 {
     m_color.a = alpha;
+}
 
-}   // SetAlpha
-
-float CVisualComponent3D::GetAlpha() const
+float CVisualComponent3D::getAlpha() const
 {
     return m_color.a;
-
-}   // GetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Set the default color
 ************************************************************************/
-void CVisualComponent3D::SetDefaultColor()
+void CVisualComponent3D::setDefaultColor()
 {
     m_color = m_visualData.GetColor();
-
-}   // SetDefaultColor
+}

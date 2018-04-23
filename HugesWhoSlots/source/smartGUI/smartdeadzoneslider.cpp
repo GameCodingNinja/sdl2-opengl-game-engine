@@ -14,37 +14,28 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CSmartDeadZoneSlider::CSmartDeadZoneSlider( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
 *    decs:  Handle events
 ****************************************************************************/
-void CSmartDeadZoneSlider::HandleEvent( const SDL_Event & rEvent )
+void CSmartDeadZoneSlider::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
-        (*dynamic_cast<CUISlider *>(m_pUIControl)).SetSlider( CSettings::Instance().GetGamePadStickDeadZone() );
-
-}   // HandleEvent
+        (*dynamic_cast<CUISlider *>(m_pUIControl)).setSlider( CSettings::Instance().GetGamePadStickDeadZone() );
+}
 
 
 /***************************************************************************
 *    decs:  Called when the control is executed - Enable/disable the apply btn
 ****************************************************************************/
-void CSmartDeadZoneSlider::Execute()
+void CSmartDeadZoneSlider::execute()
 {
-    EnableDisableApplyBtn();
-
-}   // Execute
-
-
-
-
-
-
-
+    enableDisableApplyBtn();
+}

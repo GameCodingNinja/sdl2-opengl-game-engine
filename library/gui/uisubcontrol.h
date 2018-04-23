@@ -32,104 +32,104 @@ public:
     virtual ~CUISubControl();
     
     // Init control
-    virtual void Init() override;
+    virtual void init() override;
     
     // Do some cleanup
-    virtual void CleanUp() override;
+    virtual void cleanUp() override;
 
     // Update the control
-    virtual void Update() override;
+    virtual void update() override;
 
     // Transform the control
     virtual void transform( const CObject2D & object ) override;
 
     // Render the control
-    virtual void Render( const CMatrix & matrix ) override;
+    virtual void render( const CMatrix & matrix ) override;
 
     // Handle events
-    virtual void HandleEvent( const SDL_Event & rEvent ) override;
+    virtual void handleEvent( const SDL_Event & rEvent ) override;
 
     // Reset the control to inactive if its not disabled
-    virtual void Reset( bool complete = false ) override;
+    virtual void reset( bool complete = false ) override;
 
     // Handle the select action
-    virtual bool HandleSelectAction( const CSelectMsgCracker & msgCracker ) override;
+    virtual bool handleSelectAction( const CSelectMsgCracker & msgCracker ) override;
 
     // Set the first inactive control to be active
-    virtual bool ActivateFirstInactiveControl() override;
+    virtual bool activateFirstInactiveControl() override;
     
     // Deactivate the control
-    virtual void DeactivateControl() override;
+    virtual void deactivateControl() override;
 
     // Get the pointer to the control if found
-    virtual CUIControl * FindControl( const std::string & name ) override;
-    virtual CUIControl * FindControl( void * pVoid ) override;
+    virtual CUIControl * findControl( const std::string & name ) override;
+    virtual CUIControl * findControl( void * pVoid ) override;
     
     // Get the pointer to the subcontrol if found
-    virtual CUIControl * FindSubControl( const std::string & name );
-    virtual CUIControl * FindSubControl( void * pVoid );
+    virtual CUIControl * findSubControl( const std::string & name );
+    virtual CUIControl * findSubControl( void * pVoid );
 
     // Get the sub control via index
-    virtual CUIControl * GetSubControl( uint index = 0 );
+    virtual CUIControl * getSubControl( uint index = 0 );
     
     // Handle the mouse move
-    virtual bool OnMouseMove( const SDL_Event & rEvent ) override;
+    virtual bool onMouseMove( const SDL_Event & rEvent ) override;
     
     // Check if control is a sub control
-    virtual bool IsSubControl() const override;
+    virtual bool isSubControl() const override;
     
     // Disable the control
-    virtual void DisableControl() override;
+    virtual void disableControl() override;
     
     // Enable the control to the inactive state
-    virtual void EnableControl() override;
+    virtual void enableControl() override;
     
     // Set the alpha value of this menu
-    virtual void SetAlpha( float alpha ) override;
+    virtual void setAlpha( float alpha ) override;
     
     // Get the pointer to the active control
-    virtual CUIControl * GetPtrToActiveControl() override;
+    virtual CUIControl * getPtrToActiveControl() override;
 
 protected:
 
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & controlNode ) override;
+    virtual void loadControlFromNode( const XMLNode & controlNode ) override;
 
     // Handle message
-    virtual void OnStateChange( const SDL_Event & rEvent ) override;
+    virtual void onStateChange( const SDL_Event & rEvent ) override;
     
     // Handle the sub control mouse move
-    virtual bool OnSubControlMouseMove( const SDL_Event & rEvent );
+    virtual bool onSubControlMouseMove( const SDL_Event & rEvent );
 
     // Handle Action messages
-    virtual void OnUpAction( const SDL_Event & rEvent );
-    virtual void OnDownAction( const SDL_Event & rEvent );
-    virtual void OnLeftAction( const SDL_Event & rEvent );
-    virtual void OnRightAction( const SDL_Event & rEvent );
+    virtual void onUpAction( const SDL_Event & rEvent );
+    virtual void onDownAction( const SDL_Event & rEvent );
+    virtual void onLeftAction( const SDL_Event & rEvent );
+    virtual void onRightAction( const SDL_Event & rEvent );
 
     // Handle Scroll messages
-    virtual void OnUpScroll( const SDL_Event & rEvent );
-    virtual void OnDownScroll( const SDL_Event & rEvent );
-    virtual void OnLeftScroll( const SDL_Event & rEvent );
-    virtual void OnRightScroll( const SDL_Event & rEvent );
+    virtual void onUpScroll( const SDL_Event & rEvent );
+    virtual void onDownScroll( const SDL_Event & rEvent );
+    virtual void onLeftScroll( const SDL_Event & rEvent );
+    virtual void onRightScroll( const SDL_Event & rEvent );
     
     // Handle Tab messages
-    virtual void OnTabLeft( const SDL_Event & rEvent );
-    virtual void OnTabRight( const SDL_Event & rEvent );
+    virtual void onTabLeft( const SDL_Event & rEvent );
+    virtual void onTabRight( const SDL_Event & rEvent );
     
     // Deactivate the sub control
-    virtual void DeactivateSubControl();
+    virtual void deactivateSubControl();
 
 private:
 
     // Find the reference nodes
-    void FindNodes(
+    void findNodes(
         const XMLNode & node,
         int nodeIndex,
         NavHelperMap & navNodeMap );
 
     // Find the reference nodes
-    void SetNodes(
+    void setNodes(
         const XMLNode & node,
         int nodeIndex,
         std::string attr,
@@ -139,7 +139,7 @@ private:
 private:
 
     // Navigate the menu
-    void NavigateMenu( CUIControlNavNode::ENavNode navNode );
+    void navigateMenu( CUIControlNavNode::ENavNode navNode );
 
 protected:
 

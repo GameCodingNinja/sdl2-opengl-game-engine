@@ -46,98 +46,98 @@ public:
     virtual ~CMenu();
 
     // Load the menu info from XML file
-    void LoadFromXML( const std::string & filePath );
+    void loadFromXML( const std::string & filePath );
     
     // Init the menu
-    void Init();
+    void init();
     
     // Cleanup the menu controls. Currently only for font usage
-    void CleanUp();
+    void cleanUp();
 
     // Activate this menu because it's probably a root menu
-    void ActivateMenu();
+    void activateMenu();
 
     // Update the menu
-    void Update();
+    void update();
 
     // Transform the menu
     void transform() override;
     void transform( const CObject2D & object ) override;
 
     // Get the name of the menu
-    const std::string & GetName() const;
+    const std::string & getName() const;
 
     // do the render
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
 
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent );
 
     // Reset all controls
-    void Reset();
+    void reset();
 
     // Get the pointer to the control in question
-    CUIControl * GetPtrToControl( const std::string & nameStr );
+    CUIControl * getPtrToControl( const std::string & nameStr );
 
     // Get the pointer to the active control
-    CUIControl * GetPtrToActiveControl();
+    CUIControl * getPtrToActiveControl();
 
     // Load the dynamic offset data from node
-    void LoadDynamicOffsetFromNode( const XMLNode & node );
+    void loadDynamicOffsetFromNode( const XMLNode & node );
 
     // Set the dynamic position
-    void ResetDynamicPos();
+    void resetDynamicPos();
 
     // Does this menu use dynamic offsets
-    bool IsDynamicOffset();
+    bool isDynamicOffset();
 
     // Get the scroll params
-    CScrollParam & GetScrollParam( int msg );
+    CScrollParam & getScrollParam( int msg );
     
     // Set the smart menu pointer. This class owns the pointer
-    void SetSmartGui( class CSmartGuiMenu * pSmartGuiMenu );
+    void setSmartGui( class CSmartGuiMenu * pSmartGuiMenu );
     
     // Do any smart create
-    void SmartCreate();
+    void smartCreate();
     
     // Is the menu idle
-    bool IsIdle();
+    bool isIdle();
     
     // Is the menu active
-    bool IsActive();
+    bool isActive();
     
     // Set/Get the alpha value of this menu
-    void SetAlpha( float alpha );
-    float GetAlpha();
+    void setAlpha( float alpha );
+    float getAlpha();
 
 private:
     
     // Set the dynamic position
-    void SetDynamicPos();
+    void setDynamicPos();
     
     // Init the script functions
-    void InitScriptFunctions( const XMLNode & node );
+    void initScriptFunctions( const XMLNode & node );
 
     // Load a static sprite from an XML node
-    void LoadStaticSpriteFromNode( const XMLNode & node );
+    void loadStaticSpriteFromNode( const XMLNode & node );
 
     // Load static controls from an XML node
-    void LoadStaticControlFromNode( XMLNode & node );
+    void loadStaticControlFromNode( XMLNode & node );
 
     // Load mouse only controls from an XML node
-    void LoadMouseOnlyControlFromNode( const XMLNode & node );
+    void loadMouseOnlyControlFromNode( const XMLNode & node );
 
     // Load a control from an XML node
-    void LoadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap );
+    void loadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap );
 
     // Find the reference nodes
-    void FindNodes(
+    void findNodes(
         const XMLNode & node,
         int nodeIndex,
         NavHelperMap & navNodeMap );
 
     // Find the reference nodes
-    void SetNodes(
+    void setNodes(
         const XMLNode & node,
         int nodeIndex,
         std::string attr,
@@ -145,28 +145,28 @@ private:
         NavHelperMap & navNodeMap );
 
     // Navigate the menu
-    void NavigateMenu( CUIControlNavNode::ENavNode navNodeAction );
+    void navigateMenu( CUIControlNavNode::ENavNode navNodeAction );
 
     // Message handlers
-    void OnUpAction( const SDL_Event & rEvent );
-    void OnDownAction( const SDL_Event & rEvent );
-    void OnLeftAction( const SDL_Event & rEvent );
-    void OnRightAction( const SDL_Event & rEvent );
-    void OnSelectAction( const SDL_Event & rEvent );
-    void OnSetActiveControl( const SDL_Event & rEvent );
-    void OnReactivate( const SDL_Event & rEvent );
-    void OnTransIn( const SDL_Event & rEvent );
-    void OnTransOut( const SDL_Event & rEvent );
-    void OnMouseMove( const SDL_Event & rEvent );
+    void onUpAction( const SDL_Event & rEvent );
+    void onDownAction( const SDL_Event & rEvent );
+    void onLeftAction( const SDL_Event & rEvent );
+    void onRightAction( const SDL_Event & rEvent );
+    void onSelectAction( const SDL_Event & rEvent );
+    void onSetActiveControl( const SDL_Event & rEvent );
+    void onReactivate( const SDL_Event & rEvent );
+    void onTransIn( const SDL_Event & rEvent );
+    void onTransOut( const SDL_Event & rEvent );
+    void onMouseMove( const SDL_Event & rEvent );
     
     // Prepare the script function to run
-    void Prepare( const std::string & scriptFuncId );
+    void prepare( const std::string & scriptFuncId );
 
     // Set the first inactive control to be active
-    void ActivateFirstInactiveControl();
+    void activateFirstInactiveControl();
     
     // Do any smart event handling
-    void SmartHandleEvent( const SDL_Event & rEvent );
+    void smartHandleEvent( const SDL_Event & rEvent );
 
 private:
 

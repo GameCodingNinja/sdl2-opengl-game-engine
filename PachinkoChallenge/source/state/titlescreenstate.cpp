@@ -36,8 +36,8 @@ CTitleScreenState::CTitleScreenState() :
 void CTitleScreenState::Init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().Allow();
-    CMenuManager::Instance().ActivateTree( "title_screen_tree");
+    CMenuManager::Instance().allow();
+    CMenuManager::Instance().activateTree( "title_screen_tree");
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );

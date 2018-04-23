@@ -38,24 +38,23 @@ CUISlider::CUISlider( const std::string & group ) :
     m_pressType( NDefs::EAP_IDLE)
 {
     m_type = NUIControl::ECT_SLIDER;
-
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CUISlider::~CUISlider()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the control info from XML node
 ************************************************************************/
-void CUISlider::LoadFromNode( const XMLNode & node )
+void CUISlider::loadFromNode( const XMLNode & node )
 {
-    CUISubControl::LoadFromNode( node );
+    CUISubControl::loadFromNode( node );
 
     // Get the slider specific settings
     XMLNode settingsNode = node.getChildNode( "settings" );
@@ -81,22 +80,21 @@ void CUISlider::LoadFromNode( const XMLNode & node )
             if( std::strcmp(settingsNode.getAttribute( "displayValueAsInt" ), "true") == 0 )
                 m_displayValueAsInt = true;
     }
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
-*  
+*
 *    param: node - XML node
 ************************************************************************/
-void CUISlider::LoadControlFromNode( const XMLNode & node )
+void CUISlider::loadControlFromNode( const XMLNode & node )
 {
     // Have the parent load it's stuff
-    CUISubControl::LoadControlFromNode( node );
+    CUISubControl::loadControlFromNode( node );
 
     // Get the position of the slider button as the default position
-    m_defaultPos = GetSubControl()->getPos();
+    m_defaultPos = getSubControl()->getPos();
 
     // Get the slider specific settings
     XMLNode settingsNode = node.getChildNode( "settings" );
@@ -105,239 +103,214 @@ void CUISlider::LoadControlFromNode( const XMLNode & node )
         if( settingsNode.isAttributeSet( "maxTravelDistPixels" ) )
             m_travelDistPixels = atof(settingsNode.getAttribute( "maxTravelDistPixels" ));
     }
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Init the control
 ************************************************************************/
-void CUISlider::Init()
+void CUISlider::init()
 {
-    CUIControl::Init();
-    
-    UpdateSlider();
-    
-}   // Init
+    CUIControl::init();
+
+    updateSlider();
+}
 
 
 /************************************************************************
 *    desc:  Handle OnLeftAction message
 ************************************************************************/
-void CUISlider::OnLeftAction( const SDL_Event & rEvent )
+void CUISlider::onLeftAction( const SDL_Event & rEvent )
 {
     // Handle the slider change
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandleSliderChange( -m_incValue, true );
-
-}   // OnLeftAction
+        handleSliderChange( -m_incValue, true );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightAction message
 ************************************************************************/
-void CUISlider::OnRightAction( const SDL_Event & rEvent )
+void CUISlider::onRightAction( const SDL_Event & rEvent )
 {
     // Handle the slider change
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandleSliderChange( m_incValue, true );
-
-}   // OnRightAction
+        handleSliderChange( m_incValue, true );
+}
 
 /************************************************************************
 *    desc:  Handle OnLeftScroll message
 ************************************************************************/
-void CUISlider::OnLeftScroll( const SDL_Event & rEvent )
+void CUISlider::onLeftScroll( const SDL_Event & rEvent )
 {
-    HandleSliderChange( -m_incValue );
-
-}   // OnLeftScrol
+    handleSliderChange( -m_incValue );
+}
 
 /************************************************************************
 *    desc:  Handle OnRightScroll message
 ************************************************************************/
-void CUISlider::OnRightScroll( const SDL_Event & rEvent )
+void CUISlider::onRightScroll( const SDL_Event & rEvent )
 {
-    HandleSliderChange( m_incValue );
-
-}   // OnRightScroll
+    handleSliderChange( m_incValue );
+}
 
 /************************************************************************
 *    desc:  Handle OnMouseMove message
 ************************************************************************/
-bool CUISlider::OnMouseMove( const SDL_Event & rEvent )
+bool CUISlider::onMouseMove( const SDL_Event & rEvent )
 {
-    bool result = CUISubControl::OnMouseMove( rEvent );
-    
-    if( IsActive() && (m_pressType == NDefs::EAP_DOWN) )
+    bool result = CUISubControl::onMouseMove( rEvent );
+
+    if( isActive() && (m_pressType == NDefs::EAP_DOWN) )
     {
         const float oneOverAspectRatio(1.f / CSettings::Instance().GetOrthoAspectRatio().getH());
-        
+
         if( m_orientation == EO_HORIZONTAL )
-            IncSliderMovePos( (float)rEvent.motion.xrel * oneOverAspectRatio );
+            incSliderMovePos( (float)rEvent.motion.xrel * oneOverAspectRatio );
         else
-            IncSliderMovePos( (float)rEvent.motion.yrel * oneOverAspectRatio );
+            incSliderMovePos( (float)rEvent.motion.yrel * oneOverAspectRatio );
 
-        SmartExecuteAction();
+        smartExecuteAction();
     }
-    
-    return result;
 
-}   // OnMouseMove
+    return result;
+}
 
 
 /************************************************************************
 *    desc:  Handle the select action
 ************************************************************************/
-bool CUISlider::HandleSelectAction( const CSelectMsgCracker & msgCracker )
+bool CUISlider::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
-    bool result( IsActive() && msgCracker.IsDeviceMouse() && IsPointInControl( msgCracker.GetPos() ) );
-    if( result && (msgCracker.GetPressType() == GetMouseSelectType()) )
+    bool result( isActive() && msgCracker.isDeviceMouse() && isPointInControl( msgCracker.getPos() ) );
+    if( result && (msgCracker.getPressType() == getMouseSelectType()) )
     {
-        // Get the press type to know if we need to move the slider 
+        // Get the press type to know if we need to move the slider
         // along with the mouse move
-        m_pressType = msgCracker.GetPressType();
-        
-        if( msgCracker.IsPressDown() )
+        m_pressType = msgCracker.getPressType();
+
+        if( msgCracker.isPressDown() )
         {
-            PrepareControlScriptFunction( NUIControl::ECS_SELECTED );
+            prepareControlScriptFunction( NUIControl::ECS_SELECTED );
 
             CPoint<float> dif =
-                (msgCracker.GetPos() - GetSubControl()->GetCollisionPos()) * 
+                (msgCracker.getPos() - getSubControl()->getCollisionPos()) *
                     (1.f / CSettings::Instance().GetOrthoAspectRatio().getH());
 
             if( m_orientation == EO_HORIZONTAL )
-                IncSliderMovePos( dif.x );
+                incSliderMovePos( dif.x );
             else
-                IncSliderMovePos( dif.y );
+                incSliderMovePos( dif.y );
 
-            SmartExecuteAction();
+            smartExecuteAction();
         }
     }
-    else if( msgCracker.GetPressType() != GetMouseSelectType() )
+    else if( msgCracker.getPressType() != getMouseSelectType() )
     {
         m_pressType = NDefs::EAP_IDLE;
     }
 
     return result;
-
-}   // HandleSelectAction
+}
 
 
 /************************************************************************
 *    desc:  Deactivate the control
 ************************************************************************/
-void CUISlider::DeactivateControl()
+void CUISlider::deactivateControl()
 {
-    CUISubControl::DeactivateControl();
+    CUISubControl::deactivateControl();
 
     m_pressType = NDefs::EAP_IDLE;
-
-}   // DeactivateControl
+}
 
 
 /************************************************************************
 *    desc:  Handle the slider change
 ************************************************************************/
-void CUISlider::HandleSliderChange( float value, bool prepareOnSelect )
+void CUISlider::handleSliderChange( float value, bool prepareOnSelect )
 {
-    if( IsActive() )
+    if( isActive() )
     {
         if( prepareOnSelect )
-            PrepareControlScriptFunction( NUIControl::ECS_SELECTED );
+            prepareControlScriptFunction( NUIControl::ECS_SELECTED );
 
         // Send a message to blink the button
-        NGenFunc::DispatchEvent( 
+        NGenFunc::DispatchEvent(
             NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
             NUIControl::ECS_SELECTED,
-            GetSubControl() );
+            getSubControl() );
 
-        IncSlider(value);
+        incSlider(value);
 
-        SmartExecuteAction();
+        smartExecuteAction();
     }
-
-}   // HandleSliderChange
+}
 
 
 /************************************************************************
 *    desc:  Set the slider min value
-*  
-*    param: value
 ************************************************************************/
-void CUISlider::SetMinValue( float value )
+void CUISlider::setMinValue( float value )
 {
     m_minValue = value;
-
-}   // SetMinValue
+}
 
 
 /************************************************************************
 *    desc:  Set the slider max value
-*  
-*    param: value
 ************************************************************************/
-void CUISlider::SetMaxValue( float value )
+void CUISlider::setMaxValue( float value )
 {
     m_maxValue = value;
-
-}   // SetMaxValue
+}
 
 
 /************************************************************************
 *    desc:  Set the slider inc value
-*  
-*    param: float sliderPos
 ************************************************************************/
-void CUISlider::SetSlider( float value )
+void CUISlider::setSlider( float value )
 {
     m_curValue = value;
 
     // Update the slider
-    UpdateSlider();
-
-}   // SetSlider
+    updateSlider();
+}
 
 
 /************************************************************************
 *    desc:  Set the slider inc value
-*  
-*    param: float slider value
 ************************************************************************/
-void CUISlider::IncSlider( float value )
+void CUISlider::incSlider( float value )
 {
     m_curValue += value;
 
     // Update the slider
-    UpdateSlider();
-
-}   // IncSlider
+    updateSlider();
+}
 
 
 /************************************************************************
 *    desc:  Inc the slider based on mouse movement
-*  
-*    param: float slider value
 ************************************************************************/
-void CUISlider::IncSliderMovePos( float value )
+void CUISlider::incSliderMovePos( float value )
 {
     m_curValue += value * ((m_maxValue - m_minValue) / m_travelDistPixels);
 
     // Update the slider
-    UpdateSlider();
-
-}   // IncSliderMovePos
+    updateSlider();
+}
 
 
 /************************************************************************
 *    desc:  Update the slider
 ************************************************************************/
-void CUISlider::UpdateSlider()
+void CUISlider::updateSlider()
 {
     // Cap current value to it's range
-    CapSliderValue();
+    capSliderValue();
 
     // Set the position of the slider
-    SetSliderPos();
+    setSliderPos();
 
     // Set the slider label if there is one
     if( !m_stringVec.empty() )
@@ -353,16 +326,15 @@ void CUISlider::UpdateSlider()
         else
             valueStr = boost::str( boost::format(formatStr) % m_curValue );
 
-        CreateFontString( valueStr );
+        createFontString( valueStr );
     }
-
-}   // UpdateSlider
+}
 
 
 /************************************************************************
 *    desc:  Cap the slider value
 ************************************************************************/
-void CUISlider::CapSliderValue()
+void CUISlider::capSliderValue()
 {
     // Cap current value to range
     if( m_curValue < m_minValue )
@@ -370,14 +342,13 @@ void CUISlider::CapSliderValue()
 
     else if( m_curValue > m_maxValue )
         m_curValue = m_maxValue;
-
-}   // CapSliderValue
+}
 
 
 /************************************************************************
 *    desc:  Set the position of the slider
 ************************************************************************/
-void CUISlider::SetSliderPos()
+void CUISlider::setSliderPos()
 {
     if( std::fabs(m_maxValue) > 0.001f )
     {
@@ -386,29 +357,26 @@ void CUISlider::SetSliderPos()
         float pos = startPos + (pixelsPerValue * (m_curValue - m_minValue));
 
         if( m_orientation == EO_HORIZONTAL )
-            GetSubControl()->setPos( m_defaultPos + CPoint<float>(pos,0,0) );
+            getSubControl()->setPos( m_defaultPos + CPoint<float>(pos,0,0) );
         else
-            GetSubControl()->setPos( m_defaultPos + CPoint<float>(0,-pos,0) );
+            getSubControl()->setPos( m_defaultPos + CPoint<float>(0,-pos,0) );
     }
-
-}   // SetSliderPos
+}
 
 
 /************************************************************************
 *    desc:  Cap the slider value
 ************************************************************************/
-float CUISlider::GetValue()
+float CUISlider::getValue()
 {
     return m_curValue;
-
-}   // GetValue
+}
 
 
 /************************************************************************
 *    desc:  Is the mouse down
 ************************************************************************/
-bool CUISlider::IsMouseDown()
+bool CUISlider::isMouseDown()
 {
     return (m_pressType == NDefs::EAP_DOWN);
-
-}   // IsMouseDown
+}

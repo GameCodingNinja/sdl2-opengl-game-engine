@@ -177,7 +177,7 @@ void CStartUpState::AssetLoad()
     CMenuManager::Instance().LoadListTable( "data/objects/2d/menu/menuListTable.lst" );
     
     // Load the menu action list
-    CMenuManager::Instance().LoadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
+    CMenuManager::Instance().loadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
     
     // Load the script list table
     CScriptManager::Instance().LoadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
@@ -211,7 +211,7 @@ void CStartUpState::AssetLoad()
     CSpriteSheetMgr::Instance().Clear();
     
     // Load the menu group
-    CMenuManager::Instance().LoadGroup("(menu)");
+    CMenuManager::Instance().loadGroup("(menu)");
     
     // Free up any XML's that have been loaded up to this point
     CXMLPreloader::Instance().Clear();

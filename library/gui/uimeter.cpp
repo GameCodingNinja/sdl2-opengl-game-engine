@@ -26,7 +26,7 @@
 #include <map>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CUIMeter::CUIMeter( const std::string & group ) :
     CUIControl( group ),
@@ -42,16 +42,15 @@ CUIMeter::CUIMeter( const std::string & group ) :
     m_scaleType(EST_AXIS)
 {
     m_type = NUIControl::ECT_METER;
-
-}   // Constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CUIMeter::~CUIMeter()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
@@ -59,26 +58,26 @@ CUIMeter::~CUIMeter()
 *
 *    param: node - XML node
 ************************************************************************/
-void CUIMeter::LoadFromNode( const XMLNode & node )
+void CUIMeter::loadFromNode( const XMLNode & node )
 {
-    CUIControl::LoadFromNode( node );
-    
+    CUIControl::loadFromNode( node );
+
     // Get the bang range info
     const XMLNode bangRangeNode = node.getChildNode( "bangRange" );
     if( !bangRangeNode.isEmpty() )
     {
         std::map<std::string, EBangType> bangTypeMap
             {{"rampUp", EBT_RAMP_UP}, {"linear", EBT_LINEAR}, {"hybrid", EBT_HYBRID}};
-        
+
         m_bangRangeVec.reserve( bangRangeNode.nChildNode() );
-        
+
         // Get the fast bang time
         m_fastBangTime = std::atoi(bangRangeNode.getAttribute( "fastBangTime" ));
-        
+
         // Set the scale type - How the font is scaled to fit within the meter
         if( std::strcmp( bangRangeNode.getAttribute("scaleType"), "accurate" ) == 0 )
             m_scaleType = EST_ACCURATE;
-        
+
         for( int i = 0; i < bangRangeNode.nChildNode(); ++i )
         {
             const XMLNode rangeNode = bangRangeNode.getChildNode(i);
@@ -91,113 +90,108 @@ void CUIMeter::LoadFromNode( const XMLNode & node )
                 std::atof(rangeNode.getAttribute( "slowStartTime" )) );
         }
     }
-    
+
     // Get the max size of the font string to fit within this meter.
     // As the string get's bigger, it will be scaled to fit.
     m_maxFontStrSize = NParseHelper::LoadSize( node );
-    
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
 ************************************************************************/
-void CUIMeter::LoadControlFromNode( const XMLNode & controlNode )
+void CUIMeter::loadControlFromNode( const XMLNode & controlNode )
 {
     // Call the parent
-    CUIControl::LoadControlFromNode( controlNode );
-    
+    CUIControl::loadControlFromNode( controlNode );
+
     // Find the sprite that renders the font
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.getVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().isFontSprite() )
         {
             m_pSprite = &iter;
             break;
         }
     }
-    
+
     if( m_pSprite == nullptr )
         throw NExcept::CCriticalException("UI Meter Init Error!",
             boost::str( boost::format("UI Meter doesn't have a sprite for rendering a font string (%s).\n\n%s\nLine: %s")
                 % m_name % __FUNCTION__ % __LINE__ ));
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Set the amount to the meter without banging up
 ************************************************************************/
-void CUIMeter::Set( const double amount )
+void CUIMeter::set( const double amount )
 {
     if( ((int64_t)amount > 0) && ((int64_t)amount != (int64_t)m_currentValue) )
     {
         m_lastValue = m_currentValue;
         m_currentValue = m_targetValue = amount;
-        
+
         // Display the value in the meter
-        DisplayValue();
+        displayValue();
     }
-    
-}   // Set
+}
 
 
 /************************************************************************
 *    desc:  Start the bang range
 ************************************************************************/
-void CUIMeter::StartBangUp( const double amount )
+void CUIMeter::startBangUp( const double amount )
 {
     if( (int64_t)amount != (int64_t)m_currentValue )
     {
         m_targetValue = amount;
         m_bangUp = true;
 
-        SetBangRange();
+        setBangRange();
     }
-    
-}   // StartBangUp
+}
 
 
 /************************************************************************
 *    desc:  Set the bang range
 ************************************************************************/
-void CUIMeter::SetBangRange()
+void CUIMeter::setBangRange()
 {
     bool found(false);
-    
+
     for( auto & iter : m_bangRangeVec )
     {
         if( (int64_t)(m_targetValue - m_currentValue) <= iter.m_target )
         {
             found = true;
-            InitBangRange( iter );
+            initBangRange( iter );
             break;
         }
     }
-    
+
     if( !found )
-        InitBangRange( m_bangRangeVec.back() );
-    
-}   // SetBangRange
+        initBangRange( m_bangRangeVec.back() );
+}
 
 
 /************************************************************************
 *    desc:  Init the bang range
 ************************************************************************/
-void CUIMeter::InitBangRange( const CBangRange & bangRange )
+void CUIMeter::initBangRange( const CBangRange & bangRange )
 {
     m_bangRange = bangRange;
     m_terminalVelocity = 0.0;
     m_acceleration = 0.0;
     m_impulse = 0.0;
     m_bangScaleAdjustment.set(1,1);
-    
+
     m_pSprite->setScale( CPoint<float>(1,1,1) );
-    
+
     m_velocity = bangRange.m_velocity / 1000.0;
-    
+
     double range( m_targetValue - m_currentValue );
-    
+
     // Ramp up from start to finish
     if( bangRange.m_bangType == EBT_RAMP_UP )
     {
@@ -216,49 +210,47 @@ void CUIMeter::InitBangRange( const CBangRange & bangRange )
         m_impulse = range / (bangRange.m_estimatedTime * bangRange.m_estimatedTime * 500.0);
         m_acceleration = m_impulse;
     }
-    
+
     // Set the timer to allow the bang-up to start off slowly
     m_startUpTimer.Set( bangRange.m_slowStartTime );
-    
+
     // Prepare the start script function if one exists
     m_pSprite->prepareFuncId( "start" );
-    
-}   // InitBangRange
+}
 
 
 /************************************************************************
 *    desc:  Do a fast bang
 ************************************************************************/
-void CUIMeter::FastBang()
+void CUIMeter::fastBang()
 {
     if( m_bangUp )
     {
         double acceleration = (m_targetValue - m_currentValue) / m_fastBangTime;
-        
+
         // use the fast bang acceleration if the current one is less
         if( m_acceleration < acceleration )
             m_acceleration = acceleration;
     }
-    
-}   // FastBang
+}
 
 
 /************************************************************************
 *    desc:  Update the control
 ************************************************************************/
-void CUIMeter::Update()
+void CUIMeter::update()
 {
-    CUIControl::Update();
-    
+    CUIControl::update();
+
     if( m_bangUp )
     {
         const double elapsedTime = CHighResTimer::Instance().GetElapsedTime();
-        
+
         // Ramp up from start to finish
         if( m_bangRange.m_bangType == EBT_RAMP_UP )
         {
             m_currentValue += m_velocity * elapsedTime;
-            
+
             if( m_startUpTimer.Expired() )
             {
                 m_velocity += m_acceleration * elapsedTime;
@@ -273,7 +265,7 @@ void CUIMeter::Update()
         else if( m_bangRange.m_bangType == EBT_LINEAR )
         {
             m_currentValue += m_velocity;
-            
+
             if( m_startUpTimer.Expired() )
                 m_velocity += m_acceleration * elapsedTime;
         }
@@ -281,7 +273,7 @@ void CUIMeter::Update()
         else if( m_bangRange.m_bangType == EBT_HYBRID )
         {
             m_currentValue += m_velocity;
-            
+
             if( m_startUpTimer.Expired() )
             {
                 if( m_terminalVelocity > m_acceleration )
@@ -299,34 +291,33 @@ void CUIMeter::Update()
                 m_velocity += m_acceleration * elapsedTime;
             }
         }
-        
+
         // Only update the meter if the value is different
         if( (int64_t)m_lastValue != (int64_t)m_currentValue )
         {
             m_lastValue = m_currentValue;
-            
+
             // check if the bang up has finished
             if( m_currentValue > m_targetValue )
             {
                 m_currentValue = m_targetValue;
                 m_bangUp = false;
-                
+
                 // Prepare the stop script function if one exists
                 m_pSprite->prepareFuncId( "stop" );
             }
-        
+
             // Display the value in the meter
-            DisplayValue();
+            displayValue();
         }
     }
-
-}   // Update
+}
 
 
 /************************************************************************
 *    desc:  Display the value in the meter
 ************************************************************************/
-void CUIMeter::DisplayValue()
+void CUIMeter::displayValue()
 {
     // Display the new value
     m_pSprite->createFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
@@ -353,29 +344,26 @@ void CUIMeter::DisplayValue()
             m_pSprite->setScale( scale );
         }
     }
-            
-}   // DisplayValue
+}
 
 
 /************************************************************************
 *    desc:  Is the meter banging
 ************************************************************************/
-bool CUIMeter::IsBanging()
+bool CUIMeter::isBanging()
 {
     return m_bangUp;
-    
-}   // IsBanging
+}
 
 
 /************************************************************************
 *    desc:  Clear the meter
 ************************************************************************/
-void CUIMeter::Clear()
+void CUIMeter::clear()
 {
     m_lastValue = m_currentValue = m_targetValue = 0;
     m_bangUp = false;
-    
+
     if( !m_pSprite->prepareFuncId( "clear" ) )
         m_pSprite->createFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
-
-}   // Clear
+}

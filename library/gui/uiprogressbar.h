@@ -29,32 +29,32 @@ public:
     virtual ~CUIProgressBar();
     
     // Load the initial info from XML node
-    void LoadFromNode( const XMLNode & node ) override;
+    void loadFromNode( const XMLNode & node ) override;
     
     // Load the control specific info from XML node
-    void LoadControlFromNode( const XMLNode & controlNode ) override;
+    void loadControlFromNode( const XMLNode & controlNode ) override;
     
     // Transform the control
     void transform( const CObject2D & object ) override;
     
     // do the render
-    void Render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix ) override;
     
     // Calculate the progress bar size and position
-    void SetSizePos();
+    void setSizePos();
     
     // Set/Get current value
-    void SetCurValue( float value );
-    float GetCurValue();
-    void IncCurValue( float value );
+    void setCurValue( float value );
+    float getCurValue();
+    void incCurValue( float value );
     
     // Set/Get min value
-    void SetMinValue( float value );
-    float GetMinValue();
+    void setMinValue( float value );
+    float getMinValue();
     
     // Set/Get max value
-    void SetMaxValue( float value );
-    float GetMaxValue();
+    void setMaxValue( float value );
+    float getMaxValue();
     
 private:
     

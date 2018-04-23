@@ -25,24 +25,24 @@ public:
     virtual ~CUIButtonList();
     
     // Load the initial info from XML node
-    void LoadFromNode( const XMLNode & node ) override;
+    void loadFromNode( const XMLNode & node ) override;
 
     // Set the first inactive control to be active
-    bool ActivateFirstInactiveControl() override;
+    bool activateFirstInactiveControl() override;
 
     // Update the display
-    void UpdateDisplay( int index );
+    void updateDisplay( int index );
 
     // Get the active index
-    int GetActiveIndex() const;
+    int getActiveIndex() const;
 
 protected:
 
     // Load the control specific info from XML node
-    void LoadControlFromNode( const XMLNode & node ) override;
+    void loadControlFromNode( const XMLNode & node ) override;
 
     // Handle message
-    void OnStateChange( const SDL_Event & rEvent ) override;
+    void onStateChange( const SDL_Event & rEvent ) override;
 
 private:
     
@@ -55,24 +55,24 @@ private:
     };
     
     // Inc/Dec control
-    void Inc();
-    void Dec();
+    void inc();
+    void dec();
 
     // Handle Action messages
-    virtual void OnLeftAction( const SDL_Event & rEvent ) override;
-    virtual void OnRightAction( const SDL_Event & rEvent ) override;
-    virtual void OnUpAction( const SDL_Event & rEvent ) override;
-    virtual void OnDownAction( const SDL_Event & rEvent ) override;
+    virtual void onLeftAction( const SDL_Event & rEvent ) override;
+    virtual void onRightAction( const SDL_Event & rEvent ) override;
+    virtual void onUpAction( const SDL_Event & rEvent ) override;
+    virtual void onDownAction( const SDL_Event & rEvent ) override;
 
     // Handle Scroll messages
-    virtual void OnLeftScroll( const SDL_Event & rEvent ) override;
-    virtual void OnRightScroll( const SDL_Event & rEvent ) override;
-    virtual void OnUpScroll( const SDL_Event & rEvent ) override;
-    virtual void OnDownScroll( const SDL_Event & rEvent ) override;
+    virtual void onLeftScroll( const SDL_Event & rEvent ) override;
+    virtual void onRightScroll( const SDL_Event & rEvent ) override;
+    virtual void onUpScroll( const SDL_Event & rEvent ) override;
+    virtual void onDownScroll( const SDL_Event & rEvent ) override;
 
     // Inc/Dec the list
-    void IncList();
-    void DecList();
+    void incList();
+    void decList();
 
 private:
 
@@ -84,7 +84,6 @@ private:
     
     // Indicates if the control responds to up, down, left or right
     CBitmask<uint> m_ActionMask;
-
 };
 
 #endif  // __ui_button_list_h__

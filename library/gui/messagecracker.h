@@ -20,50 +20,50 @@ public:
     { m_unionValue.m_uintValue = 0; }
 
     // Set/Get the press type
-    void SetPressType( uint value )
+    void setPressType( uint value )
     { m_unionValue.m_packedUint.m_pressType = value; }
-    NDefs::EActionPress GetPressType() const
+    NDefs::EActionPress getPressType() const
     { return NDefs::EActionPress(m_unionValue.m_packedUint.m_pressType); }
 
     // Set/Get the device Id
-    void SetDeviceId( uint value )
+    void setDeviceId( uint value )
     { m_unionValue.m_packedUint.m_deviceId = value; }
-    NDefs::EDeviceId GetDeviceId() const
+    NDefs::EDeviceId getDeviceId() const
     { return NDefs::EDeviceId(m_unionValue.m_packedUint.m_deviceId); }
 
     // Set/Get the x
-    void SetX( uint value )
+    void setX( uint value )
     { m_unionValue.m_packedUint.m_x = value; }
-    uint GetX() const
+    uint getX() const
     { return m_unionValue.m_packedUint.m_x; }
 
     // Set/Get the y
-    void SetY( uint value )
+    void setY( uint value )
     { m_unionValue.m_packedUint.m_y = value; }
-    uint GetY() const
+    uint getY() const
     { return m_unionValue.m_packedUint.m_y; }
 
     // Set/Get the packed uint
-    void SetPackedUnit( uint value )
+    void setPackedUnit( uint value )
     { m_unionValue.m_uintValue = value; }
-    uint GetPackedUnit() const
+    uint getPackedUnit() const
     { return m_unionValue.m_uintValue; }
     
     // Is this device a mouse?
-    bool IsDeviceMouse() const
-    { return (GetDeviceId() == NDefs::MOUSE); }
+    bool isDeviceMouse() const
+    { return (getDeviceId() == NDefs::MOUSE); }
     
     // Is the a press down?
-    bool IsPressDown() const
-    { return (GetPressType() == NDefs::EAP_DOWN); }
+    bool isPressDown() const
+    { return (getPressType() == NDefs::EAP_DOWN); }
     
     // Is the a press down?
-    bool IsPressUp() const
-    { return (GetPressType() == NDefs::EAP_UP); }
+    bool isPressUp() const
+    { return (getPressType() == NDefs::EAP_UP); }
     
     // Get the mouse position
-    CPoint<float> GetPos() const
-    { CPoint<float> pos( GetX(), GetY() );
+    CPoint<float> getPos() const
+    { CPoint<float> pos( getX(), getY() );
       return pos; }
 
 private:
@@ -81,8 +81,6 @@ private:
         uint m_uintValue;
 
     } m_unionValue;
-    
-    //CPoint<float> m_pos;
 };
 
 

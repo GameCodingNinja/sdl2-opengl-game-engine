@@ -20,13 +20,13 @@ public:
 
     // Called when the control is created
     // Sets the action ID string for the given device
-    void Create();
+    void create() override;
     
     // Called when the control is executed
-    void Execute();
+    void execute() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent ) override;
 
 };
 

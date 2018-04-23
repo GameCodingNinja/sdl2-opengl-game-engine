@@ -25,10 +25,10 @@ class iSmartGui
 public:
 
     // Called when the control is created
-    virtual void Create(){}
+    virtual void create(){}
 
     // Called during the handle user imput
-    virtual void HandleEvent( const SDL_Event & rEvent ){}
+    virtual void handleEvent( const SDL_Event & rEvent ){}
 };
 
 
@@ -61,7 +61,7 @@ public:
     CSmartGuiControl( CUIControl * pUIControl );
 
     // Called when the control is executed
-    virtual void Execute(){}
+    virtual void execute(){}
 
 protected:
 

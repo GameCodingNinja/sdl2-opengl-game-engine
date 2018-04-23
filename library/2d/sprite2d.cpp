@@ -58,8 +58,8 @@ void CSprite2D::load( const XMLNode & node )
     initScriptFunctions( node );
     
     // Load the font properties from XML node
-    if( m_visualComponent.IsFontSprite() )
-        m_visualComponent.LoadFontPropFromNode( node );
+    if( m_visualComponent.isFontSprite() )
+        m_visualComponent.loadFontPropFromNode( node );
 }
 
 void CSprite2D::load( const CSpriteData & spriteData )
@@ -71,8 +71,8 @@ void CSprite2D::load( const CSpriteData & spriteData )
     copyScriptFunctions( spriteData.getScriptFunctions() );
     
     // See if this sprite is used for rendering a font string
-    if( m_visualComponent.IsFontSprite() && (spriteData.getFontData() != nullptr) )
-        m_visualComponent.SetFontData( *spriteData.getFontData() );
+    if( m_visualComponent.isFontSprite() && (spriteData.getFontData() != nullptr) )
+        m_visualComponent.setFontData( *spriteData.getFontData() );
 }
 
 
@@ -82,8 +82,8 @@ void CSprite2D::load( const CSpriteData & spriteData )
 ************************************************************************/
 void CSprite2D::init()
 {
-    if( m_visualComponent.IsFontSprite() )
-        m_visualComponent.CreateFontString();
+    if( m_visualComponent.isFontSprite() )
+        m_visualComponent.createFontString();
 }
 
 
@@ -94,8 +94,8 @@ void CSprite2D::init()
 void CSprite2D::cleanUp()
 {
     // This is handled in the destructor but it doesn't hurt to handle it here as well.
-    if( m_visualComponent.IsFontSprite() )
-        m_visualComponent.DeleteFontVBO();
+    if( m_visualComponent.isFontSprite() )
+        m_visualComponent.deleteFontVBO();
     
     // Deleting the physics always needs to be done externally and
     // under the right conditions
@@ -221,13 +221,13 @@ void CSprite2D::physicsUpdate()
 void CSprite2D::render( const CMatrix & matrix )
 {
     if( isVisible() )
-        m_visualComponent.Render( m_matrix, matrix );
+        m_visualComponent.render( m_matrix, matrix );
 }
 
 void CSprite2D::render( const CCamera & camera )
 {
     if( isVisible() )
-        m_visualComponent.Render( m_matrix, camera.getFinalMatrix() );
+        m_visualComponent.render( m_matrix, camera.getFinalMatrix() );
 }
 
 
@@ -284,13 +284,13 @@ void CSprite2D::setAI( iAIBase * pAIBase )
 ************************************************************************/
 void CSprite2D::setColor( const CColor & color )
 {
-    m_visualComponent.SetColor( color );
+    m_visualComponent.setColor( color );
 }
 
 void CSprite2D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
-    m_visualComponent.SetColor( r, g, b, a );
+    m_visualComponent.setColor( r, g, b, a );
 }
 
 
@@ -299,7 +299,7 @@ void CSprite2D::setColor( float r, float g, float b, float a )
 ************************************************************************/
 void CSprite2D::setDefaultColor()
 {
-    m_visualComponent.SetColor( m_rObjectData.GetVisualData().GetColor() );
+    m_visualComponent.setColor( m_rObjectData.GetVisualData().GetColor() );
 }
 
 
@@ -308,7 +308,7 @@ void CSprite2D::setDefaultColor()
 ************************************************************************/
 const CColor & CSprite2D::getColor() const
 {
-    return m_visualComponent.GetColor();
+    return m_visualComponent.getColor();
 }
 
 
@@ -329,7 +329,7 @@ void CSprite2D::setAlpha( float alpha )
     if( alpha > 1.5 )
         alpha *= defs_RGB_TO_DEC;
 
-    m_visualComponent.SetAlpha( alpha );
+    m_visualComponent.setAlpha( alpha );
 }
 
 
@@ -338,7 +338,7 @@ void CSprite2D::setAlpha( float alpha )
 ************************************************************************/
 float CSprite2D::getAlpha() const
 {
-    return m_visualComponent.GetAlpha();
+    return m_visualComponent.getAlpha();
 }
 
 
@@ -356,7 +356,7 @@ float CSprite2D::getDefaultAlpha() const
 ************************************************************************/
 void CSprite2D::setDefaultAlpha()
 {
-    m_visualComponent.SetAlpha( m_rObjectData.GetVisualData().GetColor().getA() );
+    m_visualComponent.setAlpha( m_rObjectData.GetVisualData().GetColor().getA() );
 }
 
 
@@ -374,7 +374,7 @@ uint CSprite2D::getFrameCount() const
 ************************************************************************/
 uint CSprite2D::getCurrentFrame() const 
 {
-    return m_visualComponent.GetCurrentFrame();
+    return m_visualComponent.getCurrentFrame();
 }
 
 
@@ -383,9 +383,9 @@ uint CSprite2D::getCurrentFrame() const
 ************************************************************************/
 void CSprite2D::setFrame( uint index )
 {
-    if( m_visualComponent.GetCurrentFrame() != index )
+    if( m_visualComponent.getCurrentFrame() != index )
     {
-        m_visualComponent.SetFrame( index );
+        m_visualComponent.setFrame( index );
         
         if( m_rObjectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
             setCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().getGlyph(index).getCropOffset() );
@@ -398,7 +398,7 @@ void CSprite2D::setFrame( uint index )
 ************************************************************************/
 void CSprite2D::createFontString( const std::string & fontString )
 {
-    m_visualComponent.CreateFontString( fontString );
+    m_visualComponent.createFontString( fontString );
 }
 
 
@@ -407,7 +407,7 @@ void CSprite2D::createFontString( const std::string & fontString )
 ************************************************************************/
 const CSize<float> & CSprite2D::getFontSize() const
 {
-    return m_visualComponent.GetFontSize();
+    return m_visualComponent.getFontSize();
 }
 
 

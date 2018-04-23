@@ -56,8 +56,7 @@ CUIScrollBox::CUIScrollBox( const std::string & group ) :
     m_endScrollSelection(false)
 {
     m_type = NUIControl::ECT_SCROLL_BOX;
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -66,8 +65,7 @@ CUIScrollBox::CUIScrollBox( const std::string & group ) :
 CUIScrollBox::~CUIScrollBox()
 {
     NDelFunc::DeleteVectorPointers(m_pScrollControlVec);
-
-}   // destructor
+}
 
 
 /************************************************************************
@@ -75,13 +73,13 @@ CUIScrollBox::~CUIScrollBox()
 *
 *    param: node - XML node
 ************************************************************************/
-void CUIScrollBox::LoadFromNode( const XMLNode & node )
+void CUIScrollBox::loadFromNode( const XMLNode & node )
 {
-    CUISubControl::LoadFromNode( node );
+    CUISubControl::loadFromNode( node );
 
     // Init the slider
-    NGenFunc::DynCast<CUISlider>(GetSubControl())->SetMaxValue(m_maxMoveAmount);
-    NGenFunc::DynCast<CUISlider>(GetSubControl())->SetSlider();
+    NGenFunc::DynCast<CUISlider>(getSubControl())->setMaxValue(m_maxMoveAmount);
+    NGenFunc::DynCast<CUISlider>(getSubControl())->setSlider();
 
     // Get the scrolling info
     const XMLNode scrollNode = node.getChildNode( "scroll" );
@@ -96,18 +94,17 @@ void CUIScrollBox::LoadFromNode( const XMLNode & node )
 
     // Calc the start and end positions of what should
     // be viewable in the scroll box
-    SetStartEndPos();
-
-}   // LoadFromNode
+    setStartEndPos();
+}
 
 
 /************************************************************************
 *    desc:  Load the control specific info from XML node
 ************************************************************************/
-void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
+void CUIScrollBox::loadControlFromNode( const XMLNode & node )
 {
     // Call the parent
-    CUISubControl::LoadControlFromNode( node );
+    CUISubControl::loadControlFromNode( node );
 
     // Get the menu controls node
     const XMLNode menuControlsNode = node.getChildNode( "scrollBoxControlList" );
@@ -123,12 +120,12 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
 
         // Get the number of controls in this scroll box
         const int scrollControlCount = menuControlsNode.nChildNode( "control" );
-        
+
         m_pScrollControlVec.reserve( scrollControlCount );
 
         // Add the scroll control from node
         for( int i = 0; i < scrollControlCount; ++i )
-            AddScrollControlFromNode( menuControlsNode.getChildNode( "control", i ) );
+            addScrollControlFromNode( menuControlsNode.getChildNode( "control", i ) );
     }
 
     // Get the stencil mask node
@@ -137,7 +134,7 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
     {
         const std::string objectName = stencilMaskNode.getAttribute( "objectName" );
 
-        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( GetGroup(), objectName ) ) );
+        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( getGroup(), objectName ) ) );
 
         // Get the cull height
         m_cullHeight = (m_upStencilMaskSprite->getObjectData().GetSize().getW() + m_controlHeight) / 2;
@@ -145,8 +142,7 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
         // Load the transform data
         m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
     }
-
-}   // LoadControlFromNode
+}
 
 
 /************************************************************************
@@ -154,10 +150,10 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
 *           NOTE: This function recalulates the scroll box members because
 *                 it is also used for run-time dynamic scroll boxes
 ************************************************************************/
-CUIControl * CUIScrollBox::AddScrollControlFromNode( const XMLNode & node )
+CUIControl * CUIScrollBox::addScrollControlFromNode( const XMLNode & node )
 {
     // The pointer is placed within a vector for all controls
-    CUIControl * pCtrl = NUIControlFactory::Create( node, GetGroup() );
+    CUIControl * pCtrl = NUIControlFactory::Create( node, getGroup() );
     m_pScrollControlVec.push_back( pCtrl );
 
     // Get the position for this control
@@ -170,169 +166,157 @@ CUIControl * CUIScrollBox::AddScrollControlFromNode( const XMLNode & node )
     pCtrl->setPos( pos );
 
     // Init the control visual state
-    pCtrl->DeactivateControl();
+    pCtrl->deactivateControl();
 
     // Calculate the maximum scroll amount in pixels
     if( m_pScrollControlVec.size() > static_cast<uint>(m_visibleCount) )
         m_maxMoveAmount = (static_cast<int>(m_pScrollControlVec.size()) - m_visibleCount) * m_controlHeight;
 
     return pCtrl;
-
-}   // AddControlFromNode
+}
 
 
 /************************************************************************
 *    desc:  Init the control
 ************************************************************************/
-void CUIScrollBox::Init()
+void CUIScrollBox::init()
 {
-    CUISubControl::Init();
-    
+    CUISubControl::init();
+
     // Init all controls
     for( auto iter : m_pScrollControlVec )
-        iter->Init();
-    
-}   // Init
+        iter->init();
+}
 
 
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CUIScrollBox::CleanUp()
+void CUIScrollBox::cleanUp()
 {
-    CUISubControl::CleanUp();
-    
+    CUISubControl::cleanUp();
+
     // Init all controls
     for( auto iter : m_pScrollControlVec )
-        iter->CleanUp();
-    
-}   // CleanUp
+        iter->cleanUp();
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CUIScrollBox::HandleEvent( const SDL_Event & rEvent )
+void CUIScrollBox::handleEvent( const SDL_Event & rEvent )
 {
     // Call the parent
-    CUISubControl::HandleEvent( rEvent );
+    CUISubControl::handleEvent( rEvent );
 
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->HandleEvent( rEvent );
-
-}   // HandleEvent
+        m_pScrollControlVec[i]->handleEvent( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Handle OnUpAction message
 ************************************************************************/
-void CUIScrollBox::OnUpAction( const SDL_Event & rEvent )
+void CUIScrollBox::onUpAction( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandleKeyboardGamepadScroll( -1 );
+        handleKeyboardGamepadScroll( -1 );
 
     else if( rEvent.user.code == NDefs::EAP_UP )
         m_endScroll = true;
-
-}   // OnUpAction
+}
 
 /************************************************************************
 *    desc:  Handle OnDownAction message
 ************************************************************************/
-void CUIScrollBox::OnDownAction( const SDL_Event & rEvent )
+void CUIScrollBox::onDownAction( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandleKeyboardGamepadScroll( 1 );
+        handleKeyboardGamepadScroll( 1 );
 
     else if( rEvent.user.code == NDefs::EAP_UP )
         m_endScroll = true;
-
-}   // OnDownAction
+}
 
 /************************************************************************
 *    desc:  Handle OnUpScroll message
 ************************************************************************/
-void CUIScrollBox::OnUpScroll( const SDL_Event & rEvent )
+void CUIScrollBox::onUpScroll( const SDL_Event & rEvent )
 {
-    HandleKeyboardGamepadScroll( -1 );
+    handleKeyboardGamepadScroll( -1 );
     m_scrollMsg = true;
-
-}   // OnUpScroll
+}
 
 /************************************************************************
 *    desc:  Handle OnDownScroll message
 ************************************************************************/
-void CUIScrollBox::OnDownScroll( const SDL_Event & rEvent )
+void CUIScrollBox::onDownScroll( const SDL_Event & rEvent )
 {
-    HandleKeyboardGamepadScroll( 1 );
+    handleKeyboardGamepadScroll( 1 );
     m_scrollMsg = true;
-
-}   // OnDownScroll
+}
 
 /************************************************************************
 *    desc:  Handle OnTabLeft message
 ************************************************************************/
-void CUIScrollBox::OnTabLeft( const SDL_Event & rEvent )
+void CUIScrollBox::onTabLeft( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandlePageScroll( -1 );
-
-}   // OnTabLeft
+        handlePageScroll( -1 );
+}
 
 /************************************************************************
 *    desc:  Handle OnTabRight message
 ************************************************************************/
-void CUIScrollBox::OnTabRight( const SDL_Event & rEvent )
+void CUIScrollBox::onTabRight( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NDefs::EAP_DOWN )
-        HandlePageScroll( 1 );
-
-}   // OnTabRight
+        handlePageScroll( 1 );
+}
 
 
 /************************************************************************
 *    desc:  Handle the mouse move
 ************************************************************************/
-bool CUIScrollBox::OnMouseMove( const SDL_Event & rEvent )
+bool CUIScrollBox::onMouseMove( const SDL_Event & rEvent )
 {
-    bool result = CUISubControl::OnMouseMove( rEvent );
-    
+    bool result = CUISubControl::onMouseMove( rEvent );
+
     // Invalidate the active control
     m_activeScrollCtrl = NUIControl::NO_ACTIVE_CONTROL;
 
-    if( NGenFunc::DynCast<CUISlider>(GetSubControl())->IsMouseDown() )
+    if( NGenFunc::DynCast<CUISlider>(getSubControl())->isMouseDown() )
     {
         // Get the current scroll position
-        m_scrollCurPos = NGenFunc::DynCast<CUISlider>(GetSubControl())->GetValue();
+        m_scrollCurPos = NGenFunc::DynCast<CUISlider>(getSubControl())->getValue();
 
         // Set the bounds
-        SetStartEndPos();
+        setStartEndPos();
 
         // Reposition the scroll controls
-        RepositionScrollControls();
+        repositionScrollControls();
     }
 
     return result;
-
-}   // OnMouseMove
+}
 
 
 /************************************************************************
 *    desc:  Update the control
 ************************************************************************/
-void CUIScrollBox::Update()
+void CUIScrollBox::update()
 {
     // Call the parent
-    CUISubControl::Update();
+    CUISubControl::update();
 
     // Update all controls
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->Update();
+        m_pScrollControlVec[i]->update();
 
     // Handle any scrolling
-    HandleScrollUpdate();
-
-}   // Update
+    handleScrollUpdate();
+}
 
 
 /************************************************************************
@@ -349,21 +333,20 @@ void CUIScrollBox::transform( const CObject2D & object )
 
     // Transform the mask
     m_upStencilMaskSprite->transform( getMatrix(), wasWorldPosTranformed() );
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Render the sub control
 ************************************************************************/
-void CUIScrollBox::Render( const CMatrix & matrix )
+void CUIScrollBox::render( const CMatrix & matrix )
 {
     // Call the parent
-    CUISubControl::Render( matrix );
+    CUISubControl::render( matrix );
 
     // Disable rendering to the color buffer
     glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
-    
+
     // Disable rendering to the depth mask
     glDepthMask( GL_FALSE );
 
@@ -391,26 +374,25 @@ void CUIScrollBox::Render( const CMatrix & matrix )
 
 
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->Render( matrix );
+        m_pScrollControlVec[i]->render( matrix );
 
 
     // Finished using stencil
     glDisable( GL_STENCIL_TEST );
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc: Set the first inactive control to be active
 *    NOTE: Don't want this functuality for the scroll box buttons and slider
 ************************************************************************/
-bool CUIScrollBox::ActivateFirstInactiveControl()
+bool CUIScrollBox::activateFirstInactiveControl()
 {
-    if( CUIControl::ActivateFirstInactiveControl() )
+    if( CUIControl::activateFirstInactiveControl() )
     {
         for( size_t i = 0; i < m_pScrollControlVec.size(); ++i )
         {
-            if( m_pScrollControlVec[i]->ActivateFirstInactiveControl() )
+            if( m_pScrollControlVec[i]->activateFirstInactiveControl() )
             {
                 m_activeScrollCtrl = i;
                 break;
@@ -419,36 +401,34 @@ bool CUIScrollBox::ActivateFirstInactiveControl()
     }
 
     return m_activeScrollCtrl != NUIControl::NO_ACTIVE_CONTROL;
-
-}   // ActivateFirstInactiveControl
+}
 
 
 /************************************************************************
 *    desc:  Handle the select action
 ************************************************************************/
-bool CUIScrollBox::HandleSelectAction( const CSelectMsgCracker & msgCracker )
+bool CUIScrollBox::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
-    bool result = CUISubControl::HandleSelectAction( msgCracker );
-    
+    bool result = CUISubControl::handleSelectAction( msgCracker );
+
     // Let the scroll controls handle any selection
     for( size_t i = 0; i < m_pScrollControlVec.size(); ++i )
-        m_pScrollControlVec[i]->HandleSelectAction( msgCracker );
+        m_pScrollControlVec[i]->handleSelectAction( msgCracker );
 
-    if( msgCracker.IsDeviceMouse() && msgCracker.IsPressDown() )
+    if( msgCracker.isDeviceMouse() && msgCracker.isPressDown() )
     {
         // Get the current scroll position
-        m_scrollCurPos = NGenFunc::DynCast<CUISlider>(GetSubControl())->GetValue();
+        m_scrollCurPos = NGenFunc::DynCast<CUISlider>(getSubControl())->getValue();
 
         // Set the bounds
-        SetStartEndPos();
+        setStartEndPos();
 
         // Reposition the scroll controls
-        RepositionScrollControls();
+        repositionScrollControls();
     }
 
     return result;
-
-}   // HandleSelectAction
+}
 
 
 /************************************************************************
@@ -456,12 +436,12 @@ bool CUIScrollBox::HandleSelectAction( const CSelectMsgCracker & msgCracker )
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
-void CUIScrollBox::HandlePageScroll( int scrollVector )
+void CUIScrollBox::handlePageScroll( int scrollVector )
 {
     if( m_scrollVector == 0 )
     {
         // If there's no controls to select or reposition, do the scroll
-        if( !SelectAndRepositionCtrl( scrollVector ) )
+        if( !selectAndRepositionCtrl( scrollVector ) )
         {
             const bool SCROLL_DOWN((scrollVector > 0));
             const bool SCROLL_UP((scrollVector < 0));
@@ -484,29 +464,29 @@ void CUIScrollBox::HandlePageScroll( int scrollVector )
                 }
 
                 // Init the scroll
-                InitScrolling( scrollVector, m_controlHeight * visibleCount, true, true );
+                initScrolling( scrollVector, m_controlHeight * visibleCount, true, true );
 
                 // Deactivate the last control if the scrolling has been activated
                 if( m_scrollVector )
                 {
                     if( m_activeScrollCtrl != NUIControl::NO_ACTIVE_CONTROL )
-                        m_pScrollControlVec[m_activeScrollCtrl]->DeactivateControl();
+                        m_pScrollControlVec[m_activeScrollCtrl]->deactivateControl();
                 }
             }
             else
             {
                 m_activeScrollCtrl = m_firstScrollCtrlIndex;
-                
+
                 if( SCROLL_DOWN )
                     m_activeScrollCtrl += m_visibleCount - 1;
-                
+
                 // If the first control can't be selected, then find one that can
-                if( !ActivateScrollCtrl( m_activeScrollCtrl ) )
-                    SelectNextControl( -scrollVector );
+                if( !activateScrollCtrl( m_activeScrollCtrl ) )
+                    selectNextControl( -scrollVector );
             }
         }
     }
-}   // HandlePageScroll
+}
 
 
 /************************************************************************
@@ -514,23 +494,22 @@ void CUIScrollBox::HandlePageScroll( int scrollVector )
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
-void CUIScrollBox::HandleKeyboardGamepadScroll( int scrollVector )
+void CUIScrollBox::handleKeyboardGamepadScroll( int scrollVector )
 {
     // If there's no controls to select or reposition, do the scroll
-    if( !SelectAndRepositionCtrl( scrollVector ) )
+    if( !selectAndRepositionCtrl( scrollVector ) )
     {
         // Try to select the next control
-        auto scrollResult = SelectNextControl( scrollVector );
+        auto scrollResult = selectNextControl( scrollVector );
 
         // Scroll the contents of the scroll box if we need to activate a control
         // that's outside of the viewable area of the scroll box.
         if( !scrollResult.IsSet(IN_VIEWABLE_AREA) )
         {
-            InitScrolling( scrollVector, m_controlHeight );
+            initScrolling( scrollVector, m_controlHeight );
         }
     }
-
-}   // HandleKeyboardGamepadScroll
+}
 
 
 /************************************************************************
@@ -538,13 +517,13 @@ void CUIScrollBox::HandleKeyboardGamepadScroll( int scrollVector )
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
-CBitmask<uint> CUIScrollBox::SelectNextControl( int scrollVector )
+CBitmask<uint> CUIScrollBox::selectNextControl( int scrollVector )
 {
     // Set the active control to the viewable area
-    SetActiveCtrlToViewableArea( scrollVector );
+    setActiveCtrlToViewableArea( scrollVector );
 
     // Scroll to the next control in the viewable area
-    CBitmask<uint> scrollResult = ScrollToTheNextCtrlInViewableArea( scrollVector );
+    CBitmask<uint> scrollResult = scrollToTheNextCtrlInViewableArea( scrollVector );
 
     // If we are still in the viewable area but have no active control,
     // try to activate the current control
@@ -557,49 +536,47 @@ CBitmask<uint> CUIScrollBox::SelectNextControl( int scrollVector )
     }
 
     return scrollResult;
-
-}   // SelectNextControl
+}
 
 
 /************************************************************************
 *    desc:  Do we need to select and reposition the control
 ************************************************************************/
-bool CUIScrollBox::SelectAndRepositionCtrl( int scrollVector )
+bool CUIScrollBox::selectAndRepositionCtrl( int scrollVector )
 {
     // If there's no selected control, don't scroll
     // just select the first selectable control
-    if( SetActiveCtrlToViewableArea( scrollVector ) )
+    if( setActiveCtrlToViewableArea( scrollVector ) )
     {
         // If the first control can't be selected, then find one that can
-        if( !ActivateScrollCtrl( m_activeScrollCtrl ) )
-            SelectNextControl( 1 );
+        if( !activateScrollCtrl( m_activeScrollCtrl ) )
+            selectNextControl( 1 );
 
         // Get the alignment to see if it needs to be adjusted
-        float diff = GetControlAlignment();
+        float diff = getControlAlignment();
         if( diff > 0.1f )
         {
             int pos( m_scrollCurPos / (float)m_controlHeight );
-            
+
             bool nextCtrl( ((m_activeScrollCtrl - m_firstScrollCtrlIndex) * m_controlHeight) != 0 );
 
             if( nextCtrl || (m_firstScrollCtrlIndex > pos) )
-                InitScrolling( 1, m_controlHeight - diff, false );
+                initScrolling( 1, m_controlHeight - diff, false );
             else
-                InitScrolling( -1, diff, false );
+                initScrolling( -1, diff, false );
         }
-        
+
         return true;
     }
 
     return false;
-
-}   // SelectAndRepositionCtrl
+}
 
 
 /************************************************************************
 *    desc:  Select the paged control
 ************************************************************************/
-void CUIScrollBox::SelectPagedControl( int scrollVector )
+void CUIScrollBox::selectPagedControl( int scrollVector )
 {
     m_activeScrollCtrl += scrollVector * m_visibleCount;
 
@@ -616,23 +593,22 @@ void CUIScrollBox::SelectPagedControl( int scrollVector )
     }
 
     // If the first control can't be selected, then find one that can
-    if( !ActivateScrollCtrl( m_activeScrollCtrl ) )
-        SelectNextControl( scrollVector );
-
-}   // SelectPagedControl
+    if( !activateScrollCtrl( m_activeScrollCtrl ) )
+        selectNextControl( scrollVector );
+}
 
 
 /************************************************************************
 *    desc:  Set the active control to the viewable area
 *           This also deactivates the last known active control
 ************************************************************************/
-bool CUIScrollBox::SetActiveCtrlToViewableArea( int scrollVector )
+bool CUIScrollBox::setActiveCtrlToViewableArea( int scrollVector )
 {
     // If the active control is not within the active area, make it so that it will be the first one selected
     if( (m_activeScrollCtrl < m_firstScrollCtrlIndex) || (m_activeScrollCtrl >= (m_firstScrollCtrlIndex + m_visibleCount)) )
     {
         if( m_activeScrollCtrl != NUIControl::NO_ACTIVE_CONTROL )
-            m_pScrollControlVec[m_activeScrollCtrl]->DeactivateControl();
+            m_pScrollControlVec[m_activeScrollCtrl]->deactivateControl();
 
         m_activeScrollCtrl = m_firstScrollCtrlIndex;
 
@@ -640,8 +616,7 @@ bool CUIScrollBox::SetActiveCtrlToViewableArea( int scrollVector )
     }
 
     return false;
-
-}   // SetActiveCtrlToViewableArea
+}
 
 
 /************************************************************************
@@ -649,13 +624,13 @@ bool CUIScrollBox::SetActiveCtrlToViewableArea( int scrollVector )
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
-CBitmask<uint> CUIScrollBox::ScrollToTheNextCtrlInViewableArea( int scrollVector )
+CBitmask<uint> CUIScrollBox::scrollToTheNextCtrlInViewableArea( int scrollVector )
 {
     int newActiveCtrl(0);
-    int inView = InView( m_activeScrollCtrl, scrollVector );
+    int isInView = inView( m_activeScrollCtrl, scrollVector );
 
     // Only scroll within the viewable area
-    if( inView )
+    if( isInView )
     {
         // Set a temp variable to the active scroll control
         int tmpScrollCtrl = m_activeScrollCtrl;
@@ -665,7 +640,7 @@ CBitmask<uint> CUIScrollBox::ScrollToTheNextCtrlInViewableArea( int scrollVector
         {
             tmpScrollCtrl += scrollVector;
 
-            if( ActivateScrollCtrl(tmpScrollCtrl) )
+            if( activateScrollCtrl(tmpScrollCtrl) )
             {
                 newActiveCtrl = NEW_ACTIVE_CTRL;
 
@@ -673,26 +648,25 @@ CBitmask<uint> CUIScrollBox::ScrollToTheNextCtrlInViewableArea( int scrollVector
                 break;
             }
 
-            inView = InView( tmpScrollCtrl, scrollVector );
+            isInView = inView( tmpScrollCtrl, scrollVector );
         }
-        while( inView );
+        while( isInView );
     }
 
-    CBitmask<uint> result( inView | newActiveCtrl );
+    CBitmask<uint> result( isInView | newActiveCtrl );
 
     return result;
-
-}   // ScrollToTheNextCtrlInViewableArea
+}
 
 
 /************************************************************************
 *    desc:  See if we can activate this scroll control
 ************************************************************************/
-bool CUIScrollBox::ActivateScrollCtrl( int scrollControlIndex )
+bool CUIScrollBox::activateScrollCtrl( int scrollControlIndex )
 {
     if( (scrollControlIndex != NUIControl::NO_ACTIVE_CONTROL) &&
         (scrollControlIndex < (int)m_pScrollControlVec.size()) &&
-        !m_pScrollControlVec.at(scrollControlIndex)->IsDisabled() )
+        !m_pScrollControlVec.at(scrollControlIndex)->isDisabled() )
     {
         NGenFunc::DispatchEvent(
             NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
@@ -703,14 +677,13 @@ bool CUIScrollBox::ActivateScrollCtrl( int scrollControlIndex )
     }
 
     return false;
-
-}   // ActivateScrollCtrl
+}
 
 
 /************************************************************************
 *    desc:  Init the variables that scroll the contents of the scroll box
 ************************************************************************/
-void CUIScrollBox::InitScrolling( int scrollVector, float distance, bool endScrollSelection, bool paging )
+void CUIScrollBox::initScrolling( int scrollVector, float distance, bool endScrollSelection, bool paging )
 {
     if( m_scrollVector == 0 )
     {
@@ -729,14 +702,13 @@ void CUIScrollBox::InitScrolling( int scrollVector, float distance, bool endScro
             m_scrollDistance = distance;
         }
     }
-
-}   // InitScrolling
+}
 
 
 /************************************************************************
 *    desc:  Handle the time based Scrolling of the contents of the scroll box
 ************************************************************************/
-void CUIScrollBox::HandleScrollUpdate()
+void CUIScrollBox::handleScrollUpdate()
 {
     if( m_scrollVector )
     {
@@ -750,25 +722,25 @@ void CUIScrollBox::HandleScrollUpdate()
         else
             m_scrollCurPos -= dist;
 
-        NGenFunc::DynCast<CUISlider>(GetSubControl())->SetSlider(m_scrollCurPos);
+        NGenFunc::DynCast<CUISlider>(getSubControl())->setSlider(m_scrollCurPos);
 
         m_scrollCounter += dist;
 
         // Set the bounds
-        SetStartEndPos();
+        setStartEndPos();
 
         if( m_scrollCounter >= m_scrollDistance )
         {
             if( m_endScroll || !m_scrollMsg || m_paging )
             {
-                AlignScrollPostion();
+                alignScrollPostion();
 
                 if( m_endScrollSelection )
                 {
                     if( m_paging )
-                        SelectPagedControl( m_scrollVector );
+                        selectPagedControl( m_scrollVector );
                     else
-                        SelectNextControl( m_scrollVector );
+                        selectNextControl( m_scrollVector );
                 }
 
                 // This has to be last
@@ -782,83 +754,78 @@ void CUIScrollBox::HandleScrollUpdate()
         // Sanity check
         else if( (m_scrollCurPos < 0) || (m_scrollCurPos > m_maxMoveAmount) )
         {
-            AlignScrollPostion();
+            alignScrollPostion();
             m_scrollVector = 0;
         }
-        
-        // Reposition the scroll controls
-        RepositionScrollControls();
-    }
 
-}   // HandleScrollUpdate
+        // Reposition the scroll controls
+        repositionScrollControls();
+    }
+}
 
 
 /************************************************************************
 *    desc:  Get the fractional amount the controls are off within the scroll box
 ************************************************************************/
-float CUIScrollBox::GetControlAlignment()
+float CUIScrollBox::getControlAlignment()
 {
     float pos = m_scrollCurPos / (float)m_controlHeight;
     return (float)m_controlHeight * (pos - (int)pos);
-
-}   // GetControlAlignment
+}
 
 
 /************************************************************************
 *    desc:  Is the scroll index in view
 ************************************************************************/
-bool CUIScrollBox::InView( int scrollIndex, int scrollVector )
+bool CUIScrollBox::inView( int scrollIndex, int scrollVector )
 {
     return ((scrollVector < 0) && (scrollIndex > m_firstScrollCtrlIndex)) ||
            (((scrollVector > 0)) && (scrollIndex < (m_firstScrollCtrlIndex + m_visibleCount - 1)));
-
-}   // InView
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the subcontrol if found
 ************************************************************************/
-CUIControl * CUIScrollBox::FindSubControl( const std::string & name )
+CUIControl * CUIScrollBox::findSubControl( const std::string & name )
 {
-    CUIControl * pCtrl = CUISubControl::FindSubControl( name );
+    CUIControl * pCtrl = CUISubControl::findSubControl( name );
 
     for( int i = m_visStartPos; i < m_visEndPos && (pCtrl == nullptr); ++i )
-        pCtrl = m_pScrollControlVec[i]->FindControl( name );
+        pCtrl = m_pScrollControlVec[i]->findControl( name );
 
     return pCtrl;
-
-}   // FindSubControl
+}
 
 
 /************************************************************************
 *    desc:  Find the sub control via is pointer
 ************************************************************************/
-CUIControl * CUIScrollBox::FindSubControl( void * pVoid )
+CUIControl * CUIScrollBox::findSubControl( void * pVoid )
 {
-    CUIControl * pCtrl = CUISubControl::FindSubControl( pVoid );
+    CUIControl * pCtrl = CUISubControl::findSubControl( pVoid );
 
     for( int i = m_visStartPos; i < m_visEndPos && (pCtrl == nullptr); ++i )
         if( (void *)m_pScrollControlVec[i] == pVoid )
             pCtrl = m_pScrollControlVec[i];
 
     return pCtrl;
-
-}   // FindSubControl
+}
 
 
 /************************************************************************
 *    desc:  Handle the sub control mouse move
 ************************************************************************/
-bool CUIScrollBox::OnSubControlMouseMove( const SDL_Event & rEvent )
+bool CUIScrollBox::onSubControlMouseMove( const SDL_Event & rEvent )
 {
-    bool result = CUISubControl::OnSubControlMouseMove( rEvent );
+    bool result = CUISubControl::onSubControlMouseMove( rEvent );
 
     // We only care about the scroll controls if the point is within the scroll box
-    if( !result && IsPointInControl( rEvent.motion.x, rEvent.motion.y ) )
+    if( !result && isPointInControl( rEvent.motion.x, rEvent.motion.y ) )
     {
         for( int i = m_visStartPos; i < m_visEndPos && !result; ++i )
         {
-            result = m_pScrollControlVec[i]->OnMouseMove( rEvent );
+            result = m_pScrollControlVec[i]->onMouseMove( rEvent );
 
             if( result )
                 m_activeScrollCtrl = i;
@@ -866,27 +833,25 @@ bool CUIScrollBox::OnSubControlMouseMove( const SDL_Event & rEvent )
     }
 
     return result;
-
-}   // OnSubControlMouseMove
+}
 
 
 /************************************************************************
 *    desc:  Deactivate the sub control
 ************************************************************************/
-void CUIScrollBox::DeactivateSubControl()
+void CUIScrollBox::deactivateSubControl()
 {
-    CUISubControl::DeactivateSubControl();
+    CUISubControl::deactivateSubControl();
 
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->DeactivateControl();
-
-}   // DeactivateSubControl
+        m_pScrollControlVec[i]->deactivateControl();
+}
 
 
 /************************************************************************
 *    desc:  Set the start and end positions
 ************************************************************************/
-void CUIScrollBox::SetStartEndPos()
+void CUIScrollBox::setStartEndPos()
 {
     float pos( m_scrollCurPos / (float)m_controlHeight );
 
@@ -902,14 +867,13 @@ void CUIScrollBox::SetStartEndPos()
 
     if( m_visEndPos > static_cast<int>(m_pScrollControlVec.size()) )
         m_visEndPos = static_cast<int>(m_pScrollControlVec.size());
-
-}   // SetStartEndPos
+}
 
 
 /************************************************************************
 *    desc:  Reposition the scroll controls
 ************************************************************************/
-void CUIScrollBox::RepositionScrollControls()
+void CUIScrollBox::repositionScrollControls()
 {
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
     {
@@ -917,15 +881,14 @@ void CUIScrollBox::RepositionScrollControls()
         pos.y = m_defaultOffsetVec[i] + m_scrollCurPos;
         m_pScrollControlVec[i]->setPos( pos );
     }
-
-}   // RepositionScrollControls
+}
 
 
 /************************************************************************
 *    desc:  Align the scroll box to it's proper stopping point
 *           to account for floating point movement
 ************************************************************************/
-void CUIScrollBox::AlignScrollPostion()
+void CUIScrollBox::alignScrollPostion()
 {
     // Do bounds checking just for sanity reasons
     if( m_firstScrollCtrlIndex < 0 )
@@ -936,62 +899,57 @@ void CUIScrollBox::AlignScrollPostion()
 
     // Recalucate the scroll position which will wipe the fractional component
     m_scrollCurPos = m_firstScrollCtrlIndex * m_controlHeight;
-
-}   // AlignScrollPostion
+}
 
 
 /************************************************************************
 *    desc:  Only deactivate sub controls
 ************************************************************************/
-void CUIScrollBox::DeactivateControl()
+void CUIScrollBox::deactivateControl()
 {
-    DeactivateSubControl();
-
-}   // DeactivateControl
+    deactivateSubControl();
+}
 
 
 /************************************************************************
 *    desc:  Get the scroll control vector
 ************************************************************************/
-const std::vector<CUIControl *> & CUIScrollBox::GetScrollCtrlVec()
+const std::vector<CUIControl *> & CUIScrollBox::getScrollCtrlVec()
 {
     return m_pScrollControlVec;
-
-}   // GetScrollCtrlVec
+} 
 
 
 /************************************************************************
 *    desc:  Set the alpha value of this control
 ************************************************************************/
-void CUIScrollBox::SetAlpha( float alpha )
+void CUIScrollBox::setAlpha( float alpha )
 {
-    CUISubControl::SetAlpha( alpha );
-            
-    for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->SetAlpha( alpha );
+    CUISubControl::setAlpha( alpha );
 
-}   // SetAlpha
+    for( int i = m_visStartPos; i < m_visEndPos; ++i )
+        m_pScrollControlVec[i]->setAlpha( alpha );
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the active control
 ************************************************************************/
-CUIControl * CUIScrollBox::GetPtrToActiveControl()
+CUIControl * CUIScrollBox::getPtrToActiveControl()
 {
-    CUIControl * pResult( CUISubControl::GetPtrToActiveControl() );
-    
+    CUIControl * pResult( CUISubControl::getPtrToActiveControl() );
+
     if( pResult == nullptr )
     {
         for( auto iter : m_pScrollControlVec )
         {
-            if( iter->GetState() > NUIControl::ECS_INACTIVE )
+            if( iter->getState() > NUIControl::ECS_INACTIVE )
             {
-                pResult = iter->GetPtrToActiveControl();
+                pResult = iter->getPtrToActiveControl();
                 break;
             }
         }
     }
-    
+
     return pResult;
-    
-}   // GetPtrToActiveControl
+}

@@ -34,7 +34,7 @@ CSmartResolutionBtn::CSmartResolutionBtn( CUIControl * pUIControl ) :
 /***************************************************************************
 *    decs:  Called when the control is created - Set the resolution strings
 ****************************************************************************/
-void CSmartResolutionBtn::Create()
+void CSmartResolutionBtn::create()
 {
     SDL_DisplayMode curMode;
     SDL_GetCurrentDisplayMode(0, &curMode);
@@ -67,7 +67,7 @@ void CSmartResolutionBtn::Create()
     int counter(0);
     for( auto & iter : resVec )
     {
-        m_pUIControl->SetStringToList( boost::str( boost::format("%d x %d") % iter.w % iter.h ) );
+        m_pUIControl->setStringToList( boost::str( boost::format("%d x %d") % iter.w % iter.h ) );
 
         m_resVec.push_back( iter );
 
@@ -83,10 +83,10 @@ void CSmartResolutionBtn::Create()
 /***************************************************************************
 *    decs:  Handle events
 ****************************************************************************/
-void CSmartResolutionBtn::HandleEvent( const SDL_Event & rEvent )
+void CSmartResolutionBtn::handleEvent( const SDL_Event & rEvent )
 {
     if( (m_resIndex > -1) && (rEvent.type == NMenu::EGE_MENU_TRANS_IN) )
-        (*dynamic_cast<CUIButtonList *>(m_pUIControl)).UpdateDisplay( m_resIndex );
+        (*dynamic_cast<CUIButtonList *>(m_pUIControl)).updateDisplay( m_resIndex );
 
 }   // HandleEvent
 
@@ -94,9 +94,9 @@ void CSmartResolutionBtn::HandleEvent( const SDL_Event & rEvent )
 /***************************************************************************
 *    decs:  Called when the control is executed - Enable/disable the apply btn
 ****************************************************************************/
-void CSmartResolutionBtn::Execute()
+void CSmartResolutionBtn::execute()
 {
-    EnableDisableApplyBtn();
+    enableDisableApplyBtn();
 
 }   // Execute
 
@@ -104,9 +104,9 @@ void CSmartResolutionBtn::Execute()
 /***************************************************************************
 *    decs:  Set the resolution change
 ****************************************************************************/
-void CSmartResolutionBtn::SetResolutionChange()
+void CSmartResolutionBtn::setResolutionChange()
 {
-    m_resIndex = (*dynamic_cast<CUIButtonList *>(m_pUIControl)).GetActiveIndex();
+    m_resIndex = (*dynamic_cast<CUIButtonList *>(m_pUIControl)).getActiveIndex();
 
     CSettings::Instance().SetSize( m_resVec[m_resIndex] );
     CSettings::Instance().CalcRatio();
@@ -118,9 +118,9 @@ void CSmartResolutionBtn::SetResolutionChange()
 /***************************************************************************
 *    decs:  Was the resolution changed
 ****************************************************************************/
-bool CSmartResolutionBtn::WasResolutionChanged()
+bool CSmartResolutionBtn::wasResolutionChanged()
 {
-    if( m_resIndex != (*dynamic_cast<CUIButtonList *>(m_pUIControl)).GetActiveIndex() )
+    if( m_resIndex != (*dynamic_cast<CUIButtonList *>(m_pUIControl)).getActiveIndex() )
         return true;
 
     return false;

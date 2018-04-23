@@ -30,29 +30,29 @@ CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
 /***************************************************************************
 *    decs:  Called when the control is executed
 ****************************************************************************/
-void CSmartConfirmBtn::Execute()
+void CSmartConfirmBtn::execute()
 {
-    CMenu & rMenu = CMenuManager::Instance().GetMenu("confirmation_menu");
-    CUIControl * pYesBtn = rMenu.GetPtrToControl("yes_btn");
-    CUIControl * pMegLbl = rMenu.GetPtrToControl("message_lbl");
+    CMenu & rMenu = CMenuManager::Instance().getMenu("confirmation_menu");
+    CUIControl * pYesBtn = rMenu.getPtrToControl("yes_btn");
+    CUIControl * pMegLbl = rMenu.getPtrToControl("message_lbl");
 
     CSmartGuiControl * pSmartGuiCtrl(NULL);
     std::string conformationMsg;
     std::string executionAction;
     NUIControl::EControlActionType actionType(NUIControl::ECAT_BACK);
 
-    if( m_pUIControl->GetName() == "exit_btn" )
+    if( m_pUIControl->getName() == "exit_btn" )
     {
         actionType = NUIControl::ECAT_QUIT_GAME;
         conformationMsg = "Do you want to|quit the game?";
     }
-    else if( m_pUIControl->GetName() == "main_menu_btn" )
+    else if( m_pUIControl->getName() == "main_menu_btn" )
     {
         conformationMsg = "Are you sure you|want to go back to|the main menu?";
         actionType = NUIControl::ECAT_GAME_STATE_CHANGE;
         executionAction = "title_screen_state";
     }
-    else if( m_pUIControl->GetName() == "Key_Binding_reset_btn" )
+    else if( m_pUIControl->getName() == "Key_Binding_reset_btn" )
     {
         pSmartGuiCtrl = new CSmartResetKeyBindBtn( pYesBtn );
         conformationMsg = "Reset all key bindings|to their default settings?";
@@ -76,16 +76,8 @@ void CSmartConfirmBtn::Execute()
     }*/
 
     // Set the conformation menu
-    pYesBtn->SetSmartGui( pSmartGuiCtrl );
-    pYesBtn->SetActionType( actionType );
-    pYesBtn->SetExecutionAction( executionAction );
-    pMegLbl->CreateFontString( conformationMsg );
-
-}   // Execute
-
-
-
-
-
-
-
+    pYesBtn->setSmartGui( pSmartGuiCtrl );
+    pYesBtn->setActionType( actionType );
+    pYesBtn->setExecutionAction( executionAction );
+    pMegLbl->createFontString( conformationMsg );
+}

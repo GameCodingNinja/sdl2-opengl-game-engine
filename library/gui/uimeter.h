@@ -34,33 +34,33 @@ public:
     virtual ~CUIMeter();
     
     // Load the initial info from XML node
-    virtual void LoadFromNode( const XMLNode & node ) override;
+    virtual void loadFromNode( const XMLNode & node ) override;
     
     // Update the control
-    virtual void Update() override;
+    virtual void update() override;
     
     // Set the amount to the meter without banging up
-    void Set( const double amount );
+    void set( const double amount );
     
     // Start the bang range
-    void StartBangUp( const double amount );
+    void startBangUp( const double amount );
     
     // Do a fast bang
-    void FastBang();
+    void fastBang();
     
     // Is the meter banging
-    bool IsBanging();
+    bool isBanging();
     
     // Clear the meter
-    void Clear();
+    void clear();
     
 protected:
 
     // Load the control specific info from XML node
-    virtual void LoadControlFromNode( const XMLNode & node ) override;
+    virtual void loadControlFromNode( const XMLNode & node ) override;
     
     // Display the value in the meter
-    void DisplayValue();
+    void displayValue();
     
 private:
     
@@ -100,10 +100,10 @@ private:
     };
     
     // Set the bang range
-    void SetBangRange();
+    void setBangRange();
     
     // Init the bang range
-    void InitBangRange( const CBangRange & bangRange );
+    void initBangRange( const CBangRange & bangRange );
     
 private:
         

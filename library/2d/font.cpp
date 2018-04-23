@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CFont::CFont( const std::string & filePath )
     : m_filePath(filePath),
@@ -26,15 +26,15 @@ CFont::CFont( const std::string & filePath )
       m_horzPadding(0),
       m_vertPadding(0)
 {
-}   // Constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CFont::~CFont()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
@@ -42,7 +42,7 @@ CFont::~CFont()
 *
 *    param: String filePath - path to xml file
 ************************************************************************/
-void CFont::LoadFromXML( const std::string & group )
+void CFont::loadFromXML( const std::string & group )
 {
     // load the image
     CTextureMgr::Instance().LoadImageFor2D( group, m_filePath + ".png" );
@@ -71,7 +71,7 @@ void CFont::LoadFromXML( const std::string & group )
     for( int i = 0; i < charLstNode.nChildNode(); ++i )
     {
         XMLNode charNode = charLstNode.getChildNode( "char", i );
-        
+
         CCharData charData;
 
         // Get the offset of the character
@@ -86,31 +86,29 @@ void CFont::LoadFromXML( const std::string & group )
         charData.rect.y1 = std::atof(charNode.getAttribute( "y" ));
         charData.rect.x2 = std::atof(charNode.getAttribute( "width" ));
         charData.rect.y2 = std::atof(charNode.getAttribute( "height" ));
-        
+
         // Get the character ID which is the ascii value of the character.
         char id = std::atoi(charNode.getAttribute( "id" ));
-        
+
         // Add the character to our list
         m_charDataMap.emplace( id, charData );
     }
-
-}   // LoadFromXML
+}
 
 
 /************************************************************************
  *    desc:  Create the font texture from data
  ************************************************************************/
-void CFont::CreateFromData( const std::string & group )
+void CFont::createFromData( const std::string & group )
 {
     m_texture = CTextureMgr::Instance().CreateTextureFor2D( group, m_filePath + ".png" );
-    
-}   // CreateFromData
+}
 
 
 /************************************************************************
-*    desc:  Get the data for this character 
+*    desc:  Get the data for this character
 ************************************************************************/
-const CCharData & CFont::GetCharData( char id ) const
+const CCharData & CFont::getCharData( char id ) const
 {
     // See if this character is part of the map
     auto iter = m_charDataMap.find( id );
@@ -121,65 +119,58 @@ const CCharData & CFont::GetCharData( char id ) const
                 % id % __FUNCTION__ % __LINE__ ));
 
     return iter->second;
-
-}   // GetCharData
+}
 
 
 /************************************************************************
-*    desc:  Get the line height 
+*    desc:  Get the line height
 ************************************************************************/
-float CFont::GetLineHeight() const
+float CFont::getLineHeight() const
 {
     return m_lineHeight;
-
-}   // GetLineHeight
+}
 
 
 /************************************************************************
-*    desc:  Get the baseline offset 
+*    desc:  Get the baseline offset
 ************************************************************************/
-float CFont::GetBaselineOffset() const
+float CFont::getBaselineOffset() const
 {
     return m_baselineOffset;
-
-}   // GetBaselineOffset
+}
 
 
 /************************************************************************
 *    desc:  Get the horzontal padding
 ************************************************************************/
-float CFont::GetHorzPadding() const
+float CFont::getHorzPadding() const
 {
     return m_horzPadding;
-
-}   // GetHorzPadding
+}
 
 
 /************************************************************************
 *    desc:  Get the vertical padding
 ************************************************************************/
-float CFont::GetVertPadding() const
+float CFont::getVertPadding() const
 {
     return m_vertPadding;
-
-}   // GetVertPadding
+}
 
 
 /************************************************************************
 *    desc:  Get the texture size
 ************************************************************************/
-const CSize<int> & CFont::GetTextureSize() const
+const CSize<int> & CFont::getTextureSize() const
 {
     return m_texture.getSize();
-
-}   // GetTextureSize
+}
 
 
 /************************************************************************
 *    desc:  Get the texture ID
 ************************************************************************/
-uint32_t CFont::GetTextureID() const
+uint32_t CFont::getTextureID() const
 {
     return m_texture.getID();
-
-}   // GetTextureID
+}

@@ -42,54 +42,54 @@ public:
     ~CVisualComponent2D();
     
     // Delete the custom VBO for this font
-    void DeleteFontVBO();
+    void deleteFontVBO();
 
     // do the render
-    void Render( const CMatrix & objMatrix, const CMatrix & matrix );
+    void render( const CMatrix & objMatrix, const CMatrix & matrix );
 
     // Is this a font sprite
-    bool IsFontSprite();
+    bool isFontSprite();
 
     // Set/Get the color
-    void SetColor( const CColor & color );
-    void SetColor( float r, float g, float b, float a );
-    const CColor & GetColor() const;
-    void SetDefaultColor();
+    void setColor( const CColor & color );
+    void setColor( float r, float g, float b, float a );
+    const CColor & getColor() const;
+    void setDefaultColor();
 
     // Set/Get the alpha
-    void SetAlpha( float alpha, bool allowToExceed = false );
-    float GetAlpha() const;
+    void setAlpha( float alpha, bool allowToExceed = false );
+    float getAlpha() const;
 
     // Set the frame index
-    void SetFrame( uint index );
+    void setFrame( uint index );
     
     // Get the current frame index
-    uint GetCurrentFrame() const;
+    uint getCurrentFrame() const;
     
     // Set the font data
-    void SetFontData( const CFontData & fontData );
+    void setFontData( const CFontData & fontData );
     
     // Load the font properties from XML node
-    void LoadFontPropFromNode( const XMLNode & node );
+    void loadFontPropFromNode( const XMLNode & node );
 
     // Set the string to display
-    void CreateFontString();
-    void CreateFontString( const std::string & fontString );
+    void createFontString();
+    void createFontString( const std::string & fontString );
 
     // Get the displayed font string
-    const std::string & GetFontString();
-    void SetFontString( const std::string & fontString );
+    const std::string & getFontString();
+    void setFontString( const std::string & fontString );
     
     // Get the font size
-    const CSize<float> & GetFontSize() const;
+    const CSize<float> & getFontSize() const;
     
     // Set the font properties
-    void SetFontProperties( const CFontProperties & fontProp );
+    void setFontProperties( const CFontProperties & fontProp );
 
 private:
 
     // Add the line width to the vector based on horz alignment
-    void AddLineWithToVec(
+    void addLineWithToVec(
         const CFont & font,
         std::vector<float> & lineWidthOffsetVec,
         const NDefs::EHorzAlignment hAlign,
@@ -98,12 +98,12 @@ private:
         float lastCharOffset );
 
     // Add up all the character widths
-    std::vector<float> CalcLineWidthOffset(
+    std::vector<float> calcLineWidthOffset(
         const CFont & font,
         const std::string & str);
     
     // Is rendering allowed?
-    bool AllowRender();
+    bool allowRender();
 
 private:
     

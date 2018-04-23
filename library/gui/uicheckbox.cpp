@@ -19,8 +19,7 @@ CUICheckBox::CUICheckBox( const std::string & group ) :
     m_toggleState(false)
 {
     m_type = NUIControl::ECT_CHECK_BOX;
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -28,7 +27,7 @@ CUICheckBox::CUICheckBox( const std::string & group ) :
 ************************************************************************/
 CUICheckBox::~CUICheckBox()
 {
-}	// destructor
+}
 
 
 /************************************************************************
@@ -36,11 +35,10 @@ CUICheckBox::~CUICheckBox()
 *  
 *    param: EControlState value - control state
 ************************************************************************/
-void CUICheckBox::SetToggleState( bool value )
+void CUICheckBox::setToggleState( bool value )
 {
     m_toggleState = value;
-
-}	// SetSelectState
+}
 
 
 /************************************************************************
@@ -48,37 +46,31 @@ void CUICheckBox::SetToggleState( bool value )
 *  
 *    ret: EControlState - control state
 ************************************************************************/
-bool CUICheckBox::GetToggleState()
+bool CUICheckBox::getToggleState()
 {
     return m_toggleState;
-
-}	// GetSelectState
+}
 
 /************************************************************************
 *    desc:  Handle OnSelectExecute message
 ************************************************************************/
-void CUICheckBox::OnSelectExecute( const SDL_Event & rEvent )
+void CUICheckBox::onSelectExecute( const SDL_Event & rEvent )
 {
-    if( GetState() == NUIControl::ECS_SELECTED )
+    if( getState() == NUIControl::ECS_SELECTED )
         m_toggleState = !m_toggleState;
 
-    CUIControl::OnSelectExecute( rEvent );
-
-}   // OnSelectExecute
+    CUIControl::onSelectExecute( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Render the control
 ************************************************************************/
-void CUICheckBox::Render( const CMatrix & matrix )
+void CUICheckBox::render( const CMatrix & matrix )
 {
     for( size_t i = 0; i < m_spriteDeq.size()-1; ++i )
         m_spriteDeq[i].render( matrix );
 
     if( m_toggleState == NUIControl::TOGGLE_STATE_ON )
         m_spriteDeq.back().render( matrix );
-
-}   // Render
-
-
-
+}
