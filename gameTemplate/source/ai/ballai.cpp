@@ -44,7 +44,7 @@ void CBallAI::Init()
 ************************************************************************/
 void CBallAI::Update()
 {
-    if( m_sprite.GetPos().y < -600.f )
+    if( m_sprite.getPos().y < -600.f )
         InitPhysics();
     
 }   // Update

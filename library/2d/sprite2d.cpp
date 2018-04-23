@@ -28,13 +28,13 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     m_physicsComponent(objectData.GetPhysicsData())
 {
     // If there's no visual data, set the hide flag
-    SetVisible( objectData.GetVisualData().IsActive() );
+    setVisible( objectData.GetVisualData().IsActive() );
     
     // Set the sprite type
     m_parameters.Add( NDefs::SPRITE2D );
     
     if( objectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-        SetCropOffset( objectData.GetVisualData().GetSpriteSheet().GetGlyph().GetCropOffset() );
+        setCropOffset( objectData.GetVisualData().GetSpriteSheet().GetGlyph().GetCropOffset() );
 
 }   // constructor
 
@@ -53,7 +53,7 @@ CSprite2D::~CSprite2D()
 void CSprite2D::Load( const XMLNode & node )
 {
     // Load the transform data
-    LoadTransFromNode( node );
+    loadTransFromNode( node );
 
     // Init the script functions
     InitScriptFunctions( node );
@@ -67,7 +67,7 @@ void CSprite2D::Load( const XMLNode & node )
 void CSprite2D::Load( const CSpriteData & spriteData )
 {
     // Copy over the transform
-    CopyTransform( &spriteData );
+    copyTransform( &spriteData );
     
     // Copy over the script functions
     CopyScriptFunctions( spriteData.GetScriptFunctions() );
@@ -231,15 +231,15 @@ void CSprite2D::PhysicsUpdate()
 ************************************************************************/
 void CSprite2D::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
+    if( isVisible() )
         m_visualComponent.Render( m_matrix, matrix );
 
 }   // Render
 
 void CSprite2D::Render( const CCamera & camera )
 {
-    if( IsVisible() )
-        m_visualComponent.Render( m_matrix, camera.GetFinalMatrix() );
+    if( isVisible() )
+        m_visualComponent.Render( m_matrix, camera.getFinalMatrix() );
 
 }   // Render
 
@@ -417,7 +417,7 @@ void CSprite2D::SetFrame( uint index )
         m_visualComponent.SetFrame( index );
         
         if( m_rObjectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-            SetCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().GetGlyph(index).GetCropOffset() );
+            setCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().GetGlyph(index).GetCropOffset() );
     }
 
 }   // SetFrame

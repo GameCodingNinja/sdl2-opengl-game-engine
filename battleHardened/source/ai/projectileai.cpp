@@ -44,10 +44,10 @@ void CProjectileAI::Init()
     const float PROJECTILE_SPEED = 2.6f;
 
     // Get the sprite group
-    m_initialPos = m_sprite.GetPos();
+    m_initialPos = m_sprite.getPos();
 
     // Set the velocity of the projectile
-    float rotation = m_sprite.GetRot().z;
+    float rotation = m_sprite.getRot().z;
     m_velocity.x = cos( rotation );
     m_velocity.y = sin( rotation );
     m_velocity *= PROJECTILE_SPEED;
@@ -67,7 +67,7 @@ void CProjectileAI::Update()
     // If it's the projectile's first update, we don't want to increment 
     // it's position by the velocity 
     if( !m_firstUpdate )
-        m_sprite.IncPos( m_velocity * CHighResTimer::Instance().GetElapsedTime() );
+        m_sprite.incPos( m_velocity * CHighResTimer::Instance().GetElapsedTime() );
     else
         m_firstUpdate = false;
     
@@ -76,7 +76,7 @@ void CProjectileAI::Update()
     //    m_rStrategy.HandleMessage( NDefs::ESM_KILL_SPRITE, m_sprite.GetId() );
 
     // Delete if goes out of view
-    if( m_sprite.GetTransPos().getLengthSquared2D() > 250000.f )
+    if( m_sprite.getTransPos().getLengthSquared2D() > 250000.f )
         m_rStrategy.SetToDestroy( m_sprite.GetId() );
 
 }   // Update

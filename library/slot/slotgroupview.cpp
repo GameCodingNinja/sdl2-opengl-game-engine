@@ -52,7 +52,7 @@ void CSlotGroupView::Create(
     const std::string group = node.getAttribute( "group" );
     
     // Load the transform data from node
-    LoadTransFromNode( node.getChildNode( "translation" ) );
+    loadTransFromNode( node.getChildNode( "translation" ) );
     
     // Get the cycle results text node and object data
     const XMLNode cycleResultsTxtNode = node.getChildNode( "cycleResultsText" );
@@ -60,8 +60,8 @@ void CSlotGroupView::Create(
     
     // Allocate the cycle results text
     m_upCycleResultsTxtSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( group, objectName ) ) );
-    m_upCycleResultsTxtSprite->SetVisible( false );
-    m_upCycleResultsTxtSprite->LoadTransFromNode( cycleResultsTxtNode );
+    m_upCycleResultsTxtSprite->setVisible( false );
+    m_upCycleResultsTxtSprite->loadTransFromNode( cycleResultsTxtNode );
     
     // Load the font properties from XML node
     m_upCycleResultsTxtSprite->GetVisualComponent().LoadFontPropFromNode( cycleResultsTxtNode );
@@ -74,7 +74,7 @@ void CSlotGroupView::Create(
 ************************************************************************/
 void CSlotGroupView::SetCycleResultText( bool visible, const CPay * pPay )
 {
-    m_upCycleResultsTxtSprite->SetVisible( visible );
+    m_upCycleResultsTxtSprite->setVisible( visible );
     
     if( visible && (pPay != nullptr) )
     {
@@ -160,10 +160,10 @@ void CSlotGroupView::Update()
 ************************************************************************/
 void CSlotGroupView::Transform()
 {
-    CObject2D::Transform();
+    CObject2D::transform();
     
     if( m_upCycleResults )
-        m_upCycleResults->Transform( GetMatrix(), WasWorldPosTranformed() );
+        m_upCycleResults->Transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 

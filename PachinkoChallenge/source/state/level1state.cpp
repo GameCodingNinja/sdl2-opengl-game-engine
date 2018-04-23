@@ -154,8 +154,8 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
         if( !CMenuManager::Instance().IsMenuActive() )
         {
             auto camera = CCameraMgr::Instance().GetActiveCamera();
-            const float ratio = 1.f / camera.GetOrthoHeightAspectRatio();
-            const float x = (ratio * (float)rEvent.motion.x) - camera.GetOrthoProjSizeHalf().w;
+            const float ratio = 1.f / camera.getOrthoHeightAspectRatio();
+            const float x = (ratio * (float)rEvent.motion.x) - camera.getOrthoProjSizeHalf().w;
 
             CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
         }
@@ -266,7 +266,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
             m_multiIndexPos = std::find(m_multiXPosVec.back().begin(), m_multiXPosVec.back().end(), multiPos) - m_multiXPosVec.back().begin();
             
             // Add another strawberry
-            m_rStrawberryData.SetPos( multiPos, -1450.f );
+            m_rStrawberryData.setPos( multiPos, -1450.f );
             m_rStrategy.SetToCreate( "strawberry" );
         }
     }
@@ -301,7 +301,7 @@ void CLevel1State::SayGoodbye(b2Fixture* fixture)
 {
     CSprite2D * pSprite = reinterpret_cast<CSprite2D *>(fixture->GetUserData());
     
-    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->GetPos().getX() ) < 720.f) )
+    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->getPos().getX() ) < 720.f) )
     {
         m_totalWin += m_multiplier;
         m_rWinMeter.StartBangUp( m_totalWin );

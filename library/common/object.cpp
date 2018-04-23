@@ -17,7 +17,7 @@ CObject::CObject() :
     m_parameters(NDefs::VISIBLE),
     m_scale(1,1,1)
 {
-}   // Constructor
+}
 
 // Copy constructor
 CObject::CObject( const CObject & obj ) :
@@ -28,7 +28,7 @@ CObject::CObject( const CObject & obj ) :
     m_centerPos( obj.m_centerPos ),
     m_cropOffset( obj.m_cropOffset )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -36,88 +36,79 @@ CObject::CObject( const CObject & obj ) :
 ************************************************************************/
 CObject::~CObject()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the object's world position
 ************************************************************************/
-const CPoint<CWorldValue> & CObject::GetPos() const
+const CPoint<CWorldValue> & CObject::getPos() const
 {
     return m_pos;
+}
 
-}   // GetPos
 
-
-CPoint<float> CObject::GetPosFloat()
+CPoint<float> CObject::getPosFloat()
 {
     return m_pos;
-
-}   // GetPos
+}
 
 
 /************************************************************************
 *    desc:  Set the object's position
 ************************************************************************/
-void CObject::SetPos( const CPoint<CWorldValue> & position )
+void CObject::setPos( const CPoint<CWorldValue> & position )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos = position;
+}
 
-}   // SetPos
-
-void CObject::SetPos( const CPoint<float> & position )
+void CObject::setPos( const CPoint<float> & position )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos = position;
+}
 
-}   // SetPos
-
-void CObject::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
+void CObject::setPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos.set( x, y, z );
-
-}   // SetPos
+}
 
 
 /************************************************************************
 *    desc:  Inc the object's float position
 ************************************************************************/
-void CObject::IncPos( const CPoint<CWorldValue> & position )
+void CObject::incPos( const CPoint<CWorldValue> & position )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos += position;
+}
 
-}   // IncPos
-
-// For AngelScript
-void CObject::IncPos( const CPoint<float> & position )
+void CObject::incPos( const CPoint<float> & position )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos += position;
+}
 
-}   // SetPos
-
-void CObject::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
+void CObject::incPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     m_parameters.Add( NDefs::TRANSLATE | NDefs::TRANSFORM );
 
     m_pos.inc( x, y, z );
-
-}   // IncPos
+}
 
 
 /************************************************************************
 *    desc:  Set the object's rotation
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
-void CObject::SetRot( const CPoint<float> & rotation, bool convertToRadians )
+void CObject::setRot( const CPoint<float> & rotation, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
 
@@ -127,10 +118,9 @@ void CObject::SetRot( const CPoint<float> & rotation, bool convertToRadians )
         m_rot = rotation * defs_DEG_TO_RAD;
     else
         m_rot = rotation;
+}
 
-}   // SetRot
-
-void CObject::SetRot( float x, float y, float z, bool convertToRadians )
+void CObject::setRot( float x, float y, float z, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
@@ -138,15 +128,14 @@ void CObject::SetRot( float x, float y, float z, bool convertToRadians )
         m_rot.set( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
     else
         m_rot.set( x, y, z );
-
-}   // SetRot
+}
 
 
 /************************************************************************
 *    desc:  Inc the pre-translation matrix
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
-void CObject::IncRot( const CPoint<float> & rotation, bool convertToRadians )
+void CObject::incRot( const CPoint<float> & rotation, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
 
@@ -156,10 +145,9 @@ void CObject::IncRot( const CPoint<float> & rotation, bool convertToRadians )
         m_rot += rotation;
 
     m_rot.cap(360.0f * defs_DEG_TO_RAD);
+}
 
-}   // IncRot
-
-void CObject::IncRot( float x, float y, float z, bool convertToRadians )
+void CObject::incRot( float x, float y, float z, bool convertToRadians )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::TRANSFORM );
     
@@ -167,59 +155,53 @@ void CObject::IncRot( float x, float y, float z, bool convertToRadians )
         m_rot.inc( x * defs_DEG_TO_RAD, y * defs_DEG_TO_RAD, z * defs_DEG_TO_RAD );
     else
         m_rot.inc( x, y, z );
-
-}   // IncRot
+}
 
 
 /************************************************************************
 *    desc:  Get the object's rotation in radians
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
-const CPoint<float> & CObject::GetRot() const
+const CPoint<float> & CObject::getRot() const
 {
     return m_rot;
-
-}   // GetRot
+}
 
 
 /************************************************************************
 *    desc:  Set the object's scale
 ************************************************************************/
-void CObject::SetScale( const CPoint<float> & scale )
+void CObject::setScale( const CPoint<float> & scale )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale = scale;
+}
 
-}   // SetScale
-
-void CObject::SetScale( float x, float y, float z )
+void CObject::setScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale.set( x, y, z );
-
-}   // SetScale
+}
 
 
 /************************************************************************
 *    desc:  Inc the object's scale
 ************************************************************************/
-void CObject::IncScale( const CPoint<float> & scale )
+void CObject::incScale( const CPoint<float> & scale )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale += scale;
+}
 
-}   // IncScale
-
-void CObject::IncScale( float x, float y, float z )
+void CObject::incScale( float x, float y, float z )
 {
     m_parameters.Add( NDefs::SCALE | NDefs::TRANSFORM );
 
     m_scale.inc( x, y, z );
-
-}   // IncScale
+}
 
 
 /************************************************************************
@@ -227,47 +209,43 @@ void CObject::IncScale( float x, float y, float z )
 *
 *    ret:	const CPoint & - sprite scale
 ************************************************************************/
-const CPoint<float> & CObject::GetScale() const
+const CPoint<float> & CObject::getScale() const
 {
     return m_scale;
-
-}   // GetScale
+}
 
 
 /************************************************************************
 *    desc:  Get the object's center position
 ************************************************************************/
-const CPoint<float> & CObject::GetCenterPos() const
+const CPoint<float> & CObject::getCenterPos() const
 {
     return m_centerPos;
-
-}   // GetCenterPos
+}
 
 
 /************************************************************************
 *    desc:  Set the object's center position
 ************************************************************************/
-void CObject::SetCenterPos( const CPoint<float> & position )
+void CObject::setCenterPos( const CPoint<float> & position )
 {
     m_parameters.Add( NDefs::CENTER_POINT | NDefs::TRANSFORM );
 
     m_centerPos = position;
+}
 
-}   // SetCenterPos
-
-void CObject::SetCenterPosXYZ( float x, float y, float z )
+void CObject::setCenterPos( float x, float y, float z )
 {
     m_parameters.Add( NDefs::CENTER_POINT | NDefs::TRANSFORM );
 
     m_centerPos.set( x, y, z );
-
-}   // SetCenterPosXYZ
+}
 
 
 /************************************************************************
 *    desc:  Set the object's crop offset
 ************************************************************************/
-void CObject::SetCropOffset( const CSize<int16_t> & offset )
+void CObject::setCropOffset( const CSize<int16_t> & offset )
 {
     if( !m_centerPos.isEmpty() || !offset.isEmpty() )
     {
@@ -275,77 +253,72 @@ void CObject::SetCropOffset( const CSize<int16_t> & offset )
 
         m_cropOffset = offset;
     }
-
-}   // SetCropOffset
+}
 
 
 /************************************************************************
 *    desc:  Set the object visible
 ************************************************************************/
-void CObject::SetVisible( bool value )
+void CObject::setVisible( bool value )
 {
     if( value )
         m_parameters.Add( NDefs::VISIBLE );
     else
         m_parameters.Remove( NDefs::VISIBLE );
-
-}   // SetVisible
+}
 
 
 /************************************************************************
 *    desc:  Is the object visible
 ************************************************************************/
-bool CObject::IsVisible() const
+bool CObject::isVisible() const
 {
     return m_parameters.IsSet( NDefs::VISIBLE );
-
-}   // IsVisible
+}
 
 
 /************************************************************************
 *    desc:  Copy the transform to the passed in object
 ************************************************************************/
-void CObject::CopyTransform( const CObject * pObject )
+void CObject::copyTransform( const CObject * pObject )
 {
     if( pObject->m_parameters.IsSet( NDefs::TRANSLATE ) )
-        SetPos( pObject->m_pos );
+        setPos( pObject->m_pos );
 
     if( pObject->m_parameters.IsSet( NDefs::ROTATE ) )
-        SetRot( pObject->m_rot, false );
+        setRot( pObject->m_rot, false );
 
     if( pObject->m_parameters.IsSet( NDefs::SCALE ) )
-        SetScale( pObject->m_scale );
+        setScale( pObject->m_scale );
     
     if( pObject->m_parameters.IsSet( NDefs::CENTER_POINT ) )
-        SetCenterPos( pObject->m_centerPos );
+        setCenterPos( pObject->m_centerPos );
     
     if( pObject->m_parameters.IsSet( NDefs::CROP_OFFSET ) )
-        SetCropOffset( pObject->m_cropOffset );
-
-}   // CopyTransform
+        setCropOffset( pObject->m_cropOffset );
+}
 
 
 /************************************************************************
 *    desc:  Load the transform data from node
 ************************************************************************/
-void CObject::LoadTransFromNode( const XMLNode & node )
+void CObject::loadTransFromNode( const XMLNode & node )
 {
     bool loadedFlag;
 
     CPoint<CWorldValue> pos = NParseHelper::LoadPosition( node, loadedFlag );
     if( loadedFlag )
-        SetPos( pos );
+        setPos( pos );
 
     CPoint<float> rot = NParseHelper::LoadRotation( node, loadedFlag );
     if( loadedFlag )
-        SetRot( rot );
+        setRot( rot );
 
     CPoint<float> scale = NParseHelper::LoadScale( node, loadedFlag );
     if( loadedFlag )
-        SetScale( scale );
+        setScale( scale );
     
     CPoint<float> centerPos = NParseHelper::LoadCenterPos( node, loadedFlag );
     if( loadedFlag )
-        SetCenterPos( centerPos );
-
-}   // LoadTransFromNode
+        setCenterPos( centerPos );
+}

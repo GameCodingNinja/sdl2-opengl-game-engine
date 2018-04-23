@@ -96,7 +96,7 @@ void CUISlider::LoadControlFromNode( const XMLNode & node )
     CUISubControl::LoadControlFromNode( node );
 
     // Get the position of the slider button as the default position
-    m_defaultPos = GetSubControl()->GetPos();
+    m_defaultPos = GetSubControl()->getPos();
 
     // Get the slider specific settings
     XMLNode settingsNode = node.getChildNode( "settings" );
@@ -386,9 +386,9 @@ void CUISlider::SetSliderPos()
         float pos = startPos + (pixelsPerValue * (m_curValue - m_minValue));
 
         if( m_orientation == EO_HORIZONTAL )
-            GetSubControl()->SetPos( m_defaultPos + CPoint<float>(pos,0,0) );
+            GetSubControl()->setPos( m_defaultPos + CPoint<float>(pos,0,0) );
         else
-            GetSubControl()->SetPos( m_defaultPos + CPoint<float>(0,-pos,0) );
+            GetSubControl()->setPos( m_defaultPos + CPoint<float>(0,-pos,0) );
     }
 
 }   // SetSliderPos

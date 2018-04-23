@@ -58,7 +58,7 @@ void CLinearStageStrategy::LoadFromNode( const XMLNode & node )
         // Find the index of the desired sector
         for( auto & iter : m_sectorDeq )
         {
-            if( (iter.GetPos().x.i == startSector.x.i) && (iter.GetPos().y.i == startSector.y.i) )
+            if( (iter.getPos().x.i == startSector.x.i) && (iter.getPos().y.i == startSector.y.i) )
                 break;
 
             ++m_startIndex;
@@ -143,7 +143,7 @@ void CLinearStageStrategy::Transform()
 
     for( size_t i = m_firstIndex; i < m_sectorDeq.size(); ++i )
     {
-        m_sectorDeq.at(i).Transform();
+        m_sectorDeq.at(i).transform();
 
         if( SetRange(i) )
             break;
@@ -153,7 +153,7 @@ void CLinearStageStrategy::Transform()
         if( m_firstIndex < tmpFirstIndex )
         {
             tmpFirstIndex = m_firstIndex;
-            m_sectorDeq.at(m_firstIndex).Transform();
+            m_sectorDeq.at(m_firstIndex).transform();
         }
     }
 
@@ -165,7 +165,7 @@ void CLinearStageStrategy::Transform( const CObject2D & object )
 
     for( size_t i = m_firstIndex; i < m_sectorDeq.size(); ++i )
     {
-        m_sectorDeq.at(i).Transform( object );
+        m_sectorDeq.at(i).transform( object );
 
         if( SetRange(i) )
             break;
@@ -175,7 +175,7 @@ void CLinearStageStrategy::Transform( const CObject2D & object )
         if( m_firstIndex < tmpFirstIndex )
         {
             tmpFirstIndex = m_firstIndex;
-            m_sectorDeq.at(m_firstIndex).Transform( object );
+            m_sectorDeq.at(m_firstIndex).transform( object );
         }
     }
 

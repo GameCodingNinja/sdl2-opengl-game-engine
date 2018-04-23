@@ -88,14 +88,14 @@ void CMenuTree::Update()
 void CMenuTree::Transform()
 {
     if( !m_pMenuPathVec.empty() )
-        m_pMenuPathVec.back()->Transform();
+        m_pMenuPathVec.back()->transform();
 
 }   // Transform
 
 void CMenuTree::Transform( const CObject2D & object )
 {
     if( !m_pMenuPathVec.empty() )
-        m_pMenuPathVec.back()->Transform( object );
+        m_pMenuPathVec.back()->transform( object );
 
 }   // Transform
 

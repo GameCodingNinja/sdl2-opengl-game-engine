@@ -48,7 +48,7 @@ void CControlBase::LoadFromNode( const XMLNode & node )
         m_faction = node.getAttribute( "faction" );
     
     // Load the transform data
-    LoadTransFromNode( node );
+    loadTransFromNode( node );
     
     // Load the dynamic offset from node
     LoadDynamicOffsetFromNode( node );
@@ -98,7 +98,7 @@ void CControlBase::SetDynamicPos()
 {
     // Position the menu based on the dynamic offset
     if( !m_dynamicOffset.IsEmpty() )
-        SetPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+        setPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
 
 }   // SetDynamicPos
 

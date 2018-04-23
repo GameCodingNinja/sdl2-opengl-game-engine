@@ -162,21 +162,21 @@ void CSector::Update()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CSector::Transform()
+void CSector::transform()
 {
-    CObject2D::Transform();
+    CObject2D::transform();
 
     for( auto iter : m_pSpriteVec )
-        iter->Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter->transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 
-void CSector::Transform( const CObject2D & object )
+void CSector::transform( const CObject2D & object )
 {
-    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+    CObject2D::transform( object.getMatrix(), object.wasWorldPosTranformed() );
 
     for( auto iter : m_pSpriteVec )
-        iter->Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter->transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 
@@ -190,7 +190,7 @@ void CSector::Render( const CCamera & camera )
     if( InView() )
     {
         for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
-            (*it)->Render( camera.GetFinalMatrix(), camera.GetRotMatrix() );
+            (*it)->Render( camera.getFinalMatrix(), camera.getRotMatrix() );
     }
     
 }   // Render
@@ -263,11 +263,11 @@ bool CSector::InPerspectiveView()
     const CSize<float> & aspectRatio = CSettings::Instance().GetScreenAspectRatio();
 
     // Check the right and left sides of the screen
-    if( std::fabs(m_transPos.x) > ((std::fabs(GetPos().z) * aspectRatio.w) + m_sectorSizeHalf) )
+    if( std::fabs(m_transPos.x) > ((std::fabs(getPos().z) * aspectRatio.w) + m_sectorSizeHalf) )
         return false;
 
     // Check the top and bottom sides of the screen
-    if( std::fabs(m_transPos.y) > ((std::fabs(GetPos().z) * aspectRatio.h) + m_sectorSizeHalf) )
+    if( std::fabs(m_transPos.y) > ((std::fabs(getPos().z) * aspectRatio.h) + m_sectorSizeHalf) )
         return false;
 
     // if we made it this far, the object was not culled

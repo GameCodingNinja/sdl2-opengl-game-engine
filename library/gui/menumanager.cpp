@@ -232,7 +232,7 @@ void CMenuManager::LoadMenusFromNode( const std::string & group, const XMLNode &
         }
 
         // Load the transform from node
-        iter.first->second.LoadTransFromNode( menuNode );
+        iter.first->second.loadTransFromNode( menuNode );
 
         // Load the dynamic offset from node
         iter.first->second.LoadDynamicOffsetFromNode( menuNode );
@@ -1118,7 +1118,7 @@ void CMenuManager::ResetTransform()
 {
     for( auto & grpIter : m_menuMapMap )
         for( auto & iter : grpIter.second )
-            iter.second.ForceTransform();
+            iter.second.forceTransform();
 
 }   // ResetTransform
 

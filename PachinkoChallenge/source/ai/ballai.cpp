@@ -59,7 +59,7 @@ void CBallAI::Init()
 ************************************************************************/
 void CBallAI::Update()
 {
-    if( m_sprite.GetPos().y < -1650.0f )
+    if( m_sprite.getPos().y < -1650.0f )
         m_rStrategy.SetToDestroy( m_sprite.GetId() );
         
 }   // Update

@@ -24,8 +24,8 @@ public:
     virtual ~CSpriteChild2D();
     
     // Transform
-    void Transform() override;
-    void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
+    void transform() override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
     // do the render
     virtual void Render( const CMatrix & matrix ) override;

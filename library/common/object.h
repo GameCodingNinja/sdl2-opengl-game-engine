@@ -28,58 +28,58 @@ public:
     virtual ~CObject();
 
     // Load the transform data from node
-    void LoadTransFromNode( const XMLNode & node );
+    void loadTransFromNode( const XMLNode & node );
 
     // Set/Get the object's position
-    void SetPos( const CPoint<CWorldValue> & position );
-    void SetPos( const CPoint<float> & position );
-    void SetPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
-    const CPoint<CWorldValue> & GetPos() const;
-    CPoint<float> GetPosFloat();
+    void setPos( const CPoint<CWorldValue> & position );
+    void setPos( const CPoint<float> & position );
+    void setPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    const CPoint<CWorldValue> & getPos() const;
+    CPoint<float> getPosFloat();
 
     // Increment the object's position
-    void IncPos( const CPoint<CWorldValue> & position );
-    void IncPos( const CPoint<float> & position );
-    void IncPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void incPos( const CPoint<CWorldValue> & position );
+    void incPos( const CPoint<float> & position );
+    void incPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
 
     // Set/Get the object's rotation
     // NOTE: Rotation is stored as radians
-    void SetRot( const CPoint<float> & rotation, bool convertToRadians = true );
-    void SetRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
-    const CPoint<float> & GetRot() const;
+    void setRot( const CPoint<float> & rotation, bool convertToRadians = true );
+    void setRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
+    const CPoint<float> & getRot() const;
 
     // Increment the object's rotation
     // NOTE: Rotation is stored as radians
-    void IncRot( const CPoint<float> & rotation, bool convertToRadians = true );
-    void IncRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
+    void incRot( const CPoint<float> & rotation, bool convertToRadians = true );
+    void incRot( float x = 0, float y = 0, float z = 0, bool convertToRadians = true );
 
     // Set the object's scale
-    void SetScale( const CPoint<float> & scale );
-    void SetScale( float x = 1, float y = 1, float z = 1 );
+    void setScale( const CPoint<float> & scale );
+    void setScale( float x = 1, float y = 1, float z = 1 );
 
     // Increment the object's scale
-    void IncScale( const CPoint<float> & scale );
-    void IncScale( float x = 1, float y = 1, float z = 1 );
+    void incScale( const CPoint<float> & scale );
+    void incScale( float x = 1, float y = 1, float z = 1 );
 
     // Get the object's scale
-    const CPoint<float> & GetScale() const;
+    const CPoint<float> & getScale() const;
     
     // Set/Get the object's position
-    void SetCenterPos( const CPoint<float> & position );
-    void SetCenterPosXYZ( float x = 0, float y = 0, float z = 0 );
-    const CPoint<float> & GetCenterPos() const;
+    void setCenterPos( const CPoint<float> & position );
+    void setCenterPos( float x = 0, float y = 0, float z = 0 );
+    const CPoint<float> & getCenterPos() const;
     
     // Set the object's crop offset
-    void SetCropOffset( const CSize<int16_t> & offset );
+    void setCropOffset( const CSize<int16_t> & offset );
 
     // Set the object's visibility
-    void SetVisible( bool value = true );
+    void setVisible( bool value = true );
 
     // Is the object visible
-    bool IsVisible() const;
+    bool isVisible() const;
     
     // Copy the transform to the passed in object
-    void CopyTransform( const CObject * pObject );
+    void copyTransform( const CObject * pObject );
 
 protected:
     

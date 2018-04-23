@@ -56,7 +56,7 @@ public:
     void Update();
     
     // Transform the reel strip
-    void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
     // Do the render
     void Render( const CMatrix & matrix );

@@ -201,14 +201,14 @@ void CUISubControl::Update()
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUISubControl::Transform( const CObject2D & object )
+void CUISubControl::transform( const CObject2D & object )
 {
     // Call the parent
-    CUIControl::Transform( object );
+    CUIControl::transform( object );
     
     // Update all controls
     for( auto iter : m_pSubControlVec )
-        iter->Transform( *this );
+        iter->transform( *this );
 
 }   // Transform
 

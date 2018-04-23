@@ -162,8 +162,8 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     else
     {
         // Find the largest size width and height of the different sprites for the controls size
-        const float width( rSprite.GetObjectData().GetSize().w + std::fabs( rSprite.GetPos().x ) );
-        const float height( rSprite.GetObjectData().GetSize().h + std::fabs( rSprite.GetPos().y ) );
+        const float width( rSprite.GetObjectData().GetSize().w + std::fabs( rSprite.getPos().x ) );
+        const float height( rSprite.GetObjectData().GetSize().h + std::fabs( rSprite.getPos().y ) );
 
         if( width > m_size.w )
             m_size.w = width;
@@ -191,12 +191,12 @@ void CUIControl::Update()
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUIControl::Transform( const CObject2D & object )
+void CUIControl::transform( const CObject2D & object )
 {
-    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+    CObject2D::transform( object.getMatrix(), object.wasWorldPosTranformed() );
 
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
 
     TransformCollision();
 
@@ -208,9 +208,9 @@ void CUIControl::Transform( const CObject2D & object )
 ************************************************************************/
 void CUIControl::TransformCollision()
 {
-    if( WasWorldPosTranformed() && !m_size.isEmpty() )
+    if( wasWorldPosTranformed() && !m_size.isEmpty() )
     {
-        CMatrix finalMatrix( GetMatrix() );
+        CMatrix finalMatrix( getMatrix() );
         finalMatrix.Scale( CSettings::Instance().GetOrthoAspectRatio().getH() );
         finalMatrix.InvertY();
 

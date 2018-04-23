@@ -70,7 +70,7 @@ void CWheelView::Create( const XMLNode & node, const std::string & group )
     // Load the transform data from node
     const XMLNode transNode = node.getChildNode( "translation" );
     if( !transNode.isEmpty() )
-        LoadTransFromNode( transNode );
+        loadTransFromNode( transNode );
     
     // Set the spin direction
     if( node.isAttributeSet("spinDirection") )
@@ -114,7 +114,7 @@ void CWheelView::LoadWheelSprites( const XMLNode & node, const std::string & gro
                         % group % __FUNCTION__ % __LINE__ ));
 
             m_wheelSpriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, spriteNode.getAttribute("objectName") ) );
-            m_wheelSpriteDeq.back().LoadTransFromNode( spriteNode );
+            m_wheelSpriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
     
@@ -141,7 +141,7 @@ void CWheelView::LoadWedges( const XMLNode & node, const std::string & group )
             const std::string symbId = wedgeNode.getAttribute( "symb" );
             m_symbolDeq.emplace_back( m_rSymbolSetView.GetSpriteData(symbId), symbId );
             
-            m_symbolDeq.back().LoadTransFromNode( wedgeNode );
+            m_symbolDeq.back().loadTransFromNode( wedgeNode );
         }
     }
     
@@ -169,7 +169,7 @@ void CWheelView::LoadSprites( const XMLNode & node, const std::string & group )
                         % group % __FUNCTION__ % __LINE__ ));
 
             m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, spriteNode.getAttribute("objectName") ) );
-            m_spriteDeq.back().LoadTransFromNode( spriteNode );
+            m_spriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
     
@@ -182,7 +182,7 @@ void CWheelView::LoadSprites( const XMLNode & node, const std::string & group )
 void CWheelView::PreTransform()
 {
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // PreTransform
 
@@ -359,7 +359,7 @@ void CWheelView::IncSpin( float velocity )
     if( m_rotation >= m_PI_2 )
         m_rotation -= m_PI_2;
 
-    SetRot( 0, 0, m_rotation * m_spinDirVector, false );
+    setRot( 0, 0, m_rotation * m_spinDirVector, false );
         
 }   // IncSpin
 
@@ -367,15 +367,15 @@ void CWheelView::IncSpin( float velocity )
 /************************************************************************
 *    desc:  Transform the reel strip
 ************************************************************************/
-void CWheelView::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CWheelView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    CObject2D::Transform( matrix, tranformWorldPos );
+    CObject2D::transform( matrix, tranformWorldPos );
     
     for( auto & iter : m_wheelSpriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
     
     for( auto & iter : m_symbolDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 

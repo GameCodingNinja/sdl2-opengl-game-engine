@@ -78,8 +78,8 @@ void CLoadState::Init()
     CSize<float> scrnHalf = CSettings::Instance().GetDefaultSizeHalf();
 
     // Set the position
-    m_upSprite->SetPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
-    m_upSprite->Transform(); 
+    m_upSprite->setPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
+    m_upSprite->transform(); 
 
     // Setup the fade in
     CShaderMgr::Instance().SetShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );

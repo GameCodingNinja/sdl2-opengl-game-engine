@@ -145,7 +145,7 @@ void CLobbyState::Transform()
     
     CMenuManager::Instance().TransformInterface();
 
-    m_background.Transform();
+    m_background.transform();
 
 }   // Transform
 

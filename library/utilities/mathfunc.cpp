@@ -95,7 +95,7 @@ namespace NMathFunc
     {
         // Combine the camera and projection transformations and then invert the result
         // so we can use it like we're reversing all transformations on the mouse point.
-        CMatrix m = matCam.GetMatrix() * matProj;
+        CMatrix m = matCam.getMatrix() * matProj;
         m.Invert();
 
         // Convert to values between -1 and 1.
@@ -109,8 +109,8 @@ namespace NMathFunc
         m.Transform( r, mp );
 
         // Temporary code to project onto the xy plane.
-        r.x *= -matCam.GetPos().z - r.z;
-        r.y *= -matCam.GetPos().z - r.z;
+        r.x *= -matCam.getPos().z - r.z;
+        r.y *= -matCam.getPos().z - r.z;
         r.z = 0;
 
         return r;

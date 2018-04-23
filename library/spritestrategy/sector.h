@@ -48,8 +48,8 @@ public:
     void Update();
 
     // Transform the actor
-    void Transform() override;
-    void Transform( const CObject2D & object ) override;
+    void transform() override;
+    void transform( const CObject2D & object ) override;
 
     // Render the actor
     void Render( const CCamera & camera );

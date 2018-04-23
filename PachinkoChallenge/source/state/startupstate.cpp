@@ -101,9 +101,9 @@ void CStartUpState::Init()
     
     // Allocate the sprites
     m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().GetData2D( "(startup)", "solid_white_bk" ) );
-    m_SpriteDeque.back().Transform();
+    m_SpriteDeque.back().transform();
     m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().GetData2D( "(startup)", "logo" ) );
-    m_SpriteDeque.back().Transform();
+    m_SpriteDeque.back().transform();
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();

@@ -44,7 +44,7 @@ void CBasicStageStrategy::LoadFromFile( const std::string & file )
     
     XMLNode cameraNode = node.getChildNode( "cameraPosition" );
     if( !cameraNode.isEmpty() )
-        m_defaultCameraPos.LoadTransFromNode( cameraNode );
+        m_defaultCameraPos.loadTransFromNode( cameraNode );
 
     // Load thes sector data from node
     LoadFromNode( node );
@@ -68,7 +68,7 @@ void CBasicStageStrategy::LoadFromNode( const XMLNode & node )
             
             m_sectorDeq.emplace_back();
             m_sectorDeq.back().LoadFromNode( sectorNode );
-            m_sectorDeq.back().LoadTransFromNode( sectorNode );
+            m_sectorDeq.back().loadTransFromNode( sectorNode );
         }
     }
     
@@ -114,14 +114,14 @@ void CBasicStageStrategy::Update()
 void CBasicStageStrategy::Transform()
 {
     for( auto & iter : m_sectorDeq )
-        iter.Transform();
+        iter.transform();
 
 }   // Transform
 
 void CBasicStageStrategy::Transform( const CObject2D & object )
 {
     for( auto & iter : m_sectorDeq )
-        iter.Transform( object );
+        iter.transform( object );
 
 }   // Transform
 

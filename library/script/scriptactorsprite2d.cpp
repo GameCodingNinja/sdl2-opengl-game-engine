@@ -33,32 +33,32 @@ namespace NScriptActorSprite2D
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "int GetId()",                                        asMETHOD(CActorSprite2D,   GetId),            asCALL_THISCALL) );
 
         // Need to use CObject for the below to compile under MSVSC++
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetVisible(bool)",                              asMETHOD(CObject,   SetVisible),           asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "bool IsVisible()",                                   asMETHOD(CObject,   IsVisible),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetVisible(bool)",                              asMETHOD(CObject,   setVisible),           asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "bool IsVisible()",                                   asMETHOD(CObject,   isVisible),            asCALL_THISCALL) );
         
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(CPoint &in)",                             asMETHODPR(CObject,   SetPos, (const CPoint<float> &), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(CPoint &in)",                             asMETHODPR(CObject,   setPos, (const CPoint<float> &), void), asCALL_THISCALL) );
         //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, SetPos, (float,float,float), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(CPoint & in)",                            asMETHODPR(CObject, IncPos, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(CPoint & in)",                            asMETHODPR(CObject, incPos, (const CPoint<float> &), void),   asCALL_THISCALL) );
         //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, IncPos, (float,float,float), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "CPoint GetPos()",                                       asMETHOD(CObject, GetPosFloat),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "CPoint GetPos()",                                       asMETHOD(CObject, getPosFloat),   asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   SetRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject,   SetRot, (float, float, float, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   setRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject,   setRot, (float, float, float, bool), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   IncRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject, IncRot, (float, float, float, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   incRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject, incRot, (float, float, float, bool), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "const CPoint & GetRot()",                               asMETHOD(CObject, GetRot),               asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "const CPoint & GetRot()",                               asMETHOD(CObject, getRot),               asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetScale(CPoint & in)",                            asMETHODPR(CObject, SetScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, SetScale, (float,float,float), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetScale(CPoint & in)",                            asMETHODPR(CObject, setScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, setScale, (float,float,float), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncScale(CPoint & in)",                            asMETHODPR(CObject, IncScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, IncScale, (float,float,float), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncScale(CPoint & in)",                            asMETHODPR(CObject, incScale, (const CPoint<float> &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncScale(float x = 1, float y = 1, float z = 1)",  asMETHODPR(CObject, incScale, (float,float,float), void), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "const CPoint & GetScale()",     asMETHOD(CObject, GetScale),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "const CPoint & GetScale()",     asMETHOD(CObject, getScale),             asCALL_THISCALL) );
     }
 }

@@ -42,7 +42,7 @@ void CTitleScreenState::Init()
     CMenuManager::Instance().Allow();
     CMenuManager::Instance().ActivateTree( "title_screen_tree" );
 
-    m_cube.SetScale( 3, 3, 3 );
+    m_cube.setScale( 3, 3, 3 );
     
     CCameraMgr::Instance().CreatePerspective( "cube" );
     CCameraMgr::Instance().SetActiveCameraPos( 0, 0, 20 );
@@ -94,7 +94,7 @@ void CTitleScreenState::Update()
     m_scriptComponent.Update();
 
     float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
-    m_cube.IncRot( rot, rot, 0 );
+    m_cube.incRot( rot, rot, 0 );
 
 }   // Update
 
@@ -106,13 +106,13 @@ void CTitleScreenState::Transform()
 {
     CCommonState::Transform();
 
-    m_background.Transform();
+    m_background.transform();
     
     CCameraMgr::Instance().Transform();
     
     //m_spriteSheetTest.Transform();
     
-    m_cube.Transform();
+    m_cube.transform();
 
 }   // Transform
 
@@ -130,7 +130,7 @@ void CTitleScreenState::PreRender()
     
     auto & camera = CCameraMgr::Instance().GetActiveCamera();
     
-    m_cube.Render( camera.GetFinalMatrix(), camera.GetRotMatrix() );
+    m_cube.Render( camera.getFinalMatrix(), camera.getRotMatrix() );
     
 }   // PreRender
 

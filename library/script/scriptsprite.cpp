@@ -23,87 +23,87 @@ namespace NScriptSprite
     ************************************************************************/
     void SetVisible(bool value, iSprite & sprite)
     {
-        sprite.SetVisible(value);
+        sprite.setVisible(value);
     }
     
     bool IsVisible(iSprite & sprite)
     {
-        return sprite.IsVisible();
+        return sprite.isVisible();
     }
     
     void SetPos1(const CPoint<float> & pos, iSprite & sprite)
     {
-        sprite.SetPos(pos);
+        sprite.setPos(pos);
     }
     
     void SetPos2(float x, float y, float z, iSprite & sprite)
     {
-        sprite.SetPos(x,y,z);
+        sprite.setPos(x,y,z);
     }
     
     void IncPos1(const CPoint<float> & pos, iSprite & sprite)
     {
-        sprite.IncPos(pos);
+        sprite.incPos(pos);
     }
     
     void IncPos2(float x, float y, float z, iSprite & sprite)
     {
-        sprite.IncPos(x,y,z);
+        sprite.incPos(x,y,z);
     }
     
     CPoint<float> GetPos(iSprite & sprite)
     {
-        return sprite.GetPosFloat();
+        return sprite.getPosFloat();
     }
     
     void SetRot1(const CPoint<float> & rot, bool convertToRadians, iSprite & sprite)
     {
-        sprite.SetRot(rot, convertToRadians);
+        sprite.setRot(rot, convertToRadians);
     }
     
     void SetRot2(float x, float y, float z, bool convertToRadians, iSprite & sprite)
     {
-        sprite.SetRot(x,y,z, convertToRadians);
+        sprite.setRot(x,y,z, convertToRadians);
     }
     
     void IncRot1(const CPoint<float> & rot, bool convertToRadians, iSprite & sprite)
     {
-        sprite.IncRot(rot, convertToRadians);
+        sprite.incRot(rot, convertToRadians);
     }
     
     void IncRot2(float x, float y, float z, bool convertToRadians, iSprite & sprite)
     {
-        sprite.IncRot(x,y,z, convertToRadians);
+        sprite.incRot(x,y,z, convertToRadians);
     }
     
     const CPoint<float> & GetRot(iSprite & sprite)
     {
-        return sprite.GetRot();
+        return sprite.getRot();
     }
     
     void SetScale1(const CPoint<float> & rot, iSprite & sprite)
     {
-        sprite.SetScale(rot);
+        sprite.setScale(rot);
     }
     
     void SetScale2(float x, float y, float z, iSprite & sprite)
     {
-        sprite.SetScale(x,y,z);
+        sprite.setScale(x,y,z);
     }
     
     void IncScale1(const CPoint<float> & rot, iSprite & sprite)
     {
-        sprite.IncScale(rot);
+        sprite.incScale(rot);
     }
     
     void IncScale2(float x, float y, float z, iSprite & sprite)
     {
-        sprite.IncScale(x,y,z);
+        sprite.incScale(x,y,z);
     }
 
     const CPoint<float> & GetScale(iSprite & sprite)
     {
-        return sprite.GetScale();
+        return sprite.getScale();
     }
     
     

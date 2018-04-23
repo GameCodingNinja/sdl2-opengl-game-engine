@@ -192,7 +192,7 @@ void CUIMeter::InitBangRange( const CBangRange & bangRange )
     m_impulse = 0.0;
     m_bangScaleAdjustment.set(1,1);
     
-    m_pSprite->SetScale( CPoint<float>(1,1,1) );
+    m_pSprite->setScale( CPoint<float>(1,1,1) );
     
     m_velocity = bangRange.m_velocity / 1000.0;
     
@@ -344,13 +344,13 @@ void CUIMeter::DisplayValue()
         {
             m_bangScaleAdjustment = dif;
 
-            CPoint<float> scale( m_pSprite->GetScale() );
+            CPoint<float> scale( m_pSprite->getScale() );
             if( dif.w < dif.h )
                 scale.set(dif.w, (m_scaleType == EST_AXIS ? 1.f : dif.w), 1.f);
             else
                 scale.set((m_scaleType == EST_AXIS ? 1.f : dif.h), dif.h, 1.f);
 
-            m_pSprite->SetScale( scale );
+            m_pSprite->setScale( scale );
         }
     }
             

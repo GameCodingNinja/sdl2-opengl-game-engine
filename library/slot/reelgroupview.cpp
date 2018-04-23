@@ -166,9 +166,9 @@ void CReelGroupView::Transform()
     CSlotGroupView::Transform();
 
     for( auto & iter : m_reelStripViewDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
 
-    m_upCycleResultsTxtSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
+    m_upCycleResultsTxtSprite->transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 

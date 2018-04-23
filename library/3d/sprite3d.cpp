@@ -29,7 +29,7 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
     m_physicsComponent(objectData.GetPhysicsData())
 {
     // If there's no visual data, set the hide flag
-    SetVisible( objectData.GetVisualData().IsActive() );
+    setVisible( objectData.GetVisualData().IsActive() );
     
     // Set the sprite type
     m_parameters.Add( NDefs::SPRITE3D );
@@ -63,7 +63,7 @@ void CSprite3D::SetTransform( const btTransform & trans )
     
     // Set the position
     const btVector3 & btVec = trans.getOrigin();
-    SetPos( btVec.x(), btVec.y(), btVec.z() );
+    setPos( btVec.x(), btVec.y(), btVec.z() );
     
     // Set the rotation
     const btMatrix3x3 & btMat = trans.getBasis();
@@ -103,7 +103,7 @@ void CSprite3D::HandleEvent( const SDL_Event & rEvent )
  ************************************************************************/
 void CSprite3D::Update()
 {
-    if( IsVisible() )
+    if( isVisible() )
         m_physicsComponent.Update( this );
 
     m_scriptComponent.Update();
@@ -129,15 +129,15 @@ void CSprite3D::PhysicsUpdate()
  ************************************************************************/
 void CSprite3D::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
-    if( IsVisible() )
+    if( isVisible() )
         m_visualComponent.Render( m_matrix * matrix, m_rotMatrix * rotMatrix );
 
 }   // Render
 
 void CSprite3D::Render( const CCamera & camera )
 {
-    if( IsVisible() )
-        m_visualComponent.Render( m_matrix * camera.GetFinalMatrix(), m_rotMatrix * camera.GetRotMatrix() );
+    if( isVisible() )
+        m_visualComponent.Render( m_matrix * camera.getFinalMatrix(), m_rotMatrix * camera.getRotMatrix() );
 
 }   // Render
 

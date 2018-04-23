@@ -85,7 +85,7 @@ CActorData::CActorData(
     }
 
     // Load the transform data from node
-    LoadTransFromNode( node );
+    loadTransFromNode( node );
     
 }   // constructor
 

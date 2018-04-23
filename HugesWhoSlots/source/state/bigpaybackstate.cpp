@@ -111,7 +111,7 @@ void CBigPayBackState::Init()
     m_slotGame.SetFrontPanel( &m_frontPanel );
     m_slotGame.SetGameMusic( &m_baseGameMusic );
     
-    m_pig.SetPos( CPoint<float>(-875,-200,0) );
+    m_pig.setPos( CPoint<float>(-875,-200,0) );
     
     // Init the credit meter
     CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).Set( CBetMgr::Instance().GetCredits()  );
@@ -228,8 +228,8 @@ void CBigPayBackState::Transform()
     CCommonState::Transform();
 
     CMenuManager::Instance().TransformInterface();
-    m_background.Transform();
-    m_pig.Transform();
+    m_background.transform();
+    m_pig.transform();
     m_slotGame.Transform();
 
 }   // Transform

@@ -25,32 +25,32 @@ public:
     virtual ~CObject2D();
 
     // Transform - One call for those objects that don't have parents
-    virtual void Transform();
-    virtual void Transform( const CObject2D & object );
-    virtual void Transform( const CMatrix & matrix, bool tranformWorldPos = false );
+    virtual void transform();
+    virtual void transform( const CObject2D & object );
+    virtual void transform( const CMatrix & matrix, bool tranformWorldPos = false );
 
     // Get the object's matrix
-    const CMatrix & GetMatrix() const;
+    const CMatrix & getMatrix() const;
 
     // Was the world position transformed?
-    bool WasWorldPosTranformed() const;
+    bool wasWorldPosTranformed() const;
 
     // Force the world transform
-    void ForceTransform();
+    void forceTransform();
     
     // Get the object's translated position
-    const CPoint<float> & GetTransPos() const;
+    const CPoint<float> & getTransPos() const;
 
 protected:
 
     // Transform the object in local space
-    void TransformLocal( CMatrix & matrix );
+    void transformLocal( CMatrix & matrix );
     
     // Apply the scale
-    virtual void ApplyScale( CMatrix & matrix );
+    virtual void applyScale( CMatrix & matrix );
 
     // Apply the rotation
-    virtual void ApplyRotation( CMatrix & matrix );
+    virtual void applyRotation( CMatrix & matrix );
 
 protected:
 

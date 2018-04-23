@@ -12,14 +12,14 @@
 ************************************************************************/
 CObject2D::CObject2D()
 {
-}   // Constructor
+}
 
 CObject2D::CObject2D( const CObject2D & obj ) :
     CObject( obj ),
     m_transPos( obj.m_transPos ),
     m_matrix( obj.m_matrix )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -27,23 +27,22 @@ CObject2D::CObject2D( const CObject2D & obj ) :
 ************************************************************************/
 CObject2D::~CObject2D()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the object's translated position
 ************************************************************************/
-const CPoint<float> & CObject2D::GetTransPos() const
+const CPoint<float> & CObject2D::getTransPos() const
 {
     return m_transPos;
-
-}   // GetTransPos
+}
 
 
 /************************************************************************
 *    desc:  Transform the object in local space
 ************************************************************************/
-void CObject2D::TransformLocal( CMatrix & matrix )
+void CObject2D::transformLocal( CMatrix & matrix )
 {
     // Reset the matrices
     matrix.InitilizeMatrix();
@@ -54,11 +53,11 @@ void CObject2D::TransformLocal( CMatrix & matrix )
 
     // Apply the scale
     if( m_parameters.IsSet( NDefs::SCALE ) )
-        ApplyScale( matrix );
+        applyScale( matrix );
 
     // Apply the rotation
     if( m_parameters.IsSet( NDefs::ROTATE ) )
-        ApplyRotation( matrix );
+        applyRotation( matrix );
 
     // Apply the translation
     if( m_parameters.IsSet( NDefs::TRANSLATE ) )
@@ -69,27 +68,25 @@ void CObject2D::TransformLocal( CMatrix & matrix )
 
     // Indicate that translation was done
     m_parameters.Add( NDefs::WAS_TRANSFORMED );
-
-}   // TransformLocal
+}
 
 
 /************************************************************************
 *    desc:  Transform
 ************************************************************************/
-void CObject2D::Transform()
+void CObject2D::transform()
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
     if( m_parameters.IsSet( NDefs::TRANSFORM ) )
     {
-        TransformLocal( m_matrix );
+        transformLocal( m_matrix );
     
         m_transPos = m_pos;
     }
+}
 
-}   // Transform
-
-void CObject2D::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CObject2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
@@ -97,36 +94,33 @@ void CObject2D::Transform( const CMatrix & matrix, bool tranformWorldPos )
     {
         CMatrix localMatrix;
     
-        TransformLocal( localMatrix );
+        transformLocal( localMatrix );
     
         m_matrix = localMatrix * matrix;
 
         m_matrix.Transform( m_transPos, CPoint<float>() );
     }
+}
 
-}   // Transform
-
-void CObject2D::Transform( const CObject2D & object )
+void CObject2D::transform( const CObject2D & object )
 {
-    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
-    
-}   // Transform
+    CObject2D::transform( object.getMatrix(), object.wasWorldPosTranformed() );
+}
 
 
 /************************************************************************
 *    desc:  Apply the scale
 ************************************************************************/
-void CObject2D::ApplyScale( CMatrix & matrix )
+void CObject2D::applyScale( CMatrix & matrix )
 {
     matrix.SetScale( m_scale );
-
-}   // ApplyScale
+}
 
 
 /************************************************************************
 *    desc:  Apply the rotation
 ************************************************************************/
-void CObject2D::ApplyRotation( CMatrix & matrix )
+void CObject2D::applyRotation( CMatrix & matrix )
 {
     // Add in the center point prior to rotation
     if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
@@ -137,35 +131,31 @@ void CObject2D::ApplyRotation( CMatrix & matrix )
     // Subtract the center point after rotation to put back in original position
     if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
         matrix.Translate( -m_centerPos );
-
-}   // ApplyRotation
+}
 
 
 /************************************************************************
 *    desc:  Get the object's matrix
 ************************************************************************/
-const CMatrix & CObject2D::GetMatrix() const
+const CMatrix & CObject2D::getMatrix() const
 {
     return m_matrix;
-
-}   // GetMatrix
+}
 
 
 /************************************************************************
 *    desc:  Was the world position transformed?
 ************************************************************************/
-bool CObject2D::WasWorldPosTranformed() const
+bool CObject2D::wasWorldPosTranformed() const
 {
     return m_parameters.IsSet( NDefs::WAS_TRANSFORMED );
-
-}   // WasWorldPosTranformed
+}
 
 
 /************************************************************************
 *    desc:  Force a transform from this point all the way up the line
 ************************************************************************/
-void CObject2D::ForceTransform()
+void CObject2D::forceTransform()
 {
     m_parameters.Add( NDefs::TRANSFORM );
-
-}   // ForceTransform
+}

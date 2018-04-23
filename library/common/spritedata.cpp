@@ -53,7 +53,7 @@ CSpriteData::CSpriteData(
     
     // Get if the sprite is visible
     if( node.isAttributeSet( "visible" ) )
-        SetVisible( std::strcmp( node.getAttribute("visible"), "true" ) == 0 );
+        setVisible( std::strcmp( node.getAttribute("visible"), "true" ) == 0 );
     
     // See if any font data is specified
     const XMLNode fontNode = node.getChildNode("font");
@@ -64,7 +64,7 @@ CSpriteData::CSpriteData(
     }
 
     // Load the transform data from node
-    LoadTransFromNode( node );
+    loadTransFromNode( node );
     
     // Load any script functions
     LoadScriptFunctions( node );

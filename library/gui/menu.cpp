@@ -40,7 +40,7 @@ CMenu::CMenu( const std::string & name, const std::string & group ) :
     m_alpha(0.f)
 {
     // The menu needs to default hidden
-    SetVisible(false);
+    setVisible(false);
 
 }   // constructor
 
@@ -189,7 +189,7 @@ void CMenu::LoadStaticSpriteFromNode( const XMLNode & node )
     m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( m_group, objectName ) );
 
     // Load the transform data
-    m_spriteDeq.back().LoadTransFromNode( node );
+    m_spriteDeq.back().loadTransFromNode( node );
 
     // Init the script functions
     m_spriteDeq.back().InitScriptFunctions( node );
@@ -286,7 +286,7 @@ void CMenu::SetDynamicPos()
 {
     // Position the menu based on the dynamic offset
     if( !m_dynamicOffset.IsEmpty() )
-        SetPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+        setPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
 
 }   // SetDynamicPos
 
@@ -399,7 +399,7 @@ void CMenu::CleanUp()
 void CMenu::ActivateMenu()
 {
     m_state = NMenu::EMS_IDLE;
-    SetVisible(true);
+    setVisible(true);
     SetAlpha(1.f);
     ActivateFirstInactiveControl();
 
@@ -413,7 +413,7 @@ void CMenu::Update()
 {
     m_scriptComponent.Update();
     
-    if( IsVisible() )
+    if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
             iter.Update();
@@ -434,44 +434,44 @@ void CMenu::Update()
 /************************************************************************
 *    desc:  Transform the menu
 ************************************************************************/
-void CMenu::Transform()
+void CMenu::transform()
 {
-    if( IsVisible() )
+    if( isVisible() )
     {
-        CObject2D::Transform();
+        CObject2D::transform();
 
         for( auto & iter : m_spriteDeq )
-            iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+            iter.transform( getMatrix(), wasWorldPosTranformed() );
 
         for( auto iter : m_pStaticControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
 
         for( auto iter : m_pControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
     }
 
 }   // Transform
 
-void CMenu::Transform( const CObject2D & object )
+void CMenu::transform( const CObject2D & object )
 {
-    if( IsVisible() )
+    if( isVisible() )
     {
-        CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+        CObject2D::transform( object.getMatrix(), object.wasWorldPosTranformed() );
 
         for( auto & iter : m_spriteDeq )
-            iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+            iter.transform( getMatrix(), wasWorldPosTranformed() );
 
         for( auto iter : m_pStaticControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
 
         for( auto iter : m_pMouseOnlyControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
 
         for( auto iter : m_pControlVec )
-            iter->Transform( *this );
+            iter->transform( *this );
     }
 
 }   // Transform
@@ -482,7 +482,7 @@ void CMenu::Transform( const CObject2D & object )
 ************************************************************************/
 void CMenu::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
+    if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
             iter.Render( matrix );
@@ -962,7 +962,7 @@ void CMenu::SmartHandleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CMenu::SetAlpha( float alpha )
 {
-    if( IsVisible() )
+    if( isVisible() )
     { 
         for( auto & iter : m_spriteDeq )
             iter.SetAlpha( alpha );

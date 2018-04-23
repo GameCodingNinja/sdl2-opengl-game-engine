@@ -120,7 +120,7 @@ void CTitleScreenState::Transform()
 {
     CCommonState::Transform();
 
-    m_background.Transform();
+    m_background.transform();
 
 }   // Transform
 

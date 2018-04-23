@@ -93,12 +93,12 @@ void CActorSprite2D::Create( const CActorData & actorData )
         }
         
         // Copy over the transform for the sprite
-        m_spriteDeq.back().CopyTransform( &iter );
+        m_spriteDeq.back().copyTransform( &iter );
 
         // Find the largest size width and height of the different sprites for the controls size
         const CSize<float> & size = m_spriteDeq.back().GetObjectData().GetSize();
-        const CPoint<CWorldValue> & pos = m_spriteDeq.back().GetPos();
-        const CPoint<float> & scale = m_spriteDeq.back().GetScale();
+        const CPoint<CWorldValue> & pos = m_spriteDeq.back().getPos();
+        const CPoint<float> & scale = m_spriteDeq.back().getScale();
 
         const float width( (size.w + std::fabs(pos.x)) * scale.x );
         const float height( (size.h + std::fabs(pos.y)) * scale.y );
@@ -112,7 +112,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
     }
     
     // Copy over the transform for the Actor sprite
-    CopyTransform( &actorData );
+    copyTransform( &actorData );
 
     // Convert the largest width and height to a radius
     largestSize /= 2;
@@ -200,30 +200,30 @@ void CActorSprite2D::PhysicsUpdate()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CActorSprite2D::Transform()
+void CActorSprite2D::transform()
 {
-    CObject2D::Transform();
+    CObject2D::transform();
 
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
 
 }   // Transform
 
-void CActorSprite2D::Transform( const CObject2D & object )
+void CActorSprite2D::transform( const CObject2D & object )
 {
-    CObject2D::Transform( object.GetMatrix(), object.WasWorldPosTranformed() );
+    CObject2D::transform( object.getMatrix(), object.wasWorldPosTranformed() );
 
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
 
 }   // Transform
 
-void CActorSprite2D::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CActorSprite2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    CObject2D::Transform( matrix, tranformWorldPos );
+    CObject2D::transform( matrix, tranformWorldPos );
 
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
 
 }   // Transform
 
@@ -343,14 +343,14 @@ bool CActorSprite2D::InPerspectiveView()
 /************************************************************************
 *    desc:  Apply the scale to the radius
 ************************************************************************/
-void CActorSprite2D::ApplyScale( CMatrix & matrix )
+void CActorSprite2D::applyScale( CMatrix & matrix )
 {
-    CObject2D::ApplyScale( matrix );
+    CObject2D::applyScale( matrix );
 
     // Find the largest actor scale
-    float scale = GetScale().x;
-    if( GetScale().y > scale )
-        scale = GetScale().y;
+    float scale = getScale().x;
+    if( getScale().y > scale )
+        scale = getScale().y;
 
     m_scaledRadius = m_radius * scale;
     
@@ -401,7 +401,7 @@ bool CActorSprite2D::IsCollision( CActorSprite2D & rActor )
 bool CActorSprite2D::CheckBroadPhase( CActorSprite2D & rActor )
 {
     const float radius = m_collisionRadius + rActor.GetCollisionRadius();
-    const float length = m_transPos.getLength2D( rActor.GetTransPos() );
+    const float length = m_transPos.getLength2D( rActor.getTransPos() );
     
     return (length < radius);
     

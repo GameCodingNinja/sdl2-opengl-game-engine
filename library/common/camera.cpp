@@ -21,20 +21,19 @@ CCamera::CCamera() :
     m_maxZDist(0),
     m_scale(0)
 {
-}   // constructor
+}
 
 CCamera::CCamera( float minZDist, float maxZDist, float scale ) :
     m_orthoHeightAspectRatio(0.f)
 {
-    GenerateOrthographicProjection( minZDist, maxZDist, scale ); 
-}   // constructor
+    generateOrthographicProjection( minZDist, maxZDist, scale ); 
+}
 
 CCamera::CCamera( float angle, float minZDist, float maxZDist, float scale ) :
     m_orthoHeightAspectRatio(0.f)
 {
-    GeneratePerspectiveProjection( angle, minZDist, maxZDist, scale );
-    
-}   // constructor
+    generatePerspectiveProjection( angle, minZDist, maxZDist, scale );
+}
 
 
 /************************************************************************
@@ -42,26 +41,25 @@ CCamera::CCamera( float angle, float minZDist, float maxZDist, float scale ) :
 ************************************************************************/
 CCamera::~CCamera()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Recreate the projection matrix
 ************************************************************************/
-void CCamera::RecreateProjMatrix()
+void CCamera::recreateProjMatrix()
 {
     if( m_projType == NDefs::EPT_PERSPECTIVE )
-        GeneratePerspectiveProjection( m_angle, m_minZDist, m_maxZDist, m_scale );
+        generatePerspectiveProjection( m_angle, m_minZDist, m_maxZDist, m_scale );
     else
-        GenerateOrthographicProjection( m_minZDist, m_maxZDist, m_scale );
-    
-}   // RecreateProjMatrix
+        generateOrthographicProjection( m_minZDist, m_maxZDist, m_scale );
+}
 
 
 /************************************************************************
 *    desc:  Generate a custom perspective projection for this camera
 ************************************************************************/  
-void CCamera::GeneratePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale )
+void CCamera::generatePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale )
 {
     m_projType = NDefs::EPT_PERSPECTIVE;
     m_angle = angle;
@@ -75,15 +73,14 @@ void CCamera::GeneratePerspectiveProjection( float angle, float minZDist, float 
         minZDist,
         maxZDist );
     
-    CalcFinalMatrix();
-    
-}   // GeneratePerspectiveProjection
+    calcFinalMatrix();
+}
 
 
 /************************************************************************
 *    desc:  Generate a custom orthographic projection for this camera
 ************************************************************************/  
-void CCamera::GenerateOrthographicProjection( float minZDist, float maxZDist, float scale )
+void CCamera::generateOrthographicProjection( float minZDist, float maxZDist, float scale )
 {
     m_projType = NDefs::EPT_ORTHOGRAPHIC;
     m_minZDist = minZDist;
@@ -104,15 +101,14 @@ void CCamera::GenerateOrthographicProjection( float minZDist, float maxZDist, fl
         minZDist,
         maxZDist );
     
-    CalcFinalMatrix();
-    
-}   // GenerateOrthographicProjection
+    calcFinalMatrix();
+}
 
 
 /************************************************************************
 *    desc:  Get the orthographic projected size
 ************************************************************************/
-const CSize<float> & CCamera::GetOrthoProjSize() const
+const CSize<float> & CCamera::getOrthoProjSize() const
 {
     return m_orthoProjSize;
 }
@@ -121,7 +117,7 @@ const CSize<float> & CCamera::GetOrthoProjSize() const
 /************************************************************************
 *    desc:  Get the orthographic projected size half
 ************************************************************************/
-const CSize<float> & CCamera::GetOrthoProjSizeHalf() const
+const CSize<float> & CCamera::getOrthoProjSizeHalf() const
 {
     return m_orthoProjSizeHalf;
 }
@@ -131,87 +127,78 @@ const CSize<float> & CCamera::GetOrthoProjSizeHalf() const
 *    desc:  Height and width screen ratio for render 2D objects
 *           The difference between screen height and the default height
 ************************************************************************/
-float CCamera::GetOrthoHeightAspectRatio() const
+float CCamera::getOrthoHeightAspectRatio() const
 {
-    return m_orthoHeightAspectRatio;
-    
-}   // GetOrthoHeightAspectRatio
+    return m_orthoHeightAspectRatio; 
+}
 
 
 /************************************************************************
 *    desc:  Get the projected matrix
 ************************************************************************/  
-const CMatrix & CCamera::GetProjectionMatrix() const
+const CMatrix & CCamera::getProjectionMatrix() const
 {
     return m_projectionMatrix;
-    
-}   // GetProjectionMatrix
+}
 
 
 /************************************************************************
 *    desc:  Set the camera's world position
 ************************************************************************/  
-void CCamera::SetPos( const CPoint<CWorldValue> & position )
+void CCamera::setPos( const CPoint<CWorldValue> & position )
 {
-    CObject3D::SetPos( -position );
+    CObject3D::setPos( -position );
+}
 
-}   // SetPos
-
-void CCamera::SetPos( CWorldValue x, CWorldValue y, CWorldValue z )
+void CCamera::setPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject3D::SetPos( -x, -y, -z );
-
-}   // SetPos
+    CObject3D::setPos( -x, -y, -z );
+}
 
 
 /************************************************************************
 *    desc:  Increment the camera's world position
 ************************************************************************/  
-void CCamera::IncPos( const CPoint<CWorldValue> & position )
+void CCamera::incPos( const CPoint<CWorldValue> & position )
 {
-    CObject3D::IncPos( -position );
+    CObject3D::incPos( -position );
+}
 
-}   // IncPos
-
-void CCamera::IncPos( CWorldValue x, CWorldValue y, CWorldValue z )
+void CCamera::incPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
-    CObject3D::IncPos( -x, -y, -z );
-
-}   // IncPos
+    CObject3D::incPos( -x, -y, -z );
+}
 
 
 /************************************************************************
 *    desc:  Transform
 ************************************************************************/
-void CCamera::Transform()
+void CCamera::transform()
 {
     const bool wasTransformed( m_parameters.IsSet( NDefs::TRANSFORM ) );
     
-    CObject3D::Transform();
+    CObject3D::transform();
     
     if( wasTransformed )
-        CalcFinalMatrix();
-
-}   // Transform
+        calcFinalMatrix();
+}
 
 
 /************************************************************************
 *    desc:  Calculate the final matrix
 ************************************************************************/
-void CCamera::CalcFinalMatrix()
+void CCamera::calcFinalMatrix()
 {
     m_finalMatrix.InitilizeMatrix();
     m_finalMatrix.MergeMatrix( m_matrix );
     m_finalMatrix.MergeMatrix( m_projectionMatrix );
-    
-}   // CalcFinalMatrix
+}
 
 
 /************************************************************************
 *    desc:  Get the final matrix
 ************************************************************************/  
-const CMatrix & CCamera::GetFinalMatrix() const
+const CMatrix & CCamera::getFinalMatrix() const
 {
     return m_finalMatrix;
-    
-}   // GetFinalMatrix
+}

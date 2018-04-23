@@ -41,7 +41,7 @@ public:
     virtual void Update() override;
 
     // Transform the control
-    virtual void Transform( const CObject2D & object ) override;
+    virtual void transform( const CObject2D & object ) override;
 
     // Render the control
     virtual void Render( const CMatrix & matrix ) override;

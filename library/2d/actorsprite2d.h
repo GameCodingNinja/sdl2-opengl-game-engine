@@ -61,9 +61,9 @@ public:
     void PhysicsUpdate() override;
 
     // Transform the actor
-    void Transform() override;
-    void Transform( const CObject2D & object ) override;
-    void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
+    void transform() override;
+    void transform( const CObject2D & object ) override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
 
     // Render the actor
     void Render( const CMatrix & matrix ) override;
@@ -120,7 +120,7 @@ public:
 protected:
     
     // Apply the scale
-    void ApplyScale( CMatrix & matrix ) override;
+    void applyScale( CMatrix & matrix ) override;
     
 private:
     

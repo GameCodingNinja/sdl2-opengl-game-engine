@@ -70,9 +70,9 @@ void CPhysicsComponent3D::Init( const CSprite3D & sprite )
         float raduis( 1 );
         float diameter( 1 );
 
-        const CPoint<float> scale( sprite.GetScale() );
-        const CPoint<float> pos( sprite.GetPos() );
-        const CPoint<float> rot( sprite.GetRot() );
+        const CPoint<float> scale( sprite.getScale() );
+        const CPoint<float> pos( sprite.getPos() );
+        const CPoint<float> rot( sprite.getRot() );
 
         const float mass( rPhysicsData.GetMass() );
 

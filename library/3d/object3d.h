@@ -26,12 +26,12 @@ public:
     virtual ~CObject3D();
     
     // Get the object's rotation matrix
-    const CMatrix & GetRotMatrix() const;
+    const CMatrix & getRotMatrix() const;
     
 protected:
     
     // Apply the rotation
-    virtual void ApplyRotation( CMatrix & matrix ) override;
+    virtual void applyRotation( CMatrix & matrix ) override;
     
 protected:
 

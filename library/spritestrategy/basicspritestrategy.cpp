@@ -193,13 +193,13 @@ iSprite * CBasicSpriteStrategy::Create(
 
     // Use passed in transforms if specified
     if( !pos.isEmpty() )
-        iter.first->second->SetPos(pos);
+        iter.first->second->setPos(pos);
 
     if( !rot.isEmpty() )
-        iter.first->second->SetRot(rot, false);
+        iter.first->second->setRot(rot, false);
 
     if( scale != CPoint<float>(1,1,1) )
-        iter.first->second->SetScale(scale);
+        iter.first->second->setScale(scale);
 
     // Init the physics
     iter.first->second->InitPhysics();
@@ -311,13 +311,13 @@ iSprite * CBasicSpriteStrategy::Create(
 
     // Use passed in transforms if specified
     if( !pos.isEmpty() )
-        iter.first->second->SetPos(pos);
+        iter.first->second->setPos(pos);
 
     if( !rot.isEmpty() )
-        iter.first->second->SetRot(rot, false);
+        iter.first->second->setRot(rot, false);
 
     if( scale != CPoint<float>(1,1,1) )
-        iter.first->second->SetScale(scale);
+        iter.first->second->setScale(scale);
 
     // Init the physics
     iter.first->second->InitPhysics();
@@ -453,7 +453,7 @@ void CBasicSpriteStrategy::Update()
 void CBasicSpriteStrategy::Transform()
 {
     for( auto iter : m_pSpriteVec )
-        iter->Transform();
+        iter->transform();
 
 }   // Transform
 

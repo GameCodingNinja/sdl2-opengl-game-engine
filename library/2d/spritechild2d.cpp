@@ -30,25 +30,25 @@ CSpriteChild2D::~CSpriteChild2D()
 /************************************************************************
 *    desc:  Transform
 ************************************************************************/
-void CSpriteChild2D::Transform()
+void CSpriteChild2D::transform()
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
     if( m_parameters.IsSet( NDefs::TRANSFORM ) )
     {
-        TransformLocal( m_finalMatrix );
+        transformLocal( m_finalMatrix );
     
         m_transPos = m_pos;
     }
 
 }   // Transform
 
-void CSpriteChild2D::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
     if( m_parameters.IsSet( NDefs::TRANSFORM ) )
-        TransformLocal( m_matrix );
+        transformLocal( m_matrix );
         
     if( m_parameters.IsSet( NDefs::WAS_TRANSFORMED ) || tranformWorldPos )
     {
@@ -67,7 +67,7 @@ void CSpriteChild2D::Transform( const CMatrix & matrix, bool tranformWorldPos )
 ************************************************************************/
 void CSpriteChild2D::Render( const CMatrix & matrix )
 {
-    if( IsVisible() )
+    if( isVisible() )
         m_visualComponent.Render( m_finalMatrix, matrix );
 
 }   // Render

@@ -102,7 +102,7 @@ void CStartUpState::Init()
     
     // Allocate the sprite to fade in
     m_upSpriteLogo.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( "(startup)", "logo" ) ) );
-    m_upSpriteLogo->Transform();
+    m_upSpriteLogo->transform();
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();

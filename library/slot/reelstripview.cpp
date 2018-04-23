@@ -97,7 +97,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
         m_spinSymbDist = symbolSize.w;
     
     // Load the transform data from node
-    LoadTransFromNode( node );
+    loadTransFromNode( node );
     
     // Get the stencil mask object name
     const XMLNode stencilMaskNode = node.getChildNode( "stencilMask" );
@@ -109,7 +109,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
         m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( group, objectName ) ) );
         
         // Load the transform data
-        m_upStencilMaskSprite->LoadTransFromNode( stencilMaskNode );
+        m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
     }
     
     // Get the sprite list if any
@@ -126,7 +126,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
             m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, objectName ) );
             
             // Load the transform data
-            m_spriteDeq.back().LoadTransFromNode( spriteNode );
+            m_spriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
     
@@ -478,15 +478,15 @@ void CReelStripView::FinalizeSymbPos()
 /************************************************************************
 *    desc:  Transform the reel strip
 ************************************************************************/
-void CReelStripView::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CReelStripView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    CObject2D::Transform( matrix, tranformWorldPos );
+    CObject2D::transform( matrix, tranformWorldPos );
     
     // Transform the mask
-    m_upStencilMaskSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
+    m_upStencilMaskSprite->transform( getMatrix(), wasWorldPosTranformed() );
     
     for( auto & iter : m_spriteDeq )
-        iter.Transform( GetMatrix(), WasWorldPosTranformed() );
+        iter.transform( getMatrix(), wasWorldPosTranformed() );
     
 }   // Transform
 
@@ -532,8 +532,8 @@ void CReelStripView::Render( const CMatrix & matrix )
 
         if( !symbol->IsDeferredRender() )
         {
-            symbol->SetPos( m_symPosDeq.at(i) );
-            symbol->Transform( GetMatrix(), WasWorldPosTranformed() );
+            symbol->setPos( m_symPosDeq.at(i) );
+            symbol->transform( getMatrix(), wasWorldPosTranformed() );
             symbol->Render( matrix );
         }
     }
@@ -558,8 +558,8 @@ void CReelStripView::DeferredRender( const CMatrix & matrix )
             
             if( symbol->IsDeferredRender() )
             {
-                symbol->SetPos( m_symPosDeq.at(i) );
-                symbol->Transform( GetMatrix(), WasWorldPosTranformed() );
+                symbol->setPos( m_symPosDeq.at(i) );
+                symbol->transform( getMatrix(), wasWorldPosTranformed() );
                 symbol->Render( matrix );
             }
         }

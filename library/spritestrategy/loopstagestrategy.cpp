@@ -60,7 +60,7 @@ void CLoopStageStrategy::LoadFromNode( const XMLNode & node )
         m_loopInc = -NParseHelper::LoadPosition( incNode );
     
     // Init the offset
-    m_loopOffset.SetPos( m_loopStart );
+    m_loopOffset.setPos( m_loopStart );
 
 }   // LoadFromNode
 
@@ -72,26 +72,26 @@ void CLoopStageStrategy::Transform()
 {
     if( m_dirType > ESD_NULL )
     {
-        m_loopOffset.IncPos( m_loopInc * (float)CHighResTimer::Instance().GetElapsedTime() );
+        m_loopOffset.incPos( m_loopInc * (float)CHighResTimer::Instance().GetElapsedTime() );
 
         if( m_dirType == ESD_FORWARD )
         {
-            if( m_loopOffset.GetPos() < m_loopEnd )
+            if( m_loopOffset.getPos() < m_loopEnd )
             {
-                m_loopOffset.SetPos( m_loopStart + (m_loopOffset.GetPos() - m_loopEnd) );
+                m_loopOffset.setPos( m_loopStart + (m_loopOffset.getPos() - m_loopEnd) );
                 InitRange();
             }
         }
         else if( m_dirType == ESD_BACKWARD )
         {
-            if( m_loopOffset.GetPos() > m_loopEnd )
+            if( m_loopOffset.getPos() > m_loopEnd )
             {
-                m_loopOffset.SetPos( m_loopStart + (m_loopOffset.GetPos() - m_loopEnd) );
+                m_loopOffset.setPos( m_loopStart + (m_loopOffset.getPos() - m_loopEnd) );
                 InitRange();
             }
         }
 
-        m_loopOffset.Transform();
+        m_loopOffset.transform();
 
         CLinearStageStrategy::Transform( m_loopOffset );
     }

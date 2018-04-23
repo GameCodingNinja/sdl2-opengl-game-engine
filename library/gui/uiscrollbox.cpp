@@ -143,7 +143,7 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
         m_cullHeight = (m_upStencilMaskSprite->GetObjectData().GetSize().getW() + m_controlHeight) / 2;
 
         // Load the transform data
-        m_upStencilMaskSprite->LoadTransFromNode( stencilMaskNode );
+        m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
     }
 
 }   // LoadControlFromNode
@@ -167,7 +167,7 @@ CUIControl * CUIScrollBox::AddScrollControlFromNode( const XMLNode & node )
     m_defaultOffsetVec.push_back( pos.y );
 
     // Set the position
-    pCtrl->SetPos( pos );
+    pCtrl->setPos( pos );
 
     // Init the control visual state
     pCtrl->DeactivateControl();
@@ -338,17 +338,17 @@ void CUIScrollBox::Update()
 /************************************************************************
 *    desc:  Transform the control
 ************************************************************************/
-void CUIScrollBox::Transform( const CObject2D & object )
+void CUIScrollBox::transform( const CObject2D & object )
 {
     // Call the parent
-    CUISubControl::Transform( object );
+    CUISubControl::transform( object );
 
     // Transform all controls
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
-        m_pScrollControlVec[i]->Transform( *this );
+        m_pScrollControlVec[i]->transform( *this );
 
     // Transform the mask
-    m_upStencilMaskSprite->Transform( GetMatrix(), WasWorldPosTranformed() );
+    m_upStencilMaskSprite->transform( getMatrix(), wasWorldPosTranformed() );
 
 }   // Transform
 
@@ -913,9 +913,9 @@ void CUIScrollBox::RepositionScrollControls()
 {
     for( int i = m_visStartPos; i < m_visEndPos; ++i )
     {
-        CPoint<float> pos( m_pScrollControlVec[i]->GetPos() );
+        CPoint<float> pos( m_pScrollControlVec[i]->getPos() );
         pos.y = m_defaultOffsetVec[i] + m_scrollCurPos;
-        m_pScrollControlVec[i]->SetPos( pos );
+        m_pScrollControlVec[i]->setPos( pos );
     }
 
 }   // RepositionScrollControls

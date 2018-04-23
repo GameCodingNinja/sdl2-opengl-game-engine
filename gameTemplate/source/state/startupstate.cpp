@@ -103,7 +103,7 @@ void CStartUpState::Init()
     
     // Allocate the sprite to fade in
     m_upSpriteLogo.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( "(startup)", "waffles" ) ) );
-    m_upSpriteLogo->Transform();
+    m_upSpriteLogo->transform();
     
     // Reset the elapsed time before entering the render loop
     CHighResTimer::Instance().CalcElapsedTime();

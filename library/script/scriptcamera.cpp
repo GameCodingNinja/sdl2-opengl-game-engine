@@ -23,82 +23,82 @@ namespace NScriptCamera
     ************************************************************************/
     void SetPos1(const CPoint<float> & pos, CCamera & camera)
     {
-        camera.SetPos(pos);
+        camera.setPos(pos);
     }
     
     void SetPos2(float x, float y, float z, CCamera & camera)
     {
-        camera.SetPos(x,y,z);
+        camera.setPos(x,y,z);
     }
     
     void IncPos1(const CPoint<float> & pos, CCamera & camera)
     {
-        camera.IncPos(pos);
+        camera.incPos(pos);
     }
     
     void IncPos2(float x, float y, float z, CCamera & camera)
     {
-        camera.IncPos(x,y,z);
+        camera.incPos(x,y,z);
     }
     
     CPoint<float> GetPos(CCamera & camera)
     {
-        return camera.GetPosFloat();
+        return camera.getPosFloat();
     }
     
     void SetRot1(const CPoint<float> & rot, bool convertToRadians, CCamera & camera)
     {
-        camera.SetRot(rot, convertToRadians);
+        camera.setRot(rot, convertToRadians);
     }
     
     void SetRot2(float x, float y, float z, bool convertToRadians, CCamera & camera)
     {
-        camera.SetRot(x,y,z, convertToRadians);
+        camera.setRot(x,y,z, convertToRadians);
     }
     
     void IncRot1(const CPoint<float> & rot, bool convertToRadians, CCamera & camera)
     {
-        camera.IncRot(rot, convertToRadians);
+        camera.incRot(rot, convertToRadians);
     }
     
     void IncRot2(float x, float y, float z, bool convertToRadians, CCamera & camera)
     {
-        camera.IncRot(x,y,z, convertToRadians);
+        camera.incRot(x,y,z, convertToRadians);
     }
     
     const CPoint<float> & GetRot(CCamera & camera)
     {
-        return camera.GetRot();
+        return camera.getRot();
     }
     
     void SetScale1(const CPoint<float> & rot, CCamera & camera)
     {
-        camera.SetScale(rot);
+        camera.setScale(rot);
     }
     
     void SetScale2(float x, float y, float z, CCamera & camera)
     {
-        camera.SetScale(x,y,z);
+        camera.setScale(x,y,z);
     }
     
     void IncScale1(const CPoint<float> & rot, CCamera & camera)
     {
-        camera.IncScale(rot);
+        camera.incScale(rot);
     }
     
     void IncScale2(float x, float y, float z, CCamera & camera)
     {
-        camera.IncScale(x,y,z);
+        camera.incScale(x,y,z);
     }
 
     const CPoint<float> & GetScale(CCamera & camera)
     {
-        return camera.GetScale();
+        return camera.getScale();
     }
     
     void Transform(CCamera & camera)
     {
-        camera.Transform();
+        camera.transform();
     }
     
     

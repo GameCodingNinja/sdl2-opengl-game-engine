@@ -53,16 +53,16 @@ void CCameraMgr::CreateProjMatrix()
         CSettings::Instance().GetMaxZdist() );
     
     for( auto & iter : m_cameraMap )
-        iter.second.RecreateProjMatrix();
+        iter.second.recreateProjMatrix();
     
     // Generate the default camera
     if( CSettings::Instance().GetProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
-        m_defaultCamera.GenerateOrthographicProjection(
+        m_defaultCamera.generateOrthographicProjection(
             CSettings::Instance().GetMinZdist(),
             CSettings::Instance().GetMaxZdist(),
             CSettings::Instance().GetProjectionScale() );
     else
-        m_defaultCamera.GeneratePerspectiveProjection(
+        m_defaultCamera.generatePerspectiveProjection(
             CSettings::Instance().GetViewAngle(),
             CSettings::Instance().GetMinZdist(),
             CSettings::Instance().GetMaxZdist(),
@@ -177,25 +177,25 @@ const CCamera & CCameraMgr::GetCamera( const std::string & id ) const
 void CCameraMgr::SetActiveCameraPos( const CPoint<CWorldValue> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetPos(position);
+        m_pActiveCamera->setPos(position);
 }
 
 void CCameraMgr::SetActiveCameraPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetPos(x,y,z);
+        m_pActiveCamera->setPos(x,y,z);
 }
 
 void CCameraMgr::SetActiveCameraPos( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetPos(position);
+        m_pActiveCamera->setPos(position);
 }
 
 void CCameraMgr::SetActiveCameraPos( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetPos(x,y,z);
+        m_pActiveCamera->setPos(x,y,z);
 }
 
 
@@ -205,25 +205,25 @@ void CCameraMgr::SetActiveCameraPos( float x, float y, float z )
 void CCameraMgr::IncActiveCameraPos( const CPoint<CWorldValue> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncPos(position);
+        m_pActiveCamera->incPos(position);
 }
 
 void CCameraMgr::IncActiveCameraPos( CWorldValue x, CWorldValue y, CWorldValue z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncPos(x,y,z);
+        m_pActiveCamera->incPos(x,y,z);
 }
 
 void CCameraMgr::IncActiveCameraPos( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncPos(position);
+        m_pActiveCamera->incPos(position);
 }
 
 void CCameraMgr::IncActiveCameraPos( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncPos(x,y,z);
+        m_pActiveCamera->incPos(x,y,z);
 }
 
 
@@ -233,13 +233,13 @@ void CCameraMgr::IncActiveCameraPos( float x, float y, float z )
 void CCameraMgr::SetActiveCameraRot( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetRot(position);
+        m_pActiveCamera->setRot(position);
 }
 
 void CCameraMgr::SetActiveCameraRot( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetRot(x,y,z);
+        m_pActiveCamera->setRot(x,y,z);
 }
 
 
@@ -249,13 +249,13 @@ void CCameraMgr::SetActiveCameraRot( float x, float y, float z )
 void CCameraMgr::IncActiveCameraRot( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncRot(position);
+        m_pActiveCamera->incRot(position);
 }
 
 void CCameraMgr::IncActiveCameraRot( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncRot(x,y,z);
+        m_pActiveCamera->incRot(x,y,z);
 }
 
 
@@ -265,13 +265,13 @@ void CCameraMgr::IncActiveCameraRot( float x, float y, float z )
 void CCameraMgr::SetActiveCameraScale( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetScale(position);
+        m_pActiveCamera->setScale(position);
 }
 
 void CCameraMgr::SetActiveCameraScale( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->SetScale(x,y,z);
+        m_pActiveCamera->setScale(x,y,z);
 }
 
 
@@ -281,13 +281,13 @@ void CCameraMgr::SetActiveCameraScale( float x, float y, float z )
 void CCameraMgr::IncActiveCameraScale( const CPoint<float> & position )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncScale(position);
+        m_pActiveCamera->incScale(position);
 }
 
 void CCameraMgr::IncActiveCameraScale( float x, float y, float z )
 {
     if( m_pActiveCamera != nullptr )
-        m_pActiveCamera->IncScale(x,y,z);
+        m_pActiveCamera->incScale(x,y,z);
 }
 
 
@@ -297,7 +297,7 @@ void CCameraMgr::IncActiveCameraScale( float x, float y, float z )
 const CMatrix & CCameraMgr::GetActiveCameraMatrix() const
 {
     if( m_pActiveCamera != nullptr )
-        return m_pActiveCamera->GetFinalMatrix();
+        return m_pActiveCamera->getFinalMatrix();
 
     return GetDefaultProjMatrix();
     
@@ -314,7 +314,7 @@ const CMatrix & CCameraMgr::GetCameraMatrix( const std::string & id ) const
     {
         auto iter = m_cameraMap.find( id );
         if( iter != m_cameraMap.end() )
-            return iter->second.GetFinalMatrix();
+            return iter->second.getFinalMatrix();
 
         NGenFunc::PostDebugMsg( boost::str( boost::format("Camera id does not exist (%s).") % id ) );
     }
@@ -330,7 +330,7 @@ const CMatrix & CCameraMgr::GetCameraMatrix( const std::string & id ) const
 void CCameraMgr::Transform()
 {
     for( auto & iter : m_cameraMap )
-        iter.second.Transform();
+        iter.second.transform();
     
 }   // Transform
 
@@ -344,7 +344,7 @@ void CCameraMgr::TransformCamera( const std::string & id )
     {
         auto iter = m_cameraMap.find( id );
         if( iter != m_cameraMap.end() )
-            return iter->second.Transform();
+            return iter->second.transform();
     }
     
 }   // Transform

@@ -24,7 +24,7 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
     {
         m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter.GetGroup(), iter.GetObjectName() ) );
         
-        m_spriteDeq.back().SetVisible( iter.IsVisible() );
+        m_spriteDeq.back().setVisible( iter.isVisible() );
         
         if( m_spriteDeq.back().GetVisualComponent().IsFontSprite() )
         {
@@ -32,7 +32,7 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
             m_spriteDeq.back().GetVisualComponent().CreateFontString( iter.GetFontData()->m_fontString );
         }
         
-        m_spriteDeq.back().CopyTransform( &iter );
+        m_spriteDeq.back().copyTransform( &iter );
         
         m_spriteDeq.back().CopyScriptFunctions( iter.GetScriptFunctions() );
     }
@@ -89,28 +89,28 @@ void CSymbol2d::Update()
 /************************************************************************
 *    desc:  Transform
 ************************************************************************/
-void CSymbol2d::Transform()
+void CSymbol2d::transform()
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
     if( m_parameters.IsSet( NDefs::TRANSFORM ) )
     {
-        TransformLocal( m_finalMatrix );
+        transformLocal( m_finalMatrix );
     
         m_transPos = m_pos;
     }
     
     for( auto & iter : m_spriteDeq )
-        iter.Transform( m_finalMatrix, WasWorldPosTranformed() );
+        iter.transform( m_finalMatrix, wasWorldPosTranformed() );
 
 }   // Transform
 
-void CSymbol2d::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CSymbol2d::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     m_parameters.Remove( NDefs::WAS_TRANSFORMED );
     
     if( m_parameters.IsSet( NDefs::TRANSFORM ) )
-        TransformLocal( m_matrix );
+        transformLocal( m_matrix );
         
     if( m_parameters.IsSet( NDefs::WAS_TRANSFORMED ) || tranformWorldPos )
     {
@@ -122,7 +122,7 @@ void CSymbol2d::Transform( const CMatrix & matrix, bool tranformWorldPos )
     }
 
     for( auto & iter : m_spriteDeq )
-        iter.Transform( m_finalMatrix, WasWorldPosTranformed() );
+        iter.transform( m_finalMatrix, wasWorldPosTranformed() );
     
 }   // Transform
 

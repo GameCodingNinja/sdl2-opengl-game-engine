@@ -43,8 +43,8 @@ public:
     void Update();
 
     // Transform the control
-    void Transform() override;
-    void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
+    void transform() override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
 
     // do the render
     void Render( const CMatrix & matrix );

@@ -57,7 +57,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
     if( rEvent.type == SDL_MOUSEMOTION )
     {
         // Get the position of the gun
-        const CPoint<float> pos = m_sprite.GetSprite(-1).GetTransPos();
+        const CPoint<float> pos = m_sprite.GetSprite(-1).getTransPos();
         const float ratio = 1 / CSettings::Instance().GetOrthoAspectRatio().getH();
         m_gunXY.x = ((ratio * (float)rEvent.motion.x) - pos.x) - CSettings::Instance().GetDefaultSizeHalf().w;
         m_gunXY.y = CSettings::Instance().GetDefaultSizeHalf().h - ((ratio * (float)rEvent.motion.y) + pos.y);
@@ -87,7 +87,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
 void CPlayerShipAI::Update()
 {
     m_gunRotation = atan2( m_gunXY.y, m_gunXY.x );
-    m_gunSprite.SetRot( 0, 0, m_gunRotation - m_sprite.GetRot().z, false );
+    m_gunSprite.setRot( 0, 0, m_gunRotation - m_sprite.getRot().z, false );
 
 }   // Update
 
@@ -100,8 +100,8 @@ void CPlayerShipAI::HandleShooting()
     // If the player hits the shoot button, and our time has expired, create a projectile actor
     if( m_playerShootTimer.Expired() )
     {
-        const CPoint<float> & centerPos = m_gunSprite.GetCenterPos();
-        const CPoint<float> & pos = m_gunSprite.GetPos();
+        const CPoint<float> & centerPos = m_gunSprite.getCenterPos();
+        const CPoint<float> & pos = m_gunSprite.getPos();
         
         CPoint<float> projectileOffset;
         const float OFFSET(60.f);
@@ -110,7 +110,7 @@ void CPlayerShipAI::HandleShooting()
 
         // Create the projectile actor
         CSpriteStrategyMgr::Instance().Create(
-            "(actor)", "player_projectile", m_sprite.GetPos() + projectileOffset, CPoint<float>(0,0,m_gunRotation) );
+            "(actor)", "player_projectile", m_sprite.getPos() + projectileOffset, CPoint<float>(0,0,m_gunRotation) );
 
         m_playerShootTimer.Reset();
     }

@@ -13,13 +13,13 @@
 ************************************************************************/
 CObject3D::CObject3D()
 {
-}   // constructor
+}
 
 CObject3D::CObject3D( const CObject3D & obj ) :
     CObject2D( obj ),
     m_rotMatrix( obj.m_rotMatrix )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -27,13 +27,13 @@ CObject3D::CObject3D( const CObject3D & obj ) :
 ************************************************************************/
 CObject3D::~CObject3D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Apply the rotation
 ************************************************************************/
-void CObject3D::ApplyRotation( CMatrix & matrix )
+void CObject3D::applyRotation( CMatrix & matrix )
 {
     // Add in the center point prior to rotation
     if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
@@ -52,15 +52,13 @@ void CObject3D::ApplyRotation( CMatrix & matrix )
     // Subtract the center point after rotation to put back in original position
     if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
         matrix.Translate( -m_centerPos );
-
-}   // ApplyRotation
+}
 
 
 /************************************************************************
 *    desc:  Get the object's rotation matrix
 ************************************************************************/
-const CMatrix & CObject3D::GetRotMatrix() const
+const CMatrix & CObject3D::getRotMatrix() const
 {
     return m_rotMatrix;
-
-}   // GetMatrix
+}

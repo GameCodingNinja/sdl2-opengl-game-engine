@@ -27,44 +27,44 @@ public:
     // Destructor
     virtual ~CCamera();
     
-    //
-    void RecreateProjMatrix();
+    // Recreate the projection matrix
+    void recreateProjMatrix();
     
     // Set/Inc the camera's world position
-    void SetPos( const CPoint<CWorldValue> & position );
-    void SetPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void setPos( const CPoint<CWorldValue> & position );
+    void setPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
     
-    void IncPos( const CPoint<CWorldValue> & position );
-    void IncPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
+    void incPos( const CPoint<CWorldValue> & position );
+    void incPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
     
     // Generate a custom perspective projection for this camera
-    void GeneratePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale = 1.f );
+    void generatePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale = 1.f );
     
     // Generate a custom orthographic projection for this camera
-    void GenerateOrthographicProjection( float minZDist, float maxZDist, float scale = 1.f );
+    void generateOrthographicProjection( float minZDist, float maxZDist, float scale = 1.f );
 
     // Get the projected matrix
-    const CMatrix & GetProjectionMatrix() const;
+    const CMatrix & getProjectionMatrix() const;
     
     // Height and width screen ratio for render 2D objects
-    float GetOrthoHeightAspectRatio() const;
+    float getOrthoHeightAspectRatio() const;
     
     // Get the orthographic projected size
-    const CSize<float> & GetOrthoProjSize() const;
+    const CSize<float> & getOrthoProjSize() const;
     
     // Get the orthographic projected size half
-    const CSize<float> & GetOrthoProjSizeHalf() const;
+    const CSize<float> & getOrthoProjSizeHalf() const;
     
     // Transform - One call for those objects that don't have parents
-    virtual void Transform();
+    virtual void transform();
     
     // Get the final matrix
-    const CMatrix & GetFinalMatrix() const;
+    const CMatrix & getFinalMatrix() const;
   
 private:
     
     // Calculate the final matrix
-    void CalcFinalMatrix();
+    void calcFinalMatrix();
     
 private:
         
