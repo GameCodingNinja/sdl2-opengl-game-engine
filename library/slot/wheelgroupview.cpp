@@ -146,7 +146,7 @@ void CWheelGroupView::Render( const CMatrix & matrix )
     for( auto & iter : m_wheelViewDeq )
         iter.Render( matrix );
 
-    m_upCycleResultsTxtSprite->Render( matrix );
+    m_upCycleResultsTxtSprite->render( matrix );
     
     CSlotGroupView::Render( matrix );
     

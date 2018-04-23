@@ -44,8 +44,8 @@ public:
     // Texture file path
     std::string m_textFilePath;
 
-    uint32_t GetID() const {return m_id;}
-    const CSize<int> & GetSize() const {return m_size;}
+    uint32_t getID() const {return m_id;}
+    const CSize<int> & getSize() const {return m_size;}
 };
 
 #endif  // __texture_h__

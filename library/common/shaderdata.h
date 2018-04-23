@@ -21,38 +21,38 @@ public:
     ~CShaderData();
 
     // Set/Get the program location
-    void SetProgramID( uint32_t location );
-    uint32_t GetProgramID() const;
+    void setProgramID( uint32_t location );
+    uint32_t getProgramID() const;
 
     // Set/Get the vertex ID
-    void SetVertexID( uint32_t location );
-    uint32_t GetVertexID() const;
+    void setVertexID( uint32_t location );
+    uint32_t getVertexID() const;
 
     // Set/Get the fragment ID
-    void SetFragmentID( uint32_t location );
-    uint32_t GetFragmentID() const;
+    void setFragmentID( uint32_t location );
+    uint32_t getFragmentID() const;
 
     // Get the attribute location
-    void SetAttributeLocation( const std::string & name, int32_t location );
-    int32_t GetAttributeLocation( const std::string & name ) const;
+    void setAttributeLocation( const std::string & name, int32_t location );
+    int32_t getAttributeLocation( const std::string & name ) const;
 
     // Get the uniform location
-    void SetUniformLocation( const std::string & name, int32_t location );
-    int32_t GetUniformLocation( const std::string & name ) const;
+    void setUniformLocation( const std::string & name, int32_t location );
+    int32_t getUniformLocation( const std::string & name ) const;
     
     // Check for the uniform location
-    bool HasUniformLocation( const std::string & name ) const;
+    bool hasUniformLocation( const std::string & name ) const;
     
     // Get the vertex attribute count
-    size_t GetVertexAttribCount();
+    size_t getVertexAttribCount();
 
     // Free the data
-    void Free();
+    void free();
 
 private:
 
     // Clear the data
-    void Clear();
+    void clear();
 
 private:
 

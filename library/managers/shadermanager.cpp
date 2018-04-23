@@ -45,7 +45,7 @@ CShaderMgr::~CShaderMgr()
          m_Iter != m_shaderMap.end();
          ++m_Iter )
     {
-        m_Iter->second.Free();
+        m_Iter->second.free();
     }
 
 }   // destructor
@@ -134,9 +134,9 @@ void CShaderMgr::CreateShader( uint32_t shaderType, const std::string & filePath
     }
 
     if( shaderType == GL_VERTEX_SHADER )
-        m_Iter->second.SetVertexID( shaderID );
+        m_Iter->second.setVertexID( shaderID );
     else
-        m_Iter->second.SetFragmentID( shaderID );
+        m_Iter->second.setFragmentID( shaderID );
 
     // Load the shader from file
     std::shared_ptr<char> spChar = NGenFunc::FileToBuf( filePath );
@@ -171,8 +171,8 @@ void CShaderMgr::CreateShader( uint32_t shaderType, const std::string & filePath
 void CShaderMgr::CreateProgram()
 {
     // Create the program - OpenGL shaders are called programs
-    m_Iter->second.SetProgramID( glCreateProgram() );
-    if( m_Iter->second.GetProgramID() == 0 )
+    m_Iter->second.setProgramID( glCreateProgram() );
+    if( m_Iter->second.getProgramID() == 0 )
     {
         throw NExcept::CCriticalException("Create Shader Error!", 
             boost::str( boost::format("Error creating shader (%s).\n\n%s\nLine: %s")
@@ -180,8 +180,8 @@ void CShaderMgr::CreateProgram()
     }
 
     // Attach shaders to the program
-    glAttachShader( m_Iter->second.GetProgramID(), m_Iter->second.GetVertexID() );
-    glAttachShader( m_Iter->second.GetProgramID(), m_Iter->second.GetFragmentID() );
+    glAttachShader( m_Iter->second.getProgramID(), m_Iter->second.getVertexID() );
+    glAttachShader( m_Iter->second.getProgramID(), m_Iter->second.getFragmentID() );
 
 }   // CreateProgram
 
@@ -204,10 +204,10 @@ void CShaderMgr::BindAttributeLocation( const XMLNode & vertexNode )
             const std::string attributeName = node.getAttribute("name");
 
             // Save the attribute for use later
-            m_Iter->second.SetAttributeLocation( attributeName, location );
+            m_Iter->second.setAttributeLocation( attributeName, location );
 
             // Bind a constant attribute location for positions of vertices
-            glBindAttribLocation( m_Iter->second.GetProgramID(), (uint32_t)location, attributeName.c_str() );
+            glBindAttribLocation( m_Iter->second.getProgramID(), (uint32_t)location, attributeName.c_str() );
 
             uint32_t error(glGetError());
             if( error != GL_NO_ERROR)
@@ -226,11 +226,11 @@ void CShaderMgr::BindAttributeLocation( const XMLNode & vertexNode )
 void CShaderMgr::LinkProgram()
 {
     // Link shader program
-    glLinkProgram( m_Iter->second.GetProgramID() );
+    glLinkProgram( m_Iter->second.getProgramID() );
 
     // Check for errors
     int32_t success( GL_TRUE );
-    glGetProgramiv( m_Iter->second.GetProgramID(), GL_LINK_STATUS, &success );
+    glGetProgramiv( m_Iter->second.getProgramID(), GL_LINK_STATUS, &success );
     if( success != GL_TRUE )
     {
         throw NExcept::CCriticalException("Link Shader Error!", 
@@ -271,9 +271,9 @@ void CShaderMgr::GetUniformLocation( const XMLNode & node )
 {
     std::string name = node.getAttribute("name");
 
-    int32_t location = glGetUniformLocation( m_Iter->second.GetProgramID(), name.c_str() );
+    int32_t location = glGetUniformLocation( m_Iter->second.getProgramID(), name.c_str() );
 
-    m_Iter->second.SetUniformLocation( name, location );
+    m_Iter->second.setUniformLocation( name, location );
 
     if( location < 0 )
     {
@@ -316,14 +316,14 @@ void CShaderMgr::Bind( CShaderData * pShaderData )
     {
         if( m_pCurrentShaderData == nullptr )
         {
-            m_currentVertexAttribCount = pShaderData->GetVertexAttribCount();
+            m_currentVertexAttribCount = pShaderData->getVertexAttribCount();
             
             for( size_t i = 0; i < m_currentVertexAttribCount; ++i )
                 glEnableVertexAttribArray(i);
         }
-        else if( m_currentVertexAttribCount != pShaderData->GetVertexAttribCount() )
+        else if( m_currentVertexAttribCount != pShaderData->getVertexAttribCount() )
         {
-            const size_t attribCount( pShaderData->GetVertexAttribCount() );
+            const size_t attribCount( pShaderData->getVertexAttribCount() );
             
             if( m_currentVertexAttribCount < attribCount )
             {
@@ -343,7 +343,7 @@ void CShaderMgr::Bind( CShaderData * pShaderData )
         m_pCurrentShaderData = pShaderData;
 
         // Have OpenGL bind this shader now
-        glUseProgram( pShaderData->GetProgramID() );
+        glUseProgram( pShaderData->getProgramID() );
     }
 
 }   // Bind
@@ -373,7 +373,7 @@ void CShaderMgr::FreeShader( const std::string & shaderId )
     m_Iter = m_shaderMap.find( shaderId );
     if( m_Iter != m_shaderMap.end() )
     {
-        m_Iter->second.Free();
+        m_Iter->second.free();
         
         // Erase this shader
         m_shaderMap.erase( m_Iter );
@@ -410,10 +410,10 @@ void CShaderMgr::SetShaderColor( const std::string & shaderId, const std::string
 void CShaderMgr::SetShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color )
 {
     // Check for the shader location
-    if( shaderData.HasUniformLocation( locationId ) )
+    if( shaderData.hasUniformLocation( locationId ) )
     {
         // Get the location of the additive
-        int32_t location = shaderData.GetUniformLocation( locationId );
+        int32_t location = shaderData.getUniformLocation( locationId );
 
         // Bind the shader so that we can change the value of the member
         Bind( &shaderData );

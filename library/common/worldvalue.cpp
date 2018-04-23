@@ -25,53 +25,48 @@ CWorldValue::CWorldValue() :
     f(0),
     i(0)
 {
-}   // Constructor
+}
 
 CWorldValue::CWorldValue( const CWorldValue & value )
 {
     i = value.i;
     f = value.f;
-    ConformValue();
-
-}   // Constructor
+    conformValue();
+}
 
 CWorldValue::CWorldValue( int _i )
     : i(0)
 {
     f = static_cast<float>(_i);
-    ConformValue();
-
-}   // Constructor
+    conformValue();
+}
 
 CWorldValue::CWorldValue( float _f )
     : i(0)
 {
     f = _f;
-    ConformValue();
-
-}   // Constructor
+    conformValue();
+}
 
 CWorldValue::CWorldValue( int _i, float _f )
 {
     i = _i;
     f = _f;
-    ConformValue();
-
-}   // Constructor 
+    conformValue();
+}
 
 CWorldValue::CWorldValue( float _f, int _i )
 {
     i = _i;
     f = _f;
-    ConformValue();
-
-}   // Constructor
+    conformValue();
+}
 
 
 /************************************************************************
 *    desc:  Conform the value to the sector size
 ************************************************************************/
-void CWorldValue::ConformValue()
+void CWorldValue::conformValue()
 {
     if( SECTOR_SIZE > 0 && std::abs(f) > HALF_SECTOR_SIZE )
     {
@@ -86,34 +81,29 @@ void CWorldValue::ConformValue()
         f -= iAdjust * SECTOR_SIZE;
         i += iAdjust;
     }
-
-}   // ConformValue
+}
 
 
 /************************************************************************
 *    desc:  Return a copy of the value conformed to the sector size
-*
-*	 ret:	CWorldValue - conformed value
 ************************************************************************/
-CWorldValue CWorldValue::GetConformedValue() const
+CWorldValue CWorldValue::getConformedValue() const
 {
     return CWorldValue(i,f);
-
-}   // GetConformedValue
+}
 
 
 /************************************************************************
 *    desc:  Convert the world value in single float form
 ************************************************************************/
-void CWorldValue::ToFloat()
+void CWorldValue::toFloat()
 {
     if( i != 0 )
     {
         f += SECTOR_SIZE * i;
         i = 0;
     }
-
-}   // ToFloat
+}
 
 
 /************************************************************************
@@ -121,14 +111,13 @@ void CWorldValue::ToFloat()
 *
 *	 ret:	float - equal float value
 ************************************************************************/
-float CWorldValue::GetFloat() const
+float CWorldValue::getFloat() const
 {
     if( i == 0 )
         return f;
 
     return f + (SECTOR_SIZE * i);
-
-}   // GetFloat
+}
 
 
 /***********************************************************************************
@@ -136,10 +125,6 @@ float CWorldValue::GetFloat() const
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Equality operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator == ( const CWorldValue & value ) const
 {
@@ -147,25 +132,19 @@ bool CWorldValue::operator == ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}	// operator ==
+}
 
 bool CWorldValue::operator == ( const float value ) const
 {
-    if( GetFloat() == value )
+    if( getFloat() == value )
         return true;
 
     return false;
-
-}   // operator ==
+}
 
 
 /************************************************************************
 *    desc:  Inequality operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator != ( const CWorldValue & value ) const
 {
@@ -173,25 +152,19 @@ bool CWorldValue::operator != ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}   // operator !=
+}
 
 bool CWorldValue::operator != ( const float value ) const
 {
-    if( GetFloat() != value )
+    if( getFloat() != value )
         return true;
 
     return false;
-
-}   // operator !=
+}
 
 
 /************************************************************************
 *    desc:  Less than operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator < ( const CWorldValue & value ) const
 {
@@ -202,25 +175,19 @@ bool CWorldValue::operator < ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}   // operator <
+}
 
 bool CWorldValue::operator < ( const float value ) const
 {
-    if( GetFloat() < value )
+    if( getFloat() < value )
         return true;
 
     return false;
-
-}   // operator <
+}
 
 
 /************************************************************************
 *    desc:  Greater than operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator > ( const CWorldValue & value ) const
 {
@@ -231,25 +198,19 @@ bool CWorldValue::operator > ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}   // operator >
+}
 
 bool CWorldValue::operator > ( const float value ) const
 {
-    if( GetFloat() > value )
+    if( getFloat() > value )
         return true;
 
     return false;
-
-}   // operator >
+}
 
 
 /************************************************************************
 *    desc:  Less than or equal to operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator <= ( const CWorldValue & value ) const
 {
@@ -260,25 +221,19 @@ bool CWorldValue::operator <= ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}   // operator <=
+}
 
 bool CWorldValue::operator <= ( const float value ) const
 {
-    if( GetFloat() <= value )
+    if( getFloat() <= value )
         return true;
 
     return false;
-
-}   // operator <=
+}
 
 
 /************************************************************************
 *    desc:  Greater than or equal to operator
-*
-*	 param: const value - value to compare
-*
-*	 ret:	bool - true or false
 ************************************************************************/
 bool CWorldValue::operator >= ( const CWorldValue & value ) const
 {
@@ -289,17 +244,15 @@ bool CWorldValue::operator >= ( const CWorldValue & value ) const
         return true;
 
     return false;
-
-}   // operator >
+}
 
 bool CWorldValue::operator >= ( const float value ) const
 {
-    if( GetFloat() >= value )
+    if( getFloat() >= value )
         return true;
 
     return false;
-
-}   // operator >
+}
 
 
 /***********************************************************************************
@@ -307,8 +260,6 @@ bool CWorldValue::operator >= ( const float value ) const
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Assignment operator
-*
-*	 param: const point - point assign
 ************************************************************************/
 CWorldValue & CWorldValue::operator = ( const CWorldValue & value )
 {
@@ -316,8 +267,7 @@ CWorldValue & CWorldValue::operator = ( const CWorldValue & value )
     f = value.f;
 
     return *this;
-
-}   // operator =
+}
 
 
 /***********************************************************************************
@@ -325,39 +275,29 @@ CWorldValue & CWorldValue::operator = ( const CWorldValue & value )
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Addition operator
-*
-*	 param: const value - value to add
-*
-*	 ret:	CWorldValue - summation of values
 ************************************************************************/
 CWorldValue CWorldValue::operator + ( const CWorldValue & value ) const
 {
     return CWorldValue( i + value.i, f + value.f );
-
-}   // operator +
+}
 
 CWorldValue CWorldValue::operator + ( const float value ) const
 {
     return *this + CWorldValue(value);
-
-}   // operator +
+}
 
 /************************************************************************
 *    desc:  Addition operator
-*
-*	 param: const value - value to add
 ************************************************************************/
 void CWorldValue::operator += ( const CWorldValue & value )
 {
     *this = *this + value;
-
-}   // operator +=
+}
 
 void CWorldValue::operator += ( const float value )
 {
     *this = *this + value;
-
-}   // operator +=
+}
 
 
 /***********************************************************************************
@@ -365,39 +305,29 @@ void CWorldValue::operator += ( const float value )
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Subtraction operator
-*
-*	 param: const value - value to subtract
-*
-*	 ret:	CWorldValue - subtraction of values
 ************************************************************************/
 CWorldValue CWorldValue::operator - ( const CWorldValue & value ) const
 {
     return CWorldValue( i - value.i, f - value.f );
-
-}   // operator -
+}
 
 CWorldValue CWorldValue::operator - ( const float value ) const
 {
     return *this - CWorldValue(value);
-
-}   // operator -
+}
 
 /************************************************************************
 *    desc:  Subtraction operator
-*
-*	 param: const value - value to subtract
 ************************************************************************/
 void CWorldValue::operator -= ( const CWorldValue & value )
 {
     *this = *this - value;
-
-}   // operator -=
+}
 
 void CWorldValue::operator -= ( const float value )
 {
     *this = *this - value;
-
-}   // operator -=
+}
 
 
 /***********************************************************************************
@@ -405,22 +335,16 @@ void CWorldValue::operator -= ( const float value )
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Multiplication operator
-*
-*	 param: const value - value to multiply
-*
-*	 ret:	CWorldValue - product of values
 ************************************************************************/
 CWorldValue CWorldValue::operator * ( const CWorldValue & value ) const
 {
-    return *this * value.GetFloat();
-
-}   // operator *
+    return *this * value.getFloat();
+}
 
 CWorldValue CWorldValue::operator * ( const int value ) const
 {
     return CWorldValue( i * value, f * value );
-
-}   // operator *
+}
 
 CWorldValue CWorldValue::operator * ( const float value ) const
 {
@@ -433,34 +357,28 @@ CWorldValue CWorldValue::operator * ( const float value ) const
 
     tmp.f = ( f * value ) + ( intMultiple * SECTOR_SIZE );
 
-    tmp.ConformValue();
+    tmp.conformValue();
 
     return tmp;
-
-}   // operator *
+}
 
 /************************************************************************
 *    desc:  Multiplication operator
-*
-*	 param: const value - value to multiply
 ************************************************************************/
 void CWorldValue::operator *= ( const CWorldValue & value )
 {
     *this = *this * value;
-
-}   // operator *=
+}
 
 void CWorldValue::operator *= ( const int value )
 {
     *this = *this * value;
-
-}   // operator *=
+}
 
 void CWorldValue::operator *= ( const float value )
 {
     *this = *this * value;
-
-}   // operator *=
+}
 
 
 /***********************************************************************************
@@ -471,16 +389,11 @@ void CWorldValue::operator *= ( const float value )
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Division operator
-*
-*	 param: const value - value to divide
-*
-*	 ret:	CWorldValue - division of values
 ************************************************************************/
 CWorldValue CWorldValue::operator / ( const CWorldValue & value ) const
 {
-    return *this / value.GetFloat();
-
-}   // operator /
+    return *this / value.getFloat();
+}
 
 CWorldValue CWorldValue::operator / ( const float value ) const
 {
@@ -493,28 +406,23 @@ CWorldValue CWorldValue::operator / ( const float value ) const
 
     tmp.f = ( f / value ) + static_cast<float>( intMultiple * SECTOR_SIZE );
 
-    tmp.ConformValue();
+    tmp.conformValue();
 
     return tmp;
-
-}   // operator /
+}
 
 /************************************************************************
 *    desc:  Division operator
-*
-*	 param: const value - value to divide
 ************************************************************************/
 void CWorldValue::operator /= ( const CWorldValue & value )
 {
     *this = *this / value;
-
-}   // operator /=
+}
 
 void CWorldValue::operator /= ( const float value )
 {
     *this = *this / value;
-
-}   // operator /=
+}
 
 
 /***********************************************************************************
@@ -522,20 +430,17 @@ void CWorldValue::operator /= ( const float value )
 ***********************************************************************************/
 /************************************************************************
 *    desc:  Return a copy of the value with its signs flipped
-*
-*	 ret:	CWorldValue - value with signs flipped
 ************************************************************************/
 CWorldValue CWorldValue::operator - () const
 {
     return CWorldValue(-i,-f);
-
-}   // operator -
+}
 
 
 /************************************************************************
 *    desc:  Set the sector size
 ************************************************************************/
-void CWorldValue::SetSectorSize( int size )
+void CWorldValue::setSectorSize( int size )
 {
     SECTOR_SIZE = size;
     HALF_SECTOR_SIZE = size / 2;

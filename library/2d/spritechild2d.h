@@ -28,7 +28,7 @@ public:
     void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
     // do the render
-    virtual void Render( const CMatrix & matrix ) override;
+    virtual void render( const CMatrix & matrix ) override;
     
 private:
         

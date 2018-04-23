@@ -181,7 +181,7 @@ void CReelGroupView::Render( const CMatrix & matrix )
     for( auto & iter : m_reelStripViewDeq )
         iter.Render( matrix );
 
-    m_upCycleResultsTxtSprite->Render( matrix );
+    m_upCycleResultsTxtSprite->render( matrix );
     
     CSlotGroupView::Render( matrix );
     

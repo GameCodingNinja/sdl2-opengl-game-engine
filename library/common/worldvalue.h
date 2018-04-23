@@ -22,13 +22,13 @@ public:
     CWorldValue( float _f, int _i );
 
     // Conform the world value to the sector size
-    void ConformValue();
-    CWorldValue GetConformedValue() const;
+    void conformValue();
+    CWorldValue getConformedValue() const;
 
     // Convert the value in single float form
-    void ToFloat();
-    float GetFloat() const;
-    operator float() const { return GetFloat(); }
+    void toFloat();
+    float getFloat() const;
+    operator float() const { return getFloat(); }
 
     // Comparison Operators
     bool operator == ( const CWorldValue & value ) const;
@@ -82,7 +82,7 @@ public:
     CWorldValue operator - () const;
     
     // Set the sector size
-    static void SetSectorSize( int size );
+    static void setSectorSize( int size );
 
 public:
 

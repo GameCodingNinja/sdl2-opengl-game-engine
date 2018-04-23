@@ -54,7 +54,7 @@ CActorSprite3D::~CActorSprite3D()
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CActorSprite3D::SetAI( iAIBase * pAIBase )
+void CActorSprite3D::setAI( iAIBase * pAIBase )
 {
     m_upAI.reset(pAIBase);
 
@@ -67,7 +67,7 @@ void CActorSprite3D::SetAI( iAIBase * pAIBase )
 /************************************************************************
 *    desc:  Create the actor's sprites
 ************************************************************************/
-void CActorSprite3D::Create( const CActorData & actorData )
+void CActorSprite3D::create( const CActorData & actorData )
 {
     //const auto & spriteDataVec = actorData.GetSpriteData();
 
@@ -133,7 +133,7 @@ void CActorSprite3D::Create( const CActorData & actorData )
 /************************************************************************
 *    desc:  Init the physics                                                           
 ************************************************************************/
-void CActorSprite3D::InitPhysics()
+void CActorSprite3D::initPhysics()
 {
 
 }
@@ -142,7 +142,7 @@ void CActorSprite3D::InitPhysics()
 /************************************************************************
 *    desc:  React to what the player is doing
 ************************************************************************/
-void CActorSprite3D::HandleEvent( const SDL_Event & rEvent )
+void CActorSprite3D::handleEvent( const SDL_Event & rEvent )
 {
     if( m_upAI )
         m_upAI->HandleEvent( rEvent );
@@ -153,7 +153,7 @@ void CActorSprite3D::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Update the actor
 ************************************************************************/
-void CActorSprite3D::Update()
+void CActorSprite3D::update()
 {
     if( m_upAI )
         m_upAI->Update();
@@ -176,7 +176,7 @@ void CActorSprite3D::Update()
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CActorSprite3D::Transform()
+void CActorSprite3D::transform()
 {
     CObject3D::Transform();
 
@@ -194,7 +194,7 @@ void CActorSprite3D::Transform()
 //
 //}   // Transform
 
-void CActorSprite3D::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CActorSprite3D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     CObject3D::Transform( matrix, tranformWorldPos );
 
@@ -207,7 +207,7 @@ void CActorSprite3D::Transform( const CMatrix & matrix, bool tranformWorldPos )
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-void CActorSprite3D::Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
+void CActorSprite3D::render( const CMatrix & projMatrix, const CMatrix & cameraMatrix )
 {
     // Render in reverse order
     if( InView() )
@@ -222,7 +222,7 @@ void CActorSprite3D::Render( const CMatrix & projMatrix, const CMatrix & cameraM
 /************************************************************************
 *    desc:  Get the physics component                                                            
 ************************************************************************/
-CPhysicsComponent3D & CActorSprite3D::GetPhysicsComponent()
+CPhysicsComponent3D & CActorSprite3D::getPhysicsComponent()
 {
     return m_physicsComponent;
     
@@ -232,7 +232,7 @@ CPhysicsComponent3D & CActorSprite3D::GetPhysicsComponent()
 /************************************************************************
 *    desc:  Get the sprite
 ************************************************************************/
-CSprite3D & CActorSprite3D::GetSprite( int index )
+CSprite3D & CActorSprite3D::getSprite( int index )
 {
     if( index < 0 )
         return m_spriteDeq.back();
@@ -245,7 +245,7 @@ CSprite3D & CActorSprite3D::GetSprite( int index )
 /************************************************************************
 *    desc:  Get the sprite group
 ************************************************************************/
-CSprite3D & CActorSprite3D::GetSprite( const std::string & name )
+CSprite3D & CActorSprite3D::getSprite( const std::string & name )
 {
     auto iter = m_pSpriteMap.find( name );
     if( iter == m_pSpriteMap.end() )
@@ -261,7 +261,7 @@ CSprite3D & CActorSprite3D::GetSprite( const std::string & name )
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-bool CActorSprite3D::InView()
+bool CActorSprite3D::inView()
 {
     if( m_projectionType == NDefs::EPT_ORTHOGRAPHIC )
         return InOrthographicView();
@@ -277,7 +277,7 @@ bool CActorSprite3D::InView()
 /************************************************************************
  *    desc:  Check if an object is within the orthographic view frustum
  ************************************************************************/
-bool CActorSprite3D::InOrthographicView()
+bool CActorSprite3D::inOrthographicView()
 {
     const CSize<float> & defaultSizeHalf = CSettings::Instance().GetDefaultSizeHalf();
     
@@ -298,7 +298,7 @@ bool CActorSprite3D::InOrthographicView()
 /************************************************************************
  *    desc:  Check if an object is within the perspective view frustum
  ************************************************************************/
-bool CActorSprite3D::InPerspectiveView()
+bool CActorSprite3D::inPerspectiveView()
 {
     const CSize<float> & aspectRatio = CSettings::Instance().GetScreenAspectRatio();
 
@@ -329,7 +329,7 @@ bool CActorSprite3D::InPerspectiveView()
 /************************************************************************
 *    desc:  Apply the scale to the radius
 ************************************************************************/
-void CActorSprite3D::ApplyScale( CMatrix & matrix )
+void CActorSprite3D::applyScale( CMatrix & matrix )
 {
     CObject3D::ApplyScale( matrix );
 
@@ -349,7 +349,7 @@ void CActorSprite3D::ApplyScale( CMatrix & matrix )
 /************************************************************************
 *    desc:  Get the collision group
 ************************************************************************/
-uint CActorSprite3D::GetCollisionGroup() const
+uint CActorSprite3D::getCollisionGroup() const
 {
     return m_collisionGroup;
 }
@@ -358,7 +358,7 @@ uint CActorSprite3D::GetCollisionGroup() const
 /************************************************************************
 *    desc:  Get the collision radius
 ************************************************************************/
-float CActorSprite3D::GetCollisionRadius() const
+float CActorSprite3D::getCollisionRadius() const
 {
     return m_collisionRadius;
 }
@@ -367,7 +367,7 @@ float CActorSprite3D::GetCollisionRadius() const
 /***************************************************************************
 *    desc:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
-bool CActorSprite3D::IsCollision( CActorSprite3D & rActor )
+bool CActorSprite3D::isCollision( CActorSprite3D & rActor )
 {
     bool result(false);
     
@@ -384,7 +384,7 @@ bool CActorSprite3D::IsCollision( CActorSprite3D & rActor )
 /***************************************************************************
 *    desc:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
-bool CActorSprite3D::CheckBroadPhase( CActorSprite3D & rActor )
+bool CActorSprite3D::checkBroadPhase( CActorSprite3D & rActor )
 {
     const float radius = m_collisionRadius + rActor.GetCollisionRadius();
     const float length = m_transPos.GetLength( rActor.GetTransPos() );

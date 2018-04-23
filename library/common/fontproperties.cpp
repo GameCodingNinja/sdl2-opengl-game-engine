@@ -51,7 +51,7 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
 /************************************************************************
 *    desc:  Copy the data
 ************************************************************************/ 
-void CFontProperties::Copy( const CFontProperties & obj )
+void CFontProperties::copy( const CFontProperties & obj )
 {
     m_fontName = obj.m_fontName;
     m_hAlign = obj.m_hAlign;
@@ -63,14 +63,13 @@ void CFontProperties::Copy( const CFontProperties & obj )
     
     // Throws an exception if font is not loaded
     CFontMgr::Instance().IsFont( m_fontName );
-    
-}   // Copy
+}
 
 
 /************************************************************************
 *    desc:  Load the font properties from XML node
 ************************************************************************/
-void CFontProperties::LoadFromNode( const XMLNode & node )
+void CFontProperties::loadFromNode( const XMLNode & node )
 {
     // Get the must have font name
     m_fontName = node.getAttribute( "fontName" );
@@ -103,5 +102,4 @@ void CFontProperties::LoadFromNode( const XMLNode & node )
         m_hAlign = NParseHelper::LoadHorzAlignment( alignmentNode, NDefs::EHA_HORZ_CENTER );
         m_vAlign = NParseHelper::LoadVertAlignment( alignmentNode, NDefs::EVA_VERT_CENTER );
     }
-    
-}   // LoadFromNode
+}

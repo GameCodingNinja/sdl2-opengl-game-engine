@@ -38,7 +38,7 @@ const CSpriteSheet & CSpriteSheetMgr::Load( const std::string & filePath )
         mapIter = m_spriteSheetMap.emplace( filePath, CSpriteSheet() ).first;
         
         // Load the glyph data from XML file
-        mapIter->second.LoadFromXML( filePath );
+        mapIter->second.loadFromXML( filePath );
     }
 
     return mapIter->second;

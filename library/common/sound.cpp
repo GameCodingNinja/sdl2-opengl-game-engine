@@ -28,11 +28,11 @@ CSound::CSound( ESoundType type ) :
     m_channel(-1),
     m_volume(MIX_MAX_VOLUME)
 {
-}   // constructor
+}
 
 CSound::CSound()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -44,7 +44,7 @@ CSound::CSound( const CSound & sound ) :
     m_channel(sound.m_channel),
     m_volume(sound.m_volume)
 {
-}   // copy constructor
+}
 
 
 /************************************************************************
@@ -54,30 +54,28 @@ CSound::~CSound()
 {
     // Don't free the sound here because this destructor get's
     // called when the reference is passed around.
-	
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Free the sound                                                             
 ************************************************************************/
-void CSound::Free()
+void CSound::free()
 {
-    Stop();
+    stop();
     
     if( m_type == EST_LOADED )
         Mix_FreeChunk( (Mix_Chunk *)m_pVoid );
 
     else if( m_type == EST_STREAM )
         Mix_FreeMusic( (Mix_Music *)m_pVoid );
-
-}   // Free
+}
 
 
 /************************************************************************
 *    desc:  Load the sound                                                             
 ************************************************************************/
-void CSound::LoadFromNode( const XMLNode & node )
+void CSound::loadFromNode( const XMLNode & node )
 {
     auto file = node.getAttribute( "file" );
             
@@ -89,21 +87,20 @@ void CSound::LoadFromNode( const XMLNode & node )
     
     // Set the volume if defined
     if( node.isAttributeSet("volume") )
-        SetVolume( std::atoi(node.getAttribute( "volume" )) );
+        setVolume( std::atoi(node.getAttribute( "volume" )) );
 
     if( m_pVoid == nullptr )
         throw NExcept::CCriticalException("Sound load Error!",
             boost::str( boost::format("Error loading sound (%s)(%s).\n\n%s\nLine: %s")
                 % SDL_GetError() % file % __FUNCTION__ % __LINE__ ));
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Play the sound
 *    NOTE: Loop and channel default to -1
 ************************************************************************/
-void CSound::Play( int channel, int loopCount )
+void CSound::play( int channel, int loopCount )
 {
     if( m_type == EST_LOADED )
     {
@@ -112,14 +109,13 @@ void CSound::Play( int channel, int loopCount )
     }
     else if( m_type == EST_STREAM )
         Mix_PlayMusic( (Mix_Music *)m_pVoid, loopCount );
-
-}   // Play
+}
 
 
 /************************************************************************
 *    desc:  Stop the sound
 ************************************************************************/
-void CSound::Stop()
+void CSound::stop()
 {
     if( m_type == EST_LOADED )
     {
@@ -131,14 +127,13 @@ void CSound::Stop()
         if( Mix_PlayingMusic() )
             Mix_HaltMusic();
     }
-
-}   // Stop
+}
 
 
 /************************************************************************
 *    desc:  Pause the sound
 ************************************************************************/
-void CSound::Pause()
+void CSound::pause()
 {
     if( m_type == EST_LOADED )
     {
@@ -150,14 +145,13 @@ void CSound::Pause()
         if( Mix_PlayingMusic() )
             Mix_PauseMusic();
     }
-
-}   // Pause
+}
 
 
 /************************************************************************
 *    desc:  Resume the sound
 ************************************************************************/
-void CSound::Resume()
+void CSound::resume()
 {
     if( m_type == EST_LOADED )
     {
@@ -169,23 +163,21 @@ void CSound::Resume()
         if( Mix_PausedMusic() )
             Mix_ResumeMusic();
     }
-
-}   // Pause
+}
 
 
 /************************************************************************
 *    desc: Set/Get the volume for music or channel
 ************************************************************************/
-void CSound::SetVolume( int volume )
+void CSound::setVolume( int volume )
 {
     if( m_type == EST_STREAM )
         Mix_VolumeMusic( volume );
 
     m_volume = volume;
-    
-}   // SetVolume
+}
 
-int CSound::GetVolume()
+int CSound::getVolume()
 {
     if( m_type == EST_LOADED )
         m_volume = Mix_Volume( m_channel, -1 );
@@ -194,14 +186,13 @@ int CSound::GetVolume()
         m_volume = Mix_VolumeMusic( -1 );
     
     return m_volume;
-    
-}   // GetVolume
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel playing?
 ************************************************************************/
-bool CSound::IsPlaying()
+bool CSound::isPlaying()
 {
     if( m_type == EST_LOADED )
     {
@@ -215,14 +206,13 @@ bool CSound::IsPlaying()
     }
     
     return false;
-
-}   // IsPlaying
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel paused?
 ************************************************************************/
-bool CSound::IsPaused()
+bool CSound::isPaused()
 {
     if( m_type == EST_LOADED )
     {
@@ -236,14 +226,13 @@ bool CSound::IsPaused()
     }
     
     return false;
-
-}   // IsPaused
+}
 
 
 /************************************************************************
 *    desc:  Find an open channel and set the class member
 ************************************************************************/
-void CSound::SetOpenChannel()
+void CSound::setOpenChannel()
 {
     int i;
     for( i = 0; i < MIX_CHANNELS; ++i )
@@ -260,8 +249,7 @@ void CSound::SetOpenChannel()
     {
         m_channel = i;
     }
-
-}   // SetOpenChannel
+}
 
 /************************************************************************
 *    desc:  The equality operator
@@ -269,8 +257,7 @@ void CSound::SetOpenChannel()
 bool CSound::operator == ( const CSound & sound ) const
 {
     return (m_pVoid == sound.m_pVoid);
-
-}   // operator ==
+}
 
 /************************************************************************
 *    desc:  The inequality operator
@@ -278,5 +265,4 @@ bool CSound::operator == ( const CSound & sound ) const
 bool CSound::operator != ( const CSound & sound ) const
 {
     return (m_pVoid != sound.m_pVoid);
-
-}   // operator !=
+}

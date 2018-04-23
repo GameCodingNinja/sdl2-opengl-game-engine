@@ -22,19 +22,19 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
 {
     for( auto & iter : rSpriteDataVec )
     {
-        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter.GetGroup(), iter.GetObjectName() ) );
+        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter.getGroup(), iter.getObjectName() ) );
         
         m_spriteDeq.back().setVisible( iter.isVisible() );
         
-        if( m_spriteDeq.back().GetVisualComponent().IsFontSprite() )
+        if( m_spriteDeq.back().getVisualComponent().IsFontSprite() )
         {
-            m_spriteDeq.back().GetVisualComponent().SetFontProperties( iter.GetFontData()->m_fontProp );
-            m_spriteDeq.back().GetVisualComponent().CreateFontString( iter.GetFontData()->m_fontString );
+            m_spriteDeq.back().getVisualComponent().SetFontProperties( iter.getFontData()->m_fontProp );
+            m_spriteDeq.back().getVisualComponent().CreateFontString( iter.getFontData()->m_fontString );
         }
         
         m_spriteDeq.back().copyTransform( &iter );
         
-        m_spriteDeq.back().CopyScriptFunctions( iter.GetScriptFunctions() );
+        m_spriteDeq.back().copyScriptFunctions( iter.getScriptFunctions() );
     }
         
 }   // constructor
@@ -81,7 +81,7 @@ const std::string & CSymbol2d::GetId()
 void CSymbol2d::Update()
 {
     for( auto & iter : m_spriteDeq )
-        iter.Update();
+        iter.update();
 
 }   // Update
 
@@ -133,7 +133,7 @@ void CSymbol2d::transform( const CMatrix & matrix, bool tranformWorldPos )
 void CSymbol2d::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
 }   // Render
 

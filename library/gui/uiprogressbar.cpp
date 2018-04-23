@@ -134,7 +134,7 @@ void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
             m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
             
             // Get the size
-            m_size = m_upStencilMaskSprite->GetObjectData().GetSize();
+            m_size = m_upStencilMaskSprite->getObjectData().GetSize();
             
             // Get the initial position
             m_pos = m_upStencilMaskSprite->getPos();
@@ -145,7 +145,7 @@ void CUIProgressBar::LoadControlFromNode( const XMLNode & controlNode )
         else
         {
             // Get the size
-            m_size = m_spriteDeq.at(m_spriteApplyIndex).GetObjectData().GetSize();
+            m_size = m_spriteDeq.at(m_spriteApplyIndex).getObjectData().GetSize();
             
             // Get the initial position
             m_pos = m_spriteDeq.at(m_spriteApplyIndex).getPos();
@@ -193,7 +193,7 @@ void CUIProgressBar::Render( const CMatrix & matrix )
                 glStencilOp( GL_REPLACE, GL_REPLACE, GL_REPLACE );
 
 
-                m_upStencilMaskSprite->Render( matrix );
+                m_upStencilMaskSprite->render( matrix );
 
 
                 // Re-enable color
@@ -208,13 +208,13 @@ void CUIProgressBar::Render( const CMatrix & matrix )
                 // Disable any writing to the stencil buffer
                 glDepthMask(GL_TRUE);
                 
-                m_spriteDeq[i].Render( matrix );
+                m_spriteDeq[i].render( matrix );
                 
                 // Finished using stencil
                 glDisable( GL_STENCIL_TEST );
             }
             else
-                m_spriteDeq[i].Render( matrix );
+                m_spriteDeq[i].render( matrix );
         }
     }
     else

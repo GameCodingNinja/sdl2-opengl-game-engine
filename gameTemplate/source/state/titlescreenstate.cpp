@@ -122,7 +122,7 @@ void CTitleScreenState::Transform()
 ****************************************************************************/
 void CTitleScreenState::PreRender()
 {
-    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    m_background.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
     
     //m_spriteSheetTest.Render( orthoMatrix );
     
@@ -130,7 +130,7 @@ void CTitleScreenState::PreRender()
     
     auto & camera = CCameraMgr::Instance().GetActiveCamera();
     
-    m_cube.Render( camera.getFinalMatrix(), camera.getRotMatrix() );
+    m_cube.render( camera.getFinalMatrix(), camera.getRotMatrix() );
     
 }   // PreRender
 

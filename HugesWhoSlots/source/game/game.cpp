@@ -105,7 +105,7 @@ void CGame::Init()
         const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
         CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->setPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
-        upDebugDisplay->GetVisualComponent().SetFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
+        upDebugDisplay->getVisualComponent().SetFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
         upDebugDisplay->transform();
     }
 
@@ -241,14 +241,14 @@ void CGame::StatStringCallBack( const std::string & statStr )
     if( NBDefs::IsMobileDevice() )
     {
         if( CSettings::Instance().GetDebugStrVisible() && upDebugDisplay )
-            upDebugDisplay->CreateFontString( statStr );
+            upDebugDisplay->createFontString( statStr );
     }
     else
     {
         if( !CSettings::Instance().GetFullScreen() )
             SDL_SetWindowTitle( m_pWindow, statStr.c_str() );
         else
-            upDebugDisplay->CreateFontString( statStr );
+            upDebugDisplay->createFontString( statStr );
     }
 
 }   // StatStringCallBack
@@ -412,12 +412,12 @@ void CGame::Render()
         if( NBDefs::IsMobileDevice() )
         {
             if( CSettings::Instance().GetDebugStrVisible() && upDebugDisplay )
-                upDebugDisplay->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+                upDebugDisplay->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
         }
         else
         {
             if( CSettings::Instance().GetFullScreen() )
-                upDebugDisplay->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+                upDebugDisplay->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
         }
     }
 

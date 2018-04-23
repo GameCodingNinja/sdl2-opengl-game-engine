@@ -140,7 +140,7 @@ void CUIScrollBox::LoadControlFromNode( const XMLNode & node )
         m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( GetGroup(), objectName ) ) );
 
         // Get the cull height
-        m_cullHeight = (m_upStencilMaskSprite->GetObjectData().GetSize().getW() + m_controlHeight) / 2;
+        m_cullHeight = (m_upStencilMaskSprite->getObjectData().GetSize().getW() + m_controlHeight) / 2;
 
         // Load the transform data
         m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
@@ -374,7 +374,7 @@ void CUIScrollBox::Render( const CMatrix & matrix )
     glStencilOp( GL_REPLACE, GL_REPLACE, GL_REPLACE );
 
 
-    m_upStencilMaskSprite->Render( matrix );
+    m_upStencilMaskSprite->render( matrix );
 
 
     // Re-enable color

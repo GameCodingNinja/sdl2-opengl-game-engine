@@ -132,7 +132,7 @@ void CTitleScreenState::PreRender()
 {
     CCommonState::PreRender();
 
-    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix()  );
+    m_background.render( CCameraMgr::Instance().GetDefaultProjMatrix()  );
 
 }   // PreRender
 

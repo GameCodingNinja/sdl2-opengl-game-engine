@@ -142,7 +142,7 @@ void CStartUpState::Fade(
         CShaderMgr::Instance().SetShaderColor( "shader_2d", "additive", current );
         CShaderMgr::Instance().SetShaderColor( "shader_solid_2d", "additive", current );
         for( auto & iter : m_SpriteDeque )
-            iter.Render( matrix );
+            iter.render( matrix );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 

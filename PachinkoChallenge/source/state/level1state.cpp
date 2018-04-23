@@ -48,7 +48,7 @@ CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
-        m_rStrawberryData(m_rStrategy.GetData("strawberry").Get<CSpriteData>()),
+        m_rStrawberryData(m_rStrategy.GetData("strawberry").get<CSpriteData>()),
         m_rMultiplierLabel(CMenuManager::Instance().GetMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
         m_rWinMeter(CMenuManager::Instance().GetMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_multiIndexPos(0),
@@ -245,14 +245,14 @@ void CLevel1State::BeginContact(b2Contact* contact)
     
     if( (pSpriteA != nullptr) && (pSpriteB != nullptr) )
     {
-        const int spriteAid = pSpriteA->GetId();
-        const int spriteBid = pSpriteB->GetId();
+        const int spriteAid = pSpriteA->getId();
+        const int spriteBid = pSpriteB->getId();
         
         if( spriteAid == SPRITE_PEG )
-            pSpriteA->SetFrame(1);
+            pSpriteA->setFrame(1);
         
         else if( spriteBid == SPRITE_PEG )
-            pSpriteB->SetFrame(1);
+            pSpriteB->setFrame(1);
         
         else if( (spriteAid == STRAWBERRY) || (spriteBid == STRAWBERRY) )
         {
@@ -284,11 +284,11 @@ void CLevel1State::EndContact(b2Contact* contact)
     
     if( (pSpriteA != nullptr) && (pSpriteB != nullptr) )
     {
-        if( pSpriteA->GetId() == SPRITE_PEG )
-            pSpriteA->SetFrame(0);
+        if( pSpriteA->getId() == SPRITE_PEG )
+            pSpriteA->setFrame(0);
         
-        else if( pSpriteB->GetId() == SPRITE_PEG )
-            pSpriteB->SetFrame(0);
+        else if( pSpriteB->getId() == SPRITE_PEG )
+            pSpriteB->setFrame(0);
     }
     
 }   // EndContact
@@ -301,7 +301,7 @@ void CLevel1State::SayGoodbye(b2Fixture* fixture)
 {
     CSprite2D * pSprite = reinterpret_cast<CSprite2D *>(fixture->GetUserData());
     
-    if( (pSprite->GetId() > 1000) && (std::fabs( pSprite->getPos().getX() ) < 720.f) )
+    if( (pSprite->getId() > 1000) && (std::fabs( pSprite->getPos().getX() ) < 720.f) )
     {
         m_totalWin += m_multiplier;
         m_rWinMeter.StartBangUp( m_totalWin );

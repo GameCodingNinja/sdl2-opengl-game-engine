@@ -32,35 +32,35 @@ public:
     ~CSound();
 
     // Load the sound
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
 
     // Play the sound
-    void Play( int channel = -1, int loopCount = 0 );
+    void play( int channel = -1, int loopCount = 0 );
 
     // Stop the sound
-    void Stop();
+    void stop();
 
     // Pause the sound
-    void Pause();
+    void pause();
 
     // Resume the sound
-    void Resume();
+    void resume();
     
     // Set/Get the volume for music or channel
-    void SetVolume( int volume );
-    int GetVolume();
+    void setVolume( int volume );
+    int getVolume();
     
     // Is music or channel playing?
-    bool IsPlaying();
+    bool isPlaying();
     
     // Is music or channel paused?
-    bool IsPaused();
+    bool isPaused();
 
     // Find an open channel and set the class member
-    void SetOpenChannel();
+    void setOpenChannel();
 
     // Free the sound
-    void Free();
+    void free();
     
     // equality/inequality operator
     bool operator == ( const CSound & sound ) const;

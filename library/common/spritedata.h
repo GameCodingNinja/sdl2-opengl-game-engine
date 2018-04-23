@@ -39,28 +39,28 @@ public:
     ~CSpriteData();
     
     // Init the script functions and add them to the map
-    void LoadScriptFunctions( const XMLNode & node );
+    void loadScriptFunctions( const XMLNode & node );
     
     // Get the script functions
-    const std::map<std::string, std::string> & GetScriptFunctions() const;
+    const std::map<std::string, std::string> & getScriptFunctions() const;
     
     // Get the sprite name
-    const std::string & GetName() const;
+    const std::string & getName() const;
     
     // Get the group
-    const std::string & GetGroup() const;
+    const std::string & getGroup() const;
     
     // Get the object name
-    const std::string & GetObjectName() const;
+    const std::string & getObjectName() const;
 
     // Get the AI name
-    const std::string & GetAIName() const;
+    const std::string & getAIName() const;
     
     // Get the unique id number
-    int GetId() const;
+    int getId() const;
     
     // Get the font data
-    const CFontData * GetFontData() const;
+    const CFontData * getFontData() const;
 
 private:
 

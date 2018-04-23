@@ -245,7 +245,7 @@ const CObjectData2D & CObjectDataMgr::GetData2D( const std::string & group, cons
 
 const CObjectData2D & CObjectDataMgr::GetData2D( const CSpriteData & spriteData ) const
 {
-    return GetData2D( spriteData.GetGroup(), spriteData.GetObjectName() );
+    return GetData2D( spriteData.getGroup(), spriteData.getObjectName() );
     
 }   // GetData2D
 

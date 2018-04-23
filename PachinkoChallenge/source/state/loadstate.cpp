@@ -108,10 +108,10 @@ void CLoadState::Animate()
         // Clear the screen
         glClear( GL_COLOR_BUFFER_BIT );
 
-        m_upSprite->SetFrame( m_frame );
-        m_frame = (m_frame + 1) % m_upSprite->GetFrameCount();
+        m_upSprite->setFrame( m_frame );
+        m_frame = (m_frame + 1) % m_upSprite->getFrameCount();
 
-        m_upSprite->Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+        m_upSprite->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 

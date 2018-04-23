@@ -28,7 +28,7 @@ CPlayList::CPlayList( const std::string strType ) :
     m_type( (strType == "random") ? EST_RANDOM : EST_SEQUENTIAL )
       
 {
-}   // constructor
+}
 
 CPlayList::CPlayList() :
     m_counter(0),
@@ -36,7 +36,7 @@ CPlayList::CPlayList() :
     m_type(EST_NULL)
       
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -48,7 +48,7 @@ CPlayList::CPlayList( const CPlayList & playLst ) :
     m_type(playLst.m_type),
     m_soundVec(playLst.m_soundVec)
 {
-}   // copy constructor
+}
 
 
 /************************************************************************
@@ -56,13 +56,13 @@ CPlayList::CPlayList( const CPlayList & playLst ) :
 ************************************************************************/
 CPlayList::~CPlayList()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load  the playlist from node                                                            
 ************************************************************************/
-void CPlayList::LoadFromNode(
+void CPlayList::loadFromNode(
     const XMLNode & node,
     const std::string & group,
     std::map< const std::string, CSound > & soundMap )
@@ -83,7 +83,7 @@ void CPlayList::LoadFromNode(
 
             // Set the volume if defined
             if( soundNode.isAttributeSet("volume") )
-                m_soundVec.back().SetVolume( std::atoi(soundNode.getAttribute( "volume" )) );
+                m_soundVec.back().setVolume( std::atoi(soundNode.getAttribute( "volume" )) );
         }
         else
         {
@@ -91,21 +91,20 @@ void CPlayList::LoadFromNode(
                 boost::str( boost::format("Playlist sound Id does not exist! (%s - %s).\n\n%s\nLine: %s")
                     % id % group % __FUNCTION__ % __LINE__ ));
         }
-    }
-                
-}   // LoadFromNode
+    } 
+}
 
 
 /************************************************************************
 *    desc:  Get the sound for the playlist                                                             
 ************************************************************************/
-CSound & CPlayList::GetSound()
+CSound & CPlayList::getSound()
 {
     if( !m_soundVec.empty() )
     {
         // Is it time to shuffle?
         if( (m_type == EST_RANDOM) && (m_counter == 0) )
-            Shuffle();
+            shuffle();
 
         m_current = m_counter;
         m_counter = (m_counter + 1) % m_soundVec.size();
@@ -114,111 +113,102 @@ CSound & CPlayList::GetSound()
     }
     
     return m_DummySound;
-
-}   // GetSound
+}
 
 
 /************************************************************************
 *    desc:  Play the play list
 ************************************************************************/
-void CPlayList::Play( int channel, int loopCount )
+void CPlayList::play( int channel, int loopCount )
 {
     if( !m_soundVec.empty() )
     {
         if( (m_type == EST_RANDOM) && (m_counter == 0) )
-            Shuffle();
+            shuffle();
 
         m_current = m_counter;
-        m_soundVec[m_current].Play( channel, loopCount );
+        m_soundVec[m_current].play( channel, loopCount );
         m_counter = (m_counter + 1) % m_soundVec.size();
     }
-
-}   // Play
+}
 
 
 /************************************************************************
 *    desc:  Stop the sound
 ************************************************************************/
-void CPlayList::Stop()
+void CPlayList::stop()
 {
     if( !m_soundVec.empty() )
-        m_soundVec[m_current].Stop();
-
-}   // Stop
+        m_soundVec[m_current].stop();
+}
 
 
 /************************************************************************
 *    desc:  Pause the sound
 ************************************************************************/
-void CPlayList::Pause()
+void CPlayList::pause()
 {
     if( !m_soundVec.empty() )
-        m_soundVec[m_current].Pause();
-
-}   // Pause
+        m_soundVec[m_current].pause();
+}
 
 
 /************************************************************************
 *    desc:  Resume the sound
 ************************************************************************/
-void CPlayList::Resume()
+void CPlayList::resume()
 {
     if( !m_soundVec.empty() )
-        m_soundVec[m_current].Resume();
-
-}   // Resume
+        m_soundVec[m_current].resume();
+}
 
 
 /************************************************************************
 *    desc: Set/Get the volume for music or channel
 ************************************************************************/
-void CPlayList::SetVolume( int volume )
+void CPlayList::setVolume( int volume )
 {
     if( !m_soundVec.empty() )
-        m_soundVec[m_current].SetVolume( volume );
-    
-}   // SetVolume
+        m_soundVec[m_current].setVolume( volume );
+}
 
-int CPlayList::GetVolume()
+int CPlayList::getVolume()
 {
     if( !m_soundVec.empty() )
-        return m_soundVec[m_current].GetVolume();
+        return m_soundVec[m_current].getVolume();
     
-    return m_DummySound.GetVolume();
-    
-}   // GetVolume
+    return m_DummySound.getVolume();
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel playing?
 ************************************************************************/
-bool CPlayList::IsPlaying()
+bool CPlayList::isPlaying()
 {
     if( !m_soundVec.empty() )
-        return m_soundVec[m_current].IsPlaying();
+        return m_soundVec[m_current].isPlaying();
     
-    return m_DummySound.IsPlaying();
-
-}   // IsPlaying
+    return m_DummySound.isPlaying();
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel paused?
 ************************************************************************/
-bool CPlayList::IsPaused()
+bool CPlayList::isPaused()
 {
     if( !m_soundVec.empty() )
-        return m_soundVec[m_current].IsPaused();
+        return m_soundVec[m_current].isPaused();
     
-    return m_DummySound.IsPaused();
-
-}   // IsPaused
+    return m_DummySound.isPaused();
+}
 
 
 /************************************************************************
 *    desc:  Play the play list
 ************************************************************************/
-void CPlayList::Shuffle()
+void CPlayList::shuffle()
 {
     if( m_soundVec.size() > 2 )
     {
@@ -238,5 +228,4 @@ void CPlayList::Shuffle()
             m_soundVec[midPos] = oldLastSound;
         }
     }
-    
-}   // Shuffle
+}

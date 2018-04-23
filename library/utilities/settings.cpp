@@ -54,7 +54,7 @@ CSettings::CSettings() :
     m_projectionType(NDefs::EPT_PERSPECTIVE),
     m_debugStrVisible(false)
 {
-    CWorldValue::SetSectorSize( 512 );
+    CWorldValue::setSectorSize( 512 );
     
 }   // constructor
 
@@ -290,7 +290,7 @@ void CSettings::LoadXML()
                 {
                     m_sectorSize = std::atof(worldNode.getAttribute("sectorSize"));
                     m_sectorSizeHalf = m_sectorSize / 2;
-                    CWorldValue::SetSectorSize( m_sectorSize );
+                    CWorldValue::setSectorSize( m_sectorSize );
                 }
             }
         }

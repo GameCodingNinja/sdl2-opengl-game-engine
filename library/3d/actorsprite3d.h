@@ -39,70 +39,70 @@ public:
     virtual ~CActorSprite3D();
     
     // Init the physics
-    void InitPhysics() override;
+    void initPhysics() override;
     
     // React to what the player is doing
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Update the actor
-    void Update() override;
+    void update() override;
     
     // Update the physics
     //void PhysicsUpdate() override;
 
     // Transform the actor
-    void Transform() override;
+    void transform() override;
     //void Transform( const CObject3D & object ) override;
-    void Transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
 
     // Render the actor
-    void Render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) override;
+    void render( const CMatrix & projMatrix, const CMatrix & cameraMatrix ) override;
     
     // Get the physics component
-    CPhysicsComponent3D & GetPhysicsComponent() override;
+    CPhysicsComponent3D & getPhysicsComponent() override;
     
     // Set/Get the AI pointer
-    void SetAI( iAIBase2D * pAIBase ) override;
+    void setAI( iAIBase2D * pAIBase ) override;
 
     // Is the actor in view
-    bool InView();
+    bool inView();
     
     // Get the sprite
-    CSprite3D & GetSprite( int index = 0 );
+    CSprite3D & getSprite( int index = 0 );
     
     // Get the sprite group
-    CSprite3D & GetSprite( const std::string & name );
+    CSprite3D & getSprite( const std::string & name );
     
     // Get the unique id number
     //int GetId() const override;
     
     // Get the collision group
-    uint GetCollisionGroup() const;
+    uint getCollisionGroup() const;
     
     // Get the collision radius
-    float GetCollisionRadius() const;
+    float getCollisionRadius() const;
     
     // Check for collision against other actor sprite
-    bool IsCollision( CActorSprite3D & rPlayerActor );
+    bool isCollision( CActorSprite3D & rPlayerActor );
     
 protected:
     
     // Apply the scale
-    void ApplyScale( CMatrix & matrix ) override;
+    void applyScale( CMatrix & matrix ) override;
     
 private:
     
     // Create the actor
-    void Create( const CActorData & actorData );
+    void create( const CActorData & actorData );
     
     // Check if an object is within the orthographic view frustum
-    bool InOrthographicView();
+    bool inOrthographicView();
     
     // Check if an object is within the perspective view frustum
-    bool InPerspectiveView();
+    bool inPerspectiveView();
     
     // Check for collision against other actor sprite
-    bool CheckBroadPhase( CActorSprite3D & rPlayerActor );
+    bool checkBroadPhase( CActorSprite3D & rPlayerActor );
     
 private:
     

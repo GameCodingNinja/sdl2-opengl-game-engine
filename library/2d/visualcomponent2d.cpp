@@ -67,24 +67,24 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
         m_pShaderData = &CShaderMgr::Instance().GetShaderData( visualData.GetShaderID() );
 
         // Common shader members
-        m_vertexLocation = m_pShaderData->GetAttributeLocation( "in_position" );
-        m_matrixLocation = m_pShaderData->GetUniformLocation( "cameraViewProjMatrix" );
-        m_colorLocation = m_pShaderData->GetUniformLocation( "color" );
+        m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
+        m_matrixLocation = m_pShaderData->getUniformLocation( "cameraViewProjMatrix" );
+        m_colorLocation = m_pShaderData->getUniformLocation( "color" );
         
         // Do we have a texture? This could be a solid rect
         if( (m_textureID > 0) || (GENERATION_TYPE == NDefs::EGT_FONT) )
         {
-            m_uvLocation = m_pShaderData->GetAttributeLocation( "in_uv" );
-            m_text0Location = m_pShaderData->GetUniformLocation( "text0" );
+            m_uvLocation = m_pShaderData->getAttributeLocation( "in_uv" );
+            m_text0Location = m_pShaderData->getUniformLocation( "text0" );
         }
 
         // Is this a sprite sheet? Get the glyph rect position
         if( GENERATION_TYPE == NDefs::EGT_SPRITE_SHEET )
         {
-            m_glyphLocation = m_pShaderData->GetUniformLocation( "glyphRect" );
+            m_glyphLocation = m_pShaderData->getUniformLocation( "glyphRect" );
             
-            m_glyphUV = visualData.GetSpriteSheet().GetGlyph().GetUV();
-            m_frameIndex = visualData.GetSpriteSheet().GetDefaultIndex();
+            m_glyphUV = visualData.GetSpriteSheet().getGlyph().getUV();
+            m_frameIndex = visualData.GetSpriteSheet().getDefaultIndex();
         }
         
         // Allocate the storage for the font if this is a font sprite
@@ -224,7 +224,7 @@ void CVisualComponent2D::Render( const CMatrix & objMatrix, const CMatrix & matr
 void CVisualComponent2D::LoadFontPropFromNode( const XMLNode & node )
 {
     if(m_pFontData)
-        m_pFontData->LoadFromNode( node );
+        m_pFontData->loadFromNode( node );
     
 }   // LoadFontPropFromNode
 
@@ -235,7 +235,7 @@ void CVisualComponent2D::LoadFontPropFromNode( const XMLNode & node )
 void CVisualComponent2D::SetFontData( const CFontData & fontData )
 {
     if(m_pFontData)
-        m_pFontData->Copy( fontData );
+        m_pFontData->copy( fontData );
     
 }   // SetFontData
 
@@ -246,7 +246,7 @@ void CVisualComponent2D::SetFontData( const CFontData & fontData )
 void CVisualComponent2D::SetFontProperties( const CFontProperties & fontProp )
 {
     if(m_pFontData)
-        m_pFontData->m_fontProp.Copy( fontProp );
+        m_pFontData->m_fontProp.copy( fontProp );
     
 }   // SetFontProperties
 
@@ -706,9 +706,9 @@ void CVisualComponent2D::SetFrame( uint index )
 {
     if( GENERATION_TYPE == NDefs::EGT_SPRITE_SHEET )
     {
-        auto rGlyph = m_rVisualData.GetSpriteSheet().GetGlyph( index );
-        m_glyphUV = rGlyph.GetUV();
-        m_quadVertScale = rGlyph.GetSize() * m_rVisualData.GetDefaultUniformScale();
+        auto rGlyph = m_rVisualData.GetSpriteSheet().getGlyph( index );
+        m_glyphUV = rGlyph.getUV();
+        m_quadVertScale = rGlyph.getSize() * m_rVisualData.GetDefaultUniformScale();
     }
     else
         m_textureID = m_rVisualData.GetTextureID( index );

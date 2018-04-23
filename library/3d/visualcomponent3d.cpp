@@ -55,16 +55,16 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
     {
         m_pShaderData = &CShaderMgr::Instance().GetShaderData( visualData.GetShaderID() );
 
-        m_vertexLocation = m_pShaderData->GetAttributeLocation( "in_position" );
-        m_normalLocation = m_pShaderData->GetAttributeLocation( "in_normal" );
-        m_matrixLocation = m_pShaderData->GetUniformLocation( "cameraViewProjMatrix" );
-        m_normalMatrixLocation = m_pShaderData->GetUniformLocation( "normalMatrix" );
-        m_colorLocation = m_pShaderData->GetUniformLocation( "color" );
+        m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
+        m_normalLocation = m_pShaderData->getAttributeLocation( "in_normal" );
+        m_matrixLocation = m_pShaderData->getUniformLocation( "cameraViewProjMatrix" );
+        m_normalMatrixLocation = m_pShaderData->getUniformLocation( "normalMatrix" );
+        m_colorLocation = m_pShaderData->getUniformLocation( "color" );
 
         if( !m_mesh3d.back().m_textureVec.empty() )
         {
-            m_uvLocation = m_pShaderData->GetAttributeLocation( "in_uv" );
-            m_text0Location = m_pShaderData->GetUniformLocation( "text0" );
+            m_uvLocation = m_pShaderData->getAttributeLocation( "in_uv" );
+            m_text0Location = m_pShaderData->getUniformLocation( "text0" );
         }
     }
 

@@ -38,28 +38,28 @@ public:
     virtual ~CActorData();
     
     // Get the sprite name
-    const std::string & GetName() const;
+    const std::string & getName() const;
 
     // Get the AI name
-    const std::string & GetAIName() const;
+    const std::string & getAIName() const;
     
     // Get sprite Data
-    const std::vector<CSpriteData> & GetSpriteData() const;
+    const std::vector<CSpriteData> & getSpriteData() const;
     
     // Is this actor a player
-    bool IsPlayerActor() const;
+    bool isPlayerActor() const;
     
     // Get the collision group
-    uint GetCollisionGroup() const;
+    uint getCollisionGroup() const;
     
     // Get the collision Mask
-    uint GetCollisionMask() const;
+    uint getCollisionMask() const;
     
     // Get the collision Radius Scalar
-    float GetCollisionRadiusScalar() const;
+    float getCollisionRadiusScalar() const;
     
     // Get the unique id number
-    int GetId() const;
+    int getId() const;
 
 private:
 

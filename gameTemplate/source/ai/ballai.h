@@ -29,15 +29,15 @@ public:
     virtual ~CBallAI();
     
     // Do any initializing
-    void Init() override;
+    void init() override;
     
     // Update animations, move sprites, etc.
-    void Update() override;
+    void update() override;
     
 private:
     
     // Init the ball placement
-    void InitPhysics();
+    void initPhysics();
     
 private:
     

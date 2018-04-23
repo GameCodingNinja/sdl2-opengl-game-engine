@@ -33,8 +33,7 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
     
     // Set the sprite type
     m_parameters.Add( NDefs::SPRITE3D );
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -42,13 +41,13 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
  ************************************************************************/
 CSprite3D::~CSprite3D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Init the physics                                                           
  ************************************************************************/
-void CSprite3D::InitPhysics()
+void CSprite3D::initPhysics()
 {
     m_physicsComponent.Init( *this );
 }
@@ -57,7 +56,7 @@ void CSprite3D::InitPhysics()
 /************************************************************************
 *    desc:  Set the translation/rotation from Bullet Physics
 ************************************************************************/
-void CSprite3D::SetTransform( const btTransform & trans )
+void CSprite3D::setTransform( const btTransform & trans )
 {
     m_parameters.Add( NDefs::ROTATE | NDefs::PHYSICS_TRANSFORM );
     
@@ -83,25 +82,23 @@ void CSprite3D::SetTransform( const btTransform & trans )
     
     // Set the rotation
     //SetRotXYZ( x, y, z, false );
-
-}   // SetTransform
+}
 
 
 /************************************************************************
 *    desc:  React to what the player is doing
 ************************************************************************/
-void CSprite3D::HandleEvent( const SDL_Event & rEvent )
+void CSprite3D::handleEvent( const SDL_Event & rEvent )
 {
     if( m_upAI )
-        m_upAI->HandleEvent( rEvent );
-
-}   // HandleEvent
+        m_upAI->handleEvent( rEvent );
+}
 
 
 /************************************************************************
  *    desc:  Update the sprite                                                           
  ************************************************************************/
-void CSprite3D::Update()
+void CSprite3D::update()
 {
     if( isVisible() )
         m_physicsComponent.Update( this );
@@ -109,177 +106,159 @@ void CSprite3D::Update()
     m_scriptComponent.Update();
 
     if( m_upAI )
-        m_upAI->Update();
-
-}   // Update
+        m_upAI->update();
+}
 
 
 /************************************************************************
 *    desc:  Update the physics
 ************************************************************************/
-void CSprite3D::PhysicsUpdate()
+void CSprite3D::physicsUpdate()
 {
     m_physicsComponent.Update( this );
-
-}   // PhysicsUpdate
+}
 
 
 /************************************************************************
  *    desc:  do the render                                                            
  ************************************************************************/
-void CSprite3D::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
+void CSprite3D::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     if( isVisible() )
         m_visualComponent.Render( m_matrix * matrix, m_rotMatrix * rotMatrix );
+}
 
-}   // Render
-
-void CSprite3D::Render( const CCamera & camera )
+void CSprite3D::render( const CCamera & camera )
 {
     if( isVisible() )
         m_visualComponent.Render( m_matrix * camera.getFinalMatrix(), m_rotMatrix * camera.getRotMatrix() );
-
-}   // Render
+}
 
 
 /************************************************************************
  *    desc:  Get the visual component                                                            
  ************************************************************************/
-CVisualComponent3D & CSprite3D::GetVisualComponent()
+CVisualComponent3D & CSprite3D::getVisualComponent()
 {
     return m_visualComponent;
-
-}   // GetVisualComponent
+}
 
 
 /************************************************************************
  *    desc:  Get the physics component                                                            
  ************************************************************************/
-CPhysicsComponent3D & CSprite3D::GetPhysicsComponent()
+CPhysicsComponent3D & CSprite3D::getPhysicsComponent()
 {
     return m_physicsComponent;
-
-}   // GetPhysicsComponent
+}
 
 
 /************************************************************************
  *    desc:  Get the scripting component                                                            
  ************************************************************************/
-CScriptComponent & CSprite3D::GetScriptComponent()
+CScriptComponent & CSprite3D::getScriptComponent()
 {
     return m_scriptComponent;
-
-}   // GetScriptingComponent
+}
 
 
 /************************************************************************
  *    desc:  Get the object data                                                            
  ************************************************************************/
-const CObjectData3D & CSprite3D::GetObjectData() const
+const CObjectData3D & CSprite3D::getObjectData() const
 {
     return m_objectData;
-
-}   // GetObjectData
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CSprite3D::SetAI( iAIBase * pAIBase )
+void CSprite3D::setAI( iAIBase * pAIBase )
 {
     m_upAI.reset( pAIBase );
 
     // Handle any initialization in a separate function
-    m_upAI->Init();
-
-}   // SetAI
+    m_upAI->init();
+}
 
 
 /************************************************************************
  *    desc:  Set the color
  ************************************************************************/
-void CSprite3D::SetColor( const CColor & color )
+void CSprite3D::setColor( const CColor & color )
 {
     m_visualComponent.SetColor( color );
+}
 
-}   // SetColor
-
-void CSprite3D::SetColor( float r, float g, float b, float a )
+void CSprite3D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
     m_visualComponent.SetColor( r, g, b, a );
-
-}   // SetColor
+}
 
 
 /************************************************************************
  *    desc:  Set the default color
  ************************************************************************/
-void CSprite3D::SetDefaultColor()
+void CSprite3D::setDefaultColor()
 {
     m_visualComponent.SetColor( m_objectData.GetVisualData().GetColor() );
-
-}   // SetColor
+}
 
 
 /************************************************************************
  *    desc:  Get the color
  ************************************************************************/
-const CColor & CSprite3D::GetColor() const
+const CColor & CSprite3D::getColor() const
 {
     return m_visualComponent.GetColor();
-
-}   // GetColor
+}
 
 
 /************************************************************************
  *    desc:  Get the default color
  ************************************************************************/
-const CColor & CSprite3D::GetDefaultColor() const
+const CColor & CSprite3D::getDefaultColor() const
 {
     return m_objectData.GetVisualData().GetColor();
-
-}   // GetDefaultColor
+}
 
 
 /************************************************************************
  *    desc:  Set the Alpha
  ************************************************************************/
-void CSprite3D::SetAlpha( float alpha )
+void CSprite3D::setAlpha( float alpha )
 {
     if( alpha > 1.5 )
         alpha *= defs_RGB_TO_DEC;
 
     m_visualComponent.SetAlpha( alpha );
-
-}   // SetAlpha
+}
 
 
 /************************************************************************
  *    desc:  Get the Alpha
  ************************************************************************/
-float CSprite3D::GetAlpha() const
+float CSprite3D::getAlpha() const
 {
     return m_visualComponent.GetAlpha();
-
-}   // GetAlpha
+}
 
 
 /************************************************************************
  *    desc:  Get the default alpha
  ************************************************************************/
-float CSprite3D::GetDefaultAlpha() const
+float CSprite3D::getDefaultAlpha() const
 {
     return m_objectData.GetVisualData().GetColor().getA();
-
-}   // GetDefaultAlpha
+}
 
 
 /************************************************************************
 *    desc:  Set the default alpha
 ************************************************************************/
-void CSprite3D::SetDefaultAlpha()
+void CSprite3D::setDefaultAlpha()
 {
     m_visualComponent.SetAlpha( m_objectData.GetVisualData().GetColor().getA() );
-
-}   // SetDefaultAlpha
+}

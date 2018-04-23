@@ -35,54 +35,54 @@ public:
     virtual ~CSprite3D();
 
     // Get the object data
-    const CObjectData3D & GetObjectData() const;
+    const CObjectData3D & getObjectData() const;
 
     // Get the visual component
-    CVisualComponent3D & GetVisualComponent();
+    CVisualComponent3D & getVisualComponent();
 
     // Get the physics component
-    CPhysicsComponent3D & GetPhysicsComponent();
+    CPhysicsComponent3D & getPhysicsComponent();
 
     // Get the scripting component
-    CScriptComponent & GetScriptComponent();
+    CScriptComponent & getScriptComponent();
     
     // Init the physics
-    void InitPhysics() override;
+    void initPhysics() override;
 
     // React to what the player is doing
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Set the translation/rotation from Bullet Physics
-    void SetTransform( const btTransform & trans );
+    void setTransform( const btTransform & trans );
 
     // Update the sprite 
-    void Update() override;
+    void update() override;
     
     // Update the physics
-    void PhysicsUpdate() override;
+    void physicsUpdate() override;
 
     // do the render
-    void Render( const CCamera & camera ) override;
-    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
+    void render( const CCamera & camera ) override;
+    void render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
 
     // Set/Get the AI pointer
-    void SetAI( iAIBase * pAIBase ) override;
+    void setAI( iAIBase * pAIBase ) override;
     
     // Set the physics position and rotation
-    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
+    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
     
     // Set/Get the color
-    void SetColor( const CColor & color ) override;
-    void SetColor( float r, float g, float b, float a ) override;
-    void SetDefaultColor() override;
-    const CColor & GetColor() const override;
-    const CColor & GetDefaultColor() const override;
+    void setColor( const CColor & color ) override;
+    void setColor( float r, float g, float b, float a ) override;
+    void setDefaultColor() override;
+    const CColor & getColor() const override;
+    const CColor & getDefaultColor() const override;
 
     // Set/Get the alpha
-    void SetAlpha( float alpha ) override;
-    float GetAlpha() const override;
-    void SetDefaultAlpha() override;
-    float GetDefaultAlpha() const override;
+    void setAlpha( float alpha ) override;
+    float getAlpha() const override;
+    void setDefaultAlpha() override;
+    float getDefaultAlpha() const override;
 
 private:
 

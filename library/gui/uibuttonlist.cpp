@@ -89,7 +89,7 @@ void CUIButtonList::LoadControlFromNode( const XMLNode & node )
     // See if there is an image list
     for( size_t i = 0; i < m_spriteDeq.size(); ++i )
     {
-	if( m_spriteDeq[i].GetObjectData().GetVisualData().GetFrameCount() > 1 )
+	if( m_spriteDeq[i].getObjectData().GetVisualData().GetFrameCount() > 1 )
         {
             m_imageLstIndex = i;
             break;
@@ -256,7 +256,7 @@ void CUIButtonList::UpdateDisplay( int index )
     CreateFontString( m_activeIndex );
 
     if( m_imageLstIndex > -1 )
-        m_spriteDeq.at(m_imageLstIndex).GetVisualComponent().SetFrame( m_activeIndex );
+        m_spriteDeq.at(m_imageLstIndex).getVisualComponent().SetFrame( m_activeIndex );
 
 }  // UpdateDisplay
 

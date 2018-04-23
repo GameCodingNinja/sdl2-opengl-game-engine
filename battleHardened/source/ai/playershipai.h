@@ -31,18 +31,18 @@ public:
     virtual ~CPlayerShipAI();
     
     // Do any initializing
-    void Init() override;
+    void init() override;
     
     // Handle player related messages
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Update animations, move sprites, etc.
-    void Update() override;
+    void update() override;
     
 private:
     
     // Handle the ship's shooting 
-    void HandleShooting();
+    void handleShooting();
     
 private:
     

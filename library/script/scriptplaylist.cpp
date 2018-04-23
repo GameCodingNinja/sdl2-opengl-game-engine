@@ -62,14 +62,14 @@ namespace NScriptPlayLst
         // assignment operator
         Throw( pEngine->RegisterObjectMethod("CPlayList", "CPlayList & opAssign(const CPlayList & in)", asMETHODPR(CPlayList, operator =, (const CPlayList &), CPlayList &), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Play( int channel = -1, int loopCount = 0 )", asMETHOD(CPlayList, Play),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Stop()",                                      asMETHOD(CPlayList, Stop),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Pause()",                                     asMETHOD(CPlayList, Pause),     asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Resume()",                                    asMETHOD(CPlayList, Resume),    asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "void SetVolume( int volume )",                     asMETHOD(CPlayList, SetVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "int GetVolume()",                                  asMETHOD(CPlayList, GetVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPlaying()",                                 asMETHOD(CPlayList, IsPlaying), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPaused()",                                  asMETHOD(CPlayList, IsPaused),  asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Play( int channel = -1, int loopCount = 0 )", asMETHOD(CPlayList, play),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Stop()",                                      asMETHOD(CPlayList, stop),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Pause()",                                     asMETHOD(CPlayList, pause),     asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "void Resume()",                                    asMETHOD(CPlayList, resume),    asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "void SetVolume( int volume )",                     asMETHOD(CPlayList, setVolume), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "int GetVolume()",                                  asMETHOD(CPlayList, getVolume), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPlaying()",                                 asMETHOD(CPlayList, isPlaying), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPlayList", "bool IsPaused()",                                  asMETHOD(CPlayList, isPaused),  asCALL_THISCALL) );
 
     }
 }

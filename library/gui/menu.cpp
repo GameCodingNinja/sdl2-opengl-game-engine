@@ -192,7 +192,7 @@ void CMenu::LoadStaticSpriteFromNode( const XMLNode & node )
     m_spriteDeq.back().loadTransFromNode( node );
 
     // Init the script functions
-    m_spriteDeq.back().InitScriptFunctions( node );
+    m_spriteDeq.back().initScriptFunctions( node );
 
 }   // LoadStaticSpriteFromNode
 
@@ -285,8 +285,8 @@ void CMenu::LoadDynamicOffsetFromNode( const XMLNode & node )
 void CMenu::SetDynamicPos()
 {
     // Position the menu based on the dynamic offset
-    if( !m_dynamicOffset.IsEmpty() )
-        setPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+    if( !m_dynamicOffset.isEmpty() )
+        setPos( m_dynamicOffset.getPos( CSettings::Instance().GetDefaultSizeHalf() ) );
 
 }   // SetDynamicPos
 
@@ -416,7 +416,7 @@ void CMenu::Update()
     if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
-            iter.Update();
+            iter.update();
 
         for( auto iter : m_pStaticControlVec )
             iter->Update();
@@ -485,7 +485,7 @@ void CMenu::Render( const CMatrix & matrix )
     if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
-            iter.Render( matrix );
+            iter.render( matrix );
 
         for( auto iter : m_pStaticControlVec )
             iter->Render( matrix );
@@ -904,7 +904,7 @@ CUIControl * CMenu::GetPtrToActiveControl()
 ************************************************************************/
 bool CMenu::IsDynamicOffset()
 {
-    return !m_dynamicOffset.IsEmpty();
+    return !m_dynamicOffset.isEmpty();
 
 }   // IsDynamicOffset
 
@@ -965,7 +965,7 @@ void CMenu::SetAlpha( float alpha )
     if( isVisible() )
     { 
         for( auto & iter : m_spriteDeq )
-            iter.SetAlpha( alpha );
+            iter.setAlpha( alpha );
 
         for( auto iter : m_pStaticControlVec )
             iter->SetAlpha( alpha );

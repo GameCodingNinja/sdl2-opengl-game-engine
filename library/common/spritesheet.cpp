@@ -34,32 +34,30 @@ CSpriteSheet::CSpriteSheet() :
 /************************************************************************
 *    desc:  Set/Get the glyph count
 ************************************************************************/
-void CSpriteSheet::SetGlyphCount( uint glyphCount)
+void CSpriteSheet::setGlyphCount( uint glyphCount)
 {
     m_glyphCount = glyphCount;
-    
-}   // InitBuild
+}
 
 
 /************************************************************************
 *    desc:  Set the glyph columns
 ************************************************************************/
-void CSpriteSheet::SetGlyphColumns( uint columns )
+void CSpriteSheet::setGlyphColumns( uint columns )
 {
     m_columns = columns;
-    
-}   // SetGlyphColumns
+}
 
 
 /************************************************************************
 *    desc:  Build the simple (grid) sprite sheet data
 ************************************************************************/
-void CSpriteSheet::Build( const CSize<int> & sheetSize )
+void CSpriteSheet::build( const CSize<int> & sheetSize )
 {
     if( (m_glyphCount != 0) && (m_columns != 0) )
     {
         m_size = sheetSize;
-        
+
         int rows = m_glyphCount / m_columns;
 
         if( (m_glyphCount % m_columns) > 0 )
@@ -89,13 +87,12 @@ void CSpriteSheet::Build( const CSize<int> & sheetSize )
             }
         }
     }
-    
-}   // Build
+}
 
 
 /************************************************************************
 *    desc:  Load the glyph data from XML file
-* 
+*
 *           NOTE: The first time the sprite sheet is created, byStrID sets
 *           the stage as to how it is stored. If false, it's all loaded
 *           in the sprite sheets vector and if true, the map. It's assumed
@@ -103,28 +100,28 @@ void CSpriteSheet::Build( const CSize<int> & sheetSize )
 *           among many sprites where as no string id is a simple sprite
 *           sheet animation used by maybe one sprite.
 ************************************************************************/
-void CSpriteSheet::LoadFromXML( const std::string & filePath )
+void CSpriteSheet::loadFromXML( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "spriteSheet" );
     if( !node.isEmpty() )
     {
         m_size = NParseHelper::LoadSizeFromChild( node );
-        
+
         for( int i = 0; i < node.nChildNode(); ++i )
         {
             const XMLNode rectNode = node.getChildNode(i);
-            
+
             auto rect = NParseHelper::LoadRectFromChild( rectNode );
-            
+
             const CSize<float> glyphSize( rect.x2, rect.y2 );
-            
+
             const CRect<float> uv(
                 (float)rect.x1 / (float)m_size.w,
                 (float)rect.y1 / (float)m_size.h,
                 (float)rect.x2 / (float)m_size.w,
                 (float)rect.y2 / (float)m_size.h );
-            
+
             const CSize<int> cropOffset(
                 std::atoi( rectNode.getAttribute( "cx" ) ),
                 std::atoi( rectNode.getAttribute( "cy" ) ) );
@@ -134,50 +131,47 @@ void CSpriteSheet::LoadFromXML( const std::string & filePath )
             m_glyphMap.emplace( std::piecewise_construct, std::forward_as_tuple(strId), std::forward_as_tuple(glyphSize, uv, cropOffset) );
         }
     }
-    
-}   // LoadFromXML
+}
 
 
 /************************************************************************
 *    desc:  Set the gylph data
 ************************************************************************/
-void CSpriteSheet::Set( const CSpriteSheetGlyph & rGlyph )
+void CSpriteSheet::set( const CSpriteSheetGlyph & rGlyph )
 {
     m_glyphVec.push_back( rGlyph );
-    
-}   // Set
+}
 
-void CSpriteSheet::Set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const
+void CSpriteSheet::set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const
 {
-    rSpriteSheet.Set( FindGlyph( rGlyphId ) );
+    rSpriteSheet.set( findGlyph( rGlyphId ) );
+}
 
-}   // Set
-
-void CSpriteSheet::Set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec )
+void CSpriteSheet::set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec )
 {
     // Copy over the map entries
     for( auto & iter: rStrIdVec )
     {
-        auto & rGlyph = rSpriteSheet.FindGlyph( iter );
+        auto & rGlyph = rSpriteSheet.findGlyph( iter );
         m_glyphMap.emplace( iter, rGlyph );
         m_glyphVec.push_back( rGlyph );
     }
-}   // Set
+}
 
 
 /************************************************************************
 *    desc:  Copy over the gylph data
 ************************************************************************/
-void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec, bool loadAllGlyphs ) const
+void CSpriteSheet::copyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec, bool loadAllGlyphs ) const
 {
     if( rStrIdVec.empty() )
     {
         if( loadAllGlyphs )
         {
-            rSpriteSheet.Clear();
-            
+            rSpriteSheet.clear();
+
             for( auto & iter : m_glyphMap )
-                rSpriteSheet.Set( iter.second );
+                rSpriteSheet.set( iter.second );
         }
     }
     else if( !m_glyphMap.empty() )
@@ -186,17 +180,17 @@ void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::s
         // Should only be one entry
         if ((rStrIdVec.size() == 1) && (rStrIdVec.back().find('%') != std::string::npos))
         {
-            const int formatCodeOffset = rSpriteSheet.GetFormatCodeOffset();
-            for( uint i = 0; i < rSpriteSheet.GetCount(); ++i )
+            const int formatCodeOffset = rSpriteSheet.getFormatCodeOffset();
+            for( uint i = 0; i < rSpriteSheet.getCount(); ++i )
             {
                 std::string glyphStr = boost::str( boost::format(rStrIdVec.back()) % (formatCodeOffset+i) );
-                Set( rSpriteSheet, glyphStr );
+                set( rSpriteSheet, glyphStr );
             }
         }
         // Init the sprite sheet class when each glyph is defined in the object data
-        else if( rSpriteSheet.GetCount() == 0 )
+        else if( rSpriteSheet.getCount() == 0 )
         {
-            rSpriteSheet.Set( *this, rStrIdVec );
+            rSpriteSheet.set( *this, rStrIdVec );
         }
         else
         {
@@ -205,24 +199,22 @@ void CSpriteSheet::CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::s
                     % __FUNCTION__ % __LINE__ ));
         }
     }
-    
-}   // CopyTo
+}
 
 
 /************************************************************************
 *    desc:  Get the glyph
 ************************************************************************/
-const CSpriteSheetGlyph & CSpriteSheet::GetGlyph( int index ) const
+const CSpriteSheetGlyph & CSpriteSheet::getGlyph( int index ) const
 {
     if( index > -1 )
         return m_glyphVec.at( index );
-    
+
     else
         return m_glyphVec.at( m_defaultIndex );
-            
-}   // GetGlyph
+}
 
-const CSpriteSheetGlyph & CSpriteSheet::FindGlyph( const std::string & glyphId ) const
+const CSpriteSheetGlyph & CSpriteSheet::findGlyph( const std::string & glyphId ) const
 {
     auto mapIter = m_glyphMap.find( glyphId );
     if( mapIter == m_glyphMap.end() )
@@ -231,40 +223,38 @@ const CSpriteSheetGlyph & CSpriteSheet::FindGlyph( const std::string & glyphId )
             boost::str( boost::format("Glyph name is missing (%s).\n\n%s\nLine: %s")
                 % glyphId % __FUNCTION__ % __LINE__ ));
     }
-         
+
     return mapIter->second;
-    
-}   // GetGlyph
+}
 
 
 /************************************************************************
 *    desc:  Get the number of gylphs in this sprite sheet
 ************************************************************************/
-size_t CSpriteSheet::GetCount() const
+size_t CSpriteSheet::getCount() const
 {
     size_t count = m_glyphMap.size();
     const size_t vecCount = m_glyphVec.size();
-    
+
     if( count < vecCount )
         count = vecCount;
-    
+
     if( count < m_glyphCount )
         return m_glyphCount;
-    
+
     return count;
-    
-}   // GetCount
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the default index
 ************************************************************************/
-void CSpriteSheet::SetDefaultIndex( uint index )
+void CSpriteSheet::setDefaultIndex( uint index )
 {
     m_defaultIndex = index;
 }
 
-uint CSpriteSheet::GetDefaultIndex() const
+uint CSpriteSheet::getDefaultIndex() const
 {
     return m_defaultIndex;
 }
@@ -273,12 +263,12 @@ uint CSpriteSheet::GetDefaultIndex() const
 /************************************************************************
 *    desc:  Set/Get the offset for loading with a format code
 ************************************************************************/
-void CSpriteSheet::SetFormatCodeOffset( uint index )
+void CSpriteSheet::setFormatCodeOffset( uint index )
 {
     m_formatCodeOffset = index;
 }
 
-int CSpriteSheet::GetFormatCodeOffset() const
+int CSpriteSheet::getFormatCodeOffset() const
 {
     return m_formatCodeOffset;
 }
@@ -287,9 +277,8 @@ int CSpriteSheet::GetFormatCodeOffset() const
 /************************************************************************
 *    desc:  Clear out the data
 ************************************************************************/
-void CSpriteSheet::Clear()
+void CSpriteSheet::clear()
 {
     m_glyphVec.clear();
     m_glyphMap.clear();
-    
-}   // Clear
+}

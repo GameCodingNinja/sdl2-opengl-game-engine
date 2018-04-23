@@ -38,20 +38,20 @@ public:
     /************************************************************************                                                             
     *    desc:  Get functions
     ************************************************************************/
-    type GetX1() const
+    type getX1() const
     { return x1; }
 
-    type GetY1() const
+    type getY1() const
     { return y1; }
 
-    type GetX2() const
+    type getX2() const
     { return x2; }
 
-    type GetY2() const
+    type getY2() const
     { return y2; }
 
     // Sets the rect's x and y value based on an index and three counts
-    void SetRectXY( int index, int columnCount, int rowCount, type textureHeight, type textureWidth )
+    void setRectXY( int index, int columnCount, int rowCount, type textureHeight, type textureWidth )
     {
         int heightIndex = 0;
         int widthIndex = 0;
@@ -82,47 +82,41 @@ public:
 
     /************************************************************************                                                             
     *    desc:  Does this size not have any data? 
-    *
-    *    return: bool
     ************************************************************************/
-    bool IsEmpty() const
+    bool isEmpty() const
     {
-        return ( IsX1Empty() && IsX2Empty() && IsY1Empty() &&  IsY2Empty() );
+        return ( isX1Empty() && isX2Empty() && isY1Empty() && isY2Empty() );
     }
 
-    bool IsX1Empty() const
+    bool isX1Empty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == x1) || (*(int*)&x1 == 0) );
+    }
 
-    }   // IsX1Empty
-
-    bool IsX2Empty() const
+    bool isX2Empty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == x2) || (*(int*)&x2 == 0) );
+    }
 
-    }   // IsX1Empty
-
-    bool IsY1Empty() const
+    bool isY1Empty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == y1) || (*(int*)&y1 == 0) );
+    }
 
-    }   // IsX1Empty
-
-    bool IsY2Empty() const
+    bool isY2Empty() const
     {
         // This looks at the bits of the data as an int
         return ( (0 == y2) || (*(int*)&y2 == 0) );
-
-    }   // IsX1Empty
+    }
 
     /************************************************************************                                                             
     *    desc:  Is the point in the rect
     *           Note: Fast but does not work when rect is rotated
     ************************************************************************/
-    bool IsPointInRect( type x, type y )
+    bool isPointInRect( type x, type y )
     {
         if( ((x > x1) && (x < x2)) && ((y > y1) && (y < y2)) )
             return true;

@@ -16,7 +16,7 @@
 CSpriteChild2D::CSpriteChild2D( const CObjectData2D & objectData, int id ) :
     CSprite2D( objectData, id )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -24,7 +24,7 @@ CSpriteChild2D::CSpriteChild2D( const CObjectData2D & objectData, int id ) :
 ************************************************************************/
 CSpriteChild2D::~CSpriteChild2D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
@@ -40,8 +40,7 @@ void CSpriteChild2D::transform()
     
         m_transPos = m_pos;
     }
-
-}   // Transform
+}
 
 void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
@@ -58,16 +57,14 @@ void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 
         m_finalMatrix.MergeMatrix( matrix );
     }
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  do the render                                                            
 ************************************************************************/
-void CSpriteChild2D::Render( const CMatrix & matrix )
+void CSpriteChild2D::render( const CMatrix & matrix )
 {
     if( isVisible() )
         m_visualComponent.Render( m_finalMatrix, matrix );
-
-}   // Render
+}

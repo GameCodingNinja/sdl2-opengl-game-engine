@@ -110,7 +110,7 @@ void CUIMeter::LoadControlFromNode( const XMLNode & controlNode )
     // Find the sprite that renders the font
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.GetVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().IsFontSprite() )
         {
             m_pSprite = &iter;
             break;
@@ -221,7 +221,7 @@ void CUIMeter::InitBangRange( const CBangRange & bangRange )
     m_startUpTimer.Set( bangRange.m_slowStartTime );
     
     // Prepare the start script function if one exists
-    m_pSprite->PrepareFuncId( "start" );
+    m_pSprite->prepareFuncId( "start" );
     
 }   // InitBangRange
 
@@ -312,7 +312,7 @@ void CUIMeter::Update()
                 m_bangUp = false;
                 
                 // Prepare the stop script function if one exists
-                m_pSprite->PrepareFuncId( "stop" );
+                m_pSprite->prepareFuncId( "stop" );
             }
         
             // Display the value in the meter
@@ -329,10 +329,10 @@ void CUIMeter::Update()
 void CUIMeter::DisplayValue()
 {
     // Display the new value
-    m_pSprite->CreateFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
+    m_pSprite->createFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
 
     // Get the font size
-    const CSize<float> & size = m_pSprite->GetFontSize();
+    const CSize<float> & size = m_pSprite->getFontSize();
 
     // Check if the font string size is greater then what is allowed
     if( size > m_maxFontStrSize )
@@ -375,9 +375,7 @@ void CUIMeter::Clear()
     m_lastValue = m_currentValue = m_targetValue = 0;
     m_bangUp = false;
     
-    if( !m_pSprite->PrepareFuncId( "clear" ) )
-    {
-        m_pSprite->CreateFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
-    }
+    if( !m_pSprite->prepareFuncId( "clear" ) )
+        m_pSprite->createFontString( boost::lexical_cast<std::string>((int64_t)m_currentValue ) );
 
 }   // Clear

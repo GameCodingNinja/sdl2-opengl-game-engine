@@ -101,7 +101,7 @@ CActorData::~CActorData()
 /************************************************************************
 *    desc:  Get the name of this specific actor sprite instance
 ************************************************************************/
-const std::string & CActorData::GetName() const
+const std::string & CActorData::getName() const
 {
     return m_name;
 
@@ -111,7 +111,7 @@ const std::string & CActorData::GetName() const
 /************************************************************************
 *    desc:  Get the ai name
 ************************************************************************/
-const std::string & CActorData::GetAIName() const
+const std::string & CActorData::getAIName() const
 {
     return m_aiName;
 }
@@ -120,7 +120,7 @@ const std::string & CActorData::GetAIName() const
 /************************************************************************
 *    desc:  Get sprite Data vector
 ************************************************************************/
-const std::vector<CSpriteData> & CActorData::GetSpriteData() const
+const std::vector<CSpriteData> & CActorData::getSpriteData() const
 {
     return m_spriteDataVec;
 }
@@ -129,7 +129,7 @@ const std::vector<CSpriteData> & CActorData::GetSpriteData() const
 /************************************************************************
 *    desc:  Is this actor a player
 ************************************************************************/
-bool CActorData::IsPlayerActor() const
+bool CActorData::isPlayerActor() const
 {
     return m_playerActor;
 }
@@ -138,7 +138,7 @@ bool CActorData::IsPlayerActor() const
 /************************************************************************
 *    desc:  Get the collision group
 ************************************************************************/
-uint CActorData::GetCollisionGroup() const
+uint CActorData::getCollisionGroup() const
 {
     return m_collisionGroup;
 }
@@ -147,7 +147,7 @@ uint CActorData::GetCollisionGroup() const
 /************************************************************************
 *    desc:  Get the collision Mask
 ************************************************************************/
-uint CActorData::GetCollisionMask() const
+uint CActorData::getCollisionMask() const
 {
     return m_collisionMask;
 }
@@ -156,7 +156,7 @@ uint CActorData::GetCollisionMask() const
 /************************************************************************
 *    desc:  Get the collision Radius Scalar
 ************************************************************************/
-float CActorData::GetCollisionRadiusScalar() const
+float CActorData::getCollisionRadiusScalar() const
 {
     return m_collisionRadiusScalar;
 }
@@ -164,7 +164,7 @@ float CActorData::GetCollisionRadiusScalar() const
 /************************************************************************
 *    desc:  Get the unique id number
 ************************************************************************/
-int CActorData::GetId() const
+int CActorData::getId() const
 {
     return m_id;
 

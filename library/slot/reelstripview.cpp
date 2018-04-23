@@ -365,7 +365,7 @@ void CReelStripView::Update()
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
                         const int channel = CSoundMgr::Instance().GetNextChannel();
-                        m_pSpinStopSnd->Play( channel );
+                        m_pSpinStopSnd->play( channel );
                     }
                     
                     break;
@@ -497,7 +497,7 @@ void CReelStripView::transform( const CMatrix & matrix, bool tranformWorldPos )
 void CReelStripView::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
     // Disable rendering to the color buffer
     glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
@@ -510,7 +510,7 @@ void CReelStripView::Render( const CMatrix & matrix )
     glStencilOp( GL_REPLACE, GL_REPLACE, GL_REPLACE );
 
 
-    m_upStencilMaskSprite->Render( matrix );
+    m_upStencilMaskSprite->render( matrix );
 
 
     // Re-enable color

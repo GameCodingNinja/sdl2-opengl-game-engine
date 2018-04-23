@@ -135,10 +135,10 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 {
     if( aiName == "player_ship" )
-        pSprite->SetAI( new CPlayerShipAI( pSprite ) );
+        pSprite->setAI( new CPlayerShipAI( pSprite ) );
     
     else if( aiName == "player_projectile" )
-        pSprite->SetAI( new CProjectileAI( pSprite ) );
+        pSprite->setAI( new CProjectileAI( pSprite ) );
     
 }   // AICreateCallBack
 

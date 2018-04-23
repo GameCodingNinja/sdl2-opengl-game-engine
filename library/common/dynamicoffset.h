@@ -30,23 +30,23 @@ public:
     };
 
     // Add to the bit mask
-    void Add( EDynamicOffset value )
+    void add( EDynamicOffset value )
     { m_parameters.Add( value ); }
 
     // Set/Get X
-    void SetX( float value )
+    void setX( float value )
     { point.x = value; }
 
     // Set/Get Y
-    void SetY( float value )
+    void setY( float value )
     { point.y = value; }
 
     // Is the dynamic offset being used
-    bool IsEmpty() const
+    bool isEmpty() const
     { return m_parameters.IsEmpty(); }
 
     // Get the dynamic position
-    CPoint<float> GetPos( CSize<float> defaultHalfSize )
+    CPoint<float> getPos( CSize<float> defaultHalfSize )
     {
         CPoint<float> pos;
         

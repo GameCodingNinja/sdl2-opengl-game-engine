@@ -170,7 +170,7 @@ float CFont::GetVertPadding() const
 ************************************************************************/
 const CSize<int> & CFont::GetTextureSize() const
 {
-    return m_texture.GetSize();
+    return m_texture.getSize();
 
 }   // GetTextureSize
 
@@ -180,6 +180,6 @@ const CSize<int> & CFont::GetTextureSize() const
 ************************************************************************/
 uint32_t CFont::GetTextureID() const
 {
-    return m_texture.GetID();
+    return m_texture.getID();
 
 }   // GetTextureID

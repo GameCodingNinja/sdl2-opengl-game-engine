@@ -35,7 +35,7 @@ CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
     m_collisionMask(0)
 {
     // Create the actor based on the data
-    Create( actorData );
+    create( actorData );
     
     // Set the sprite type
     m_parameters.Add( NDefs::ACTOR2D );
@@ -54,12 +54,12 @@ CActorSprite2D::~CActorSprite2D()
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CActorSprite2D::SetAI( iAIBase * pAIBase )
+void CActorSprite2D::setAI( iAIBase * pAIBase )
 {
     m_upAI.reset(pAIBase);
 
     // Handle any initialization in a separate function
-    m_upAI->Init();
+    m_upAI->init();
 
 }   // SetAI
 
@@ -67,28 +67,28 @@ void CActorSprite2D::SetAI( iAIBase * pAIBase )
 /************************************************************************
 *    desc:  Create the actor's sprites
 ************************************************************************/
-void CActorSprite2D::Create( const CActorData & actorData )
+void CActorSprite2D::create( const CActorData & actorData )
 {
-    const auto & spriteDataVec = actorData.GetSpriteData();
+    const auto & spriteDataVec = actorData.getSpriteData();
 
     CSize<float> largestSize;
 
     for( auto & iter: spriteDataVec )
     {
         // Allocate the sprite and add it to the map for easy access
-        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter.GetId() );
+        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter.getId() );
         
         // If there's a name for this sprite, add it to the map
-        if( !iter.GetName().empty() )
+        if( !iter.getName().empty() )
         {
-            auto duplicateCheckIter = m_pSpriteMap.emplace( iter.GetName(), &m_spriteDeq.back() );
+            auto duplicateCheckIter = m_pSpriteMap.emplace( iter.getName(), &m_spriteDeq.back() );
             
             // Check for duplicate names
             if( !duplicateCheckIter.second )
             {
                 throw NExcept::CCriticalException("Actor Sprite Creation !rror!",
                     boost::str( boost::format("Duplicate sprite name (%s).\n\n%s\nLine: %s")
-                        % iter.GetName() % __FUNCTION__ % __LINE__ ));
+                        % iter.getName() % __FUNCTION__ % __LINE__ ));
             }
         }
         
@@ -96,7 +96,7 @@ void CActorSprite2D::Create( const CActorData & actorData )
         m_spriteDeq.back().copyTransform( &iter );
 
         // Find the largest size width and height of the different sprites for the controls size
-        const CSize<float> & size = m_spriteDeq.back().GetObjectData().GetSize();
+        const CSize<float> & size = m_spriteDeq.back().getObjectData().GetSize();
         const CPoint<CWorldValue> & pos = m_spriteDeq.back().getPos();
         const CPoint<float> & scale = m_spriteDeq.back().getScale();
 
@@ -120,9 +120,9 @@ void CActorSprite2D::Create( const CActorData & actorData )
     m_scaledRadius = m_radius;
     
     // Set the collision filter info
-    m_collisionGroup = actorData.GetCollisionGroup();
-    m_collisionMask = actorData.GetCollisionMask();
-    m_collisionRadiusScalar = actorData.GetCollisionRadiusScalar();
+    m_collisionGroup = actorData.getCollisionGroup();
+    m_collisionMask = actorData.getCollisionMask();
+    m_collisionRadiusScalar = actorData.getCollisionRadiusScalar();
     
     // Init the radius for collision
     m_collisionRadius = m_scaledRadius * m_collisionRadiusScalar;
@@ -134,10 +134,10 @@ void CActorSprite2D::Create( const CActorData & actorData )
 *    desc:  Init the sprite
 *           NOTE: Do not call from a constructor!
 ************************************************************************/
-void CActorSprite2D::Init()
+void CActorSprite2D::init()
 {
     for( auto & iter : m_spriteDeq )
-        iter.Init();
+        iter.init();
     
 } // Init
 
@@ -146,10 +146,10 @@ void CActorSprite2D::Init()
 *    desc:  Clean up the sprite
 *           NOTE: Do not call from a destructor!
 ************************************************************************/
-void CActorSprite2D::CleanUp()
+void CActorSprite2D::cleanUp()
 {
     for( auto & iter : m_spriteDeq )
-        iter.CleanUp();
+        iter.cleanUp();
     
 } // CleanUp
 
@@ -157,7 +157,7 @@ void CActorSprite2D::CleanUp()
 /************************************************************************
 *    desc:  Init the physics                                                           
 ************************************************************************/
-void CActorSprite2D::InitPhysics()
+void CActorSprite2D::initPhysics()
 {
 
 }
@@ -166,10 +166,10 @@ void CActorSprite2D::InitPhysics()
 /************************************************************************
 *    desc:  React to what the player is doing
 ************************************************************************/
-void CActorSprite2D::HandleEvent( const SDL_Event & rEvent )
+void CActorSprite2D::handleEvent( const SDL_Event & rEvent )
 {
     if( m_upAI )
-        m_upAI->HandleEvent( rEvent );
+        m_upAI->handleEvent( rEvent );
 
 }   // HandleEvent
 
@@ -177,13 +177,13 @@ void CActorSprite2D::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Update the actor
 ************************************************************************/
-void CActorSprite2D::Update()
+void CActorSprite2D::update()
 {
     if( m_upAI )
-        m_upAI->Update();
+        m_upAI->update();
 
     for( auto & iter : m_spriteDeq )
-        iter.Update();
+        iter.update();
 
 }   // Update
 
@@ -191,7 +191,7 @@ void CActorSprite2D::Update()
 /************************************************************************
 *    desc:  Update the physics
 ************************************************************************/
-void CActorSprite2D::PhysicsUpdate()
+void CActorSprite2D::physicsUpdate()
 {
 
 }   // PhysicsUpdate
@@ -231,13 +231,13 @@ void CActorSprite2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-void CActorSprite2D::Render( const CMatrix & matrix )
+void CActorSprite2D::render( const CMatrix & matrix )
 {
     // Render in reverse order
-    if( InView() )
+    if( inView() )
     {
         for( auto & iter : m_spriteDeq )
-            iter.Render( matrix );
+            iter.render( matrix );
     }
 
 }   // Render
@@ -246,7 +246,7 @@ void CActorSprite2D::Render( const CMatrix & matrix )
 /************************************************************************
 *    desc:  Get the physics component                                                            
 ************************************************************************/
-CPhysicsComponent2D & CActorSprite2D::GetPhysicsComponent()
+CPhysicsComponent2D & CActorSprite2D::getPhysicsComponent()
 {
     return m_physicsComponent;
     
@@ -256,7 +256,7 @@ CPhysicsComponent2D & CActorSprite2D::GetPhysicsComponent()
 /************************************************************************
 *    desc:  Get the sprite
 ************************************************************************/
-CSprite2D & CActorSprite2D::GetSprite( int index )
+CSprite2D & CActorSprite2D::getSprite( int index )
 {
     if( index < 0 )
         return m_spriteDeq.back();
@@ -269,7 +269,7 @@ CSprite2D & CActorSprite2D::GetSprite( int index )
 /************************************************************************
 *    desc:  Get the sprite group
 ************************************************************************/
-CSprite2D & CActorSprite2D::GetSprite( const std::string & name )
+CSprite2D & CActorSprite2D::getSprite( const std::string & name )
 {
     auto iter = m_pSpriteMap.find( name );
     if( iter == m_pSpriteMap.end() )
@@ -285,13 +285,13 @@ CSprite2D & CActorSprite2D::GetSprite( const std::string & name )
 /************************************************************************
 *    desc:  Render the actor
 ************************************************************************/
-bool CActorSprite2D::InView()
+bool CActorSprite2D::inView()
 {
     if( m_projectionType == NDefs::EPT_ORTHOGRAPHIC )
-        return InOrthographicView();
+        return inOrthographicView();
 
     else if( m_projectionType == NDefs::EPT_PERSPECTIVE )
-        return InPerspectiveView();
+        return inPerspectiveView();
 
     return true;
 
@@ -301,7 +301,7 @@ bool CActorSprite2D::InView()
 /************************************************************************
  *    desc:  Check if an object is within the orthographic view frustum
  ************************************************************************/
-bool CActorSprite2D::InOrthographicView()
+bool CActorSprite2D::inOrthographicView()
 {
     const CSize<float> & defaultSizeHalf = CSettings::Instance().GetDefaultSizeHalf();
     
@@ -322,7 +322,7 @@ bool CActorSprite2D::InOrthographicView()
 /************************************************************************
  *    desc:  Check if an object is within the perspective view frustum
  ************************************************************************/
-bool CActorSprite2D::InPerspectiveView()
+bool CActorSprite2D::inPerspectiveView()
 {
     const CSize<float> & aspectRatio = CSettings::Instance().GetScreenAspectRatio();
 
@@ -363,7 +363,7 @@ void CActorSprite2D::applyScale( CMatrix & matrix )
 /************************************************************************
 *    desc:  Get the collision group
 ************************************************************************/
-uint CActorSprite2D::GetCollisionGroup() const
+uint CActorSprite2D::getCollisionGroup() const
 {
     return m_collisionGroup;
 }
@@ -372,7 +372,7 @@ uint CActorSprite2D::GetCollisionGroup() const
 /************************************************************************
 *    desc:  Get the collision radius
 ************************************************************************/
-float CActorSprite2D::GetCollisionRadius() const
+float CActorSprite2D::getCollisionRadius() const
 {
     return m_collisionRadius;
 }
@@ -381,13 +381,13 @@ float CActorSprite2D::GetCollisionRadius() const
 /***************************************************************************
 *    desc:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
-bool CActorSprite2D::IsCollision( CActorSprite2D & rActor )
+bool CActorSprite2D::isCollision( CActorSprite2D & rActor )
 {
     bool result(false);
     
-    if( m_collisionMask & rActor.GetCollisionGroup() )
+    if( m_collisionMask & rActor.getCollisionGroup() )
     {
-        result = CheckBroadPhase( rActor );
+        result = checkBroadPhase( rActor );
     }
     
     return result;
@@ -398,9 +398,9 @@ bool CActorSprite2D::IsCollision( CActorSprite2D & rActor )
 /***************************************************************************
 *    desc:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
-bool CActorSprite2D::CheckBroadPhase( CActorSprite2D & rActor )
+bool CActorSprite2D::checkBroadPhase( CActorSprite2D & rActor )
 {
-    const float radius = m_collisionRadius + rActor.GetCollisionRadius();
+    const float radius = m_collisionRadius + rActor.getCollisionRadius();
     const float length = m_transPos.getLength2D( rActor.getTransPos() );
     
     return (length < radius);

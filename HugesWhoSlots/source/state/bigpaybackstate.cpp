@@ -241,9 +241,9 @@ void CBigPayBackState::Transform()
 void CBigPayBackState::PreRender()
 {
     const CMatrix & orthoMatrix = CCameraMgr::Instance().GetDefaultProjMatrix();
-    m_background.Render( orthoMatrix );
+    m_background.render( orthoMatrix );
     m_slotGame.Render( orthoMatrix );
-    m_pig.Render( orthoMatrix );
+    m_pig.render( orthoMatrix );
     
     CCommonState::PreRender();
 

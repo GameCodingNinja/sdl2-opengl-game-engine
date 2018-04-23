@@ -74,7 +74,7 @@ CPhysicsComponent2D::~CPhysicsComponent2D()
 ************************************************************************/
 void CPhysicsComponent2D::Init( const CSprite2D & sprite )
 {
-    if( sprite.GetObjectData().GetPhysicsData().IsActive() )
+    if( sprite.getObjectData().GetPhysicsData().IsActive() )
     {
         CreateBody( sprite );
         CreateFixture( sprite );
@@ -88,7 +88,7 @@ void CPhysicsComponent2D::Init( const CSprite2D & sprite )
 ************************************************************************/
 void CPhysicsComponent2D::CreateBody( const CSprite2D & sprite )
 {
-    const CObjectPhysicsData2D & physicsData = sprite.GetObjectData().GetPhysicsData();
+    const CObjectPhysicsData2D & physicsData = sprite.getObjectData().GetPhysicsData();
 
     if( physicsData.GetBodyType() != b2BodyType(-1) )
     {
@@ -114,7 +114,7 @@ void CPhysicsComponent2D::CreateBody( const CSprite2D & sprite )
 ************************************************************************/
 void CPhysicsComponent2D::CreateFixture( const CSprite2D & sprite )
 {
-    const auto & fixture = sprite.GetObjectData().GetPhysicsData().GetFixtureVec();
+    const auto & fixture = sprite.getObjectData().GetPhysicsData().GetFixtureVec();
 
     for( auto & iter : fixture )
     {
@@ -168,11 +168,11 @@ void CPhysicsComponent2D::CreateEdgeShapeFixture( const CSprite2D & sprite, cons
     if( fixture.m_vertVec.size() != 2 )
         throw NExcept::CCriticalException("Physics Edge Fixture error!",
             boost::str( boost::format("Physics object has incorrect number of points defined (%d/%s).\n\n%s\nLine: %s")
-                % fixture.m_vertVec.size() % sprite.GetObjectData().GetName() % __FUNCTION__ % __LINE__ ));
+                % fixture.m_vertVec.size() % sprite.getObjectData().GetName() % __FUNCTION__ % __LINE__ ));
                 
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.GetObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().GetSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
@@ -207,7 +207,7 @@ void CPhysicsComponent2D::CreatePolygonShapeFixture( const CSprite2D & sprite, c
 
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.GetObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().GetSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
@@ -274,11 +274,11 @@ void CPhysicsComponent2D::CreateChainShapeFixture( const CSprite2D & sprite, con
     if( fixture.m_vertVec.size() > 1 )
         throw NExcept::CCriticalException("Physics Edge Fixture error!",
             boost::str( boost::format("Physics object has incorrect number of points defined (%d/%s).\n\n%s\nLine: %s")
-                % fixture.m_vertVec.size() % sprite.GetObjectData().GetName() % __FUNCTION__ % __LINE__ ));
+                % fixture.m_vertVec.size() % sprite.getObjectData().GetName() % __FUNCTION__ % __LINE__ ));
                 
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.GetObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().GetSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 

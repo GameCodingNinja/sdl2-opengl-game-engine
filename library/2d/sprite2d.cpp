@@ -34,9 +34,8 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     m_parameters.Add( NDefs::SPRITE2D );
     
     if( objectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-        setCropOffset( objectData.GetVisualData().GetSpriteSheet().GetGlyph().GetCropOffset() );
-
-}   // constructor
+        setCropOffset( objectData.GetVisualData().GetSpriteSheet().getGlyph().getCropOffset() );
+}
 
 
 /************************************************************************
@@ -44,58 +43,55 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
 ************************************************************************/
 CSprite2D::~CSprite2D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the sprite data
 ************************************************************************/
-void CSprite2D::Load( const XMLNode & node )
+void CSprite2D::load( const XMLNode & node )
 {
     // Load the transform data
     loadTransFromNode( node );
 
     // Init the script functions
-    InitScriptFunctions( node );
+    initScriptFunctions( node );
     
     // Load the font properties from XML node
     if( m_visualComponent.IsFontSprite() )
         m_visualComponent.LoadFontPropFromNode( node );
-    
-}   // Load
+}
 
-void CSprite2D::Load( const CSpriteData & spriteData )
+void CSprite2D::load( const CSpriteData & spriteData )
 {
     // Copy over the transform
     copyTransform( &spriteData );
     
     // Copy over the script functions
-    CopyScriptFunctions( spriteData.GetScriptFunctions() );
+    copyScriptFunctions( spriteData.getScriptFunctions() );
     
     // See if this sprite is used for rendering a font string
-    if( m_visualComponent.IsFontSprite() && (spriteData.GetFontData() != nullptr) )
-        m_visualComponent.SetFontData( *spriteData.GetFontData() );
-    
-}   // Load
+    if( m_visualComponent.IsFontSprite() && (spriteData.getFontData() != nullptr) )
+        m_visualComponent.SetFontData( *spriteData.getFontData() );
+}
 
 
 /************************************************************************
 *    desc:  Init the sprite
 *           NOTE: Do not call from a constructor!
 ************************************************************************/
-void CSprite2D::Init()
+void CSprite2D::init()
 {
     if( m_visualComponent.IsFontSprite() )
         m_visualComponent.CreateFontString();
-    
-} // Init
+}
 
 
 /************************************************************************
 *    desc:  Clean up the sprite
 *           NOTE: Do not call from a destructor!
 ************************************************************************/
-void CSprite2D::CleanUp()
+void CSprite2D::cleanUp()
 {
     // This is handled in the destructor but it doesn't hurt to handle it here as well.
     if( m_visualComponent.IsFontSprite() )
@@ -104,15 +100,14 @@ void CSprite2D::CleanUp()
     // Deleting the physics always needs to be done externally and
     // under the right conditions
     m_physicsComponent.DestroyBody();
-    
-} // CleanUp
+}
 
 
 /************************************************************************
 *    desc:  Init the script functions and add them to the map
 *           This function loads the attribute info reguardless of what it is
 ************************************************************************/
-void CSprite2D::InitScriptFunctions( const XMLNode & node )
+void CSprite2D::initScriptFunctions( const XMLNode & node )
 {
     // Check for scripting - Add an empty string for scripts not defined
     XMLNode scriptLstNode = node.getChildNode( "scriptLst" );
@@ -132,24 +127,23 @@ void CSprite2D::InitScriptFunctions( const XMLNode & node )
                 m_scriptFunctionMap.emplace( attrName, attrValue );
         }
     }
-    
-}   // InitScriptFunctions
+}
+
 
 /************************************************************************
 *    desc:  Copy over the script functions
 ************************************************************************/
-void CSprite2D::CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap )
+void CSprite2D::copyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap )
 {
     for( auto & iter : scriptFunctionMap )
         m_scriptFunctionMap.emplace( iter );
-    
-}   // CopyScriptFunctions
+}
 
 
 /************************************************************************
 *    desc:  Prepare the script function to run
 ************************************************************************/
-bool CSprite2D::PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate )
+bool CSprite2D::prepareFuncId( const std::string & scriptFuncId, bool forceUpdate )
 {
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
@@ -165,10 +159,9 @@ bool CSprite2D::PrepareFuncId( const std::string & scriptFuncId, bool forceUpdat
     }
 
     return false;
-    
-}   // Prepare
+}
 
-void CSprite2D::Prepare(
+void CSprite2D::prepare(
     const std::string & funcName,
     const std::vector<CScriptParam> & paramVec,
     bool forceUpdate )
@@ -179,14 +172,13 @@ void CSprite2D::Prepare(
     // for the scripts that don't animate
     if( forceUpdate )
         m_scriptComponent.Update();
-    
-}   // Prepare
+}
 
 
 /************************************************************************
 *    desc:  Init the physics                                                           
 ************************************************************************/
-void CSprite2D::InitPhysics()
+void CSprite2D::initPhysics()
 {
     m_physicsComponent.Init(*this);
 }
@@ -195,259 +187,234 @@ void CSprite2D::InitPhysics()
 /************************************************************************
 *    desc:  React to what the player is doing
 ************************************************************************/
-void CSprite2D::HandleEvent( const SDL_Event & rEvent )
+void CSprite2D::handleEvent( const SDL_Event & rEvent )
 {
     if( m_upAI )
-        m_upAI->HandleEvent( rEvent );
-
-}   // HandleEvent
+        m_upAI->handleEvent( rEvent );
+}
 
 
 /************************************************************************
 *    desc:  Update the sprite                                                           
 ************************************************************************/
-void CSprite2D::Update()
+void CSprite2D::update()
 {
     m_scriptComponent.Update();
     
     if( m_upAI )
-        m_upAI->Update();
-
-}   // Update
+        m_upAI->update();
+}
 
 
 /************************************************************************
 *    desc:  Update the physics                                                           
 ************************************************************************/
-void CSprite2D::PhysicsUpdate()
+void CSprite2D::physicsUpdate()
 {
     m_physicsComponent.Update( this );
-
-}   // PhysicsUpdate
+}
 
 
 /************************************************************************
 *    desc:  do the render                                                            
 ************************************************************************/
-void CSprite2D::Render( const CMatrix & matrix )
+void CSprite2D::render( const CMatrix & matrix )
 {
     if( isVisible() )
         m_visualComponent.Render( m_matrix, matrix );
+}
 
-}   // Render
-
-void CSprite2D::Render( const CCamera & camera )
+void CSprite2D::render( const CCamera & camera )
 {
     if( isVisible() )
         m_visualComponent.Render( m_matrix, camera.getFinalMatrix() );
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Get the visual component                                                            
 ************************************************************************/
-CVisualComponent2D & CSprite2D::GetVisualComponent()
+CVisualComponent2D & CSprite2D::getVisualComponent()
 {
     return m_visualComponent;
-
-}   // GetVisualComponent
+}
 
 
 /************************************************************************
 *    desc:  Get the physics component                                                            
 ************************************************************************/
-CPhysicsComponent2D & CSprite2D::GetPhysicsComponent()
+CPhysicsComponent2D & CSprite2D::getPhysicsComponent()
 {
     return m_physicsComponent;
-
-}   // GetPhysicsComponent
+}
 
 
 /************************************************************************
 *    desc:  Get the scripting component                                                            
 ************************************************************************/
-CScriptComponent & CSprite2D::GetScriptComponent()
+CScriptComponent & CSprite2D::getScriptComponent()
 {
     return m_scriptComponent;
-
-}   // GetScriptingComponent
+}
 
 
 /************************************************************************
 *    desc:  Get the object data                                                            
 ************************************************************************/
-const CObjectData2D & CSprite2D::GetObjectData() const
+const CObjectData2D & CSprite2D::getObjectData() const
 {
     return m_rObjectData;
-
-}   // GetObjectData
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
-void CSprite2D::SetAI( iAIBase * pAIBase )
+void CSprite2D::setAI( iAIBase * pAIBase )
 {
     m_upAI.reset( pAIBase );
 
     // Handle any initialization in a separate function
-    m_upAI->Init();
-
-}   // SetAI
+    m_upAI->init();
+}
 
 
 /************************************************************************
 *    desc:  Set the color
 ************************************************************************/
-void CSprite2D::SetColor( const CColor & color )
+void CSprite2D::setColor( const CColor & color )
 {
     m_visualComponent.SetColor( color );
+}
 
-}   // SetColor
-
-void CSprite2D::SetColor( float r, float g, float b, float a )
+void CSprite2D::setColor( float r, float g, float b, float a )
 {
     // This function assumes values between 0.0 to 1.0.
     m_visualComponent.SetColor( r, g, b, a );
-
-}   // SetColor
+}
 
 
 /************************************************************************
 *    desc:  Set the default color
 ************************************************************************/
-void CSprite2D::SetDefaultColor()
+void CSprite2D::setDefaultColor()
 {
     m_visualComponent.SetColor( m_rObjectData.GetVisualData().GetColor() );
-
-}   // SetColor
+}
 
 
 /************************************************************************
 *    desc:  Get the color
 ************************************************************************/
-const CColor & CSprite2D::GetColor() const
+const CColor & CSprite2D::getColor() const
 {
     return m_visualComponent.GetColor();
-
-}   // GetColor
+}
 
 
 /************************************************************************
 *    desc:  Get the default color
 ************************************************************************/
-const CColor & CSprite2D::GetDefaultColor() const
+const CColor & CSprite2D::getDefaultColor() const
 {
     return m_rObjectData.GetVisualData().GetColor();
-
-}   // GetDefaultColor
+}
 
 
 /************************************************************************
 *    desc:  Set the Alpha
 ************************************************************************/
-void CSprite2D::SetAlpha( float alpha )
+void CSprite2D::setAlpha( float alpha )
 {
     if( alpha > 1.5 )
         alpha *= defs_RGB_TO_DEC;
 
     m_visualComponent.SetAlpha( alpha );
-
-}   // SetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Get the Alpha
 ************************************************************************/
-float CSprite2D::GetAlpha() const
+float CSprite2D::getAlpha() const
 {
     return m_visualComponent.GetAlpha();
-
-}   // GetAlpha
+}
 
 
 /************************************************************************
 *    desc:  Get the default alpha
 ************************************************************************/
-float CSprite2D::GetDefaultAlpha() const
+float CSprite2D::getDefaultAlpha() const
 {
     return m_rObjectData.GetVisualData().GetColor().getA();
-
-}   // GetDefaultAlpha
+}
 
 
 /************************************************************************
 *    desc:  Set the default alpha
 ************************************************************************/
-void CSprite2D::SetDefaultAlpha()
+void CSprite2D::setDefaultAlpha()
 {
     m_visualComponent.SetAlpha( m_rObjectData.GetVisualData().GetColor().getA() );
-
-}   // SetDefaultAlpha
+}
 
 
 /************************************************************************
 *    desc:  Get the frame count
 ************************************************************************/
-uint CSprite2D::GetFrameCount() const 
+uint CSprite2D::getFrameCount() const 
 {
     return m_rObjectData.GetVisualData().GetFrameCount();
-
-}   // GetFrameCount
+}
 
 
 /************************************************************************
 *    desc:  Get the current frame
 ************************************************************************/
-uint CSprite2D::GetCurrentFrame() const 
+uint CSprite2D::getCurrentFrame() const 
 {
     return m_visualComponent.GetCurrentFrame();
-
-}   // GetFrameCount
+}
 
 
 /************************************************************************
 *    desc:  Set the texture ID from index
 ************************************************************************/
-void CSprite2D::SetFrame( uint index )
+void CSprite2D::setFrame( uint index )
 {
     if( m_visualComponent.GetCurrentFrame() != index )
     {
         m_visualComponent.SetFrame( index );
         
         if( m_rObjectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-            setCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().GetGlyph(index).GetCropOffset() );
+            setCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().getGlyph(index).getCropOffset() );
     }
-
-}   // SetFrame
+}
 
 
 /************************************************************************
 *    desc:  Create the font string
 ************************************************************************/
-void CSprite2D::CreateFontString( const std::string & fontString )
+void CSprite2D::createFontString( const std::string & fontString )
 {
     m_visualComponent.CreateFontString( fontString );
-
-}   // CreateFontString
+}
 
 
 /************************************************************************
 *    desc:  Get the font size
 ************************************************************************/
-const CSize<float> & CSprite2D::GetFontSize() const
+const CSize<float> & CSprite2D::getFontSize() const
 {
     return m_visualComponent.GetFontSize();
-
-}   // CreateFontString
+}
 
 
 /************************************************************************
 *    desc:  Set the physics position and rotation
 ************************************************************************/
-void CSprite2D::SetPhysicsTransform( float x, float y, float angle, bool resetVelocity )
+void CSprite2D::setPhysicsTransform( float x, float y, float angle, bool resetVelocity )
 {
     m_physicsComponent.SetTransform( x, y, angle, resetVelocity );
-    
-}   // SetPhysicsTransform
+}

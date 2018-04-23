@@ -294,7 +294,7 @@ void CActionMgr::LoadActionFromNode(
                 if( iter != actionMap.end() )
                 {
                     // If it's found, add another id to this map
-                    iter->second.SetId( keyCodeIter->second );
+                    iter->second.setId( keyCodeIter->second );
                 }
                 else
                 {
@@ -516,7 +516,7 @@ bool CActionMgr::WasAction(
     // If it's found, see if this is the correct action
     if( iter != actionMap.end() )
     {
-        result = iter->second.WasAction( Id );
+        result = iter->second.wasAction( Id );
     }
 
     return result;
@@ -725,10 +725,10 @@ NDefs::EDeviceId CActionMgr::ResetAction(
             if( iter != pActionMap->end() )
             {
                 // Remove the old key code Id
-                iter->second.RemoveId( oldKeyCodeId );
+                iter->second.removeId( oldKeyCodeId );
                 
                 // Add the new key code Id
-                iter->second.SetId( newKeyCodeId );
+                iter->second.setId( newKeyCodeId );
                 
                 // Update the XML node with the change
                 XMLNode node = playerVisibleNode.getChildNode( "actionMap", xmlNodeIndex );

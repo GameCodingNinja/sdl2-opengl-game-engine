@@ -60,16 +60,16 @@ CSpriteData::CSpriteData(
     if( !fontNode.isEmpty() )
     {
         m_upFontData.reset( new CFontData );
-        m_upFontData->LoadFromNode( node );
+        m_upFontData->loadFromNode( node );
     }
 
     // Load the transform data from node
     loadTransFromNode( node );
     
     // Load any script functions
-    LoadScriptFunctions( node );
+    loadScriptFunctions( node );
     
-}   // constructor
+}
 
 CSpriteData::CSpriteData( const CSpriteData & data ) :
     CObject( data ),
@@ -79,7 +79,7 @@ CSpriteData::CSpriteData( const CSpriteData & data ) :
     m_aiName( data.m_aiName ),
     m_id( data.m_id )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -87,43 +87,40 @@ CSpriteData::CSpriteData( const CSpriteData & data ) :
 ************************************************************************/
 CSpriteData::~CSpriteData()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the name of this specific sprite instance
 ************************************************************************/
-const std::string & CSpriteData::GetName() const
+const std::string & CSpriteData::getName() const
 {
     return m_name;
-
-}   // GetName
+}
 
 
 /************************************************************************
 *    desc:  Get the group
 ************************************************************************/
-const std::string & CSpriteData::GetGroup() const
+const std::string & CSpriteData::getGroup() const
 {
     return m_group;
-
-}   // GetGroup
+}
 
 
 /************************************************************************
 *    desc:  Get the object name
 ************************************************************************/
-const std::string & CSpriteData::GetObjectName() const
+const std::string & CSpriteData::getObjectName() const
 {
     return m_objectName;
-
-}   // GetObjectName
+}
 
 
 /************************************************************************
 *    desc:  Get the ai name
 ************************************************************************/
-const std::string & CSpriteData::GetAIName() const
+const std::string & CSpriteData::getAIName() const
 {
     return m_aiName;
 }
@@ -132,37 +129,34 @@ const std::string & CSpriteData::GetAIName() const
 /************************************************************************
 *    desc:  Get the unique id number
 ************************************************************************/
-int CSpriteData::GetId() const
+int CSpriteData::getId() const
 {
     return m_id;
-
-}   // GetId
+}
 
 
 /************************************************************************
 *    desc:  Get the font data
 ************************************************************************/
-const CFontData * CSpriteData::GetFontData() const
+const CFontData * CSpriteData::getFontData() const
 {
     return m_upFontData.get();
-
-}   // GetFontData
+}
 
 
 /************************************************************************
 *    desc:  Get the script functions
 ************************************************************************/
-const std::map<std::string, std::string> & CSpriteData::GetScriptFunctions() const
+const std::map<std::string, std::string> & CSpriteData::getScriptFunctions() const
 {
     return m_scriptFunctionMap;
-    
-}   // GetScriptFunctions
+}
 
 
 /************************************************************************
 *    desc:  Load the script functions and add them to the map
 ************************************************************************/
-void CSpriteData::LoadScriptFunctions( const XMLNode & node )
+void CSpriteData::loadScriptFunctions( const XMLNode & node )
 {
     // Check for scripting - Add an empty string for scripts not defined
     XMLNode scriptLstNode = node.getChildNode( "scriptLst" );
@@ -182,5 +176,4 @@ void CSpriteData::LoadScriptFunctions( const XMLNode & node )
                 m_scriptFunctionMap.emplace( attrName, attrValue );
         }
     }
-    
-}   // InitScriptFunctions
+}

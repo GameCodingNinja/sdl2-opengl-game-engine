@@ -27,11 +27,11 @@ public:
     ~CSpriteDataContainer();
     
     // Get the data type
-    int GetType() const;
+    int getType() const;
     
     // Get the data
     template<typename T>
-    T & Get() const;
+    T & get() const;
     
 private:
 
@@ -52,8 +52,8 @@ private:
     } m_data;
 };
 
-template<> inline CSpriteData & CSpriteDataContainer::Get() const { return *m_data.m_pSpriteData; }
-template<> inline CActorData  & CSpriteDataContainer::Get() const { return *m_data.m_pActorData; }
+template<> inline CSpriteData & CSpriteDataContainer::get() const { return *m_data.m_pSpriteData; }
+template<> inline CActorData  & CSpriteDataContainer::get() const { return *m_data.m_pActorData; }
 
 #endif  // __sprite_data_h__
 

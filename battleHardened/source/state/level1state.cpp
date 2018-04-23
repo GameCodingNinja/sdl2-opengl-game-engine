@@ -72,7 +72,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     
     if( !CMenuManager::Instance().IsActive() )
     {
-        m_pPlayerShip->HandleEvent( rEvent );
+        m_pPlayerShip->handleEvent( rEvent );
     }
     
     // Check for the "change state" message

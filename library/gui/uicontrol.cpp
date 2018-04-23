@@ -148,22 +148,22 @@ void CUIControl::LoadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     auto & rSprite = m_spriteDeq.back();
 
     // Load the sprite data
-    rSprite.Load( node );
+    rSprite.load( node );
 
     // See if this sprite is used for rendering a font string
-    if( rSprite.GetVisualComponent().IsFontSprite() )
+    if( rSprite.getVisualComponent().IsFontSprite() )
     {
         // Set the font string to be created later
         if( !m_stringVec.empty() && (fontSpriteCount < m_stringVec.size()) )
-            rSprite.GetVisualComponent().SetFontString( m_stringVec.at(fontSpriteCount) );
+            rSprite.getVisualComponent().SetFontString( m_stringVec.at(fontSpriteCount) );
 
         ++fontSpriteCount;
     }
     else
     {
         // Find the largest size width and height of the different sprites for the controls size
-        const float width( rSprite.GetObjectData().GetSize().w + std::fabs( rSprite.getPos().x ) );
-        const float height( rSprite.GetObjectData().GetSize().h + std::fabs( rSprite.getPos().y ) );
+        const float width( rSprite.getObjectData().GetSize().w + std::fabs( rSprite.getPos().x ) );
+        const float height( rSprite.getObjectData().GetSize().h + std::fabs( rSprite.getPos().y ) );
 
         if( width > m_size.w )
             m_size.w = width;
@@ -183,7 +183,7 @@ void CUIControl::Update()
     m_scriptComponent.Update();
 
     for( auto & iter : m_spriteDeq )
-        iter.Update();
+        iter.update();
 
 }   // Update
 
@@ -259,7 +259,7 @@ void CUIControl::TransformCollision()
 void CUIControl::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
 }   // Render
 
@@ -567,7 +567,7 @@ void CUIControl::Init()
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto & iter : m_spriteDeq )
-        iter.Init();
+        iter.init();
     
     // Call any init scripts
     PrepareSpriteScriptFunction( NUIControl::ECS_INIT );
@@ -583,7 +583,7 @@ void CUIControl::CleanUp()
     // Free the font VBO
     // This allows for early VBO delete so that the menu manager can be freed from the load screen
     for( auto & iter : m_spriteDeq )
-        iter.CleanUp();
+        iter.cleanUp();
     
 }   // CleanUp
 
@@ -640,7 +640,7 @@ void CUIControl::PrepareSpriteScriptFunction( NUIControl::EControlState controlS
 void CUIControl::CallSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate )
 {    
     for( auto & iter : m_spriteDeq )
-        iter.PrepareFuncId( scriptFuncMapKey, forceUpdate );
+        iter.prepareFuncId( scriptFuncMapKey, forceUpdate );
     
 }   // CallCustomSpriteScript
 
@@ -678,7 +678,7 @@ void CUIControl::Reset( bool complete )
 void CUIControl::RecycleContext()
 {
     for( auto & iter : m_spriteDeq )
-        iter.GetScriptComponent().ResetAndRecycle();
+        iter.getScriptComponent().ResetAndRecycle();
 
 }   // RecycleContext
 
@@ -856,11 +856,11 @@ void CUIControl::CreateFontString( const std::string & fontString, int spriteInd
 
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.GetVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().IsFontSprite() )
         {
             if( fontSpriteCounter == spriteIndex )
             {
-                iter.GetVisualComponent().CreateFontString( fontString );
+                iter.getVisualComponent().CreateFontString( fontString );
                 break;
             }
 
@@ -887,11 +887,11 @@ void CUIControl::SetFontString( const std::string & fontString, int spriteIndex 
 
     for( auto & iter : m_spriteDeq )
     {
-        if( iter.GetVisualComponent().IsFontSprite() )
+        if( iter.getVisualComponent().IsFontSprite() )
         {
             if( fontSpriteCounter == spriteIndex )
             {
-                iter.GetVisualComponent().SetFontString( fontString );
+                iter.getVisualComponent().SetFontString( fontString );
                 break;
             }
 
@@ -969,13 +969,13 @@ bool CUIControl::ActivateFirstInactiveControl()
 ************************************************************************/
 bool CUIControl::IsPointInControl( int x, int y )
 {
-    return m_collisionQuad.IsPointInQuad( x, y );
+    return m_collisionQuad.isPointInQuad( x, y );
 
 }   // IsPointInControl
 
 bool CUIControl::IsPointInControl( const CPoint<float> & pos )
 {
-    return m_collisionQuad.IsPointInQuad( pos.x, pos.y );
+    return m_collisionQuad.isPointInQuad( pos.x, pos.y );
 
 }   // IsPointInControl
 
@@ -1096,7 +1096,7 @@ void CUIControl::Connect_ExecutionAction( const ExecutionActionSignal::slot_type
 void CUIControl::SetAlpha( float alpha )
 {
     for( auto & iter : m_spriteDeq )
-        iter.SetAlpha( alpha );
+        iter.setAlpha( alpha );
 
 }   // SetAlpha
 

@@ -407,35 +407,35 @@ namespace NParseHelper
         {
             if( dynamicOffsetNode.isAttributeSet( "left" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_LEFT );
-                dynamicOffset.SetX( std::atof( dynamicOffsetNode.getAttribute( "left" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_LEFT );
+                dynamicOffset.setX( std::atof( dynamicOffsetNode.getAttribute( "left" ) ) );
             }
             else if( dynamicOffsetNode.isAttributeSet( "right" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_RIGHT );
-                dynamicOffset.SetX( std::atof( dynamicOffsetNode.getAttribute( "right" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_RIGHT );
+                dynamicOffset.setX( std::atof( dynamicOffsetNode.getAttribute( "right" ) ) );
             }
             else if( dynamicOffsetNode.isAttributeSet( "horzCenter" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_HORZ_CENTER );
-                dynamicOffset.SetX( std::atof( dynamicOffsetNode.getAttribute( "horzCenter" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_HORZ_CENTER );
+                dynamicOffset.setX( std::atof( dynamicOffsetNode.getAttribute( "horzCenter" ) ) );
             }
 
             if( dynamicOffsetNode.isAttributeSet( "top" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_TOP );
-                dynamicOffset.SetY( std::atof( dynamicOffsetNode.getAttribute( "top" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_TOP );
+                dynamicOffset.setY( std::atof( dynamicOffsetNode.getAttribute( "top" ) ) );
             }
 
             else if( dynamicOffsetNode.isAttributeSet( "bottom" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_BOTTOM );
-                dynamicOffset.SetY( std::atof( dynamicOffsetNode.getAttribute( "bottom" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_BOTTOM );
+                dynamicOffset.setY( std::atof( dynamicOffsetNode.getAttribute( "bottom" ) ) );
             }
             else if( dynamicOffsetNode.isAttributeSet( "vertCenter" ) )
             {
-                dynamicOffset.Add( CDynamicOffset::EDO_VERT_CENTER );
-                dynamicOffset.SetX( std::atof( dynamicOffsetNode.getAttribute( "vertCenter" ) ) );
+                dynamicOffset.add( CDynamicOffset::EDO_VERT_CENTER );
+                dynamicOffset.setX( std::atof( dynamicOffsetNode.getAttribute( "vertCenter" ) ) );
             }
         }
 

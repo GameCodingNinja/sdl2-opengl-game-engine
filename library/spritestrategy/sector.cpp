@@ -79,13 +79,13 @@ void CSector::LoadFromNode( const XMLNode & node )
             {
                 // Allocate the sprite
                 CSpriteData data( spriteNode, defGroup, defObjName, defAIName, defId );
-                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data ), data.GetId() ) );
+                m_pSpriteVec.push_back( new CSprite2D( CObjectDataMgr::Instance().GetData2D( data ), data.getId() ) );
                 
                 // Load the rest from sprite data
-                dynamic_cast<CSprite2D *>(m_pSpriteVec.back())->Load( data );
+                dynamic_cast<CSprite2D *>(m_pSpriteVec.back())->load( data );
                 
-                aiName = data.GetAIName();
-                spriteName = data.GetName();
+                aiName = data.getAIName();
+                spriteName = data.getName();
             }
             /*else if( tag == "actor2d" )
             {
@@ -102,7 +102,7 @@ void CSector::LoadFromNode( const XMLNode & node )
                 m_pSpriteMap.emplace( spriteName, m_pSpriteVec.back() );
             
             // Init the physics
-            m_pSpriteVec.back()->InitPhysics();
+            m_pSpriteVec.back()->initPhysics();
             
             // Broadcast the signal to create the sprite AI
             if( !aiName.empty() )
@@ -120,7 +120,7 @@ void CSector::Init()
     // Create any font strings
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto iter : m_pSpriteVec )
-        iter->Init();
+        iter->init();
     
 }   // Init
 
@@ -133,7 +133,7 @@ void CSector::CleanUp()
     // Free the font VBO
     // This allows for early VBO delete so that the font can be freed from the load screen
     for( auto iter : m_pSpriteVec )
-        iter->CleanUp();
+        iter->cleanUp();
     
 }   // CleanUp
 
@@ -154,7 +154,7 @@ void CSector::Destroy()
 void CSector::Update()
 {
     for( auto & iter : m_pSpriteVec )
-        iter->Update();
+        iter->update();
     
 }   // Update
 
@@ -190,7 +190,7 @@ void CSector::Render( const CCamera & camera )
     if( InView() )
     {
         for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
-            (*it)->Render( camera.getFinalMatrix(), camera.getRotMatrix() );
+            (*it)->render( camera.getFinalMatrix(), camera.getRotMatrix() );
     }
     
 }   // Render
@@ -201,7 +201,7 @@ void CSector::Render( const CMatrix & matrix )
     if( InView() )
     {
         for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
-            (*it)->Render( matrix );
+            (*it)->render( matrix );
     }
     
 }   // Render
@@ -212,7 +212,7 @@ void CSector::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
     if( InView() )
     {
         for( auto it = m_pSpriteVec.rbegin(); it != m_pSpriteVec.rend(); ++it )
-            (*it)->Render( matrix, rotMatrix );
+            (*it)->render( matrix, rotMatrix );
     }
     
 }   // Render

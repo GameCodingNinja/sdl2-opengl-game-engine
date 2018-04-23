@@ -116,7 +116,7 @@ const CTexture & CTextureMgr::CreateTextureFor2D( const std::string & group, con
             boost::str( boost::format("Error creating texture (%s)(%s).\n\n%s\nLine: %s")
                 % filePath % __FUNCTION__ % __LINE__ ));
     
-    if( mapIter->second.GetID() == 0 )
+    if( mapIter->second.getID() == 0 )
     {
         // Load the texture from file path
         CreateTexture( mapIter->second, compressed );
@@ -185,13 +185,13 @@ const CTexture & CTextureMgr::CreateTextureFor3D( const std::string & group, con
                 % filePath % group % __FUNCTION__ % __LINE__ ));
 
     // If it's not found, create the texture and add it to the list
-    if( mapIter->second.GetID() == 0 )
+    if( mapIter->second.getID() == 0 )
     {
         // Load the texture from file path
         CreateTexture( mapIter->second, compressed );
         
         // Init with common features until I need to configure differently
-        glBindTexture(GL_TEXTURE_2D, mapIter->second.GetID());
+        glBindTexture(GL_TEXTURE_2D, mapIter->second.getID());
         
         // Set the anisotropic value
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, m_anisotropicLevel );
@@ -219,7 +219,7 @@ void CTextureMgr::LoadTexture( CTexture & texture, const std::string & filePath,
         SOIL_CREATE_NEW_ID,
         (compressed == true) ? SOIL_FLAG_COMPRESS_TO_DXT : SOIL_FLAG_ORIGINAL_TEXTURE_FORMAT );
 
-    if( texture.GetID() == 0 )
+    if( texture.getID() == 0 )
         throw NExcept::CCriticalException("Load Texture Error!",
             boost::str( boost::format("Error loading texture (%s)(%s).\n\n%s\nLine: %s")
                 % stbi_failure_reason() % filePath % __FUNCTION__ % __LINE__ ));
@@ -271,7 +271,7 @@ void CTextureMgr::CreateTexture( CTexture & texture, bool compressed )
     
     texture.m_pData = nullptr;
     
-    if( texture.GetID() == 0 )
+    if( texture.getID() == 0 )
         throw NExcept::CCriticalException("Load Texture Error!",
             boost::str( boost::format("Error loading texture (%s).\n\n%s\nLine: %s")
                 % stbi_failure_reason() % __FUNCTION__ % __LINE__ ));

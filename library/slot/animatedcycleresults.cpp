@@ -55,7 +55,7 @@ void CAnimatedCycleResults::Update()
         auto & rSymbPos = rPay.GetSymbPos();
 
         for( auto & iter : rSymbPos )
-            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().GetScriptComponent().Update();
+            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().getScriptComponent().Update();
     }
     
 }   // Update
@@ -121,8 +121,8 @@ void CAnimatedCycleResults::StartAnimation()
         {
             for( auto sympIter : iter )
             {
-                sympIter->GetSprite().SetAlpha( 0.20f );
-                sympIter->GetSprite().GetScriptComponent().ResetAndRecycle();
+                sympIter->GetSprite().setAlpha( 0.20f );
+                sympIter->GetSprite().getScriptComponent().ResetAndRecycle();
                 sympIter->SetDeferredRender( false );
             }
         }
@@ -131,8 +131,8 @@ void CAnimatedCycleResults::StartAnimation()
         for( auto & iter : rSymbPos )
         {
             auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-            symbol->GetSprite().SetDefaultColor();
-            symbol->GetSprite().PrepareFuncId( "animate" );
+            symbol->GetSprite().setDefaultColor();
+            symbol->GetSprite().prepareFuncId( "animate" );
             symbol->SetDeferredRender( true );
         }
 
@@ -156,8 +156,8 @@ void CAnimatedCycleResults::StopAnimation()
         {
             for( auto sympIter : iter )
             {
-                sympIter->GetSprite().SetDefaultColor();
-                sympIter->GetSprite().GetScriptComponent().ResetAndRecycle();
+                sympIter->GetSprite().setDefaultColor();
+                sympIter->GetSprite().getScriptComponent().ResetAndRecycle();
                 sympIter->SetDeferredRender( false );
             }
         }
@@ -182,7 +182,7 @@ bool CAnimatedCycleResults::IsAnimating()
         for( auto & iter : rSymbPos )
         {
             auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-            if( symbol->GetSprite().GetScriptComponent().IsActive() )
+            if( symbol->GetSprite().getScriptComponent().IsActive() )
                 return true;
         }
     }

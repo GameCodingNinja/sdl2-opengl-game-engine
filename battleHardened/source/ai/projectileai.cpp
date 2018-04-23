@@ -38,7 +38,7 @@ CProjectileAI::~CProjectileAI()
 /************************************************************************
 *    desc:  Do any initalizing                                                            
 ************************************************************************/
-void CProjectileAI::Init()
+void CProjectileAI::init()
 {
     // Speed of the projectile
     const float PROJECTILE_SPEED = 2.6f;
@@ -62,7 +62,7 @@ void CProjectileAI::Init()
 /************************************************************************
 *    desc:  Update animations, move sprites, etc.
 ************************************************************************/
-void CProjectileAI::Update()
+void CProjectileAI::update()
 {
     // If it's the projectile's first update, we don't want to increment 
     // it's position by the velocity 
@@ -77,6 +77,6 @@ void CProjectileAI::Update()
 
     // Delete if goes out of view
     if( m_sprite.getTransPos().getLengthSquared2D() > 250000.f )
-        m_rStrategy.SetToDestroy( m_sprite.GetId() );
+        m_rStrategy.SetToDestroy( m_sprite.getId() );
 
 }   // Update

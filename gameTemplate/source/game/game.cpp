@@ -136,7 +136,7 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 {
     if( aiName == "aiBall" )
-        pSprite->SetAI( new CBallAI( pSprite ) );
+        pSprite->setAI( new CBallAI( pSprite ) );
 
 }   // AICreateCallBack
 

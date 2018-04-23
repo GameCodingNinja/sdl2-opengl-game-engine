@@ -20,13 +20,13 @@ CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData, int type ) :
     m_type(type),
     m_data(pData)
 {
-}   // constructor
+}
 
 CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, int type ) :
     m_type(type),
     m_data(pData)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -39,14 +39,13 @@ CSpriteDataContainer::~CSpriteDataContainer()
     
     else if( m_type == NDefs::ACTOR2D )
         NDelFunc::Delete( m_data.m_pActorData );
-        
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the data type                                                             
 ************************************************************************/
-int CSpriteDataContainer::GetType() const
+int CSpriteDataContainer::getType() const
 {
     return m_type;
 }

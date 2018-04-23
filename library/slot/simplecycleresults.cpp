@@ -91,11 +91,11 @@ void CSimpleCycleresults::StartAnimation()
         // Set them all to a low alphs
         for( auto & iter : rCycleResultSymb )
             for( auto sympIter : iter )
-                sympIter->GetSprite().SetAlpha( 0.20f );
+                sympIter->GetSprite().setAlpha( 0.20f );
 
         // Set only the winners to default color
         for( auto & iter : rSymbPos )
-            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().SetDefaultColor();
+            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().setDefaultColor();
 
         m_spSlotGroupView->SetCycleResultText( true, &rPay );
     }
@@ -117,7 +117,7 @@ void CSimpleCycleresults::StopAnimation()
         // Set it all back to normal
         for( auto & iter : rCycleResultSymb )
             for( auto sympIter : iter )
-                sympIter->GetSprite().SetDefaultColor();
+                sympIter->GetSprite().setDefaultColor();
         
         m_spSlotGroupView->SetCycleResultText( false );
     }

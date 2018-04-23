@@ -30,7 +30,7 @@ namespace NScriptActorSprite2D
         // Register type
         Throw( pEngine->RegisterObjectType(  "CActorSprite2D", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "int GetId()",                                        asMETHOD(CActorSprite2D,   GetId),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "int GetId()",                                        asMETHOD(CActorSprite2D,   getId),            asCALL_THISCALL) );
 
         // Need to use CObject for the below to compile under MSVSC++
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetVisible(bool)",                              asMETHOD(CObject,   setVisible),           asCALL_THISCALL) );

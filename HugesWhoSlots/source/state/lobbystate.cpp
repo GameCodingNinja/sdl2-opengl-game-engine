@@ -155,7 +155,7 @@ void CLobbyState::Transform()
 ****************************************************************************/
 void CLobbyState::PreRender()
 {
-    m_background.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    m_background.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
     
     CCommonState::PreRender();
 

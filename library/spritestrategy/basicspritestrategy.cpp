@@ -157,30 +157,30 @@ iSprite * CBasicSpriteStrategy::Create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
     
     // Create the sprite
-    if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
+    if( rSpriteDataContainer.getType() == NDefs::SPRITE2D )
     {
-        const auto & rData = rSpriteDataContainer.Get<CSpriteData>();
-        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
-            spriteId = rData.GetId();
+        const auto & rData = rSpriteDataContainer.get<CSpriteData>();
+        if( rData.getId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.getId();
         
         // Allocate the sprite
         iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
         
         // Load the rest from sprite data
-        dynamic_cast<CSprite2D *>(iter.first->second)->Load( rData );
+        dynamic_cast<CSprite2D *>(iter.first->second)->load( rData );
         
-        aiName = rData.GetAIName();
+        aiName = rData.getAIName();
     }
-    else if( rSpriteDataContainer.GetType() == NDefs::ACTOR2D )
+    else if( rSpriteDataContainer.getType() == NDefs::ACTOR2D )
     {
-        const auto & rData = rSpriteDataContainer.Get<CActorData>();
-        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
-            spriteId = rData.GetId();
+        const auto & rData = rSpriteDataContainer.get<CActorData>();
+        if( rData.getId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.getId();
         
         // Allocate the actor sprite
         iter = m_spriteMap.emplace( spriteId, new CActorSprite2D( rData, spriteId ) );
         
-        aiName = rData.GetAIName();
+        aiName = rData.getAIName();
     }
 
     // Check for duplicate id's
@@ -202,7 +202,7 @@ iSprite * CBasicSpriteStrategy::Create(
         iter.first->second->setScale(scale);
 
     // Init the physics
-    iter.first->second->InitPhysics();
+    iter.first->second->initPhysics();
     
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
@@ -228,34 +228,34 @@ iSprite * CBasicSpriteStrategy::Create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
     
     // Create the sprite
-    if( rSpriteDataContainer.GetType() == NDefs::SPRITE2D )
+    if( rSpriteDataContainer.getType() == NDefs::SPRITE2D )
     {
-        const auto & rData = rSpriteDataContainer.Get<CSpriteData>();
-        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
-            spriteId = rData.GetId();
+        const auto & rData = rSpriteDataContainer.get<CSpriteData>();
+        if( rData.getId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.getId();
         
         // Allocate the sprite
         iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
         
         // Load the rest from sprite data
-        dynamic_cast<CSprite2D *>(iter.first->second)->Load( rData );
+        dynamic_cast<CSprite2D *>(iter.first->second)->load( rData );
         
-        aiName = rData.GetAIName();
+        aiName = rData.getAIName();
     }
-    else if( rSpriteDataContainer.GetType() == NDefs::ACTOR2D )
+    else if( rSpriteDataContainer.getType() == NDefs::ACTOR2D )
     {
-        const auto & rData = rSpriteDataContainer.Get<CActorData>();
-        if( rData.GetId() != defs_SPRITE_DEFAULT_ID )
-            spriteId = rData.GetId();
+        const auto & rData = rSpriteDataContainer.get<CActorData>();
+        if( rData.getId() != defs_SPRITE_DEFAULT_ID )
+            spriteId = rData.getId();
         
         // Allocate the actor sprite
         iter = m_spriteMap.emplace( spriteId, new CActorSprite2D( rData, spriteId ) );
         
-        aiName = rData.GetAIName();
+        aiName = rData.getAIName();
     }
     
     // Init the physics
-    iter.first->second->InitPhysics();
+    iter.first->second->initPhysics();
 
     // Check for duplicate id's
     if( !iter.second )
@@ -320,7 +320,7 @@ iSprite * CBasicSpriteStrategy::Create(
         iter.first->second->setScale(scale);
 
     // Init the physics
-    iter.first->second->InitPhysics();
+    iter.first->second->initPhysics();
     
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -360,7 +360,7 @@ iSprite * CBasicSpriteStrategy::Create(
     }
     
     // Init the physics
-    iter.first->second->InitPhysics();
+    iter.first->second->initPhysics();
     
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -393,7 +393,7 @@ void CBasicSpriteStrategy::DeleteObj( int index )
         // specifically delete the physics body before deleting the sprite
         // Deleting the physics always needs to be done externally and
         // under the right conditions. NEVER call from destructor
-        iter->second->CleanUp();
+        iter->second->cleanUp();
         
         auto spriteIter = std::find( m_pSpriteVec.begin(), m_pSpriteVec.end(), iter->second );
         if( spriteIter != m_pSpriteVec.end() )
@@ -417,7 +417,7 @@ void CBasicSpriteStrategy::DeleteObj( int index )
 void CBasicSpriteStrategy::Init()
 {
     for( auto iter : m_pSpriteVec )
-        iter->Init();
+        iter->init();
     
 }   // Init
 
@@ -428,7 +428,7 @@ void CBasicSpriteStrategy::Init()
 void CBasicSpriteStrategy::CleanUp()
 {
     for( auto iter : m_pSpriteVec )
-        iter->CleanUp();
+        iter->cleanUp();
 
 }   // CleanUp
 
@@ -440,8 +440,8 @@ void CBasicSpriteStrategy::Update()
 {
     for( auto iter : m_pSpriteVec )
     {
-        iter->Update();
-        iter->PhysicsUpdate();
+        iter->update();
+        iter->physicsUpdate();
     }
 
 }   // Update
@@ -464,14 +464,14 @@ void CBasicSpriteStrategy::Transform()
 void CBasicSpriteStrategy::Render( const CMatrix & matrix )
 {
     for( auto iter : m_pSpriteVec )
-        iter->Render( matrix );
+        iter->render( matrix );
 
 }   // Render
 
 void CBasicSpriteStrategy::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     for( auto iter : m_pSpriteVec )
-        iter->Render( matrix, rotMatrix );
+        iter->render( matrix, rotMatrix );
 
 }   // Render
 
@@ -480,7 +480,7 @@ void CBasicSpriteStrategy::Render()
     const auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
 
     for( auto iter : m_pSpriteVec )
-        iter->Render( camera );
+        iter->render( camera );
 
 }   // Render
 
@@ -508,7 +508,7 @@ iSprite * CBasicSpriteStrategy::get( const int id )
 bool CBasicSpriteStrategy::Find( iSprite * piSprite )
 {
     // See if this sprite has already been created
-    auto iter = m_spriteMap.find( piSprite->GetId() );
+    auto iter = m_spriteMap.find( piSprite->getId() );
     if( iter != m_spriteMap.end() && (iter->second == piSprite) )
         return true;
         

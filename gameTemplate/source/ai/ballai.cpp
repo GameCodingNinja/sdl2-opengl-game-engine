@@ -32,9 +32,9 @@ CBallAI::~CBallAI()
 /************************************************************************
 *    desc:  Do any initializing                                                            
 ************************************************************************/
-void CBallAI::Init()
+void CBallAI::init()
 {
-    InitPhysics();
+    initPhysics();
     
 }   // Init
 
@@ -42,10 +42,10 @@ void CBallAI::Init()
 /************************************************************************
 *    desc:  Update animations, move sprites, etc.
 ************************************************************************/
-void CBallAI::Update()
+void CBallAI::update()
 {
     if( m_sprite.getPos().y < -600.f )
-        InitPhysics();
+        initPhysics();
     
 }   // Update
 
@@ -53,13 +53,13 @@ void CBallAI::Update()
 /************************************************************************
 *    desc:  Init the ball placement
 ************************************************************************/
-void CBallAI::InitPhysics()
+void CBallAI::initPhysics()
 {
     std::uniform_int_distribution<int> m_RandX(-700,700);
     std::uniform_int_distribution<int> m_RandY(600,1000);
     std::uniform_int_distribution<int> m_RandR(0,360);
     
-    m_sprite.SetPhysicsTransform(
+    m_sprite.setPhysicsTransform(
         m_RandX(m_generator),
         m_RandY(m_generator),
         m_RandR(m_generator) );

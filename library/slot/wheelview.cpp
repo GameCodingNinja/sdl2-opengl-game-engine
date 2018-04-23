@@ -331,7 +331,7 @@ void CWheelView::Update()
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
                         const int channel = CSoundMgr::Instance().GetNextChannel();
-                        m_pSpinStopSnd->Play( channel );
+                        m_pSpinStopSnd->play( channel );
                     }
                     
                     break;
@@ -386,13 +386,13 @@ void CWheelView::transform( const CMatrix & matrix, bool tranformWorldPos )
 void CWheelView::Render( const CMatrix & matrix )
 {
     for( auto & iter : m_wheelSpriteDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
     for( auto & iter : m_symbolDeq )
         iter.Render( matrix );
 
     for( auto & iter : m_spriteDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 }
 
 

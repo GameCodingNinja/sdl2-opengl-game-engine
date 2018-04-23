@@ -19,10 +19,10 @@ class CFontData
 public:
     
     // Copy the data
-    void Copy( const CFontData & obj );
+    void copy( const CFontData & obj );
     
     // Load the font properties from XML node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
     
 public:
     

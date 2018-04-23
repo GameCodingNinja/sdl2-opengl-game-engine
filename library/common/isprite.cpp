@@ -19,48 +19,43 @@ iSprite::iSprite( int id ) :
 /************************************************************************
 *    desc:  Is this a 2D sprite?
 ************************************************************************/  
-bool iSprite::IsSprite2D() const
+bool iSprite::isSprite2D() const
 {
     return m_parameters.IsSet( NDefs::SPRITE2D );
-            
-}   // IsSprite2D
+}
 
 
 /************************************************************************
 *    desc:  Is this a 2D actor?
 ************************************************************************/  
-bool iSprite::IsActor2D() const
+bool iSprite::isActor2D() const
 {
     return m_parameters.IsSet( NDefs::ACTOR2D );
-            
-}   // IsActor2D
+}
 
 
 /************************************************************************
 *    desc:  Is this a 3D sprite?
 ************************************************************************/  
-bool iSprite::IsSprite3D() const
+bool iSprite::isSprite3D() const
 {
-    return m_parameters.IsSet( NDefs::SPRITE3D );
-            
-}   // IsSprite3D
+    return m_parameters.IsSet( NDefs::SPRITE3D );   
+}
 
 
 /************************************************************************
 *    desc:  Is this a 3D actor?
 ************************************************************************/  
-bool iSprite::IsActor3D() const
+bool iSprite::isActor3D() const
 {
-    return m_parameters.IsSet( NDefs::ACTOR3D );
-            
-}   // IsActor3D
+    return m_parameters.IsSet( NDefs::ACTOR3D );    
+}
 
 
 /************************************************************************
 *    desc:  Get the unique id number
 ************************************************************************/
-int iSprite::GetId() const
+int iSprite::getId() const
 {
     return m_id;
-
-}   // GetId
+}

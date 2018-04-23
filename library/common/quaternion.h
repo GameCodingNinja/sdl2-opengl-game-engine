@@ -31,7 +31,7 @@ public:
     // Fast init if class varaibles.
     CQuaternion():length(0)
     {
-        Identity();
+        identity();
     }
 
     // Copy constructor
@@ -48,7 +48,7 @@ public:
     /************************************************************************                                                             
     *    desc:  Set to it's identity
     ************************************************************************/
-    void Identity()
+    void identity()
     {
         x = 0.;
         y = 0.;
@@ -59,7 +59,7 @@ public:
     /************************************************************************                                                             
     *    desc:  Set a rotation point - Assuming the angles are in radians
     ************************************************************************/
-    void SetRotation( const CPoint<float> & rot )
+    void setRotation( const CPoint<float> & rot )
     {
         /*double a = rot.x / 2.0;
         double h = rot.y / 2.0;
@@ -101,15 +101,13 @@ public:
         z = cosr * cosp * siny - sinr * sinp * cosy;
         w = cosr * cosp * cosy + sinr * sinp * siny;
 
-        Normalize();
-
-    }	// SetRotation
+        normalize();
+    }
     
-
     /************************************************************************                                                             
     *    desc:  Get the Euler angles from the quad
     ************************************************************************/
-    CPoint<float> GetRotation() const
+    CPoint<float> getRotation() const
     {
         CPoint<float> tmp;
 
@@ -156,15 +154,10 @@ public:
         }
 
         return tmp;
-
-    }   // GetRotation
+    }
 
     /************************************************************************                                                             
     *    desc:  The equality operator 
-    *
-    *    param:  CQuaternion & quat - point to check
-    *
-    *    return: bool - true or false
     ************************************************************************/
     bool operator == ( const CQuaternion & quat ) const
     {
@@ -172,15 +165,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator ==
+    }
 
     /************************************************************************                                                             
     *    desc:  The inequality operator 
-    *
-    *    param:  CQuaternion & quat - quat to check
-    *
-    *    return: bool - true or false
     ************************************************************************/
     bool operator != ( const CQuaternion & quat ) const
     {
@@ -188,15 +176,10 @@ public:
             return true;
 
         return false;
-
-    }   // operator !=
+    }
 
     /************************************************************************                                                             
     *    desc:  The multiplication operator 
-    *
-    *    param:  CQuaternion & quat * quat to multiply
-    *
-    *    return: CQuaternion - multiplied quat
     ************************************************************************/
     CQuaternion operator * ( const CQuaternion & quat ) const
     {
@@ -208,15 +191,10 @@ public:
         tmp.w = (w * quat.w) - (x * quat.x) - (y * quat.y) - (z * quat.z);
 
         return tmp;
-
-    }   // operator *
+    }
 
     /************************************************************************                                                             
     *    desc:  The multiplication operator 
-    *
-    *    param:  CQuaternion & quat * quat to multiply
-    *
-    *    return: CQuaternion - multiplied quat
     ************************************************************************/
     CQuaternion operator *= ( const CQuaternion & quat )
     {
@@ -226,15 +204,10 @@ public:
         w = (w * quat.w) - (x * quat.x) - (y * quat.y) - (z * quat.z);
 
         return *this;
-
-    }   // operator *=
+    }
 
     /************************************************************************                                                             
     *    desc:  The addition operator 
-    *
-    *    param:  CQuaternion & quat * quat to add
-    *
-    *    return: CQuaternion - added quat
     ************************************************************************/
     CQuaternion operator + ( const CQuaternion & quat ) const
     {
@@ -245,15 +218,10 @@ public:
         tmp.w = w + quat.w;
 
         return tmp;
-
-    }   // operator +
+    }
 
     /************************************************************************                                                             
     *    desc:  The addition operator 
-    *
-    *    param:  CQuaternion & quat * quat to add
-    *
-    *    return: CQuaternion - added point
     ************************************************************************/
     CQuaternion operator += ( const CQuaternion & quat )
     {
@@ -263,15 +231,10 @@ public:
         w += quat.w;
 
         return *this;
-
-    }   // operator +=
+    }
 
     /************************************************************************                                                             
     *    desc:  The subtraction operator 
-    *
-    *    param:  CQuaternion & quat * quat to subtract
-    *
-    *    return: CQuaternion - subtracted quat
     ************************************************************************/
     CQuaternion operator - ( const CQuaternion & quat ) const
     {
@@ -282,15 +245,10 @@ public:
         tmp.w = w - quat.w;
 
         return tmp;
-
-    }   // operator -
+    }
 
     /************************************************************************                                                             
     *    desc:  The subtraction operator 
-    *
-    *    param:  CQuaternion & quat - point to add
-    *
-    *    return: CQuaternion - subtracted
     ************************************************************************/
     CQuaternion operator -= ( const CQuaternion & quat )
     {
@@ -300,40 +258,37 @@ public:
         w -= quat.w;
 
         return *this;
-
-    }   // operator -=
+    }
 
     /************************************************************************                                                             
     *    desc:  Set the quaternion data
     ************************************************************************/
-    void Set( const CPoint<float> & point )
+    void set( const CPoint<float> & point )
     {
         x = point.x;
         y = point.y;
         z = point.z;
 
-        Normalize();
-
-    }   // Set
+        normalize();
+    }
 
     /************************************************************************                                                             
     *    desc:  Set the quaternion data
     ************************************************************************/
-    void Set( double _x, double _y, double _z, double _w )
+    void set( double _x, double _y, double _z, double _w )
     {
         x = _x;
         y = _y;
         z = _z;
         w = _w;
 
-        Normalize();
-
-    }   // Set
+        normalize();
+    }
 
     /************************************************************************                                                             
     *    desc:  Invert the values of this quaternion
     ************************************************************************/
-    CQuaternion GetConjugate() const
+    CQuaternion getConjugate() const
     {
         CQuaternion tmp;
         tmp.x = -x;
@@ -342,17 +297,16 @@ public:
         tmp.w = w;
 
         return tmp;
-
-    }   // GetConjugate
+    }
 
     /************************************************************************                                                             
     *    desc:  Invert the values of this quaternion
     ************************************************************************/
-    CQuaternion GetInverse() const
+    CQuaternion getInverse() const
     {
         CQuaternion tmp;
 
-        double norm2_inv = 1.0 / GetLengthSquared();
+        double norm2_inv = 1.0 / getLengthSquared();
 
         tmp.x = -x * norm2_inv;
         tmp.y = -y * norm2_inv;
@@ -360,26 +314,22 @@ public:
         tmp.w =  w * norm2_inv;
 
         return tmp;
-
-    }   // GetInverse
+    }
 
     /************************************************************************                                                             
     *    desc:  Get the length of the quaternion 
-    *
-    *    return: float - length of point
     ************************************************************************/
-    double GetLengthSquared() const
+    double getLengthSquared() const
     {
         return (x * x) +  (y * y) + (z * z) + (w * w);
-
-    }   // GetLengthSquared
+    }
 
     /************************************************************************                                                             
     *    desc:  Get the point 
     *
     *    return: CPoint - get the point
     ************************************************************************/
-    CPoint<float> GetPoint() const
+    CPoint<float> getPoint() const
     {
         CPoint<float> tmp;
 
@@ -388,15 +338,14 @@ public:
         tmp.z = z * length;
 
         return tmp;
-
-    }   // GetPoint
+    }
 
     /************************************************************************                                                             
     *    desc:  normalize this quaternion
     ************************************************************************/
-    void Normalize()
+    void normalize()
     {
-        length = sqrt( GetLengthSquared() );
+        length = sqrt( getLengthSquared() );
 
         if( length != 0.0f )
         {
@@ -405,8 +354,7 @@ public:
             z /= length;
             w /= length;
         }
-
-    }	// Normalize
+    }
 };
 
 #endif  // __quaternion_h__

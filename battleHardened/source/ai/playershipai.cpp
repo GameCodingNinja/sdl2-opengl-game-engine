@@ -23,8 +23,8 @@
 ************************************************************************/
 CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CActorSprite2D *>(pSprite) ),
-    m_fireTailSprite( m_sprite.GetSprite("player_fire_tail") ),
-    m_gunSprite( m_sprite.GetSprite("ship_gun") ),
+    m_fireTailSprite( m_sprite.getSprite("player_fire_tail") ),
+    m_gunSprite( m_sprite.getSprite("ship_gun") ),
     m_gunRotation(0),
     m_playerShootTimer(200, true)
 {
@@ -42,9 +42,9 @@ CPlayerShipAI::~CPlayerShipAI()
 /************************************************************************
 *    desc:  Do any initalizing
 ************************************************************************/
-void CPlayerShipAI::Init()
+void CPlayerShipAI::init()
 {
-    m_fireTailSprite.Prepare( "Play", {24, &m_fireTailSprite, true} );
+    m_fireTailSprite.prepare( "Play", {24, &m_fireTailSprite, true} );
 
 }   // Init
 
@@ -52,12 +52,12 @@ void CPlayerShipAI::Init()
 /************************************************************************
 *    desc:  Handle player related messages
 ************************************************************************/
-void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
+void CPlayerShipAI::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == SDL_MOUSEMOTION )
     {
         // Get the position of the gun
-        const CPoint<float> pos = m_sprite.GetSprite(-1).getTransPos();
+        const CPoint<float> pos = m_sprite.getSprite(-1).getTransPos();
         const float ratio = 1 / CSettings::Instance().GetOrthoAspectRatio().getH();
         m_gunXY.x = ((ratio * (float)rEvent.motion.x) - pos.x) - CSettings::Instance().GetDefaultSizeHalf().w;
         m_gunXY.y = CSettings::Instance().GetDefaultSizeHalf().h - ((ratio * (float)rEvent.motion.y) + pos.y);
@@ -75,7 +75,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
     }
     else if( CActionMgr::Instance().WasAction( rEvent, "Shoot", NDefs::EAP_DOWN ) )
     {
-        HandleShooting();
+        handleShooting();
     }
 
 }   // HandleEvent
@@ -84,7 +84,7 @@ void CPlayerShipAI::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Update animations, move sprites, etc.
 ************************************************************************/
-void CPlayerShipAI::Update()
+void CPlayerShipAI::update()
 {
     m_gunRotation = atan2( m_gunXY.y, m_gunXY.x );
     m_gunSprite.setRot( 0, 0, m_gunRotation - m_sprite.getRot().z, false );
@@ -95,7 +95,7 @@ void CPlayerShipAI::Update()
 /************************************************************************
 *    desc:  Handle the ship's shooting
 ************************************************************************/
-void CPlayerShipAI::HandleShooting()
+void CPlayerShipAI::handleShooting()
 {
     // If the player hits the shoot button, and our time has expired, create a projectile actor
     if( m_playerShootTimer.Expired() )

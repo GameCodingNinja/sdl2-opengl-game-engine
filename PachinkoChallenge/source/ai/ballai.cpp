@@ -40,12 +40,12 @@ CBallAI::~CBallAI()
 /************************************************************************
 *    desc:  Do any initializing                                                            
 ************************************************************************/
-void CBallAI::Init()
+void CBallAI::init()
 {
-    m_sprite.PrepareFuncId( "fadeIn" );
+    m_sprite.prepareFuncId( "fadeIn" );
     
     // Put ball into a random rotation
-    auto pBody = m_sprite.GetPhysicsComponent().GetBody();
+    auto pBody = m_sprite.getPhysicsComponent().GetBody();
     pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
     
     // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
@@ -57,9 +57,9 @@ void CBallAI::Init()
 /************************************************************************
 *    desc:  Update animations, move sprites, etc.
 ************************************************************************/
-void CBallAI::Update()
+void CBallAI::update()
 {
     if( m_sprite.getPos().y < -1650.0f )
-        m_rStrategy.SetToDestroy( m_sprite.GetId() );
+        m_rStrategy.SetToDestroy( m_sprite.getId() );
         
 }   // Update

@@ -156,21 +156,21 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
             if( !spriteSheetNode.isEmpty() )
             {
                 if( spriteSheetNode.isAttributeSet("defIndex") )
-                    m_spriteSheet.SetDefaultIndex( std::atoi( spriteSheetNode.getAttribute( "defIndex" ) ) );
+                    m_spriteSheet.setDefaultIndex( std::atoi( spriteSheetNode.getAttribute( "defIndex" ) ) );
                 
                 // Make sure all elements are defined for manually building the sprite sheet data
                 if( spriteSheetNode.isAttributeSet("glyphCount") )
                 {
-                    m_spriteSheet.SetGlyphCount( std::atoi( spriteSheetNode.getAttribute( "glyphCount" ) ) );
+                    m_spriteSheet.setGlyphCount( std::atoi( spriteSheetNode.getAttribute( "glyphCount" ) ) );
 
                     if( spriteSheetNode.isAttributeSet("columns") )
                     {
-                        m_spriteSheet.SetGlyphColumns( std::atoi( spriteSheetNode.getAttribute( "columns" ) ) );
+                        m_spriteSheet.setGlyphColumns( std::atoi( spriteSheetNode.getAttribute( "columns" ) ) );
                     }
                 }
                 
                 if( spriteSheetNode.isAttributeSet("formatCodeOffset") )
-                    m_spriteSheet.SetFormatCodeOffset( std::atoi( spriteSheetNode.getAttribute( "formatCodeOffset" ) ) );
+                    m_spriteSheet.setFormatCodeOffset( std::atoi( spriteSheetNode.getAttribute( "formatCodeOffset" ) ) );
 
                 bool loadAllGlyphs(false);
                 if( spriteSheetNode.isAttributeSet("loadAllGlyphs") )
@@ -199,7 +199,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     auto rSpriteSheet = CSpriteSheetMgr::Instance().Load( filePath );
 
                     // Copy the needed glyph data from the manager
-                    rSpriteSheet.CopyTo( m_spriteSheet, m_glyphIDs, loadAllGlyphs );
+                    rSpriteSheet.copyTo( m_spriteSheet, m_glyphIDs, loadAllGlyphs );
                 }
             }
 
@@ -302,33 +302,33 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
     {
         // Build the simple (grid) sprite sheet from XML data
         if( m_spriteSheetFilePath.empty() )
-            m_spriteSheet.Build( rSize );
+            m_spriteSheet.build( rSize );
         
         // Generate a quad
         GenerateQuad( group );
 
         // For this generation type, the glyph size is the default scale
-        rSize = m_vertexScale = m_spriteSheet.GetGlyph().GetSize() * m_defaultUniformScale;
+        rSize = m_vertexScale = m_spriteSheet.getGlyph().getSize() * m_defaultUniformScale;
     }
     else if( m_genType == NDefs::EGT_SCALED_FRAME )
     {
         if( !m_glyphIDs.empty() && !m_spriteSheetFilePath.empty() )
         {
             // Get the glyph to make the frame with
-            auto rGlyph = m_spriteSheet.FindGlyph( m_glyphIDs.back() );
+            auto rGlyph = m_spriteSheet.findGlyph( m_glyphIDs.back() );
             
             // Create the scaled frame using glyph info
             if( m_meshFilePath.empty() )
-                GenerateScaledFrame( group, texture.GetSize(), rGlyph.GetSize(), rSize, rGlyph.GetUV() );
+                GenerateScaledFrame( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
             else
-                GenerateScaledFrameMeshFile( group, texture.GetSize(), rGlyph.GetSize(), rSize, rGlyph.GetUV() );
+                GenerateScaledFrameMeshFile( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
         }
         // Generate a scaled frame
         else if( m_meshFilePath.empty() )
-            GenerateScaledFrame( group, texture.GetSize(), texture.GetSize(), rSize, CRect<float>() );
+            GenerateScaledFrame( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
 
         else
-            GenerateScaledFrameMeshFile( group, texture.GetSize(), texture.GetSize(), rSize, CRect<float>() );
+            GenerateScaledFrameMeshFile( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
     }
 
 }   // CreateFromData
@@ -356,7 +356,7 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
                     NGenFunc::AddFileExt( file, filePath, m_resExt );
                 
                 rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
-                m_textureIDVec.push_back( rTexture.GetID() );
+                m_textureIDVec.push_back( rTexture.getID() );
             }
         }
         else
@@ -368,12 +368,12 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
                 NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
             
             rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
-            m_textureIDVec.push_back( rTexture.GetID() );
+            m_textureIDVec.push_back( rTexture.getID() );
         }
         
         // If the passed in size reference is empty, set it to the texture size
         if( rSize.isEmpty() )
-            rSize = rTexture.GetSize();
+            rSize = rTexture.getSize();
     }
     
 }   // CreateTexture
@@ -692,7 +692,7 @@ int CObjectVisualData2D::GetIBOCount() const
 size_t CObjectVisualData2D::GetFrameCount() const 
 {
     if( m_genType == NDefs::EGT_SPRITE_SHEET )
-        return m_spriteSheet.GetCount();
+        return m_spriteSheet.getCount();
     
     return m_textureIDVec.size();
 }

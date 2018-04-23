@@ -28,7 +28,7 @@
 CShaderData::CShaderData()
     : m_programID(0), m_vertexID(0), m_fragmentID(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -46,55 +46,49 @@ CShaderData::~CShaderData()
 /************************************************************************
 *    desc:  Set/Get the program ID
 ************************************************************************/
-void CShaderData::SetProgramID( uint32_t location )
+void CShaderData::setProgramID( uint32_t location )
 {
     m_programID = location;
+}
 
-}   // SetProgramID
-
-uint32_t CShaderData::GetProgramID() const
+uint32_t CShaderData::getProgramID() const
 {
     return m_programID;
-
-}   // GetProgramID
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the vertex ID
 ************************************************************************/
-void CShaderData::SetVertexID( uint32_t location )
+void CShaderData::setVertexID( uint32_t location )
 {
     m_vertexID = location;
+}
 
-}   // SetVertexID
-
-uint32_t CShaderData::GetVertexID() const
+uint32_t CShaderData::getVertexID() const
 {
     return m_vertexID;
-
-}   // GetVertexID
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the fragment ID
 ************************************************************************/
-void CShaderData::SetFragmentID( uint32_t location )
+void CShaderData::setFragmentID( uint32_t location )
 {
     m_fragmentID = location;
+}
 
-}   // SetFragmentID
-
-uint32_t CShaderData::GetFragmentID() const
+uint32_t CShaderData::getFragmentID() const
 {
     return m_fragmentID;
-
-}   // GetFragmentID
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the attribute location
 ************************************************************************/
-void CShaderData::SetAttributeLocation( const std::string & name, int32_t location )
+void CShaderData::setAttributeLocation( const std::string & name, int32_t location )
 {
     auto iter = m_attributeMap.find( name );
     if( iter != m_attributeMap.end() )
@@ -104,10 +98,9 @@ void CShaderData::SetAttributeLocation( const std::string & name, int32_t locati
     }
 
     m_attributeMap.emplace( name, location );
+}
 
-}   // SetAttributeLocation
-
-int32_t CShaderData::GetAttributeLocation( const std::string & name ) const
+int32_t CShaderData::getAttributeLocation( const std::string & name ) const
 {
     auto iter = m_attributeMap.find( name );
     if( iter == m_attributeMap.end() )
@@ -117,14 +110,13 @@ int32_t CShaderData::GetAttributeLocation( const std::string & name ) const
     }
 
     return iter->second;
-
-}   // GetAttributeLocation
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the uniform location
 ************************************************************************/
-void CShaderData::SetUniformLocation( const std::string & name, int32_t location )
+void CShaderData::setUniformLocation( const std::string & name, int32_t location )
 {
     auto iter = m_uniformMap.find( name );
     if( iter != m_uniformMap.end() )
@@ -134,10 +126,9 @@ void CShaderData::SetUniformLocation( const std::string & name, int32_t location
     }
 
     m_uniformMap.emplace( name, location );
+}
 
-}   // SetUniformLocation
-
-int32_t CShaderData::GetUniformLocation( const std::string & name ) const
+int32_t CShaderData::getUniformLocation( const std::string & name ) const
 {
     auto iter = m_uniformMap.find( name );
     if( iter == m_uniformMap.end() )
@@ -147,28 +138,26 @@ int32_t CShaderData::GetUniformLocation( const std::string & name ) const
     }
 
     return iter->second;
-
-}   // GetUniformLocation
+}
 
 
 /************************************************************************
 *    desc:  Check for the uniform location
 ************************************************************************/
-bool CShaderData::HasUniformLocation( const std::string & name ) const
+bool CShaderData::hasUniformLocation( const std::string & name ) const
 {
     auto iter = m_uniformMap.find( name );
     if( iter != m_uniformMap.end() )
         return true;
 
     return false;
-
-}   // GetUniformLocation
+}
 
 
 /************************************************************************
 *    desc:  Get the vertex attribute count
 ************************************************************************/
-size_t CShaderData::GetVertexAttribCount()
+size_t CShaderData::getVertexAttribCount()
 {
     return m_attributeMap.size();
 }
@@ -177,7 +166,7 @@ size_t CShaderData::GetVertexAttribCount()
 /************************************************************************
 *    desc:  Free the data
 ************************************************************************/
-void CShaderData::Free()
+void CShaderData::free()
 {
     // Detach the shaders
     if( (m_vertexID > 0) && (m_fragmentID > 0) && (m_programID > 0) )
@@ -197,20 +186,17 @@ void CShaderData::Free()
     if( m_programID > 0 )
         glDeleteProgram(m_programID);
 
-    Clear();
-
-}   // Free
+    clear();
+}
 
 
 /************************************************************************
 *    desc:  Clear the data
 ************************************************************************/
-void CShaderData::Clear()
+void CShaderData::clear()
 {
     m_programID = m_vertexID = m_fragmentID = 0;
 
     m_attributeMap.clear();
     m_uniformMap.clear();
-
-}   // Clear
-
+}

@@ -26,19 +26,19 @@ public:
     };
 
     // And to the bit mask
-    void Add( ERelativeOffset value )
+    void add( ERelativeOffset value )
     { m_parameters.Add( value ); }
     
     // Check if bits were set
-    bool IsSet( EDynamicOffset value )
+    bool isSet( EDynamicOffset value )
     { return m_parameters.IsSet( value ); }
 
     // Is the dynamic offset being used
-    bool IsEmpty() const
+    bool isEmpty() const
     { return !m_parameters.IsEmpty(); }
     
     // Get the position based on relative offset
-    CPoint<float> GetPos( const CPoint<float> & curPos, CSize<float> defaultHalfSize )
+    CPoint<float> getPos( const CPoint<float> & curPos, CSize<float> defaultHalfSize )
     {
         CPoint<float> pos( curPos );
         

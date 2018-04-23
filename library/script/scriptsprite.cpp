@@ -119,23 +119,23 @@ namespace NScriptSprite
         // Register type
         Throw( pEngine->RegisterObjectType(  "iSprite", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void createFontString(string &in)",                  asMETHOD(iSprite, CreateFontString),     asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "uint getFrameCount()",                               asMETHOD(iSprite, GetFrameCount),        asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setFrame(uint)",                                asMETHOD(iSprite, SetFrame),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "uint getCurrentFrame()",                             asMETHOD(iSprite, GetCurrentFrame),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void createFontString(string &in)",                  asMETHOD(iSprite, createFontString),     asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "uint getFrameCount()",                               asMETHOD(iSprite, getFrameCount),        asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setFrame(uint)",                                asMETHOD(iSprite, setFrame),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "uint getCurrentFrame()",                             asMETHOD(iSprite, getCurrentFrame),      asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("iSprite", "int getId()",                                        asMETHOD(iSprite,   GetId),            asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setColor(const CColor &in)",                    asMETHODPR(iSprite, SetColor, (const CColor &), void),   asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setColor(float, float, float, float)",          asMETHODPR(iSprite, SetColor, (float,float,float,float), void), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setDefaultColor()",                             asMETHOD(iSprite, SetDefaultColor),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "const CColor & getColor()",                          asMETHOD(iSprite, GetColor),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "const CColor & getDefaultColor()",                   asMETHOD(iSprite, GetDefaultColor),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "int getId()",                                        asMETHOD(iSprite,   getId),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setColor(const CColor &in)",                    asMETHODPR(iSprite, setColor, (const CColor &), void),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setColor(float, float, float, float)",          asMETHODPR(iSprite, setColor, (float,float,float,float), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setDefaultColor()",                             asMETHOD(iSprite, setDefaultColor),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "const CColor & getColor()",                          asMETHOD(iSprite, getColor),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "const CColor & getDefaultColor()",                   asMETHOD(iSprite, getDefaultColor),      asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setAlpha(float alpha)",                         asMETHOD(iSprite, SetAlpha),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "float getAlpha()",                                   asMETHOD(iSprite, GetAlpha),             asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "float getDefaultAlpha()",                            asMETHOD(iSprite, GetDefaultAlpha),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setDefaultAlpha()",                             asMETHOD(iSprite, SetDefaultAlpha),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSprite", "void setPhysicsTransform(float, float, float, bool resetVelocity = true)", asMETHOD(iSprite, SetPhysicsTransform),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setAlpha(float alpha)",                         asMETHOD(iSprite, setAlpha),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "float getAlpha()",                                   asMETHOD(iSprite, getAlpha),             asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "float getDefaultAlpha()",                            asMETHOD(iSprite, getDefaultAlpha),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setDefaultAlpha()",                             asMETHOD(iSprite, setDefaultAlpha),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "void setPhysicsTransform(float, float, float, bool resetVelocity = true)", asMETHOD(iSprite, setPhysicsTransform),             asCALL_THISCALL) );
         
         Throw( pEngine->RegisterObjectMethod("iSprite", "void setVisible(bool)",                              asFUNCTION(SetVisible), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("iSprite", "bool isVisible()",                                   asFUNCTION(IsVisible), asCALL_CDECL_OBJLAST) );

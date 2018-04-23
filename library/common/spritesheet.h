@@ -25,44 +25,44 @@ public:
     CSpriteSheet();
     
     // Set the glyph count
-    void SetGlyphCount( uint glyphCount);
+    void setGlyphCount( uint glyphCount);
     
     // Set the glyph columns
-    void SetGlyphColumns( uint columns );
+    void setGlyphColumns( uint columns );
     
     // Build the simple (grid) sprite sheet
-    void Build( const CSize<int> & sheetSize );
+    void build( const CSize<int> & sheetSize );
     
     // Load the glyph data from XML file
-    void LoadFromXML( const std::string & filePath );
+    void loadFromXML( const std::string & filePath );
     
     // Get the glyph
-    const CSpriteSheetGlyph & GetGlyph( int index = -1 ) const;
-    const CSpriteSheetGlyph & FindGlyph( const std::string & glyphId ) const;
+    const CSpriteSheetGlyph & getGlyph( int index = -1 ) const;
+    const CSpriteSheetGlyph & findGlyph( const std::string & glyphId ) const;
    
     // Get the number of gylphs in this sprite sheet
-    size_t GetCount() const;
+    size_t getCount() const;
     
     // Set/Get the default index
-    void SetDefaultIndex( uint index );
-    uint GetDefaultIndex() const;
+    void setDefaultIndex( uint index );
+    uint getDefaultIndex() const;
     
     // Set/Get the start index for when loading from format code
-    void SetFormatCodeOffset( uint index );
-    int GetFormatCodeOffset() const;
+    void setFormatCodeOffset( uint index );
+    int getFormatCodeOffset() const;
     
     // Copy over the gylph data
-    void CopyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec, bool loadAllGlyphs = false ) const;
+    void copyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & strIdVec, bool loadAllGlyphs = false ) const;
     
     // Clear out the data
-    void Clear();
+    void clear();
     
 private:
 
     // Set the gylph data
-    void Set( const CSpriteSheetGlyph & rGlyph );
-    void Set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const;
-    void Set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec );
+    void set( const CSpriteSheetGlyph & rGlyph );
+    void set( CSpriteSheet & rSpriteSheet, const std::string & rGlyphId ) const;
+    void set( const CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec );
     
 private:
 

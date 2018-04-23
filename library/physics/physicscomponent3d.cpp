@@ -56,9 +56,9 @@ CPhysicsComponent3D::~CPhysicsComponent3D()
  ************************************************************************/
 void CPhysicsComponent3D::Init( const CSprite3D & sprite )
 {
-    if( sprite.GetObjectData().GetPhysicsData().IsActive() )
+    if( sprite.getObjectData().GetPhysicsData().IsActive() )
     {
-        const CObjectPhysicsData3D & rPhysicsData = sprite.GetObjectData().GetPhysicsData();
+        const CObjectPhysicsData3D & rPhysicsData = sprite.getObjectData().GetPhysicsData();
         std::string bodyShape = rPhysicsData.GetBodyShape();
         btCollisionShape * pColShape( nullptr );
 
@@ -147,7 +147,7 @@ void CPhysicsComponent3D::Update( CSprite3D * pSprite )
         m_upRigidBody->getMotionState()->getWorldTransform(trans);
         
         // transform the sprite based on the physics
-        pSprite->SetTransform( trans );
+        pSprite->setTransform( trans );
     }
 
 }   // Update

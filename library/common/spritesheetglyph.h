@@ -37,15 +37,15 @@ public:
     {}
     
     // Get the size
-    const CSize<int> & GetSize() const
+    const CSize<int> & getSize() const
     { return m_size; }
     
     // Get the UV
-    const CRect<float> & GetUV() const
+    const CRect<float> & getUV() const
     { return m_uv; }
     
     // Get the crop offset
-    const CSize<int> & GetCropOffset() const
+    const CSize<int> & getCropOffset() const
     { return m_cropOffset; }
 
 private:

@@ -73,10 +73,10 @@ void CUICheckBox::OnSelectExecute( const SDL_Event & rEvent )
 void CUICheckBox::Render( const CMatrix & matrix )
 {
     for( size_t i = 0; i < m_spriteDeq.size()-1; ++i )
-        m_spriteDeq[i].Render( matrix );
+        m_spriteDeq[i].render( matrix );
 
     if( m_toggleState == NUIControl::TOGGLE_STATE_ON )
-        m_spriteDeq.back().Render( matrix );
+        m_spriteDeq.back().render( matrix );
 
 }   // Render
 

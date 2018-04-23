@@ -97,8 +97,8 @@ void CControlBase::LoadDynamicOffsetFromNode( const XMLNode & node )
 void CControlBase::SetDynamicPos()
 {
     // Position the menu based on the dynamic offset
-    if( !m_dynamicOffset.IsEmpty() )
-        setPos( m_dynamicOffset.GetPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+    if( !m_dynamicOffset.isEmpty() )
+        setPos( m_dynamicOffset.getPos( CSettings::Instance().GetDefaultSizeHalf() ) );
 
 }   // SetDynamicPos
 

@@ -26,10 +26,10 @@ public:
     CFontProperties( const std::string fontName, NDefs::EHorzAlignment hAlign, NDefs::EVertAlignment vAlign, float kerning );
     
     // Copy the data
-    void Copy( const CFontProperties & obj );
+    void copy( const CFontProperties & obj );
     
     // oad the font properties from XML node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
     
 public:
 

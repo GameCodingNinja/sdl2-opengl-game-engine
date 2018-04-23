@@ -14,19 +14,18 @@
 /************************************************************************
 *    desc:  Copy the data
 ************************************************************************/ 
-void CFontData::Copy( const CFontData & obj )
+void CFontData::copy( const CFontData & obj )
 {
     m_fontString = obj.m_fontString;
     m_fontStrSize = obj.m_fontStrSize;
-    m_fontProp.Copy( obj.m_fontProp );
-    
-}   // Copy
+    m_fontProp.copy( obj.m_fontProp );
+}
 
 
 /************************************************************************
 *    desc:  Load the font properties from XML node
 ************************************************************************/ 
-void CFontData::LoadFromNode( const XMLNode & node )
+void CFontData::loadFromNode( const XMLNode & node )
 {
     const XMLNode fontNode = node.getChildNode( "font" );
     if( !fontNode.isEmpty() )
@@ -35,6 +34,6 @@ void CFontData::LoadFromNode( const XMLNode & node )
         if( fontNode.isAttributeSet("fontString") )
             m_fontString = fontNode.getAttribute( "fontString" );
 
-        m_fontProp.LoadFromNode( fontNode );
+        m_fontProp.loadFromNode( fontNode );
     }
 }

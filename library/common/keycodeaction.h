@@ -18,11 +18,11 @@ public:
     
     CKeyCodeAction(int id)
     {
-        SetId( id );
+        setId( id );
     }
 
     // Set additional id's
-    void SetId( int id )
+    void setId( int id )
     {
         // Only set id's that are positive numbers
         if( id > -1 )
@@ -30,7 +30,7 @@ public:
     }
     
     // Remove an id
-    void RemoveId( int id )
+    void removeId( int id )
     {
         auto iter = std::find(m_id.begin(), m_id.end(), id);
         
@@ -39,7 +39,7 @@ public:
     }
 
     // Check for action
-    bool WasAction( const int id ) const
+    bool wasAction( const int id ) const
     {
         for( int iter : m_id )
             if( iter == id )

@@ -137,7 +137,7 @@ void CStartUpState::Fade(
         glClear( GL_COLOR_BUFFER_BIT );
 
         CShaderMgr::Instance().SetShaderColor( "shader_2d", "additive", current );
-        sprite.Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+        sprite.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 

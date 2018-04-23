@@ -40,25 +40,25 @@ public:
     virtual ~CActorSprite2D();
     
     // Get the physics component
-    CPhysicsComponent2D & GetPhysicsComponent();
+    CPhysicsComponent2D & getPhysicsComponent();
     
     // Init the sprite
-    void Init() override;
+    void init() override;
     
     // Clean up the sprite
-    void CleanUp() override;
+    void cleanUp() override;
     
     // Init the physics
-    void InitPhysics() override;
+    void initPhysics() override;
     
     // React to what the player is doing
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Update the actor
-    void Update() override;
+    void update() override;
     
     // Update the physics
-    void PhysicsUpdate() override;
+    void physicsUpdate() override;
 
     // Transform the actor
     void transform() override;
@@ -66,56 +66,56 @@ public:
     void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
 
     // Render the actor
-    void Render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix ) override;
     
     // Set/Get the AI pointer
-    void SetAI( iAIBase * pAIBase ) override;
+    void setAI( iAIBase * pAIBase ) override;
 
     // Is the actor in view
-    bool InView();
+    bool inView();
     
     // Get the sprite
-    CSprite2D & GetSprite( int index = 0 );
+    CSprite2D & getSprite( int index = 0 );
     
     // Get the sprite group
-    CSprite2D & GetSprite( const std::string & name );
+    CSprite2D & getSprite( const std::string & name );
     
     // Get the collision group
-    uint GetCollisionGroup() const;
+    uint getCollisionGroup() const;
     
     // Get the collision radius
-    float GetCollisionRadius() const;
+    float getCollisionRadius() const;
     
     // Check for collision against other actor sprite
-    bool IsCollision( CActorSprite2D & rPlayerActor );
+    bool isCollision( CActorSprite2D & rPlayerActor );
     
     
     // Set/Get the color
-    void SetColor( const CColor & color ) override {}
-    void SetColor( float r, float g, float b, float a ) override {}
-    void SetDefaultColor() override {}
-    const CColor & GetColor() const override {return m_dummy;}
-    const CColor & GetDefaultColor() const override {return m_dummy;}
+    void setColor( const CColor & color ) override {}
+    void setColor( float r, float g, float b, float a ) override {}
+    void setDefaultColor() override {}
+    const CColor & getColor() const override {return m_dummy;}
+    const CColor & getDefaultColor() const override {return m_dummy;}
 
     // Set/Get the alpha
-    void SetAlpha( float alpha ) override {}
-    float GetAlpha() const override {return 0;}
-    void SetDefaultAlpha() override {}
-    float GetDefaultAlpha() const override {return 0;}
+    void setAlpha( float alpha ) override {}
+    float getAlpha() const override {return 0;}
+    void setDefaultAlpha() override {}
+    float getDefaultAlpha() const override {return 0;}
 
     // Get the frame count
-    uint GetFrameCount() const override {return 0;}
+    uint getFrameCount() const override {return 0;}
 
     // Set the texture ID from index
-    void SetFrame( uint index ) override {}
+    void setFrame( uint index ) override {}
     
     // Get the current frame
-    uint GetCurrentFrame() const override {return 0;}
+    uint getCurrentFrame() const override {return 0;}
     
     // Create the font string
-    void CreateFontString( const std::string & fontString ) override {}
+    void createFontString( const std::string & fontString ) override {}
     
-    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
+    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
     
 protected:
     
@@ -125,16 +125,16 @@ protected:
 private:
     
     // Create the actor
-    void Create( const CActorData & actorData );
+    void create( const CActorData & actorData );
     
     // Check if an object is within the orthographic view frustum
-    bool InOrthographicView();
+    bool inOrthographicView();
     
     // Check if an object is within the perspective view frustum
-    bool InPerspectiveView();
+    bool inPerspectiveView();
     
     // Check for collision against other actor sprite
-    bool CheckBroadPhase( CActorSprite2D & rPlayerActor );
+    bool checkBroadPhase( CActorSprite2D & rPlayerActor );
     
 private:
     

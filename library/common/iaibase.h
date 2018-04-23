@@ -16,22 +16,22 @@ class iAIBase
 public:
 
     // Constructor
-    iAIBase();
+    iAIBase(){};
 
     // Destructor
-    virtual ~iAIBase();
+    virtual ~iAIBase(){};
     
     // Do any initializing
-    virtual void Init();
+    virtual void init(){};
 
     // Handle player related messages
-    virtual void HandleEvent( const SDL_Event & rEvent );
+    virtual void handleEvent( const SDL_Event & rEvent ){};
 
     // Update animations, move sprites, etc.
-    virtual void Update();
+    virtual void update(){};
     
     // Update the physics
-    virtual void PhysicsUpdate();
+    virtual void physicsUpdate(){};
 };
 
 #endif  // __i_ai_base_h__

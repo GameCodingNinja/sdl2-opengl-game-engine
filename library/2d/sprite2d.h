@@ -42,89 +42,89 @@ public:
     virtual ~CSprite2D();
     
     // Init the script functions
-    void InitScriptFunctions( const XMLNode & node );
+    void initScriptFunctions( const XMLNode & node );
     
     // Prepare the script function to run
-    bool PrepareFuncId( const std::string & scriptFuncId, bool forceUpdate = false );
-    void Prepare(
+    bool prepareFuncId( const std::string & scriptFuncId, bool forceUpdate = false );
+    void prepare(
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>(),
         bool forceUpdate = false );
     
     // Load the sprite data
-    void Load( const XMLNode & node );
-    void Load( const CSpriteData & spriteData );
+    void load( const XMLNode & node );
+    void load( const CSpriteData & spriteData );
     
     // Init the sprite
-    void Init() override;
+    void init() override;
     
     // Clean up the sprite
-    void CleanUp() override;
+    void cleanUp() override;
 
     // Get the object data
-    const CObjectData2D & GetObjectData() const;
+    const CObjectData2D & getObjectData() const;
 
     // Get the visual component
-    CVisualComponent2D & GetVisualComponent();
+    CVisualComponent2D & getVisualComponent();
 
     // Get the physics component
-    CPhysicsComponent2D & GetPhysicsComponent();
+    CPhysicsComponent2D & getPhysicsComponent();
 
     // Get the scripting component
-    CScriptComponent & GetScriptComponent();
+    CScriptComponent & getScriptComponent();
     
     // Init the physics
-    void InitPhysics() override;
+    void initPhysics() override;
     
     // React to what the player is doing
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Update the sprite 
-    void Update() override;
+    void update() override;
     
     // Update the physics 
-    void PhysicsUpdate() override;
+    void physicsUpdate() override;
 
     // do the render
-    void Render( const CCamera & camera ) override;
-    void Render( const CMatrix & matrix ) override;
+    void render( const CCamera & camera ) override;
+    void render( const CMatrix & matrix ) override;
     
     // Set/Get the AI pointer
-    void SetAI( iAIBase * pAIBase ) override;
+    void setAI( iAIBase * pAIBase ) override;
     
     // Get the font size
-    const CSize<float> & GetFontSize() const;
+    const CSize<float> & getFontSize() const;
     
     // Copy over the script functions
-    void CopyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
+    void copyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
     
     // Set the physics position and rotation
-    void SetPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override;
+    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override;
     
     // Set/Get the color
-    void SetColor( const CColor & color ) override;
-    void SetColor( float r, float g, float b, float a ) override;
-    void SetDefaultColor() override;
-    const CColor & GetColor() const override;
-    const CColor & GetDefaultColor() const override;
+    void setColor( const CColor & color ) override;
+    void setColor( float r, float g, float b, float a ) override;
+    void setDefaultColor() override;
+    const CColor & getColor() const override;
+    const CColor & getDefaultColor() const override;
 
     // Set/Get the alpha
-    void SetAlpha( float alpha ) override;
-    float GetAlpha() const override;
-    void SetDefaultAlpha() override;
-    float GetDefaultAlpha() const override;
+    void setAlpha( float alpha ) override;
+    float getAlpha() const override;
+    void setDefaultAlpha() override;
+    float getDefaultAlpha() const override;
 
     // Get the frame count
-    uint GetFrameCount() const override;
+    uint getFrameCount() const override;
 
     // Set the texture ID from index
-    void SetFrame( uint index ) override;
+    void setFrame( uint index ) override;
     
     // Get the current frame
-    uint GetCurrentFrame() const override;
+    uint getCurrentFrame() const override;
     
     // Create the font string
-    void CreateFontString( const std::string & fontString ) override;
+    void createFontString( const std::string & fontString ) override;
 
 protected:
 

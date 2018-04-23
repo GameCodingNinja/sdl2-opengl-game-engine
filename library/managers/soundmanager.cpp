@@ -66,7 +66,7 @@ CSoundMgr::~CSoundMgr()
     {
         for( auto & mapIter : mapMapIter.second )
         {
-            mapIter.second.Free();
+            mapIter.second.free();
         }
     }
 
@@ -147,7 +147,7 @@ void CSoundMgr::LoadFromXML( const std::string & group, const std::string & file
             }
 
             // Now try to load the sound
-            iter.first->second.LoadFromNode( loadNode );
+            iter.first->second.loadFromNode( loadNode );
         }
     }
 
@@ -177,7 +177,7 @@ void CSoundMgr::LoadFromXML( const std::string & group, const std::string & file
                         % id % group % __FUNCTION__ % __LINE__ ));
             }
 
-            iter.first->second.LoadFromNode( playListNode, group, soundMapIter->second );
+            iter.first->second.loadFromNode( playListNode, group, soundMapIter->second );
         }
     }
 
@@ -195,7 +195,7 @@ void CSoundMgr::FreeGroup( const std::string & group )
     {
         // Free all the sounds in this group
         for( auto & mapIter : soundMapIter->second )
-            mapIter.second.Free();
+            mapIter.second.free();
 
         // Erase this group
         m_soundMapMap.erase( soundMapIter );
@@ -220,7 +220,7 @@ CSound & CSoundMgr::GetSound( const std::string & group, const std::string & sou
     {
         auto iter = playListMapIter->second.find( soundID );
         if( iter != playListMapIter->second.end() )
-            return iter->second.GetSound();
+            return iter->second.getSound();
     }
 
     auto soundMapIter = m_soundMapMap.find( group );
@@ -276,7 +276,7 @@ int CSoundMgr::GetNextChannel()
 ************************************************************************/
 void CSoundMgr::Play( const std::string & group, const std::string & soundID, int loopCount )
 {
-    GetSound( group, soundID ).Play( GetNextChannel(), loopCount );
+    GetSound( group, soundID ).play( GetNextChannel(), loopCount );
 
 }   // Play
 
@@ -286,7 +286,7 @@ void CSoundMgr::Play( const std::string & group, const std::string & soundID, in
 ************************************************************************/
 void CSoundMgr::Pause( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).Pause();
+    GetSound( group, soundID ).pause();
 
 }   // Pause
 
@@ -296,7 +296,7 @@ void CSoundMgr::Pause( const std::string & group, const std::string & soundID )
 ************************************************************************/
 void CSoundMgr::Resume( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).Resume();
+    GetSound( group, soundID ).resume();
 
 }   // Resume
 
@@ -306,7 +306,7 @@ void CSoundMgr::Resume( const std::string & group, const std::string & soundID )
 ************************************************************************/
 void CSoundMgr::Stop( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).Stop();
+    GetSound( group, soundID ).stop();
 
 }   // Resume
 
@@ -316,13 +316,13 @@ void CSoundMgr::Stop( const std::string & group, const std::string & soundID )
 ************************************************************************/
 void CSoundMgr::SetVolume( const std::string & group, const std::string & soundID, int volume )
 {
-    GetSound( group, soundID ).SetVolume( volume );
+    GetSound( group, soundID ).setVolume( volume );
     
 }   // SetVolume
 
 int CSoundMgr::GetVolume( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).GetVolume();
+    return GetSound( group, soundID ).getVolume();
     
 }   // GetVolume
 
@@ -332,7 +332,7 @@ int CSoundMgr::GetVolume( const std::string & group, const std::string & soundID
 ************************************************************************/
 bool CSoundMgr::IsPlaying( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).IsPlaying();
+    return GetSound( group, soundID ).isPlaying();
 
 }   // IsPlaying
 
@@ -342,7 +342,7 @@ bool CSoundMgr::IsPlaying( const std::string & group, const std::string & soundI
 ************************************************************************/
 bool CSoundMgr::IsPaused( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).IsPaused();
+    return GetSound( group, soundID ).isPaused();
     
 }   // IsPaused
 
