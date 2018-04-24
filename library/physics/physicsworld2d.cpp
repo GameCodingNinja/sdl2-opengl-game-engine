@@ -164,7 +164,7 @@ void CPhysicsWorld2D::fixedTimeStep()
     if( m_active )
     {
         // Increment the timer
-        m_timer += CHighResTimer::Instance().GetElapsedTime();
+        m_timer += CHighResTimer::Instance().getElapsedTime();
 
         if( m_timer > m_stepTime )
         {
@@ -186,7 +186,7 @@ void CPhysicsWorld2D::variableTimeStep()
     if( m_active )
     {
         // Begin the physics world step
-        m_world.Step( CHighResTimer::Instance().GetElapsedTime() / 1000.f, m_velStepCount, m_posStepCount );
+        m_world.Step( CHighResTimer::Instance().getElapsedTime() / 1000.f, m_velStepCount, m_posStepCount );
     }
 }
 

@@ -34,24 +34,24 @@ public:
 
     // Post Lambda to the work queue and return future
     template<class F, class... Args>
-    auto PostRetFut(F&& f, Args&&... args)
+    auto postRetFut(F&& f, Args&&... args)
         -> std::future<typename std::result_of<F(Args...)>::type>;
     
     // Post Lambda to the work queue and store future internally
     template<class F, class... Args>
-    void Post(F&& f, Args&&... args);
+    void post(F&& f, Args&&... args);
     
     // Wait for the jobs to complete
-    void Wait();
+    void wait();
     
     // Lock mutex for Synchronization
-    void Lock();
+    void lock();
     
     // Unlock mutex for Synchronization
-    void Unlock();
+    void unlock();
     
     // Get the mutex
-    std::mutex & GetMutex();
+    std::mutex & getMutex();
 
 private:
     
@@ -86,7 +86,7 @@ private:
 *    desc:  Post Lambda to the work queue and return future
 ************************************************************************/
 template<class F, class... Args>
-auto CThreadPool::PostRetFut(F&& f, Args&&... args)
+auto CThreadPool::postRetFut(F&& f, Args&&... args)
     -> std::future<typename std::result_of<F(Args...)>::type>
 {
     using return_type = typename std::result_of < F(Args...)>::type;
@@ -125,7 +125,7 @@ auto CThreadPool::PostRetFut(F&& f, Args&&... args)
 *    desc:  Post Lambda to the work queue and store future internally
 ************************************************************************/
 template<class F, class... Args>
-void CThreadPool::Post(F&& f, Args&&... args)
+void CThreadPool::post(F&& f, Args&&... args)
 {
     #if defined(__thread_disable__)
     f();

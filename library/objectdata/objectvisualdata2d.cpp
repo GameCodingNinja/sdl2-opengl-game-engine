@@ -82,7 +82,7 @@ void CObjectVisualData2D::loadFromNode( const XMLNode & objectNode )
                     const int heightOrLess = std::atoi( resNode.getAttribute( "heightOrLess" ) );
 
                     // If the current render resolution is less then or equil to the heightOrLess value, we found the swap res
-                    if( static_cast<int>(CSettings::Instance().GetSize().getH()) <= heightOrLess )
+                    if( static_cast<int>(CSettings::Instance().getSize().getH()) <= heightOrLess )
                     {
                         m_defaultUniformScale = std::atof( resNode.getAttribute( "defaultUniformScale" ) );
 

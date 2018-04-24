@@ -28,116 +28,116 @@ public:
     }
 
     // Save the settings file
-    void SaveSettings();
+    void saveSettings();
     
     // Init the file path for loading the settings file
-    void InitFilePath( const std::string & filePath );
+    void initFilePath( const std::string & filePath );
 
     // Load settings data from xml file
-    void LoadXML();
+    void loadXML();
 
     // Get game window size
-    const CSize<float> & GetResolution() const;
-    const CSize<float> & GetSize() const;
-    const CSize<float> & GetSizeHalf() const;
-    const CSize<float> & GetNativeSize() const;
-    const CSize<float> & GetDefaultSize() const;
-    const CSize<float> & GetDefaultSizeHalf() const;
-    void SetSize( const CSize<float> & size );
+    const CSize<float> & getResolution() const;
+    const CSize<float> & getSize() const;
+    const CSize<float> & getSizeHalf() const;
+    const CSize<float> & getNativeSize() const;
+    const CSize<float> & getDefaultSize() const;
+    const CSize<float> & getDefaultSizeHalf() const;
+    void setSize( const CSize<float> & size );
 
     // Do we want vSync?
-    bool GetVSync() const;
-    void SetVSync( bool value );
+    bool getVSync() const;
+    void setVSync( bool value );
 
     // Get the OpenGL major version
-    int GetMajorVersion() const;
+    int getMajorVersion() const;
 
     // Get the OpenGL minor version
-    int GetMinorVersion() const;
+    int getMinorVersion() const;
 
     // Get the OpenGL profile type
-    int GetProfile() const;
+    int getProfile() const;
 
     // Get the view angle
-    float GetViewAngle() const;
+    float getViewAngle() const;
 
     // Get the minimum z distance
-    float GetMinZdist() const;
+    float getMinZdist() const;
 
     // Get the maximum z distance
-    float GetMaxZdist() const;
+    float getMaxZdist() const;
     
     // Height and width screen ratio for orthographic objects.
     // The difference between screen and the default size
-    const CSize<float> & GetOrthoAspectRatio() const;
+    const CSize<float> & getOrthoAspectRatio() const;
 
     // Height and width screen ratio for perspective projection
-    const CSize<float> & GetScreenAspectRatio() const;
+    const CSize<float> & getScreenAspectRatio() const;
 
     // Get the gamepad stick dead zone
-    int GetGamePadStickDeadZone() const;
+    int getGamePadStickDeadZone() const;
 
     // Set the gamepad stick dead zone
-    void SetGamePadStickDeadZone( int value );
+    void setGamePadStickDeadZone( int value );
 
     // Get/Set full screen
-    bool GetFullScreen() const;
-    void SetFullScreen( bool value );
+    bool getFullScreen() const;
+    void setFullScreen( bool value );
 
     // Calculate the ratio
-    void CalcRatio();
+    void calcRatio();
 
     // Do we create the depth stencil buffer
-    bool GetCreateStencilBuffer() const;
+    bool getCreateStencilBuffer() const;
 
     // Get the bit size of the stencil buffer
-    int GetStencilBufferBitSize() const;
+    int getStencilBufferBitSize() const;
 
     // Do we clear the stencil buffer
-    bool GetClearStencilBuffer() const;
+    bool getClearStencilBuffer() const;
 
     // Is the depth buffer enabled by default
-    bool GetEnableDepthBuffer() const;
+    bool getEnableDepthBuffer() const;
 
     // Do we clear the target buffer
-    bool GetClearTargetBuffer() const;
+    bool getClearTargetBuffer() const;
     
     // Get the sound frequency
-    int GetFrequency() const;
+    int getFrequency() const;
     
     // Get the sound channels: mono, stero, quad, suround, etc
-    int GetSoundChannels() const;
+    int getSoundChannels() const;
     
     // Get the number of channels used for mixing
-    int GetMixChannels() const;
+    int getMixChannels() const;
     
     // Get the chunk size.
-    int GetChunkSize() const;
+    int getChunkSize() const;
     
     // Get the minimum thread count
-    int GetMinThreadCount() const;
+    int getMinThreadCount() const;
     
     // Get the maximum thread count
-    int GetMaxThreadCount() const;
+    int getMaxThreadCount() const;
     
     // Get the sector size
-    int GetSectorSize() const;
+    int getSectorSize() const;
     
     // Get half of the sector size
-    int GetSectorSizeHalf() const;
+    int getSectorSizeHalf() const;
     
     // Get the Anisotropic setting
-    int GetAnisotropicLevel() const;
+    int getAnisotropicLevel() const;
     
     // Get the projection type
-    NDefs::EProjectionType GetProjectionType() const;
+    NDefs::EProjectionType getProjectionType() const;
     
     // Get the projection scale
-    float GetProjectionScale() const;
+    float getProjectionScale() const;
     
     // Set/Get debug string visible
-    void SetDebugStrVisible( bool value );
-    bool GetDebugStrVisible() const;
+    void setDebugStrVisible( bool value );
+    bool getDebugStrVisible() const;
 
 private:
 
@@ -168,7 +168,7 @@ private:
     // Height and width screen ratio for perspective projection
     CSize<float> m_screenAspectRatio;
 
-    // Precalculated aspect ratios for orthographic projection
+    // Pre-calculated aspect ratios for orthographic projection
     CSize<float> m_orthoAspectRatio;
     
     // Projection scale

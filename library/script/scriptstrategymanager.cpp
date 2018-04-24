@@ -29,11 +29,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            CSpriteStrategyMgr::Instance().AddStrategy( strategyId, new CBasicSpriteStrategy( cameraId, idOffset, idDir ) );
+            CSpriteStrategyMgr::Instance().addStrategy( strategyId, new CBasicSpriteStrategy( cameraId, idOffset, idDir ) );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -45,11 +45,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            CSpriteStrategyMgr::Instance().AddStrategy( strategyId, new CBasicSpriteStrategy( idOffset, idDir ) );
+            CSpriteStrategyMgr::Instance().addStrategy( strategyId, new CBasicSpriteStrategy( idOffset, idDir ) );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -64,11 +64,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            CSpriteStrategyMgr::Instance().AddStrategy( strategyId, new CBasicStageStrategy(cameraId) );
+            CSpriteStrategyMgr::Instance().addStrategy( strategyId, new CBasicStageStrategy(cameraId) );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -83,11 +83,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            CSpriteStrategyMgr::Instance().DeleteStrategy( strategyId );
+            CSpriteStrategyMgr::Instance().deleteStrategy( strategyId );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -102,11 +102,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            return CSpriteStrategyMgr::Instance().Create( strategyId, group, name );
+            return CSpriteStrategyMgr::Instance().create( strategyId, group, name );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -120,11 +120,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            return CSpriteStrategyMgr::Instance().Create( strategyId, name );
+            return CSpriteStrategyMgr::Instance().create( strategyId, name );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -181,11 +181,11 @@ namespace NScriptStrategyManager
     {
         try
         {
-            CSpriteStrategyMgr::Instance().Get<iSpriteStrategy>( strategyId ).SetCameraId( cameraId );
+            CSpriteStrategyMgr::Instance().get<iSpriteStrategy>( strategyId ).setCameraId( cameraId );
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -207,7 +207,7 @@ namespace NScriptStrategyManager
         Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, int idOffset = 0, int idDir = 1)", asFUNCTIONPR(CreateBasicSpriteStrategy, (const std::string &, int, int), void), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateStageStrategy(string &in, string &in)", asFUNCTION(CreateBasicStageStrategy), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_DeleteStrategy(string &in)", asFUNCTION(DeleteStrategy), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void Strategy_DeleteSprite(string &in, int)", asMETHOD(CSpriteStrategyMgr, DeleteSprite), asCALL_THISCALL_ASGLOBAL, &CSpriteStrategyMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Strategy_DeleteSprite(string &in, int)", asMETHOD(CSpriteStrategyMgr, deleteSprite), asCALL_THISCALL_ASGLOBAL, &CSpriteStrategyMgr::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("iSprite & Strategy_CreateSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &, const std::string &), iSprite *), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("iSprite & Strategy_CreateSprite(string &in, string &in)", asFUNCTIONPR(CreateSprite, (const std::string &, const std::string &), iSprite *), asCALL_CDECL) );
         //Throw( pEngine->RegisterGlobalFunction("CActorSprite2D & Strategy_CreateActorSprite(string &in, string &in, string &in)", asFUNCTIONPR(CreateActorSprite, (const std::string &, const std::string &, const std::string &), CActorSprite2D *), asCALL_CDECL) );

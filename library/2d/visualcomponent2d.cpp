@@ -143,7 +143,7 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
         const int32_t VERTEX_BUF_SIZE( sizeof(CVertex2D) );
 
         // Increment our stat counter to keep track of what is going on.
-        CStatCounter::Instance().IncDisplayCounter();
+        CStatCounter::Instance().incDisplayCounter();
 
         // Bind the VBO and IBO
         CVertBufMgr::Instance().bind( m_vbo, m_ibo );
@@ -175,7 +175,7 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
         {
             // Calculate the final matrix
             CMatrix finalMatrix;
-            finalMatrix.SetScale( m_quadVertScale );
+            finalMatrix.setScale( m_quadVertScale );
             finalMatrix *= objMatrix;
             finalMatrix *= matrix;
 
@@ -187,7 +187,7 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
         {
             // Calculate the final matrix
             CMatrix finalMatrix;
-            finalMatrix.SetScale( m_quadVertScale );
+            finalMatrix.setScale( m_quadVertScale );
             finalMatrix *= objMatrix;
             finalMatrix *= matrix;
 

@@ -42,17 +42,17 @@ public:
     virtual ~CBasicSpriteStrategy();
     
     // Load the sprite data from file
-    void LoadFromFile( const std::string & file ) override;
+    void loadFromFile( const std::string & file ) override;
 
     // Create the sprite
-    virtual iSprite * Create(
+    virtual iSprite * create(
         const std::string & dataName,
         const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
     
-    virtual iSprite * Create(
+    virtual iSprite * create(
         const std::string & group,
         const std::string & name,
         const int id,
@@ -60,54 +60,54 @@ public:
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
     
-    virtual iSprite * Create(
+    virtual iSprite * create(
         const std::string & dataName,
         const int id ) override;
     
-    virtual iSprite * Create(
+    virtual iSprite * create(
         const std::string & group,
         const std::string & name,
         const int id ) override;
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
     
-    void CleanUp() override;
+    void cleanUp() override;
 
     // Update the sprites
-    void Update() override;
+    void update() override;
 
     // Transform the sprite
-    void Transform() override;
+    void transform() override;
 
     // Render the sprites
-    void Render() override;
-    void Render( const CMatrix & matrix ) override;
-    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
+    void render() override;
+    void render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
     
     // Get the reference to the sprite
     template<typename target>
-    target & Get( const int id )
+    target & get( const int id )
     {
-        return *dynamic_cast<target *>(get( id ));
+        return *dynamic_cast<target *>(getSprite( id ));
     }
     
     // Find if the sprite exists
-    bool Find( iSprite * piSprite );
+    bool find( iSprite * piSprite );
     
     // Get the sprite data by name
-    CSpriteDataContainer & GetData( const std::string & name );
+    CSpriteDataContainer & getData( const std::string & name );
 
 protected:
     
     // Handle the deleting of any sprites
-    void DeleteObj( int index ) override;
+    void deleteObj( int index ) override;
     
     // Handle the creating of any object by name
-    void CreateObj( const std::string & name ) override;
+    void createObj( const std::string & name ) override;
     
     // Get the pointer to the sprite
-    iSprite * get( const int id );
+    iSprite * getSprite( const int id );
 
 protected:
     

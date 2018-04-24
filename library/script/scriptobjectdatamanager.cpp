@@ -30,7 +30,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -49,7 +49,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -65,7 +65,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -84,7 +84,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -100,7 +100,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -119,7 +119,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -135,7 +135,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -154,7 +154,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {
@@ -170,7 +170,7 @@ namespace NScriptObjectDataManager
         }
         catch( NExcept::CCriticalException & ex )
         {
-            asGetActiveContext()->SetException(ex.GetErrorMsg().c_str());
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
         }
         catch( std::exception const & ex )
         {

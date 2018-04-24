@@ -80,7 +80,7 @@ void CSimpleCycleresults::StartAnimation()
 {
     if( m_cycleResultsActive )
     {
-        m_cycleResultsTimer.Set( 1000 );
+        m_cycleResultsTimer.set( 1000 );
         
         auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
         
@@ -110,7 +110,7 @@ void CSimpleCycleresults::StopAnimation()
 {
     if( m_cycleResultsActive )
     {
-        m_cycleResultsTimer.SetExpired();
+        m_cycleResultsTimer.setExpired();
         
         auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
         
@@ -130,6 +130,6 @@ void CSimpleCycleresults::StopAnimation()
 ****************************************************************************/
 bool CSimpleCycleresults::IsAnimating()
 {
-    return !m_cycleResultsTimer.Expired();
+    return !m_cycleResultsTimer.expired();
     
 }   // Animate

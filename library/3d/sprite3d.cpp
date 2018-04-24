@@ -32,7 +32,7 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
     setVisible( objectData.getVisualData().isActive() );
     
     // Set the sprite type
-    m_parameters.Add( NDefs::SPRITE3D );
+    m_parameters.add( NDefs::SPRITE3D );
 }
 
 
@@ -58,7 +58,7 @@ void CSprite3D::initPhysics()
 ************************************************************************/
 void CSprite3D::setTransform( const btTransform & trans )
 {
-    m_parameters.Add( NDefs::ROTATE | NDefs::PHYSICS_TRANSFORM );
+    m_parameters.add( NDefs::ROTATE | NDefs::PHYSICS_TRANSFORM );
     
     // Set the position
     const btVector3 & btVec = trans.getOrigin();
@@ -69,7 +69,7 @@ void CSprite3D::setTransform( const btTransform & trans )
     for( int i = 0; i < 3; ++i )
     {
         const btVector3 & vec = btMat.getRow(i);
-        m_rotMatrix.SetColumn( i, vec.x(), vec.y(), vec.z() );
+        m_rotMatrix.setColumn( i, vec.x(), vec.y(), vec.z() );
     }
     
     // This is an example of how to get the rotation out of bullet physics

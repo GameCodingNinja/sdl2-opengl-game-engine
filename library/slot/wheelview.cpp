@@ -49,7 +49,7 @@ CWheelView::CWheelView( const CSlotStripModel & rSlotStripModel, CSymbolSetView 
     m_allowStopSounds(true)
 {
     // Set the value returned by Expired when the timer is disabled
-    m_spinTimer.SetDisableValue( true );
+    m_spinTimer.setDisableValue( true );
     
 }   // constructor
 
@@ -223,7 +223,7 @@ void CWheelView::Update()
                 m_velocity = 0.0;
                 m_acceleration = m_spinProfile.GetAccelation();
                 m_saftyCheckDegree = m_degreePerWedge / m_spinProfile.GetSafetyCheckDivisor();
-                m_spinTimer.Set( m_spinProfile.GetStartDelay() );
+                m_spinTimer.set( m_spinProfile.GetStartDelay() );
                 m_spinState = NSlotDefs::ESS_SPIN_STARTING;
                 
                 break;
@@ -231,10 +231,10 @@ void CWheelView::Update()
             
             case NSlotDefs::ESS_SPIN_STARTING:
             {
-                if( m_spinTimer.Expired() )
+                if( m_spinTimer.expired() )
                 {
                     // Increment the velocity and acceleration
-                    const float elapsedTime = CHighResTimer::Instance().GetElapsedTime();
+                    const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                     m_velocity += m_acceleration * elapsedTime;
                     m_acceleration += m_spinProfile.GetImpulse() * elapsedTime;
                     
@@ -242,7 +242,7 @@ void CWheelView::Update()
                     if( m_velocity >= m_spinProfile.GetMaxVelocity() )
                     {
                         m_velocity = m_spinProfile.GetMaxVelocity();
-                        m_spinTimer.Set( m_spinProfile.GetMaxVelocityTime() );
+                        m_spinTimer.set( m_spinProfile.GetMaxVelocityTime() );
                         m_spinState = NSlotDefs::ESS_SPINNING;
                     }
                     
@@ -257,10 +257,10 @@ void CWheelView::Update()
                 IncSpin( m_velocity );
                 
                 // Disable the timer if fast stop is needed
-                m_spinTimer.Disable( m_disableSpinTimer );
+                m_spinTimer.disable( m_disableSpinTimer );
                 
                 // Wait for the spin to expire and the rotation to be less then the win point degree
-                if( m_spinTimer.Expired() && (m_rotation < m_winPointDegree)  )
+                if( m_spinTimer.expired() && (m_rotation < m_winPointDegree)  )
                     m_spinState = NSlotDefs::ESS_PREPARE_TO_STOP;
                 
                 break;
@@ -286,7 +286,7 @@ void CWheelView::Update()
 
             case NSlotDefs::ESS_SPIN_STOPPING:
             {  
-                const float elapsedTime = CHighResTimer::Instance().GetElapsedTime();
+                const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                 m_velocity -= m_acceleration * elapsedTime;
 
                 if( m_velocity < 0.0 )
@@ -353,7 +353,7 @@ void CWheelView::Update()
 void CWheelView::IncSpin( float velocity )
 {
     // Get the rotation traveled
-    m_rotation += velocity * CHighResTimer::Instance().GetElapsedTime();
+    m_rotation += velocity * CHighResTimer::Instance().getElapsedTime();
     m_currentRotation = m_rotation;
 
     if( m_rotation >= m_PI_2 )

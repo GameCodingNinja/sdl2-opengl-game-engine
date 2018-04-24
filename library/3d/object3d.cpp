@@ -36,22 +36,22 @@ CObject3D::~CObject3D()
 void CObject3D::applyRotation( CMatrix & matrix )
 {
     // Add in the center point prior to rotation
-    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
-        matrix.Translate( m_centerPos );
+    if( m_parameters.isSet( NDefs::CENTER_POINT ) )
+        matrix.translate( m_centerPos );
     
     // Add in the rotation if this is NOT a physics transformation
-    if( !m_parameters.IsSet( NDefs::PHYSICS_TRANSFORM ) )
+    if( !m_parameters.isSet( NDefs::PHYSICS_TRANSFORM ) )
     {
-        m_rotMatrix.InitilizeMatrix();
-        m_rotMatrix.Rotate( m_rot );
+        m_rotMatrix.initilizeMatrix();
+        m_rotMatrix.rotate( m_rot );
     }
     
     // Since the rotation has already been done, multiply it into the matrix
-    matrix.Multiply3x3( m_rotMatrix );
+    matrix.multiply3x3( m_rotMatrix );
     
     // Subtract the center point after rotation to put back in original position
-    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
-        matrix.Translate( -m_centerPos );
+    if( m_parameters.isSet( NDefs::CENTER_POINT ) )
+        matrix.translate( -m_centerPos );
 }
 
 

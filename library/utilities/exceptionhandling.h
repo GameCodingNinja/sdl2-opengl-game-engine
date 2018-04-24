@@ -21,8 +21,8 @@ namespace NExcept
         {}
 
         // Return the error info
-        std::string & GetErrorMsg(){ return errorMsg; }
-        std::string & GetErrorTitle(){ return errorTitle; }
+        std::string & getErrorMsg(){ return errorMsg; }
+        std::string & getErrorTitle(){ return errorTitle; }
 
     protected:
 

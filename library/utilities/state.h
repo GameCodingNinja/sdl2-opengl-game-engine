@@ -21,7 +21,7 @@ public:
     ~CState();
 
     // Initilize the state class
-    void Initilize();
+    void initilize();
 
     // Returns the current state value for the substate.
     operator int() const;
@@ -36,7 +36,7 @@ public:
     // This returns a new state varible which references the new substack within
     // the state stack.  Use this new state returned to use and change the
     // substate you have created.
-    CState NewSubState () const;
+    CState newSubState () const;
 
 protected:
 

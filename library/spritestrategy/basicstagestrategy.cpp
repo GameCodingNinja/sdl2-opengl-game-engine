@@ -18,12 +18,12 @@
 CBasicStageStrategy::CBasicStageStrategy( const std::string & cameraId ) :
     iSpriteStrategy(cameraId)
 {
-}   // constructor
+}
 
 CBasicStageStrategy::CBasicStageStrategy() :
     iSpriteStrategy()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -31,146 +31,135 @@ CBasicStageStrategy::CBasicStageStrategy() :
 ************************************************************************/
 CBasicStageStrategy::~CBasicStageStrategy()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the sector data from file
 ************************************************************************/
-void CBasicStageStrategy::LoadFromFile( const std::string & file )
+void CBasicStageStrategy::loadFromFile( const std::string & file )
 {
     // open and parse the XML file:
     XMLNode node = XMLNode::openFileHelper( file.c_str(), "stage" );
-    
+
     XMLNode cameraNode = node.getChildNode( "cameraPosition" );
     if( !cameraNode.isEmpty() )
         m_defaultCameraPos.loadTransFromNode( cameraNode );
 
     // Load thes sector data from node
-    LoadFromNode( node );
-
-}   // LoadFromFile
+    loadFromNode( node );
+}
 
 
 /************************************************************************
 *    desc:  Load thes sector data from node
 ************************************************************************/
-void CBasicStageStrategy::LoadFromNode( const XMLNode & node )
+void CBasicStageStrategy::loadFromNode( const XMLNode & node )
 {
     XMLNode sectorsNode = node.getChildNode( "sectors" );
     if( !sectorsNode.isEmpty() )
     {
         const XMLNode sectorsNode = node.getChildNode( "sectors" );
-        
+
         for( int i = 0; i < sectorsNode.nChildNode(); ++i )
         {
             XMLNode sectorNode = sectorsNode.getChildNode( i );
-            
+
             m_sectorDeq.emplace_back();
-            m_sectorDeq.back().LoadFromNode( sectorNode );
+            m_sectorDeq.back().loadFromNode( sectorNode );
             m_sectorDeq.back().loadTransFromNode( sectorNode );
         }
     }
-    
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CBasicStageStrategy::Init()
+void CBasicStageStrategy::init()
 {
     for( auto & iter : m_sectorDeq )
-        iter.Init();
-    
-}   // Init
+        iter.init();
+}
 
 
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CBasicStageStrategy::CleanUp()
+void CBasicStageStrategy::cleanUp()
 {
     for( auto & iter : m_sectorDeq )
-        iter.CleanUp();
-    
-}   // CleanUp
+        iter.cleanUp();
+}
 
 
 /***************************************************************************
 *    desc:  Update the sector
 ****************************************************************************/
-void CBasicStageStrategy::Update()
+void CBasicStageStrategy::update()
 {
     for( auto & iter : m_sectorDeq )
-        iter.Update();
-
-}   // Update2D
+        iter.update();
+}
 
 
 /************************************************************************
 *    desc:  Transform the sector
 ************************************************************************/
-void CBasicStageStrategy::Transform()
+void CBasicStageStrategy::transform()
 {
     for( auto & iter : m_sectorDeq )
         iter.transform();
+}
 
-}   // Transform
-
-void CBasicStageStrategy::Transform( const CObject2D & object )
+void CBasicStageStrategy::transform( const CObject2D & object )
 {
     for( auto & iter : m_sectorDeq )
         iter.transform( object );
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  Render the sector
 ****************************************************************************/
-void CBasicStageStrategy::Render( const CMatrix & matrix )
+void CBasicStageStrategy::render( const CMatrix & matrix )
 {
     for( auto & iter : m_sectorDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
+}
 
-}   // Render
-
-void CBasicStageStrategy::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
+void CBasicStageStrategy::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     for( auto & iter : m_sectorDeq )
-        iter.Render( matrix, rotMatrix );
+        iter.render( matrix, rotMatrix );
+}
 
-}   // Render
-
-void CBasicStageStrategy::Render()
+void CBasicStageStrategy::render()
 {
     const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
     for( auto & iter : m_sectorDeq )
-        iter.Render( camera );
-
-}   // Render
+        iter.render( camera );
+}
 
 
 /************************************************************************
 *    desc:  Get the default camera position
 ************************************************************************/
-CObject & CBasicStageStrategy::GetDefaultCameraPos()
+CObject & CBasicStageStrategy::getDefaultCameraPos()
 {
     return m_defaultCameraPos;
-    
-}   // GetDefaultCameraPos
+}
 
 
 /************************************************************************
  *    desc:  Find if the sprite exists
  ************************************************************************/
-bool CBasicStageStrategy::Find( iSprite * piSprite )
+bool CBasicStageStrategy::find( iSprite * piSprite )
 {
     for( auto & iter : m_sectorDeq )
     {
-        if( iter.Find( piSprite ) )
+        if( iter.find( piSprite ) )
             return true;
     }
 

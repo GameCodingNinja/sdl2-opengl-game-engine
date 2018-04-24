@@ -39,11 +39,11 @@ CBaseGame::CBaseGame()
       m_gameRunning(false),
       m_clearBufferMask(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CBaseGame::~CBaseGame()
 {
@@ -57,41 +57,39 @@ CBaseGame::~CBaseGame()
 
     // Quit SDL subsystems
     SDL_Quit();
-
-}   // destructor
+}
 
 
 /***************************************************************************
 *   desc:  Create the game Window
  ****************************************************************************/
-void CBaseGame::Create()
+void CBaseGame::create()
 {
     // Create the window and OpenGL context
-    CDevice::Instance().Create();
+    CDevice::Instance().create();
 
     // Get local copies of the device handles
-    m_pWindow = CDevice::Instance().GetWindow();
-    m_context = CDevice::Instance().GetContext();
+    m_pWindow = CDevice::Instance().getWindow();
+    m_context = CDevice::Instance().getContext();
 
     // Game start init
-    Init();
-
-}   // Create
+    init();
+}
 
 
 /************************************************************************
 *    desc:  Init the game
 ************************************************************************/
-void CBaseGame::Init()
+void CBaseGame::init()
 {
     // Init the clear color
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
+
     // Init the stencil clear mask based on the bit size of the mask
     // Stencil buffer can only be 1 or 8 bits per pixel
-    if( CSettings::Instance().GetStencilBufferBitSize() == 1 )
+    if( CSettings::Instance().getStencilBufferBitSize() == 1 )
         glStencilMask(0x1);
-    else if( CSettings::Instance().GetStencilBufferBitSize() == 8 )
+    else if( CSettings::Instance().getStencilBufferBitSize() == 8 )
         glStencilMask(0xff);
 
     // Cull the back face
@@ -107,37 +105,36 @@ void CBaseGame::Init()
     glActiveTexture(GL_TEXTURE0);
 
     // Init the clear buffer mask
-    if( CSettings::Instance().GetClearTargetBuffer() )
+    if( CSettings::Instance().getClearTargetBuffer() )
         m_clearBufferMask |= GL_COLOR_BUFFER_BIT;
 
-    if( CSettings::Instance().GetEnableDepthBuffer() )
+    if( CSettings::Instance().getEnableDepthBuffer() )
         m_clearBufferMask |= GL_DEPTH_BUFFER_BIT;
-    
-    if( CSettings::Instance().GetClearStencilBuffer() )
+
+    if( CSettings::Instance().getClearStencilBuffer() )
         m_clearBufferMask |= GL_STENCIL_BUFFER_BIT;
-        
-    if( CSettings::Instance().GetEnableDepthBuffer() )
+
+    if( CSettings::Instance().getEnableDepthBuffer() )
         glEnable( GL_DEPTH_TEST );
-    
+
     // Clear the back buffer and flip it prior to showing the window
     // Keeps us from seeing a flash or flicker of pre init junk
     glClear( GL_COLOR_BUFFER_BIT );
     SDL_GL_SwapWindow( m_pWindow );
-    
+
     // Show the window
-    CDevice::Instance().ShowWindow( true );
-    
+    CDevice::Instance().showWindow( true );
+
     // Display a black screen
     glClear( GL_COLOR_BUFFER_BIT );
     SDL_GL_SwapWindow( m_pWindow );
-
-}   // Init
+}
 
 
 /***************************************************************************
 *   desc:  Poll for game events
 ****************************************************************************/
-void CBaseGame::PollEvents()
+void CBaseGame::pollEvents()
 {
     // Event handler
     SDL_Event msgEvent;
@@ -147,57 +144,57 @@ void CBaseGame::PollEvents()
     {
         // let the game handle the event
         // turns true on quit
-        if( HandleEvent( msgEvent ) )
+        if( handleEvent( msgEvent ) )
         {
             // Stop the game
             m_gameRunning = false;
 
             // Hide the window to give the impression of a quick exit
-            CDevice::Instance().ShowWindow( false );
+            CDevice::Instance().showWindow( false );
 
             break;
         }
     }
-}   // PollEvents
+}
 
 
 /***************************************************************************
 *   desc:  Main game loop
 ****************************************************************************/
-bool CBaseGame::GameLoop()
+bool CBaseGame::gameLoop()
 {
     // Handle the state change
-    DoStateChange();
+    doStateChange();
 
     // Poll for game events
-    PollEvents();
+    pollEvents();
 
     // Get our elapsed time
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
 
     if( m_gameRunning )
     {
         // Handle any misc processing before the real work is started
-        MiscProcess();
-        
+        miscProcess();
+
         // Handle the physics
-        Physics();
+        physics();
 
         // Update animations, Move sprites, Check for collision
-        Update();
+        update();
 
         // Transform game objects
-        Transform();
-        
+        transform();
+
         // Clear the buffers
         glClear( m_clearBufferMask );
 
         // Do the rendering
-        Render();
-        
+        render();
+
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );
-        
+
         // Unbind everything after a round of rendering
         CShaderMgr::Instance().unbind();
         CTextureMgr::Instance().unbind();
@@ -205,54 +202,46 @@ bool CBaseGame::GameLoop()
 
         // Inc the cycle
         if( NBDefs::IsDebugMode() )
-            CStatCounter::Instance().IncCycle();
+            CStatCounter::Instance().incCycle();
     }
 
     return m_gameRunning;
-
-}   // GameLoop
+}
 
 
 /***************************************************************************
 *   desc:  Display error massage
 ****************************************************************************/
-void CBaseGame::DisplayErrorMsg( const std::string & title, const std::string & msg )
+void CBaseGame::displayErrorMsg( const std::string & title, const std::string & msg )
 {
     printf("Error: %s, %s", title.c_str(), msg.c_str() );
 
     SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, title.c_str(), msg.c_str(), m_pWindow );
-
-}   // DisplayErrorMsg
+}
 
 
 /***************************************************************************
 *   desc:  Start the game
 ****************************************************************************/
-void CBaseGame::StartGame()
+void CBaseGame::startGame()
 {
     m_gameRunning = true;
-
-}   // StartGame
+}
 
 
 /***************************************************************************
 *   desc:  Stop the game
 ****************************************************************************/
-void CBaseGame::StopGame()
+void CBaseGame::stopGame()
 {
     m_gameRunning = false;
-
-}   // StopGame
+}
 
 
 /***************************************************************************
 *  desc:  Is the game running?
-*
-*  ret: bool - true or false if game is running
 ****************************************************************************/
-bool CBaseGame::IsGameRunning() const
+bool CBaseGame::isGameRunning() const
 {
     return m_gameRunning;
-
-}   // IsGameRunning
-
+}

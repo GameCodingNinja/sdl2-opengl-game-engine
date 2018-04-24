@@ -71,7 +71,7 @@ void CControlBase::loadFromNode( const XMLNode & node )
 
         // Load xml specific control code
         // Use the preloaded since many controls reuse xml files
-        loadControlFromNode( CXMLPreloader::Instance().Load( controlFilePath.c_str(), "UIControl" ) );
+        loadControlFromNode( CXMLPreloader::Instance().load( controlFilePath.c_str(), "UIControl" ) );
     }
 }
 
@@ -96,7 +96,7 @@ void CControlBase::setDynamicPos()
 {
     // Position the menu based on the dynamic offset
     if( !m_dynamicOffset.isEmpty() )
-        setPos( m_dynamicOffset.getPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+        setPos( m_dynamicOffset.getPos( CSettings::Instance().getDefaultSizeHalf() ) );
 }
 
 

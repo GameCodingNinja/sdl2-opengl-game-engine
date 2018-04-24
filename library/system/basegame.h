@@ -28,51 +28,51 @@ public:
     virtual ~CBaseGame();
 
     // Create the game Window
-    void Create();
+    void create();
 
     // Main game loop
-    bool GameLoop();
+    bool gameLoop();
 
     // Display error massage
-    void DisplayErrorMsg( const std::string & title, const std::string & msg );
+    void displayErrorMsg( const std::string & title, const std::string & msg );
 
     // Is the game running?
-    bool IsGameRunning() const;
+    bool isGameRunning() const;
 
 protected:
 
     // Game start init
-    virtual void Init();
+    virtual void init();
 
     // Handle events
-    virtual bool HandleEvent( const SDL_Event & event ) = 0;
+    virtual bool handleEvent( const SDL_Event & event ) = 0;
 
     // Handle the state change
-    virtual void DoStateChange() = 0;
+    virtual void doStateChange() = 0;
     
     // Handle any misc processing before the real work is started
-    virtual void MiscProcess() = 0;
+    virtual void miscProcess() = 0;
 
     // Handle the physics
-    virtual void Physics() = 0;
+    virtual void physics() = 0;
 
     // Update animations, Move sprites, Check for collision
-    virtual void Update() = 0;
+    virtual void update() = 0;
 
     // Transform game objects
-    virtual void Transform() = 0;
+    virtual void transform() = 0;
 
     // Render of game content
-    virtual void Render() = 0;
+    virtual void render() = 0;
 
     // Start the game
-    void StartGame();
+    void startGame();
 
     // Stop the game
-    void StopGame();
+    void stopGame();
 
     // Poll for game events
-    void PollEvents();
+    void pollEvents();
 
 protected:
 

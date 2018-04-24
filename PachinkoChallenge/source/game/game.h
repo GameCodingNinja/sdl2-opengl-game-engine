@@ -34,45 +34,45 @@ public:
 protected:
 
     // Game start init
-    void Init() override;
+    void init() override;
 
     // Handle events
-    bool HandleEvent( const SDL_Event & rEvent ) override;
+    bool handleEvent( const SDL_Event & rEvent ) override;
 
     // Handle the state change
-    void DoStateChange() override;
+    void doStateChange() override;
     
     // Handle any misc processing before the real work is started
-    void MiscProcess() override;
+    void miscProcess() override;
 
     // Handle the physics
-    void Physics() override;
+    void physics() override;
 
     // Update animations, Move sprites, Check for collision
-    void Update() override;
+    void update() override;
 
     // Transform game objects
-    void Transform() override;
+    void transform() override;
 
     // 2D/3D Render of game content
-    void Render() override;
+    void render() override;
 
 private:
 
     // Callback for when a smart gui control is created
-    void SmartGuiControlCreateCallBack( CUIControl * pUIControl );
+    void smartGuiControlCreateCallBack( CUIControl * pUIControl );
     
     // Callback for when a smart menu is created
-    void SmartMenuCreateCallBack( CMenu * pMenu );
+    void smartMenuCreateCallBack( CMenu * pMenu );
     
     // Call back function to create sprite ai
-    void AICreateCallBack( const std::string & aiName, iSprite * pSprite );
+    void aICreateCallBack( const std::string & aiName, iSprite * pSprite );
     
     // Callback for shader init
-    void ShaderInitCallBack( const std::string & shaderId );
+    void shaderInitCallBack( const std::string & shaderId );
     
     // Callback for the state string
-    void StatStringCallBack( const std::string & statStr );
+    void statStringCallBack( const std::string & statStr );
 
 protected:
 

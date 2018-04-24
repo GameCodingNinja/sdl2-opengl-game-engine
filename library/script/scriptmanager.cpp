@@ -146,7 +146,7 @@ asIScriptContext * CScriptManager::getContext()
     }
 
     // Maintain a total count of contexts
-    CStatCounter::Instance().IncScriptContexCounter();
+    CStatCounter::Instance().incScriptContexCounter();
 
     return scpEngine->CreateContext();
 }
@@ -386,7 +386,7 @@ void CScriptManager::update( std::vector<asIScriptContext *> & pContextVec )
             (pContext->GetState() == asEXECUTION_PREPARED) )
         {
             // Increment the active script context counter
-            CStatCounter::Instance().IncActiveScriptContexCounter();
+            CStatCounter::Instance().incActiveScriptContexCounter();
 
             // Execute the script and check for errors
             // Since the script can be suspended, this also is used to continue execution

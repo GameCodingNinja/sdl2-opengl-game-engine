@@ -26,7 +26,7 @@
 CSpriteStrategyMgr::CSpriteStrategyMgr() :
     m_spriteInc(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -35,17 +35,16 @@ CSpriteStrategyMgr::CSpriteStrategyMgr() :
 CSpriteStrategyMgr::~CSpriteStrategyMgr()
 {
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
-    
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Add strategy
  ************************************************************************/
-void CSpriteStrategyMgr::AddStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
+void CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
 {
     auto mapIter = m_pStrategyMap.emplace( strategyId, pSpriteStrategy );
-    
+
     // Check for duplicate groups being used
     if( !mapIter.second )
     {
@@ -53,58 +52,55 @@ void CSpriteStrategyMgr::AddStrategy( const std::string & strategyId, iSpriteStr
             boost::str( boost::format("Duplicate id name (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
     }
-    
+
     // See if there is any files associated with the strategy id in the list table
     auto listTableIter = m_listTableMap.find( strategyId );
     if( listTableIter != m_listTableMap.end() )
-        for( auto & filePathIter : listTableIter->second ) 
-            mapIter.first->second->LoadFromFile( filePathIter );
-    
+        for( auto & filePathIter : listTableIter->second )
+            mapIter.first->second->loadFromFile( filePathIter );
+
     // Add the strategy pointer to the vector for rendering
     m_pStrategyVec.push_back( pSpriteStrategy );
-
-}   // AddStrategy
+}
 
 
 /************************************************************************
  *    desc:  Delete strategy
  ************************************************************************/
-void CSpriteStrategyMgr::DeleteStrategy( const std::string & strategyId )
+void CSpriteStrategyMgr::deleteStrategy( const std::string & strategyId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter != m_pStrategyMap.end() )
     {
-        mapIter->second->CleanUp();
-        
+        mapIter->second->cleanUp();
+
         auto strategyIter = std::find( m_pStrategyVec.begin(), m_pStrategyVec.end(), mapIter->second );
         if( strategyIter != m_pStrategyVec.end() )
             m_pStrategyVec.erase( strategyIter );
-        
+
         NDelFunc::Delete( mapIter->second );
         m_pStrategyMap.erase( mapIter );
     }
-        
-}   // DeleteStrategy
+}
 
 
 /************************************************************************
  *    desc:  Delete sprite
  ************************************************************************/
-void CSpriteStrategyMgr::DeleteSprite( const std::string & strategyId, int spriteId )
+void CSpriteStrategyMgr::deleteSprite( const std::string & strategyId, int spriteId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter != m_pStrategyMap.end() )
-        mapIter->second->SetToDestroy( spriteId );
-        
-}   // DeleteSprite
+        mapIter->second->setToDestroy( spriteId );
+}
 
 
 /************************************************************************
 *    desc:  create the sprite and provide a unique id number for each one
 ************************************************************************/
-iSprite * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::create(
     const std::string & strategyId,
     const std::string & dataName,
     const CPoint<CWorldValue> & pos,
@@ -115,14 +111,13 @@ iSprite * CSpriteStrategyMgr::Create(
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
-            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s")
                 % strategyId % dataName % __FUNCTION__ % __LINE__ ));
-    
-    return mapIter->second->Create( dataName, ++m_spriteInc, pos, rot, scale );
 
-}   // Create
+    return mapIter->second->create( dataName, ++m_spriteInc, pos, rot, scale );
+}
 
-iSprite * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name,
@@ -134,14 +129,13 @@ iSprite * CSpriteStrategyMgr::Create(
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
-            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
-    
-    return mapIter->second->Create( group, name, ++m_spriteInc, pos, rot, scale );
 
-}   // Create
+    return mapIter->second->create( group, name, ++m_spriteInc, pos, rot, scale );
+}
 
-iSprite * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::create(
     const std::string & strategyId,
     const std::string & dataName )
 {
@@ -149,14 +143,13 @@ iSprite * CSpriteStrategyMgr::Create(
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
-            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s")
                 % strategyId % dataName % __FUNCTION__ % __LINE__ ));
-    
-    return mapIter->second->Create( dataName, ++m_spriteInc );
 
-}   // Create
+    return mapIter->second->create( dataName, ++m_spriteInc );
+}
 
-iSprite * CSpriteStrategyMgr::Create(
+iSprite * CSpriteStrategyMgr::create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name )
@@ -165,129 +158,117 @@ iSprite * CSpriteStrategyMgr::Create(
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Manager Strategy Group Find Error!",
-            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
-    
-    return mapIter->second->Create( group, name, ++m_spriteInc );
 
-}   // Create
+    return mapIter->second->create( group, name, ++m_spriteInc );
+}
 
 
 /************************************************************************
 *    desc:  Delete all the sprites
 ************************************************************************/
-void CSpriteStrategyMgr::Clear()
+void CSpriteStrategyMgr::clear()
 {
     // Do the pre-delete cleanup
-    CleanUp();
-    
+    cleanUp();
+
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
     m_pStrategyVec.clear();
     m_spriteInc = 0;
-
-}   // Clear
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CSpriteStrategyMgr::Init()
+void CSpriteStrategyMgr::init()
 {
     for( auto iter : m_pStrategyVec )
-        iter->Init();
-    
-}   // Init
+        iter->init();
+}
 
 
 /************************************************************************
 *    desc:  Do some cleanup
 ************************************************************************/
-void CSpriteStrategyMgr::CleanUp()
+void CSpriteStrategyMgr::cleanUp()
 {
     for( auto iter : m_pStrategyVec )
-        iter->CleanUp();
-    
-}   // CleanUp
+        iter->cleanUp();
+}
 
 
 /************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ************************************************************************/
-void CSpriteStrategyMgr::MiscProcess()
+void CSpriteStrategyMgr::miscProcess()
 {
     for( auto iter : m_pStrategyVec )
-        iter->MiscProcess();
-    
-}   // MiscProcess
+        iter->miscProcess();
+}
 
 
 /***************************************************************************
 *    desc:  Update the sprites
 ****************************************************************************/
-void CSpriteStrategyMgr::Update()
+void CSpriteStrategyMgr::update()
 {
     for( auto iter : m_pStrategyVec )
-        iter->Update();
-
-}   // Update
+        iter->update();
+}
 
 
 /************************************************************************
 *    desc:  Transform the sprite
 ************************************************************************/
-void CSpriteStrategyMgr::Transform()
+void CSpriteStrategyMgr::transform()
 {
     for( auto iter : m_pStrategyVec )
-        iter->Transform();
+        iter->transform();
+}
 
-}   // Transform
-
-void CSpriteStrategyMgr::Transform( const CObject2D & object )
+void CSpriteStrategyMgr::transform( const CObject2D & object )
 {
     for( auto iter : m_pStrategyVec )
-        iter->Transform( object );
-
-}   // Transform
+        iter->transform( object );
+}
 
 
 /***************************************************************************
 *    desc:  Render the sprites
 ****************************************************************************/
-void CSpriteStrategyMgr::Render()
+void CSpriteStrategyMgr::render()
 {
     for( auto iter : m_pStrategyVec )
-        iter->Render();
+        iter->render();
+}
 
-}   // Render
-
-void CSpriteStrategyMgr::Render( const CMatrix & matrix )
+void CSpriteStrategyMgr::render( const CMatrix & matrix )
 {
     for( auto iter : m_pStrategyVec )
-        iter->Render( matrix );
+        iter->render( matrix );
+}
 
-}   // Render
-
-void CSpriteStrategyMgr::Render( const CMatrix & matrix, const CMatrix & rotMatrix )
+void CSpriteStrategyMgr::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     for( auto iter : m_pStrategyVec )
-        iter->Render( matrix, rotMatrix );
-
-}   // Render
+        iter->render( matrix, rotMatrix );
+}
 
 
 /************************************************************************
 *    desc:  Get the pointer to the strategy
 ************************************************************************/
-iSpriteStrategy * CSpriteStrategyMgr::get( const std::string & strategyId )
+iSpriteStrategy * CSpriteStrategyMgr::getStrategy( const std::string & strategyId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
     if( mapIter == m_pStrategyMap.end() )
         throw NExcept::CCriticalException("Sprite Strategy Manager Id Find Error!",
-            boost::str( boost::format("Sprite Manager strategy Id can't be found (%s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sprite Manager strategy Id can't be found (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
 
     return mapIter->second;
-
-}   // get
+}

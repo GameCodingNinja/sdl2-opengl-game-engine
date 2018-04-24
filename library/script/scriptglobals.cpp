@@ -56,9 +56,9 @@ namespace NScriptGlobals
     {
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("double GetElapsedTime()", asMETHOD(CHighResTimer, GetElapsedTime), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void TimerStart()", asMETHOD(CHighResTimer, TimerStart), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("float TimerStop()", asMETHOD(CHighResTimer, TimerStop), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("double GetElapsedTime()", asMETHOD(CHighResTimer, getElapsedTime), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void TimerStart()", asMETHOD(CHighResTimer, timerStart), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("float TimerStop()", asMETHOD(CHighResTimer, timerStop), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("void Print(string &in)", asFUNCTION(NGenFunc::PostDebugMsg), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Suspend()", asFUNCTION(Suspend), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("int UniformRandomInt(int startRange, int endRange, int seed = 0)", asFUNCTION( NGenFunc::UniformRandomInt), asCALL_CDECL ) );

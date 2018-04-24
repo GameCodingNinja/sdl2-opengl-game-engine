@@ -27,69 +27,65 @@ CBaseStrategy::CBaseStrategy( int idOffset, int idDir ) :
     m_idOffset(idOffset),
     m_idDir(idDir)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CBaseStrategy::~CBaseStrategy()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Set to Destroy the sprite
  ************************************************************************/
-void CBaseStrategy::SetToDestroy( int spriteIndex )
+void CBaseStrategy::setToDestroy( int spriteIndex )
 {
     m_deleteSet.insert( spriteIndex );
-
-}   // SetToDestroy
+}
 
 
 /************************************************************************
  *    desc:  Set to create the sprite
  ************************************************************************/
-void CBaseStrategy::SetToCreate( const std::string & name )
+void CBaseStrategy::setToCreate( const std::string & name )
 {
     m_createSet.insert( name );
-
-}   // SetToCreate
+}
 
 
 /************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ************************************************************************/
-void CBaseStrategy::MiscProcess()
+void CBaseStrategy::miscProcess()
 {
-    HandleDelete();
-    
-    HandleCreate();
-    
-}   // MiscProcess
+    handleDelete();
+
+    handleCreate();
+}
 
 
 /***************************************************************************
 *    desc:  Handle the deleting of any object by Id
 ****************************************************************************/
-void CBaseStrategy::HandleDelete()
+void CBaseStrategy::handleDelete()
 {
     if( !m_deleteSet.empty() )
     {
         for( auto iter : m_deleteSet )
-            DeleteObj( iter );
+            deleteObj( iter );
 
         m_deleteSet.clear();
     }
-
-}   // HandleDelete
+}
 
 
 /***************************************************************************
 *    desc:  Handle the deleting of any object by Id
 ****************************************************************************/
-void CBaseStrategy::DeleteObj( int index )
+void CBaseStrategy::deleteObj( int index )
 {
     // Virtual function meant to be over written by inherited class
 }
@@ -98,23 +94,22 @@ void CBaseStrategy::DeleteObj( int index )
 /***************************************************************************
 *    desc:  Handle the creating of new sprite objects by name
 ****************************************************************************/
-void CBaseStrategy::HandleCreate()
+void CBaseStrategy::handleCreate()
 {
     if( !m_createSet.empty() )
     {
         for( auto iter : m_createSet )
-            CreateObj( iter );
+            createObj( iter );
 
         m_createSet.clear();
     }
-
-}   // HandleDelete
+}
 
 
 /***************************************************************************
 *    desc:  Handle the creating of any object by name
 ****************************************************************************/
-void CBaseStrategy::CreateObj( const std::string & name )
+void CBaseStrategy::createObj( const std::string & name )
 {
     // Virtual function meant to be over written by inherited class
 }

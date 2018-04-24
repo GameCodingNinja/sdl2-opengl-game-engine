@@ -41,17 +41,17 @@ CSoundMgr::CSoundMgr() :
     // Setup the audio format
     // High frenquency plus low chunk size = low latency audio playback
     if( Mix_OpenAudio(
-        CSettings::Instance().GetFrequency(),     // Usually 22050 or 44100
+        CSettings::Instance().getFrequency(),     // Usually 22050 or 44100
         MIX_DEFAULT_FORMAT,
-        CSettings::Instance().GetSoundChannels(), // mono, stero, quad, suround, etc
-        CSettings::Instance().GetChunkSize() ) == 0 )
+        CSettings::Instance().getSoundChannels(), // mono, stero, quad, suround, etc
+        CSettings::Instance().getChunkSize() ) == 0 )
     {
         NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s")
                         % SDL_GetError() % __FUNCTION__ % __LINE__ ) );
     }
 
-    if( CSettings::Instance().GetMixChannels() != m_maxMixChannels )
-        m_maxMixChannels = Mix_AllocateChannels( CSettings::Instance().GetMixChannels() );
+    if( CSettings::Instance().getMixChannels() != m_maxMixChannels )
+        m_maxMixChannels = Mix_AllocateChannels( CSettings::Instance().getMixChannels() );
 }
 
 

@@ -41,7 +41,7 @@ void CSmartResolutionBtn::create()
     std::vector< CSize<int> > resVec;
 
     // Get the current display size from the settings
-    const CSize<int> gameSize = CSettings::Instance().GetResolution();
+    const CSize<int> gameSize = CSettings::Instance().getResolution();
 
     int displayCount = SDL_GetNumDisplayModes(0);
     for( int i = 0; i < displayCount; i++ )
@@ -108,8 +108,8 @@ void CSmartResolutionBtn::setResolutionChange()
 {
     m_resIndex = (*dynamic_cast<CUIButtonList *>(m_pUIControl)).getActiveIndex();
 
-    CSettings::Instance().SetSize( m_resVec[m_resIndex] );
-    CSettings::Instance().CalcRatio();
+    CSettings::Instance().setSize( m_resVec[m_resIndex] );
+    CSettings::Instance().calcRatio();
     CCameraMgr::Instance().createProjMatrix();
 
 }   // SetResolutionChange

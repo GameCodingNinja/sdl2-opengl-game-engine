@@ -35,23 +35,23 @@ public:
     }
     
     // Add strategy
-    void AddStrategy( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
+    void addStrategy( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
     
     // Delete strategy
-    void DeleteStrategy( const std::string & strategyId );
+    void deleteStrategy( const std::string & strategyId );
     
     // Delete sprite
-    void DeleteSprite( const std::string & strategyId, int spriteId );
+    void deleteSprite( const std::string & strategyId, int spriteId );
     
     // create the sprite and provide a unique id number for each one
-    iSprite * Create(
+    iSprite * create(
         const std::string & strategyId,
         const std::string & dataName,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
     
-    iSprite * Create(
+    iSprite * create(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name,
@@ -59,49 +59,49 @@ public:
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) );
     
-    iSprite * Create(
+    iSprite * create(
         const std::string & strategyId,
         const std::string & dataName );
     
-    iSprite * Create(
+    iSprite * create(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name );
 
     // Delete all the sprites
-    void Clear();
+    void clear();
     
     // Do any pre-game loop init's
-    void Init();
+    void init();
     
     // Do some cleanup
-    void CleanUp();
+    void cleanUp();
     
     // Handle any misc processing before the real work is started.
-    void MiscProcess();
+    void miscProcess();
     
     // Update the sprites
-    void Update();
+    void update();
 
     // Transform the sprite
-    void Transform();
-    void Transform( const class CObject2D & object );
+    void transform();
+    void transform( const class CObject2D & object );
 
     // Render the sprites
-    void Render();
-    void Render( const class CMatrix & matrix );
-    void Render( const CMatrix & matrix, const CMatrix & cameraMatrix );
+    void render();
+    void render( const class CMatrix & matrix );
+    void render( const CMatrix & matrix, const CMatrix & cameraMatrix );
     
     // Get a reference to the strategy
     template <typename target>
-    target & Get( const std::string & strategyId )
+    target & get( const std::string & strategyId )
     {
-        return *dynamic_cast<target *>(get( strategyId ));
+        return *dynamic_cast<target *>(getStrategy( strategyId ));
     }
     
     // Get a pointer to the strategy based on if the sprite can be found
     template <typename target>
-    target & Find( iSprite * piSprite )
+    target & find( iSprite * piSprite )
     {
         target * pStrategy = nullptr;
         
@@ -120,7 +120,7 @@ public:
     
     // Get a pointer to the strategy based on if the sprite can be found
     template <typename target>
-    target & Find( const std::string & strategyId )
+    target & find( const std::string & strategyId )
     {
         target * pStrategy = nullptr;
         
@@ -139,18 +139,18 @@ public:
     
     // Create templates
     template <typename target>
-    target * CreateSprite(
+    target * createSprite(
         const std::string & strategyId,
         const std::string & name,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) )
     {
-        return dynamic_cast<target *>(Create( strategyId, name, pos, rot, scale ));
+        return dynamic_cast<target *>(create( strategyId, name, pos, rot, scale ));
     }
     
     template <typename target>
-    target * CreateSprite(
+    target * createSprite(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name,
@@ -158,24 +158,24 @@ public:
         const CPoint<float> & rot = CPoint<float>(),
         const CPoint<float> & scale = CPoint<float>(1,1,1) )
     {
-        return dynamic_cast<target *>(Create( strategyId, group, name, pos, rot, scale ));
+        return dynamic_cast<target *>(create( strategyId, group, name, pos, rot, scale ));
     }
     
     template <typename target>
-    target * CreateSprite(
+    target * createSprite(
         const std::string & strategyId,
         const std::string & name )
     {
-        return dynamic_cast<target *>(Create( strategyId, name ));
+        return dynamic_cast<target *>(create( strategyId, name ));
     }
     
     template <typename target>
-    target * CreateSprite(
+    target * createSprite(
         const std::string & strategyId,
         const std::string & group,
         const std::string & name )
     {
-        return dynamic_cast<target *>(Create( strategyId, group, name ));
+        return dynamic_cast<target *>(create( strategyId, group, name ));
     }
 
 private:
@@ -187,7 +187,7 @@ private:
     virtual ~CSpriteStrategyMgr();
     
     // Get the pointer to the strategy
-    iSpriteStrategy * get( const std::string & strategyId );
+    iSpriteStrategy * getStrategy( const std::string & strategyId );
 
 private:
 

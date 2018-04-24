@@ -27,22 +27,22 @@ public:
     ~CTimer();
 
     // Set the time to have expired
-    void SetExpired();
+    void setExpired();
 
     // Has the timer expired
-    bool Expired( bool resetOnExpire = false );
+    bool expired( bool resetOnExpire = false );
 
     // Reset the timer to start over
-    void Reset();
+    void reset();
 
     // Set the timer interval
-    void Set(double interval);
+    void set(double interval);
 
     // Set the timer interval
-    void Disable( bool disabled = true );
+    void disable( bool disabled = true );
     
     // Set the value returned by Expired when the timer is disabled
-    void SetDisableValue( bool disableValue );
+    void setDisableValue( bool disableValue );
 
 private:
 

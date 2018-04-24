@@ -11,7 +11,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CHighResTimer::CHighResTimer()
     : m_inverseTimerFrequency(0.0),
@@ -24,47 +24,44 @@ CHighResTimer::CHighResTimer()
 
     // Init the lastTime variable for the first runthrough
     m_lastTime = SDL_GetPerformanceCounter();
-
-}   // Constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CHighResTimer::~CHighResTimer()
 {
-}   // Destructor
+}
 
 
 /***************************************************************************
 *    desc:  Simple timer start
 ****************************************************************************/
-void CHighResTimer::TimerStart()
+void CHighResTimer::timerStart()
 {
     // Get the current performance time
     m_timer = SDL_GetPerformanceCounter();
-        
-}  // TimerStart
+}
 
 
 /***************************************************************************
 *    desc:  Simple timer duration
 ****************************************************************************/
-float CHighResTimer::TimerStop()
+float CHighResTimer::timerStop()
 {
     // Get the current performance time
     uint64_t time = SDL_GetPerformanceCounter();
 
     // Get the elapsed time
     return (float)((time - m_timer) * m_inverseTimerFrequency);
-        
-}  // TimerStop
+}
 
 
 /***************************************************************************
 *    desc:  Calc the elapsed time
 ****************************************************************************/
-void CHighResTimer::CalcElapsedTime()
+void CHighResTimer::calcElapsedTime()
 {
     // Get the current performance time
     uint64_t time = SDL_GetPerformanceCounter();
@@ -76,21 +73,20 @@ void CHighResTimer::CalcElapsedTime()
     m_fps = static_cast<float>(1000.0f / m_elapsedTime);
 
     // Catch any hickups - cap to about 10 fps
-    // Elapsed time is not expected to get this 
+    // Elapsed time is not expected to get this
     // high in  a game which is why it's capped
     if( m_elapsedTime > 100.0f )
         m_elapsedTime = 100.0f;
 
     // Reset the last time
     m_lastTime = time;
-    
-}  // GetPerformanceTime
+}
 
 
 /***************************************************************************
 *    desc:  Get the elapsed time
 ****************************************************************************/
-double CHighResTimer::GetElapsedTime()
+double CHighResTimer::getElapsedTime()
 {
     return m_elapsedTime;
 }
@@ -99,7 +95,7 @@ double CHighResTimer::GetElapsedTime()
 /***************************************************************************
 *    desc:  get the elapsed time
 ****************************************************************************/
-float CHighResTimer::GetFPS()
+float CHighResTimer::getFPS()
 {
     return m_fps;
 }
@@ -108,11 +104,10 @@ float CHighResTimer::GetFPS()
 /***************************************************************************
 *    desc:  get the raw time
 ****************************************************************************/
-double CHighResTimer::GetTime()
+double CHighResTimer::getTime()
 {
     // Get the current performance time
     uint64_t time = SDL_GetPerformanceCounter();
 
     return (double)(time * m_inverseTimerFrequency);
-
-}   // GetTime
+}

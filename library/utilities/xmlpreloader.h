@@ -29,13 +29,13 @@ public:
     }
     
     // Load the XML file
-    const XMLNode & Load( const std::string & filePath, const std::string & firstNode );
+    const XMLNode & load( const std::string & filePath, const std::string & firstNode );
     
     // Get the loaded XML node
-    const XMLNode & GetNode( const std::string & filePath ) const;
+    const XMLNode & getNode( const std::string & filePath ) const;
     
     // Clear all the XML data
-    void Clear();
+    void clear();
     
 private:
     

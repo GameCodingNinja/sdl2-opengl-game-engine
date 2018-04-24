@@ -31,13 +31,12 @@ enum
 
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CMatrix::CMatrix()
 {
-    InitilizeMatrix();
-
-}   // Constructor
+    initilizeMatrix();
+}
 
 
 /************************************************************************
@@ -46,8 +45,7 @@ CMatrix::CMatrix()
 CMatrix::CMatrix( const CMatrix & obj )
 {
     std::memcpy( matrix, obj.matrix, sizeof(matrix) );
-
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -56,28 +54,25 @@ CMatrix::CMatrix( const CMatrix & obj )
 CMatrix::CMatrix( float mat[mMax] )
 {
     std::memcpy( matrix, mat, sizeof(matrix) );
-
-}   // Constructor
+}
 
 
 /************************************************************************
 *    desc:  Copy from another matrix
 ************************************************************************/
-void CMatrix::Copy( const CMatrix & obj )
+void CMatrix::copy( const CMatrix & obj )
 {
     std::memcpy( matrix, obj.matrix, sizeof(matrix) );
+}
 
-}   // Copy
 
-
-/************************************************************************                                                             
+/************************************************************************
 *    desc:  Reset the matrix to the identity matrix
 ************************************************************************/
-void CMatrix::InitilizeMatrix()
+void CMatrix::initilizeMatrix()
 {
-    InitIdentityMatrix( matrix );
-
-}   // InitilizeMatrix
+    initIdentityMatrix( matrix );
+}
 
 
 /************************************************************************
@@ -85,41 +80,39 @@ void CMatrix::InitilizeMatrix()
 *
 *    param: float mat[16] - Matrix array
 ************************************************************************/
-void CMatrix::InitIdentityMatrix( float mat[16] )
+void CMatrix::initIdentityMatrix( float mat[16] )
 {
     // Initializes a specific matrix to the identity matrix:
     mat[0]  = 1.0f;   mat[1] = 0.0f;   mat[2]  = 0.0f;   mat[3] = 0.0f;
     mat[4]  = 0.0f;   mat[5] = 1.0f;   mat[6]  = 0.0f;   mat[7] = 0.0f;
     mat[8]  = 0.0f;   mat[9] = 0.0f;   mat[10] = 1.0f;  mat[11] = 0.0f;
     mat[12] = 0.0f;  mat[13] = 0.0f;   mat[14] = 0.0f;  mat[15] = 1.0f;
-
-}   // InitIdentityMatrix
+}
 
 
 /************************************************************************
 *    desc:  Clear translation data from the matrix
 ************************************************************************/
-void CMatrix::ClearTranlate()
+void CMatrix::clearTranlate()
 {
     // Initializes a specific matrix to the identity matrix:
     matrix[12] = 0.0f;  matrix[13] = 0.0f;   matrix[14] = 0.0f;
-
-}   // ClearTranlate
+}
 
 
 /************************************************************************
 *    desc:  Merge matrix into master matrix
 *
 *    parm:  float newMatrix[16] - Matrix array
-************************************************************************/  
-void CMatrix::MergeMatrix( const float mat[mMax] )
+************************************************************************/
+void CMatrix::mergeMatrix( const float mat[mMax] )
 {
     float temp[mMax];
 
     for( int i = 0; i < 4; ++i )
     {
         for( int j = 0; j < 4; ++j )
-        { 
+        {
             temp[(i*4)+j] = (matrix[i*4] * mat[j])
             + (matrix[(i*4)+1] * mat[4+j])
             + (matrix[(i*4)+2] * mat[8+j])
@@ -132,25 +125,23 @@ void CMatrix::MergeMatrix( const float mat[mMax] )
 
 }  // MergeMatrix
 
-void CMatrix::MergeMatrix( const CMatrix & obj )
+void CMatrix::mergeMatrix( const CMatrix & obj )
 {
-    MergeMatrix( obj.matrix );
+    mergeMatrix( obj.matrix );
 }
 
 
 /************************************************************************
 *    desc:  Merge matrix into master matrix
-*
-*    parm:  float newMatrix[16] - Matrix array
-************************************************************************/  
-void CMatrix::ReverseMergeMatrix( const float mat[mMax] )
+************************************************************************/
+void CMatrix::reverseMergeMatrix( const float mat[mMax] )
 {
     float temp[mMax];
 
     for( int i = 0; i < 4; ++i )
     {
         for( int j = 0; j < 4; ++j )
-        { 
+        {
             temp[(i*4)+j] = (mat[i*4] * matrix[j])
             + (mat[(i*4)+1] * matrix[4+j])
             + (mat[(i*4)+2] * matrix[8+j])
@@ -160,8 +151,7 @@ void CMatrix::ReverseMergeMatrix( const float mat[mMax] )
 
     // Copy temp to master Matrix
     std::memcpy( matrix, temp, sizeof(temp) );
-
-}  // MergeMatrix
+}
 
 
 /************************************************************************
@@ -170,7 +160,7 @@ void CMatrix::ReverseMergeMatrix( const float mat[mMax] )
 *    param: float Dest[16] - Destination Matric
 *           float Source[16] - Source Matrix
 ************************************************************************/
-void CMatrix::MergeMatrices( float dest[mMax], const float source[mMax] )
+void CMatrix::mergeMatrices( float dest[mMax], const float source[mMax] )
 {
     float temp[mMax];
 
@@ -187,8 +177,7 @@ void CMatrix::MergeMatrices( float dest[mMax], const float source[mMax] )
 
     // Copy Temp to Dest
     std::memcpy( dest, temp, sizeof(temp) );
-
-}   // MergeMatrices
+}
 
 
 /************************************************************************
@@ -202,60 +191,50 @@ void CMatrix::MergeMatrices( float dest[mMax], const float source[mMax] )
 *			I can't figure out why. I've tried everything to reproduce this
 *			rotationally screwed up matrix but couldn't
 ************************************************************************/
-void CMatrix::Rotate( const CPoint<float> & radian )
+void CMatrix::rotate( const CPoint<float> & radian )
 {
     int flags = NO_ROT;
     float rMatrix[ 16 ];
 
     // init the rotation matrix
-    InitIdentityMatrix( rMatrix );
+    initIdentityMatrix( rMatrix );
 
     // Apply Z rotation
     if( !radian.isZEmpty() )
     {
-        RotateZ( rMatrix, radian.z, flags );
+        rotateZ( rMatrix, radian.z, flags );
         flags |= ROT_Z;
     }
 
     // Apply Y rotation
     if( !radian.isYEmpty() )
     {
-        RotateY( rMatrix, radian.y, flags );
+        rotateY( rMatrix, radian.y, flags );
         flags |= ROT_Y;
     }
 
     // Apply X rotation
     if( !radian.isXEmpty() )
     {
-        RotateX( rMatrix, radian.x, flags );
+        rotateX( rMatrix, radian.x, flags );
         flags |= ROT_X;
     }
 
     // Merg the rotation into the master matrix
-    MergeMatrix( rMatrix );
-
-}   // Rotate
+    mergeMatrix( rMatrix );
+}
 
 
 /************************************************************************
 *    desc:  Get the Z rotation of the matrix
-*
-*	 NOTE:	If the matrix is scaled or there are more rotations besides
-*			z, then the result might not be correct
-*
-*    param: bool inDegrees = true - whether to return the rotation in degrees
-*									or radians
-*
-*	 ret:	float - rotation value
 ************************************************************************/
-float CMatrix::GetZRot( bool inDegrees ) const
+float CMatrix::getZRot( bool inDegrees ) const
 {
     if( inDegrees )
         return -atan2( matrix[m10], matrix[m00] ) * defs_RAD_TO_DEG;
 
     return -atan2( matrix[m10], matrix[m00] );
-
-}	// GetZRot
+}
 
 
 /************************************************************************
@@ -263,30 +242,25 @@ float CMatrix::GetZRot( bool inDegrees ) const
 *
 *    param: const CPoint & point - translation point
 ************************************************************************/
-void CMatrix::Translate( const CPoint<float> & point )
+void CMatrix::translate( const CPoint<float> & point )
 {
     matrix[12] += point.x;
     matrix[13] += point.y;
     matrix[14] += point.z;
+}
 
-}   // Translate
-
-void CMatrix::Translate( const CSize<int16_t> & size )
+void CMatrix::translate( const CSize<int16_t> & size )
 {
     matrix[12] += static_cast<float>(size.w);
     matrix[13] += static_cast<float>(size.h);
-
-}   // Translate
+}
 
 
 /************************************************************************
 *    desc:  Function designed to transform a vertex using
 *           the master matrix
-*
-*    param: CPoint & dest - destination point
-*           CPoint & source - source point
 ************************************************************************/
-void CMatrix::Transform( CPoint<float> & dest, const CPoint<float> & source ) const
+void CMatrix::transform( CPoint<float> & dest, const CPoint<float> & source ) const
 {
     // Transform vertex by master matrix:
     dest.x = ( source.x * matrix[ 0 ] )
@@ -303,18 +277,14 @@ void CMatrix::Transform( CPoint<float> & dest, const CPoint<float> & source ) co
            + ( source.y * matrix[ 6 ] )
            + ( source.z * matrix[ 10 ] )
            + matrix[ 14 ];
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Function designed to transform a vertex using
 *           the master matrix
-*
-*    param: CPoint & dest - destination point
-*           CPoint & source - source point
 ************************************************************************/
-void CMatrix::Transform( CPoint<float> * pDest, const CPoint<float> * pSource ) const
+void CMatrix::transform( CPoint<float> * pDest, const CPoint<float> * pSource ) const
 {
     // Transform vertex by master matrix:
     pDest->x = ( pSource->x * matrix[ 0 ] )
@@ -331,18 +301,14 @@ void CMatrix::Transform( CPoint<float> * pDest, const CPoint<float> * pSource ) 
            + ( pSource->y * matrix[ 6 ] )
            + ( pSource->z * matrix[ 10 ] )
            + matrix[ 14 ];
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Function designed to transform a vertex using
 *           the master matrix
-*
-*    param: CPoint & dest - destination point
-*           CPoint & source - source point
 ************************************************************************/
-void CMatrix::Transform( CRect<float> & dest, const CRect<float> & source ) const
+void CMatrix::transform( CRect<float> & dest, const CRect<float> & source ) const
 {
     // Transform vertex by master matrix:
     dest.x1 = ( source.x1 * matrix[ 0 ] )
@@ -360,19 +326,37 @@ void CMatrix::Transform( CRect<float> & dest, const CRect<float> & source ) cons
     dest.y2 = ( source.x2 * matrix[ 1 ] )
             + ( source.y2 * matrix[ 5 ] )
             + matrix[ 13 ];
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Function designed to transform a normal. Normals don't have
 *           a position, only direction so we only use the rotation
 *           portion of the matrix.
-*
-*    param: CTransNormal & dest - destination point
-*           CNormal & source - source point
 ************************************************************************/
-void CMatrix::Transform( CNormal<float> & dest, const CNormal<float> & source ) const
+void CMatrix::transform( CNormal<float> & dest, const CNormal<float> & source ) const
+{
+    // Transform vertex by master matrix:
+    dest.x = ( source.x * matrix[ 0 ])
+           + ( source.y * matrix[ 4 ])
+           + ( source.z * matrix[ 8 ]);
+
+    dest.y = ( source.x * matrix[ 1 ])
+           + ( source.y * matrix[ 5 ])
+           + ( source.z * matrix[ 9 ]);
+
+    dest.z = ( source.x * matrix[ 2 ])
+           + ( source.y * matrix[ 6 ])
+           + ( source.z * matrix[ 10 ]);
+}
+
+
+/************************************************************************
+*    desc:  Function designed to transform a normal. Normals don't have
+*           a position, only direction so we only use the rotation
+*           portion of the matrix.
+************************************************************************/
+void CMatrix::transform3x3( CPoint<float> & dest, const CPoint<float> & source ) const
 {
     // Transform vertex by master matrix:
     dest.x = ( source.x * matrix[ 0 ])
@@ -387,55 +371,25 @@ void CMatrix::Transform( CNormal<float> & dest, const CNormal<float> & source ) 
            + ( source.y * matrix[ 6 ])
            + ( source.z * matrix[ 10 ]);
 
-}   // Transform
-
-
-/************************************************************************
-*    desc:  Function designed to transform a normal. Normals don't have
-*           a position, only direction so we only use the rotation
-*           portion of the matrix.
-*
-*    param: CPoint & dest   - destination point
-*           CPoint & source - source point
-************************************************************************/
-void CMatrix::Transform3x3( CPoint<float> & dest, const CPoint<float> & source ) const
-{
-    // Transform vertex by master matrix:
-    dest.x = ( source.x * matrix[ 0 ])
-           + ( source.y * matrix[ 4 ])
-           + ( source.z * matrix[ 8 ]);
-
-    dest.y = ( source.x * matrix[ 1 ])
-           + ( source.y * matrix[ 5 ])
-           + ( source.z * matrix[ 9 ]);
-
-    dest.z = ( source.x * matrix[ 2 ])
-           + ( source.y * matrix[ 6 ])
-           + ( source.z * matrix[ 10 ]);
-
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Function designed to transform a vertex using
 *           the master matrix
-*
-*    param: CQuad & dest - destination point
-*           CQuad & source - source point
 ************************************************************************/
-void CMatrix::Transform( CQuad & dest, const CQuad & source ) const
+void CMatrix::transform( CQuad & dest, const CQuad & source ) const
 {
     // Transform vertex by master matrix:
     for( int i = 0; i < 4; ++i )
-        Transform( dest.point[i], source.point[i] );
-
-}   // Transform
+        transform( dest.point[i], source.point[i] );
+}
 
 
 /************************************************************************
 *    desc:  Get the transpose of a matrix
 ************************************************************************/
-CMatrix CMatrix::GetTransposeMatrix() const
+CMatrix CMatrix::getTransposeMatrix() const
 {
     CMatrix tmp;
 
@@ -466,16 +420,13 @@ CMatrix CMatrix::GetTransposeMatrix() const
     tmp[m33] = matrix[m33];
 
     return tmp;
-
-}   // GetTransposeMatrix
+}
 
 
 /************************************************************************
 *    desc:   Get matrix point in space
-*
-*    ret:    CPoint - point to be returned
 ************************************************************************/
-CPoint<float> CMatrix::GetMatrixPoint()
+CPoint<float> CMatrix::getMatrixPoint()
 {
     CPoint<float> source;
     CPoint<float> dest;
@@ -490,31 +441,28 @@ CPoint<float> CMatrix::GetMatrixPoint()
     source.z = -matrix[m32];
 
     // Inverse the matrix
-    Inverse();
+    inverse();
 
-    // Transform only by the 3x3 part of the matrix 
-    Transform3x3( dest, source );
+    // Transform only by the 3x3 part of the matrix
+    transform3x3( dest, source );
 
     // Restore the matrix back to what it was
     std::memcpy( matrix, tempMat, sizeof(matrix) );
 
     return dest;
-
-}   // GetMatrixPoint
+}
 
 
 /************************************************************************
 *    desc:   Get matrix rotation
-*
-*    ret:    CRadian - radian to be returned
 ************************************************************************/
-CPoint<float> CMatrix::GetMatrixRotation()
+CPoint<float> CMatrix::getMatrixRotation()
 {
     CPoint<float> tmp;
 
     // singularity at north pole
     if( matrix[m10] > 0.998f )
-    { 
+    {
         tmp.x = M_PI_2;
         tmp.y = atan2( matrix[m02], matrix[m22] );
         tmp.z = 0;
@@ -523,7 +471,7 @@ CPoint<float> CMatrix::GetMatrixRotation()
 
     // singularity at south pole
     if( matrix[m10] < -0.998f )
-    { 
+    {
         tmp.x = -M_PI_2;
         tmp.y = atan2( matrix[m02], matrix[m22] );
         tmp.z = 0;
@@ -535,90 +483,80 @@ CPoint<float> CMatrix::GetMatrixRotation()
     tmp.z = atan2( -matrix[m12], matrix[m11] );
 
     return tmp;
-
-}   // GetMatrixRotation
+}
 
 
 /************************************************************************
 *    desc: Set the scale
-************************************************************************/   
-void CMatrix::SetScale( const CPoint<float> & point )
+************************************************************************/
+void CMatrix::setScale( const CPoint<float> & point )
 {
     // Initialize scaling matrix:
     matrix[0]  *= point.x;
     matrix[5]  *= point.y;
     matrix[10] *= point.z;
+}
 
-}   // SetScale
-
-void CMatrix::SetScale( const CSize<float> & size )
+void CMatrix::setScale( const CSize<float> & size )
 {
     // Initialize scaling matrix:
     matrix[0]  *= size.w;
     matrix[5]  *= size.h;
     matrix[10] *= 1.f;
+}
 
-}   // SetScale
-  
-void CMatrix::SetScale( float scale )
+void CMatrix::setScale( float scale )
 {
     // Initialize scaling matrix:
     matrix[0]  *= scale;
     matrix[5]  *= scale;
     matrix[10] *= scale;
-
-}   // SetScale
+}
 
 
 /************************************************************************
 *    desc: Scale the matrix
-************************************************************************/   
-void CMatrix::Scale( const CPoint<float> & point )
+************************************************************************/
+void CMatrix::scale( const CPoint<float> & point )
 {
-    MergeScale( point.x, point.y, point.z );
+    mergeScale( point.x, point.y, point.z );
+}
 
-}   // Scale
-
-void CMatrix::Scale( const CSize<float> & size )
+void CMatrix::scale( const CSize<float> & size )
 {
-    MergeScale( size.w, size.h, 1.f );
+    mergeScale( size.w, size.h, 1.f );
+}
 
-}   // Scale
-  
-void CMatrix::Scale( float scale )
+void CMatrix::scale( float scale )
 {
-    MergeScale( scale, scale, scale );
-
-}   // Scale
+    mergeScale( scale, scale, scale );
+}
 
 
 /************************************************************************
 *    desc:  scale and merge
 ************************************************************************/
-void CMatrix::MergeScale( float x, float y, float z )
+void CMatrix::mergeScale( float x, float y, float z )
 {
     float temp[ 16 ];
 
     // init the matrix
-    InitIdentityMatrix( temp );
-    
+    initIdentityMatrix( temp );
+
     // Initialize scaling matrix:
     temp[0]  = x;
     temp[5]  = y;
     temp[10] = z;
-    
-    // Merge the scale into the master matrix
-    MergeMatrix( temp );
 
-}   // MergeScale
+    // Merge the scale into the master matrix
+    mergeMatrix( temp );
+}
 
 
 /************************************************************************
 *    desc:  Inverses this matrix. Assumes that the last column is [0 0 0 1]
-*
-*    ret: bool - true on success
 ************************************************************************/
-bool CMatrix::Inverse()
+bool CMatrix::inverse()
 {
     const float EPSILON_E5((float)(1E-5));
 
@@ -637,7 +575,7 @@ bool CMatrix::Inverse()
     float tmp[ 16 ];
 
     // Initialize translation matrix
-    InitIdentityMatrix( tmp );
+    initIdentityMatrix( tmp );
 
     tmp[m00] =  det_inv * ( matrix[m11] * matrix[m22] - matrix[m12] * matrix[m21] );
     tmp[m01] = -det_inv * ( matrix[m01] * matrix[m22] - matrix[m02] * matrix[m21] );
@@ -663,16 +601,13 @@ bool CMatrix::Inverse()
     std::memcpy( matrix, tmp, sizeof(tmp) );
 
     return true;
-
-}   // Inverse
+}
 
 
 /************************************************************************
 *    desc:  Inverses this matrix. Assumes that the last column is [0 0 0 1]
-*
-*    ret: bool - true on success
 ************************************************************************/
-bool CMatrix::Invert()
+bool CMatrix::invert()
 {
     float inv[16];
 
@@ -799,51 +734,45 @@ bool CMatrix::Invert()
         matrix[i] = inv[i] * det;
 
     return true;
-
-}   // Inverse
+}
 
 
 /************************************************************************
-*    desc:  Inverse the Y. 
+*    desc:  Inverse the Y.
 ************************************************************************/
-void CMatrix::InvertX()
+void CMatrix::invertX()
 {
     matrix[12] = -matrix[12];
-
-}	// InvertX
+}
 
 
 /************************************************************************
-*    desc:  Inverse the Y. 
+*    desc:  Inverse the Y.
 ************************************************************************/
-void CMatrix::InvertY()
+void CMatrix::invertY()
 {
     matrix[13] = -matrix[13];
-
-}	// InvertY
+}
 
 
 /************************************************************************
-*    desc:  Inverse the Z. 
+*    desc:  Inverse the Z.
 ************************************************************************/
-void CMatrix::InvertZ()
+void CMatrix::invertZ()
 {
     matrix[14] = -matrix[14];
-
-}	// InvertZ
+}
 
 
 /************************************************************************
 *    desc:  Set the quaternion
-*
-*    param: CQuaternion & quat - set the quat
 ************************************************************************/
-void CMatrix::Set( const CQuaternion & quat )
+void CMatrix::set( const CQuaternion & quat )
 {
     float temp[mMax];
 
     // Initialize translation matrix
-    InitIdentityMatrix( temp );
+    initIdentityMatrix( temp );
 
     float x2 = quat.x * quat.x;
     float y2 = quat.y * quat.y;
@@ -868,19 +797,14 @@ void CMatrix::Set( const CQuaternion & quat )
     temp[m22] = 1.0f - 2.0f * (x2 + y2);
 
     // Merge matrix with master matrix:
-    MergeMatrix( temp );
-
-}   // Set
+    mergeMatrix( temp );
+}
 
 
 /************************************************************************
 *    desc:  Create the matrix based on where the camera is looking
-*
-*    param: pos - pos if camera/light
-*    param: target - spot the camera/light is pointing to
-*    param: cameraUp - The camera up of the camera
 ************************************************************************/
-void CMatrix::LookAt( const CPoint<float> & pos, const CPoint<float> & target, const CPoint<float> & cameraUp )
+void CMatrix::lookAt( const CPoint<float> & pos, const CPoint<float> & target, const CPoint<float> & cameraUp )
 {
     CPoint<float> zAxis = target - pos;
     zAxis.normalize();
@@ -898,14 +822,13 @@ void CMatrix::LookAt( const CPoint<float> & pos, const CPoint<float> & target, c
     matrix[m31] = -pos.getDotProduct(yAxis);
     matrix[m32] = -pos.getDotProduct(zAxis);
     matrix[m33] = 1.f;
-
-}   // LookAt
+}
 
 
 /************************************************************************
-*    desc:  Calculate an orthographic matrix 
+*    desc:  Calculate an orthographic matrix
 ************************************************************************/
-void CMatrix::OrthographicRH( float w, float h, float zn, float zf )
+void CMatrix::orthographicRH( float w, float h, float zn, float zf )
 {
     // Formula for a right handed orthographic matrix
     //	2/w  0    0           0
@@ -917,10 +840,9 @@ void CMatrix::OrthographicRH( float w, float h, float zn, float zf )
     matrix[m11] = 2 / h;
     matrix[m22] = 1 / (zn-zf);
     matrix[m32] = zn / (zn-zf);
+}
 
-}// OrthographicProjRH
-
-void CMatrix::OrthographicLH( float w, float h, float zn, float zf )
+void CMatrix::orthographicLH( float w, float h, float zn, float zf )
 {
     // Formula for a left handed orthographic matrix
     //  2/w  0    0           0
@@ -932,14 +854,13 @@ void CMatrix::OrthographicLH( float w, float h, float zn, float zf )
     matrix[m11] = 2 / h;
     matrix[m22] = 1 / (zf-zn);
     matrix[m32] = -zn / (zf-zn);
-
-}   // OrthographicProjRH
+}
 
 
 /************************************************************************
-*    desc:  Calculate an perspective matrix 
+*    desc:  Calculate an perspective matrix
 ************************************************************************/
-void CMatrix::PerspectiveFovRH( float fovy, float aspect, float zn, float zf )
+void CMatrix::perspectiveFovRH( float fovy, float aspect, float zn, float zf )
 {
 	 // Formula for a right handed perspective matrix
     //  yScale = cot(fovY/2)
@@ -957,10 +878,9 @@ void CMatrix::PerspectiveFovRH( float fovy, float aspect, float zn, float zf )
     matrix[m22] = zf / (zn-zf);
     matrix[m23] = -1;
     matrix[m32] = zn * zf / (zn-zf);
+}
 
-}   // PerspectiveFovRH
-
-void CMatrix::PerspectiveFovLH( float fovy, float aspect, float zn, float zf )
+void CMatrix::perspectiveFovLH( float fovy, float aspect, float zn, float zf )
 {
 	 // Formula for a left handed perspective matrix
     //  yScale = cot(fovY/2)
@@ -978,16 +898,13 @@ void CMatrix::PerspectiveFovLH( float fovy, float aspect, float zn, float zf )
     matrix[m22] = zf / (zf-zn);
     matrix[m23] = 1;
     matrix[m32] = -zn * zf / (zf-zn);
+}
 
-}   // PerspectiveFovLH
 
-
-/************************************************************************                                                             
-*    desc:	Multiply the matrices only using the rotation/scale portion 
-*
-*    param:	const CMatrix & obj - matrix to multiply
+/************************************************************************
+*    desc:	Multiply the matrices only using the rotation/scale portion
 ************************************************************************/
-void CMatrix::Multiply3x3( const CMatrix & obj )
+void CMatrix::multiply3x3( const CMatrix & obj )
 {
     float tmp[mMax] = { 1, 0, 0, 0,
                         0, 1, 0, 0,
@@ -997,7 +914,7 @@ void CMatrix::Multiply3x3( const CMatrix & obj )
     for( int i = 0; i < 3; ++i )
     {
         for( int j = 0; j < 3; ++j )
-        { 
+        {
             tmp[(i*4)+j] = ( matrix[i*4] * obj[j]   )
                          + ( matrix[(i*4)+1] * obj[4+j] )
                          + ( matrix[(i*4)+2] * obj[8+j] );
@@ -1006,18 +923,13 @@ void CMatrix::Multiply3x3( const CMatrix & obj )
 
     // Copy the tmp matrix to the class's matrix
     std::memcpy( matrix, tmp, sizeof(matrix) );
-
-}   // Multiply3x3
+}
 
 
 /************************************************************************
 *    desc:  Rotate the matrix along the z axis
-*
-*    param: float dest[mMax] - destination matrix
-*			float value      - amount to rotate by
-*			int rotFlags     - bitmask representing the applied rotations
-************************************************************************/  
-void CMatrix::RotateZ( float dest[mMax], float value, int rotFlags )
+************************************************************************/
+void CMatrix::rotateZ( float dest[mMax], float value, int rotFlags )
 {
     float cosZ = cos(value);
     float sinZ = sin(value);
@@ -1026,18 +938,13 @@ void CMatrix::RotateZ( float dest[mMax], float value, int rotFlags )
     dest[1] = sinZ;
     dest[4] = -sinZ;
     dest[5] = cosZ;
-
-}   // RotateZ
+}
 
 
 /************************************************************************
 *    desc:  Rotate the matrix along the y axis
-*
-*    param: float dest[mMax] - destination matrix
-*			float value      - amount to rotate by
-*			int rotFlags     - bitmask representing the applied rotations
-************************************************************************/  
-void CMatrix::RotateY( float dest[mMax], float value, int rotFlags )
+************************************************************************/
+void CMatrix::rotateY( float dest[mMax], float value, int rotFlags )
 {
     float cosY = cos(value);
     float sinY = sin(value);
@@ -1068,18 +975,13 @@ void CMatrix::RotateY( float dest[mMax], float value, int rotFlags )
             break;
         }
     }
-
-}   // RotateY
+}
 
 
 /************************************************************************
 *    desc:  Rotate the matrix along the x axis
-*
-*    param: float dest[mMax] - destination matrix
-*			float value      - amount to rotate by
-*			int rotFlags     - bitmask representing the applied rotations
-************************************************************************/  
-void CMatrix::RotateX( float dest[mMax], float value, int rotFlags )
+************************************************************************/
+void CMatrix::rotateX( float dest[mMax], float value, int rotFlags )
 {
     float cosX = cos(value);
     float sinX = sin(value);
@@ -1145,44 +1047,37 @@ void CMatrix::RotateX( float dest[mMax], float value, int rotFlags )
             break;
         }
     }
-
-}   // RotateX
+}
 
 
 /************************************************************************
 *    desc:  Use a point to set a row
 ************************************************************************/
-void CMatrix::SetRow( int row, const CPoint<float> & point )
+void CMatrix::setRow( int row, const CPoint<float> & point )
 {
     float *pRow = matrix + (row * 4);
-    
+
     *pRow = point.x; ++pRow;
     *pRow = point.y; ++pRow;
     *pRow = point.z;
-    
-}   // SetRow
+}
 
 
 /************************************************************************
 *    desc:  Use a point to set a column
 ************************************************************************/
-void CMatrix::SetColumn( const int col, const float x, const float y, const float z )
+void CMatrix::setColumn( const int col, const float x, const float y, const float z )
 {
     float *pCol = matrix + col;
-    
+
     *pCol = x; pCol += 4;
     *pCol = y; pCol += 4;
     *pCol = z;
-    
-}   // SetColumn
+}
 
 
-/************************************************************************                                                             
-*    desc:  The multiplication operator 
-*
-*    param:  CMatrix & newMatrix - matrix to multiply
-*
-*    return: CMatrix - multiplied matrix
+/************************************************************************
+*    desc:  The multiplication operator
 ************************************************************************/
 CMatrix CMatrix::operator * ( const CMatrix & obj ) const
 {
@@ -1191,7 +1086,7 @@ CMatrix CMatrix::operator * ( const CMatrix & obj ) const
     for( int i = 0; i < 4; ++i )
     {
         for( int j = 0; j < 4; ++j )
-        { 
+        {
             tmp[(i*4)+j] =   (matrix[i*4]     * obj[j])
                            + (matrix[(i*4)+1] * obj[4+j])
                            + (matrix[(i*4)+2] * obj[8+j])
@@ -1200,16 +1095,11 @@ CMatrix CMatrix::operator * ( const CMatrix & obj ) const
     }
 
     return CMatrix(tmp);
+}
 
-}   // operator *
 
-
-/************************************************************************                                                             
-*    desc:  The multiplication operator 
-*
-*    param:  CMatrix & newMatrix - matrix to multiply
-*
-*    return: CMatrix - multiplied matrix
+/************************************************************************
+*    desc:  The multiplication operator
 ************************************************************************/
 CMatrix CMatrix::operator *= ( const CMatrix & obj )
 {
@@ -1218,7 +1108,7 @@ CMatrix CMatrix::operator *= ( const CMatrix & obj )
     for( int i = 0; i < 4; ++i )
     {
         for( int j = 0; j < 4; ++j )
-        { 
+        {
             tmp[(i*4)+j] =    (matrix[i*4]     * obj[j])
                             + (matrix[(i*4)+1] * obj[4+j])
                             + (matrix[(i*4)+2] * obj[8+j])
@@ -1230,16 +1120,11 @@ CMatrix CMatrix::operator *= ( const CMatrix & obj )
     std::memcpy( matrix, tmp, sizeof(tmp) );
 
     return *this;
+}
 
-}   // operator *=
 
-
-/************************************************************************                                                             
-*    desc:  The = operator 
-*
-*    param:  const float mat[4][4] - matrix to copy over
-*
-*    return: CMatrix - multiplied matrix
+/************************************************************************
+*    desc:  The = operator
 ************************************************************************/
 CMatrix CMatrix::operator = ( const float mat[4][4] )
 {
@@ -1248,16 +1133,11 @@ CMatrix CMatrix::operator = ( const float mat[4][4] )
             matrix[i*4 + j] = mat[i][j];
 
     return *this;
+}
 
-}   // operator =
 
-
-/************************************************************************                                                             
-*    desc:  The [] operator 
-*
-*    param:  uint index - index into matrix array
-*
-*    return: float
+/************************************************************************
+*    desc:  The [] operator
 ************************************************************************/
 float CMatrix::operator [] ( uint index ) const
 {
@@ -1266,8 +1146,7 @@ float CMatrix::operator [] ( uint index ) const
             boost::str( boost::format("Index exceeds allowable range (%d,%d).\n\n%s\nLine: %s") % index % mMax % __FUNCTION__ % __LINE__ ));
 
     return matrix[index];
-
-}   // operator []
+}
 
 float & CMatrix::operator [] ( uint index )
 {
@@ -1276,17 +1155,13 @@ float & CMatrix::operator [] ( uint index )
             boost::str( boost::format("Index exceeds allowable range (%d,%d).\n\n%s\nLine: %s") % index % mMax % __FUNCTION__ % __LINE__ ));
 
     return matrix[index];
+}
 
-}   // operator []
 
-
-/************************************************************************                                                             
-*    desc:  The () operator 
-*
-*    return: float
+/************************************************************************
+*    desc:  The () operator
 ************************************************************************/
 const float * CMatrix::operator () () const
 {
     return matrix;
-
-}   // operator ()
+}

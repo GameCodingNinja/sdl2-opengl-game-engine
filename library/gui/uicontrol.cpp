@@ -206,11 +206,11 @@ void CUIControl::transformCollision()
     if( wasWorldPosTranformed() && !m_size.isEmpty() )
     {
         CMatrix finalMatrix( getMatrix() );
-        finalMatrix.Scale( CSettings::Instance().GetOrthoAspectRatio().getH() );
-        finalMatrix.InvertY();
+        finalMatrix.scale( CSettings::Instance().getOrthoAspectRatio().getH() );
+        finalMatrix.invertY();
 
         // Get half the screen size to convert to screen coordinates
-        CSize<float> screenHalf = CSettings::Instance().GetSizeHalf();
+        CSize<float> screenHalf = CSettings::Instance().getSizeHalf();
 
         // Create the rect of the control based on half it's size
         float halfwidth = m_size.getW() * 0.5f;
@@ -226,7 +226,7 @@ void CUIControl::transformCollision()
         quad.point[3].x = -halfwidth + -m_sizeModifier.x1;
         quad.point[3].y = halfHeight + m_sizeModifier.y2;
 
-        finalMatrix.Transform( m_collisionQuad, quad );
+        finalMatrix.transform( m_collisionQuad, quad );
 
         // Convert the translated rect to screen coordinates
         m_collisionQuad.point[0].x += screenHalf.getW();
@@ -238,7 +238,7 @@ void CUIControl::transformCollision()
         m_collisionQuad.point[3].x += screenHalf.getW();
         m_collisionQuad.point[3].y += screenHalf.getH();
 
-        finalMatrix.Transform( m_collisionCenter, CPoint<float>() );
+        finalMatrix.transform( m_collisionCenter, CPoint<float>() );
 
         // Convert to screen coordinates
         m_collisionCenter.x += screenHalf.getW();

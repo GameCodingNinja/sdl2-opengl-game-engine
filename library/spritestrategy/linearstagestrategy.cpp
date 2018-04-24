@@ -26,7 +26,7 @@ CLinearStageStrategy::CLinearStageStrategy() :
     m_startIndex(0),
     m_dirType(ESD_NULL)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -34,15 +34,15 @@ CLinearStageStrategy::CLinearStageStrategy() :
 ************************************************************************/
 CLinearStageStrategy::~CLinearStageStrategy()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CLinearStageStrategy::LoadFromNode( const XMLNode & node )
+void CLinearStageStrategy::loadFromNode( const XMLNode & node )
 {
-    CBasicStageStrategy::LoadFromNode( node );
+    CBasicStageStrategy::loadFromNode( node );
 
     const XMLNode linearStageNode = node.getChildNode( "linearStage" );
     if( !linearStageNode.isEmpty() )
@@ -66,31 +66,29 @@ void CLinearStageStrategy::LoadFromNode( const XMLNode & node )
     }
 
     // Init the range of sectors to check
-    InitRange();
-
-}   // LoadFromNode
+    initRange();
+}
 
 
 /************************************************************************
 *    desc:  Init the range of sectors to check
 ************************************************************************/
-void CLinearStageStrategy::InitRange()
+void CLinearStageStrategy::initRange()
 {
     m_firstIndex = m_startIndex;
 
     m_lastIndex = m_startIndex +
-        (CSettings::Instance().GetDefaultSize().w /
-        CSettings::Instance().GetSectorSize()) + 1;
-
-}   // InitRange
+        (CSettings::Instance().getDefaultSize().w /
+        CSettings::Instance().getSectorSize()) + 1;
+}
 
 
 /***************************************************************************
 *    desc:  Set the range based on the sector's visibility
 ****************************************************************************/
-bool CLinearStageStrategy::SetRange( const size_t index )
+bool CLinearStageStrategy::setRange( const size_t index )
 {
-    if( !m_sectorDeq.at(index).InView() )
+    if( !m_sectorDeq.at(index).inView() )
     {
         if( m_dirType == ESD_FORWARD )
         {
@@ -119,25 +117,23 @@ bool CLinearStageStrategy::SetRange( const size_t index )
     }
 
     return false;
-
-}   // SetRange
+}
 
 
 /***************************************************************************
 *    desc:  Update the actors
 ****************************************************************************/
-void CLinearStageStrategy::Update()
+void CLinearStageStrategy::update()
 {
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
-        m_sectorDeq.at(i).Update();
-
-}   // Update
+        m_sectorDeq.at(i).update();
+}
 
 
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CLinearStageStrategy::Transform()
+void CLinearStageStrategy::transform()
 {
     size_t tmpFirstIndex = m_firstIndex;
 
@@ -145,7 +141,7 @@ void CLinearStageStrategy::Transform()
     {
         m_sectorDeq.at(i).transform();
 
-        if( SetRange(i) )
+        if( setRange(i) )
             break;
 
         // Going backwards will decrement to an index that
@@ -156,10 +152,9 @@ void CLinearStageStrategy::Transform()
             m_sectorDeq.at(m_firstIndex).transform();
         }
     }
+}
 
-}   // Transform
-
-void CLinearStageStrategy::Transform( const CObject2D & object )
+void CLinearStageStrategy::transform( const CObject2D & object )
 {
     size_t tmpFirstIndex = m_firstIndex;
 
@@ -167,7 +162,7 @@ void CLinearStageStrategy::Transform( const CObject2D & object )
     {
         m_sectorDeq.at(i).transform( object );
 
-        if( SetRange(i) )
+        if( setRange(i) )
             break;
 
         // Going backwards will decrement to an index that
@@ -178,25 +173,22 @@ void CLinearStageStrategy::Transform( const CObject2D & object )
             m_sectorDeq.at(m_firstIndex).transform( object );
         }
     }
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  Render the actors
 ****************************************************************************/
-void CLinearStageStrategy::Render( const CMatrix & matrix )
+void CLinearStageStrategy::render( const CMatrix & matrix )
 {
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
-        m_sectorDeq.at(i).Render( matrix );
+        m_sectorDeq.at(i).render( matrix );
+}
 
-}   // Render
-
-void CLinearStageStrategy::Render()
+void CLinearStageStrategy::render()
 {
     auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
-        m_sectorDeq.at(i).Render( camera );
-
-}   // Render
+        m_sectorDeq.at(i).render( camera );
+}

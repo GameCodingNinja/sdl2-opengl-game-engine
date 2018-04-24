@@ -14,26 +14,25 @@
 iSpriteStrategy::iSpriteStrategy(const std::string & cameraId) :
     m_cameraId(cameraId)
 {
-}   // constructor
+}
 
 iSpriteStrategy::iSpriteStrategy()
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 iSpriteStrategy::~iSpriteStrategy()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Transform the sprites
 ************************************************************************/
-void iSpriteStrategy::SetCameraId( const std::string & cameraId )
+void iSpriteStrategy::setCameraId( const std::string & cameraId )
 {
     m_cameraId = cameraId;
-
-}   // Transform
+}

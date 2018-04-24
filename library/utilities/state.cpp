@@ -11,27 +11,27 @@
 #include <assert.h>
 
 /************************************************************************
-*    desc:  constructor                                                             
+*    desc:  constructor
 ************************************************************************/
 CState::CState() :
     pState(nullptr),
     level(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CState::~CState()
 {
-}   // destructor
+}
 
 
 /************************************************************************
-*    desc:  Initilize the state class                                                             
+*    desc:  Initilize the state class
 ************************************************************************/
-void CState::Initilize()
+void CState::initilize()
 {
     assert(pState == nullptr && "Persistant state pointer already initilized!");
 
@@ -43,33 +43,27 @@ void CState::Initilize()
 
     // Init the pointer to the persistant class
     pState = &perState;
-
-}   // Initilize
+}
 
 
 /************************************************************************
 *    desc:  Returns the current state value
-*
-*    ret: Returns int of current state
 ************************************************************************/
 CState::operator int() const
 {
     // Sanity checks
     assert(pState != nullptr && "Persistant state pointer NOT initilized!");
-  
+
     // Check that we have not over run the queue
     assert(level < pState->state.size() && "Level exceeds queue size!");
 
     // Just return the current states value for this level.
     return pState->state[level];
-
-}   // operator int
+}
 
 
 /************************************************************************
 *    desc:  Set this state's current value.
-*
-*    ret: Returns int of current state
 ************************************************************************/
 int CState::operator = (int newState)
 {
@@ -98,16 +92,13 @@ int CState::operator = (int newState)
 
     // Return out new state value.
     return newState;
-
-}   // operator int
+}
 
 
 /************************************************************************
 *    desc:  Create a substate by pushing onto the stack a new state value of zero.
-*
-*    ret: Returns a new state
 ************************************************************************/
-CState CState::NewSubState() const
+CState CState::newSubState() const
 {
     // Sanity checks
     assert(pState != nullptr && "Persistant state pointer NOT initilized!");
@@ -123,7 +114,7 @@ CState CState::NewSubState() const
 
         // Guard against a run away sub state queue
         assert(pState->state.size() < 50 && "Possible run away sub state! Sub state queue of 50!!");
-    
+
         // Check that the new level is the last index in the queue
         assert( pState->level+1 == pState->state.size() && "Level and queue size out of sync!!");
     }
@@ -139,5 +130,4 @@ CState CState::NewSubState() const
 
     // Reutrn our new substate for use.
     return state;
-
-}   // NewSubState
+}

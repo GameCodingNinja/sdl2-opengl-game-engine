@@ -23,100 +23,91 @@ public:
     // Copy Constructors
     CBitmask( const type args ) : bitmask(args)
     {}
-    
+
     template <typename U>
     CBitmask( const CBitmask<U> bitmask ) : bitmask(bitmask.bitmask)
     {}
 
-    
+
     /************************************************************************
     *    desc:  Add the parameters to the bitmask
     ************************************************************************/
-    void Add( const type args )
+    void add( const type args )
     {
         bitmask |= args;
-
-    }   // Set
+    }
 
 
     /************************************************************************
     *    desc:  Remove the parameters from the bitmask
     ************************************************************************/
-    void Remove( const type args )
+    void remove( const type args )
     {
         bitmask &= args ^ -1;
-
-    }   // Remove
+    }
 
 
     /************************************************************************
     *    desc:  Remove all parameters except for the ones passed in
     ************************************************************************/
-    void RemoveAllExcept( const type args )
+    void removeAllExcept( const type args )
     {
         bitmask &= args;
-
-    }   // RemoveAllExcept
+    }
 
 
     /************************************************************************
     *    desc:  Set the bitmask to zero
     ************************************************************************/
-    void Clear()
+    void clear()
     {
         bitmask = 0;
+    }
 
-    }   // Clear
-    
-    
+
     /************************************************************************
     *    desc:  Check if all of the parameters are set
     ************************************************************************/
-    bool IsEmpty() const
+    bool isEmpty() const
     {
         return (bitmask == 0);
-
-    }   // AreAllSet
+    }
 
 
     /************************************************************************
     *    desc:  Check if one of the parameters is set
     ************************************************************************/
-    bool IsSet( const type args ) const
+    bool isSet( const type args ) const
     {
         return (bitmask & args) != 0;
-
-    }   // IsSet
+    }
 
 
     /************************************************************************
     *    desc:  Check if all of the parameters are set
     ************************************************************************/
-    bool AreAllSet( const type args ) const
+    bool areAllSet( const type args ) const
     {
         return (bitmask & args) == args;
-
-    }   // AreAllSet
+    }
 
 
     /************************************************************************
     *    desc:  Get a copy of the bitmask including the parameters
     ************************************************************************/
-    type GetIncluding( const type args ) const
+    type getIncluding( const type args ) const
     {
         return bitmask | args;
-
-    }   // GetIncluding
+    }
 
 
     /************************************************************************
     *    desc:  Get a copy of the bitmask excluding the parameters
     ************************************************************************/
-    type GetExcluding( const type args ) const
+    type getExcluding( const type args ) const
     {
         return bitmask & (args ^ -1);
-
-    }   // GetExcluding
+    }
 
 
     /************************************************************************
@@ -125,8 +116,7 @@ public:
     void operator = ( const type value )
     {
         bitmask = value;
-
-    }   // operator =
+    }
 
 private:
 

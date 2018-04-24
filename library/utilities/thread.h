@@ -46,7 +46,7 @@ namespace thread
         { }
 
         // Starts executing the objects method in a concurrent thread.
-        void Start(T* object, int ( T::* method)(), const char* pThreadname, bool detachThread = false)
+        void start(T* object, int ( T::* method)(), const char* pThreadname, bool detachThread = false)
         {
             // Storing the name of the thread so that it's pointer never goes out of scope.
             // This solved a random problem where the name was being passed as a hard coded
@@ -78,7 +78,7 @@ namespace thread
         }
 
         // Has the thread started
-        bool Started()
+        bool started()
         {
             if( m_threadID > 0 )
                 return true;
@@ -87,13 +87,13 @@ namespace thread
         }
 
         // Is the thread running
-        bool Running()
+        bool running()
         {
             return ( Started() && m_threadRunning );
         }
 
         // Wait for the thread to finish
-        void WaitForThread()
+        void waitForThread()
         {
             if( !m_detachThread && Running() )
                 SDL_WaitThread( m_pThread, NULL );

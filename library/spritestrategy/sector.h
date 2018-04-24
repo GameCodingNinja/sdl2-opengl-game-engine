@@ -33,45 +33,45 @@ public:
     virtual ~CSector();
     
     // Load the sector data from node
-    void LoadFromNode( const struct XMLNode & node );
+    void loadFromNode( const struct XMLNode & node );
     
     // Do any pre-game loop init's
-    void Init();
+    void init();
     
     // Do some cleanup
-    void CleanUp();
+    void cleanUp();
     
     // Destroy this sector
-    void Destroy();
+    void destroy();
 
     // Update the actor
-    void Update();
+    void update();
 
     // Transform the actor
     void transform() override;
     void transform( const CObject2D & object ) override;
 
     // Render the actor
-    void Render( const CCamera & camera );
-    void Render( const CMatrix & matrix );
-    void Render( const CMatrix & matrix, const CMatrix & rotMatrix );
+    void render( const CCamera & camera );
+    void render( const CMatrix & matrix );
+    void render( const CMatrix & matrix, const CMatrix & rotMatrix );
 
     // Is the actor in view
-    bool InView();
+    bool inView();
     
     // Find if the sprite exists
-    bool Find( iSprite * piSprite );
+    bool find( iSprite * piSprite );
     
     // Get the pointer to the sprite
-    iSprite * Get( const std::string & spriteName );
+    iSprite * get( const std::string & spriteName );
     
 private:
     
     // Check if the sector is within the orthographic view frustum
-    bool InOrthographicView();
+    bool inOrthographicView();
     
     // Check if the sector is within the perspective view frustum
-    bool InPerspectiveView();
+    bool inPerspectiveView();
     
 private:
     

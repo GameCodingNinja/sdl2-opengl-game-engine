@@ -106,7 +106,7 @@ void CStartUpState::Init()
     m_SpriteDeque.back().transform();
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
  
 }   // Init
 
@@ -128,10 +128,10 @@ void CStartUpState::Fade(
     do
     {
         // Get the elapsed time
-        CHighResTimer::Instance().CalcElapsedTime();
+        CHighResTimer::Instance().calcElapsedTime();
 
-        time -= CHighResTimer::Instance().GetElapsedTime();
-        current += inc * CHighResTimer::Instance().GetElapsedTime();
+        time -= CHighResTimer::Instance().getElapsedTime();
+        current += inc * CHighResTimer::Instance().getElapsedTime();
 
         if( time < 0 )
             current = finalColor;
@@ -144,7 +144,7 @@ void CStartUpState::Fade(
         for( auto & iter : m_SpriteDeque )
             iter.render( matrix );
 
-        SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
+        SDL_GL_SwapWindow( CDevice::Instance().getWindow() );
 
         // Apparently it's a good practice to do this at the end of a render cycle
         CShaderMgr::Instance().unbind();
@@ -227,11 +227,11 @@ bool CStartUpState::DoStateChange()
     // Do the fade in
     Fade( 500.f, CColor(0,0,0,1), CColor(1,1,1,1) );
     
-    CHighResTimer::Instance().TimerStart();
+    CHighResTimer::Instance().timerStart();
     
     AssetLoad();
     
-    const int time = static_cast<int>(CHighResTimer::Instance().TimerStop());
+    const int time = static_cast<int>(CHighResTimer::Instance().timerStop());
     
     if( time < 2000.f )
         std::this_thread::sleep_for( std::chrono::milliseconds( 2000 - time ) );

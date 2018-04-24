@@ -22,22 +22,22 @@ public:
     }
 
     // Calc the elapsed time
-    void CalcElapsedTime();
+    void calcElapsedTime();
 
     // Get the elapsed time
-    double GetElapsedTime();
+    double getElapsedTime();
     
     // Simple timer start
-    void TimerStart();
+    void timerStart();
     
     // Simple timer stop
-    float TimerStop();
+    float timerStop();
 
     // Get the FPS
-    float GetFPS();
+    float getFPS();
 
     // Get the time
-    double GetTime();
+    double getTime();
 
 private:
 

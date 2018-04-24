@@ -31,32 +31,32 @@ public:
     }
 
     // Create the window and OpenGL context
-    void Create();
+    void create();
 
     // Show/Hide the Window
-    void ShowWindow( bool visible );
+    void showWindow( bool visible );
 
     // Get the OpenGl Context
-    SDL_GLContext GetContext();
+    SDL_GLContext getContext();
 
     // Get the SDL window
-    SDL_Window * GetWindow();
+    SDL_Window * getWindow();
 
     // Close out the game pads
-    void CloseGamepads();
+    void closeGamepads();
 
     // Set full screen or windowed mode
-    void SetFullScreen( bool fullscreen );
+    void setFullScreen( bool fullscreen );
 
     // Enable/disable v-sync
-    void EnableVSync( bool enable );
+    void enableVSync( bool enable );
 
     // Add/Remove the game pad
-    void AddGamepad( int id );
-    void RemoveGamepad( int id );
+    void addGamepad( int id );
+    void removeGamepad( int id );
     
     // Get the gamepad count
-    size_t GetGamepadCount();
+    size_t getGamepadCount();
 
 private:
 
@@ -67,7 +67,7 @@ private:
     virtual ~CDevice();
     
     // Init current gamepads plugged in at startup
-    void InitStartupGamepads();
+    void initStartupGamepads();
 
 private:
 

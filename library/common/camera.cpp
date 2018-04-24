@@ -67,9 +67,9 @@ void CCamera::generatePerspectiveProjection( float angle, float minZDist, float 
     m_maxZDist = maxZDist;
     m_scale = scale;
     
-    m_projectionMatrix.PerspectiveFovRH(
+    m_projectionMatrix.perspectiveFovRH(
         angle,
-        CSettings::Instance().GetScreenAspectRatio().w * scale,
+        CSettings::Instance().getScreenAspectRatio().w * scale,
         minZDist,
         maxZDist );
     
@@ -86,16 +86,16 @@ void CCamera::generateOrthographicProjection( float minZDist, float maxZDist, fl
     m_minZDist = minZDist;
     m_maxZDist = maxZDist;
     m_scale = scale;
-    const auto defSize = CSettings::Instance().GetDefaultSize();
+    const auto defSize = CSettings::Instance().getDefaultSize();
     
     // Calc the new width and height
     m_orthoProjSize.set( defSize.getW() * scale, defSize.getH() * scale );
     m_orthoProjSizeHalf = m_orthoProjSize / 2.f;
     
     // Calc the new height aspect ratio
-    m_orthoHeightAspectRatio = CSettings::Instance().GetSize().h / m_orthoProjSize.h;
+    m_orthoHeightAspectRatio = CSettings::Instance().getSize().h / m_orthoProjSize.h;
 
-    m_projectionMatrix.OrthographicRH(
+    m_projectionMatrix.orthographicRH(
         m_orthoProjSize.w,
         m_orthoProjSize.h,
         minZDist,
@@ -175,7 +175,7 @@ void CCamera::incPos( CWorldValue x, CWorldValue y, CWorldValue z )
 ************************************************************************/
 void CCamera::transform()
 {
-    const bool wasTransformed( m_parameters.IsSet( NDefs::TRANSFORM ) );
+    const bool wasTransformed( m_parameters.isSet( NDefs::TRANSFORM ) );
     
     CObject3D::transform();
     
@@ -189,9 +189,9 @@ void CCamera::transform()
 ************************************************************************/
 void CCamera::calcFinalMatrix()
 {
-    m_finalMatrix.InitilizeMatrix();
-    m_finalMatrix.MergeMatrix( m_matrix );
-    m_finalMatrix.MergeMatrix( m_projectionMatrix );
+    m_finalMatrix.initilizeMatrix();
+    m_finalMatrix.mergeMatrix( m_matrix );
+    m_finalMatrix.mergeMatrix( m_projectionMatrix );
 }
 
 

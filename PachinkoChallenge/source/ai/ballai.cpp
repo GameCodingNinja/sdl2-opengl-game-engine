@@ -21,7 +21,7 @@
 ************************************************************************/
 CBallAI::CBallAI( iSprite * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
-    m_rStrategy(CSpriteStrategyMgr::Instance().Find<CBasicSpriteStrategy>("_spriteStrategy")), // Find the strategy that has this ball
+    m_rStrategy(CSpriteStrategyMgr::Instance().find<CBasicSpriteStrategy>("_spriteStrategy")), // Find the strategy that has this ball
     m_generator(std::random_device{}()),
     m_angularImpulse(-1, 1),
     m_rotation(-M_PI, M_PI)
@@ -60,6 +60,6 @@ void CBallAI::init()
 void CBallAI::update()
 {
     if( m_sprite.getPos().y < -1650.0f )
-        m_rStrategy.SetToDestroy( m_sprite.getId() );
+        m_rStrategy.setToDestroy( m_sprite.getId() );
         
 }   // Update

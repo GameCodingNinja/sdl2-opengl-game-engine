@@ -35,51 +35,51 @@ public:
 protected:
 
     // Game start init
-    void Init() override;
+    void init() override;
 
     // Handle events
-    bool HandleEvent( const SDL_Event & rEvent ) override;
+    bool handleEvent( const SDL_Event & rEvent ) override;
 
     // Handle the state change
-    void DoStateChange() override;
+    void doStateChange() override;
     
     // Handle any misc processing before the real work is started
-    void MiscProcess() override;
+    void miscProcess() override;
 
     // Handle the physics
-    void Physics() override;
+    void physics() override;
 
     // Update animations, Move sprites, Check for collision
-    void Update() override;
+    void update() override;
 
     // Transform game objects
-    void Transform() override;
+    void transform() override;
 
     // 2D/3D Render of game content
-    void Render() override;
+    void render() override;
 
 private:
 
     // Callback for when a smart gui control is created
-    void SmartGuiControlCreateCallBack( CUIControl * pUIControl );
+    void smartGuiControlCreateCallBack( CUIControl * pUIControl );
     
     // Callback for when a smart menu is created
-    void SmartMenuCreateCallBack( CMenu * pMenu );
+    void smartMenuCreateCallBack( CMenu * pMenu );
     
     // Callback for shader init
-    void ShaderInitCallBack( const std::string & shaderId );
+    void shaderInitCallBack( const std::string & shaderId );
     
     // Game settings call back fuctions
-    void LobbyMusicCallBack( CUIControl * pUIControl );
-    void SpinMusicCallBack( CUIControl * pUIControl );
-    void StopSoundsCallBack( CUIControl * pUIControl );
+    void lobbyMusicCallBack( CUIControl * pUIControl );
+    void spinMusicCallBack( CUIControl * pUIControl );
+    void stopSoundsCallBack( CUIControl * pUIControl );
     
     // Callback for the state string
-    void StatStringCallBack( const std::string & statStr );
+    void statStringCallBack( const std::string & statStr );
     
     // Dev debug settings call back fuctions
-    void DevDebugVSyncCallBack( CUIControl * pUIControl );
-    void DevDebugStringCallBack( CUIControl * pUIControl );
+    void devDebugVSyncCallBack( CUIControl * pUIControl );
+    void devDebugStringCallBack( CUIControl * pUIControl );
 
 protected:
 

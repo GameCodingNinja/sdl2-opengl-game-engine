@@ -31,7 +31,7 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     setVisible( objectData.getVisualData().isActive() );
     
     // Set the sprite type
-    m_parameters.Add( NDefs::SPRITE2D );
+    m_parameters.add( NDefs::SPRITE2D );
     
     if( objectData.getVisualData().getGenerationType() == NDefs::EGT_SPRITE_SHEET )
         setCropOffset( objectData.getVisualData().getSpriteSheet().getGlyph().getCropOffset() );

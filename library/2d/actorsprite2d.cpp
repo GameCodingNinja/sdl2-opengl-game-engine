@@ -30,7 +30,7 @@ CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
     iSprite(id),
     m_radius(0),
     m_scaledRadius(0),
-    m_projectionType(CSettings::Instance().GetProjectionType()),
+    m_projectionType(CSettings::Instance().getProjectionType()),
     m_collisionGroup(0),
     m_collisionMask(0)
 {
@@ -38,7 +38,7 @@ CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
     create( actorData );
     
     // Set the sprite type
-    m_parameters.Add( NDefs::ACTOR2D );
+    m_parameters.add( NDefs::ACTOR2D );
 
 }   // constructor
 
@@ -303,7 +303,7 @@ bool CActorSprite2D::inView()
  ************************************************************************/
 bool CActorSprite2D::inOrthographicView()
 {
-    const CSize<float> & defaultSizeHalf = CSettings::Instance().GetDefaultSizeHalf();
+    const CSize<float> & defaultSizeHalf = CSettings::Instance().getDefaultSizeHalf();
     
     // Check against the right side of the screen
     if( std::fabs(m_transPos.x) > (defaultSizeHalf.w + m_scaledRadius) )
@@ -324,7 +324,7 @@ bool CActorSprite2D::inOrthographicView()
  ************************************************************************/
 bool CActorSprite2D::inPerspectiveView()
 {
-    const CSize<float> & aspectRatio = CSettings::Instance().GetScreenAspectRatio();
+    const CSize<float> & aspectRatio = CSettings::Instance().getScreenAspectRatio();
 
     // Check the right and left sides of the screen
     if( std::fabs(m_transPos.x) > ((std::fabs(m_pos.z) * aspectRatio.w) + m_scaledRadius) )

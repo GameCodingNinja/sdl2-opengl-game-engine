@@ -18,23 +18,23 @@ CThreadPool::CThreadPool()
 {
     #if !defined(__thread_disable__)
     // Get minimum number of threads
-    int threads = CSettings::Instance().GetMinThreadCount();
-    
+    int threads = CSettings::Instance().getMinThreadCount();
+
     // Get maximum number of threads.
     // Value of zero means use max hardware threads to number of cores
-    const int maxThreads = CSettings::Instance().GetMaxThreadCount();
-    
+    const int maxThreads = CSettings::Instance().getMaxThreadCount();
+
     // Get the number of hardware cores. May return 0 if can't determine
     const int maxCores = std::thread::hardware_concurrency();
-    
+
     // Allow for the maximum number of threads
     if( ((maxThreads == 0) || (maxThreads > maxCores)) && (threads < maxCores) )
         threads = maxCores;
-    
+
     // Use defined thread count
     else if( (maxThreads > threads) && (maxThreads <= maxCores) )
         threads = maxThreads;
-    
+
     m_workers.reserve( threads );
 
     for( int i = 0; i < threads; ++i )
@@ -49,10 +49,10 @@ CThreadPool::CThreadPool()
                         std::unique_lock<std::mutex> lock(this->m_queue_mutex);
                         this->m_condition.wait(lock,
                             [this] { return this->m_stop || !this->m_tasks.empty(); });
-                                
+
                         if (this->m_stop && this->m_tasks.empty())
                             return;
-                                
+
                         task = std::move(this->m_tasks.front());
                         this->m_tasks.pop();
                     }
@@ -67,7 +67,7 @@ CThreadPool::CThreadPool()
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CThreadPool::~CThreadPool()
 {
@@ -76,9 +76,9 @@ CThreadPool::~CThreadPool()
         std::unique_lock<std::mutex> lock( m_queue_mutex );
         m_stop = true;
     }
-    
+
     m_condition.notify_all();
-    
+
     for( std::thread & iter : m_workers )
         iter.join();
     #endif
@@ -88,13 +88,13 @@ CThreadPool::~CThreadPool()
 /************************************************************************
 *    desc:  Wait for the jobs to complete
 ************************************************************************/
-void CThreadPool::Wait()
+void CThreadPool::wait()
 {
     #if !defined(__thread_disable__)
     // Wait for all the jobs to finish
     // get() is a blocking call, waiting for each job to return
     for( auto && iter : m_jobVec ) iter.get();
-    
+
     // Clear the vector because all jobs are done
     m_jobVec.clear();
     #endif
@@ -104,7 +104,7 @@ void CThreadPool::Wait()
 /************************************************************************
 *    desc:  Lock mutex for Synchronization
 ************************************************************************/
-void CThreadPool::Lock()
+void CThreadPool::lock()
 {
     #if !defined(__thread_disable__)
     m_mutex.lock();
@@ -115,7 +115,7 @@ void CThreadPool::Lock()
 /************************************************************************
 *    desc:  Unlock mutex for Synchronization
 ************************************************************************/
-void CThreadPool::Unlock()
+void CThreadPool::unlock()
 {
     #if !defined(__thread_disable__)
     m_mutex.unlock();
@@ -126,7 +126,7 @@ void CThreadPool::Unlock()
 /************************************************************************
 *    desc:  Get the mutex
 ************************************************************************/
-std::mutex & CThreadPool::GetMutex()
+std::mutex & CThreadPool::getMutex()
 {
     return m_mutex;
 }

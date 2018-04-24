@@ -86,7 +86,7 @@ void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalM
     for( auto & meshIter : m_mesh3d.getMeshVec() )
     {
         // Increment our stat counter to keep track of what is going on.
-        CStatCounter::Instance().IncDisplayCounter();
+        CStatCounter::Instance().incDisplayCounter();
 
         // Bind the VBO and IBO
         CVertBufMgr::Instance().bind( meshIter.m_vbo, meshIter.m_ibo );

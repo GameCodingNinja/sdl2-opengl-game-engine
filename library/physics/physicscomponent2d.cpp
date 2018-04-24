@@ -327,7 +327,7 @@ void CPhysicsComponent2D::update( CSprite2D * pSprite )
 {
     if( m_pBody != nullptr )
     {
-        CStatCounter::Instance().IncPhysicsObjectsCounter();
+        CStatCounter::Instance().incPhysicsObjectsCounter();
 
         if( (BODY_TYPE > b2_staticBody) && m_pBody->IsAwake() )
         {

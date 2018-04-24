@@ -341,8 +341,8 @@ void CTextureMgr::initAnisotropic()
     if( maxAnisotropicLevel < 0 )
         maxAnisotropicLevel = 0;
 
-    if( CSettings::Instance().GetAnisotropicLevel() <= maxAnisotropicLevel )
-        m_anisotropicLevel = CSettings::Instance().GetAnisotropicLevel();
+    if( CSettings::Instance().getAnisotropicLevel() <= maxAnisotropicLevel )
+        m_anisotropicLevel = CSettings::Instance().getAnisotropicLevel();
     else
         m_anisotropicLevel = maxAnisotropicLevel;
 }

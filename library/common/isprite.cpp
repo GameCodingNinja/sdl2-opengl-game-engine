@@ -21,7 +21,7 @@ iSprite::iSprite( int id ) :
 ************************************************************************/  
 bool iSprite::isSprite2D() const
 {
-    return m_parameters.IsSet( NDefs::SPRITE2D );
+    return m_parameters.isSet( NDefs::SPRITE2D );
 }
 
 
@@ -30,7 +30,7 @@ bool iSprite::isSprite2D() const
 ************************************************************************/  
 bool iSprite::isActor2D() const
 {
-    return m_parameters.IsSet( NDefs::ACTOR2D );
+    return m_parameters.isSet( NDefs::ACTOR2D );
 }
 
 
@@ -39,7 +39,7 @@ bool iSprite::isActor2D() const
 ************************************************************************/  
 bool iSprite::isSprite3D() const
 {
-    return m_parameters.IsSet( NDefs::SPRITE3D );   
+    return m_parameters.isSet( NDefs::SPRITE3D );   
 }
 
 
@@ -48,7 +48,7 @@ bool iSprite::isSprite3D() const
 ************************************************************************/  
 bool iSprite::isActor3D() const
 {
-    return m_parameters.IsSet( NDefs::ACTOR3D );    
+    return m_parameters.isSet( NDefs::ACTOR3D );    
 }
 
 

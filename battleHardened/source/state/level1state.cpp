@@ -51,14 +51,14 @@ void CLevel1State::Init()
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Create the actors
-    CSpriteStrategyMgr::Instance().Create("(actor)", "enemy_ship");
-    m_pPlayerShip = CSpriteStrategyMgr::Instance().CreateSprite<CActorSprite2D>("(actor)", "player_ship");
+    CSpriteStrategyMgr::Instance().create("(actor)", "enemy_ship");
+    m_pPlayerShip = CSpriteStrategyMgr::Instance().createSprite<CActorSprite2D>("(actor)", "player_ship");
     
     // Get pointer to the player ship
     //m_pPlayerShip = &CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)").Get<CActorSprite2D>(id);
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -113,7 +113,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CLevel1State::MiscProcess()
 {
-    CSpriteStrategyMgr::Instance().MiscProcess();
+    CSpriteStrategyMgr::Instance().miscProcess();
     
 }   // MiscProcess
 
@@ -143,7 +143,7 @@ void CLevel1State::Update()
     if( !CMenuManager::Instance().isActive() )
     {
         //CCamera::Instance().IncPos( CPoint<float>( -0.05f * CHighResTimer::Instance().GetElapsedTime(), 0.f ) );
-        CSpriteStrategyMgr::Instance().Update();
+        CSpriteStrategyMgr::Instance().update();
     }
 
 }   // Update
@@ -157,7 +157,7 @@ void CLevel1State::Transform()
     CCommonState::Transform();
 
     //CCamera::Instance().Transform();
-    CSpriteStrategyMgr::Instance().Transform();
+    CSpriteStrategyMgr::Instance().transform();
 
 }   // Transform
 
@@ -169,7 +169,7 @@ void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
     
-    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -199,8 +199,8 @@ namespace NLevel_1
     
     void Load()
     {
-        CSpriteStrategyMgr::Instance().AddStrategy( "(actor)", new CBasicSpriteStrategy );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CLoopStageStrategy );
+        CSpriteStrategyMgr::Instance().addStrategy( "(actor)", new CBasicSpriteStrategy );
+        CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CLoopStageStrategy );
         
         // Load state specific AngelScript functions
         CScriptManager::Instance().loadGroup("(actor)");
@@ -223,7 +223,7 @@ namespace NLevel_1
     
     void Unload()
     {
-        CSpriteStrategyMgr::Instance().Clear();
+        CSpriteStrategyMgr::Instance().clear();
         
     }   // Unload
 

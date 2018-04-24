@@ -22,7 +22,7 @@
 CProjectileAI::CProjectileAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CSprite2D *>(pSprite) ),
     m_firstUpdate(true),
-    m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(actor)"))
+    m_rStrategy(CSpriteStrategyMgr::Instance().get<CBasicSpriteStrategy>("(actor)"))
 {
 }   // constructor
 
@@ -67,7 +67,7 @@ void CProjectileAI::update()
     // If it's the projectile's first update, we don't want to increment 
     // it's position by the velocity 
     if( !m_firstUpdate )
-        m_sprite.incPos( m_velocity * CHighResTimer::Instance().GetElapsedTime() );
+        m_sprite.incPos( m_velocity * CHighResTimer::Instance().getElapsedTime() );
     else
         m_firstUpdate = false;
     
@@ -77,6 +77,6 @@ void CProjectileAI::update()
 
     // Delete if goes out of view
     if( m_sprite.getTransPos().getLengthSquared2D() > 250000.f )
-        m_rStrategy.SetToDestroy( m_sprite.getId() );
+        m_rStrategy.setToDestroy( m_sprite.getId() );
 
 }   // Update

@@ -277,7 +277,7 @@ void CMenu::setDynamicPos()
 {
     // Position the menu based on the dynamic offset
     if( !m_dynamicOffset.isEmpty() )
-        setPos( m_dynamicOffset.getPos( CSettings::Instance().GetDefaultSizeHalf() ) );
+        setPos( m_dynamicOffset.getPos( CSettings::Instance().getDefaultSizeHalf() ) );
 }
 
 

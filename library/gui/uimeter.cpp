@@ -212,7 +212,7 @@ void CUIMeter::initBangRange( const CBangRange & bangRange )
     }
 
     // Set the timer to allow the bang-up to start off slowly
-    m_startUpTimer.Set( bangRange.m_slowStartTime );
+    m_startUpTimer.set( bangRange.m_slowStartTime );
 
     // Prepare the start script function if one exists
     m_pSprite->prepareFuncId( "start" );
@@ -244,14 +244,14 @@ void CUIMeter::update()
 
     if( m_bangUp )
     {
-        const double elapsedTime = CHighResTimer::Instance().GetElapsedTime();
+        const double elapsedTime = CHighResTimer::Instance().getElapsedTime();
 
         // Ramp up from start to finish
         if( m_bangRange.m_bangType == EBT_RAMP_UP )
         {
             m_currentValue += m_velocity * elapsedTime;
 
-            if( m_startUpTimer.Expired() )
+            if( m_startUpTimer.expired() )
             {
                 m_velocity += m_acceleration * elapsedTime;
                 m_acceleration += m_impulse * elapsedTime;
@@ -266,7 +266,7 @@ void CUIMeter::update()
         {
             m_currentValue += m_velocity;
 
-            if( m_startUpTimer.Expired() )
+            if( m_startUpTimer.expired() )
                 m_velocity += m_acceleration * elapsedTime;
         }
         // combination of ramp up and linear
@@ -274,7 +274,7 @@ void CUIMeter::update()
         {
             m_currentValue += m_velocity;
 
-            if( m_startUpTimer.Expired() )
+            if( m_startUpTimer.expired() )
             {
                 if( m_terminalVelocity > m_acceleration )
                 {

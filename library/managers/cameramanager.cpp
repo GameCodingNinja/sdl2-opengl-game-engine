@@ -40,33 +40,33 @@ CCameraMgr::~CCameraMgr()
 ************************************************************************/
 void CCameraMgr::createProjMatrix()
 {
-    m_perspectiveMatrix.PerspectiveFovRH(
-        CSettings::Instance().GetViewAngle(),
-        CSettings::Instance().GetScreenAspectRatio().w,
-        CSettings::Instance().GetMinZdist(),
-        CSettings::Instance().GetMaxZdist() );
+    m_perspectiveMatrix.perspectiveFovRH(
+        CSettings::Instance().getViewAngle(),
+        CSettings::Instance().getScreenAspectRatio().w,
+        CSettings::Instance().getMinZdist(),
+        CSettings::Instance().getMaxZdist() );
 
-    m_orthographicMatrix.OrthographicRH(
-        CSettings::Instance().GetDefaultSize().getW(),
-        CSettings::Instance().GetDefaultSize().getH(),
-        CSettings::Instance().GetMinZdist(),
-        CSettings::Instance().GetMaxZdist() );
+    m_orthographicMatrix.orthographicRH(
+        CSettings::Instance().getDefaultSize().getW(),
+        CSettings::Instance().getDefaultSize().getH(),
+        CSettings::Instance().getMinZdist(),
+        CSettings::Instance().getMaxZdist() );
 
     for( auto & iter : m_cameraMap )
         iter.second.recreateProjMatrix();
 
     // Generate the default camera
-    if( CSettings::Instance().GetProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
+    if( CSettings::Instance().getProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
         m_defaultCamera.generateOrthographicProjection(
-            CSettings::Instance().GetMinZdist(),
-            CSettings::Instance().GetMaxZdist(),
-            CSettings::Instance().GetProjectionScale() );
+            CSettings::Instance().getMinZdist(),
+            CSettings::Instance().getMaxZdist(),
+            CSettings::Instance().getProjectionScale() );
     else
         m_defaultCamera.generatePerspectiveProjection(
-            CSettings::Instance().GetViewAngle(),
-            CSettings::Instance().GetMinZdist(),
-            CSettings::Instance().GetMaxZdist(),
-            CSettings::Instance().GetProjectionScale() );
+            CSettings::Instance().getViewAngle(),
+            CSettings::Instance().getMinZdist(),
+            CSettings::Instance().getMaxZdist(),
+            CSettings::Instance().getProjectionScale() );
 }
 
 
@@ -75,7 +75,7 @@ void CCameraMgr::createProjMatrix()
 ************************************************************************/
 const CMatrix & CCameraMgr::getDefaultProjMatrix() const
 {
-    if( CSettings::Instance().GetProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
+    if( CSettings::Instance().getProjectionType() == NDefs::EPT_ORTHOGRAPHIC )
         return m_orthographicMatrix;
     else
         return m_perspectiveMatrix;

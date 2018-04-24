@@ -504,7 +504,7 @@ void CUIScrollBox::handleKeyboardGamepadScroll( int scrollVector )
 
         // Scroll the contents of the scroll box if we need to activate a control
         // that's outside of the viewable area of the scroll box.
-        if( !scrollResult.IsSet(IN_VIEWABLE_AREA) )
+        if( !scrollResult.isSet(IN_VIEWABLE_AREA) )
         {
             initScrolling( scrollVector, m_controlHeight );
         }
@@ -527,7 +527,7 @@ CBitmask<uint> CUIScrollBox::selectNextControl( int scrollVector )
 
     // If we are still in the viewable area but have no active control,
     // try to activate the current control
-    if( scrollResult.IsSet(IN_VIEWABLE_AREA) && !scrollResult.IsSet(NEW_ACTIVE_CTRL) )
+    if( scrollResult.isSet(IN_VIEWABLE_AREA) && !scrollResult.isSet(NEW_ACTIVE_CTRL) )
     {
         NGenFunc::DispatchEvent(
             NMenu::EGE_MENU_CONTROL_STATE_CHANGE,
@@ -712,10 +712,10 @@ void CUIScrollBox::handleScrollUpdate()
 {
     if( m_scrollVector )
     {
-        float dist = CHighResTimer::Instance().GetElapsedTime() * m_scrollSpeed;
+        float dist = CHighResTimer::Instance().getElapsedTime() * m_scrollSpeed;
 
         if( m_paging )
-            dist = CHighResTimer::Instance().GetElapsedTime() * m_pageSpeed;
+            dist = CHighResTimer::Instance().getElapsedTime() * m_pageSpeed;
 
         if( m_scrollVector > 0 )
             m_scrollCurPos += dist;

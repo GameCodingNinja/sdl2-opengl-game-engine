@@ -19,12 +19,7 @@
 ************************************************************************/
 CLoopStageStrategy::CLoopStageStrategy()
 {
-    //m_loopEnd.x.i = -1;
-    //m_loopInc.x = -0.05f;
-
-    //m_loopOffset.SetPos( m_loopStart );
-
-}   // constructor
+}
 
 
 /************************************************************************
@@ -32,15 +27,15 @@ CLoopStageStrategy::CLoopStageStrategy()
 ************************************************************************/
 CLoopStageStrategy::~CLoopStageStrategy()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CLoopStageStrategy::LoadFromNode( const XMLNode & node )
+void CLoopStageStrategy::loadFromNode( const XMLNode & node )
 {
-    CLinearStageStrategy::LoadFromNode( node );
+    CLinearStageStrategy::loadFromNode( node );
 
     const XMLNode loopStageNode = node.getChildNode( "loopingStage" );
 
@@ -58,28 +53,27 @@ void CLoopStageStrategy::LoadFromNode( const XMLNode & node )
     const XMLNode incNode = loopStageNode.getChildNode( "inc" );
     if( !incNode.isEmpty() )
         m_loopInc = -NParseHelper::LoadPosition( incNode );
-    
+
     // Init the offset
     m_loopOffset.setPos( m_loopStart );
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Transform the actor
 ************************************************************************/
-void CLoopStageStrategy::Transform()
+void CLoopStageStrategy::transform()
 {
     if( m_dirType > ESD_NULL )
     {
-        m_loopOffset.incPos( m_loopInc * (float)CHighResTimer::Instance().GetElapsedTime() );
+        m_loopOffset.incPos( m_loopInc * (float)CHighResTimer::Instance().getElapsedTime() );
 
         if( m_dirType == ESD_FORWARD )
         {
             if( m_loopOffset.getPos() < m_loopEnd )
             {
                 m_loopOffset.setPos( m_loopStart + (m_loopOffset.getPos() - m_loopEnd) );
-                InitRange();
+                initRange();
             }
         }
         else if( m_dirType == ESD_BACKWARD )
@@ -87,15 +81,14 @@ void CLoopStageStrategy::Transform()
             if( m_loopOffset.getPos() > m_loopEnd )
             {
                 m_loopOffset.setPos( m_loopStart + (m_loopOffset.getPos() - m_loopEnd) );
-                InitRange();
+                initRange();
             }
         }
 
         m_loopOffset.transform();
 
-        CLinearStageStrategy::Transform( m_loopOffset );
+        CLinearStageStrategy::transform( m_loopOffset );
     }
     else
-        CLinearStageStrategy::Transform();
-
-}   // Transform
+        CLinearStageStrategy::transform();
+}

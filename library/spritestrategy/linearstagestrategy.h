@@ -34,28 +34,28 @@ public:
     virtual ~CLinearStageStrategy();
 
     // Update the actors
-    void Update() override;
+    void update() override;
 
     // Transform the actor
-    void Transform() override;
-    void Transform( const CObject2D & object ) override;
+    void transform() override;
+    void transform( const CObject2D & object ) override;
 
     // Render the actors
-    void Render() override;
-    void Render( const CMatrix & matrix ) override;
+    void render() override;
+    void render( const CMatrix & matrix ) override;
     
 protected:
     
     // Load thes actor data from node
-    virtual void LoadFromNode( const XMLNode & node ) override;
+    virtual void loadFromNode( const XMLNode & node ) override;
     
     // Init the range of sectors to check
-    void InitRange();
+    void initRange();
 
 private:
     
     // Set the range based on the sector's visibility
-    bool SetRange( const size_t index );
+    bool setRange( const size_t index );
     
 protected:
     

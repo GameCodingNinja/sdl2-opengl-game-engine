@@ -31,29 +31,29 @@ public:
     }
 
     // Have we run through one cycle.
-    void IncCycle();
+    void incCycle();
 
     // Inc the display counter
-    void IncDisplayCounter( size_t value = 1 );
+    void incDisplayCounter( size_t value = 1 );
     
     // Inc the physics objects counter
-    void IncPhysicsObjectsCounter();
+    void incPhysicsObjectsCounter();
 
     // Inc the script contex counter
-    void IncScriptContexCounter();
-    void IncActiveScriptContexCounter();
+    void incScriptContexCounter();
+    void incActiveScriptContexCounter();
     
     // Connect/Disconnect to the signal
-    void Connect( const StatCounterSignal::slot_type & slot );
-    void Disconnect();
+    void connect( const StatCounterSignal::slot_type & slot );
+    void disconnect();
 
 private:
 
     // Reset the counter
-    void ResetCounters();
+    void resetCounters();
 
     // Format the stat string
-    void FormatStatString();
+    void formatStatString();
 
     CStatCounter();
     ~CStatCounter();

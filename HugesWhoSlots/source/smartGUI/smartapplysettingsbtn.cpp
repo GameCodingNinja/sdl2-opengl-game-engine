@@ -81,10 +81,10 @@ void CSmartApplySettingsBtn::execute()
     // Check for the full screen check box
     pControl = rMenu.getPtrToControl( "full_screen_check_box" );
     const bool fullScreenState = (*dynamic_cast<CUICheckBox *>(pControl)).getToggleState();
-    const bool oldFullScreenState = CSettings::Instance().GetFullScreen();
-    if( CSettings::Instance().GetFullScreen() != fullScreenState )
+    const bool oldFullScreenState = CSettings::Instance().getFullScreen();
+    if( CSettings::Instance().getFullScreen() != fullScreenState )
     {
-        CSettings::Instance().SetFullScreen( fullScreenState );
+        CSettings::Instance().setFullScreen( fullScreenState );
         fullScreenChanged = true;
         settingsChangeMade = true;
     }
@@ -92,19 +92,19 @@ void CSmartApplySettingsBtn::execute()
     // Check for the v-sync check box
     pControl = rMenu.getPtrToControl( "v-sync_check_box" );
     const bool vsyncState = (*dynamic_cast<CUICheckBox *>(pControl)).getToggleState();
-    if( CSettings::Instance().GetVSync() != vsyncState )
+    if( CSettings::Instance().getVSync() != vsyncState )
     {
-        CSettings::Instance().SetVSync( vsyncState );
-        CDevice::Instance().EnableVSync( vsyncState );
+        CSettings::Instance().setVSync( vsyncState );
+        CDevice::Instance().enableVSync( vsyncState );
         settingsChangeMade = true;
     }
 
     // Check for dead zone slider
     pControl = rMenu.getPtrToControl( "settings_dead_zone_slider" );
     int sliderValue = (*dynamic_cast<CUISlider *>(pControl)).getValue();
-    if( CSettings::Instance().GetGamePadStickDeadZone() != sliderValue )
+    if( CSettings::Instance().getGamePadStickDeadZone() != sliderValue )
     {
-        CSettings::Instance().SetGamePadStickDeadZone( sliderValue );
+        CSettings::Instance().setGamePadStickDeadZone( sliderValue );
         settingsChangeMade = true;
     }
 
@@ -113,27 +113,27 @@ void CSmartApplySettingsBtn::execute()
         // SDL2 doesn't allow res change in full screen
         // so take us out of full screen mode for res changes
         if( oldFullScreenState && fullScreenState )
-            CDevice::Instance().SetFullScreen( false );
+            CDevice::Instance().setFullScreen( false );
 
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        mode.w = CSettings::Instance().GetSize().getW();
-        mode.h = CSettings::Instance().GetSize().getH();
+        mode.w = CSettings::Instance().getSize().getW();
+        mode.h = CSettings::Instance().getSize().getH();
         mode.refresh_rate = 0;
 
-        SDL_SetWindowDisplayMode( CDevice::Instance().GetWindow(), &mode );
+        SDL_SetWindowDisplayMode( CDevice::Instance().getWindow(), &mode );
 
         if( fullScreenChanged || fullScreenState )
-            CDevice::Instance().SetFullScreen( fullScreenState );
+            CDevice::Instance().setFullScreen( fullScreenState );
 
         SDL_SetWindowSize(
-            CDevice::Instance().GetWindow(),
-            CSettings::Instance().GetSize().getW(),
-            CSettings::Instance().GetSize().getH() );
+            CDevice::Instance().getWindow(),
+            CSettings::Instance().getSize().getW(),
+            CSettings::Instance().getSize().getH() );
 
         SDL_SetWindowPosition(
-            CDevice::Instance().GetWindow(),
+            CDevice::Instance().getWindow(),
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED );
 
@@ -144,16 +144,16 @@ void CSmartApplySettingsBtn::execute()
         CMenuManager::Instance().resetDynamicOffset();
 
         // Need to reset the view port the changing the resolution
-        glViewport(0, 0, CSettings::Instance().GetSize().getW(), CSettings::Instance().GetSize().getH());
+        glViewport(0, 0, CSettings::Instance().getSize().getW(), CSettings::Instance().getSize().getH());
     }
     else if( fullScreenChanged )
     {
-        CDevice::Instance().SetFullScreen( fullScreenState );
+        CDevice::Instance().setFullScreen( fullScreenState );
     }
 
     // Only save if a change was actually made
     if( settingsChangeMade )
-        CSettings::Instance().SaveSettings();
+        CSettings::Instance().saveSettings();
 
     m_pUIControl->changeState(NUIControl::ECS_DISABLED);
 

@@ -96,17 +96,17 @@ namespace NMathFunc
         // Combine the camera and projection transformations and then invert the result
         // so we can use it like we're reversing all transformations on the mouse point.
         CMatrix m = matCam.getMatrix() * matProj;
-        m.Invert();
+        m.invert();
 
         // Convert to values between -1 and 1.
         CPoint<float> mp;
-        mp.x = (2.f * (mx / (CSettings::Instance().GetSize().w - 1.f))) - 1.f;
-        mp.y = 1.f - (2.f * (my / (CSettings::Instance().GetSize().h - 1.f)));
+        mp.x = (2.f * (mx / (CSettings::Instance().getSize().w - 1.f))) - 1.f;
+        mp.y = 1.f - (2.f * (my / (CSettings::Instance().getSize().h - 1.f)));
         mp.z = 1;
 
         // Undo the projection transformation.
         CPoint<float> r;
-        m.Transform( r, mp );
+        m.transform( r, mp );
 
         // Temporary code to project onto the xy plane.
         r.x *= -matCam.getPos().z - r.z;

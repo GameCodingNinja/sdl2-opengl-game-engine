@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CStatCounter::CStatCounter() :
     m_vObjCounter(0),
@@ -28,37 +28,33 @@ CStatCounter::CStatCounter() :
     m_activeContexCounter(0),
     m_statsDisplayTimer(1000)
 {
-    ResetCounters();
-
-}   // Constructor
+    resetCounters();
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CStatCounter::~CStatCounter()
 {
-
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Connect to the signal
 ************************************************************************/
-void CStatCounter::Connect( const StatCounterSignal::slot_type & slot )
+void CStatCounter::connect( const StatCounterSignal::slot_type & slot )
 {
     m_statCounterSignal.connect(slot);
-
-}   // Connect
+}
 
 /************************************************************************
 *    desc:  Disconnect all slots
 ************************************************************************/
-void CStatCounter::Disconnect()
+void CStatCounter::disconnect()
 {
     m_statCounterSignal.disconnect_all_slots();;
-
-}   // Disconnect
+}
 
 
 /************************************************************************
@@ -66,46 +62,44 @@ void CStatCounter::Disconnect()
 *
 *	 ret: bool - true if one cycle has been completed
 ************************************************************************/
-void CStatCounter::IncCycle()
+void CStatCounter::incCycle()
 {
     // These counters are incremeented each game loop cycle so they can
     // be placed here in this function because this function is also called
     // each game loop cycle
-    m_elapsedFPSCounter += CHighResTimer::Instance().GetFPS();
+    m_elapsedFPSCounter += CHighResTimer::Instance().getFPS();
 
     ++m_cycleCounter;
 
     // update the stats every 500 miliseconds
-    if( m_statsDisplayTimer.Expired(CTimer::RESTART_ON_EXPIRE) )
+    if( m_statsDisplayTimer.expired(CTimer::RESTART_ON_EXPIRE) )
     {
-        FormatStatString();
+        formatStatString();
         m_statCounterSignal( m_statStr );
 
         // Now that the stats are displayed, we can reset out counters.
-        ResetCounters();
+        resetCounters();
     }
-
-}   // HasCycleCompleted
+}
 
 
 /************************************************************************
-*    desc:  Reset the counter                                                             
+*    desc:  Reset the counter
 ************************************************************************/
-void CStatCounter::ResetCounters()
+void CStatCounter::resetCounters()
 {
     m_vObjCounter = 0;
     m_physicsObjCounter = 0;
     m_elapsedFPSCounter = 0.0;
     m_cycleCounter = 0;
     m_activeContexCounter = 0;
-
-}   // ResetCounters
+}
 
 
 /************************************************************************
-*    desc:  Format the stat string                                                             
+*    desc:  Format the stat string
 ************************************************************************/
-void CStatCounter::FormatStatString()
+void CStatCounter::formatStatString()
 {
     m_statStr = boost::str( boost::format("fps: %d - scx: %d of %d - vis: %d - phy: %d - res: %d x %d")
         % ((int)(m_elapsedFPSCounter / (double)m_cycleCounter))
@@ -113,50 +107,45 @@ void CStatCounter::FormatStatString()
         % m_scriptContexCounter
         % (m_vObjCounter / m_cycleCounter)
         % (m_physicsObjCounter / m_cycleCounter)
-        % CSettings::Instance().GetSize().w
-        % CSettings::Instance().GetSize().h
+        % CSettings::Instance().getSize().w
+        % CSettings::Instance().getSize().h
         //% (playerPos.x)
-        //% (playerPos.y) 
+        //% (playerPos.y)
         );
-
-}   // GetStatString
+}
 
 
 /************************************************************************
-*    desc:  Inc the display counter                                                             
+*    desc:  Inc the display counter
 ************************************************************************/
-void CStatCounter::IncDisplayCounter( size_t value )
+void CStatCounter::incDisplayCounter( size_t value )
 {
     m_vObjCounter += value;
-
-}   // IncDisplayCounter
+}
 
 
 /************************************************************************
-*    desc:  Inc the physics objects counter                                                             
+*    desc:  Inc the physics objects counter
 ************************************************************************/
-void CStatCounter::IncPhysicsObjectsCounter()
+void CStatCounter::incPhysicsObjectsCounter()
 {
     ++m_physicsObjCounter;
-
-}   // IncPhysicsObjectsCounter
+}
 
 
 /************************************************************************
-*    desc:  Inc the script contex counter                                                             
+*    desc:  Inc the script contex counter
 ************************************************************************/
-void CStatCounter::IncScriptContexCounter()
+void CStatCounter::incScriptContexCounter()
 {
     ++m_scriptContexCounter;
-
-}   // IncScriptContexCounter
+}
 
 
 /************************************************************************
-*    desc:  Inc the active script contex counter                                                             
+*    desc:  Inc the active script contex counter
 ************************************************************************/
-void CStatCounter::IncActiveScriptContexCounter()
+void CStatCounter::incActiveScriptContexCounter()
 {
     ++m_activeContexCounter;
-
-}   // IncScriptContexCounter
+}

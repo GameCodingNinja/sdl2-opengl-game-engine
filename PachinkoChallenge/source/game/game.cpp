@@ -41,13 +41,13 @@
 ************************************************************************/
 CGame::CGame()
 {
-    CSignalMgr::Instance().connect_smartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
-    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
-    CSignalMgr::Instance().connect_aICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
-    CShaderMgr::Instance().connect_initShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartGui( boost::bind(&CGame::smartGuiControlCreateCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::smartMenuCreateCallBack, this, _1) );
+    CSignalMgr::Instance().connect_aICreate( boost::bind(&CGame::aICreateCallBack, this, _1, _2) );
+    CShaderMgr::Instance().connect_initShader( boost::bind(&CGame::shaderInitCallBack, this, _1) );
     
     if( NBDefs::IsDebugMode() )
-        CStatCounter::Instance().Connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
+        CStatCounter::Instance().connect( boost::bind(&CGame::statStringCallBack, this, _1) );
 
 }   // constructor
 
@@ -63,22 +63,22 @@ CGame::~CGame()
 /************************************************************************
 *    desc:  Init the game
 ************************************************************************/
-void CGame::Init()
+void CGame::init()
 {
-    CBaseGame::Init();
+    CBaseGame::init();
 
     // Setup the message filtering
     //SDL_SetEventFilter(FilterEvents, 0);
     
     // Handle some events on startup
-    PollEvents();
+    pollEvents();
 
     // Create the startup state
     upGameState.reset( new CStartUpState );
     upGameState->Init();
 
     // Let the games begin
-    StartGame();
+    startGame();
 
 }   // Init
 
@@ -86,7 +86,7 @@ void CGame::Init()
 /************************************************************************
 *    desc:  Callback for when a smart gui control is created
 ************************************************************************/
-void CGame::SmartGuiControlCreateCallBack( CUIControl * pUIControl )
+void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 {
     if( pUIControl->getFaction() == "decision_btn" )
         pUIControl->setSmartGui( new CSmartConfirmBtn( pUIControl ) );
@@ -97,7 +97,7 @@ void CGame::SmartGuiControlCreateCallBack( CUIControl * pUIControl )
 /************************************************************************
 *    desc:  Callback for when a smart menu is created
 ************************************************************************/
-void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
+void CGame::smartMenuCreateCallBack( CMenu * pMenu )
 {
 
 }   // SmartMenuCreateCallBack
@@ -106,7 +106,7 @@ void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
 /***************************************************************************
 *    decs:  Call back function to create actor ai
 ****************************************************************************/
-void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
+void CGame::aICreateCallBack( const std::string & aiName, iSprite * pSprite )
 {
     if( aiName == "aiBall" )
         pSprite->setAI( new CBallAI( pSprite ) );
@@ -117,7 +117,7 @@ void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 /************************************************************************
 *    desc:  Callback for shader init
 ************************************************************************/
-void CGame::ShaderInitCallBack( const std::string & shaderId )
+void CGame::shaderInitCallBack( const std::string & shaderId )
 {
     // Init the color for fading in
     CShaderMgr::Instance().setShaderColor( shaderId, "additive", CColor(0,0,0,1) );
@@ -128,9 +128,9 @@ void CGame::ShaderInitCallBack( const std::string & shaderId )
 /************************************************************************
 *    desc:  Callback for the state string
 ************************************************************************/
-void CGame::StatStringCallBack( const std::string & statStr )
+void CGame::statStringCallBack( const std::string & statStr )
 {
-    if( !CSettings::Instance().GetFullScreen() )
+    if( !CSettings::Instance().getFullScreen() )
         SDL_SetWindowTitle( m_pWindow, statStr.c_str() );
 
 }   // StatStringCallBack
@@ -139,7 +139,7 @@ void CGame::StatStringCallBack( const std::string & statStr )
 /***************************************************************************
 *    decs:  Handle the state change
 ****************************************************************************/
-void CGame::DoStateChange()
+void CGame::doStateChange()
 {
     if( upGameState->DoStateChange() )
     {
@@ -157,7 +157,7 @@ void CGame::DoStateChange()
         
         // Process any lingering messages so that the new state isn't
         // getting hammered by a bunch of queued up messages
-        PollEvents();
+        pollEvents();
         
         if( nextState == NGameDefs::EGS_TITLE_SCREEN )
             upGameState.reset( new CTitleScreenState );
@@ -183,7 +183,7 @@ void CGame::DoStateChange()
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-bool CGame::HandleEvent( const SDL_Event & rEvent )
+bool CGame::handleEvent( const SDL_Event & rEvent )
 {
     if( (rEvent.type == SDL_QUIT) || (rEvent.type == SDL_APP_TERMINATING) )
         return true;
@@ -193,13 +193,13 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
         return false;
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEADDED )
-        CDevice::Instance().AddGamepad( rEvent.cdevice.which );
+        CDevice::Instance().addGamepad( rEvent.cdevice.which );
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEREMOVED )
-        CDevice::Instance().RemoveGamepad( rEvent.cdevice.which );
+        CDevice::Instance().removeGamepad( rEvent.cdevice.which );
 
     else if( rEvent.type == SDL_APP_LOWMEMORY )
-        DisplayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
+        displayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
     
     // In a traditional game, want the pause menu to display when the game is sent to the background
     else if( (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().isMenuActive() )
@@ -217,7 +217,7 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    desc:  Handle any misc processing before the real work is started.
 ************************************************************************/
-void CGame::MiscProcess()
+void CGame::miscProcess()
 {
     upGameState->MiscProcess();
     
@@ -227,7 +227,7 @@ void CGame::MiscProcess()
 /************************************************************************
 *    desc:  Handle the physics.
 ************************************************************************/
-void CGame::Physics()
+void CGame::physics()
 {
     upGameState->Physics();
     
@@ -237,7 +237,7 @@ void CGame::Physics()
 /***************************************************************************
 *    decs:  Update animations
 ****************************************************************************/
-void CGame::Update()
+void CGame::update()
 {
     upGameState->Update();
 
@@ -247,7 +247,7 @@ void CGame::Update()
 /***************************************************************************
 *    desc:  Transform game objects
 ****************************************************************************/
-void CGame::Transform()
+void CGame::transform()
 {
     upGameState->Transform();
 
@@ -257,7 +257,7 @@ void CGame::Transform()
 /***************************************************************************
 *    decs:  3D/2D Render of game content
 ****************************************************************************/
-void CGame::Render()
+void CGame::render()
 {
     upGameState->PreRender();
     
@@ -277,7 +277,7 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
     if( pEvent->type == SDL_CONTROLLERAXISMOTION )
     {
         // Analog stick max values -32768 to 32767
-        const int deadZone = CSettings::Instance().GetGamePadStickDeadZone() * 
+        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() * 
             defs_ANALOG_PERCENTAGE_CONVERTION;
 
         if( ((pEvent->caxis.axis >= SDL_CONTROLLER_AXIS_LEFTX) &&

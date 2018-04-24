@@ -32,9 +32,9 @@ CSpriteChild2D::~CSpriteChild2D()
 ************************************************************************/
 void CSpriteChild2D::transform()
 {
-    m_parameters.Remove( NDefs::WAS_TRANSFORMED );
+    m_parameters.remove( NDefs::WAS_TRANSFORMED );
     
-    if( m_parameters.IsSet( NDefs::TRANSFORM ) )
+    if( m_parameters.isSet( NDefs::TRANSFORM ) )
     {
         transformLocal( m_finalMatrix );
     
@@ -44,18 +44,18 @@ void CSpriteChild2D::transform()
 
 void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    m_parameters.Remove( NDefs::WAS_TRANSFORMED );
+    m_parameters.remove( NDefs::WAS_TRANSFORMED );
     
-    if( m_parameters.IsSet( NDefs::TRANSFORM ) )
+    if( m_parameters.isSet( NDefs::TRANSFORM ) )
         transformLocal( m_matrix );
         
-    if( m_parameters.IsSet( NDefs::WAS_TRANSFORMED ) || tranformWorldPos )
+    if( m_parameters.isSet( NDefs::WAS_TRANSFORMED ) || tranformWorldPos )
     {
-        m_parameters.Add( NDefs::WAS_TRANSFORMED );
+        m_parameters.add( NDefs::WAS_TRANSFORMED );
 
-        m_finalMatrix.Copy( m_matrix );
+        m_finalMatrix.copy( m_matrix );
 
-        m_finalMatrix.MergeMatrix( matrix );
+        m_finalMatrix.mergeMatrix( matrix );
     }
 }
 

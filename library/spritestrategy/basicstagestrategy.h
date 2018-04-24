@@ -37,43 +37,43 @@ public:
     virtual ~CBasicStageStrategy();
 
     // Load the sector data from file
-    virtual void LoadFromFile( const std::string & file ) override;
+    virtual void loadFromFile( const std::string & file ) override;
     
     // Do any pre-game loop init's
-    virtual void Init() override;
+    virtual void init() override;
     
     // Do some cleanup
-    virtual void CleanUp() override;
+    virtual void cleanUp() override;
 
     // Update the actors
-    virtual void Update() override;
+    virtual void update() override;
 
     // Transform the actor
-    virtual void Transform() override;
-    virtual void Transform( const CObject2D & object ) override;
+    virtual void transform() override;
+    virtual void transform( const CObject2D & object ) override;
 
     // Render the actors
-    void Render() override;
-    void Render( const CMatrix & matrix ) override;
-    void Render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
+    void render() override;
+    void render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix, const CMatrix & rotMatrix ) override;
     
     // Find if the sprite exists
-    bool Find( iSprite * piSprite );
+    bool find( iSprite * piSprite );
     
     // Get the default camera position
-    CObject & GetDefaultCameraPos();
+    CObject & getDefaultCameraPos();
     
     // Get a reference to the sprite
     template <typename target>
-    target & Get( const std::string & spriteName, int index = 0 )
+    target & get( const std::string & spriteName, int index = 0 )
     {
-        return *dynamic_cast<target *>(m_sectorDeq.at(index).Get( spriteName ));
+        return *dynamic_cast<target *>(m_sectorDeq.at(index).get( spriteName ));
     }
     
 protected:
     
     // Load the sector data from node
-    virtual void LoadFromNode( const struct XMLNode & node );
+    virtual void loadFromNode( const struct XMLNode & node );
     
 protected:
 

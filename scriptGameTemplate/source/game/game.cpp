@@ -64,7 +64,7 @@ CGame::CGame()
       m_clearBufferMask(0)
 {
     if( NBDefs::IsDebugMode() )
-        CStatCounter::Instance().Connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
+        CStatCounter::Instance().connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
 
 }   // constructor
 
@@ -94,11 +94,11 @@ CGame::~CGame()
 void CGame::Create()
 {
     // Create the window and OpenGL context
-    CDevice::Instance().Create();
+    CDevice::Instance().create();
 
     // Get local copies of the device handles
-    m_pWindow = CDevice::Instance().GetWindow();
-    m_context = CDevice::Instance().GetContext();
+    m_pWindow = CDevice::Instance().getWindow();
+    m_context = CDevice::Instance().getContext();
 
     // Game start init
     Init();
@@ -116,9 +116,9 @@ void CGame::OpenGLInit()
     
     // Init the stencil clear mask based on the bit size of the mask
     // Stencil buffer can only be 1 or 8 bits per pixel
-    if( CSettings::Instance().GetStencilBufferBitSize() == 1 )
+    if( CSettings::Instance().getStencilBufferBitSize() == 1 )
         glStencilMask(0x1);
-    else if( CSettings::Instance().GetStencilBufferBitSize() == 8 )
+    else if( CSettings::Instance().getStencilBufferBitSize() == 8 )
         glStencilMask(0xff);
 
     // Cull the back face
@@ -134,16 +134,16 @@ void CGame::OpenGLInit()
     glActiveTexture(GL_TEXTURE0);
 
     // Init the clear buffer mask
-    if( CSettings::Instance().GetClearTargetBuffer() )
+    if( CSettings::Instance().getClearTargetBuffer() )
         m_clearBufferMask |= GL_COLOR_BUFFER_BIT;
 
-    if( CSettings::Instance().GetEnableDepthBuffer() )
+    if( CSettings::Instance().getEnableDepthBuffer() )
         m_clearBufferMask |= GL_DEPTH_BUFFER_BIT;
     
-    if( CSettings::Instance().GetClearStencilBuffer() )
+    if( CSettings::Instance().getClearStencilBuffer() )
         m_clearBufferMask |= GL_STENCIL_BUFFER_BIT;
         
-    if( CSettings::Instance().GetEnableDepthBuffer() )
+    if( CSettings::Instance().getEnableDepthBuffer() )
         glEnable( GL_DEPTH_TEST );
     
     // Clear the back buffer and flip it prior to showing the window
@@ -152,7 +152,7 @@ void CGame::OpenGLInit()
     SDL_GL_SwapWindow( m_pWindow );
     
     // Show the window
-    CDevice::Instance().ShowWindow( true );
+    CDevice::Instance().showWindow( true );
     
     // Display a black screen
     glClear( GL_COLOR_BUFFER_BIT );
@@ -198,7 +198,7 @@ void CGame::Init()
     CScriptManager::Instance().loadGroup("(main)");
     CScriptManager::Instance().prepare("(main)", "main");
     
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
     // Let the games begin
     StartGame();
@@ -229,7 +229,7 @@ void CGame::PollEvents()
             m_gameRunning = false;
 
             // Hide the window to give the impression of a quick exit
-            CDevice::Instance().ShowWindow( false );
+            CDevice::Instance().showWindow( false );
 
             break;
         }
@@ -246,7 +246,7 @@ bool CGame::GameLoop()
     PollEvents();
     
     // Get our elapsed time
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
     // Main script update
     CScriptManager::Instance().update();
@@ -257,11 +257,11 @@ bool CGame::GameLoop()
         glClear( m_clearBufferMask );
         
         // Process all game states
-        CSpriteStrategyMgr::Instance().MiscProcess();
-        CSpriteStrategyMgr::Instance().Update();
-        CSpriteStrategyMgr::Instance().Transform();
+        CSpriteStrategyMgr::Instance().miscProcess();
+        CSpriteStrategyMgr::Instance().update();
+        CSpriteStrategyMgr::Instance().transform();
         CCameraMgr::Instance().transform();
-        CSpriteStrategyMgr::Instance().Render();
+        CSpriteStrategyMgr::Instance().render();
         
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );
@@ -273,7 +273,7 @@ bool CGame::GameLoop()
 
         // Inc the cycle
         if( NBDefs::IsDebugMode() )
-            CStatCounter::Instance().IncCycle();
+            CStatCounter::Instance().incCycle();
     }
     
     return m_gameRunning;
@@ -286,7 +286,7 @@ bool CGame::GameLoop()
 ************************************************************************/
 void CGame::StatStringCallBack( const std::string & statStr )
 {
-    if( !CSettings::Instance().GetFullScreen() )
+    if( !CSettings::Instance().getFullScreen() )
         SDL_SetWindowTitle( m_pWindow, statStr.c_str() );
 
 }   // StatStringCallBack
@@ -305,10 +305,10 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
         return false;
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEADDED )
-        CDevice::Instance().AddGamepad( rEvent.cdevice.which );
+        CDevice::Instance().addGamepad( rEvent.cdevice.which );
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEREMOVED )
-        CDevice::Instance().RemoveGamepad( rEvent.cdevice.which );
+        CDevice::Instance().removeGamepad( rEvent.cdevice.which );
 
     else if( rEvent.type == SDL_APP_LOWMEMORY )
         DisplayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
@@ -377,7 +377,7 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
     if( pEvent->type == SDL_CONTROLLERAXISMOTION )
     {
         // Analog stick max values -32768 to 32767
-        const int deadZone = CSettings::Instance().GetGamePadStickDeadZone() * 
+        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() * 
             defs_ANALOG_PERCENTAGE_CONVERTION;
 
         if( ((pEvent->caxis.axis >= SDL_CONTROLLER_AXIS_LEFTX) &&

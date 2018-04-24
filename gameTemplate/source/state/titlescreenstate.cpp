@@ -52,7 +52,7 @@ void CTitleScreenState::Init()
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -93,7 +93,7 @@ void CTitleScreenState::Update()
     
     m_scriptComponent.update();
 
-    float rot = CHighResTimer::Instance().GetElapsedTime() * 0.04;
+    float rot = CHighResTimer::Instance().getElapsedTime() * 0.04;
     m_cube.incRot( rot, rot, 0 );
 
 }   // Update

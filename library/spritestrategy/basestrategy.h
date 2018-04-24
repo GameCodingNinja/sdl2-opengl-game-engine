@@ -27,27 +27,27 @@ public:
     virtual ~CBaseStrategy();
     
     // Set to Destroy the sprite
-    void SetToDestroy( int spriteIndex ) override;
+    void setToDestroy( int spriteIndex ) override;
     
     // Set to create the sprite
-    void SetToCreate( const std::string & name ) override;
+    void setToCreate( const std::string & name ) override;
     
     // Load the data from file
-    virtual void MiscProcess() override;
+    virtual void miscProcess() override;
     
 protected:
     
     // Handle the deleting of any object by Id
-    virtual void HandleDelete() override;
+    virtual void handleDelete() override;
     
     // Handle the deleting of any object by Id
-    virtual void DeleteObj( int index );
+    virtual void deleteObj( int index );
     
     // Handle the creating of new sprite objects by name
-    virtual void HandleCreate();
+    virtual void handleCreate();
     
     // Handle the creating of any object by name
-    virtual void CreateObj( const std::string & name );
+    virtual void createObj( const std::string & name );
     
 protected:
     

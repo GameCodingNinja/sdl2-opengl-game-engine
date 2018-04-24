@@ -59,7 +59,7 @@ CReelStripView::CReelStripView( const CSlotStripModel & rSlotStripModel, CSymbol
     m_allowStopSounds(true)
 {
     // Set the value returned by Expired when the timer is disabled
-    m_spinTimer.SetDisableValue( true );
+    m_spinTimer.setDisableValue( true );
     
 }   // constructor
 
@@ -257,16 +257,16 @@ void CReelStripView::Update()
                 
                 m_velocity = 0.0;
                 m_acceleration = m_spinProfile.GetAccelation();
-                m_spinTimer.Set( m_spinProfile.GetStartDelay() );
+                m_spinTimer.set( m_spinProfile.GetStartDelay() );
                 m_spinState = NSlotDefs::ESS_SPIN_STARTING;
             }
             
             case NSlotDefs::ESS_SPIN_STARTING:
             {
-                if( m_spinTimer.Expired() )
+                if( m_spinTimer.expired() )
                 {
                     // Increment the velocity and accelation
-                    const float elapsedTime = CHighResTimer::Instance().GetElapsedTime();
+                    const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                     m_velocity += m_acceleration * elapsedTime;
                     m_acceleration += m_spinProfile.GetImpulse() * elapsedTime;
                     
@@ -274,7 +274,7 @@ void CReelStripView::Update()
                     if( m_velocity >= m_spinProfile.GetMaxVelocity() )
                     {
                         m_velocity = m_spinProfile.GetMaxVelocity();
-                        m_spinTimer.Set( m_spinProfile.GetMaxVelocityTime() );
+                        m_spinTimer.set( m_spinProfile.GetMaxVelocityTime() );
                         m_spinState = NSlotDefs::ESS_SPINNING;
                     }
                     
@@ -289,10 +289,10 @@ void CReelStripView::Update()
                 IncSpin( m_velocity );
                 
                 // Disable the timer if fast stop is needed
-                m_spinTimer.Disable( m_disableSpinTimer );
+                m_spinTimer.disable( m_disableSpinTimer );
                 
                 // Wait for the spin to expire
-                if( m_spinTimer.Expired() && m_symbAlign )
+                if( m_spinTimer.expired() && m_symbAlign )
                 {
                     // Set the new stop to start splicing at the end of the rendered strip
                     m_spinStop = m_rSlotStripModel.GetStop();
@@ -324,7 +324,7 @@ void CReelStripView::Update()
                         m_acceleration = -(m_spinProfile.GetMaxVelocity() / (m_spinSymbDist + m_spinProfile.GetBounceCorrection()));
                         
                         // Set the spin timer as an eror catch for the next state
-                        m_spinTimer.Set( m_spinProfile.GetTimeOutDelay() );
+                        m_spinTimer.set( m_spinProfile.GetTimeOutDelay() );
                         
                         m_spinState = NSlotDefs::ESS_SPIN_STOPPING;
                     }
@@ -335,7 +335,7 @@ void CReelStripView::Update()
             
             case NSlotDefs::ESS_SPIN_STOPPING:
             {  
-                const float elapsedTime = CHighResTimer::Instance().GetElapsedTime();
+                const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                 m_velocity += m_acceleration * elapsedTime;
                 
                 // Add in the drag but keep it from turning the value positive
@@ -347,7 +347,7 @@ void CReelStripView::Update()
                 // Spin has completed. This will also catch errors
                 // The spin timer here is also used as safty valve in the event of an error
                 // to force the reel to stop
-                if( (m_spinDistance < 0.0) || m_spinTimer.Expired() )
+                if( (m_spinDistance < 0.0) || m_spinTimer.expired() )
                 {
                     // Stop the spin
                     m_velocity = 0.0;
@@ -389,7 +389,7 @@ void CReelStripView::IncSpin( float velocity )
     CPoint<float> symbOffset;
     
     // Get the distance traveled
-    float dist = velocity * CHighResTimer::Instance().GetElapsedTime();
+    float dist = velocity * CHighResTimer::Instance().getElapsedTime();
     
     // Are we spinning up/down or left/right?
     if( m_spinDir <= NSlotDefs::ESD_DOWN )

@@ -70,7 +70,7 @@ void CLobbyState::Init()
         m_scriptComponent.prepare( m_group, "Lobby_PlayMusic" );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -193,7 +193,7 @@ namespace NLobby
 
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
-        CXMLPreloader::Instance().Clear();
+        CXMLPreloader::Instance().clear();
         
     }   // ThreadLoad
     

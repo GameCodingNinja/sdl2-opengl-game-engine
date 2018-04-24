@@ -73,7 +73,7 @@ void CLoadState::Init()
     m_upSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( "(loadingScreen)", "loadAnim" ) ) );
     
     // Get the position, scale and half the screen size
-    CSize<float> scrnHalf = CSettings::Instance().GetDefaultSizeHalf();
+    CSize<float> scrnHalf = CSettings::Instance().getDefaultSizeHalf();
 
     // Set the position
     m_upSprite->setPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
@@ -83,7 +83,7 @@ void CLoadState::Init()
     CShaderMgr::Instance().setShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -94,9 +94,9 @@ void CLoadState::Init()
 void CLoadState::Animate()
 {
     // Get the elapsed time
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
 
-    m_time += CHighResTimer::Instance().GetElapsedTime();
+    m_time += CHighResTimer::Instance().getElapsedTime();
         
     if( m_time > 83.f )
     {
@@ -108,7 +108,7 @@ void CLoadState::Animate()
 
         m_upSprite->render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
-        SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
+        SDL_GL_SwapWindow( CDevice::Instance().getWindow() );
 
         // Unbind everything after a round of rendering
         CShaderMgr::Instance().unbind();
@@ -140,8 +140,8 @@ void CLoadState::ObjectDataLoad()
     }
     catch (NExcept::CCriticalException & ex)
     {
-        m_errorTitle = ex.GetErrorTitle();
-        m_errorMsg = ex.GetErrorMsg();
+        m_errorTitle = ex.getErrorTitle();
+        m_errorMsg = ex.getErrorMsg();
     }
     catch (std::exception const & ex)
     {
@@ -227,8 +227,8 @@ void CLoadState::AssetsLoad()
     }
     catch (NExcept::CCriticalException & ex)
     {
-        m_errorTitle = ex.GetErrorTitle();
-        m_errorMsg = ex.GetErrorMsg();
+        m_errorTitle = ex.getErrorTitle();
+        m_errorMsg = ex.getErrorMsg();
     }
     catch (std::exception const & ex)
     {

@@ -43,7 +43,7 @@ void CTitleScreenState::Init()
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 

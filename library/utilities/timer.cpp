@@ -20,67 +20,61 @@ CTimer::CTimer(double interval, bool startExpired)
       m_disableValue(false)
 {
     if( startExpired )
-        SetExpired();
+        setExpired();
     else
-        Reset();
+        reset();
 
-}   // constructor
+}
 
 CTimer::CTimer()
-    : m_expiredTime(CHighResTimer::Instance().GetTime()),
+    : m_expiredTime(CHighResTimer::Instance().getTime()),
       m_disabled(false),
       m_disableValue(false)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CTimer::~CTimer()
 {
-}	// destructor
+}
 
 
 /***************************************************************************
 *   desc:  Reset the timer to start over
 ****************************************************************************/
-void CTimer::Reset()
+void CTimer::reset()
 {
-    m_expiredTime = m_timeInterval + CHighResTimer::Instance().GetTime();
+    m_expiredTime = m_timeInterval + CHighResTimer::Instance().getTime();
     m_disabled = false;
-    
-}   // Reset
+}
 
 
 /***************************************************************************
 *   desc:  Set the time to have expired
 ****************************************************************************/
-void CTimer::SetExpired()
+void CTimer::setExpired()
 {
-    m_expiredTime = CHighResTimer::Instance().GetTime();
-
-}   // Reset
+    m_expiredTime = CHighResTimer::Instance().getTime();
+}
 
 
 /***************************************************************************
 *   desc:  Set the timer interval
 ****************************************************************************/
-void CTimer::Set( double interval )
+void CTimer::set( double interval )
 {
     m_timeInterval = interval;
-    Reset();
-
-}   // Set
+    reset();
+}
 
 
 /***************************************************************************
 *   desc:  Has the timer expired
-*
-*   param:  resetOnExpire - Reset the timer if it has expired
-*
 ****************************************************************************/
-bool CTimer::Expired( bool resetOnExpire )
+bool CTimer::expired( bool resetOnExpire )
 {
     // Has the timer been disabled
     if( m_disabled )
@@ -88,34 +82,31 @@ bool CTimer::Expired( bool resetOnExpire )
 
     bool result(false);
 
-    if( CHighResTimer::Instance().GetTime() > m_expiredTime )
+    if( CHighResTimer::Instance().getTime() > m_expiredTime )
     {
         result = true;
 
         if( resetOnExpire )
-            Reset();
+            reset();
     }
 
     return result;
-
-}   // Expired
+}
 
 
 /***************************************************************************
 *   desc:  Disable this timer
 ****************************************************************************/
-void CTimer::Disable( bool disabled )
+void CTimer::disable( bool disabled )
 {
     m_disabled = disabled;
-
-}   // Disable
+}
 
 
 /***************************************************************************
 *   desc:  Set the value returned by Expired when the timer is disabled
 ****************************************************************************/
-void CTimer::SetDisableValue( bool disableValue )
+void CTimer::setDisableValue( bool disableValue )
 {
     m_disableValue = disableValue;
-
-}   // Disable
+}

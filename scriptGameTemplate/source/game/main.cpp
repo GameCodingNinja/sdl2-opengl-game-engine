@@ -32,7 +32,7 @@ int main( int argc, char* args[] )
     }
     catch( NExcept::CCriticalException & ex )
     {
-        game.DisplayErrorMsg( ex.GetErrorTitle(), ex.GetErrorMsg() );
+        game.DisplayErrorMsg( ex.getErrorTitle(), ex.getErrorMsg() );
     }
     catch( std::exception const & ex )
     {

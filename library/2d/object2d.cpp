@@ -45,29 +45,29 @@ const CPoint<float> & CObject2D::getTransPos() const
 void CObject2D::transformLocal( CMatrix & matrix )
 {
     // Reset the matrices
-    matrix.InitilizeMatrix();
+    matrix.initilizeMatrix();
 
     // Apply the crop offset
-    if( m_parameters.IsSet( NDefs::CROP_OFFSET ) )
-        matrix.Translate( m_cropOffset );
+    if( m_parameters.isSet( NDefs::CROP_OFFSET ) )
+        matrix.translate( m_cropOffset );
 
     // Apply the scale
-    if( m_parameters.IsSet( NDefs::SCALE ) )
+    if( m_parameters.isSet( NDefs::SCALE ) )
         applyScale( matrix );
 
     // Apply the rotation
-    if( m_parameters.IsSet( NDefs::ROTATE ) )
+    if( m_parameters.isSet( NDefs::ROTATE ) )
         applyRotation( matrix );
 
     // Apply the translation
-    if( m_parameters.IsSet( NDefs::TRANSLATE ) )
-        matrix.Translate( m_pos );
+    if( m_parameters.isSet( NDefs::TRANSLATE ) )
+        matrix.translate( m_pos );
 
     // Clear the check parameter
-    m_parameters.Remove( NDefs::TRANSFORM | NDefs::PHYSICS_TRANSFORM );
+    m_parameters.remove( NDefs::TRANSFORM | NDefs::PHYSICS_TRANSFORM );
 
     // Indicate that translation was done
-    m_parameters.Add( NDefs::WAS_TRANSFORMED );
+    m_parameters.add( NDefs::WAS_TRANSFORMED );
 }
 
 
@@ -76,9 +76,9 @@ void CObject2D::transformLocal( CMatrix & matrix )
 ************************************************************************/
 void CObject2D::transform()
 {
-    m_parameters.Remove( NDefs::WAS_TRANSFORMED );
+    m_parameters.remove( NDefs::WAS_TRANSFORMED );
     
-    if( m_parameters.IsSet( NDefs::TRANSFORM ) )
+    if( m_parameters.isSet( NDefs::TRANSFORM ) )
     {
         transformLocal( m_matrix );
     
@@ -88,9 +88,9 @@ void CObject2D::transform()
 
 void CObject2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    m_parameters.Remove( NDefs::WAS_TRANSFORMED );
+    m_parameters.remove( NDefs::WAS_TRANSFORMED );
     
-    if( m_parameters.IsSet( NDefs::TRANSFORM ) || tranformWorldPos )
+    if( m_parameters.isSet( NDefs::TRANSFORM ) || tranformWorldPos )
     {
         CMatrix localMatrix;
     
@@ -98,7 +98,7 @@ void CObject2D::transform( const CMatrix & matrix, bool tranformWorldPos )
     
         m_matrix = localMatrix * matrix;
 
-        m_matrix.Transform( m_transPos, CPoint<float>() );
+        m_matrix.transform( m_transPos, CPoint<float>() );
     }
 }
 
@@ -113,7 +113,7 @@ void CObject2D::transform( const CObject2D & object )
 ************************************************************************/
 void CObject2D::applyScale( CMatrix & matrix )
 {
-    matrix.SetScale( m_scale );
+    matrix.setScale( m_scale );
 }
 
 
@@ -123,14 +123,14 @@ void CObject2D::applyScale( CMatrix & matrix )
 void CObject2D::applyRotation( CMatrix & matrix )
 {
     // Add in the center point prior to rotation
-    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
-        matrix.Translate( m_centerPos );
+    if( m_parameters.isSet( NDefs::CENTER_POINT ) )
+        matrix.translate( m_centerPos );
 
-    matrix.Rotate( m_rot );
+    matrix.rotate( m_rot );
 
     // Subtract the center point after rotation to put back in original position
-    if( m_parameters.IsSet( NDefs::CENTER_POINT ) )
-        matrix.Translate( -m_centerPos );
+    if( m_parameters.isSet( NDefs::CENTER_POINT ) )
+        matrix.translate( -m_centerPos );
 }
 
 
@@ -148,7 +148,7 @@ const CMatrix & CObject2D::getMatrix() const
 ************************************************************************/
 bool CObject2D::wasWorldPosTranformed() const
 {
-    return m_parameters.IsSet( NDefs::WAS_TRANSFORMED );
+    return m_parameters.isSet( NDefs::WAS_TRANSFORMED );
 }
 
 
@@ -157,5 +157,5 @@ bool CObject2D::wasWorldPosTranformed() const
 ************************************************************************/
 void CObject2D::forceTransform()
 {
-    m_parameters.Add( NDefs::TRANSFORM );
+    m_parameters.add( NDefs::TRANSFORM );
 }

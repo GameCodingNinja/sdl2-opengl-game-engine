@@ -47,8 +47,8 @@
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().getWorld( "(game)" ) ),
-        m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
-        m_rStrawberryData(m_rStrategy.GetData("strawberry").get<CSpriteData>()),
+        m_rStrategy(CSpriteStrategyMgr::Instance().get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
+        m_rStrawberryData(m_rStrategy.getData("strawberry").get<CSpriteData>()),
         m_rMultiplierLabel(CMenuManager::Instance().getMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
         m_rWinMeter(CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_multiIndexPos(0),
@@ -124,13 +124,13 @@ void CLevel1State::Init()
     // Add the first strawberry
     std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.back().size()-1);
     m_multiIndexPos = multiPosRand(m_generator);
-    CSpriteStrategyMgr::Instance().Create(
+    CSpriteStrategyMgr::Instance().create(
         "(level1_spriteStrategy)",
         "strawberry",
         CPoint<float>(m_multiXPosVec.back().at(m_multiIndexPos),-1450.f) );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -157,7 +157,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
             const float ratio = 1.f / camera.getOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - camera.getOrthoProjSizeHalf().w;
 
-            CSpriteStrategyMgr::Instance().Create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
+            CSpriteStrategyMgr::Instance().create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
         }
     }
 
@@ -171,7 +171,7 @@ void CLevel1State::MiscProcess()
 {
     if( !CMenuManager::Instance().isMenuActive() )
     {
-        CSpriteStrategyMgr::Instance().MiscProcess();
+        CSpriteStrategyMgr::Instance().miscProcess();
     }
     
 }   // MiscProcess
@@ -203,7 +203,7 @@ void CLevel1State::Update()
     
     if( !CMenuManager::Instance().isMenuActive() )
     {
-        CSpriteStrategyMgr::Instance().Update();
+        CSpriteStrategyMgr::Instance().update();
     }
 
 }   // Update
@@ -216,7 +216,7 @@ void CLevel1State::Transform()
 {
     CCommonState::Transform();
     
-    CSpriteStrategyMgr::Instance().Transform();
+    CSpriteStrategyMgr::Instance().transform();
 
 }   // Transform
 
@@ -228,7 +228,7 @@ void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
     
-    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().getActiveCameraMatrix() );
+    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getActiveCameraMatrix() );
 
     CMenuManager::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
 
@@ -256,7 +256,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
         
         else if( (spriteAid == STRAWBERRY) || (spriteBid == STRAWBERRY) )
         {
-            m_rStrategy.SetToDestroy( STRAWBERRY );
+            m_rStrategy.setToDestroy( STRAWBERRY );
             
             m_rMultiplierLabel.createFontString( std::to_string(++m_multiplier) + "x" );
             
@@ -267,7 +267,7 @@ void CLevel1State::BeginContact(b2Contact* contact)
             
             // Add another strawberry
             m_rStrawberryData.setPos( multiPos, -1450.f );
-            m_rStrategy.SetToCreate( "strawberry" );
+            m_rStrategy.setToCreate( "strawberry" );
         }
     }
     
@@ -343,8 +343,8 @@ namespace NLevel1State
         CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
         
         // Load the sprite strategies
-        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy );
+        CSpriteStrategyMgr::Instance().addStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
+        CSpriteStrategyMgr::Instance().addStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy );
     }
     
     void CriticalInit()
@@ -352,7 +352,7 @@ namespace NLevel1State
         // Creates the font strings, run init scripts
         CMenuManager::Instance().initGroup("(levels)");
         
-        CSpriteStrategyMgr::Instance().Init();
+        CSpriteStrategyMgr::Instance().init();
     }
 
 
@@ -363,7 +363,7 @@ namespace NLevel1State
     void CriticalUnload()
     {        
         CMenuManager::Instance().cleanUpGroup("(levels)");
-        CSpriteStrategyMgr::Instance().CleanUp();
+        CSpriteStrategyMgr::Instance().cleanUp();
         CObjectDataMgr::Instance().freeGroup2D( "(level1)" );
         CObjectDataMgr::Instance().freeGroup2D( "(levels)" );
     }
@@ -374,7 +374,7 @@ namespace NLevel1State
         CMenuManager::Instance().freeGroup("(levels)");
         
         // Unload the strategy group stuff
-        CSpriteStrategyMgr::Instance().Clear();
+        CSpriteStrategyMgr::Instance().clear();
         
         // Unload state specific AngelScript functions
         CScriptManager::Instance().freeGroup("(level1)");

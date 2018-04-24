@@ -53,7 +53,7 @@ void CTitleScreenState::Init()
     m_title.transform();
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 

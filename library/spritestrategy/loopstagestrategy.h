@@ -28,10 +28,10 @@ public:
     virtual ~CLoopStageStrategy();
     
     // Load thes actor data from node
-    void LoadFromNode( const XMLNode & node ) override;
+    void loadFromNode( const XMLNode & node ) override;
     
     // Transform the actor
-    void Transform() override;
+    void transform() override;
 
 private:
 

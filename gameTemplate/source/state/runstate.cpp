@@ -48,7 +48,7 @@ void CRunState::Init()
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -94,7 +94,7 @@ void CRunState::Update()
     m_scriptComponent.update();
     
     if( !CMenuManager::Instance().isActive() )
-        CSpriteStrategyMgr::Instance().Update();
+        CSpriteStrategyMgr::Instance().update();
 
 }   // Update
 
@@ -107,7 +107,7 @@ void CRunState::Transform()
     CCommonState::Transform();
     
     if( !CMenuManager::Instance().isActive() )
-        CSpriteStrategyMgr::Instance().Transform();
+        CSpriteStrategyMgr::Instance().transform();
 
 }   // Transform
 
@@ -119,7 +119,7 @@ void CRunState::PreRender()
 {
     CCommonState::PreRender();
     
-    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -148,8 +148,8 @@ namespace NRunState
     {
 	// All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CBasicStageStrategy );
-        CSpriteStrategyMgr::Instance().AddStrategy( "(sprite)", new CBasicSpriteStrategy );
+        CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CBasicStageStrategy );
+        CSpriteStrategyMgr::Instance().addStrategy( "(sprite)", new CBasicSpriteStrategy );
     }
     
     void CriticalInit()
@@ -157,7 +157,7 @@ namespace NRunState
         const char* shapes[] = {"triangle_blue", "triangle_green", "circle_blue", "circle_green", "circle_red", "square_red"};
         
         for( int i = 0; i < 24; ++i )
-            CSpriteStrategyMgr::Instance().Create( "(sprite)", shapes[i % 6] );
+            CSpriteStrategyMgr::Instance().create( "(sprite)", shapes[i % 6] );
     }
 
 
@@ -167,13 +167,13 @@ namespace NRunState
     ****************************************************************************/
     void CriticalUnload()
     {
-        CSpriteStrategyMgr::Instance().CleanUp();
+        CSpriteStrategyMgr::Instance().cleanUp();
         CObjectDataMgr::Instance().freeGroup2D( "(run)" );
     }
     
     void Unload()
     {
-        CSpriteStrategyMgr::Instance().Clear();
+        CSpriteStrategyMgr::Instance().clear();
         CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
     }
 

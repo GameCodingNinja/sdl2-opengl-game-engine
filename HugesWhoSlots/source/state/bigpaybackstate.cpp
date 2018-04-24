@@ -89,8 +89,8 @@ void CBigPayBackState::Init()
             "main_reel_strip",
             "main_paytable",
             CSlotMathMgr::Instance().GetSlotMath( m_stateGroup, "slot" ),
-            CXMLPreloader::Instance().GetNode( std::get<0>(NBigPayBack::reelGrpCfg) ),
-            CXMLPreloader::Instance().GetNode( std::get<0>(NBigPayBack::spinProfileCfg) ),
+            CXMLPreloader::Instance().getNode( std::get<0>(NBigPayBack::reelGrpCfg) ),
+            CXMLPreloader::Instance().getNode( std::get<0>(NBigPayBack::spinProfileCfg) ),
             CSymbolSetViewMgr::Instance().Get( m_stateGroup, "base_game" ),
             rPlayResult,
             std::move(std::unique_ptr<iCycleResults>(new CAnimatedCycleResults( &rPlayResult ))) ) );
@@ -117,7 +117,7 @@ void CBigPayBackState::Init()
     CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().GetCredits()  );
     
     // Clear any preloaded XML files
-    CXMLPreloader::Instance().Clear();
+    CXMLPreloader::Instance().clear();
     
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( m_stateGroup, "Screen_FadeIn" );
@@ -126,7 +126,7 @@ void CBigPayBackState::Init()
     AllowStopSounds( CGameSave::Instance().GetPlayStopSounds() );
     
     // Reset the elapsed time before entering game loop
-    CHighResTimer::Instance().CalcElapsedTime();
+    CHighResTimer::Instance().calcElapsedTime();
     
 }   // Init
 
@@ -294,9 +294,9 @@ namespace NBigPayBack
         CSpriteSheetMgr::Instance().clear();
         
         // Preload some needed XML files
-        CXMLPreloader::Instance().Clear();
-        CXMLPreloader::Instance().Load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
-        CXMLPreloader::Instance().Load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
+        CXMLPreloader::Instance().clear();
+        CXMLPreloader::Instance().load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
+        CXMLPreloader::Instance().load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
 
     }   // Load
     
