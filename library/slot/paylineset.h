@@ -28,10 +28,10 @@ public:
     CPaylineSet( const XMLNode & node );
     
     // Get the line data
-    const std::vector<std::vector<int8_t>> & GetLineData() const;
+    const std::vector<std::vector<int8_t>> & getLineData() const;
     
     // See if the scatter eval symbol index is allowed
-    bool IndexOfScaterData( int strip, int index ) const;
+    bool indexOfScaterData( int strip, int index ) const;
 
 private:
     

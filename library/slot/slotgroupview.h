@@ -41,67 +41,67 @@ public:
     virtual ~CSlotGroupView();
     
     // Create the view slot strips
-    virtual void Create(
+    virtual void create(
         const XMLNode & node,
         CSymbolSetView & rSymbolSetView,
         std::unique_ptr<iCycleResults> upCycleResults );
     
     // Set the cycle results text
-    void SetCycleResultText( bool visible, const CPay * pPay = nullptr );
+    void setCycleResultText( bool visible, const CPay * pPay = nullptr );
     
     // Load the spin profile from XML node
-    void LoadSpinProfileFromNode( const XMLNode & node );
+    void loadSpinProfileFromNode( const XMLNode & node );
     
     // Clear the cycle results symbols
-    virtual void ClearCycleResultSymbs();
+    virtual void clearCycleResultSymbs();
     
     // Generate the cycle results symbols
-    virtual void GenerateCycleResultSymbs() = 0;
+    virtual void generateCycleResultSymbs() = 0;
 
     // Get the cycle results symbols
-    virtual std::vector<std::vector<CSymbol2d *>> & GetCycleResultSymbs() = 0;
+    virtual std::vector<std::vector<CSymbol2d *>> & getCycleResultSymbs() = 0;
     
     // Do we allow the stop sounds?
-    virtual void AllowStopSounds( bool allow ) = 0;
+    virtual void allowStopSounds( bool allow ) = 0;
     
     // Update the reel group
-    virtual void Update();
+    virtual void update();
     
     // Transform the reel group
-    virtual void Transform();
+    virtual void transform();
     
     // Do the render
-    virtual void Render( const CMatrix & matrix );
+    virtual void render( const CMatrix & matrix );
     
     // Do the deferred render
-    virtual void DeferredRender( const CMatrix & matrix ) = 0;
+    virtual void deferredRender( const CMatrix & matrix ) = 0;
     
     // Start the reels spinning
-    virtual void StartSpin() = 0;
+    virtual void startSpin() = 0;
     
     // Stop the reels spinning
-    virtual void StopSpin() = 0;
+    virtual void stopSpin() = 0;
     
     // Is the spin state
-    virtual bool IsSpinState( NSlotDefs::ESpinState state ) const = 0;
+    virtual bool isSpinState( NSlotDefs::ESpinState state ) const = 0;
     
     // Activate the cycle results
-    void ActivateCycleResults();
+    void activateCycleResults();
     
     // Stop the cycle results
-    void DeactivateCycleResults();
+    void deactivateCycleResults();
     
     // Start the cycle results animation
-    void StartCycleResultsAnimation();
+    void startCycleResultsAnimation();
     
     // Stop the cycle results animation
-    void StopCycleResultsAnimation();
+    void stopCycleResultsAnimation();
     
     // Is the cycle results active
-    bool IsCycleResultsActive();
+    bool isCycleResultsActive();
     
     // Is the cycle results animating
-    bool IsCycleResultsAnimating();
+    bool isCycleResultsAnimating();
 
 protected:
     

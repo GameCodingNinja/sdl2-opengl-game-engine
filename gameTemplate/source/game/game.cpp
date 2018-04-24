@@ -80,7 +80,7 @@ void CGame::init()
     pollEvents();
     
     // Init with the total amount of credits
-    CBetMgr::Instance().SetCredits( 50000 );
+    CBetMgr::Instance().setCredits( 50000 );
 
     // Create the startup state
     upGameState.reset( new CStartUpState );

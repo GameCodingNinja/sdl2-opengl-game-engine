@@ -37,7 +37,7 @@ namespace NSlotGroupFactory
     {
         // Create the group model
         auto spSlotGroupModel = std::make_shared<CSlotGroupModel>( rSlotMath, rPlayResult );
-        spSlotGroupModel->Create( slotStripSetId, paytableSetId );
+        spSlotGroupModel->create( slotStripSetId, paytableSetId );
         
         // Create the group view
         std::shared_ptr<CSlotGroupView> spSlotGroupView;
@@ -54,13 +54,13 @@ namespace NSlotGroupFactory
         
         // Init the cycle results if we have one
         if( upCycleResults )
-            upCycleResults->Init( spSlotGroupView );
+            upCycleResults->init( spSlotGroupView );
         
         // Create group view based on xml node and symbol set view
-        spSlotGroupView->Create( rViewCfgNode, rSymbolSetView, std::move(upCycleResults) );
+        spSlotGroupView->create( rViewCfgNode, rSymbolSetView, std::move(upCycleResults) );
 
         // Load the spin profile from XML node
-        spSlotGroupView->LoadSpinProfileFromNode( rViewSpinProfileCfgNode );
+        spSlotGroupView->loadSpinProfileFromNode( rViewSpinProfileCfgNode );
         
         // Create the slot group
         std::unique_ptr<CSlotGroup> upSlotGroup( new CSlotGroup(spSlotGroupModel, spSlotGroupView) );

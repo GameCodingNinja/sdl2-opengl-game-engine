@@ -23,27 +23,27 @@ public:
     }
     
     // Set/Get the line bet
-    void SetLineBet( uint lineBet );
-    uint GetLineBet() const;
+    void setLineBet( uint lineBet );
+    uint getLineBet() const;
     
     // Set the total lines being bet
-    void SetTotalLines( uint totalLinesBet );
+    void setTotalLines( uint totalLinesBet );
     
     // Get the total bet
-    uint GetTotalBet() const;
+    uint getTotalBet() const;
     
     // Set/Get the credits
-    void SetCredits( uint credits );
-    uint GetCredits() const;
+    void setCredits( uint credits );
+    uint getCredits() const;
     
     // Is there anough credits to play?
-    bool AllowPlay() const;
+    bool allowPlay() const;
     
     // Deduct the bet amount from the credits
-    void DeductBet();
+    void deductBet();
     
     // Add in the award
-    void AddAward( uint award );
+    void addAward( uint award );
     
 private:
     

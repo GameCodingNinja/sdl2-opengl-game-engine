@@ -39,48 +39,48 @@ public:
     virtual ~CReelGroupView();
     
     // Create the view slot strips
-    void Create(
+    void create(
         const XMLNode & node,
         CSymbolSetView & rSymbolSetView,
         std::unique_ptr<iCycleResults> upCycleResults ) override;
     
     // Update the reel group
-    void Update() override;
+    void update() override;
     
     // Transform the reel group
-    void Transform() override;
+    void transform() override;
     
     // Do the render
-    void Render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix ) override;
     
     // Do the deferred render
-    void DeferredRender( const CMatrix & matrix ) override;
+    void deferredRender( const CMatrix & matrix ) override;
     
     // Start the reels spinning
-    void StartSpin() override;
+    void startSpin() override;
     
     // Stop the reels spinning
-    void StopSpin() override;
+    void stopSpin() override;
     
     // Is the spin state
-    bool IsSpinState( NSlotDefs::ESpinState state ) const override;
+    bool isSpinState( NSlotDefs::ESpinState state ) const override;
     
     // Generate the cycle results symbols
-    void GenerateCycleResultSymbs() override;
+    void generateCycleResultSymbs() override;
     
     // Get the cycle results symbols
-    std::vector<std::vector<CSymbol2d *>> & GetCycleResultSymbs() override;
+    std::vector<std::vector<CSymbol2d *>> & getCycleResultSymbs() override;
     
     // Clear the cycle results symbols
-    void ClearCycleResultSymbs() override;
+    void clearCycleResultSymbs() override;
     
     // Do we allow the stop sounds?
-    void AllowStopSounds( bool allow ) override;
+    void allowStopSounds( bool allow ) override;
     
 private:
     
     // Free the memory allocated for the cycle result symbols
-    void DeleteCycleResultSymbs();
+    void deleteCycleResultSymbs();
     
 private:
     
@@ -92,5 +92,3 @@ private:
 };
 
 #endif  // __reel_group_view_h__
-
-

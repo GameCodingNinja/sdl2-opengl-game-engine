@@ -20,16 +20,16 @@ public:
     CMathSymbol( const std::string & symbolID, const std::vector<std::string> & wildMatches );
     
     // Get the string ID
-    const std::string & GetID() const;
+    const std::string & getID() const;
     
     // Is this a wild symbol?
-    bool IsWild() const;
+    bool isWild() const;
     
     // Is wild for this symbol?
-    bool IsWildFor( const std::string & symbolID ) const;
+    bool isWildFor( const std::string & symbolID ) const;
     
     // Does symbol match?
-    bool IsMatch( const std::string & symbolID ) const;
+    bool isMatch( const std::string & symbolID ) const;
     
     // Equality operator. The symbols are equal if their id's are
     bool operator == ( const CMathSymbol & mathSymbol ) const;

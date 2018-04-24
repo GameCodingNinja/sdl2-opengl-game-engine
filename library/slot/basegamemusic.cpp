@@ -28,45 +28,42 @@ CBaseGameMusic::CBaseGameMusic(
         m_allowSpinMusic( true )
 {
     m_musicTimer.disable( true );
-    
-}   // constructor
+}
 
 
 /***************************************************************************
 *    desc:  Handle update checks
 ****************************************************************************/
-void CBaseGameMusic::Update()
+void CBaseGameMusic::update()
 {
     m_scriptComponent.update();
-    
+
     // Fade down the music if the player is not spinning
     if( m_allowSpinMusic && m_musicTimer.expired() )
     {
         m_musicTimer.disable( true );
         m_scriptComponent.prepare( m_group, m_stopMusicFunc );
     }
-    
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Start the music
 ****************************************************************************/
-void CBaseGameMusic::StartMusic()
+void CBaseGameMusic::startMusic()
 {
     if( m_allowSpinMusic )
     {
         m_scriptComponent.resetAndRecycle();
         m_scriptComponent.prepare( m_group, m_startMusicFunc );
     }
-    
-}   // StartMusic
+}
 
 
 /***************************************************************************
 *    desc:  Start the music timeout
 ****************************************************************************/
-void CBaseGameMusic::SetTimeOut()
+void CBaseGameMusic::setTimeOut()
 {
     // Set the timer that waits to see if the music should time out
     if( m_allowSpinMusic )
@@ -74,28 +71,26 @@ void CBaseGameMusic::SetTimeOut()
         m_musicTimer.set( m_musicTimeOut );
         m_musicTimer.disable( false );
     }
-    
-}   // SetTimeOut
+}
 
 
 /***************************************************************************
 *    desc:  Start the music
 ****************************************************************************/
-void CBaseGameMusic::FastFadeDown()
+void CBaseGameMusic::fastFadeDown()
 {
     if( m_allowSpinMusic )
     {
         m_scriptComponent.resetAndRecycle();
         m_scriptComponent.prepare( m_group, m_fastFadeFunc );
     }
-    
-}   // ForceFadeDown
+}
 
 
 /************************************************************************
 *    desc:  Do we play the music
 ************************************************************************/
-void CBaseGameMusic::AllowMusic( bool allow )
+void CBaseGameMusic::allowMusic( bool allow )
 {
     m_allowSpinMusic = allow;
 }

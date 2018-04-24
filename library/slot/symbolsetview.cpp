@@ -26,7 +26,7 @@
 CSymbolSetView::CSymbolSetView( const std::string & group ) :
     m_group( group )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -34,13 +34,13 @@ CSymbolSetView::CSymbolSetView( const std::string & group ) :
 ************************************************************************/
 CSymbolSetView::~CSymbolSetView()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes reel group data from node
 ************************************************************************/
-void CSymbolSetView::LoadFromNode( const XMLNode & node, const std::string & name )
+void CSymbolSetView::loadFromNode( const XMLNode & node, const std::string & name )
 {
     for( int i = 0; i < node.nChildNode(); ++i )
     {
@@ -52,7 +52,7 @@ void CSymbolSetView::LoadFromNode( const XMLNode & node, const std::string & nam
 
         // Add the vector to the map
         auto iter = m_symbolSetDataMap.emplace( id, std::vector<CSpriteData>() );
-        
+
         // Check for duplicate id's
         if( !iter.second )
         {
@@ -60,18 +60,17 @@ void CSymbolSetView::LoadFromNode( const XMLNode & node, const std::string & nam
                 boost::str( boost::format("Duplicate symbol id (%s - %s - %s).\n\n%s\nLine: %s")
                     % id % m_group % name % __FUNCTION__ % __LINE__ ));
         }
-        
+
         for( int j = 0; j < symbolNode.nChildNode(); ++j )
             iter.first->second.emplace_back( symbolNode.getChildNode(j), m_group );
     }
-    
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Get the vector of sprite data
 ************************************************************************/
-const std::vector<CSpriteData> & CSymbolSetView::GetSpriteData( const std::string & symb ) const
+const std::vector<CSpriteData> & CSymbolSetView::getSpriteData( const std::string & symb ) const
 {
     // Use the math symbol ID to find the visual symbol
     auto iter = m_symbolSetDataMap.find( symb );
@@ -81,16 +80,15 @@ const std::vector<CSpriteData> & CSymbolSetView::GetSpriteData( const std::strin
             boost::str( boost::format("View symbol data not found in symbol set (%s).\n\n%s\nLine: %s")
                 % symb % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetSpriteData
+}
 
 
 /************************************************************************
 *    desc:  Build the visible symbol set
 ************************************************************************/
-void CSymbolSetView::BuildSymbolSetView()
+void CSymbolSetView::buildSymbolSetView()
 {
     // Build the symbol set when asked for it if empty
     if( m_symbolSetMap.empty() )
@@ -112,13 +110,13 @@ void CSymbolSetView::BuildSymbolSetView()
             }
         }
     }
-}   // BuildSymbolSet
+}
 
 
 /************************************************************************
 *    desc:  Get the symbol set created by the data
 ************************************************************************/
-CSymbol2d & CSymbolSetView::GetSymbol( const std::string & symb )
+CSymbol2d & CSymbolSetView::getSymbol( const std::string & symb )
 {
     // Use the math symbol ID to find the visual symbol
     auto iter = m_symbolSetMap.find( symb );
@@ -128,7 +126,6 @@ CSymbol2d & CSymbolSetView::GetSymbol( const std::string & symb )
             boost::str( boost::format("View symbol not found in symbol set (%s).\n\n%s\nLine: %s")
                 % symb % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetSymbol
+}

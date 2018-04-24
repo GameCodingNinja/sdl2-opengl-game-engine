@@ -22,13 +22,12 @@ public:
     virtual ~CValueTable();
     
     // Get the value from the value table
-    int GetValue( const int index ) const;
+    int getValue( const int index ) const;
     
 private:
     
     // value
     const std::vector<int> m_valueVec;
-
 };
 
 #endif  // __value_table_h__

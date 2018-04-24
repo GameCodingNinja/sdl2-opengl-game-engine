@@ -34,10 +34,10 @@ public:
     virtual ~CSlotGroup();
     
     // Get the slot group model
-    CSlotGroupModel * GetModel();
+    CSlotGroupModel * getModel();
     
     // Get the slot group view
-    CSlotGroupView * GetView();
+    CSlotGroupView * getView();
     
 private:
     

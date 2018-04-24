@@ -14,73 +14,67 @@
 CSlotResults::CSlotResults() :
     m_totalWinAmount(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Create a new play results entry into the vector
 ************************************************************************/
-CPlayResult & CSlotResults::Create()
+CPlayResult & CSlotResults::create()
 {
     m_playResultVec.emplace_back();
-    
+
     return m_playResultVec.back();
-    
-}   // Create
+}
 
 
 /************************************************************************
 *    desc:  Clear the pays
 ************************************************************************/
-void CSlotResults::Clear()
+void CSlotResults::clear()
 {
     m_totalWinAmount = 0;
-    
+
     for( auto & iter : m_playResultVec )
-        iter.Clear();
-    
-}   // Clear
+        iter.clear();
+}
 
 
 /************************************************************************
 *    desc:  Sort the pays
 ************************************************************************/
-void CSlotResults::SortPays()
+void CSlotResults::sortPays()
 {
     for( auto & iter : m_playResultVec )
-        iter.SortPays();
-    
-}   // SortPays
+        iter.sortPays();
+}
 
 
 /************************************************************************
 *    desc:  Add up the win
 ************************************************************************/
-void CSlotResults::AddUpWin()
+void CSlotResults::addUpWin()
 {
     m_totalWinAmount = 0;
-    
-    for( auto & iter : m_playResultVec )
-        m_totalWinAmount += iter.AddUpWin();
 
-}   // AddUpWin
+    for( auto & iter : m_playResultVec )
+        m_totalWinAmount += iter.addUpWin();
+}
 
 
 /************************************************************************
 *    desc:  Get the total win
 ************************************************************************/
-uint CSlotResults::GetTotalWin()
+uint CSlotResults::getTotalWin()
 {
     return m_totalWinAmount;
-    
-}   // GetTotalWin
+}
 
 
 /************************************************************************
 *    desc:  Do we have a win
 ************************************************************************/
-bool CSlotResults::IsWin()
+bool CSlotResults::isWin()
 {
     return (m_totalWinAmount > 0);
-    
-}   // IsWin
+}

@@ -31,27 +31,27 @@ public:
     virtual ~CSymbol2d();
     
     // Get the sprite
-    CSprite2D & GetSprite( int index = 0 );
+    CSprite2D & getSprite( int index = 0 );
     
     // Get the sprite
-    size_t GetSpriteCount();
+    size_t getSpriteCount();
     
     // Get the string id
-    const std::string & GetId();
+    const std::string & getId();
     
     // Update the control
-    void Update();
+    void update();
 
     // Transform the control
     void transform() override;
     void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
 
     // do the render
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
     
     // Get/Set if deferred render
-    bool IsDeferredRender();
-    void SetDeferredRender( bool value );
+    bool isDeferredRender();
+    void setDeferredRender( bool value );
     
 private:
     

@@ -14,52 +14,48 @@
 /************************************************************************
 *    desc:  Constructor
 ************************************************************************/
-CMathSymbol::CMathSymbol( 
+CMathSymbol::CMathSymbol(
     const std::string & symbolID, const std::vector<std::string> & wildMatches ) :
         m_id( symbolID ),
         m_wildMatches( wildMatches )
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the string ID
 ************************************************************************/
-const std::string & CMathSymbol::GetID() const
+const std::string & CMathSymbol::getID() const
 {
     return m_id;
-    
-}   // GetID
+}
 
 
 /************************************************************************
 *    desc:  Is this a wild symbol?
 ************************************************************************/
-bool CMathSymbol::IsWild() const
+bool CMathSymbol::isWild() const
 {
     return !m_wildMatches.empty();
-    
-}   // IsWildSymbol
+}
 
 
 /************************************************************************
 *    desc:  Is wild for this symbol?
 ************************************************************************/
-bool CMathSymbol::IsWildFor( const std::string & symbolID ) const
+bool CMathSymbol::isWildFor( const std::string & symbolID ) const
 {
     return std::find( m_wildMatches.begin(), m_wildMatches.end(), symbolID ) != m_wildMatches.end();
-    
-}   // IsWildFor
+}
 
 
 /************************************************************************
 *    desc:  Does symbol match?
 ************************************************************************/
-bool CMathSymbol::IsMatch( const std::string & symbolID ) const
+bool CMathSymbol::isMatch( const std::string & symbolID ) const
 {
-    return ((m_id == symbolID) || IsWildFor(symbolID));
-    
-}   // Matches
+    return ((m_id == symbolID) || isWildFor(symbolID));
+}
 
 
 /************************************************************************
@@ -67,12 +63,11 @@ bool CMathSymbol::IsMatch( const std::string & symbolID ) const
 ************************************************************************/
 bool CMathSymbol::operator == ( const CMathSymbol & mathSymbol ) const
 {
-    if( m_id == mathSymbol.GetID() )
+    if( m_id == mathSymbol.getID() )
         return true;
 
     return false;
-
-}   // operator ==
+}
 
 bool CMathSymbol::operator == ( const std::string & symbolID ) const
 {
@@ -80,5 +75,4 @@ bool CMathSymbol::operator == ( const std::string & symbolID ) const
         return true;
 
     return false;
-
-}   // operator ==
+}

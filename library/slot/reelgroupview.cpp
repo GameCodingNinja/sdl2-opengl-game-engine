@@ -29,7 +29,7 @@
 CReelGroupView::CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     CSlotGroupView( rSlotGroupModel )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -37,174 +37,164 @@ CReelGroupView::CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGr
 ************************************************************************/
 CReelGroupView::~CReelGroupView()
 {
-    DeleteCycleResultSymbs();
-    
-}   // destructor
+    deleteCycleResultSymbs();
+}
 
 
 /************************************************************************
 *    desc:  Create the view slot strips
 ************************************************************************/
-void CReelGroupView::Create(
+void CReelGroupView::create(
     const XMLNode & node,
     CSymbolSetView & rSymbolSetView,
     std::unique_ptr<iCycleResults> upCycleResults )
 {
-    CSlotGroupView::Create( node, rSymbolSetView, std::move(upCycleResults) );
-    
+    CSlotGroupView::create( node, rSymbolSetView, std::move(upCycleResults) );
+
     // Get the group name
     const std::string group = node.getAttribute( "group" );
-    
+
     // Sanity check
     const XMLNode reelstripLstNode = node.getChildNode( "reelstripList" );
     if( reelstripLstNode.isEmpty() )
         throw NExcept::CCriticalException("Reel Strip Creation Error!",
             boost::str( boost::format("Reel strip list node is empty!\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
-    
+
     // Check that the model and view reel strip count is the same
-    if( static_cast<int>(m_spSlotGroupModel->GetCount()) != reelstripLstNode.nChildNode() )
+    if( static_cast<int>(m_spSlotGroupModel->getCount()) != reelstripLstNode.nChildNode() )
     {
         throw NExcept::CCriticalException("Reel Strip Creation Error!",
             boost::str( boost::format("Reelstrip model count does not match view count.\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
     }
-    
+
     // Build the visible symbol set
-    rSymbolSetView.BuildSymbolSetView();
-    
+    rSymbolSetView.buildSymbolSetView();
+
     // Create the view reel strips
     for( int reel = 0; reel < reelstripLstNode.nChildNode(); ++reel )
     {
         const XMLNode reelNode = reelstripLstNode.getChildNode(reel);
-        
+
         // Add the model reel strip to the view reel strip
-        m_reelStripViewDeq.emplace_back( m_spSlotGroupModel->GetStrip(reel), rSymbolSetView, reel );
-        m_reelStripViewDeq.back().Create( reelNode, group );
+        m_reelStripViewDeq.emplace_back( m_spSlotGroupModel->getStrip(reel), rSymbolSetView, reel );
+        m_reelStripViewDeq.back().create( reelNode, group );
     }
 
     // Setup the cycle result symbol vectors
     m_cycleResultSymbVec.resize( m_reelStripViewDeq.size() );
     for( size_t i = 0; i < m_reelStripViewDeq.size(); ++i )
-        m_cycleResultSymbVec.at(i).resize( m_reelStripViewDeq.at(i).GetVisibleSymbolCount() );
-    
-}   // CreateReelStrips
+        m_cycleResultSymbVec.at(i).resize( m_reelStripViewDeq.at(i).getVisibleSymbolCount() );
+}
 
 
 /************************************************************************
 *    desc:  Generate the cycle results symbols
 ************************************************************************/
-void CReelGroupView::GenerateCycleResultSymbs()
+void CReelGroupView::generateCycleResultSymbs()
 {
     for( size_t reel = 0; reel < m_cycleResultSymbVec.size(); ++reel )
     {
-        auto & evalSymbIndexVec = m_spSlotGroupModel->GetStrip(reel).GetEvalIndexVec();
-        
+        auto & evalSymbIndexVec = m_spSlotGroupModel->getStrip(reel).getEvalIndexVec();
+
         // This is an allocated pointer and will need to be freed
         for( size_t symb = 0; symb < evalSymbIndexVec.size(); ++symb )
-            m_cycleResultSymbVec.at(reel).at(symb) = m_reelStripViewDeq.at(reel).GetCycleResultSymbol( evalSymbIndexVec.at(symb) );
+            m_cycleResultSymbVec.at(reel).at(symb) = m_reelStripViewDeq.at(reel).getCycleResultSymbol( evalSymbIndexVec.at(symb) );
     }
-    
-}   // GenerateCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Get the cycle results symbols
 ************************************************************************/
-std::vector<std::vector<CSymbol2d *>> & CReelGroupView::GetCycleResultSymbs()
+std::vector<std::vector<CSymbol2d *>> & CReelGroupView::getCycleResultSymbs()
 {
     return m_cycleResultSymbVec;
-    
-}   // GetCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Clear the cycle results symbols
 ************************************************************************/
-void CReelGroupView::ClearCycleResultSymbs()
+void CReelGroupView::clearCycleResultSymbs()
 {
     // This replaces the temporary symbols with the ones used for spinning
     for( auto & iter : m_reelStripViewDeq )
-        iter.ClearCycleResultSymbs();
-        
+        iter.clearCycleResultSymbs();
+
     // Free the memory allocated for the cycle result symbols
-    DeleteCycleResultSymbs();
-    
-}   // ClearCycleResultSymbs
+    deleteCycleResultSymbs();
+}
 
 
 /************************************************************************
 *    desc:  Free the memory allocated for the cycle result symbols
 ************************************************************************/
-void CReelGroupView::DeleteCycleResultSymbs()
+void CReelGroupView::deleteCycleResultSymbs()
 {
     for( size_t reel = 0; reel < m_cycleResultSymbVec.size(); ++reel )
         for( size_t symb = 0; symb < m_cycleResultSymbVec.at(reel).size(); ++symb )
             NDelFunc::Delete( m_cycleResultSymbVec.at(reel).at(symb) );
-    
-}   // DeleteCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Update the reel group
 ************************************************************************/
-void CReelGroupView::Update()
+void CReelGroupView::update()
 {
-    CSlotGroupView::Update();
-    
+    CSlotGroupView::update();
+
     for( auto & iter : m_reelStripViewDeq )
-        iter.Update();
-    
-}   // Update
+        iter.update();
+}
 
 
 /************************************************************************
 *    desc:  Transform the reel group
 ************************************************************************/
-void CReelGroupView::Transform()
+void CReelGroupView::transform()
 {
-    CSlotGroupView::Transform();
+    CSlotGroupView::transform();
 
     for( auto & iter : m_reelStripViewDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
 
     m_upCycleResultsTxtSprite->transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CReelGroupView::Render( const CMatrix & matrix )
+void CReelGroupView::render( const CMatrix & matrix )
 {
     for( auto & iter : m_reelStripViewDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
     m_upCycleResultsTxtSprite->render( matrix );
-    
-    CSlotGroupView::Render( matrix );
-    
-}   // Render
+
+    CSlotGroupView::render( matrix );
+}
 
 
 /************************************************************************
 *    desc:  Do the deferred render
 ************************************************************************/
-void CReelGroupView::DeferredRender( const CMatrix & matrix )
+void CReelGroupView::deferredRender( const CMatrix & matrix )
 {
     for( auto & iter : m_reelStripViewDeq )
-        iter.DeferredRender( matrix );
-    
-}   // Render
+        iter.deferredRender( matrix );
+}
 
 
 /************************************************************************
 *    desc:  Start the reels spinning
 ************************************************************************/
-void CReelGroupView::StartSpin()
+void CReelGroupView::startSpin()
 {
-    if( IsSpinState( NSlotDefs::ESS_STOPPED ) )
+    if( isSpinState( NSlotDefs::ESS_STOPPED ) )
     {
         auto iter = m_spinProfileMapVec.find( m_defaultSpinProfile );
         if( iter == m_spinProfileMapVec.end() )
@@ -214,54 +204,50 @@ void CReelGroupView::StartSpin()
 
         // Init the reels with the spin profile
         for( size_t i = 0; i < m_reelStripViewDeq.size(); ++i )
-            m_reelStripViewDeq.at(i).SetSpinProfile( iter->second.at(i) );
+            m_reelStripViewDeq.at(i).setSpinProfile( iter->second.at(i) );
 
         // Start the spin
         for( auto & iter : m_reelStripViewDeq )
-            iter.StartSpin();
+            iter.startSpin();
     }
-    
-}   // StartSpin
+}
 
 
 /************************************************************************
 *    desc:  Stop the reels spinning
 ************************************************************************/
-void CReelGroupView::StopSpin()
+void CReelGroupView::stopSpin()
 {
     for( auto & iter : m_reelStripViewDeq )
-        iter.StopSpin();
-        
-}   // StopSpin
+        iter.stopSpin();
+}
 
 
 /************************************************************************
 *    desc:  Is the spin state
 ************************************************************************/
-bool CReelGroupView::IsSpinState( NSlotDefs::ESpinState state ) const
+bool CReelGroupView::isSpinState( NSlotDefs::ESpinState state ) const
 {
     bool result(true);
-    
+
     for( auto & iter : m_reelStripViewDeq )
     {
-        if( iter.GetSpinState() != state )
+        if( iter.getSpinState() != state )
         {
             result = false;
             break;
         }
     }
-    
+
     return result;
-    
-}   // IsSpinState
+}
 
 
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CReelGroupView::AllowStopSounds( bool allow )
+void CReelGroupView::allowStopSounds( bool allow )
 {
     for( auto & iter : m_reelStripViewDeq )
-        iter.AllowStopSounds( allow );
-    
-}   // AllowStopSounds
+        iter.allowStopSounds( allow );
+}

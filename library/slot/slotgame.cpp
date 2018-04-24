@@ -39,7 +39,7 @@ CSlotGame::CSlotGame() :
     m_pFrontPanel( nullptr ),
     m_pGameMusic( nullptr )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -47,13 +47,13 @@ CSlotGame::CSlotGame() :
 ************************************************************************/
 CSlotGame::~CSlotGame()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Add the slot group
 ************************************************************************/
-void CSlotGame::AddSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
+void CSlotGame::addSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
 {
     m_slotGroupVec.emplace_back( std::move(slotGroup) );
 }
@@ -62,320 +62,300 @@ void CSlotGame::AddSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CSlotGame::AllowStopSounds( bool allow )
+void CSlotGame::allowStopSounds( bool allow )
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->AllowStopSounds( allow );
-    
-}   // AllowStopSounds
+        iter->getView()->allowStopSounds( allow );
+}
 
 
 /***************************************************************************
 *    desc:  Go through the game state
 ****************************************************************************/
-void CSlotGame::ProcessGameState()
+void CSlotGame::processGameState()
 {
     switch( m_slotState )
     {
-        case NSlotDefs::ESLOT_IDLE:                StateIdle();              break;
-        case NSlotDefs::ESLOT_KILL_CYCLE_RESULTS:  StateKillCycleResults();  break;
-        case NSlotDefs::ESLOT_PLACE_WAGER:         StatePlaceWager();        break;
-        case NSlotDefs::ESLOT_GENERATE_STOPS:      StateGenerateStops();     break;
-        case NSlotDefs::ESLOT_EVALUATE:            StateEvaluate();          break;
-        case NSlotDefs::ESLOT_PRE_SPIN:            StatePreSpin();           break;
-        case NSlotDefs::ESLOT_SPIN:                StateSpin();              break;
-        case NSlotDefs::ESLOT_POST_SPIN:           StatePostSpin();          break;
-        case NSlotDefs::ESLOT_PRE_AWARD_WIN:       StatePreAwardWin();       break;
-        case NSlotDefs::ESLOT_BONUS_DECISION:      StateBonusDecision();     break;
-        case NSlotDefs::ESLOT_PRE_BONUS:           StatePreBonus();          break;
-        case NSlotDefs::ESLOT_BONUS:               StateBonus();             break;
-        case NSlotDefs::ESLOT_POST_BONUS:          StatePostBonus();         break;
-        case NSlotDefs::ESLOT_POST_AWARD_WIN:      StatePostAwardWin();      break;
-        case NSlotDefs::ESLOT_WAIT_FOR_AWARD:      StateWaitForAward();      break;
-        case NSlotDefs::ESLOT_END:                 StateEnd();               break;
+        case NSlotDefs::ESLOT_IDLE:                stateIdle();              break;
+        case NSlotDefs::ESLOT_KILL_CYCLE_RESULTS:  stateKillCycleResults();  break;
+        case NSlotDefs::ESLOT_PLACE_WAGER:         statePlaceWager();        break;
+        case NSlotDefs::ESLOT_GENERATE_STOPS:      stateGenerateStops();     break;
+        case NSlotDefs::ESLOT_EVALUATE:            stateEvaluate();          break;
+        case NSlotDefs::ESLOT_PRE_SPIN:            statePreSpin();           break;
+        case NSlotDefs::ESLOT_SPIN:                stateSpin();              break;
+        case NSlotDefs::ESLOT_POST_SPIN:           statePostSpin();          break;
+        case NSlotDefs::ESLOT_PRE_AWARD_WIN:       statePreAwardWin();       break;
+        case NSlotDefs::ESLOT_BONUS_DECISION:      stateBonusDecision();     break;
+        case NSlotDefs::ESLOT_PRE_BONUS:           statePreBonus();          break;
+        case NSlotDefs::ESLOT_BONUS:               stateBonus();             break;
+        case NSlotDefs::ESLOT_POST_BONUS:          statePostBonus();         break;
+        case NSlotDefs::ESLOT_POST_AWARD_WIN:      statePostAwardWin();      break;
+        case NSlotDefs::ESLOT_WAIT_FOR_AWARD:      stateWaitForAward();      break;
+        case NSlotDefs::ESLOT_END:                 stateEnd();               break;
     };
-    
-}   // ProcessGameState
+}
 
 
 /***************************************************************************
 *    desc: State Idle slot
 ****************************************************************************/
-void CSlotGame::StateIdle()
+void CSlotGame::stateIdle()
 {
-}   // StateIdle
+}
 
 
 /***************************************************************************
 *    desc:  State Wait for the cycle results to stop
 ****************************************************************************/
-void CSlotGame::StateKillCycleResults()
+void CSlotGame::stateKillCycleResults()
 {
-    KillCycleResults();
+    killCycleResults();
 
     m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
-    
-}   // StateWaitCycleResultsStop
+}
 
 
 /***************************************************************************
 *    desc:  State Place Wager
 ****************************************************************************/
-void CSlotGame::StatePlaceWager()
+void CSlotGame::statePlaceWager()
 {
-    CBetMgr::Instance().DeductBet();
-    
+    CBetMgr::Instance().deductBet();
+
     if( m_pFrontPanel != nullptr )
-        m_pFrontPanel->InitGame( CBetMgr::Instance().GetCredits() );
-    
-    m_slotResults.Clear();
-    
+        m_pFrontPanel->initGame( CBetMgr::Instance().getCredits() );
+
+    m_slotResults.clear();
+
     if( m_pGameMusic )
-        m_pGameMusic->StartMusic();
-    
+        m_pGameMusic->startMusic();
+
     m_slotState = NSlotDefs::ESLOT_GENERATE_STOPS;
-    
-}   // StatePlaceWager
+}
 
 
 /***************************************************************************
 *    desc:  State Generate Stops
 ****************************************************************************/
-void CSlotGame::StateGenerateStops()
+void CSlotGame::stateGenerateStops()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetModel()->GenerateStops();
-    
+        iter->getModel()->generateStops();
+
     m_slotState = NSlotDefs::ESLOT_EVALUATE;
-    
-}   // StateGenerateStops
+}
 
 
 /***************************************************************************
 *    desc:  State Evaluate
 ****************************************************************************/
-void CSlotGame::StateEvaluate()
+void CSlotGame::stateEvaluate()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetModel()->Evaluate();
-    
-    m_slotResults.SortPays();
-    m_slotResults.AddUpWin();
-    
+        iter->getModel()->evaluate();
+
+    m_slotResults.sortPays();
+    m_slotResults.addUpWin();
+
     m_slotState = NSlotDefs::ESLOT_PRE_SPIN;
-    
-}   // StateEvaluate
+}
 
 
 /***************************************************************************
 *    desc:  State Pre Spin
 ****************************************************************************/
-void CSlotGame::StatePreSpin()
+void CSlotGame::statePreSpin()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->StartSpin();
-    
+        iter->getView()->startSpin();
+
     m_slotState = NSlotDefs::ESLOT_SPIN;
-    
-}   // StatePreSpin
+}
 
 
 /***************************************************************************
 *    desc:  State Spin
 ****************************************************************************/
-void CSlotGame::StateSpin()
+void CSlotGame::stateSpin()
 {
     bool stopped(true);
     for( auto & iter : m_slotGroupVec )
     {
-        if( !iter->GetView()->IsSpinState( NSlotDefs::ESS_STOPPED ) )
+        if( !iter->getView()->isSpinState( NSlotDefs::ESS_STOPPED ) )
         {
             stopped = false;
             break;
         }
     }
-    
+
     if( stopped )
         m_slotState = NSlotDefs::ESLOT_POST_SPIN;
-    
-}   // StatePreSpin
+}
 
 
 /***************************************************************************
 *    desc:  State Post Spin
 ****************************************************************************/
-void CSlotGame::StatePostSpin()
+void CSlotGame::statePostSpin()
 {
     m_slotState = NSlotDefs::ESLOT_PRE_AWARD_WIN;
-    
-}   // StatePostSpin
+}
 
 
 /***************************************************************************
 *    desc:  State Pre Award Win
 ****************************************************************************/
-void CSlotGame::StatePreAwardWin()
+void CSlotGame::statePreAwardWin()
 {
     m_slotState = NSlotDefs::ESLOT_BONUS_DECISION;
-    
-}   // StatePreAwardWin
+}
 
 
 /***************************************************************************
 *    desc:  State Bonus Decision
 ****************************************************************************/
-void CSlotGame::StateBonusDecision()
+void CSlotGame::stateBonusDecision()
 {
     m_slotState = NSlotDefs::ESLOT_PRE_BONUS;
-    
-}   // StateBonusDecision
+}
 
 
 /***************************************************************************
 *    desc:  State Pre Bonus
 ****************************************************************************/
-void CSlotGame::StatePreBonus()
+void CSlotGame::statePreBonus()
 {
     m_slotState = NSlotDefs::ESLOT_BONUS;
-    
-}   // StatePreBonus
+}
 
 
 /***************************************************************************
 *    desc:  State Bonus
 ****************************************************************************/
-void CSlotGame::StateBonus()
+void CSlotGame::stateBonus()
 {
     m_slotState = NSlotDefs::ESLOT_POST_BONUS;
-    
-}   // StateBonus
+}
 
 
 /***************************************************************************
 *    desc:  State Post Bonus
 ****************************************************************************/
-void CSlotGame::StatePostBonus()
+void CSlotGame::statePostBonus()
 {
     m_slotState = NSlotDefs::ESLOT_POST_AWARD_WIN;
-    
-}   // StatePostBonus
+}
 
 
 /***************************************************************************
 *    desc:  State Post Award Win
 ****************************************************************************/
-void CSlotGame::StatePostAwardWin()
+void CSlotGame::statePostAwardWin()
 {
-    if( m_slotResults.IsWin() )
+    if( m_slotResults.isWin() )
     {
-        CBetMgr::Instance().AddAward( m_slotResults.GetTotalWin() );
-        
+        CBetMgr::Instance().addAward( m_slotResults.getTotalWin() );
+
         if( m_pFrontPanel != nullptr )
-            m_pFrontPanel->StartBangUp( 
-                m_slotResults.GetTotalWin(), CBetMgr::Instance().GetCredits() );
-        
+            m_pFrontPanel->startBangUp(
+                m_slotResults.getTotalWin(), CBetMgr::Instance().getCredits() );
+
         // Start the cycle results
         for( auto & iter : m_slotGroupVec )
-            iter->GetView()->ActivateCycleResults();
+            iter->getView()->activateCycleResults();
     }
-    
+
     m_slotState = NSlotDefs::ESLOT_WAIT_FOR_AWARD;
-    
-}   // StatePostAwardWin
+}
 
 
 /***************************************************************************
 *    desc:  State wait for the award to finish it's display
 ****************************************************************************/
-void CSlotGame::StateWaitForAward()
+void CSlotGame::stateWaitForAward()
 {
     if( m_pFrontPanel != nullptr )
     {
-        if( !m_pFrontPanel->IsBanging() )
+        if( !m_pFrontPanel->isBanging() )
             m_slotState = NSlotDefs::ESLOT_END;
     }
     else
     {
         m_slotState = NSlotDefs::ESLOT_END;
     }
-    
-}   // StateWaitForAward
+}
 
 
 /***************************************************************************
 *    desc:  State End
 ****************************************************************************/
-void CSlotGame::StateEnd()
+void CSlotGame::stateEnd()
 {
     if( m_pFrontPanel != nullptr )
-        m_pFrontPanel->EnableButtons( CBetMgr::Instance().AllowPlay() );
-    
+        m_pFrontPanel->enableButtons( CBetMgr::Instance().allowPlay() );
+
     if( m_pGameMusic )
-        m_pGameMusic->SetTimeOut();
-    
+        m_pGameMusic->setTimeOut();
+
     m_slotState = NSlotDefs::ESLOT_IDLE;
-    
-}   // StateEnd
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CSlotGame::HandleEvent( const SDL_Event & rEvent )
+void CSlotGame::handleEvent( const SDL_Event & rEvent )
 {
-}   // HandleEvent
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CSlotGame::Update()
+void CSlotGame::update()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->Update();
-    
+        iter->getView()->update();
+
     // Start the cycle results animation if not currently animating
-    if( IsCycleResultsActive() && !IsCycleResultsAnimating() )
+    if( isCycleResultsActive() && !isCycleResultsAnimating() )
     {
         for( auto & iter : m_slotGroupVec )
-            iter->GetView()->StartCycleResultsAnimation();
+            iter->getView()->startCycleResultsAnimation();
     }
-
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CSlotGame::Transform()
+void CSlotGame::transform()
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->Transform();
-
-}   // Transform
+        iter->getView()->transform();
+}
 
 
 /***************************************************************************
 *    desc:  2D/3D Render of game content
 ****************************************************************************/
-void CSlotGame::Render( const CMatrix & matrix )
+void CSlotGame::render( const CMatrix & matrix )
 {
     for( auto & iter : m_slotGroupVec )
-        iter->GetView()->Render( matrix );
-
-}   // Render
+        iter->getView()->render( matrix );
+}
 
 
 /***************************************************************************
 *    desc:  Play a game
 ****************************************************************************/
-void CSlotGame::PlayGame(CUIControl *)
+void CSlotGame::playGame(CUIControl *)
 {
     if( m_slotState == NSlotDefs::ESLOT_IDLE )
     {
-        if( CBetMgr::Instance().AllowPlay() )
+        if( CBetMgr::Instance().allowPlay() )
         {
-            if( IsCycleResultsActive() )
+            if( isCycleResultsActive() )
                 m_slotState = NSlotDefs::ESLOT_KILL_CYCLE_RESULTS;
             else
                 m_slotState = NSlotDefs::ESLOT_PLACE_WAGER;
@@ -384,21 +364,20 @@ void CSlotGame::PlayGame(CUIControl *)
     else if( m_slotState == NSlotDefs::ESLOT_SPIN )
     {
         for( auto & iter : m_slotGroupVec )
-            iter->GetView()->StopSpin();
+            iter->getView()->stopSpin();
     }
     else if( m_slotState == NSlotDefs::ESLOT_WAIT_FOR_AWARD )
     {
         if( m_pFrontPanel != nullptr )
-            m_pFrontPanel->FastBang();
+            m_pFrontPanel->fastBang();
     }
-    
-}   // PlayGame
+}
 
 
 /***************************************************************************
 *    desc:  Set the front panel
 ****************************************************************************/
-void CSlotGame::SetFrontPanel( iFrontPanel * pFrontPanel )
+void CSlotGame::setFrontPanel( iFrontPanel * pFrontPanel )
 {
     m_pFrontPanel = pFrontPanel;
 }
@@ -407,7 +386,7 @@ void CSlotGame::SetFrontPanel( iFrontPanel * pFrontPanel )
 /***************************************************************************
 *    desc:  Set the game music
 ****************************************************************************/
-void CSlotGame::SetGameMusic( iGameMusic * pGameMusic )
+void CSlotGame::setGameMusic( iGameMusic * pGameMusic )
 {
     m_pGameMusic = pGameMusic;
 }
@@ -416,59 +395,55 @@ void CSlotGame::SetGameMusic( iGameMusic * pGameMusic )
 /***************************************************************************
 *    desc:  Get the state
 ****************************************************************************/
-NSlotDefs::ESlotState CSlotGame::GetState()
+NSlotDefs::ESlotState CSlotGame::getState()
 {
     return m_slotState;
-    
-}   // GetState
+}
 
 
 /************************************************************************
 *    desc:  Is the cycle results animating
 ************************************************************************/
-bool CSlotGame::IsCycleResultsAnimating()
+bool CSlotGame::isCycleResultsAnimating()
 {
     for( auto & iter : m_slotGroupVec )
-        if( iter->GetView()->IsCycleResultsAnimating() )
+        if( iter->getView()->isCycleResultsAnimating() )
             return true;
 
     return false;
-    
-}   // IsCycleResultsAnimating
+}
 
 
 /************************************************************************
 *    desc:  Is the cycle results active
 ************************************************************************/
-bool CSlotGame::IsCycleResultsActive()
+bool CSlotGame::isCycleResultsActive()
 {
     for( auto & iter : m_slotGroupVec )
-        if( iter->GetView()->IsCycleResultsActive() )
+        if( iter->getView()->isCycleResultsActive() )
             return true;
 
     return false;
-    
-}   // IsCycleResultsActive
+}
 
 
 /************************************************************************
 *    desc:  Create a play result for a slot group
 ************************************************************************/
-CPlayResult & CSlotGame::CreatePlayResult()
+CPlayResult & CSlotGame::createPlayResult()
 {
-    return m_slotResults.Create();
+    return m_slotResults.create();
 }
 
 
 /************************************************************************
 *    desc:  Kill the cycle results
 ************************************************************************/
-void CSlotGame::KillCycleResults()
+void CSlotGame::killCycleResults()
 {
     for( auto & iter : m_slotGroupVec )
     {
-        iter->GetView()->StopCycleResultsAnimation();
-        iter->GetView()->DeactivateCycleResults();
+        iter->getView()->stopCycleResultsAnimation();
+        iter->getView()->deactivateCycleResults();
     }
-    
-}   // KillCycleResults
+}

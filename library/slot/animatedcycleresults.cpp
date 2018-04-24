@@ -22,182 +22,173 @@
 CAnimatedCycleResults::CAnimatedCycleResults( CPlayResult * pPlayResult ) :
     iCycleResults( pPlayResult )
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CAnimatedCycleResults::~CAnimatedCycleResults()
 {
-}   // destructor
+}
 
 
 /***************************************************************************
 *    desc:  Do some inits
 ****************************************************************************/
-void CAnimatedCycleResults::Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
+void CAnimatedCycleResults::init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
 {
     m_spSlotGroupView = spSlotGroupView;
-    
-}   // Init
+}
 
 
 /***************************************************************************
 *    desc:  Update the cycle results
 ****************************************************************************/
-void CAnimatedCycleResults::Update()
+void CAnimatedCycleResults::update()
 {
     if( m_cycleResultsActive )
     {
-        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
-        auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
-        auto & rSymbPos = rPay.GetSymbPos();
+        auto & rCycleResultSymb = m_spSlotGroupView->getCycleResultSymbs();
+        auto & rPay = m_pPlayResult->getPay( m_curPayIndex );
+        auto & rSymbPos = rPay.getSymbPos();
 
         for( auto & iter : rSymbPos )
-            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().getScriptComponent().update();
+            rCycleResultSymb.at(iter.getReel()).at(iter.getPos())->getSprite().getScriptComponent().update();
     }
-    
-}   // Update
+}
 
 
 /************************************************************************
 *    desc:  Transform
 ************************************************************************/
-void CAnimatedCycleResults::Transform( const CMatrix & matrix, bool tranformWorldPos )
+void CAnimatedCycleResults::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
-    
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  Activate the cycle results
 ****************************************************************************/
-void CAnimatedCycleResults::Activate()
+void CAnimatedCycleResults::activate()
 {
-    if( m_pPlayResult->GetPayCount() > 0 )
+    if( m_pPlayResult->getPayCount() > 0 )
     {
-        iCycleResults::Activate();
+        iCycleResults::activate();
 
-        m_spSlotGroupView->GenerateCycleResultSymbs();
+        m_spSlotGroupView->generateCycleResultSymbs();
     }
-    
-}   // Activate
+}
 
 
 /***************************************************************************
 *    desc:  Deactivate the cycle results
 ****************************************************************************/
-void CAnimatedCycleResults::Deactivate()
+void CAnimatedCycleResults::deactivate()
 {
     if( m_cycleResultsActive )
     {
-        iCycleResults::Deactivate();
-        
-        m_spSlotGroupView->ClearCycleResultSymbs();
+        iCycleResults::deactivate();
+
+        m_spSlotGroupView->clearCycleResultSymbs();
     }
-    
-}   // Deactivate
+}
 
 
 /***************************************************************************
 *    desc:  Start the cycle results animation
 ****************************************************************************/
-void CAnimatedCycleResults::StartAnimation()
+void CAnimatedCycleResults::startAnimation()
 {
     if( m_cycleResultsActive )
     {
-        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
-        
+        auto & rCycleResultSymb = m_spSlotGroupView->getCycleResultSymbs();
+
         m_curPayIndex = m_cyclePayCounter;
-        m_cyclePayCounter = (m_cyclePayCounter + 1) % m_pPlayResult->GetPayCount();
-        
-        auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
-        auto & rSymbPos = rPay.GetSymbPos();
-        
+        m_cyclePayCounter = (m_cyclePayCounter + 1) % m_pPlayResult->getPayCount();
+
+        auto & rPay = m_pPlayResult->getPay( m_curPayIndex );
+        auto & rSymbPos = rPay.getSymbPos();
+
 
         // Set them all the alphs low
         for( auto & iter : rCycleResultSymb )
         {
             for( auto sympIter : iter )
             {
-                sympIter->GetSprite().setAlpha( 0.20f );
-                sympIter->GetSprite().getScriptComponent().resetAndRecycle();
-                sympIter->SetDeferredRender( false );
+                sympIter->getSprite().setAlpha( 0.20f );
+                sympIter->getSprite().getScriptComponent().resetAndRecycle();
+                sympIter->setDeferredRender( false );
             }
         }
 
         // Set only the winners to default color and set the script function
         for( auto & iter : rSymbPos )
         {
-            auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-            symbol->GetSprite().setDefaultColor();
-            symbol->GetSprite().prepareFuncId( "animate" );
-            symbol->SetDeferredRender( true );
+            auto symbol = rCycleResultSymb.at(iter.getReel()).at(iter.getPos());
+            symbol->getSprite().setDefaultColor();
+            symbol->getSprite().prepareFuncId( "animate" );
+            symbol->setDeferredRender( true );
         }
 
-        m_spSlotGroupView->SetCycleResultText( true, &rPay );
+        m_spSlotGroupView->setCycleResultText( true, &rPay );
     }
-    
-}   // StartAnimation
+}
 
 
 /***************************************************************************
 *    desc:  Stop the cycle results animation
 ****************************************************************************/
-void CAnimatedCycleResults::StopAnimation()
+void CAnimatedCycleResults::stopAnimation()
 {
     if( m_cycleResultsActive )
     {
-        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
-        
+        auto & rCycleResultSymb = m_spSlotGroupView->getCycleResultSymbs();
+
         // Set it all back to normal
         for( auto & iter : rCycleResultSymb )
         {
             for( auto sympIter : iter )
             {
-                sympIter->GetSprite().setDefaultColor();
-                sympIter->GetSprite().getScriptComponent().resetAndRecycle();
-                sympIter->SetDeferredRender( false );
+                sympIter->getSprite().setDefaultColor();
+                sympIter->getSprite().getScriptComponent().resetAndRecycle();
+                sympIter->setDeferredRender( false );
             }
         }
-        
-        m_spSlotGroupView->SetCycleResultText( false );
+
+        m_spSlotGroupView->setCycleResultText( false );
     }
-    
-}   // StopAnimation
+}
 
 
 /***************************************************************************
 *    desc:  Are we still animating
 ****************************************************************************/
-bool CAnimatedCycleResults::IsAnimating()
+bool CAnimatedCycleResults::isAnimating()
 {
     if( m_cycleResultsActive )
     {
-        auto & rCycleResultSymb = m_spSlotGroupView->GetCycleResultSymbs();
-        auto & rPay = m_pPlayResult->GetPay( m_curPayIndex );
-        auto & rSymbPos = rPay.GetSymbPos();
+        auto & rCycleResultSymb = m_spSlotGroupView->getCycleResultSymbs();
+        auto & rPay = m_pPlayResult->getPay( m_curPayIndex );
+        auto & rSymbPos = rPay.getSymbPos();
 
         for( auto & iter : rSymbPos )
         {
-            auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-            if( symbol->GetSprite().getScriptComponent().isActive() )
+            auto symbol = rCycleResultSymb.at(iter.getReel()).at(iter.getPos());
+            if( symbol->getSprite().getScriptComponent().isActive() )
                 return true;
         }
     }
-    
+
     return false;
-    
-}   // IsAnimating
+}
 
 
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CAnimatedCycleResults::Render( const CMatrix & matrix )
+void CAnimatedCycleResults::render( const CMatrix & matrix )
 {
     if( m_cycleResultsActive )
-        m_spSlotGroupView->DeferredRender( matrix );
-        
-}   // Render
+        m_spSlotGroupView->deferredRender( matrix );
+}

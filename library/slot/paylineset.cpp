@@ -48,14 +48,13 @@ CPaylineSet::CPaylineSet( const XMLNode & node )
         for( int j = 0; j < scatterNode.nAttribute(); ++j )
             m_scatterVecVec.at(i).push_back( std::atoi(scatterNode.getAttributeValue(j)) );
     }
-    
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the line data
 ************************************************************************/
-const std::vector<std::vector<int8_t>> & CPaylineSet::GetLineData() const
+const std::vector<std::vector<int8_t>> & CPaylineSet::getLineData() const
 {
     return m_lineVecVec;
 }
@@ -64,7 +63,7 @@ const std::vector<std::vector<int8_t>> & CPaylineSet::GetLineData() const
 /************************************************************************
 *    desc:  See if the scatter eval symbol index is allowed
 ************************************************************************/
-bool CPaylineSet::IndexOfScaterData( int strip, int index ) const
+bool CPaylineSet::indexOfScaterData( int strip, int index ) const
 {
     return std::find(m_scatterVecVec.at(strip).begin(), m_scatterVecVec.at(strip).end(), index) != m_scatterVecVec.at(strip).end();
 }

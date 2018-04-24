@@ -24,19 +24,19 @@ class iFrontPanel
 public:
     
     // Init a new game
-    virtual void InitGame( uint credits ) = 0;
+    virtual void initGame( uint credits ) = 0;
     
     // Start the bang up
-    virtual void StartBangUp( uint credits, uint win ) = 0;
+    virtual void startBangUp( uint credits, uint win ) = 0;
     
     // Are the meters banging
-    virtual bool IsBanging() = 0;
+    virtual bool isBanging() = 0;
     
     // Start the fast bang
-    virtual void FastBang() = 0;
+    virtual void fastBang() = 0;
     
     // Enable the buttons
-    virtual void EnableButtons( bool allowPlay ) = 0;
+    virtual void enableButtons( bool allowPlay ) = 0;
 
 };
 

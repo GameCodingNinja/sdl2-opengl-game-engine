@@ -31,7 +31,7 @@ CSlotMath::CSlotMath( const std::string & group ) :
 /************************************************************************
 *    desc:  Get the payline set ID
 ************************************************************************/
-const std::string & CSlotMath::GetPaylineSetID() const
+const std::string & CSlotMath::getPaylineSetID() const
 {
     return m_paylineSetId;
 }
@@ -41,7 +41,7 @@ const std::string & CSlotMath::GetPaylineSetID() const
 *    desc:  Get the symbol set
 ************************************************************************/
 const std::map<const std::string, CMathSymbol> &
-    CSlotMath::GetSymbolSet( const std::string & id ) const
+    CSlotMath::getSymbolSet( const std::string & id ) const
 {
     auto iter = m_symbolSetMapMap.find( id );
     if( iter == m_symbolSetMapMap.end() )
@@ -50,17 +50,16 @@ const std::map<const std::string, CMathSymbol> &
             boost::str( boost::format("Math symbol set not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetSymbolSet
+}
 
 
 /************************************************************************
 *    desc:  Get the math strip
 ************************************************************************/
 const std::vector<CStripStop> &
-    CSlotMath::GetStrip( const std::string & id ) const
+    CSlotMath::getStrip( const std::string & id ) const
 {
     auto iter = m_stripMapVec.find( id );
     if( iter == m_stripMapVec.end() )
@@ -69,17 +68,16 @@ const std::vector<CStripStop> &
             boost::str( boost::format("Math strip not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetStrip
+}
 
 
 /************************************************************************
 *    desc:  Get the strip set
 ************************************************************************/
 const std::vector<CStripSet> &
-    CSlotMath::GetStripSet( const std::string & id ) const
+    CSlotMath::getStripSet( const std::string & id ) const
 {
     auto iter = m_stripSetMapVec.find( id );
     if( iter == m_stripSetMapVec.end() )
@@ -88,17 +86,16 @@ const std::vector<CStripSet> &
             boost::str( boost::format("Strip set not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetStripSet
+}
 
 
 /************************************************************************
 *    desc:  Get the pay combo set
 ************************************************************************/
 const std::vector<CPayCombo> &
-    CSlotMath::GetPayComboSet( const std::string & id ) const
+    CSlotMath::getPayComboSet( const std::string & id ) const
 {
     auto iter = m_payComboMapVec.find( id );
     if( iter == m_payComboMapVec.end() )
@@ -107,17 +104,16 @@ const std::vector<CPayCombo> &
             boost::str( boost::format("Pay combo set not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetPayComboSet
+}
 
 
 /************************************************************************
 *    desc:  Get the paytable set
 ************************************************************************/
 const std::vector<CPaytableSet> &
-    CSlotMath::GetPaytableSet( const std::string & id ) const
+    CSlotMath::getPaytableSet( const std::string & id ) const
 {
     auto iter = m_paytableSetMapVec.find( id );
     if( iter == m_paytableSetMapVec.end() )
@@ -126,17 +122,16 @@ const std::vector<CPaytableSet> &
             boost::str( boost::format("Paytable set not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetPaytableSet
+}
 
 
 /************************************************************************
 *    desc:  Get the weighted table
 ************************************************************************/
 const CWeightedTable &
-    CSlotMath::GetWeightedTable( const std::string & id ) const
+    CSlotMath::getWeightedTable( const std::string & id ) const
 {
     auto iter = m_weightedTableMap.find( id );
     if( iter == m_weightedTableMap.end() )
@@ -145,17 +140,16 @@ const CWeightedTable &
             boost::str( boost::format("Weighted table not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetWeightedTable
+}
 
 
 /************************************************************************
 *    desc:  Get the value table
 ************************************************************************/
 const CValueTable &
-    CSlotMath::GetValueTable( const std::string & id ) const
+    CSlotMath::getValueTable( const std::string & id ) const
 {
     auto iter = m_valueTableMap.find( id );
     if( iter == m_valueTableMap.end() )
@@ -164,69 +158,67 @@ const CValueTable &
             boost::str( boost::format("Valuetable not found (%s - %s).\n\n%s\nLine: %s")
                 % id % m_group % __FUNCTION__ % __LINE__ ));
     }
-    
+
     return iter->second;
-    
-}   // GetValueTable
+}
 
 
 /************************************************************************
 *    desc:  Load the slot group data from node
 ************************************************************************/
-void CSlotMath::LoadFromNode( const XMLNode & node )
+void CSlotMath::loadFromNode( const XMLNode & node )
 {
     // Get the math id
     m_id = node.getAttribute( "id" );
-    
+
     // Get the payline id
     m_paylineSetId = node.getAttribute( "paylineSetId" );
-    
+
     // Get the math percentage
     m_percenatge = static_cast<double>(std::atof(node.getAttribute( "percentage" )));
-    
-    // Load thes symbol set data from node
-    LoadSymbolSetsFromNode( node );
-    
-    // Load the math strip data from node
-    LoadStripFromNode( node );
-    
-    // Load the strip set list data from node
-    LoadStripSetListFromNode( node );
-    
-    // Load the pay combo data from node
-    LoadPayComboFromNode( node );
-    
-    // Load the paytable set list data from node
-    LoadPaytableSetListFromNode( node );
-    
-    // Load the weighted table data from node
-    LoadWeightedTableFromNode( node );
-    
-    // Load the value table data from node
-    LoadValueTableFromNode( node );
 
-}   // LoadFromNode
+    // Load thes symbol set data from node
+    loadSymbolSetsFromNode( node );
+
+    // Load the math strip data from node
+    loadStripFromNode( node );
+
+    // Load the strip set list data from node
+    loadStripSetListFromNode( node );
+
+    // Load the pay combo data from node
+    loadPayComboFromNode( node );
+
+    // Load the paytable set list data from node
+    loadPaytableSetListFromNode( node );
+
+    // Load the weighted table data from node
+    loadWeightedTableFromNode( node );
+
+    // Load the value table data from node
+    loadValueTableFromNode( node );
+}
 
 
 /************************************************************************
 *    desc:  Load the symbol set data from node
 ************************************************************************/
-void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
+void CSlotMath::loadSymbolSetsFromNode( const XMLNode & node )
 {
     // Get the node to the symbol set list
     const XMLNode symbSetLstNode = node.getChildNode( "symbolSetList" );
-    
+
     for( int symbLst = 0; symbLst < symbSetLstNode.nChildNode(); ++symbLst )
     {
         // Get the symbol set node
         const XMLNode symbSetNode = symbSetLstNode.getChildNode( symbLst );
-        
+
         // Get the symbol set id
         const std::string setId = symbSetNode.getAttribute( "id" );
-        
+
         // Create a new symbol set map inside of our map
         auto symbSetIter = m_symbolSetMapMap.emplace( setId, std::map<const std::string, CMathSymbol>() );
-        
+
         // Check for duplicate names
         if( !symbSetIter.second )
         {
@@ -234,13 +226,13 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
                 boost::str( boost::format("Duplicate symbol set name (%s - %s).\n\n%s\nLine: %s")
                     % setId % m_group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Get the wild list node
         const XMLNode wildLstNode = symbSetNode.getChildNode( "wildSymbolList" );
-        
+
         // map of wild matches
         std::map<const std::string, std::vector<std::string>> wildMatchesMap;
-        
+
         // Load up the wild matches first to feed the constructor
         if( !wildLstNode.isEmpty() )
         {
@@ -248,10 +240,10 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
             {
                 // Get the wild node
                 const XMLNode wildNode = wildLstNode.getChildNode( wildLst );
-                
+
                 // Get the wild id
                 const std::string wildId = wildNode.getAttribute( "id" );
-                
+
                 // Create the map and check for duplicate names
                 auto iter = wildMatchesMap.emplace( wildId, std::vector<std::string>() );
                 if( !iter.second )
@@ -260,9 +252,9 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
                         boost::str( boost::format("Duplicate wild symbol in math file (%s, %s).\n\n%s\nLine: %s")
                             % wildId % m_group % __FUNCTION__ % __LINE__ ));
                 }
-                
+
                 iter.first->second.reserve( wildNode.nChildNode() );
-                
+
                 for( int symb = 0; symb < wildNode.nChildNode(); ++symb )
                 {
                     // Get the wild symbol node
@@ -276,18 +268,18 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
                 }
             }
         }
-        
+
         // Empty vector for symbols that don't have wild matches
         std::vector<std::string> dummy, *pWildMatches;
-        
+
         // Get the symbol list node
         const XMLNode symbLstNode = symbSetNode.getChildNode( "symbolList" );
-        
+
         for( int symb = 0; symb < symbLstNode.nChildNode(); ++symb )
         {
             // Get the symbol node
             const XMLNode symbNode = symbLstNode.getChildNode( symb );
-            
+
             // Get the symbol id
             const std::string symbId = symbNode.getAttribute( "id" );
 
@@ -296,11 +288,11 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
             auto wildMatchIter = wildMatchesMap.find( symbId );
             if( wildMatchIter != wildMatchesMap.end() )
                 pWildMatches = &wildMatchIter->second;
-            
+
             // Create the math symbol
             auto symbIter = symbSetIter.first->second.emplace(
                 std::piecewise_construct, std::forward_as_tuple(symbId), std::forward_as_tuple(symbId, *pWildMatches) );
-            
+
             // Check for duplicate names
             if( !symbIter.second )
             {
@@ -308,12 +300,12 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
                     boost::str( boost::format("Duplicate symbol name (%s - %s).\n\n%s\nLine: %s")
                         % symbId % m_group % __FUNCTION__ % __LINE__ ));
             }
-            
+
             // If a wild was found, erase it from the map
             if( wildMatchIter != wildMatchesMap.end() )
                 wildMatchesMap.erase( wildMatchIter );
         }
-        
+
         // Check for any dangling wild defines
         if( !wildMatchesMap.empty() )
         {
@@ -322,30 +314,29 @@ void CSlotMath::LoadSymbolSetsFromNode( const XMLNode & node )
                     % wildMatchesMap.begin()->first % m_group % __FUNCTION__ % __LINE__ ));
         }
     }
-    
-}   // LoadSymbolSetsFromNode
+}
 
 
 /************************************************************************
-*    desc:  Load the math strip data from node 
+*    desc:  Load the math strip data from node
 *           Stores a reference from m_symbolSetMapMap
 ************************************************************************/
-void CSlotMath::LoadStripFromNode( const XMLNode & node )
+void CSlotMath::loadStripFromNode( const XMLNode & node )
 {
     // Get the node to the strip list
     const XMLNode stripLstNode = node.getChildNode( "stripList" );
-    
+
     for( int i = 0; i < stripLstNode.nChildNode(); ++i )
     {
         // Get the strip node
         const XMLNode stripNode = stripLstNode.getChildNode(i);
-        
+
         // Get the strip id
         const std::string stripId = stripNode.getAttribute( "id" );
-        
+
         // Get the symbol set id
         const std::string symbSetId = stripNode.getAttribute( "symbSetId" );
-        
+
         // Find the symbol set this strip is using
         auto symbSetIter = m_symbolSetMapMap.find( symbSetId );
         if( symbSetIter == m_symbolSetMapMap.end() )
@@ -354,10 +345,10 @@ void CSlotMath::LoadStripFromNode( const XMLNode & node )
                 boost::str( boost::format("Can't find math strip symbol set name (%s - %s).\n\n%s\nLine: %s")
                     % symbSetId % m_group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Create a new math strip inside the map
         auto stripIter = m_stripMapVec.emplace( stripId, std::vector<CStripStop>() );
-        
+
         // Check for duplicate names
         if( !stripIter.second )
         {
@@ -365,18 +356,18 @@ void CSlotMath::LoadStripFromNode( const XMLNode & node )
                 boost::str( boost::format("Duplicate math strip name (%s - %s).\n\n%s\nLine: %s")
                     % stripId % m_group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Reserve the number of vectors needed
         stripIter.first->second.reserve( stripNode.nChildNode() );
-        
+
         for( int j = 0; j < stripNode.nChildNode(); ++j )
         {
             // Get the symbol node
             const XMLNode symbolNode = stripNode.getChildNode(j);
-            
+
             // Get the symbol id
             const std::string symbId = symbolNode.getAttribute( "id" );
-            
+
             auto iter = symbSetIter->second.find( symbId );
             if( iter == symbSetIter->second.end() )
             {
@@ -384,7 +375,7 @@ void CSlotMath::LoadStripFromNode( const XMLNode & node )
                     boost::str( boost::format("Math symbol not found in symbol set (%s - %s).\n\n%s\nLine: %s")
                         % symbId % m_group % __FUNCTION__ % __LINE__ ));
             }
-            
+
             int weight = 1;
             if( symbolNode.isAttributeSet( "weight" ) )
                 weight = std::atoi(symbolNode.getAttribute( "weight" ));
@@ -393,29 +384,28 @@ void CSlotMath::LoadStripFromNode( const XMLNode & node )
             stripIter.first->second.emplace_back( iter->second, weight );
         }
     }
-    
-}   // LoadStripFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the strip set list data from node
 ************************************************************************/
-void CSlotMath::LoadStripSetListFromNode( const XMLNode & node )
+void CSlotMath::loadStripSetListFromNode( const XMLNode & node )
 {
     // Get the node to the strip set list
     const XMLNode stripSetLstNode = node.getChildNode( "stripSetList" );
-    
+
     for( int set = 0; set < stripSetLstNode.nChildNode(); ++set )
     {
         // Get the strip node
         const XMLNode stripSetNode = stripSetLstNode.getChildNode( set );
-        
+
         // Get the strip id
         const std::string stripSetId = stripSetNode.getAttribute( "id" );
-        
+
         // Create a new strip inside the map
         auto stripSetIter = m_stripSetMapVec.emplace( stripSetId, std::vector<CStripSet>() );
-        
+
         // Check for duplicate names
         if( !stripSetIter.second )
         {
@@ -423,18 +413,18 @@ void CSlotMath::LoadStripSetListFromNode( const XMLNode & node )
                 boost::str( boost::format("Duplicate strip set name (%s - %s).\n\n%s\nLine: %s")
                     % stripSetId % m_group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Reserve the number of vectors needed
         stripSetIter.first->second.reserve( stripSetNode.nChildNode() );
-        
+
         for( int tbl = 0; tbl < stripSetNode.nChildNode(); ++tbl )
         {
             // Get the strip node
             const XMLNode stripNode = stripSetNode.getChildNode( tbl );
-            
+
             // Get the strip id
             const std::string stripId = stripNode.getAttribute( "id" );
-            
+
             // Check that this strip exists in the strip map vec
             auto iter = m_stripMapVec.find( stripId );
             if( iter == m_stripMapVec.end() )
@@ -443,7 +433,7 @@ void CSlotMath::LoadStripSetListFromNode( const XMLNode & node )
                     boost::str( boost::format("Strip not found in strip list (%s - %s).\n\n%s\nLine: %s")
                         % stripId % m_group % __FUNCTION__ % __LINE__ ));
             }
-            
+
             // Get the evaluation symbol indexes. Reels tend to be in succession but wheels can be disbursed.
             std::vector<int8_t> evalSymbIndex;
             for( int i = 0; i < stripNode.nChildNode(); ++i )
@@ -453,18 +443,17 @@ void CSlotMath::LoadStripSetListFromNode( const XMLNode & node )
             stripSetIter.first->second.emplace_back( stripId, evalSymbIndex );
         }
     }
-    
-}   // LoadStripSetListFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the pay combo data from node
 ************************************************************************/
-void CSlotMath::LoadPayComboFromNode( const XMLNode & node )
+void CSlotMath::loadPayComboFromNode( const XMLNode & node )
 {
     // Get the node to the combo set set list
     const XMLNode payComboSetLstNode = node.getChildNode( "comboSetList" );
-    
+
     if( !payComboSetLstNode.isEmpty() )
     {
         for( int set = 0; set < payComboSetLstNode.nChildNode(); ++set )
@@ -474,10 +463,10 @@ void CSlotMath::LoadPayComboFromNode( const XMLNode & node )
 
             // Get the pay combo set id
             const std::string payComboSetId = payComboSetNode.getAttribute( "id" );
-            
+
             // Create a new pay combo in the map
             auto payComboMapIter = m_payComboMapVec.emplace( payComboSetId, std::vector<CPayCombo>() );
-            
+
             // Check for duplicate names
             if( !payComboMapIter.second )
             {
@@ -485,23 +474,23 @@ void CSlotMath::LoadPayComboFromNode( const XMLNode & node )
                     boost::str( boost::format("Duplicate pay combo set name (%s - %s).\n\n%s\nLine: %s")
                         % payComboSetId % m_group % __FUNCTION__ % __LINE__ ));
             }
-            
+
             payComboMapIter.first->second.reserve( payComboSetNode.nChildNode() );
-            
+
             for( int pay = 0; pay < payComboSetNode.nChildNode(); ++pay )
             {
                 // Get the pay combo node
                 const XMLNode payComboNode = payComboSetNode.getChildNode( pay );
-                
+
                 // Get the symbol
                 const std::string symb = payComboNode.getAttribute( "symb" );
-                
+
                 // Get the count
                 const int count = std::atoi(payComboNode.getAttribute( "count" ));
-                
+
                 // Get the value
                 const int award = std::atoi(payComboNode.getAttribute( "award" ));
-                
+
                 // Get the value
                 int bonusCode = 0;
                 if( payComboNode.isAttributeSet( "bonusCode" ))
@@ -512,29 +501,28 @@ void CSlotMath::LoadPayComboFromNode( const XMLNode & node )
             }
         }
     }
-    
-}   // LoadPaylineComboFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the paytable set list data from node
 ************************************************************************/
-void CSlotMath::LoadPaytableSetListFromNode( const XMLNode & node )
+void CSlotMath::loadPaytableSetListFromNode( const XMLNode & node )
 {
     // Get the node to the paytable set list
     const XMLNode paytableSetLstNode = node.getChildNode( "paytableSetList" );
-    
+
     for( int set = 0; set < paytableSetLstNode.nChildNode(); ++set )
     {
         // Get the paytable node
         const XMLNode paytableSetNode = paytableSetLstNode.getChildNode( set );
-        
+
         // Get the paytable id
         const std::string paytableSetId = paytableSetNode.getAttribute( "id" );
-        
+
         // Create a new paytable inside the map
         auto paytableSetIter = m_paytableSetMapVec.emplace( paytableSetId, std::vector<CPaytableSet>() );
-        
+
         // Check for duplicate names
         if( !paytableSetIter.second )
         {
@@ -542,23 +530,23 @@ void CSlotMath::LoadPaytableSetListFromNode( const XMLNode & node )
                 boost::str( boost::format("Duplicate paytable set name (%s - %s).\n\n%s\nLine: %s")
                     % paytableSetId % m_group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Reserve the number of vectors needed
         paytableSetIter.first->second.reserve( paytableSetNode.nChildNode() );
-        
+
         for( int tbl = 0; tbl < paytableSetNode.nChildNode(); ++tbl )
         {
             // Get the paytable node
             const XMLNode paytableNode = paytableSetNode.getChildNode( tbl );
-            
+
             // Get the paytable type
             NSlotDefs::EPayType paytableType = NSlotDefs::EP_PAYLINE;
             if( std::strcmp( paytableNode.getAttribute("type"), "scatter" ) == 0 )
                 paytableType = NSlotDefs::EP_SCATTER;
-            
+
             // Get the paytable id
             const std::string paytableStrId = paytableNode.getAttribute( "id" );
-            
+
             // Check that this pay combo exists in the pay combo map vec
             auto paylineIter = m_payComboMapVec.find( paytableStrId );
             if( paylineIter == m_payComboMapVec.end() )
@@ -572,18 +560,17 @@ void CSlotMath::LoadPaytableSetListFromNode( const XMLNode & node )
             paytableSetIter.first->second.emplace_back( paytableType, paytableStrId );
         }
     }
-    
-}   // LoadPaytableSetListFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the weighted table data from node
 ************************************************************************/
-void CSlotMath::LoadWeightedTableFromNode( const XMLNode & node )
+void CSlotMath::loadWeightedTableFromNode( const XMLNode & node )
 {
     // Get the node to the weighted table list
     const XMLNode weightedTableLstNode = node.getChildNode( "weightedTableList" );
-    
+
     if( !weightedTableLstNode.isEmpty() )
     {
         for( int set = 0; set < weightedTableLstNode.nChildNode(); ++set )
@@ -630,18 +617,17 @@ void CSlotMath::LoadWeightedTableFromNode( const XMLNode & node )
             }
         }
     }
-    
-}   // LoadWeightedTableFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the value table data from node
 ************************************************************************/
-void CSlotMath::LoadValueTableFromNode( const XMLNode & node )
+void CSlotMath::loadValueTableFromNode( const XMLNode & node )
 {
     // Get the node to the value table list
     const XMLNode valueTableLstNode = node.getChildNode( "valueTableList" );
-    
+
     if( !valueTableLstNode.isEmpty() )
     {
         for( int set = 0; set < valueTableLstNode.nChildNode(); ++set )
@@ -679,5 +665,4 @@ void CSlotMath::LoadValueTableFromNode( const XMLNode & node )
             }
         }
     }
-    
-}   // LoadWeightedTableFromNode
+}

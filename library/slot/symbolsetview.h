@@ -31,16 +31,16 @@ public:
     virtual ~CSymbolSetView();
     
     // Load thes symbol set from node
-    void LoadFromNode( const XMLNode & node, const std::string & name );
+    void loadFromNode( const XMLNode & node, const std::string & name );
     
     // Get the sprite data
-    const std::vector<CSpriteData> & GetSpriteData( const std::string & symb ) const;
+    const std::vector<CSpriteData> & getSpriteData( const std::string & symb ) const;
     
     // Build the visible symbol set
-    void BuildSymbolSetView();
+    void buildSymbolSetView();
     
     // Get the symbol set created by the data
-    CSymbol2d & GetSymbol( const std::string & symb );
+    CSymbol2d & getSymbol( const std::string & symb );
     
 private:
     

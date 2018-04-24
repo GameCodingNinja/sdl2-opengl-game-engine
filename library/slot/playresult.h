@@ -25,7 +25,7 @@ public:
     CPlayResult();
     
     // Add a slot pay
-    void AddPay(
+    void addPay(
         const NSlotDefs::EPayType payType,
         const CPayCombo & rCombo,
         const int multiplier,
@@ -33,19 +33,19 @@ public:
         const std::vector<CSymbPos> & symbPos );
     
     // Sort the pays
-    void SortPays();
+    void sortPays();
     
     // Add up the win
-    uint AddUpWin();
+    uint addUpWin();
     
     // Get the pay
-    const CPay & GetPay( int index ) const;
+    const CPay & getPay( int index ) const;
     
     // Get the number of pays
-    uint GetPayCount() const;
+    uint getPayCount() const;
     
     // Clear the pays
-    void Clear();
+    void clear();
     
 private:
     

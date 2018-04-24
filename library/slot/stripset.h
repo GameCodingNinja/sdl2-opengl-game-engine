@@ -21,10 +21,10 @@ public:
     CStripSet( const std::string & id, const std::vector<int8_t> & evalSymbIndexVec );
     
     // Get the paytable ID
-    const std::string & GetId() const;
+    const std::string & getId() const;
     
     // Get the evaluation symbol count
-    const std::vector<int8_t> & GetEvalIndexVec() const;
+    const std::vector<int8_t> & getEvalIndexVec() const;
     
 private:
     

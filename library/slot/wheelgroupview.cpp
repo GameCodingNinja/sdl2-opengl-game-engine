@@ -25,151 +25,144 @@
 CWheelGroupView::CWheelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     CSlotGroupView( rSlotGroupModel )
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CWheelGroupView::~CWheelGroupView()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Create the view slot strips
 ************************************************************************/
-void CWheelGroupView::Create(
+void CWheelGroupView::create(
     const XMLNode & node,
     CSymbolSetView & rSymbolSetView,
     std::unique_ptr<iCycleResults> upCycleResults )
 {
-    CSlotGroupView::Create( node, rSymbolSetView, std::move(upCycleResults) );
-    
+    CSlotGroupView::create( node, rSymbolSetView, std::move(upCycleResults) );
+
     // Get the group name
     const std::string group = node.getAttribute( "group" );
-    
+
     // Sanity check
     const XMLNode wheelLstNode = node.getChildNode( "wheelList" );
     if( wheelLstNode.isEmpty() )
         throw NExcept::CCriticalException("Wheel View Creation Error!",
             boost::str( boost::format("Wheel view node is empty!\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
-    
+
     // Create the view wheel
     for( int wheel = 0; wheel < wheelLstNode.nChildNode(); ++wheel )
     {
         const XMLNode wheelNode = wheelLstNode.getChildNode(wheel);
-        
+
         // Add the model reel strip to the view reel strip
-        m_wheelViewDeq.emplace_back( m_spSlotGroupModel->GetStrip(wheel), rSymbolSetView, wheel );
-        m_wheelViewDeq.back().Create( wheelNode, group );
+        m_wheelViewDeq.emplace_back( m_spSlotGroupModel->getStrip(wheel), rSymbolSetView, wheel );
+        m_wheelViewDeq.back().create( wheelNode, group );
     }
-    
+
     // Setup the cycle result symbol vectors
     m_cycleResultSymbVec.resize( m_wheelViewDeq.size() );
     for( size_t i = 0; i < m_wheelViewDeq.size(); ++i )
-        m_cycleResultSymbVec.at(i).resize( m_wheelViewDeq.at(i).GetVisibleSymbolCount() );
-    
+        m_cycleResultSymbVec.at(i).resize( m_wheelViewDeq.at(i).getVisibleSymbolCount() );
+
     // One time transform to set the non-spinning wheel sprites
-    Transform();
+    transform();
     for( auto & iter : m_wheelViewDeq )
-        iter.PreTransform();
-    
-}   // Create
+        iter.preTransform();
+}
 
 
 /************************************************************************
 *    desc:  Generate the cycle results symbols
 ************************************************************************/
-void CWheelGroupView::GenerateCycleResultSymbs()
+void CWheelGroupView::generateCycleResultSymbs()
 {
     for( size_t wheel = 0; wheel < m_cycleResultSymbVec.size(); ++wheel )
     {
-        auto & evalSymbIndexVec = m_spSlotGroupModel->GetStrip(wheel).GetEvalIndexVec();
-        
+        auto & evalSymbIndexVec = m_spSlotGroupModel->getStrip(wheel).getEvalIndexVec();
+
         // Get the first symbol index array as the starting point
         // NOTE: It is assumed these values as listed in the math file are in order from lowest to highest
         int evalStartPoint = evalSymbIndexVec.at(0);
-        
+
         // These pointers don't need to be freed
-        for( size_t symb = 0; symb < m_wheelViewDeq.at(wheel).GetVisibleSymbolCount(); ++symb )
-            m_cycleResultSymbVec.at(wheel).at(symb) = &m_wheelViewDeq.at(wheel).GetSymbol( evalStartPoint + symb );
+        for( size_t symb = 0; symb < m_wheelViewDeq.at(wheel).getVisibleSymbolCount(); ++symb )
+            m_cycleResultSymbVec.at(wheel).at(symb) = &m_wheelViewDeq.at(wheel).getSymbol( evalStartPoint + symb );
     }
-    
-}   // GenerateCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Get the cycle results symbols
 ************************************************************************/
-std::vector<std::vector<CSymbol2d *>> & CWheelGroupView::GetCycleResultSymbs()
+std::vector<std::vector<CSymbol2d *>> & CWheelGroupView::getCycleResultSymbs()
 {
     return m_cycleResultSymbVec;
-    
-}   // GetCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Update the reel group
 ************************************************************************/
-void CWheelGroupView::Update()
+void CWheelGroupView::update()
 {
-    CSlotGroupView::Update();
-    
+    CSlotGroupView::update();
+
     for( auto & iter : m_wheelViewDeq )
-        iter.Update();
-    
-}   // Update
+        iter.update();
+}
 
 
 /************************************************************************
 *    desc:  Transform the reel group
 ************************************************************************/
-void CWheelGroupView::Transform()
+void CWheelGroupView::transform()
 {
-    CSlotGroupView::Transform();
+    CSlotGroupView::transform();
 
     for( auto & iter : m_wheelViewDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
 
     m_upCycleResultsTxtSprite->transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CWheelGroupView::Render( const CMatrix & matrix )
+void CWheelGroupView::render( const CMatrix & matrix )
 {
     for( auto & iter : m_wheelViewDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
     m_upCycleResultsTxtSprite->render( matrix );
-    
-    CSlotGroupView::Render( matrix );
-    
-}   // Render
+
+    CSlotGroupView::render( matrix );
+}
 
 
 /************************************************************************
 *    desc:  Do the deferred render
 ************************************************************************/
-void CWheelGroupView::DeferredRender( const CMatrix & matrix )
+void CWheelGroupView::deferredRender( const CMatrix & matrix )
 {
     for( auto & iter : m_wheelViewDeq )
-        iter.Render( matrix );
-    
-}   // DeferredRender
+        iter.render( matrix );
+}
 
 
 /************************************************************************
 *    desc:  Start the reels spinning
 ************************************************************************/
-void CWheelGroupView::StartSpin()
+void CWheelGroupView::startSpin()
 {
-    if( IsSpinState( NSlotDefs::ESS_STOPPED ) )
+    if( isSpinState( NSlotDefs::ESS_STOPPED ) )
     {
         auto iter = m_spinProfileMapVec.find( m_defaultSpinProfile );
         if( iter == m_spinProfileMapVec.end() )
@@ -179,54 +172,50 @@ void CWheelGroupView::StartSpin()
 
         // Init the wheels with the spin profile
         for( size_t i = 0; i < m_wheelViewDeq.size(); ++i )
-            m_wheelViewDeq.at(i).SetSpinProfile( iter->second.at(i) );
+            m_wheelViewDeq.at(i).setSpinProfile( iter->second.at(i) );
 
         // Start the spin
         for( auto & iter : m_wheelViewDeq )
-            iter.StartSpin();
+            iter.startSpin();
     }
-    
-}   // StartSpin
+}
 
 
 /************************************************************************
 *    desc:  Stop the reels spinning
 ************************************************************************/
-void CWheelGroupView::StopSpin()
+void CWheelGroupView::stopSpin()
 {
     for( auto & iter : m_wheelViewDeq )
-        iter.StopSpin();
-        
-}   // StopSpin
+        iter.stopSpin();
+}
 
 
 /************************************************************************
 *    desc:  Is the spin state
 ************************************************************************/
-bool CWheelGroupView::IsSpinState( NSlotDefs::ESpinState state ) const
+bool CWheelGroupView::isSpinState( NSlotDefs::ESpinState state ) const
 {
     bool result(true);
-    
+
     for( auto & iter : m_wheelViewDeq )
     {
-        if( iter.GetSpinState() != state )
+        if( iter.getSpinState() != state )
         {
             result = false;
             break;
         }
     }
-    
+
     return result;
-    
-}   // IsSpinState
+}
 
 
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CWheelGroupView::AllowStopSounds( bool allow )
+void CWheelGroupView::allowStopSounds( bool allow )
 {
     for( auto & iter : m_wheelViewDeq )
-        iter.AllowStopSounds( allow );
-    
-}   // AllowStopSounds
+        iter.allowStopSounds( allow );
+}

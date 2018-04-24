@@ -27,37 +27,37 @@ public:
     virtual ~iCycleResults();
     
     // Do some inits
-    virtual void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) = 0;
+    virtual void init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) = 0;
     
     // Start the cycle results animation
-    virtual void StartAnimation() = 0;
+    virtual void startAnimation() = 0;
     
     // Stop the cycle results animation
-    virtual void StopAnimation() = 0;
+    virtual void stopAnimation() = 0;
     
     // Are we still animating
-    virtual bool IsAnimating() = 0;
+    virtual bool isAnimating() = 0;
     
     // Update the cycle results
-    virtual void Update(){};
+    virtual void update(){};
     
     // Transform the reel group
-    virtual void Transform( const CMatrix & matrix, bool tranformWorldPos ){};
+    virtual void transform( const CMatrix & matrix, bool tranformWorldPos ){};
 
     // Do the render
-    virtual void Render( const CMatrix & matrix ){}
+    virtual void render( const CMatrix & matrix ){}
     
     // Activate the cycle results
-    virtual void Activate();
+    virtual void activate();
     
     // Deactivate the cycle results
-    virtual void Deactivate();
+    virtual void deactivate();
     
     // Did we complete one animation cycle of all the pays?
-    bool IsFirstCycleComplete();
+    bool isFirstCycleComplete();
     
     // Is the cycle results active?
-    bool IsCycleResultsActive();
+    bool isCycleResultsActive();
     
 protected:
     

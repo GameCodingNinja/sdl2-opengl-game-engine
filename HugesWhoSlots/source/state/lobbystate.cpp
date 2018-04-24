@@ -61,7 +61,7 @@ void CLobbyState::Init()
     CMenuManager::Instance().activateTree( "lobby_tree");
     
     // Init the credit meter
-    CMenuManager::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().GetCredits() );
+    CMenuManager::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits() );
     
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( m_group, "Screen_FadeIn" );

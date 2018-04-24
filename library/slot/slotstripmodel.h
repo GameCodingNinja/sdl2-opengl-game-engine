@@ -35,25 +35,25 @@ public:
     virtual ~CSlotStripModel();
     
     // Generate the strip stop
-    void GenerateStop();
+    void generateStop();
     
     // Get the last stop
-    int GetLastStop() const;
+    int getLastStop() const;
     
     // Get the strip stop
-    int GetStop() const;
+    int getStop() const;
     
     // Get the math symbol
-    const CMathSymbol & GetSymbol( const int stop ) const;
+    const CMathSymbol & getSymbol( const int stop ) const;
     
     // Get the math symbol index
-    int GetSymbolIndex( const int stop ) const;
+    int getSymbolIndex( const int stop ) const;
     
     // Get the evaluation symbol count
-    const std::vector<int8_t> & GetEvalIndexVec() const;
+    const std::vector<int8_t> & getEvalIndexVec() const;
     
     // Get the math symbol strip vector
-    const std::vector<CStripStop> & GetStripVec() const;
+    const std::vector<CStripStop> & getStripVec() const;
     
 private:
     

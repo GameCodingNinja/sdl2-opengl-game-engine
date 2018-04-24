@@ -31,25 +31,25 @@ public:
     }
     
     // Load all of the math data from a specific group
-    void LoadGroup( const std::string & group );
+    void loadGroup( const std::string & group );
     
     // Unload all of the math data from a specific group
-    void FreeGroup( const std::string & group );
+    void freeGroup( const std::string & group );
     
     // Get the slot math
-    const CSlotMath & GetSlotMath( const std::string & group, const std::string & id ) const;
+    const CSlotMath & getSlotMath( const std::string & group, const std::string & id ) const;
     
     // Load the payline configuration from XML file
-    void LoadPaylineSetFromFile( const std::string & filePath );
+    void loadPaylineSetFromFile( const std::string & filePath );
     
     // Get the payline set
-    const CPaylineSet & GetPaylineSet( const std::string & id ) const;
+    const CPaylineSet & getPaylineSet( const std::string & id ) const;
     
     // Free the payline set
-    void FreePaylineSet();
+    void freePaylineSet();
     
     // Clear out all the data
-    void Clear();
+    void clear();
     
 private:
 
@@ -60,7 +60,7 @@ private:
     virtual ~CSlotMathMgr();
     
     // Load all math data from an xml
-    void LoadFromXML( const std::string & group, const std::string & filePath );
+    void loadFromXML( const std::string & group, const std::string & filePath );
     
 private:
     

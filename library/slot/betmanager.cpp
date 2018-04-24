@@ -17,7 +17,7 @@ CBetMgr::CBetMgr() :
     m_totalLines(0),
     m_credits(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -25,87 +25,78 @@ CBetMgr::CBetMgr() :
 ************************************************************************/
 CBetMgr::~CBetMgr()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the line bet
 ************************************************************************/
-void CBetMgr::SetLineBet( uint lineBet )
+void CBetMgr::setLineBet( uint lineBet )
 {
     m_lineBet = lineBet;
-    
-}   // SetLineBet
+}
 
-uint CBetMgr::GetLineBet() const
+uint CBetMgr::getLineBet() const
 {
     return m_lineBet;
-    
-}   // GetLineBet
+}
 
 
 /************************************************************************
 *    desc:  Set the total lines being bet
 ************************************************************************/
-void CBetMgr::SetTotalLines( uint totalLines )
+void CBetMgr::setTotalLines( uint totalLines )
 {
     m_totalLines = totalLines;
-    
-}   // SetTotalLinesBet
+}
 
 
 /************************************************************************
 *    desc:  Get the total bet
 ************************************************************************/
-uint CBetMgr::GetTotalBet() const
+uint CBetMgr::getTotalBet() const
 {
     return m_lineBet * m_totalLines;
-    
-}   // GetTotalBet
+}
 
 
 /************************************************************************
 *    desc:  Set/Get the credits
 ************************************************************************/
-void CBetMgr::SetCredits( uint credits )
+void CBetMgr::setCredits( uint credits )
 {
     m_credits = credits;
-    
-}   // SetCredits
+}
 
-uint CBetMgr::GetCredits() const
+uint CBetMgr::getCredits() const
 {
     return m_credits;
-    
-}   // GetCredits
+}
 
 
 /************************************************************************
 *    desc:  Is there anough credits to play?
 ************************************************************************/
-bool CBetMgr::AllowPlay() const
+bool CBetMgr::allowPlay() const
 {
-    return ((m_credits > 0) && (m_credits >= GetTotalBet()));
-    
-}   // AllowPlay
+    return ((m_credits > 0) && (m_credits >= getTotalBet()));
+}
 
 
 /************************************************************************
 *    desc:  Deduct the bet amount from the credits
 ************************************************************************/
-void CBetMgr::DeductBet()
+void CBetMgr::deductBet()
 {
-    if( AllowPlay() )
-        m_credits -= GetTotalBet();
-    
-}   // DeductBet
+    if( allowPlay() )
+        m_credits -= getTotalBet();
+}
 
 
 /************************************************************************
 *    desc:  Add in the award
 ************************************************************************/
-void CBetMgr::AddAward( uint award )
+void CBetMgr::addAward( uint award )
 {
     m_credits += award;
-    
-}   // AddAward
+}

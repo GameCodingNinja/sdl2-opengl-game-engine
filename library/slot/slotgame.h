@@ -45,69 +45,69 @@ public:
     virtual ~CSlotGame();
     
     // Add the slot group
-    void AddSlotGroup( std::unique_ptr<CSlotGroup> slotGroup );
+    void addSlotGroup( std::unique_ptr<CSlotGroup> slotGroup );
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent );
+    void handleEvent( const SDL_Event & rEvent );
     
     // Update objects that require them
-    void Update();
+    void update();
 
     // Transform the game objects
-    void Transform();
+    void transform();
 
     // Render of game content
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
     
     // Play a game
-    void PlayGame(CUIControl *);
+    void playGame(CUIControl *);
     
     // Go through the game state
-    void ProcessGameState();
+    void processGameState();
     
     // Set the front panel
-    void SetFrontPanel( iFrontPanel * pFrontPanel );
+    void setFrontPanel( iFrontPanel * pFrontPanel );
     
     // Set the game music
-    void SetGameMusic( iGameMusic * pGameMusic );
+    void setGameMusic( iGameMusic * pGameMusic );
     
     // Get the state
-    NSlotDefs::ESlotState GetState();
+    NSlotDefs::ESlotState getState();
     
     // Do we allow the stop sounds?
-    void AllowStopSounds( bool allow );
+    void allowStopSounds( bool allow );
     
     // Create a play result for a slot group
-    CPlayResult & CreatePlayResult();
+    CPlayResult & createPlayResult();
     
 protected:
     
     // Game state functions
-    void StateIdle();
-    void StateKillCycleResults();
-    void StatePlaceWager();
-    void StateGenerateStops();
-    void StateEvaluate();
-    void StatePreSpin();
-    void StateSpin();
-    void StatePostSpin();
-    void StatePreAwardWin();
-    void StateBonusDecision();
-    void StatePreBonus();
-    void StateBonus();
-    void StatePostBonus();
-    void StatePostAwardWin();
-    void StateWaitForAward();
-    void StateEnd();
+    void stateIdle();
+    void stateKillCycleResults();
+    void statePlaceWager();
+    void stateGenerateStops();
+    void stateEvaluate();
+    void statePreSpin();
+    void stateSpin();
+    void statePostSpin();
+    void statePreAwardWin();
+    void stateBonusDecision();
+    void statePreBonus();
+    void stateBonus();
+    void statePostBonus();
+    void statePostAwardWin();
+    void stateWaitForAward();
+    void stateEnd();
     
     // Is the cycle results animating
-    bool IsCycleResultsAnimating();
+    bool isCycleResultsAnimating();
     
     // Is the cycle results active
-    bool IsCycleResultsActive();
+    bool isCycleResultsActive();
     
     // Kill the cycle results
-    void KillCycleResults();
+    void killCycleResults();
 
 private:
     

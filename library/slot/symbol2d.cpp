@@ -23,21 +23,21 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
     for( auto & iter : rSpriteDataVec )
     {
         m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( iter.getGroup(), iter.getObjectName() ) );
-        
+
         m_spriteDeq.back().setVisible( iter.isVisible() );
-        
+
         if( m_spriteDeq.back().getVisualComponent().isFontSprite() )
         {
             m_spriteDeq.back().getVisualComponent().setFontProperties( iter.getFontData()->m_fontProp );
             m_spriteDeq.back().getVisualComponent().createFontString( iter.getFontData()->m_fontString );
         }
-        
+
         m_spriteDeq.back().copyTransform( &iter );
-        
+
         m_spriteDeq.back().copyScriptFunctions( iter.getScriptFunctions() );
     }
-        
-}   // constructor
+
+}
 
 
 /************************************************************************
@@ -45,13 +45,13 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
 ************************************************************************/
 CSymbol2d::~CSymbol2d()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the sprite
 ************************************************************************/
-CSprite2D & CSymbol2d::GetSprite( int index )
+CSprite2D & CSymbol2d::getSprite( int index )
 {
     return m_spriteDeq.at( index );
 }
@@ -60,7 +60,7 @@ CSprite2D & CSymbol2d::GetSprite( int index )
 /************************************************************************
 *    desc:  Get the sprite
 ************************************************************************/
-size_t CSymbol2d::GetSpriteCount()
+size_t CSymbol2d::getSpriteCount()
 {
     return m_spriteDeq.size();
 }
@@ -69,7 +69,7 @@ size_t CSymbol2d::GetSpriteCount()
 /************************************************************************
 *    desc:  Get the string id
 ************************************************************************/
-const std::string & CSymbol2d::GetId()
+const std::string & CSymbol2d::getId()
 {
     return m_id;
 }
@@ -78,12 +78,11 @@ const std::string & CSymbol2d::GetId()
 /************************************************************************
 *    desc:  Update the symbol
 ************************************************************************/
-void CSymbol2d::Update()
+void CSymbol2d::update()
 {
     for( auto & iter : m_spriteDeq )
         iter.update();
-
-}   // Update
+}
 
 
 /************************************************************************
@@ -92,26 +91,25 @@ void CSymbol2d::Update()
 void CSymbol2d::transform()
 {
     m_parameters.remove( NDefs::WAS_TRANSFORMED );
-    
+
     if( m_parameters.isSet( NDefs::TRANSFORM ) )
     {
         transformLocal( m_finalMatrix );
-    
+
         m_transPos = m_pos;
     }
-    
+
     for( auto & iter : m_spriteDeq )
         iter.transform( m_finalMatrix, wasWorldPosTranformed() );
-
-}   // Transform
+}
 
 void CSymbol2d::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     m_parameters.remove( NDefs::WAS_TRANSFORMED );
-    
+
     if( m_parameters.isSet( NDefs::TRANSFORM ) )
         transformLocal( m_matrix );
-        
+
     if( m_parameters.isSet( NDefs::WAS_TRANSFORMED ) || tranformWorldPos )
     {
         m_parameters.add( NDefs::WAS_TRANSFORMED );
@@ -123,30 +121,28 @@ void CSymbol2d::transform( const CMatrix & matrix, bool tranformWorldPos )
 
     for( auto & iter : m_spriteDeq )
         iter.transform( m_finalMatrix, wasWorldPosTranformed() );
-    
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CSymbol2d::Render( const CMatrix & matrix )
+void CSymbol2d::render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
         iter.render( matrix );
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  Get/Set if deferred render
 ************************************************************************/
-bool CSymbol2d::IsDeferredRender()
+bool CSymbol2d::isDeferredRender()
 {
     return m_deferredRender;
 }
 
-void CSymbol2d::SetDeferredRender( bool value )
+void CSymbol2d::setDeferredRender( bool value )
 {
     m_deferredRender = value;
 }

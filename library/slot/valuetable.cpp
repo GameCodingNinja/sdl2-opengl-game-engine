@@ -14,7 +14,7 @@
 CValueTable::CValueTable( const std::vector<int> & valueVec ) :
     m_valueVec(valueVec)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -22,14 +22,13 @@ CValueTable::CValueTable( const std::vector<int> & valueVec ) :
 ************************************************************************/
 CValueTable::~CValueTable()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Get the value from the value table
  ************************************************************************/
-int CValueTable::GetValue( const int index ) const
+int CValueTable::getValue( const int index ) const
 {
     return m_valueVec.at(index);
-    
-}   // GetValue
+}

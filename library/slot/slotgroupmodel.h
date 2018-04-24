@@ -36,33 +36,33 @@ public:
     virtual ~CSlotGroupModel();
     
     // Create the model strips
-    void Create( const std::string & rStripSetId, const std::string & paytableSetId );
+    void create( const std::string & rStripSetId, const std::string & paytableSetId );
     
     // Generate the reel stops
-    void GenerateStops();
+    void generateStops();
     
     // Evaluate the reels
-    void Evaluate();
+    void evaluate();
     
     // Get the strips
-    const CSlotStripModel & GetStrip( int index ) const;
+    const CSlotStripModel & getStrip( int index ) const;
     
     // Get the number of math strips
-    size_t GetCount() const;
+    size_t getCount() const;
     
 private:
     
     // Generate the evaluation symbols
-    void GenerateEvalSymbs();
+    void generateEvalSymbs();
     
     // Evaluate the line pays
-    void EvaluateLinePays( const std::string & paytable );
+    void evaluateLinePays( const std::string & paytable );
     
     // Evaluate the scatter pays
-    void EvaluateScatters( const std::string & paytable );
+    void evaluateScatters( const std::string & paytable );
     
     // Add line pay to slot result
-    void AddLinePay(
+    void addLinePay(
         const CPayCombo & rPayCombo,
         const int payline,
         const std::vector<std::vector<int8_t>> & rPaylineSetVecVec );

@@ -25,10 +25,10 @@ public:
     virtual ~CWeightedTable();
     
     // Get the value from the weighted table
-    int GetWeightedValue( const int rngValue ) const;
+    int getWeightedValue( const int rngValue ) const;
     
     // Get the total weight value
-    int GetTotalWeight() const;
+    int getTotalWeight() const;
     
 private:
     
@@ -37,7 +37,6 @@ private:
     
     // weight
     const std::vector<int> m_weightVec;
-
 };
 
 #endif  // __weighted_table_h__

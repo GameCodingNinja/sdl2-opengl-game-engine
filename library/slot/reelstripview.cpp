@@ -41,7 +41,7 @@ CReelStripView::CReelStripView( const CSlotStripModel & rSlotStripModel, CSymbol
     m_rSlotStripModel(rSlotStripModel),
     m_rSymbolSetView(rSymbolSetView),
     m_reelId(reelId),
-    m_visibleSymbCount(rSlotStripModel.GetEvalIndexVec().size()),
+    m_visibleSymbCount(rSlotStripModel.getEvalIndexVec().size()),
     m_bufferSymbols(0),
     m_spinDir(NSlotDefs::ESD_DOWN),
     m_spin(false),
@@ -60,8 +60,7 @@ CReelStripView::CReelStripView( const CSlotStripModel & rSlotStripModel, CSymbol
 {
     // Set the value returned by Expired when the timer is disabled
     m_spinTimer.setDisableValue( true );
-    
-}   // constructor
+}
 
 
 /************************************************************************
@@ -69,36 +68,36 @@ CReelStripView::CReelStripView( const CSlotStripModel & rSlotStripModel, CSymbol
 ************************************************************************/
 CReelStripView::~CReelStripView()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Create the reel strip from data node
 ************************************************************************/
-void CReelStripView::Create( const XMLNode & node, const std::string & group )
+void CReelStripView::create( const XMLNode & node, const std::string & group )
 {
     // Get the number of buffer symbols
     m_bufferSymbols = std::atoi(node.getAttribute( "bufferSymbols" ));
-    
+
     // Get the size of the symbol
     CSize<float> symbolSize;
     symbolSize.w = std::atoi(node.getAttribute( "symbolWidth" ));
     symbolSize.h = std::atoi(node.getAttribute( "symbolHeight" ));
-    
+
     // Get the spin direction and set the spin direction vector
     m_spinDir = NSlotDefs::ESpinDirection(std::atoi(node.getAttribute( "spinDirection" )));
     m_spinDirVector = -1;
     m_spinSymbDist = symbolSize.h;
-    
+
     if( (m_spinDir == NSlotDefs::ESD_UP) || (m_spinDir == NSlotDefs::ESD_RIGHT)  )
         m_spinDirVector = 1;
-    
+
     if( m_spinDir >= NSlotDefs::ESD_LEFT )
         m_spinSymbDist = symbolSize.w;
-    
+
     // Load the transform data from node
     loadTransFromNode( node );
-    
+
     // Get the stencil mask object name
     const XMLNode stencilMaskNode = node.getChildNode( "stencilMask" );
     if( !stencilMaskNode.isEmpty() )
@@ -107,11 +106,11 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
 
         // Allocate the stencil
         m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( group, objectName ) ) );
-        
+
         // Load the transform data
         m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
     }
-    
+
     // Get the sprite list if any
     const XMLNode spriteLstNode = node.getChildNode( "spriteList" );
     if( !spriteLstNode.isEmpty() )
@@ -119,73 +118,70 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
         for( int i = 0; i < spriteLstNode.nChildNode(); ++i )
         {
             const XMLNode spriteNode = spriteLstNode.getChildNode( "sprite", i );
-            
+
             // Get the type of object
             const std::string objectName = spriteNode.getAttribute( "objectName" );
-            
+
             m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( group, objectName ) );
-            
+
             // Load the transform data
             m_spriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
-    
+
     // Get the sprite list if any
     const XMLNode stopSoundNode = node.getChildNode( "stopSound" );
     if( !stopSoundNode.isEmpty() )
     {
         const std::string group = stopSoundNode.getAttribute( "group" );
         const std::string soundId = stopSoundNode.getAttribute( "soundId" );
-        
+
         m_pSpinStopSnd = &CSoundMgr::Instance().getSound( group, soundId );
     }
-    
+
     // Init the reel strip with symbols
-    InitReelStrip();
-        
-}   // LoadFromNode
+    initReelStrip();
+}
 
 
 /************************************************************************
 *    desc:  Init the reel strip with symbols
 ************************************************************************/
-void CReelStripView::InitReelStrip()
+void CReelStripView::initReelStrip()
 {
     const int totalSymbols = m_visibleSymbCount + (m_bufferSymbols * 2);
     const int offset = (((totalSymbols - 1) * m_spinSymbDist) / 2);
-    
+
     // Check that all the symbols on the reel strips have a visual symbol partner
-    auto & rMathStripVec = m_rSlotStripModel.GetStripVec();
+    auto & rMathStripVec = m_rSlotStripModel.getStripVec();
     for( auto iter : rMathStripVec )
-        m_rSymbolSetView.GetSymbol( iter.GetMathSymbol().GetID() );
-    
+        m_rSymbolSetView.getSymbol( iter.getMathSymbol().getID() );
+
     for( int i = 0; i < totalSymbols; ++i )
     {
         // Push it into the deque and set it's position
         // Get the current stop minus the buffer symbols because we render from top to bottom
-        m_symbolDeq.push_back( GetSymbol( m_rSlotStripModel.GetLastStop() - m_bufferSymbols + i ) );
-        
+        m_symbolDeq.push_back( getSymbol( m_rSlotStripModel.getLastStop() - m_bufferSymbols + i ) );
+
         // Are we spinning up/down or left/right?
         if( m_spinDir <= NSlotDefs::ESD_DOWN )
             m_symPosDeq.emplace_back( 0, -(i * m_spinSymbDist) + offset );
         else
             m_symPosDeq.emplace_back( -offset + (i * m_spinSymbDist), 0 );
     }
-    
-}   // InitReelStrip
+}
 
 
 /************************************************************************
 *    desc:  Get the symbol from the reel strip offset
 ************************************************************************/
-CSymbol2d * CReelStripView::GetSymbol( int stop )
+CSymbol2d * CReelStripView::getSymbol( int stop )
 {
     // Get the math symbol
-    auto & rMathSymb = m_rSlotStripModel.GetSymbol( stop );
-    
-    return &m_rSymbolSetView.GetSymbol( rMathSymb.GetID() );
-    
-}   // GetSymbol
+    auto & rMathSymb = m_rSlotStripModel.getSymbol( stop );
+
+    return &m_rSymbolSetView.getSymbol( rMathSymb.getID() );
+}
 
 
 /************************************************************************
@@ -193,52 +189,49 @@ CSymbol2d * CReelStripView::GetSymbol( int stop )
 *           NOTE: Index assumes visible symbol that can animate
 *                 Will need to be freed by the recipient of pointer.
 ************************************************************************/
-CSymbol2d * CReelStripView::GetCycleResultSymbol( int index )
+CSymbol2d * CReelStripView::getCycleResultSymbol( int index )
 {
     // Get the current symbol ID
-    const auto & symbId = m_symbolDeq.at(m_bufferSymbols + index)->GetId();
-    
+    const auto & symbId = m_symbolDeq.at(m_bufferSymbols + index)->getId();
+
     // allocate a new symbol for the cycle results
     // NOTE: Recipient of this pointer is responsible for deleting it
-    auto * pSymbol = new CSymbol2d( m_rSymbolSetView.GetSpriteData( symbId ), symbId );
-    
+    auto * pSymbol = new CSymbol2d( m_rSymbolSetView.getSpriteData( symbId ), symbId );
+
     // Replace the current symbol pointer with the allocated one
     m_symbolDeq.at(m_bufferSymbols + index) = pSymbol;
 
     return pSymbol;
-    
-}   // GetCycleResultSymbol
+}
 
 
 /************************************************************************
 *    desc:  This replaces the temporary cycle symbols with the ones used for spinning
 ************************************************************************/
-void CReelStripView::ClearCycleResultSymbs()
+void CReelStripView::clearCycleResultSymbs()
 {
     for( int i = 0; i < m_visibleSymbCount; ++i )
     {
-        const auto & symbId = m_symbolDeq.at(m_bufferSymbols + i)->GetId();
-        
-        m_symbolDeq.at(i + m_bufferSymbols) = &m_rSymbolSetView.GetSymbol( symbId );
+        const auto & symbId = m_symbolDeq.at(m_bufferSymbols + i)->getId();
+
+        m_symbolDeq.at(i + m_bufferSymbols) = &m_rSymbolSetView.getSymbol( symbId );
     }
-    
-}   // ClearCycleResultSymbs
+}
 
 
 /************************************************************************
 *    desc:  Set the spin profile
 ************************************************************************/
-void CReelStripView::SetSpinProfile( const CSpinProfile & spinProfile )
+void CReelStripView::setSpinProfile( const CSpinProfile & spinProfile )
 {
     m_spinProfile = spinProfile;
-    
-}   // SetSpinProfile
+}
 
 
 /************************************************************************
 *    desc:  Update the reel strip
 ************************************************************************/
-void CReelStripView::Update()
+void CReelStripView::update()
 {
     if( m_spin )
     {
@@ -247,20 +240,20 @@ void CReelStripView::Update()
             // Do the spin init and let it fall through to start the spin
             case NSlotDefs::ESS_STOPPED:
             {
-                m_spinStop = m_rSlotStripModel.GetLastStop();
-                
+                m_spinStop = m_rSlotStripModel.getLastStop();
+
                 // Set the spin stop to the current stop with offset adjustments
                 if( (m_spinDir == NSlotDefs::ESD_DOWN) || (m_spinDir == NSlotDefs::ESD_RIGHT) )
                     m_spinStop -= m_bufferSymbols;
                 else
                     m_spinStop += m_visibleSymbCount + m_bufferSymbols;
-                
+
                 m_velocity = 0.0;
-                m_acceleration = m_spinProfile.GetAccelation();
-                m_spinTimer.set( m_spinProfile.GetStartDelay() );
+                m_acceleration = m_spinProfile.getAccelation();
+                m_spinTimer.set( m_spinProfile.getStartDelay() );
                 m_spinState = NSlotDefs::ESS_SPIN_STARTING;
             }
-            
+
             case NSlotDefs::ESS_SPIN_STARTING:
             {
                 if( m_spinTimer.expired() )
@@ -268,35 +261,35 @@ void CReelStripView::Update()
                     // Increment the velocity and accelation
                     const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                     m_velocity += m_acceleration * elapsedTime;
-                    m_acceleration += m_spinProfile.GetImpulse() * elapsedTime;
-                    
+                    m_acceleration += m_spinProfile.getImpulse() * elapsedTime;
+
                     // Cap the velocity at the max speed
-                    if( m_velocity >= m_spinProfile.GetMaxVelocity() )
+                    if( m_velocity >= m_spinProfile.getMaxVelocity() )
                     {
-                        m_velocity = m_spinProfile.GetMaxVelocity();
-                        m_spinTimer.set( m_spinProfile.GetMaxVelocityTime() );
+                        m_velocity = m_spinProfile.getMaxVelocity();
+                        m_spinTimer.set( m_spinProfile.getMaxVelocityTime() );
                         m_spinState = NSlotDefs::ESS_SPINNING;
                     }
-                    
-                    IncSpin( m_velocity );
+
+                    incSpin( m_velocity );
                 }
-                
+
                 break;
             }
-            
+
             case NSlotDefs::ESS_SPINNING:
             {
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 // Disable the timer if fast stop is needed
                 m_spinTimer.disable( m_disableSpinTimer );
-                
+
                 // Wait for the spin to expire
                 if( m_spinTimer.expired() && m_symbAlign )
                 {
                     // Set the new stop to start splicing at the end of the rendered strip
-                    m_spinStop = m_rSlotStripModel.GetStop();
-                    
+                    m_spinStop = m_rSlotStripModel.getStop();
+
                     // Set the spin stop to the current stop with offset adjustments
                     if( (m_spinDir == NSlotDefs::ESD_DOWN) || (m_spinDir == NSlotDefs::ESD_RIGHT) )
                         m_spinStop += m_visibleSymbCount + m_bufferSymbols;
@@ -304,42 +297,42 @@ void CReelStripView::Update()
                         m_spinStop -= m_bufferSymbols + 1;
 
                     m_symbAlignCounter = 0;
-                    
+
                     m_spinState = NSlotDefs::ESS_PREPARE_TO_STOP;
                 }
-                
+
                 break;
             }
-            
+
             case NSlotDefs::ESS_PREPARE_TO_STOP:
             {
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 if( m_symbAlign )
                 {
                     // Wait for all but the last symbol to get into place
                     if( ++m_symbAlignCounter >= (m_visibleSymbCount + (m_bufferSymbols * 2) - 1) )
                     {
                         // Set a negative accelation slow down the spin to slightly pass that last symbol and cause a bounce up into position
-                        m_acceleration = -(m_spinProfile.GetMaxVelocity() / (m_spinSymbDist + m_spinProfile.GetBounceCorrection()));
-                        
+                        m_acceleration = -(m_spinProfile.getMaxVelocity() / (m_spinSymbDist + m_spinProfile.getBounceCorrection()));
+
                         // Set the spin timer as an eror catch for the next state
-                        m_spinTimer.set( m_spinProfile.GetTimeOutDelay() );
-                        
+                        m_spinTimer.set( m_spinProfile.getTimeOutDelay() );
+
                         m_spinState = NSlotDefs::ESS_SPIN_STOPPING;
                     }
                 }
 
                 break;
             }
-            
+
             case NSlotDefs::ESS_SPIN_STOPPING:
-            {  
+            {
                 const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                 m_velocity += m_acceleration * elapsedTime;
-                
+
                 // Add in the drag but keep it from turning the value positive
-                float drag = m_spinProfile.GetBounceDrag() * elapsedTime;
+                float drag = m_spinProfile.getBounceDrag() * elapsedTime;
                 if( (m_acceleration + drag) < -0.0 )
                     m_acceleration += drag;
 
@@ -353,57 +346,56 @@ void CReelStripView::Update()
                     m_velocity = 0.0;
                     m_spin = false;
                     m_disableSpinTimer = false;
-    
+
                     // Hard set the final position of the symbols
-                    FinalizeSymbPos();
-                    
+                    finalizeSymbPos();
+
                     m_spinState = NSlotDefs::ESS_STOPPED;
-                    
+
                     // Send the signal of the spin state
                     m_spinStateSignal(m_reelId, NSlotDefs::ESS_STOPPED);
-                    
+
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
                         const int channel = CSoundMgr::Instance().getNextChannel();
                         m_pSpinStopSnd->play( channel );
                     }
-                    
+
                     break;
                 }
 
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 break;
             }
         }
     }
-    
-}   // Update
+}
 
 
 /************************************************************************
 *    desc:  Inc the reel spin
 ************************************************************************/
-void CReelStripView::IncSpin( float velocity )
+void CReelStripView::incSpin( float velocity )
 {
     CPoint<float> symbOffset;
-    
+
     // Get the distance traveled
     float dist = velocity * CHighResTimer::Instance().getElapsedTime();
-    
+
     // Are we spinning up/down or left/right?
     if( m_spinDir <= NSlotDefs::ESD_DOWN )
         symbOffset.y = dist;
     else
         symbOffset.x = dist;
-    
+
     // Increment the position of all the symbols
     for( auto & iter : m_symPosDeq )
         iter += symbOffset * m_spinDirVector;
 
     // Inc for distance checking
     m_spinDistance += dist;
-    
+
     // Clear the alignment flag
     m_symbAlign = false;
 
@@ -420,8 +412,8 @@ void CReelStripView::IncSpin( float velocity )
             m_spinStop -= m_spinDirVector;
             symbOffset.x = m_spinSymbDist;
         }
-        
-        auto pSymbol = GetSymbol( m_spinStop );
+
+        auto pSymbol = getSymbol( m_spinStop );
 
         // Pop the old symbol and push the new one on based on the way it's spinning
         // Invert the spin direction vector to set the offset of the new symbol
@@ -429,7 +421,7 @@ void CReelStripView::IncSpin( float velocity )
         {
             m_symbolDeq.pop_back();
             m_symbolDeq.push_front( pSymbol );
-            
+
             m_symPosDeq.push_front( m_symPosDeq.front() + (symbOffset * -m_spinDirVector) );
             m_symPosDeq.pop_back();
         }
@@ -437,42 +429,40 @@ void CReelStripView::IncSpin( float velocity )
         {
             m_symbolDeq.pop_front();
             m_symbolDeq.push_back( pSymbol );
-            
+
             m_symPosDeq.push_back( m_symPosDeq.back() + (symbOffset * -m_spinDirVector) );
             m_symPosDeq.pop_front();
         }
 
         // Reset the spin distance with the remainder
         m_spinDistance -= m_spinSymbDist;
-        
+
         // Set the flag that indicates the reel is close to alignment
         // and a symbol was pushed on and popped off.
         m_symbAlign = true;
     }
-        
-}   // IncSpin
+}
 
 
 /************************************************************************
 *    desc:  Hard set the final position of the symbols
 ************************************************************************/
-void CReelStripView::FinalizeSymbPos()
+void CReelStripView::finalizeSymbPos()
 {
     const int offset = (((m_symPosDeq.size() - 1) * m_spinSymbDist) / 2);
-    
+
     // Reset the position and the symbols of the strip
     for( size_t i = 0; i < m_symPosDeq.size(); ++i )
     {
-        m_symbolDeq.at(i) = GetSymbol( m_rSlotStripModel.GetStop() - m_bufferSymbols + (int)i );
-        
+        m_symbolDeq.at(i) = getSymbol( m_rSlotStripModel.getStop() - m_bufferSymbols + (int)i );
+
         // Are we spinning up/down or left/right?
         if( m_spinDir <= NSlotDefs::ESD_DOWN )
             m_symPosDeq.at(i) = CPoint<float>( 0, -((int)i * m_spinSymbDist) + offset );
         else
             m_symPosDeq.at(i) = CPoint<float>( -offset + ((int)i * m_spinSymbDist), 0 );
     }
-    
-}   // FinalizeSymbPos
+}
 
 
 /************************************************************************
@@ -481,20 +471,19 @@ void CReelStripView::FinalizeSymbPos()
 void CReelStripView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     CObject2D::transform( matrix, tranformWorldPos );
-    
+
     // Transform the mask
     m_upStencilMaskSprite->transform( getMatrix(), wasWorldPosTranformed() );
-    
+
     for( auto & iter : m_spriteDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CReelStripView::Render( const CMatrix & matrix )
+void CReelStripView::render( const CMatrix & matrix )
 {
     for( auto & iter : m_spriteDeq )
         iter.render( matrix );
@@ -530,99 +519,92 @@ void CReelStripView::Render( const CMatrix & matrix )
     {
         auto symbol = m_symbolDeq.at(i);
 
-        if( !symbol->IsDeferredRender() )
+        if( !symbol->isDeferredRender() )
         {
             symbol->setPos( m_symPosDeq.at(i) );
             symbol->transform( getMatrix(), wasWorldPosTranformed() );
-            symbol->Render( matrix );
+            symbol->render( matrix );
         }
     }
 
 
     // Finished using stencil
     glDisable( GL_STENCIL_TEST );
-
-}   // Render
+}
 
 
 /************************************************************************
 *    desc:  do the render
 ************************************************************************/
-void CReelStripView::DeferredRender( const CMatrix & matrix )
+void CReelStripView::deferredRender( const CMatrix & matrix )
 {
     if( m_spinState == NSlotDefs::ESS_STOPPED )
     {
         for( size_t i = 0; i < m_symbolDeq.size(); ++i )
         {
             auto symbol = m_symbolDeq.at(i);
-            
-            if( symbol->IsDeferredRender() )
+
+            if( symbol->isDeferredRender() )
             {
                 symbol->setPos( m_symPosDeq.at(i) );
                 symbol->transform( getMatrix(), wasWorldPosTranformed() );
-                symbol->Render( matrix );
+                symbol->render( matrix );
             }
         }
     }
-
-}   // DeferredRender
+}
 
 
 /************************************************************************
 *    desc:  Start the spin
 ************************************************************************/
-void CReelStripView::StartSpin()
+void CReelStripView::startSpin()
 {
     m_spin = true;
-    
-}   // StartSpin
+}
 
 
 /************************************************************************
 *    desc:  Stop the spin
 ************************************************************************/
-void CReelStripView::StopSpin()
+void CReelStripView::stopSpin()
 {
     if( m_spin && (m_spinState < NSlotDefs::ESS_SPIN_STOPPING) )
         m_disableSpinTimer = true;
-        
-}   // StopSpin
+}
 
 
 /************************************************************************
 *    desc:  Get the spin state
 ************************************************************************/
-NSlotDefs::ESpinState CReelStripView::GetSpinState() const
+NSlotDefs::ESpinState CReelStripView::getSpinState() const
 {
     return m_spinState;
-    
-}   // GetSpinState
+}
 
 
 /************************************************************************
 *    desc:  Connect to the spin state signal
 ************************************************************************/
-void CReelStripView::Connect_SpinState( const SpinStateSignal::slot_type & slot )
+void CReelStripView::connect_spinState( const SpinStateSignal::slot_type & slot )
 {
     m_spinStateSignal.connect(slot);
-
-}   // Connect_SpinState
+}
 
 
 /************************************************************************
 *    desc:  Get the number of visible symbols on this reel
 ************************************************************************/
-int CReelStripView::GetVisibleSymbolCount() const
+int CReelStripView::getVisibleSymbolCount() const
 {
     return m_visibleSymbCount;
-    
-}   // GetVisibleSymbolCount
+}
 
 
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CReelStripView::AllowStopSounds( bool allow )
+void CReelStripView::allowStopSounds( bool allow )
 {
     m_allowStopSounds = allow;
 }

@@ -20,7 +20,7 @@
 ************************************************************************/
 CSlotMathMgr::CSlotMathMgr()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -28,13 +28,13 @@ CSlotMathMgr::CSlotMathMgr()
 ************************************************************************/
 CSlotMathMgr::~CSlotMathMgr()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Get the slot math
  ************************************************************************/
-const CSlotMath & CSlotMathMgr::GetSlotMath( const std::string & group, const std::string & id ) const
+const CSlotMath & CSlotMathMgr::getSlotMath( const std::string & group, const std::string & id ) const
 {
     auto groupMapIter = m_slotMathMapMap.find( group );
     if( groupMapIter == m_slotMathMapMap.end() )
@@ -49,14 +49,13 @@ const CSlotMath & CSlotMathMgr::GetSlotMath( const std::string & group, const st
                 % group % id % __FUNCTION__ % __LINE__ ));
 
     return dataMapIter->second;
-
-}   // GetSlotMath
+}
 
 
 /************************************************************************
  *    desc:  Load all of the reel group data from a specific group
  ************************************************************************/
-void CSlotMathMgr::LoadGroup( const std::string & group )
+void CSlotMathMgr::loadGroup( const std::string & group )
 {
     // Make sure the group we are looking has been defined in the list table file
     auto listTableIter = m_listTableMap.find( group );
@@ -70,8 +69,8 @@ void CSlotMathMgr::LoadGroup( const std::string & group )
     {
         // Create a new group map inside of our map
         m_slotMathMapMap.emplace( group, std::map<const std::string, CSlotMath>() );
-        
-        LoadFromXML( group, listTableIter->second.back() );
+
+        loadFromXML( group, listTableIter->second.back() );
     }
     else
     {
@@ -79,24 +78,23 @@ void CSlotMathMgr::LoadGroup( const std::string & group )
             boost::str( boost::format("Math config group has alread been loaded (%s).\n\n%s\nLine: %s")
             % group % __FUNCTION__ % __LINE__ ));
     }
-
-}   // LoadGroup
+}
 
 
 /************************************************************************
  *    desc:  Load all math data from an xml
  ************************************************************************/
-void CSlotMathMgr::LoadFromXML( const std::string & group, const std::string & filePath )
+void CSlotMathMgr::loadFromXML( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "math" );
-    
+
     // Get the id
     const std::string id = node.getAttribute( "id" );
-    
+
     // Get an iterator to the group
     auto groupMapIter = m_slotMathMapMap.find( group );
-    
+
     // Allocate the math group data to the map
     auto iter = groupMapIter->second.emplace( id, group );
 
@@ -109,28 +107,27 @@ void CSlotMathMgr::LoadFromXML( const std::string & group, const std::string & f
     }
 
     // Load the data from node
-    iter.first->second.LoadFromNode( node );
-    
-}   // LoadFromXML
+    iter.first->second.loadFromNode( node );
+}
 
 
 /************************************************************************
 *    desc:  Load the payline configuration from XML file
 ************************************************************************/
-void CSlotMathMgr::LoadPaylineSetFromFile( const std::string & filePath )
+void CSlotMathMgr::loadPaylineSetFromFile( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "paylineSetList" );
-    
+
     for( int i = 0; i < node.nChildNode(); ++i )
     {
         const XMLNode paylineNode = node.getChildNode(i);
-        
+
         // Get the id
         const std::string id = paylineNode.getAttribute( "id" );
-        
+
         auto iter = m_paylineSetMap.emplace( id, paylineNode );
-        
+
         // Check for duplicate ids
         if( !iter.second )
         {
@@ -139,14 +136,13 @@ void CSlotMathMgr::LoadPaylineSetFromFile( const std::string & filePath )
                     % id % __FUNCTION__ % __LINE__ ));
         }
     }
-    
-}   // LoadPaylineCfgFromFile
+}
 
 
 /************************************************************************
 *    desc:  Get the payline set
 ************************************************************************/
-const CPaylineSet & CSlotMathMgr::GetPaylineSet( const std::string & id ) const
+const CPaylineSet & CSlotMathMgr::getPaylineSet( const std::string & id ) const
 {
     // Make sure the group we are looking for exists
     auto iter = m_paylineSetMap.find( id );
@@ -154,16 +150,15 @@ const CPaylineSet & CSlotMathMgr::GetPaylineSet( const std::string & id ) const
         throw NExcept::CCriticalException("Payline Set Data Error!",
             boost::str( boost::format("Payline Set id can't be found (%s).\n\n%s\nLine: %s")
                 % id % __FUNCTION__ % __LINE__ ));
-    
+
     return iter->second;
-    
-}   // GetPaylineSet
+}
 
 
 /************************************************************************
  *    desc:  Unload all of the reel group data from a specific group
  ************************************************************************/
-void CSlotMathMgr::FreeGroup( const std::string & group )
+void CSlotMathMgr::freeGroup( const std::string & group )
 {
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
@@ -177,14 +172,13 @@ void CSlotMathMgr::FreeGroup( const std::string & group )
     auto groupMapIter = m_slotMathMapMap.find( group );
     if( groupMapIter != m_slotMathMapMap.end() )
         m_slotMathMapMap.erase( groupMapIter );
-
-}   // FreeGroup
+}
 
 
 /************************************************************************
 *    desc:  Free the payline set
 ************************************************************************/
-void CSlotMathMgr::FreePaylineSet()
+void CSlotMathMgr::freePaylineSet()
 {
     m_paylineSetMap.clear();
 }
@@ -193,8 +187,8 @@ void CSlotMathMgr::FreePaylineSet()
 /************************************************************************
 *    desc:  Clear out all the data
 ************************************************************************/
-void CSlotMathMgr::Clear()
+void CSlotMathMgr::clear()
 {
     m_slotMathMapMap.clear();
-    FreePaylineSet();
+    freePaylineSet();
 }

@@ -90,7 +90,7 @@ void CGame::init()
     CGameSave::Instance().Load();
     
     // Init with the total amount of credits
-    CBetMgr::Instance().SetCredits( CGameSave::Instance().GetTotalCredits() );
+    CBetMgr::Instance().setCredits( CGameSave::Instance().GetTotalCredits() );
 
     // Create the startup state
     upGameState.reset( new CStartUpState );

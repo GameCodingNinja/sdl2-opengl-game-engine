@@ -19,10 +19,10 @@ public:
     CSymbPos( int reel, int pos ) : m_reel(reel), m_pos(pos)
     {}
     
-    int GetReel() const
+    int getReel() const
     { return m_reel; }
     
-    int GetPos() const
+    int getPos() const
     { return m_pos; }
 
 private:

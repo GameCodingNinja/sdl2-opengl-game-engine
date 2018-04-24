@@ -34,19 +34,19 @@ public:
         int musicTimeOut );
     
     // Handle update checks
-    void Update() override;
+    void update() override;
     
     // Start the music
-    void StartMusic() override;
+    void startMusic() override;
     
     // Start the music timeout
-    void SetTimeOut() override;
+    void setTimeOut() override;
     
     // Fast a fade down. Could be exiting the game
-    void FastFadeDown();
+    void fastFadeDown();
     
     // Do we play the music
-    void AllowMusic( bool allow );
+    void allowMusic( bool allow );
     
 private:
 

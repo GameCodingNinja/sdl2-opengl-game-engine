@@ -34,7 +34,7 @@ CSlotGroup::CSlotGroup(
         m_spSlotGroupModel( spSlotGroupModel ),
         m_spSlotGroupView( spSlotGroupView )
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -42,24 +42,22 @@ CSlotGroup::CSlotGroup(
 ************************************************************************/
 CSlotGroup::~CSlotGroup()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Get the slot group model
 ************************************************************************/
-CSlotGroupModel * CSlotGroup::GetModel()
+CSlotGroupModel * CSlotGroup::getModel()
 {
     return m_spSlotGroupModel.get();
-    
-}   // GetModel
+}
 
 
 /************************************************************************
 *    desc:  Get the slot group view
 ************************************************************************/
-CSlotGroupView * CSlotGroup::GetView()
+CSlotGroupView * CSlotGroup::getView()
 {
     return m_spSlotGroupView.get();
-    
-}   // GetView
+}

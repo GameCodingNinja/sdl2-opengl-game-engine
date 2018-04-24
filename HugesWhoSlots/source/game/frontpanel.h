@@ -31,25 +31,25 @@ public:
     CFrontPanel();
     
     // Set the buttons
-    void SetButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & pOtherBtnVec );
+    void setButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & pOtherBtnVec );
     
     // Set the meters
-    void SetMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter );
+    void setMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter );
     
     // Init a new game
-    void InitGame( uint credits ) override;
+    void initGame( uint credits ) override;
     
     // Start the bang up
-    void StartBangUp( uint credits, uint win ) override;
+    void startBangUp( uint credits, uint win ) override;
     
     // Are the meters banging
-    bool IsBanging() override;
+    bool isBanging() override;
     
     // Start the fast bang
-    void FastBang() override;
+    void fastBang() override;
     
     // Enable the buttons
-    void EnableButtons( bool allowPlay ) override;
+    void enableButtons( bool allowPlay ) override;
     
 private:
     

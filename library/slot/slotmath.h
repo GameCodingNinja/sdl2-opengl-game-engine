@@ -33,61 +33,61 @@ public:
     CSlotMath( const std::string & group );
     
     // Get the payline set ID
-    const std::string & GetPaylineSetID() const;
+    const std::string & getPaylineSetID() const;
     
     // Get the symbol set
     const std::map<const std::string, CMathSymbol> &
-        GetSymbolSet( const std::string & id ) const;
+        getSymbolSet( const std::string & id ) const;
     
     // Get the reel strip
     const std::vector<CStripStop> &
-        GetStrip( const std::string & id ) const;
+        getStrip( const std::string & id ) const;
     
     // Get the reel strip set
     const std::vector<CStripSet> &
-        GetStripSet( const std::string & id ) const;
+        getStripSet( const std::string & id ) const;
     
     // Get the pay combo set
     const std::vector<CPayCombo> &
-        GetPayComboSet( const std::string & id ) const;
+        getPayComboSet( const std::string & id ) const;
     
     // Get the paytable set
     const std::vector<CPaytableSet> &
-        GetPaytableSet( const std::string & id ) const;
+        getPaytableSet( const std::string & id ) const;
     
     // Get the weighted table
     const CWeightedTable &
-        GetWeightedTable( const std::string & id ) const;
+        getWeightedTable( const std::string & id ) const;
     
     // Get the value table
     const CValueTable &
-        GetValueTable( const std::string & id ) const;
+        getValueTable( const std::string & id ) const;
     
     // Load thes reel group data from node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
     
 private:
     
     // Load the symbol set data from node
-    void LoadSymbolSetsFromNode( const XMLNode & node );
+    void loadSymbolSetsFromNode( const XMLNode & node );
     
     // Load the math strip data from node
-    void LoadStripFromNode( const XMLNode & node );
+    void loadStripFromNode( const XMLNode & node );
     
     // Load the strip set list data from node
-    void LoadStripSetListFromNode( const XMLNode & node );
+    void loadStripSetListFromNode( const XMLNode & node );
     
     // Load the pay combo data from node
-    void LoadPayComboFromNode( const XMLNode & node );
+    void loadPayComboFromNode( const XMLNode & node );
     
     // Load the paytable set list data from node
-    void LoadPaytableSetListFromNode( const XMLNode & node );
+    void loadPaytableSetListFromNode( const XMLNode & node );
     
     // Load the weighted table data from node
-    void LoadWeightedTableFromNode( const XMLNode & node );
+    void loadWeightedTableFromNode( const XMLNode & node );
     
     // Load the value table data from node
-    void LoadValueTableFromNode( const XMLNode & node );
+    void loadValueTableFromNode( const XMLNode & node );
     
 private:
     

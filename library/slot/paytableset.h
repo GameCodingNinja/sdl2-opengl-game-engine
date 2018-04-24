@@ -22,10 +22,10 @@ public:
     CPaytableSet( const NSlotDefs::EPayType type, const std::string & id );
     
     // Get the paytable ID
-    const std::string & GetId() const;
+    const std::string & getId() const;
     
     // Get the paytable type
-    NSlotDefs::EPayType GetType() const;
+    NSlotDefs::EPayType getType() const;
     
 private:
     

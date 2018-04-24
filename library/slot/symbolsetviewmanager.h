@@ -30,16 +30,16 @@ public:
     }
     
     // Load all of the symbols of a specific group
-    void LoadGroup( const std::string & group );
+    void loadGroup( const std::string & group );
     
     // Get the symbol set view data
-    CSymbolSetView & Get( const std::string & group, const std::string & name );
+    CSymbolSetView & get( const std::string & group, const std::string & name );
     
     // Free a symbol group
-    void FreeGroup( const std::string & group );
+    void freeGroup( const std::string & group );
     
     // Clear all the data
-    void Clear();
+    void clear();
     
 private:
         
@@ -50,7 +50,7 @@ private:
     virtual ~CSymbolSetViewMgr();
     
     // Load all symbol information from an xml
-    void LoadFromXML( const std::string & group, const std::string & filePath );
+    void loadFromXML( const std::string & group, const std::string & filePath );
     
 private:
     

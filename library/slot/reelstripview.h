@@ -50,60 +50,60 @@ public:
     virtual ~CReelStripView();
     
     // Create the reel strip from data node
-    void Create( const XMLNode & node, const std::string & group );
+    void create( const XMLNode & node, const std::string & group );
     
     // Update the reel strip
-    void Update();
+    void update();
     
     // Transform the reel strip
     void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
     // Do the render
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
     
     // Do the deferred render
-    void DeferredRender( const CMatrix & matrix );
+    void deferredRender( const CMatrix & matrix );
     
     // Start the spin
-    void StartSpin();
+    void startSpin();
     
     // Stop the spin
-    void StopSpin();
+    void stopSpin();
     
     // Set the spin profile
-    void SetSpinProfile( const CSpinProfile & spinProfile );
+    void setSpinProfile( const CSpinProfile & spinProfile );
     
     // Get the spin state
-    NSlotDefs::ESpinState GetSpinState() const;
+    NSlotDefs::ESpinState getSpinState() const;
     
     // Get the number of visible symbols on this reel
-    int GetVisibleSymbolCount() const;
+    int getVisibleSymbolCount() const;
     
     // Get the cycle result symbol for this spot on the reel strip
-    CSymbol2d * GetCycleResultSymbol( int index );
+    CSymbol2d * getCycleResultSymbol( int index );
     
     // This replaces the temporary cycle symbols with the ones used for spinning
-    void ClearCycleResultSymbs();
+    void clearCycleResultSymbs();
     
     // Connect to the spin state signal
-    void Connect_SpinState( const SpinStateSignal::slot_type & slot );
+    void connect_spinState( const SpinStateSignal::slot_type & slot );
     
     // Do we allow the stop sounds?
-    void AllowStopSounds( bool allow );
+    void allowStopSounds( bool allow );
     
 private:
     
     // Get the symbol from the reel strip offset
-    CSymbol2d * GetSymbol( int stop );
+    CSymbol2d * getSymbol( int stop );
     
     // Init the reel strip with symbols
-    void InitReelStrip();
+    void initReelStrip();
     
     // Inc the reel spin
-    void IncSpin( float speed );
+    void incSpin( float speed );
     
     // Hard set the final position of the symbols
-    void FinalizeSymbPos();
+    void finalizeSymbPos();
     
 private:
     

@@ -25,31 +25,31 @@ public:
     virtual ~CAnimatedCycleResults();
     
     // Do some inits
-    void Init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) override;
+    void init( std::shared_ptr<CSlotGroupView> & spSlotGroupView ) override;
     
     // Update the cycle results
-    void Update() override;
+    void update() override;
     
     // Transform
-    void Transform( const CMatrix & matrix, bool tranformWorldPos ) override;
+    void transform( const CMatrix & matrix, bool tranformWorldPos ) override;
     
     // Activate the cycle results
-    void Activate() override;
+    void activate() override;
     
     // Deactivate the cycle results
-    void Deactivate() override;
+    void deactivate() override;
     
     // Start the cycle results animation
-    void StartAnimation() override;
+    void startAnimation() override;
     
     // Stop the cycle results animation
-    void StopAnimation() override;
+    void stopAnimation() override;
     
     // Animate the cycle results
-    bool IsAnimating() override;
+    bool isAnimating() override;
 
     // Do the render
-    void Render( const CMatrix & matrix ) override;
+    void render( const CMatrix & matrix ) override;
 };
 
 #endif  // __simple_cycle_results_h__

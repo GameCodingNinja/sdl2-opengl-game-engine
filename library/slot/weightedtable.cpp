@@ -19,7 +19,7 @@ CWeightedTable::CWeightedTable(
             m_totalWeight(totalWeight),
             m_weightVec(weightVec)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -27,37 +27,35 @@ CWeightedTable::CWeightedTable(
 ************************************************************************/
 CWeightedTable::~CWeightedTable()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Get the value from the weighted table
  ************************************************************************/
-int CWeightedTable::GetWeightedValue( const int rngValue ) const
+int CWeightedTable::getWeightedValue( const int rngValue ) const
 {
     int index(0);
     int weightCount(0);
-    
+
     for( int iter : m_weightVec )
     {
         weightCount += iter;
-        
+
         if( rngValue <= weightCount )
             break;
-        
+
         ++index;
     }
-    
-    return GetValue(index);
-    
-}   // GetWeightedValue
+
+    return getValue(index);
+}
 
 
 /************************************************************************
  *    desc:  Get the total weight value
  ************************************************************************/
-int CWeightedTable::GetTotalWeight() const
+int CWeightedTable::getTotalWeight() const
 {
     return m_totalWeight;
-    
-}   // GetTotalWeight
+}

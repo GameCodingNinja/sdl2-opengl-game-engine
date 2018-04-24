@@ -40,7 +40,7 @@ CWheelView::CWheelView( const CSlotStripModel & rSlotStripModel, CSymbolSetView 
     m_spinDirVector(-1),
     m_PI_2(M_PI * 2),
     m_winPointDegree(0.0),
-    m_degreePerWedge(m_PI_2 / rSlotStripModel.GetStripVec().size()),
+    m_degreePerWedge(m_PI_2 / rSlotStripModel.getStripVec().size()),
     m_saftyCheckDegree(0.0),
     m_rotation(0.0),
     m_currentRotation(0.0),
@@ -50,60 +50,58 @@ CWheelView::CWheelView( const CSlotStripModel & rSlotStripModel, CSymbolSetView 
 {
     // Set the value returned by Expired when the timer is disabled
     m_spinTimer.setDisableValue( true );
-    
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CWheelView::~CWheelView()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Create the reel strip from data node
 ************************************************************************/
-void CWheelView::Create( const XMLNode & node, const std::string & group )
+void CWheelView::create( const XMLNode & node, const std::string & group )
 {
     // Load the transform data from node
     const XMLNode transNode = node.getChildNode( "translation" );
     if( !transNode.isEmpty() )
         loadTransFromNode( transNode );
-    
+
     // Set the spin direction
     if( node.isAttributeSet("spinDirection") )
     {
         m_spinDir = NSlotDefs::ESpinDirection( std::atoi(node.getAttribute( "spinDirection" )) );
-        
+
         if( m_spinDir == NSlotDefs::EDS_COUNTERCLOCKWISE )
             m_spinDirVector = 1;
     }
 
     // Load the wheel sprites from node
-    LoadWheelSprites( node, group );
+    loadWheelSprites( node, group );
 
     // Load the wheel wedges from node
-    LoadWedges( node, group );
+    loadWedges( node, group );
 
     // Load the sprites from node. These are sprites that don't spin with the wheel
-    LoadSprites( node, group );
-    
-}   // Create
+    loadSprites( node, group );
+}
 
 
 /************************************************************************
 *    desc:  Load the wheel wedges from node
 *           NOTE: These sprites spin with the wheel
 ************************************************************************/
-void CWheelView::LoadWheelSprites( const XMLNode & node, const std::string & group )
+void CWheelView::loadWheelSprites( const XMLNode & node, const std::string & group )
 {
     const XMLNode wheelSpriteLstNode = node.getChildNode( "wheelSpriteList" );
     if( !wheelSpriteLstNode.isEmpty() )
     {
         const XMLNode spriteLstNode = wheelSpriteLstNode.getChildNode( "spriteList" );
-        
+
         for( int i = 0; i < spriteLstNode.nChildNode(); ++i )
         {
             // Sanity check for the object name
@@ -117,14 +115,13 @@ void CWheelView::LoadWheelSprites( const XMLNode & node, const std::string & gro
             m_wheelSpriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
-    
-}   // LoadWheelSprites
+}
 
 
 /************************************************************************
 *    desc:  Load the wheel wedges from node
 ************************************************************************/
-void CWheelView::LoadWedges( const XMLNode & node, const std::string & group )
+void CWheelView::loadWedges( const XMLNode & node, const std::string & group )
 {
     const XMLNode wedgeLstNode = node.getChildNode( "wedgeList" );
     if( !wedgeLstNode.isEmpty() )
@@ -136,29 +133,28 @@ void CWheelView::LoadWedges( const XMLNode & node, const std::string & group )
                 throw NExcept::CCriticalException("Wheel View Wedge Creation Error!",
                     boost::str( boost::format("Wheel view wedge symbol ID missing (%s)!\n\n%s\nLine: %s")
                         % group % __FUNCTION__ % __LINE__ ));
-            
+
             // Symbol, wedge, it's all the same thing... a container for sprites
             const std::string symbId = wedgeNode.getAttribute( "symb" );
-            m_symbolDeq.emplace_back( m_rSymbolSetView.GetSpriteData(symbId), symbId );
-            
+            m_symbolDeq.emplace_back( m_rSymbolSetView.getSpriteData(symbId), symbId );
+
             m_symbolDeq.back().loadTransFromNode( wedgeNode );
         }
     }
-    
-}   // LoadWedges
+}
 
 
 /************************************************************************
 *    desc:  Load the wheel wedges from node
 *           NOTE: These are sprites that don't spin with the wheel
 ************************************************************************/
-void CWheelView::LoadSprites( const XMLNode & node, const std::string & group )
+void CWheelView::loadSprites( const XMLNode & node, const std::string & group )
 {
     const XMLNode nonRotateSpriteLstNode = node.getChildNode( "nonRotateSpriteList" );
     if( !nonRotateSpriteLstNode.isEmpty() )
     {
         const XMLNode spriteLstNode = nonRotateSpriteLstNode.getChildNode( "spriteList" );
-        
+
         for( int i = 0; i < spriteLstNode.nChildNode(); ++i )
         {
             // Sanity check for the object name
@@ -172,35 +168,32 @@ void CWheelView::LoadSprites( const XMLNode & node, const std::string & group )
             m_spriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
-    
-}   // LoadWedges
+}
 
 
 /************************************************************************
 *    desc:  One time transform to set the non-spinning wheel sprites
 ************************************************************************/
-void CWheelView::PreTransform()
+void CWheelView::preTransform()
 {
     for( auto & iter : m_spriteDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // PreTransform
+}
 
 
 /************************************************************************
 *    desc:  Set the spin profile
 ************************************************************************/
-void CWheelView::SetSpinProfile( const CSpinProfile & spinProfile )
+void CWheelView::setSpinProfile( const CSpinProfile & spinProfile )
 {
     m_spinProfile = spinProfile;
-    
-}   // SetSpinProfile
+}
 
 
 /************************************************************************
 *    desc:  Update the reel strip
 ************************************************************************/
-void CWheelView::Update()
+void CWheelView::update()
 {
     if( m_spin )
     {
@@ -210,25 +203,25 @@ void CWheelView::Update()
             case NSlotDefs::ESS_STOPPED:
             {
                 if( m_spinDir == NSlotDefs::EDS_CLOCKWISE )
-                    m_winPointDegree = m_PI_2 - (m_degreePerWedge * (m_rSlotStripModel.GetStop()));
+                    m_winPointDegree = m_PI_2 - (m_degreePerWedge * (m_rSlotStripModel.getStop()));
                 else
                 {
                     // Special condition for stop zero checks
-                    if( m_rSlotStripModel.GetStop() == 0 )
+                    if( m_rSlotStripModel.getStop() == 0 )
                         m_winPointDegree = m_PI_2;
                     else
-                        m_winPointDegree = m_degreePerWedge * m_rSlotStripModel.GetStop();
+                        m_winPointDegree = m_degreePerWedge * m_rSlotStripModel.getStop();
                 }
-                
+
                 m_velocity = 0.0;
-                m_acceleration = m_spinProfile.GetAccelation();
-                m_saftyCheckDegree = m_degreePerWedge / m_spinProfile.GetSafetyCheckDivisor();
-                m_spinTimer.set( m_spinProfile.GetStartDelay() );
+                m_acceleration = m_spinProfile.getAccelation();
+                m_saftyCheckDegree = m_degreePerWedge / m_spinProfile.getSafetyCheckDivisor();
+                m_spinTimer.set( m_spinProfile.getStartDelay() );
                 m_spinState = NSlotDefs::ESS_SPIN_STARTING;
-                
+
                 break;
             }
-            
+
             case NSlotDefs::ESS_SPIN_STARTING:
             {
                 if( m_spinTimer.expired() )
@@ -236,48 +229,48 @@ void CWheelView::Update()
                     // Increment the velocity and acceleration
                     const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                     m_velocity += m_acceleration * elapsedTime;
-                    m_acceleration += m_spinProfile.GetImpulse() * elapsedTime;
-                    
+                    m_acceleration += m_spinProfile.getImpulse() * elapsedTime;
+
                     // Cap the velocity at the max speed
-                    if( m_velocity >= m_spinProfile.GetMaxVelocity() )
+                    if( m_velocity >= m_spinProfile.getMaxVelocity() )
                     {
-                        m_velocity = m_spinProfile.GetMaxVelocity();
-                        m_spinTimer.set( m_spinProfile.GetMaxVelocityTime() );
+                        m_velocity = m_spinProfile.getMaxVelocity();
+                        m_spinTimer.set( m_spinProfile.getMaxVelocityTime() );
                         m_spinState = NSlotDefs::ESS_SPINNING;
                     }
-                    
-                    IncSpin( m_velocity );
+
+                    incSpin( m_velocity );
                 }
-                
+
                 break;
             }
-            
+
             case NSlotDefs::ESS_SPINNING:
             {
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 // Disable the timer if fast stop is needed
                 m_spinTimer.disable( m_disableSpinTimer );
-                
+
                 // Wait for the spin to expire and the rotation to be less then the win point degree
                 if( m_spinTimer.expired() && (m_rotation < m_winPointDegree)  )
                     m_spinState = NSlotDefs::ESS_PREPARE_TO_STOP;
-                
+
                 break;
             }
 
             case NSlotDefs::ESS_PREPARE_TO_STOP:
             {
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 // Wait for the unadjusted rotation to exceed the win point to start slowing down
                 if( (m_currentRotation > m_winPointDegree) )
                 {
                     // A velocity(4) / PI is the exact deceleration to slow down within 1 rotation
-                    float vel = m_spinProfile.GetMaxVelocity() * 1000.0;
-                    m_acceleration = 
-                        (m_velocity / ((M_PI * (4.0 / vel)) * m_spinProfile.GetDecelerationRotationCount())) / 1000.0;
-                        
+                    float vel = m_spinProfile.getMaxVelocity() * 1000.0;
+                    m_acceleration =
+                        (m_velocity / ((M_PI * (4.0 / vel)) * m_spinProfile.getDecelerationRotationCount())) / 1000.0;
+
                     m_spinState = NSlotDefs::ESS_SPIN_STOPPING;
                 }
 
@@ -285,7 +278,7 @@ void CWheelView::Update()
             }
 
             case NSlotDefs::ESS_SPIN_STOPPING:
-            {  
+            {
                 const float elapsedTime = CHighResTimer::Instance().getElapsedTime();
                 m_velocity -= m_acceleration * elapsedTime;
 
@@ -295,18 +288,18 @@ void CWheelView::Update()
                     m_velocity = 0.0;
                     m_spin = false;
                     m_disableSpinTimer = false;
-    
+
                     // Sanity check the bounds in which we stopped and reset if needed
                     float maxRot = m_winPointDegree + m_saftyCheckDegree;
                     float minRot = m_winPointDegree - m_saftyCheckDegree;
 
                     // There's a special case for the first stop
-                    if( (m_rSlotStripModel.GetStop() == 0) && (m_rotation < 6.0) )
+                    if( (m_rSlotStripModel.getStop() == 0) && (m_rotation < 6.0) )
                     {
                         if( m_rotation > m_saftyCheckDegree )
                         {
                             m_rotation = maxRot;
-                            IncSpin( m_velocity );
+                            incSpin( m_velocity );
                         }
                     }
                     else
@@ -314,43 +307,42 @@ void CWheelView::Update()
                         if( m_rotation > maxRot )
                         {
                             m_rotation = maxRot;
-                            IncSpin( m_velocity );
+                            incSpin( m_velocity );
                         }
                         else if( m_rotation < minRot )
                         {
                             m_rotation = minRot;
-                            IncSpin( m_velocity );
+                            incSpin( m_velocity );
                         }
                     }
-                    
+
                     m_spinState = NSlotDefs::ESS_STOPPED;
-                    
+
                     // Send the signal of the spin state
                     m_spinStateSignal(m_wheelId, NSlotDefs::ESS_STOPPED);
-                    
+
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
                         const int channel = CSoundMgr::Instance().getNextChannel();
                         m_pSpinStopSnd->play( channel );
                     }
-                    
+
                     break;
                 }
 
-                IncSpin( m_velocity );
-                
+                incSpin( m_velocity );
+
                 break;
             }
         }
     }
-    
-}   // Update
+}
 
 
 /************************************************************************
 *    desc:  Inc the wheel spin
 ************************************************************************/
-void CWheelView::IncSpin( float velocity )
+void CWheelView::incSpin( float velocity )
 {
     // Get the rotation traveled
     m_rotation += velocity * CHighResTimer::Instance().getElapsedTime();
@@ -360,8 +352,7 @@ void CWheelView::IncSpin( float velocity )
         m_rotation -= m_PI_2;
 
     setRot( 0, 0, m_rotation * m_spinDirVector, false );
-        
-}   // IncSpin
+}
 
 
 /************************************************************************
@@ -370,26 +361,25 @@ void CWheelView::IncSpin( float velocity )
 void CWheelView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
     CObject2D::transform( matrix, tranformWorldPos );
-    
+
     for( auto & iter : m_wheelSpriteDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
-    
+
     for( auto & iter : m_symbolDeq )
         iter.transform( getMatrix(), wasWorldPosTranformed() );
-    
-}   // Transform
+}
 
 
 /************************************************************************
 *    desc:  Do the render
 ************************************************************************/
-void CWheelView::Render( const CMatrix & matrix )
+void CWheelView::render( const CMatrix & matrix )
 {
     for( auto & iter : m_wheelSpriteDeq )
         iter.render( matrix );
 
     for( auto & iter : m_symbolDeq )
-        iter.Render( matrix );
+        iter.render( matrix );
 
     for( auto & iter : m_spriteDeq )
         iter.render( matrix );
@@ -399,57 +389,53 @@ void CWheelView::Render( const CMatrix & matrix )
 /************************************************************************
 *    desc:  Do the deferred render
 ************************************************************************/
-void CWheelView::DeferredRender( const CMatrix & matrix )
+void CWheelView::deferredRender( const CMatrix & matrix )
 {
-    
+
 }
 
 
 /************************************************************************
 *    desc:  Start the spin
 ************************************************************************/
-void CWheelView::StartSpin()
+void CWheelView::startSpin()
 {
     m_spin = true;
-    
-}   // StartSpin
+}
 
 
 /************************************************************************
 *    desc:  Stop the spin
 ************************************************************************/
-void CWheelView::StopSpin()
+void CWheelView::stopSpin()
 {
     if( m_spin && (m_spinState < NSlotDefs::ESS_SPIN_STOPPING) )
         m_disableSpinTimer = true;
-        
-}   // StopSpin
+}
 
 
 /************************************************************************
 *    desc:  Get the spin state
 ************************************************************************/
-NSlotDefs::ESpinState CWheelView::GetSpinState() const
+NSlotDefs::ESpinState CWheelView::getSpinState() const
 {
     return m_spinState;
-    
-}   // GetSpinState
+}
 
 
 /************************************************************************
 *    desc:  Connect to the spin state signal
 ************************************************************************/
-void CWheelView::Connect_SpinState( const SpinStateSignal::slot_type & slot )
+void CWheelView::connect_spinState( const SpinStateSignal::slot_type & slot )
 {
     m_spinStateSignal.connect(slot);
-
-}   // Connect_SpinState
+}
 
 
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CWheelView::AllowStopSounds( bool allow )
+void CWheelView::allowStopSounds( bool allow )
 {
     m_allowStopSounds = allow;
 }
@@ -458,7 +444,7 @@ void CWheelView::AllowStopSounds( bool allow )
 /************************************************************************
 *    desc:  Get the number of visible symbols (wedges) on this wheel
 ************************************************************************/
-size_t CWheelView::GetVisibleSymbolCount() const
+size_t CWheelView::getVisibleSymbolCount() const
 {
     return m_symbolDeq.size();
 }
@@ -467,19 +453,18 @@ size_t CWheelView::GetVisibleSymbolCount() const
 /************************************************************************
 *    desc:  Get the symbol for this spot on the wheel
 ************************************************************************/
-CSymbol2d & CWheelView::GetSymbol( int index )
+CSymbol2d & CWheelView::getSymbol( int index )
 {
     // Get the math symbol
-    int stop = m_rSlotStripModel.GetStop() + index;
-    
-    if( m_symbolDeq.size() == m_rSlotStripModel.GetStripVec().size() )
+    int stop = m_rSlotStripModel.getStop() + index;
+
+    if( m_symbolDeq.size() == m_rSlotStripModel.getStripVec().size() )
     {
-        const int index = m_rSlotStripModel.GetSymbolIndex( stop );
-        
+        const int index = m_rSlotStripModel.getSymbolIndex( stop );
+
         return m_symbolDeq.at(index);
     }
-    
+
     // TODO: Need to handle this condition of unmatched math and visual symbol counts
     return m_symbolDeq.at(0);
-    
-}   // GetSymbol
+}

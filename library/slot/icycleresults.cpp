@@ -21,55 +21,51 @@ iCycleResults::iCycleResults( CPlayResult * pPlayResult ) :
     m_firstCycleComplete(false),
     m_cycleResultsActive(false)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 iCycleResults::~iCycleResults()
 {
-}   // destructor
+}
 
 
 /***************************************************************************
 *    desc:  Activate the cycle results
 ****************************************************************************/
-void iCycleResults::Activate()
+void iCycleResults::activate()
 {
     m_cycleResultsActive = true;
     m_firstCycleComplete = false;
     m_cyclePayCounter = 0;
     m_curPayIndex = 0;
-    
-}   // Activate
+}
 
 
 /***************************************************************************
 *    desc:  Deactivate the cycle results
 ****************************************************************************/
-void iCycleResults::Deactivate()
+void iCycleResults::deactivate()
 {
     m_cycleResultsActive = false;
-    
-}   // Deactivate
+}
 
 
 /***************************************************************************
 *    desc:  Did we complete one animation cycle of all the pays?
 ****************************************************************************/
-bool iCycleResults::IsFirstCycleComplete()
+bool iCycleResults::isFirstCycleComplete()
 {
     return m_firstCycleComplete;
-    
-}   // IsFirstCycleComplete
+}
 
 
 /***************************************************************************
 *    desc:  Is the cycle results active?
 ****************************************************************************/
-bool iCycleResults::IsCycleResultsActive()
+bool iCycleResults::isCycleResultsActive()
 {
     return m_cycleResultsActive;
-    
-}   // IsCycleResultsActive
+}

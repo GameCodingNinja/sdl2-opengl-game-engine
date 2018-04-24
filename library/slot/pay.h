@@ -30,28 +30,28 @@ public:
         const std::vector<CSymbPos> & symbPos );
     
     // Get the pay type
-    NSlotDefs::EPayType GetPayType() const;
+    NSlotDefs::EPayType getPayType() const;
     
     // Get the base award
-    uint GetBaseAward() const;
+    uint getBaseAward() const;
     
     // Get the final award
-    uint GetFinalAward() const;
+    uint getFinalAward() const;
     
     // Get the multiplier
-    uint GetMultiplier() const;
+    uint getMultiplier() const;
     
     // Get the pay line
-    int GetPayLine() const;
+    int getPayLine() const;
     
     // Get the bonus code
-    int GetBonusCode() const;
+    int getBonusCode() const;
     
     // Get the symbol positions
-    const std::vector<CSymbPos> & GetSymbPos() const;
+    const std::vector<CSymbPos> & getSymbPos() const;
     
     // Debug output
-    void Debug() const;
+    void debug() const;
     
 private:
     

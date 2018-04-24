@@ -35,7 +35,7 @@ CSpinProfile::CSpinProfile() :
     m_decelerationRotationCount(1),
     m_safetyCheckDivisor(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -43,152 +43,141 @@ CSpinProfile::CSpinProfile() :
 ************************************************************************/
 CSpinProfile::~CSpinProfile()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes reel strip data from node
 ************************************************************************/
-void CSpinProfile::LoadFromNode( const XMLNode & node )
+void CSpinProfile::loadFromNode( const XMLNode & node )
 {
     // Get the symbols per reel
     if( node.isAttributeSet( "startDelay" ) )
         m_startDelay = std::atoi(node.getAttribute( "startDelay" ));
-    
+
     // Get the acceleration
     if( node.isAttributeSet( "accelation" ) )
         m_accelation = std::atof(node.getAttribute( "accelation" )) / 1000.f;
-    
+
     // Get the acceleration
     if( node.isAttributeSet( "impulse" ) )
         m_impulse = std::atof(node.getAttribute( "impulse" )) / 1000.f;
-    
+
     // Get the max velocity
     if( node.isAttributeSet( "maxVelocity" ) )
         m_maxVelocity = std::atof(node.getAttribute( "maxVelocity" )) / 1000.f;
-    
+
     // Get the max speed time
     if( node.isAttributeSet( "maxVelocityTime" ) )
         m_maxVelocityTime = std::atoi(node.getAttribute( "maxVelocityTime" ));
-    
+
     // Get the bounce drag
     if( node.isAttributeSet( "bounceDrag" ) )
         m_bounceDrag = std::atof(node.getAttribute( "bounceDrag" )) / 1000.f;
-    
+
     // Get the bounce distance
     if( node.isAttributeSet( "bounceCorrection" ) )
         m_bounceCorrection = std::atoi(node.getAttribute( "bounceCorrection" ));
-    
+
     // Get the time out delay
     if( node.isAttributeSet( "timeOutDelay" ) )
         m_timeOutDelay = std::atof(node.getAttribute( "timeOutDelay" ));
-    
-    
+
+
     // Get the time out delay
     if( node.isAttributeSet( "decelerationRotationCount" ) )
         m_decelerationRotationCount = std::atof(node.getAttribute( "decelerationRotationCount" ));
-    
+
     // Get the time out delay
     if( node.isAttributeSet( "safetyCheckDivisor" ) )
         m_safetyCheckDivisor = std::atof(node.getAttribute( "safetyCheckDivisor" ));
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Get the start delay
 ************************************************************************/
-int CSpinProfile::GetStartDelay() const
+int CSpinProfile::getStartDelay() const
 {
     return m_startDelay;
-    
-}   // GetStartDelay
+}
 
 
 /************************************************************************
 *    desc:  Get the acceleration
 ************************************************************************/
-double CSpinProfile::GetAccelation() const
+double CSpinProfile::getAccelation() const
 {
     return m_accelation;
-    
-}   // GetAccelation
+}
 
 /************************************************************************
 *    desc:  Get the impulse
 ************************************************************************/
-double CSpinProfile::GetImpulse() const
+double CSpinProfile::getImpulse() const
 {
     return m_impulse;
-    
-}   // GetImpulse
+}
 
 
 /************************************************************************
 *    desc:  Get the max velocity
 ************************************************************************/
-double CSpinProfile::GetMaxVelocity() const
+double CSpinProfile::getMaxVelocity() const
 {
     return m_maxVelocity;
-    
-}   // GetMaxVelocity
+}
 
 
 /************************************************************************
 *    desc:  Get the max speed time
 ************************************************************************/
-int CSpinProfile::GetMaxVelocityTime() const
+int CSpinProfile::getMaxVelocityTime() const
 {
     return m_maxVelocityTime;
-    
-}   // GetMaxVelocityTime
+}
 
 
 /************************************************************************
 *    desc:  Get the bounce drag
 ************************************************************************/
-double CSpinProfile::GetBounceDrag() const
+double CSpinProfile::getBounceDrag() const
 {
     return m_bounceDrag;
-    
-}   // GetBounceDrag
+}
 
 
 /************************************************************************
 *    desc:  Get the bounce correction
 ************************************************************************/
-int CSpinProfile::GetBounceCorrection() const
+int CSpinProfile::getBounceCorrection() const
 {
     return m_bounceCorrection;
-    
-}   // GetBounceCorrection
+}
 
 
 /************************************************************************
 *    desc:  Get the time out delay
 ************************************************************************/
-double CSpinProfile::GetTimeOutDelay() const
+double CSpinProfile::getTimeOutDelay() const
 {
     return m_timeOutDelay;
-    
-}   // GetTimeOutDelay
+}
 
 
 /************************************************************************
 *    desc:  Get the deceleration rotation count
 ************************************************************************/
-double CSpinProfile::GetDecelerationRotationCount() const
+double CSpinProfile::getDecelerationRotationCount() const
 {
     return m_decelerationRotationCount;
-    
-}   // GetDecelerationRotationCount
+}
 
 
 /************************************************************************
 *    desc:  Get the safety check divisor
 ************************************************************************/
-double CSpinProfile::GetSafetyCheckDivisor() const
+double CSpinProfile::getSafetyCheckDivisor() const
 {
     return m_safetyCheckDivisor;
-    
-}   // GetSafetyCheckDivisor
+}

@@ -47,60 +47,60 @@ public:
     virtual ~CWheelView();
     
     // Create the reel strip from data node
-    void Create( const XMLNode & node, const std::string & group );
+    void create( const XMLNode & node, const std::string & group );
     
     // One time transform to set the non-spinning wheel sprites
-    void PreTransform();
+    void preTransform();
     
     // Update the reel strip
-    void Update();
+    void update();
     
     // Transform the reel strip
     void transform( const CMatrix & matrix, bool tranformWorldPos = false ) override;
     
     // Do the render
-    void Render( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
     
     // Do the deferred render
-    void DeferredRender( const CMatrix & matrix );
+    void deferredRender( const CMatrix & matrix );
     
     // Start the spin
-    void StartSpin();
+    void startSpin();
     
     // Stop the spin
-    void StopSpin();
+    void stopSpin();
     
     // Set the spin profile
-    void SetSpinProfile( const CSpinProfile & spinProfile );
+    void setSpinProfile( const CSpinProfile & spinProfile );
     
     // Get the spin state
-    NSlotDefs::ESpinState GetSpinState() const;
+    NSlotDefs::ESpinState getSpinState() const;
     
     // Connect to the spin state signal
-    void Connect_SpinState( const SpinStateSignal::slot_type & slot );
+    void connect_spinState( const SpinStateSignal::slot_type & slot );
     
     // Do we allow the stop sounds?
-    void AllowStopSounds( bool allow );
+    void allowStopSounds( bool allow );
     
     // Get the number of visible symbols (wedges) on this wheel
-    size_t GetVisibleSymbolCount() const;
+    size_t getVisibleSymbolCount() const;
     
     // Get the symbol for this spot on the wheel
-    CSymbol2d & GetSymbol( int index );
+    CSymbol2d & getSymbol( int index );
     
 private:
     
     // Load the wheel wedges from node
-    void LoadWheelSprites( const XMLNode & node, const std::string & group );
+    void loadWheelSprites( const XMLNode & node, const std::string & group );
     
     // Load the wheel wedges from node
-    void LoadWedges( const XMLNode & node, const std::string & group );
+    void loadWedges( const XMLNode & node, const std::string & group );
     
     // Load the wheel wedges from node
-    void LoadSprites( const XMLNode & node, const std::string & group );
+    void loadSprites( const XMLNode & node, const std::string & group );
     
     // Inc the reel spin
-    void IncSpin( float speed );
+    void incSpin( float speed );
     
 private:
     
@@ -175,7 +175,6 @@ private:
     
     // Do we allow stop sounds
     bool m_allowStopSounds;
-
 };
 
 #endif  // __wheel_view_h__

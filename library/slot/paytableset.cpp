@@ -15,23 +15,22 @@ CPaytableSet::CPaytableSet( const NSlotDefs::EPayType type, const std::string & 
     m_type(type),
     m_id(id)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the paytable ID
 ************************************************************************/
-const std::string & CPaytableSet::GetId() const
+const std::string & CPaytableSet::getId() const
 {
     return m_id;
-    
-}   // GetId
+}
 
 
 /************************************************************************
 *    desc:  Get the paytable type
 ************************************************************************/
-NSlotDefs::EPayType CPaytableSet::GetType() const
+NSlotDefs::EPayType CPaytableSet::getType() const
 {
     return m_type;
 }

@@ -70,7 +70,7 @@ void CBigPayBackState::Init()
     
     // Hook the Play button to the reel group
     CUIButton & rPlayBtn = CMenuManager::Instance().getMenuControl<CUIButton>( "base_game_menu", "play_btn" );
-    rPlayBtn.connect_executionAction( boost::bind(&CSlotGame::PlayGame, &m_slotGame, _1) );
+    rPlayBtn.connect_executionAction( boost::bind(&CSlotGame::playGame, &m_slotGame, _1) );
 
     // Hook the total bet call back function to the total bet meter
     auto & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
@@ -80,18 +80,18 @@ void CBigPayBackState::Init()
     rTotalBetIncBtn.connect_executionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
     
     // Create a play result
-    auto & rPlayResult = m_slotGame.CreatePlayResult();
+    auto & rPlayResult = m_slotGame.createPlayResult();
     
     // Create the slot group
-    m_slotGame.AddSlotGroup(
+    m_slotGame.addSlotGroup(
         NSlotGroupFactory::Create(
             NSlotDefs::ED_REEL,
             "main_reel_strip",
             "main_paytable",
-            CSlotMathMgr::Instance().GetSlotMath( m_stateGroup, "slot" ),
+            CSlotMathMgr::Instance().getSlotMath( m_stateGroup, "slot" ),
             CXMLPreloader::Instance().getNode( std::get<0>(NBigPayBack::reelGrpCfg) ),
             CXMLPreloader::Instance().getNode( std::get<0>(NBigPayBack::spinProfileCfg) ),
-            CSymbolSetViewMgr::Instance().Get( m_stateGroup, "base_game" ),
+            CSymbolSetViewMgr::Instance().get( m_stateGroup, "base_game" ),
             rPlayResult,
             std::move(std::unique_ptr<iCycleResults>(new CAnimatedCycleResults( &rPlayResult ))) ) );
     
@@ -101,20 +101,20 @@ void CBigPayBackState::Init()
         &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "menu_btn" ),
         &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
         &rTotalBetMeter };
-    m_frontPanel.SetButtons( &rPlayBtn, btnVec );
+    m_frontPanel.setButtons( &rPlayBtn, btnVec );
     
-    m_frontPanel.SetMeters(
+    m_frontPanel.setMeters(
         &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
         &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
     
     // Add slot game component
-    m_slotGame.SetFrontPanel( &m_frontPanel );
-    m_slotGame.SetGameMusic( &m_baseGameMusic );
+    m_slotGame.setFrontPanel( &m_frontPanel );
+    m_slotGame.setGameMusic( &m_baseGameMusic );
     
     m_pig.setPos( CPoint<float>(-875,-200,0) );
     
     // Init the credit meter
-    CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().GetCredits()  );
+    CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits()  );
     
     // Clear any preloaded XML files
     CXMLPreloader::Instance().clear();
@@ -137,9 +137,9 @@ void CBigPayBackState::Init()
 void CBigPayBackState::AllowMusic( bool allow )
 {
     if( !allow )
-        m_baseGameMusic.FastFadeDown();
+        m_baseGameMusic.fastFadeDown();
     
-    m_baseGameMusic.AllowMusic( allow );
+    m_baseGameMusic.allowMusic( allow );
     
 }   // AllowSpinMusic
 
@@ -149,7 +149,7 @@ void CBigPayBackState::AllowMusic( bool allow )
 ************************************************************************/
 void CBigPayBackState::AllowStopSounds( bool allow )
 {
-    m_slotGame.AllowStopSounds( allow );
+    m_slotGame.allowStopSounds( allow );
     
 }   // AllowStopSounds
 
@@ -160,7 +160,7 @@ void CBigPayBackState::AllowStopSounds( bool allow )
 void CBigPayBackState::TotalBetCallBack(CUIControl *)
 {
     const CUIButtonList & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
-    CBetMgr::Instance().SetLineBet( rTotalBetMeter.getActiveIndex() + 1 );
+    CBetMgr::Instance().setLineBet( rTotalBetMeter.getActiveIndex() + 1 );
     
 }   // TotalBetCallBack
 
@@ -179,12 +179,12 @@ void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
         if( rEvent.user.code == NMenu::ETC_BEGIN )
         {
             m_scriptComponent.prepare( m_stateGroup, "Screen_FadeOut" );
-            m_baseGameMusic.FastFadeDown();
+            m_baseGameMusic.fastFadeDown();
         }
     }
     else if( rEvent.type == SDL_APP_WILLENTERBACKGROUND )
     {
-        if( m_slotGame.GetState() == NSlotDefs::ESLOT_IDLE )
+        if( m_slotGame.getState() == NSlotDefs::ESLOT_IDLE )
             CSoundMgr::Instance().stopMusic();
     }
 
@@ -196,7 +196,7 @@ void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CBigPayBackState::MiscProcess()
 {
-    m_slotGame.ProcessGameState();
+    m_slotGame.processGameState();
     
 }   // MiscProcess
 
@@ -212,10 +212,10 @@ void CBigPayBackState::Update()
     
     m_scriptComponent.update();
     
-    m_baseGameMusic.Update();
+    m_baseGameMusic.update();
     
     if( !CMenuManager::Instance().isMenuActive() )
-        m_slotGame.Update();
+        m_slotGame.update();
 
 }   // Update
 
@@ -230,7 +230,7 @@ void CBigPayBackState::Transform()
     CMenuManager::Instance().transformInterface();
     m_background.transform();
     m_pig.transform();
-    m_slotGame.Transform();
+    m_slotGame.transform();
 
 }   // Transform
 
@@ -242,7 +242,7 @@ void CBigPayBackState::PreRender()
 {
     const CMatrix & orthoMatrix = CCameraMgr::Instance().getDefaultProjMatrix();
     m_background.render( orthoMatrix );
-    m_slotGame.Render( orthoMatrix );
+    m_slotGame.render( orthoMatrix );
     m_pig.render( orthoMatrix );
     
     CCommonState::PreRender();
@@ -282,13 +282,13 @@ namespace NBigPayBack
         CScriptManager::Instance().loadGroup("(big_pay_back)");
         
         // Load the slot group stuff
-        CSymbolSetViewMgr::Instance().LoadGroup( "(big_pay_back)" );
-        CSlotMathMgr::Instance().LoadGroup( "(big_pay_back)" );
-        CSlotMathMgr::Instance().LoadPaylineSetFromFile( "data/objects/2d/slot/payline_4x5.cfg" );
+        CSymbolSetViewMgr::Instance().loadGroup( "(big_pay_back)" );
+        CSlotMathMgr::Instance().loadGroup( "(big_pay_back)" );
+        CSlotMathMgr::Instance().loadPaylineSetFromFile( "data/objects/2d/slot/payline_4x5.cfg" );
         
-        // Set the line bet and the total numvber of lines bet
-        CBetMgr::Instance().SetLineBet(1);
-        CBetMgr::Instance().SetTotalLines( CSlotMathMgr::Instance().GetPaylineSet("40_4x5").GetLineData().size() );
+        // Set the line bet and the total number of lines bet
+        CBetMgr::Instance().setLineBet(1);
+        CBetMgr::Instance().setTotalLines( CSlotMathMgr::Instance().getPaylineSet("40_4x5").getLineData().size() );
         
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
@@ -317,7 +317,7 @@ namespace NBigPayBack
         CObjectDataMgr::Instance().freeGroup2D( "(big_pay_back)" );
         
         // Unload the slot group stuff
-        CSymbolSetViewMgr::Instance().Clear();
+        CSymbolSetViewMgr::Instance().clear();
     }
     
     void Unload()
@@ -326,7 +326,7 @@ namespace NBigPayBack
         CMenuManager::Instance().freeGroup("(big_pay_back)");
         
         // Unload the slot group stuff
-        CSlotMathMgr::Instance().Clear();
+        CSlotMathMgr::Instance().clear();
         
         // Unload state specific AngelScript functions
         CScriptManager::Instance().freeGroup("(big_pay_back)");

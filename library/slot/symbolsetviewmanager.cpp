@@ -21,7 +21,7 @@
 ************************************************************************/
 CSymbolSetViewMgr::CSymbolSetViewMgr()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -29,13 +29,13 @@ CSymbolSetViewMgr::CSymbolSetViewMgr()
 ************************************************************************/
 CSymbolSetViewMgr::~CSymbolSetViewMgr()
 {
-}   // destructor
+}
 
 
 /************************************************************************
  *    desc:  Get the symbol set view
  ************************************************************************/
-CSymbolSetView & CSymbolSetViewMgr::Get( const std::string & group, const std::string & name )
+CSymbolSetView & CSymbolSetViewMgr::get( const std::string & group, const std::string & name )
 {
     auto groupMapIter = m_symbolSetViewMap.find( group );
     if( groupMapIter == m_symbolSetViewMap.end() )
@@ -50,14 +50,13 @@ CSymbolSetView & CSymbolSetViewMgr::Get( const std::string & group, const std::s
                 % group % name % __FUNCTION__ % __LINE__ ));
 
     return dataMapIter->second;
-
-}   // GetViewData
+}
 
 
 /************************************************************************
  *    desc:  Load all of the symbols of a specific group
  ************************************************************************/
-void CSymbolSetViewMgr::LoadGroup( const std::string & group )
+void CSymbolSetViewMgr::loadGroup( const std::string & group )
 {
     // Make sure the group we are looking has been defined in the list table file
     auto listTableIter = m_listTableMap.find( group );
@@ -73,7 +72,7 @@ void CSymbolSetViewMgr::LoadGroup( const std::string & group )
         m_symbolSetViewMap.emplace( group, std::map<const std::string, CSymbolSetView>() );
 
         for( auto & iter : listTableIter->second )
-            LoadFromXML( group, iter );
+            loadFromXML( group, iter );
     }
     else
     {
@@ -81,14 +80,13 @@ void CSymbolSetViewMgr::LoadGroup( const std::string & group )
             boost::str( boost::format("Symbol config group has alread been loaded (%s).\n\n%s\nLine: %s")
             % group % __FUNCTION__ % __LINE__ ));
     }
-
-}   // LoadGroup
+}
 
 
 /************************************************************************
  *    desc:  Load all symbol information from an xml
  ************************************************************************/
-void CSymbolSetViewMgr::LoadFromXML( const std::string & group, const std::string & filePath )
+void CSymbolSetViewMgr::loadFromXML( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode symbolSetListNode = XMLNode::openFileHelper( filePath.c_str(), "symbolSetList" );
@@ -106,7 +104,7 @@ void CSymbolSetViewMgr::LoadFromXML( const std::string & group, const std::strin
 
         // Allocate the symbol to the map
         auto iter = groupMapIter->second.emplace( name, group );
-        
+
         // Check for duplicate names
         if( !iter.second )
         {
@@ -114,18 +112,17 @@ void CSymbolSetViewMgr::LoadFromXML( const std::string & group, const std::strin
                 boost::str( boost::format("Duplicate symbol set (%s - %s).\n\n%s\nLine: %s")
                     % name % group % __FUNCTION__ % __LINE__ ));
         }
-        
+
         // Load in the symbol set data
-        iter.first->second.LoadFromNode( symbolSetNode, name );
+        iter.first->second.loadFromNode( symbolSetNode, name );
     }
-    
-}   // LoadFromXML
+}
 
 
 /************************************************************************
 *    desc:  Free a symbol group
 ************************************************************************/
-void CSymbolSetViewMgr::FreeGroup( const std::string & group )
+void CSymbolSetViewMgr::freeGroup( const std::string & group )
 {
     // Free the texture group if it exists
     auto mapMapIter = m_symbolSetViewMap.find( group );
@@ -134,15 +131,13 @@ void CSymbolSetViewMgr::FreeGroup( const std::string & group )
         // Erase this group
         m_symbolSetViewMap.erase( mapMapIter );
     }
-
-}   // FreeGroup
+}
 
 
 /************************************************************************
 *    desc:  Clear all the data
 ************************************************************************/
-void CSymbolSetViewMgr::Clear()
+void CSymbolSetViewMgr::clear()
 {
     m_symbolSetViewMap.clear();
-
-}   // Clear
+}

@@ -32,37 +32,37 @@ public:
     virtual ~CSpinProfile();
     
     // Load thes reel strip data from node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
     
     // Get the start delay
-    int GetStartDelay() const;
+    int getStartDelay() const;
     
     // Get the acceleration
-    double GetAccelation() const;
+    double getAccelation() const;
     
     // Get the impulse
-    double GetImpulse() const;
+    double getImpulse() const;
     
     // Get the max velocity
-    double GetMaxVelocity() const;
+    double getMaxVelocity() const;
     
     // Get the max velocity time
-    int GetMaxVelocityTime() const;
+    int getMaxVelocityTime() const;
     
     // Get the bounce drag
-    double GetBounceDrag() const;
+    double getBounceDrag() const;
     
     // Get the bounce correction
-    int GetBounceCorrection() const;
+    int getBounceCorrection() const;
     
     // Get the time out delay
-    double GetTimeOutDelay() const;
+    double getTimeOutDelay() const;
 
     // Get the deceleration rotation count
-    double GetDecelerationRotationCount() const;
+    double getDecelerationRotationCount() const;
     
     // GGet the safety check divisor
-    double GetSafetyCheckDivisor() const;
+    double getSafetyCheckDivisor() const;
     
 private:
     

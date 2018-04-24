@@ -17,44 +17,40 @@ CPayCombo::CPayCombo( const std::string & symb, const int count, const uint awar
     m_award(award),
     m_bonusCode(bonusCode)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the symbol ID
 ************************************************************************/
-const std::string & CPayCombo::GetSymbol() const
+const std::string & CPayCombo::getSymbol() const
 {
     return m_symbol;
-    
-}   // GetSymbol
+}
 
 
 /************************************************************************
 *    desc:  Get the number of symbols involved in this pay
 ************************************************************************/
-int CPayCombo::GetCount() const
+int CPayCombo::getCount() const
 {
     return m_count;
-    
-}   // GetCount
+}
 
 
 /************************************************************************
 *    desc:  Get the award
 ************************************************************************/
-uint CPayCombo::GetAward() const
+uint CPayCombo::getAward() const
 {
     return m_award;
-    
-}   // GetAward
+}
 
 
 /************************************************************************
 *    desc:  Get the bonus code
 ************************************************************************/
-int CPayCombo::GetBonusCode() const
+int CPayCombo::getBonusCode() const
 {
     return m_bonusCode;
-    
-}   // GetBonusCode
+}

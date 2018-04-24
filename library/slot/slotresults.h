@@ -22,22 +22,22 @@ public:
     CSlotResults();
     
     // Create a new play results entry into the vector
-    CPlayResult & Create();
+    CPlayResult & create();
     
     // Clear the pays
-    void Clear();
+    void clear();
     
     // Sort the pays
-    void SortPays();
+    void sortPays();
     
     // Add up the win
-    void AddUpWin();
+    void addUpWin();
     
     // Get the total win
-    uint GetTotalWin();
+    uint getTotalWin();
     
     // Do we have a win
-    bool IsWin();
+    bool isWin();
     
 private:
     

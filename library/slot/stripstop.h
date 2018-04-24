@@ -19,10 +19,10 @@ public:
     CStripStop( const CMathSymbol & rMathSymbol, int weight );
     
     // Get the math symbol weight
-    int GetWeight() const;
+    int getWeight() const;
     
     // Get the math symbol
-    const CMathSymbol & GetMathSymbol() const;
+    const CMathSymbol & getMathSymbol() const;
     
 private:
     

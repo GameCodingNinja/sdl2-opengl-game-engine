@@ -28,98 +28,90 @@ CPay::CPay(
         m_payLine(payLine),
         m_symbPosVec(symbPos)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the pay type
 ************************************************************************/
-NSlotDefs::EPayType CPay::GetPayType() const
+NSlotDefs::EPayType CPay::getPayType() const
 {
     return m_payType;
-    
-}   // GetPayType
+}
 
 
 /************************************************************************
 *    desc:  Get the award
 ************************************************************************/
-uint CPay::GetBaseAward() const
+uint CPay::getBaseAward() const
 {
     return m_award;
-    
-}   // GetBaseAward
+}
 
 
 /************************************************************************
 *    desc:  Get the final award
 ************************************************************************/
-uint CPay::GetFinalAward() const
+uint CPay::getFinalAward() const
 {
     return m_award * m_multiplier;
-    
-}   // GetAward
+}
 
 
 /************************************************************************
 *    desc:  Get the multiplier
 ************************************************************************/
-uint CPay::GetMultiplier() const
+uint CPay::getMultiplier() const
 {
     return m_multiplier;
-    
-}   // GetMultiplier
+}
 
 
 /************************************************************************
 *    desc:  Get the pay line
 ************************************************************************/
-int CPay::GetPayLine() const
+int CPay::getPayLine() const
 {
     return m_payLine;
-    
-}   // GetPayLine
+}
 
 
 /************************************************************************
 *    desc:  Get the bonus code
 ************************************************************************/
-int CPay::GetBonusCode() const
+int CPay::getBonusCode() const
 {
     return m_bonusCode;
-    
-}   // GetBonusCode
+}
 
 
 /************************************************************************
 *    desc:  Get the symbol positions
 ************************************************************************/
-const std::vector<CSymbPos> & CPay::GetSymbPos() const
+const std::vector<CSymbPos> & CPay::getSymbPos() const
 {
     return m_symbPosVec;
-    
-}   // GetSymbPos
+}
 
 
 /************************************************************************
 *    desc:  Debug output
 ************************************************************************/
-void CPay::Debug() const
+void CPay::debug() const
 {
     std::cout << "Pay Type: ";
-    
+
     if( m_payType == NSlotDefs::EP_PAYLINE )
         std::cout << "Pay Line - " << (m_payLine + 1) << std::endl;
     else
         std::cout << "Scatter" << std::endl;
-    
+
     std::cout << "Bonus Code: " << m_bonusCode << std::endl;
     std::cout << "Award: " << m_award << std::endl;
     std::cout << "Multiplier: " << m_multiplier << std::endl;
     std::cout << "Symbol Pos:";
     for( auto & iter: m_symbPosVec )
-        std::cout << " (reel: " << iter.GetReel() << ", pos: " << iter.GetPos() << ")";
-    
+        std::cout << " (reel: " << iter.getReel() << ", pos: " << iter.getPos() << ")";
+
     std::cout << std::endl << "__________________________________" << std::endl << std::endl;
-    
-}   // Debug
+}

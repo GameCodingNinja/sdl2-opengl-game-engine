@@ -29,7 +29,7 @@ CFrontPanel::CFrontPanel() :
 /************************************************************************
 *    desc:  Set the buttons
 ************************************************************************/
-void CFrontPanel::SetButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & pOtherBtnVec )
+void CFrontPanel::setButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & pOtherBtnVec )
 {
     m_pPlayBtn = pPlayBtn;
     m_pOtherBtnVec = pOtherBtnVec;
@@ -39,86 +39,80 @@ void CFrontPanel::SetButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & 
 /************************************************************************
 *    desc:  Set the meters
 ************************************************************************/
-void CFrontPanel::SetMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter )
+void CFrontPanel::setMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter )
 {
     m_pWinMeter = pWinMeter;
     m_pCreditMeter = pCreditMeter;
-    
-}   // SetMeters
+}
 
 
 /************************************************************************
 *    desc:  Init a new game
 ************************************************************************/
-void CFrontPanel::InitGame( uint credits )
+void CFrontPanel::initGame( uint credits )
 {
     if( m_pWinMeter != nullptr )
         m_pWinMeter->clear();
-    
+
     if( m_pCreditMeter != nullptr )
         m_pCreditMeter->set( credits );
-    
+
     for( auto iter : m_pOtherBtnVec )
         iter->disableControl();
-
-}   // InitGame
+}
 
 
 /************************************************************************
 *    desc:  Start the bang up
 ************************************************************************/
-void CFrontPanel::StartBangUp( uint win, uint credits )
+void CFrontPanel::startBangUp( uint win, uint credits )
 {
     if( m_pWinMeter != nullptr )
         m_pWinMeter->startBangUp( win );
-    
+
     if( m_pCreditMeter != nullptr )
         m_pCreditMeter->startBangUp( credits );
-
-}   // StartBangUp
+}
 
 
 /************************************************************************
 *    desc:  Are the meters banging
 ************************************************************************/
-bool CFrontPanel::IsBanging()
+bool CFrontPanel::isBanging()
 {
     bool result(false);
-    
+
     if( m_pWinMeter != nullptr )
         result |= m_pWinMeter->isBanging();
-    
+
     if( m_pCreditMeter != nullptr )
         result |= m_pCreditMeter->isBanging();
-    
+
     return result;
-    
-}   // IsBanging
+}
 
 
 /************************************************************************
 *    desc:  Start the fast bang
 ************************************************************************/
-void CFrontPanel::FastBang()
+void CFrontPanel::fastBang()
 {
     if( m_pWinMeter != nullptr )
         m_pWinMeter->fastBang();
-    
+
     if( m_pCreditMeter != nullptr )
         m_pCreditMeter->fastBang();
-    
-}   // FastBang
+}
 
 
 /************************************************************************
 *    desc:  Enable the buttons
 ************************************************************************/
-void CFrontPanel::EnableButtons( bool allowPlay )
+void CFrontPanel::enableButtons( bool allowPlay )
 {
     for( auto iter : m_pOtherBtnVec )
         iter->enableControl();
-    
+
     if( (m_pPlayBtn != nullptr) && allowPlay )
         m_pPlayBtn->callSpriteScriptFuncKey( "playReady", true );
-
-}   // EnableButtons
+}

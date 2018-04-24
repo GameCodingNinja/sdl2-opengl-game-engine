@@ -24,16 +24,16 @@ public:
     CPayCombo( const std::string & symb, const int count, const uint award, const int bonusCode );
     
     // Get the symbol ID
-    const std::string & GetSymbol() const;
+    const std::string & getSymbol() const;
     
     // Get the number of symbols involved in this pay
-    int GetCount() const;
+    int getCount() const;
     
     // Get the award
-    uint GetAward() const;
+    uint getAward() const;
     
     // Get the bonus code
-    int GetBonusCode() const;
+    int getBonusCode() const;
 
 private:
     

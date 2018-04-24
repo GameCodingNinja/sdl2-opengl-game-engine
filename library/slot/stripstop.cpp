@@ -18,23 +18,22 @@ CStripStop::CStripStop( const CMathSymbol & rMathSymbol, int weight ) :
     m_rMathSymbol(rMathSymbol),
     m_weight(weight)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the math symbol weight
 ************************************************************************/
-int CStripStop::GetWeight() const
+int CStripStop::getWeight() const
 {
     return m_weight;
-    
-}   // GetWeight
+}
 
 
 /************************************************************************
 *    desc:  Get the math symbol
 ************************************************************************/
-const CMathSymbol & CStripStop::GetMathSymbol() const
+const CMathSymbol & CStripStop::getMathSymbol() const
 {
     return m_rMathSymbol;
 }

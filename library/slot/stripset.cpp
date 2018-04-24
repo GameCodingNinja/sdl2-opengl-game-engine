@@ -15,23 +15,22 @@ CStripSet::CStripSet( const std::string & id, const std::vector<int8_t> & evalSy
     m_id(id),
     m_evalSymbIndexVec(evalSymbIndexVec)
 {
-}   // constructor
+}
 
 
 /************************************************************************
 *    desc:  Get the paytable ID
 ************************************************************************/
-const std::string & CStripSet::GetId() const
+const std::string & CStripSet::getId() const
 {
     return m_id;
-    
-}   // GetId
+}
 
 
 /************************************************************************
 *    desc:  Get the evaluation symbol index count
 ************************************************************************/
-const std::vector<int8_t> & CStripSet::GetEvalIndexVec() const
+const std::vector<int8_t> & CStripSet::getEvalIndexVec() const
 {
     return m_evalSymbIndexVec;
 }
