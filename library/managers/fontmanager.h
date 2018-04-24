@@ -27,22 +27,22 @@ public:
     }
 
     // Load the material from file path
-    void LoadFromXML( const std::string & filePath, const bool createFromData = true );
+    void loadFromXML( const std::string & filePath, const bool createFromData = true );
     
     // Create the font texture from data
-    void CreateFromData();
+    void createFromData();
 
     // Get the font
-    const CFont & GetFont( const std::string & name ) const;
+    const CFont & getFont( const std::string & name ) const;
 
     // Is the font in the map. throws exception if not
-    void IsFont( const std::string & name ) const;
+    void isFont( const std::string & name ) const;
 
     // Delete a specific mesh
-    void DeleteTheFont( const std::string & key );
+    void deleteTheFont( const std::string & key );
 
     // Get the group name
-    const std::string & GetGroup() const;
+    const std::string & getGroup() const;
 
 private:
 

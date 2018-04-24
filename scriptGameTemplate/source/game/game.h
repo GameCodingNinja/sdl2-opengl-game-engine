@@ -62,15 +62,6 @@ private:
 
     // Stop the game
     void StopGame();
-
-    // Callback for when a smart gui control is created
-    void SmartGuiControlCreateCallBack( CUIControl * pUIControl );
-    
-    // Callback for when a smart menu is created
-    void SmartMenuCreateCallBack( CMenu * pMenu );
-    
-    // Call back function to create sprite ai
-    void AICreateCallBack( const std::string & aiName, iSprite * pSprite );
     
     // Callback for the state string
     void StatStringCallBack( const std::string & statStr );

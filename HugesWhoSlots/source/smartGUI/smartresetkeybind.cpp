@@ -31,7 +31,7 @@ CSmartResetKeyBindBtn::CSmartResetKeyBindBtn( CUIControl * pUIControl ) :
 void CSmartResetKeyBindBtn::execute()
 {
     // Reset the key bindings for all controls and save
-    CActionMgr::Instance().ResetKeyBindingsToDefault();
+    CActionMgr::Instance().resetKeyBindingsToDefault();
     
     // Get a pointer to the scroll box
     CMenu & rMenu = CMenuManager::Instance().getMenu( "key_bindings_menu" );

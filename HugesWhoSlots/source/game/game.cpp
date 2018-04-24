@@ -51,13 +51,13 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CGame::CGame()
 {
-    CSignalMgr::Instance().Connect_SmartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_SmartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );  
-    CShaderMgr::Instance().Connect_InitShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );  
+    CShaderMgr::Instance().connect_initShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
     
     if( NBDefs::IsDebugMode() )
         CStatCounter::Instance().Connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
@@ -66,7 +66,7 @@ CGame::CGame()
 
 
 /************************************************************************
-*    desc:  destructer                                                             
+*    desc:  destructor                                                             
 ************************************************************************/
 CGame::~CGame()
 {
@@ -103,7 +103,7 @@ void CGame::Init()
         CObjectDataMgr::Instance().LoadGroup2D( "(debug)" );
         upDebugDisplay.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D("(debug)", "debugString_font") ) );
         const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
-        CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font_debug.lst" );
+        CFontMgr::Instance().loadFromXML( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->setPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
         upDebugDisplay->getVisualComponent().setFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
         upDebugDisplay->transform();
@@ -228,7 +228,7 @@ void CGame::StopSoundsCallBack( CUIControl * pUIControl )
 void CGame::ShaderInitCallBack( const std::string & shaderId )
 {
     // Init the color for fading in
-    CShaderMgr::Instance().SetShaderColor( shaderId, "additive", CColor(0,0,0,1) );
+    CShaderMgr::Instance().setShaderColor( shaderId, "additive", CColor(0,0,0,1) );
     
 }   // ShaderInitCallBack
 
@@ -412,12 +412,12 @@ void CGame::Render()
         if( NBDefs::IsMobileDevice() )
         {
             if( CSettings::Instance().GetDebugStrVisible() && upDebugDisplay )
-                upDebugDisplay->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+                upDebugDisplay->render( CCameraMgr::Instance().getDefaultProjMatrix() );
         }
         else
         {
             if( CSettings::Instance().GetFullScreen() )
-                upDebugDisplay->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+                upDebugDisplay->render( CCameraMgr::Instance().getDefaultProjMatrix() );
         }
     }
 

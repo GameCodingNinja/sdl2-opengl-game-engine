@@ -74,7 +74,7 @@ void CObjectDataMgr::LoadGroup2D( const std::string & group, const bool createFr
     }
     
     // Free the sprite sheet data because it's no longer needed
-    CSpriteSheetMgr::Instance().Clear();
+    CSpriteSheetMgr::Instance().clear();
 
 }   // LoadGroup2D
 
@@ -140,7 +140,7 @@ void CObjectDataMgr::LoadFromXML2D( const std::string & group, const std::string
     }
     
     // If the sprite sheets were used, It's work is now done.
-    CSpriteSheetMgr::Instance().Clear();
+    CSpriteSheetMgr::Instance().clear();
 
 }   // LoadFromXML2D
 
@@ -198,8 +198,8 @@ void CObjectDataMgr::FreeGroup2D( const std::string & group, const bool freeOpen
  ************************************************************************/
 void CObjectDataMgr::FreeOpenGL2D( const std::string & group )
 {
-    CTextureMgr::Instance().DeleteTextureGroupFor2D( group );
-    CVertBufMgr::Instance().DeleteBufferGroupFor2D( group );
+    CTextureMgr::Instance().deleteTextureGroupFor2D( group );
+    CVertBufMgr::Instance().deleteBufferGroupFor2D( group );
 
 }   // FreeOpenGL2D
 
@@ -398,8 +398,8 @@ void CObjectDataMgr::FreeGroup3D( const std::string & group, const bool freeOpen
  ************************************************************************/
 void CObjectDataMgr::FreeOpenGL3D( const std::string & group )
 {
-    CTextureMgr::Instance().DeleteTextureGroupFor3D( group );
-    CMeshMgr::Instance().DeleteBufferGroup( group );
+    CTextureMgr::Instance().deleteTextureGroupFor3D( group );
+    CMeshMgr::Instance().deleteBufferGroup( group );
 
 }   // FreeOpenGL3D
 

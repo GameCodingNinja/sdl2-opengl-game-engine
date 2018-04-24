@@ -155,7 +155,7 @@ void CLobbyState::Transform()
 ****************************************************************************/
 void CLobbyState::PreRender()
 {
-    m_background.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    m_background.render( CCameraMgr::Instance().getDefaultProjMatrix() );
     
     CCommonState::PreRender();
 
@@ -187,12 +187,12 @@ namespace NLobby
         // Load the state specific menu group
         CMenuManager::Instance().loadGroup("(lobby)", CMenuManager::DONT_INIT_GROUP);
         
-        CSoundMgr::Instance().LoadGroup("(lobby)");
+        CSoundMgr::Instance().loadGroup("(lobby)");
         
         CScriptManager::Instance().LoadGroup("(lobby)");
 
         // Free the sprite sheet data manager because it's no longer needed
-        CSpriteSheetMgr::Instance().Clear();
+        CSpriteSheetMgr::Instance().clear();
         CXMLPreloader::Instance().Clear();
         
     }   // ThreadLoad
@@ -218,7 +218,7 @@ namespace NLobby
     {
         CMenuManager::Instance().freeGroup("(lobby)");
         CScriptManager::Instance().FreeGroup("(lobby)");
-        CSoundMgr::Instance().FreeGroup("(lobby)");
+        CSoundMgr::Instance().freeGroup("(lobby)");
 
     }   // Unload
 

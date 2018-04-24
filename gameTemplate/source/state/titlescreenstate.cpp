@@ -44,9 +44,9 @@ void CTitleScreenState::Init()
 
     m_cube.setScale( 3, 3, 3 );
     
-    CCameraMgr::Instance().CreatePerspective( "cube" );
-    CCameraMgr::Instance().SetActiveCameraPos( 0, 0, 20 );
-    CCameraMgr::Instance().SetActiveCameraRot( 10, 0, 0 );
+    CCameraMgr::Instance().createPerspective( "cube" );
+    CCameraMgr::Instance().setActiveCameraPos( 0, 0, 20 );
+    CCameraMgr::Instance().setActiveCameraRot( 10, 0, 0 );
     
     // Prepare the script to fade in the screen
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
@@ -108,7 +108,7 @@ void CTitleScreenState::Transform()
 
     m_background.transform();
     
-    CCameraMgr::Instance().Transform();
+    CCameraMgr::Instance().transform();
     
     //m_spriteSheetTest.Transform();
     
@@ -122,13 +122,13 @@ void CTitleScreenState::Transform()
 ****************************************************************************/
 void CTitleScreenState::PreRender()
 {
-    m_background.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    m_background.render( CCameraMgr::Instance().getDefaultProjMatrix() );
     
     //m_spriteSheetTest.Render( orthoMatrix );
     
     CCommonState::PreRender();
     
-    auto & camera = CCameraMgr::Instance().GetActiveCamera();
+    auto & camera = CCameraMgr::Instance().getActiveCamera();
     
     m_cube.render( camera.getFinalMatrix(), camera.getRotMatrix() );
     

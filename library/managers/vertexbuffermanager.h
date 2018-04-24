@@ -37,27 +37,27 @@ public:
     }
     
     // Create VBO from vertex data
-    uint32_t CreateVBO( 
+    uint32_t createVBO( 
         const std::string & group,
         const std::string & name,
         const std::vector<CVertex2D> & vertVec );
 
     // Create a IBO buffer
-    uint32_t CreateIBO(
+    uint32_t createIBO(
         const std::string & group,
         const std::string & name,
         uint8_t indexData[],
         int sizeInBytes );
 
     // Creates and manages the dynamic font indicies IBO
-    uint32_t CreateDynamicFontIBO(
+    uint32_t createDynamicFontIBO(
         const std::string & group,
         const std::string & name,
         uint16_t * pIndexData,
         int maxIndicies );
 
     // Create a scaled frame
-    uint32_t CreateScaledFrame( 
+    uint32_t createScaledFrame( 
         const std::string & group,
         const std::string & name,
         const CScaledFrame & scaledFrame,
@@ -67,7 +67,7 @@ public:
         const CRect<float> & spriteSheetOffset,
         const std::vector<CVertex2D> & vertVec );
 
-    void CreateQuad(
+    void createQuad(
         const CPoint<float> & vert,
         const CSize<float> & vSize,
         const CUV & uv,
@@ -78,7 +78,7 @@ public:
         CQuad2D & quadBuf );
     
     // Generate a scaled frame
-    void GenerateScaledFrame(
+    void generateScaledFrame(
         std::vector<CVertex2D> & vertVec,
         const CScaledFrame & scaledFrame,
         const CSize<int> & textureSize,
@@ -87,19 +87,19 @@ public:
         const CRect<float> & spriteSheetOffset );
 
     // Function call used to manage what buffer is currently bound.
-    void Bind( uint32_t vboID, uint32_t iboID );
+    void bind( uint32_t vboID, uint32_t iboID );
 
     // Unbind the buffers and reset the flag
-    void Unbind();
+    void unbind();
 
     // Delete buffer group
-    void DeleteBufferGroupFor2D( const std::string & group );
+    void deleteBufferGroupFor2D( const std::string & group );
     
     // See if a VBO already exists
-    uint32_t IsVBO( const std::string & group, const std::string & name );
+    uint32_t isVBO( const std::string & group, const std::string & name );
     
     // Get the current max font indices
-    int GetCurrentMaxFontIndices();
+    int getCurrentMaxFontIndices();
 
 private:
 

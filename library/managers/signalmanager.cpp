@@ -27,7 +27,7 @@
 ************************************************************************/
 CSignalMgr::CSignalMgr()
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -35,130 +35,96 @@ CSignalMgr::CSignalMgr()
 ************************************************************************/
 CSignalMgr::~CSignalMgr()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Connect/Disconnect to the smart gui control signal
 ************************************************************************/
-void CSignalMgr::Connect_SmartGui( const SmartGuiControlSignal::slot_type & slot )
+void CSignalMgr::connect_smartGui( const SmartGuiControlSignal::slot_type & slot )
 {
     m_smartGuiControlSignal.connect(slot);
+}
 
-}   // Connect_SmartGui
-
-void CSignalMgr::Disconnect_SmartGui()
+void CSignalMgr::disconnect_smartGui()
 {
     m_smartGuiControlSignal.disconnect_all_slots();
-
-}   // Disconnect_SmartGui
+}
 
 
 /************************************************************************
 *    desc:  Connect/Disconnect to the smart menu signal
 ************************************************************************/
-void CSignalMgr::Connect_SmartMenu( const SmartMenuSignal::slot_type & slot )
+void CSignalMgr::connect_smartMenu( const SmartMenuSignal::slot_type & slot )
 {
     m_smartMenuSignal.connect(slot);
+}
 
-}   // Connect_SmartMenu
-
-void CSignalMgr::Disconnect_SmartMenu()
+void CSignalMgr::disconnect_smartMenu()
 {
     m_smartMenuSignal.disconnect_all_slots();
-
-}   // Disconnect_SmartMenu
+}
 
 
 /************************************************************************
 *    desc:  Connect/Disconnect to the Ai create signal
 ************************************************************************/
-void CSignalMgr::Connect_AICreate( const AICreateSignal::slot_type & slot )
+void CSignalMgr::connect_aICreate( const AICreateSignal::slot_type & slot )
 {
     m_aiCreateSignal.connect(slot);
+}
 
-}   // Connect_AISpriteCreate
-
-void CSignalMgr::Disconnect_AICreate()
+void CSignalMgr::disconnect_aICreate()
 {
     m_aiCreateSignal.disconnect_all_slots();
-
-}   // Disconnect_AISpriteCreate
-
-
-/************************************************************************
-*    desc:  Connect/Disconnect to the load signal
-************************************************************************/
-void CSignalMgr::Connect_Load( const BasicFunction::slot_type & slot )
-{
-    m_loadSignal.connect(slot);
-
-}   // Connect_Load
-
-void CSignalMgr::Disconnect_Load()
-{
-    m_loadSignal.disconnect_all_slots();
-
-}   // Disconnect_Load
+}
 
 
 /************************************************************************
 *    desc:  Connect/Disconnect to the resolution change signal
 ************************************************************************/
-void CSignalMgr::Connect_ResolutionChange( const BasicFunction::slot_type & slot )
+void CSignalMgr::connect_resolutionChange( const BasicFunction::slot_type & slot )
 {
     m_resolutionChange.connect(slot);
+}
 
-}   // Connect_ResolutionChange
-
-void CSignalMgr::Disconnect_ResolutionChange()
+void CSignalMgr::disconnect_resolutionChange()
 {
     m_resolutionChange.disconnect_all_slots();
-
-}   // Disconnect_ResolutionChange
+}
 
 
 /************************************************************************
 *    desc:  Broadcast smart gui control signal
 ************************************************************************/
-void CSignalMgr::Broadcast( CUIControl * pControl )
+void CSignalMgr::broadcast( CUIControl * pControl )
 {
     m_smartGuiControlSignal(pControl);
+}
 
-}   // Broadcast
 
 /************************************************************************
 *    desc:  Broadcast smart menu signal
 ************************************************************************/
-void CSignalMgr::Broadcast( CMenu * pMenu )
+void CSignalMgr::broadcast( CMenu * pMenu )
 {
     m_smartMenuSignal(pMenu);
+}
 
-}   // Broadcast
 
 /************************************************************************
 *    desc:  Broadcast AI Sprite create signal
 ************************************************************************/
-void CSignalMgr::Broadcast( const std::string & aiName, iSprite * pSprite )
+void CSignalMgr::broadcast( const std::string & aiName, iSprite * pSprite )
 {
     m_aiCreateSignal(aiName, pSprite);
+}
 
-}   // Broadcast
-
-/************************************************************************
-*    desc:  Broadcast the load signal
-************************************************************************/
-void CSignalMgr::Broadcast_LoadSignal()
-{
-    m_loadSignal();
-
-}   // Broadcast_LoadSignal
 
 /************************************************************************
 *    desc:  Broadcast the resolution change
 ************************************************************************/
-void CSignalMgr::Broadcast_ResolutionChange()
+void CSignalMgr::broadcast_ResolutionChange()
 {
     m_resolutionChange();
-
-}   // Broadcast_ResolutionChange
+}

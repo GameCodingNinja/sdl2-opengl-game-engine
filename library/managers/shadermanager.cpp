@@ -32,11 +32,11 @@ CShaderMgr::CShaderMgr() :
     m_pCurrentShaderData(nullptr),
     m_currentVertexAttribCount(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CShaderMgr::~CShaderMgr()
 {
@@ -47,14 +47,13 @@ CShaderMgr::~CShaderMgr()
     {
         m_Iter->second.free();
     }
-
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the shader from xml file path
 ************************************************************************/
-void CShaderMgr::LoadFromXML( const std::string & filePath )
+void CShaderMgr::loadFromXML( const std::string & filePath )
 {
     // Open and parse the XML file:
     XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "shaderLst" );
@@ -66,15 +65,14 @@ void CShaderMgr::LoadFromXML( const std::string & filePath )
     }
 
     for( int i = 0; i < mainNode.nChildNode(); ++i )
-        CreateShader( mainNode.getChildNode(i) );
-
-}   // LoadFromXML
+        createShader( mainNode.getChildNode(i) );
+}
 
 
 /************************************************************************
 *    desc:  Create the shader
 ************************************************************************/
-void CShaderMgr::CreateShader( const XMLNode & node )
+void CShaderMgr::createShader( const XMLNode & node )
 {
     const std::string shaderStrId = node.getAttribute("Id");
 
@@ -96,39 +94,38 @@ void CShaderMgr::CreateShader( const XMLNode & node )
     m_Iter = m_shaderMap.emplace( shaderStrId, CShaderData() ).first;
 
     // Create the vertex shader
-    CreateShader( GL_VERTEX_SHADER, vertexNode.getAttribute("file") );
+    createShader( GL_VERTEX_SHADER, vertexNode.getAttribute("file") );
 
     // Create the vertex shader
-    CreateShader( GL_FRAGMENT_SHADER, fragmentNode.getAttribute("file") );
+    createShader( GL_FRAGMENT_SHADER, fragmentNode.getAttribute("file") );
 
     // Link the shader
-    CreateProgram();
+    createProgram();
 
     // Bind the attribute location by index defined in shader config file
-    BindAttributeLocation( vertexNode );
+    bindAttributeLocation( vertexNode );
 
     // Link the shader program
-    LinkProgram();
+    linkProgram();
 
     // Set all the shader attributes
-    LocateShaderVariables( vertexNode, fragmentNode );
-    
+    locateShaderVariables( vertexNode, fragmentNode );
+
     // Send out a signal to init this shader
     m_initShaderSignal( shaderStrId );
-
-}   // CreateShader
+}
 
 
 /************************************************************************
 *    desc:  Create the shader
 ************************************************************************/
-void CShaderMgr::CreateShader( uint32_t shaderType, const std::string & filePath )
+void CShaderMgr::createShader( uint32_t shaderType, const std::string & filePath )
 {
     // Create the shader
     uint32_t shaderID = glCreateShader( shaderType );
     if( shaderID == 0 )
     {
-        throw NExcept::CCriticalException("Create Shader Error!", 
+        throw NExcept::CCriticalException("Create Shader Error!",
             boost::str( boost::format("Error creating shader (%s).\n\n%s\nLine: %s")
                 % filePath % __FUNCTION__ % __LINE__ ));
     }
@@ -157,24 +154,23 @@ void CShaderMgr::CreateShader( uint32_t shaderType, const std::string & filePath
         std::unique_ptr<char[]> upError( new char[maxLength] );
         glGetShaderInfoLog(shaderID, maxLength, &maxLength, upError.get());
 
-        throw NExcept::CCriticalException("Create Vertex Shader Error!", 
+        throw NExcept::CCriticalException("Create Vertex Shader Error!",
             boost::str( boost::format("Error compiling vertex shader (%s).\n\n%s.\n\n%s\nLine: %s")
                 % filePath % upError.get() % __FUNCTION__ % __LINE__ ));
     }
-
-}   // CreateShader
+}
 
 
 /************************************************************************
 *    desc:  Create the shader program
 ************************************************************************/
-void CShaderMgr::CreateProgram()
+void CShaderMgr::createProgram()
 {
     // Create the program - OpenGL shaders are called programs
     m_Iter->second.setProgramID( glCreateProgram() );
     if( m_Iter->second.getProgramID() == 0 )
     {
-        throw NExcept::CCriticalException("Create Shader Error!", 
+        throw NExcept::CCriticalException("Create Shader Error!",
             boost::str( boost::format("Error creating shader (%s).\n\n%s\nLine: %s")
                 % m_Iter->first % __FUNCTION__ % __LINE__ ));
     }
@@ -182,8 +178,7 @@ void CShaderMgr::CreateProgram()
     // Attach shaders to the program
     glAttachShader( m_Iter->second.getProgramID(), m_Iter->second.getVertexID() );
     glAttachShader( m_Iter->second.getProgramID(), m_Iter->second.getFragmentID() );
-
-}   // CreateProgram
+}
 
 
 /************************************************************************
@@ -191,7 +186,7 @@ void CShaderMgr::CreateProgram()
 *           NOTE: This function is called if 0 or greater is specified in
 *           the shader config to allow the defining of the attribute index
 ************************************************************************/
-void CShaderMgr::BindAttributeLocation( const XMLNode & vertexNode )
+void CShaderMgr::bindAttributeLocation( const XMLNode & vertexNode )
 {
     // Get the location ID for the vertex variables
     for( int i = 0; i < vertexNode.nChildNode(); ++i )
@@ -211,19 +206,18 @@ void CShaderMgr::BindAttributeLocation( const XMLNode & vertexNode )
 
             uint32_t error(glGetError());
             if( error != GL_NO_ERROR)
-                throw NExcept::CCriticalException("Create Shader Error!", 
+                throw NExcept::CCriticalException("Create Shader Error!",
                     boost::str( boost::format("Error binding attribute (%s).\n\n%s\nLine: %s")
                         % attributeName % __FUNCTION__ % __LINE__ ));
         }
     }
-
-}   // BindAttributeLocation
+}
 
 
 /************************************************************************
 *    desc:  Link the shader program
 ************************************************************************/
-void CShaderMgr::LinkProgram()
+void CShaderMgr::linkProgram()
 {
     // Link shader program
     glLinkProgram( m_Iter->second.getProgramID() );
@@ -233,18 +227,17 @@ void CShaderMgr::LinkProgram()
     glGetProgramiv( m_Iter->second.getProgramID(), GL_LINK_STATUS, &success );
     if( success != GL_TRUE )
     {
-        throw NExcept::CCriticalException("Link Shader Error!", 
+        throw NExcept::CCriticalException("Link Shader Error!",
             boost::str( boost::format("Error linking shader (%s).\n\n%s\nLine: %s")
                 % m_Iter->first % __FUNCTION__ % __LINE__ ));
     }
-
-}   // LinkProgram
+}
 
 
 /************************************************************************
 *    desc:  Find the location of the custom shader variables
 ************************************************************************/
-void CShaderMgr::LocateShaderVariables(
+void CShaderMgr::locateShaderVariables(
     const XMLNode & vertexNode,
     const XMLNode & fragmentNode )
 {
@@ -254,20 +247,19 @@ void CShaderMgr::LocateShaderVariables(
         const XMLNode node = vertexNode.getChildNode(i);
 
         if( !node.isAttributeSet( "location" ) )
-            GetUniformLocation( node );
+            getUniformLocation( node );
     }
 
     // Get the location ID for the fragment variables
     for( int i = 0; i < fragmentNode.nChildNode(); ++i )
-        GetUniformLocation( fragmentNode.getChildNode(i) );
-
-}   // LocateShaderVariables
+        getUniformLocation( fragmentNode.getChildNode(i) );
+}
 
 
 /************************************************************************
 *    desc:  Get the uniform location
 ************************************************************************/
-void CShaderMgr::GetUniformLocation( const XMLNode & node )
+void CShaderMgr::getUniformLocation( const XMLNode & node )
 {
     std::string name = node.getAttribute("name");
 
@@ -277,18 +269,17 @@ void CShaderMgr::GetUniformLocation( const XMLNode & node )
 
     if( location < 0 )
     {
-        throw NExcept::CCriticalException("Shader Uniform Location Error!", 
+        throw NExcept::CCriticalException("Shader Uniform Location Error!",
             boost::str( boost::format("Error Uniform Location (%s) not found (%s).\n\n%s\nLine: %s")
                 % name % m_Iter->first % __FUNCTION__ % __LINE__ ));
     }
-
-}   // GetUniformLocation
+}
 
 
 /************************************************************************
 *    desc:  Get the shader data
 ************************************************************************/
-CShaderData & CShaderMgr::GetShaderData( const std::string & shaderId )
+CShaderData & CShaderMgr::getShaderData( const std::string & shaderId )
 {
     // See if we can find the shader
     m_Iter = m_shaderMap.find( shaderId );
@@ -300,8 +291,7 @@ CShaderData & CShaderMgr::GetShaderData( const std::string & shaderId )
     }
 
     return m_Iter->second;
-
-}   // GetShaderData
+}
 
 
 /************************************************************************
@@ -310,21 +300,21 @@ CShaderData & CShaderMgr::GetShaderData( const std::string & shaderId )
 *           Note: Vertex Attribute Arrays should always be defined in
 *           the shader.cfg starting from 0 to max count. Makes live easy
 ************************************************************************/
-void CShaderMgr::Bind( CShaderData * pShaderData )
+void CShaderMgr::bind( CShaderData * pShaderData )
 {
     if( m_pCurrentShaderData != pShaderData )
     {
         if( m_pCurrentShaderData == nullptr )
         {
             m_currentVertexAttribCount = pShaderData->getVertexAttribCount();
-            
+
             for( size_t i = 0; i < m_currentVertexAttribCount; ++i )
                 glEnableVertexAttribArray(i);
         }
         else if( m_currentVertexAttribCount != pShaderData->getVertexAttribCount() )
         {
             const size_t attribCount( pShaderData->getVertexAttribCount() );
-            
+
             if( m_currentVertexAttribCount < attribCount )
             {
                 for( size_t i = m_currentVertexAttribCount; i < attribCount; ++i )
@@ -335,7 +325,7 @@ void CShaderMgr::Bind( CShaderData * pShaderData )
                 for( size_t i = attribCount; i < m_currentVertexAttribCount; ++i )
                     glDisableVertexAttribArray(i);
             }
-            
+
             m_currentVertexAttribCount = attribCount;
         }
 
@@ -345,69 +335,63 @@ void CShaderMgr::Bind( CShaderData * pShaderData )
         // Have OpenGL bind this shader now
         glUseProgram( pShaderData->getProgramID() );
     }
-
-}   // Bind
+}
 
 
 /************************************************************************
 *    desc:  Unbind the shader and reset the flag
 ************************************************************************/
-void CShaderMgr::Unbind()
+void CShaderMgr::unbind()
 {
     for( size_t i = 0; i < m_currentVertexAttribCount; ++i )
         glDisableVertexAttribArray(i);
-    
+
     m_pCurrentShaderData = nullptr;
     m_currentVertexAttribCount = 0;
     glUseProgram( 0 );
-
-}   // Unbind
+}
 
 
 /************************************************************************
 *    desc:  Free the shader
 ************************************************************************/
-void CShaderMgr::FreeShader( const std::string & shaderId )
+void CShaderMgr::freeShader( const std::string & shaderId )
 {
     // See if we can find the shader
     m_Iter = m_shaderMap.find( shaderId );
     if( m_Iter != m_shaderMap.end() )
     {
         m_Iter->second.free();
-        
+
         // Erase this shader
         m_shaderMap.erase( m_Iter );
     }
-
-}   // FreeShader
+}
 
 
 /************************************************************************
 *    desc:  Connect to the Init Shader signal
 ************************************************************************/
-void CShaderMgr::Connect_InitShader( const InitShaderSignal::slot_type & slot )
+void CShaderMgr::connect_initShader( const InitShaderSignal::slot_type & slot )
 {
     m_initShaderSignal.connect(slot);
-
-}   // Connect_InitShader
+}
 
 
 /************************************************************************
 *    desc:  Set the shader member variable
 ************************************************************************/
-void CShaderMgr::SetShaderColor( const std::string & shaderId, const std::string & locationId, CColor color )
+void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string & locationId, CColor color )
 {
-    SetShaderColor( GetShaderData( shaderId ), locationId, color );
-    
-}   // SetShaderColor
+    setShaderColor( getShaderData( shaderId ), locationId, color );
+}
 
-void CShaderMgr::SetShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a )
+void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a )
 {
-    SetShaderColor( GetShaderData( shaderId ), locationId, CColor(r,g,b,a) );
-    
-}   // SetShaderColor
+    setShaderColor( getShaderData( shaderId ), locationId, CColor(r,g,b,a) );
+}
 
-void CShaderMgr::SetShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color )
+void CShaderMgr::setShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color )
 {
     // Check for the shader location
     if( shaderData.hasUniformLocation( locationId ) )
@@ -416,31 +400,28 @@ void CShaderMgr::SetShaderColor( CShaderData & shaderData, const std::string & l
         int32_t location = shaderData.getUniformLocation( locationId );
 
         // Bind the shader so that we can change the value of the member
-        Bind( &shaderData );
+        bind( &shaderData );
 
         // Set the color
         glUniform4fv( location, 1, (float *)&color );
 
         // Unbind now that we are done
-        Unbind();
+        unbind();
     }
-    
-}   // SetShaderColor
+}
 
 
 /************************************************************************
 *    desc:  Set all the shaders using this color location
 ************************************************************************/
-void CShaderMgr::SetAllShaderColor( const std::string & locationId, CColor color )
+void CShaderMgr::setAllShaderColor( const std::string & locationId, CColor color )
 {
     for( auto & iter : m_shaderMap )
-        SetShaderColor( iter.second, locationId, color );
-    
-}   // SetAllShaderColor
+        setShaderColor( iter.second, locationId, color );
+}
 
-void CShaderMgr::SetAllShaderColor( const std::string & locationId, float r, float g, float b, float a )
+void CShaderMgr::setAllShaderColor( const std::string & locationId, float r, float g, float b, float a )
 {
     for( auto & iter : m_shaderMap )
-        SetShaderColor( iter.second, locationId, CColor(r,g,b,a) );
-    
-}   // SetAllShaderColor
+        setShaderColor( iter.second, locationId, CColor(r,g,b,a) );
+}

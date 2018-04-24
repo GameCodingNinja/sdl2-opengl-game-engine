@@ -45,7 +45,7 @@ CFont::~CFont()
 void CFont::loadFromXML( const std::string & group )
 {
     // load the image
-    CTextureMgr::Instance().LoadImageFor2D( group, m_filePath + ".png" );
+    CTextureMgr::Instance().loadImageFor2D( group, m_filePath + ".png" );
 
     // open this file and parse
     XMLNode mainNode = XMLNode::openFileHelper( (m_filePath + ".fnt").c_str(), "font" );
@@ -101,7 +101,7 @@ void CFont::loadFromXML( const std::string & group )
  ************************************************************************/
 void CFont::createFromData( const std::string & group )
 {
-    m_texture = CTextureMgr::Instance().CreateTextureFor2D( group, m_filePath + ".png" );
+    m_texture = CTextureMgr::Instance().createTextureFor2D( group, m_filePath + ".png" );
 }
 
 

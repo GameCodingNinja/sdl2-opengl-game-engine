@@ -27,7 +27,6 @@
 #include <managers/fontmanager.h>
 #include <managers/soundmanager.h>
 #include <managers/actionmanager.h>
-#include <managers/signalmanager.h>
 #include <managers/spritesheetmanager.h>
 #include <managers/cameramanager.h>
 #include <spritestrategy/spritestrategymanager.h>
@@ -91,10 +90,10 @@ CStartUpState::~CStartUpState()
 void CStartUpState::Init()
 {
     // Load the object data list table
-    CObjectDataMgr::Instance().LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
+    CObjectDataMgr::Instance().loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
     
     // Load the shader
-    CShaderMgr::Instance().LoadFromXML( "data/shaders/shader.cfg" );
+    CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
     
     // Load the start up animation group
     CObjectDataMgr::Instance().LoadGroup2D( "(startup)" );
@@ -135,15 +134,15 @@ void CStartUpState::Fade(
         // Clear the screen
         glClear( GL_COLOR_BUFFER_BIT );
 
-        CShaderMgr::Instance().SetShaderColor( "shader_2d", "additive", current );
-        sprite.render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+        CShaderMgr::Instance().setShaderColor( "shader_2d", "additive", current );
+        sprite.render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 
         // Apparently it's a good practice to do this at the end of a render cycle
-        CShaderMgr::Instance().Unbind();
-        CTextureMgr::Instance().Unbind();
-        CVertBufMgr::Instance().Unbind();
+        CShaderMgr::Instance().unbind();
+        CTextureMgr::Instance().unbind();
+        CVertBufMgr::Instance().unbind();
 
         std::this_thread::sleep_for( std::chrono::milliseconds( 2 ) );
     }
@@ -158,26 +157,26 @@ void CStartUpState::Fade(
 void CStartUpState::AssetLoad()
 {
     // Load the stage list table
-    CSpriteStrategyMgr::Instance().LoadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CSpriteStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
     
     // Load in any fonts
-    CFontMgr::Instance().LoadFromXML( "data/textures/fonts/font.lst" );
+    CFontMgr::Instance().loadFromXML( "data/textures/fonts/font.lst" );
 
     // Load the action manager - Must be loaded before memu system
-    CActionMgr::Instance().LoadActionFromXML( "data/settings/controllerMapping.cfg" );
+    CActionMgr::Instance().loadActionFromXML( "data/settings/controllerMapping.cfg" );
     
     // Load menu list table
-    CMenuManager::Instance().LoadListTable( "data/objects/2d/menu/menuListTable.lst" );
+    CMenuManager::Instance().loadListTable( "data/objects/2d/menu/menuListTable.lst" );
     
     // Load the menu action list
     CMenuManager::Instance().loadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
     
     // Load sound resources for the menu
-    CSoundMgr::Instance().LoadListTable( "data/sound/soundListTable.lst" );
-    CSoundMgr::Instance().LoadGroup("(menu)");
+    CSoundMgr::Instance().loadListTable( "data/sound/soundListTable.lst" );
+    CSoundMgr::Instance().loadGroup("(menu)");
     
     // Load the script list table
-    CScriptManager::Instance().LoadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
+    CScriptManager::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
     
     // Load the physics list table
     //CPhysicsWorldManager::Instance().LoadListTable( "data/objects/2d/physics/physicsListTable.lst" );
@@ -199,7 +198,7 @@ void CStartUpState::AssetLoad()
     CObjectDataMgr::Instance().LoadGroup2D("(menu)");
     
     // Free the sprite sheet data because it's no longer needed
-    CSpriteSheetMgr::Instance().Clear();
+    CSpriteSheetMgr::Instance().clear();
 
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");

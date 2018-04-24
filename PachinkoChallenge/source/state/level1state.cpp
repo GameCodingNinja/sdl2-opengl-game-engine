@@ -72,7 +72,7 @@ CLevel1State::~CLevel1State()
 {
     m_rPhysicsWorld.GetWorld().SetDestructionListener(nullptr);
     m_rPhysicsWorld.GetWorld().SetContactListener(nullptr);
-    CSignalMgr::Instance().Disconnect_ResolutionChange();
+    CSignalMgr::Instance().disconnect_resolutionChange();
     
 }   // destructor
 
@@ -108,8 +108,8 @@ void CLevel1State::Init()
     m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
     
     // Set the initial camera scale
-    CCameraMgr::Instance().CreateOrthographic("game", 5.f, 1000.f, 1.65);
-    CCameraMgr::Instance().Transform();
+    CCameraMgr::Instance().createOrthographic("game", 5.f, 1000.f, 1.65);
+    CCameraMgr::Instance().transform();
     
     // Reset the camera
     //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
@@ -153,7 +153,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     {
         if( !CMenuManager::Instance().isMenuActive() )
         {
-            auto camera = CCameraMgr::Instance().GetActiveCamera();
+            auto camera = CCameraMgr::Instance().getActiveCamera();
             const float ratio = 1.f / camera.getOrthoHeightAspectRatio();
             const float x = (ratio * (float)rEvent.motion.x) - camera.getOrthoProjSizeHalf().w;
 
@@ -228,9 +228,9 @@ void CLevel1State::PreRender()
 {
     CCommonState::PreRender();
     
-    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().GetActiveCameraMatrix() );
+    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().getActiveCameraMatrix() );
 
-    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PreRender
 

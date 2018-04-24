@@ -48,7 +48,7 @@ void CSmartKeyBindBtn::create()
         CUIControl * pControl = pSubControl->getSubControl(i);
     
         // If the ID is defined in the controller mapping XML, set it's string Id
-        if( CActionMgr::Instance().GetDeviceActionStr(NDefs::EDeviceId(i), actionNameStr, idStr, configurable) )
+        if( CActionMgr::Instance().getDeviceActionStr(NDefs::EDeviceId(i), actionNameStr, idStr, configurable) )
         {
             pControl->createFontString( idStr );
             
@@ -79,7 +79,7 @@ void CSmartKeyBindBtn::execute()
 {
     // Disable all action checking so that most buttons can be key mapped
     // without being acted on
-    CActionMgr::Instance().EnableAction(false);
+    CActionMgr::Instance().enableAction(false);
 }
 
 
@@ -97,7 +97,7 @@ void CSmartKeyBindBtn::handleEvent( const SDL_Event & rEvent )
         if( (rEvent.type == SDL_KEYUP) && (rEvent.key.keysym.sym == SDLK_ESCAPE) )
         {
             // Re-enable action checking
-            CActionMgr::Instance().EnableAction(true);
+            CActionMgr::Instance().enableAction(true);
             
             // Dispatch a message to clear the selected control and put it back into active state
             NGenFunc::DispatchEvent( NMenu::EGE_MENU_REACTIVATE );
@@ -106,7 +106,7 @@ void CSmartKeyBindBtn::handleEvent( const SDL_Event & rEvent )
         {
             std::string idStr;
             const std::string actionNameStr = m_pUIControl->getStringVec().back();
-            NDefs::EDeviceId deviceId = CActionMgr::Instance().ResetAction( rEvent, actionNameStr, idStr );
+            NDefs::EDeviceId deviceId = CActionMgr::Instance().resetAction( rEvent, actionNameStr, idStr );
 
             if( deviceId != NDefs::DEVICE_NULL )
             {
@@ -118,10 +118,10 @@ void CSmartKeyBindBtn::handleEvent( const SDL_Event & rEvent )
                 pControl->createFontString( idStr );
                 
                 // Save the key binding changes to file
-                CActionMgr::Instance().SaveToFile();
+                CActionMgr::Instance().saveToFile();
                 
                 // Re-enable action checking
-                CActionMgr::Instance().EnableAction(true);
+                CActionMgr::Instance().enableAction(true);
 
                 // Dispatch a message to clear the selected control and put it back into active state
                 NGenFunc::DispatchEvent( NMenu::EGE_MENU_REACTIVATE );

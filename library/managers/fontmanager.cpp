@@ -16,29 +16,25 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CFontMgr::CFontMgr()
 {
-}   // Constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CFontMgr::~CFontMgr()
 {
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the material from file path
-*  
-*    param: string & filePath - path to material file
-* 
-*    return: bool - false on fail
 ************************************************************************/
-void CFontMgr::LoadFromXML( const std::string & filePath, const bool createFromData )
+void CFontMgr::loadFromXML( const std::string & filePath, const bool createFromData )
 {
     // open this file and parse
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "fontLst" );
@@ -68,29 +64,27 @@ void CFontMgr::LoadFromXML( const std::string & filePath, const bool createFromD
 
         // Load the character info from file
         iter.first->second.loadFromXML( m_group );
-        
+
         if( createFromData )
             iter.first->second.createFromData( m_group );
     }
-
-}   // LoadFromFile
+}
 
 
 /************************************************************************
  *    desc:  Create the font texture from data
  ************************************************************************/
-void CFontMgr::CreateFromData()
+void CFontMgr::createFromData()
 {
     for( auto & iter : m_fontMap )
         iter.second.createFromData( m_group );
-
-}   // CreateFromData
+}
 
 
 /************************************************************************
-*    desc:  Get the font 
+*    desc:  Get the font
 ************************************************************************/
-const CFont & CFontMgr::GetFont( const std::string & name ) const
+const CFont & CFontMgr::getFont( const std::string & name ) const
 {
     // See if this font is part of the map
     auto iter = m_fontMap.find( name );
@@ -101,14 +95,13 @@ const CFont & CFontMgr::GetFont( const std::string & name ) const
                 % name % __FUNCTION__ % __LINE__ ));
 
     return iter->second;
-
-}   // GetFont
+}
 
 
 /************************************************************************
 *    desc:  Is the font in the map. throws exception if not
 ************************************************************************/
-void CFontMgr::IsFont( const std::string & name ) const
+void CFontMgr::isFont( const std::string & name ) const
 {
     // See if this character is part of the map
     auto iter = m_fontMap.find( name );
@@ -117,19 +110,13 @@ void CFontMgr::IsFont( const std::string & name ) const
         throw NExcept::CCriticalException("Font Manager Error!",
             boost::str( boost::format("Font name can't be found (%s).\n\n%s\nLine: %s")
                 % name % __FUNCTION__ % __LINE__ ));
-
-}   // IsFont
+}
 
 
 /************************************************************************
 *    desc:  Delete a specific mesh
-*
-*    NOTE: The name of this function is because of windows naming
-*          conflict. Can't name it DeleteFont().       
-*  
-*    param: string & key
 ************************************************************************/
-void CFontMgr::DeleteTheFont( const std::string & key )
+void CFontMgr::deleteTheFont( const std::string & key )
 {
     // See if this font has already been loaded
     auto iter = m_fontMap.find( key );
@@ -137,15 +124,13 @@ void CFontMgr::DeleteTheFont( const std::string & key )
     // If it's found, delete from the map
     if( iter != m_fontMap.end() )
         m_fontMap.erase( iter );
-
-}   // DeleteTheFont
+}
 
 
 /************************************************************************
-*    desc:  Get the group name 
+*    desc:  Get the group name
 ************************************************************************/
-const std::string & CFontMgr::GetGroup() const
+const std::string & CFontMgr::getGroup() const
 {
     return m_group;
-
-}   // GetGroup
+}

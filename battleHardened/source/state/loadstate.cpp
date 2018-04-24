@@ -55,8 +55,6 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
 ************************************************************************/
 CLoadState::~CLoadState()
 {
-    CSignalMgr::Instance().Disconnect_Load();
-    
     CObjectDataMgr::Instance().FreeGroup2D( "(loadingScreen)" );
     
 }   // destructer
@@ -81,10 +79,7 @@ void CLoadState::Init()
     m_upSprite->transform(); 
     
     // Setup the fade in
-    CShaderMgr::Instance().SetShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );
-    
-    // Bind the signal callback to animate during critical load/unload
-    CSignalMgr::Instance().Connect_Load( boost::bind(&CLoadState::Animate, this) );
+    CShaderMgr::Instance().setShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -110,14 +105,14 @@ void CLoadState::Animate()
         m_upSprite->setFrame( m_frame );
         m_frame = (m_frame + 1) % m_upSprite->getFrameCount();
 
-        m_upSprite->render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+        m_upSprite->render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
         SDL_GL_SwapWindow( CDevice::Instance().GetWindow() );
 
         // Apparently it's a good practice to do this at the end of a render cycle
-        CShaderMgr::Instance().Unbind();
-        CTextureMgr::Instance().Unbind();
-        CVertBufMgr::Instance().Unbind();
+        CShaderMgr::Instance().unbind();
+        CTextureMgr::Instance().unbind();
+        CVertBufMgr::Instance().unbind();
         
         int dif = m_time / 83;
         m_time = m_time - (dif * 83);
@@ -255,7 +250,7 @@ void CLoadState::AssetsLoad()
 ****************************************************************************/
 bool CLoadState::DoStateChange()
 {
-    CActionMgr::Instance().ResetLastUsedDevice();
+    CActionMgr::Instance().resetLastUsedDevice();
 
     std::thread objLoadThread( &CLoadState::ObjectDataLoad, this );
     objLoadThread.detach();

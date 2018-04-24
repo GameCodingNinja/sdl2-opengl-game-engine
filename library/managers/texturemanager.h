@@ -28,25 +28,25 @@ public:
     }
     
     // Load the image from file path
-    void LoadImageFor2D( const std::string & group, const std::string & filePath );
-    void LoadImageFor3D( const std::string & group, const std::string & filePath );
+    void loadImageFor2D( const std::string & group, const std::string & filePath );
+    void loadImageFor3D( const std::string & group, const std::string & filePath );
     
     // Create the texture from file path
-    const CTexture & CreateTextureFor2D( const std::string & group, const std::string & filePath, bool compressed = false );
-    const CTexture & CreateTextureFor3D( const std::string & group, const std::string & filePath, bool compressed = false );
+    const CTexture & createTextureFor2D( const std::string & group, const std::string & filePath, bool compressed = false );
+    const CTexture & createTextureFor3D( const std::string & group, const std::string & filePath, bool compressed = false );
 
     // Texture deleting
-    void DeleteTextureGroupFor2D( const std::string & group );
-    void DeleteTextureGroupFor3D( const std::string & group );
+    void deleteTextureGroupFor2D( const std::string & group );
+    void deleteTextureGroupFor3D( const std::string & group );
 
     // Function call used to manage what texture is currently bound
-    void Bind( uint32_t textureID );
+    void bind( uint32_t textureID );
 
     // Unbind the texture and reset the flag
-    void Unbind();
+    void unbind();
     
     // Init the Anisotropic filtering
-    void InitAnisotropic();
+    void initAnisotropic();
 
 private:
 
@@ -57,13 +57,13 @@ private:
     ~CTextureMgr();
     
     // Load the texture from file path
-    void LoadTexture( CTexture & texture, const std::string & filePath, bool compressed );
+    void loadTexture( CTexture & texture, const std::string & filePath, bool compressed );
     
     // Load the just the image from file path
-    void LoadImage( CTexture & texture, const std::string & filePath );
+    void loadImage( CTexture & texture, const std::string & filePath );
     
     // Create the texture from image data loaded into memory
-    void CreateTexture( CTexture & texture, bool compressed );
+    void createTexture( CTexture & texture, bool compressed );
 
 private:
 

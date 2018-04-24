@@ -330,7 +330,7 @@ void CWheelView::Update()
                     
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
-                        const int channel = CSoundMgr::Instance().GetNextChannel();
+                        const int channel = CSoundMgr::Instance().getNextChannel();
                         m_pSpinStopSnd->play( channel );
                     }
                     

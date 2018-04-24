@@ -39,67 +39,67 @@ public:
     }
 
     // Load the action mappings from xml
-    void LoadActionFromXML( const std::string & filePath );
+    void loadActionFromXML( const std::string & filePath );
 
     // Was this an action
-    bool WasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress );
-    NDefs::EActionPress WasAction( const SDL_Event & rEvent, const std::string & actionStr );
+    bool wasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress );
+    NDefs::EActionPress wasAction( const SDL_Event & rEvent, const std::string & actionStr );
 
     // What was the last devic
-    bool WasLastDeviceGamepad();
-    bool WasLastDeviceKeyboard();
-    bool WasLastDeviceMouse();
-    NDefs::EDeviceId GetLastDeviceUsed();
+    bool wasLastDeviceGamepad();
+    bool wasLastDeviceKeyboard();
+    bool wasLastDeviceMouse();
+    NDefs::EDeviceId getLastDeviceUsed();
 
     // Reset the last used device
-    void ResetLastUsedDevice();
+    void resetLastUsedDevice();
 
     // Get the mouse position
-    const CPoint<float> & GetMouseAbsolutePos() const;
-    const CPoint<float> & GetMouseRelativePos() const;
+    const CPoint<float> & getMouseAbsolutePos() const;
+    const CPoint<float> & getMouseRelativePos() const;
     
     // Get the last controller position
-    const CPoint<float> & GetControllerPosLeft() const;
-    const CPoint<float> & GetControllerPosRight() const;
+    const CPoint<float> & getControllerPosLeft() const;
+    const CPoint<float> & getControllerPosRight() const;
     
     // Get the action/component strings for the give device id
-    bool GetDeviceActionStr( 
+    bool getDeviceActionStr( 
         NDefs::EDeviceId deviceId,
         const std::string & actionNameStr,
         std::string & componetIdStr,
         bool & configurable );
     
     // Reset the action
-    NDefs::EDeviceId ResetAction(
+    NDefs::EDeviceId resetAction(
         const SDL_Event & rEvent,
         const std::string & actionNameStr,
         std::string & componetIdStr );
     
     // Enable/Disable action handling
-    void EnableAction( bool value );
+    void enableAction( bool value );
     
     // Is action handling allowed
-    bool IsAction();
+    bool isAction();
     
     // Save the xml to file
-    void SaveToFile();
+    void saveToFile();
     
     // Reset all the key bindings to their default settings
-    void ResetKeyBindingsToDefault();
+    void resetKeyBindingsToDefault();
     
     // Queue the event
-    void QueueEvent( const SDL_Event & rEvent );
+    void queueEvent( const SDL_Event & rEvent );
     
     // Clear the queue
-    void ClearQueue();
+    void clearQueue();
     
     // Was this an event in the Queue
-    bool WasEvent( const std::string & actionStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool wasEvent( const std::string & actionStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
     
     // Device specific key checks
-    bool WasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
-    bool WasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
-    bool WasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool wasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool wasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    bool wasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
 
 private:
 
@@ -114,38 +114,38 @@ private:
     typedef std::map< const std::string, CKeyCodeAction > actionMapType;
 
     // Load action data from xml node
-    void LoadActionFromNode(
+    void loadActionFromNode(
         const XMLNode & node, 
         keyCodeMapType & keyCodeMap,
         actionMapType & actionMap );
 
     // Load the keyboard/mouse/gamepad mapping from node
-    void LoadAction();
-    void LoadKeyboardMappingFromNode( const XMLNode & node );
-    void LoadMouseMappingFromNode( const XMLNode & node );
-    void LoadGamepadMappingFromNode( const XMLNode & node );
+    void loadAction();
+    void loadKeyboardMappingFromNode( const XMLNode & node );
+    void loadMouseMappingFromNode( const XMLNode & node );
+    void loadGamepadMappingFromNode( const XMLNode & node );
 
     // Was this an action
-    bool WasAction( 
+    bool wasAction( 
         const int Id,
         const std::string & actionStr,
         const actionMapType & actionMap );
     
     // Get the action/component strings for the keyboard device id
-    int GetActionStr(
+    int getActionStr(
         const XMLNode & playerVisibleNode, 
         const std::string & actionNameStr, 
         std::string & componetIdStr, 
         bool & configurable );
     
     // Get the string associated with the key code
-    bool GetKeyCodeStr(
+    bool getKeyCodeStr(
         keyCodeMapType & keyCodeMap,
         const int keyCode,
         std::string & componetIdStr );
     
     // Get the key code associated with the string
-    int GetKeyCode(
+    int getKeyCode(
         keyCodeMapType & keyCodeMap,
         const std::string & componetIdStr );
 
@@ -224,7 +224,6 @@ private:
     
     // Que of event message
     std::vector<SDL_Event> m_eventQueue;
-
 };
 
 #endif  // __action_manager_h__

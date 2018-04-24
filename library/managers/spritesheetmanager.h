@@ -28,10 +28,10 @@ public:
     }
     
     // Load the glyph data from XML file
-    const CSpriteSheet & Load( const std::string & filePath );
+    const CSpriteSheet & load( const std::string & filePath );
     
     // Clear all the sprite sheet data
-    void Clear();
+    void clear();
     
 private:
 

@@ -119,7 +119,7 @@ void CRunState::PreRender()
 {
     CCommonState::PreRender();
     
-    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CSpriteStrategyMgr::Instance().Render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PreRender
 

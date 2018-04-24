@@ -99,7 +99,7 @@ void CCommonState::Transform()
 ****************************************************************************/
 void CCommonState::PreRender()
 {
-    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PreRender
 
@@ -109,7 +109,7 @@ void CCommonState::PreRender()
 ****************************************************************************/
 void CCommonState::PostRender()
 {
-    CMenuManager::Instance().render( CCameraMgr::Instance().GetDefaultProjMatrix() );
+    CMenuManager::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
 
 }   // PostRender
 

@@ -199,9 +199,9 @@ bool CBaseGame::GameLoop()
         SDL_GL_SwapWindow( m_pWindow );
         
         // Unbind everything after a round of rendering
-        CShaderMgr::Instance().Unbind();
-        CTextureMgr::Instance().Unbind();
-        CVertBufMgr::Instance().Unbind();
+        CShaderMgr::Instance().unbind();
+        CTextureMgr::Instance().unbind();
+        CVertBufMgr::Instance().unbind();
 
         // Inc the cycle
         if( NBDefs::IsDebugMode() )

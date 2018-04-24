@@ -35,30 +35,30 @@ public:
     }
 
     // Load the shader from xml file path
-    void LoadFromXML( const std::string & filePath );
+    void loadFromXML( const std::string & filePath );
 
     // Get the shader data
-    CShaderData & GetShaderData( const std::string & shaderId );
+    CShaderData & getShaderData( const std::string & shaderId );
 
     // Function call used to manage what shader is currently bound.
-    void Bind( CShaderData * pShaderData );
+    void bind( CShaderData * pShaderData );
 
     // Unbind the shader and reset the flag
-    void Unbind();
+    void unbind();
     
     // Free the shader
-    void FreeShader( const std::string & shaderId );
+    void freeShader( const std::string & shaderId );
     
     // Set the shader member variable
-    void SetShaderColor( const std::string & shaderId, const std::string & locationId, CColor color );
-    void SetShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a );
+    void setShaderColor( const std::string & shaderId, const std::string & locationId, CColor color );
+    void setShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a );
     
     // Set all the shaders using this color location
-    void SetAllShaderColor( const std::string & locationId, CColor color );
-    void SetAllShaderColor( const std::string & locationId, float r, float g, float b, float a );
+    void setAllShaderColor( const std::string & locationId, CColor color );
+    void setAllShaderColor( const std::string & locationId, float r, float g, float b, float a );
     
     // Connect to the Init Shader signal
-    void Connect_InitShader( const InitShaderSignal::slot_type & slot );
+    void connect_initShader( const InitShaderSignal::slot_type & slot );
 
 private:
 
@@ -69,30 +69,30 @@ private:
     ~CShaderMgr();
 
     // Create the shader
-    void CreateShader( const XMLNode & node );
+    void createShader( const XMLNode & node );
 
     // Create the shader
-    void CreateShader( uint32_t shaderType, const std::string & filePath );
+    void createShader( uint32_t shaderType, const std::string & filePath );
 
     // Create the shader program
-    void CreateProgram();
+    void createProgram();
 
     // Bind the attribute location
-    void BindAttributeLocation( const XMLNode & vertexNode );
+    void bindAttributeLocation( const XMLNode & vertexNode );
 
     // Link the shader program
-    void LinkProgram();
+    void linkProgram();
 
     // Find the location of the shader variables
-    void LocateShaderVariables(
+    void locateShaderVariables(
         const XMLNode & vertexNode,
         const XMLNode & fragmentNode );
     
     // Get the uniform location
-    void GetUniformLocation( const XMLNode & node );
+    void getUniformLocation( const XMLNode & node );
     
     // Set the shader member variable
-    void SetShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color );
+    void setShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color );
 
 private:
 

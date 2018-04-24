@@ -20,23 +20,21 @@
 ************************************************************************/
 CManagerBase::CManagerBase()
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CManagerBase::~CManagerBase()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the data list tables
-*
-*	 param:	string & filePath - file path of the object data list XML
 ************************************************************************/
-void CManagerBase::LoadListTable( const std::string & filePath )
+void CManagerBase::loadListTable( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper(filePath.c_str(), "listTable");
@@ -66,5 +64,4 @@ void CManagerBase::LoadListTable( const std::string & filePath )
             iter.first->second.push_back(dataNode.getAttribute("path"));
         }
     }
-
-}   // LoadListTable
+}

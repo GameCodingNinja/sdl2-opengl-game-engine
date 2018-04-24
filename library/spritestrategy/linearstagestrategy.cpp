@@ -194,7 +194,7 @@ void CLinearStageStrategy::Render( const CMatrix & matrix )
 
 void CLinearStageStrategy::Render()
 {
-    auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
+    auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
     for( size_t i = m_firstIndex; i < m_lastIndex; ++i )
         m_sectorDeq.at(i).Render( camera );

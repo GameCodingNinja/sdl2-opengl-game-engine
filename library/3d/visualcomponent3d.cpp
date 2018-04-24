@@ -53,7 +53,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 {
     if( visualData.IsActive() )
     {
-        m_pShaderData = &CShaderMgr::Instance().GetShaderData( visualData.GetShaderID() );
+        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.GetShaderID() );
 
         m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
         m_normalLocation = m_pShaderData->getAttributeLocation( "in_normal" );
@@ -89,10 +89,10 @@ void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalM
         CStatCounter::Instance().IncDisplayCounter();
 
         // Bind the VBO and IBO
-        CVertBufMgr::Instance().Bind( meshIter.m_vbo, meshIter.m_ibo );
+        CVertBufMgr::Instance().bind( meshIter.m_vbo, meshIter.m_ibo );
 
         // Bind the shader. This must be done first
-        CShaderMgr::Instance().Bind( m_pShaderData );
+        CShaderMgr::Instance().bind( m_pShaderData );
 
         // Setup the vertex attribute shader data
         glVertexAttribPointer( m_vertexLocation, 3, GL_FLOAT, GL_FALSE, m_VERTEX_BUF_SIZE, (GLvoid*)0 );
@@ -106,7 +106,7 @@ void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalM
             // Bind the texture
             for( auto & txtIter : meshIter.m_textureVec )
             {
-                CTextureMgr::Instance().Bind( txtIter.m_id );
+                CTextureMgr::Instance().bind( txtIter.m_id );
                 glUniform1i( m_text0Location, (int)txtIter.m_type); // 0 = TEXTURE0
             }
 

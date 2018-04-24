@@ -106,7 +106,7 @@ void CSector::LoadFromNode( const XMLNode & node )
             
             // Broadcast the signal to create the sprite AI
             if( !aiName.empty() )
-                CSignalMgr::Instance().Broadcast( aiName, m_pSpriteVec.back() );
+                CSignalMgr::Instance().broadcast( aiName, m_pSpriteVec.back() );
         }
     }
 }   // LoadFromNode

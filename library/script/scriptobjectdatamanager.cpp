@@ -26,7 +26,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().LoadListTable( filePath );
+            CObjectDataMgr::Instance().loadListTable( filePath );
         }
         catch( NExcept::CCriticalException & ex )
         {

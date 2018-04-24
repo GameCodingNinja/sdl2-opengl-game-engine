@@ -383,7 +383,7 @@ void CUIControl::onSetActiveControl( const SDL_Event & rEvent )
         m_lastState = m_state = NUIControl::ECS_ACTIVE;
 
         // Don't animate the control if the mouse was used
-        if( !CActionMgr::Instance().WasLastDeviceMouse() )
+        if( !CActionMgr::Instance().wasLastDeviceMouse() )
         {
             recycleContext();
             setDisplayState();
@@ -402,8 +402,8 @@ void CUIControl::onReactivate( const SDL_Event & rEvent )
         m_lastState = m_state = NUIControl::ECS_ACTIVE;
 
         // Don't animate the control if the mouse was used
-        if( !CActionMgr::Instance().WasLastDeviceMouse() ||
-            isPointInControl( CActionMgr::Instance().GetMouseAbsolutePos() ) )
+        if( !CActionMgr::Instance().wasLastDeviceMouse() ||
+            isPointInControl( CActionMgr::Instance().getMouseAbsolutePos() ) )
         {
             recycleContext();
             setDisplayState();
@@ -899,7 +899,7 @@ bool CUIControl::activateFirstInactiveControl()
     // If a mouse was used, set the control as active but don't animate it.
     // This allows us to use the keys to scroll when pressed
     #if !(defined(__IOS__) || defined(__ANDROID__))
-    if( CActionMgr::Instance().WasLastDeviceMouse() )
+    if( CActionMgr::Instance().wasLastDeviceMouse() )
     {
         if( !isDisabled() )
         {

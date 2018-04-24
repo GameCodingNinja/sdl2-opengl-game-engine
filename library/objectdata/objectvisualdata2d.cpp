@@ -196,7 +196,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                         NGenFunc::AddFileExt( m_spriteSheetFilePath, filePath, m_resExt );
 
                     // This will return the sprite sheet
-                    auto rSpriteSheet = CSpriteSheetMgr::Instance().Load( filePath );
+                    auto rSpriteSheet = CSpriteSheetMgr::Instance().load( filePath );
 
                     // Copy the needed glyph data from the manager
                     rSpriteSheet.copyTo( m_spriteSheet, m_glyphIDs, loadAllGlyphs );
@@ -259,7 +259,7 @@ void CObjectVisualData2D::LoadImage( const std::string & group )
                 if( !m_resExt.empty() )
                     NGenFunc::AddFileExt( file, filePath, m_resExt );
 
-                CTextureMgr::Instance().LoadImageFor2D( group, filePath );
+                CTextureMgr::Instance().loadImageFor2D( group, filePath );
             }
         }
         else
@@ -270,7 +270,7 @@ void CObjectVisualData2D::LoadImage( const std::string & group )
             if( !m_resExt.empty() )
                 NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
 
-            CTextureMgr::Instance().LoadImageFor2D( group, filePath );
+            CTextureMgr::Instance().loadImageFor2D( group, filePath );
         }
     }
     
@@ -355,7 +355,7 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
                 if( !m_resExt.empty() )
                     NGenFunc::AddFileExt( file, filePath, m_resExt );
                 
-                rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
+                rTexture = CTextureMgr::Instance().createTextureFor2D( group, filePath, m_compressed );
                 m_textureIDVec.push_back( rTexture.getID() );
             }
         }
@@ -367,7 +367,7 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
             if( !m_resExt.empty() )
                 NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
             
-            rTexture = CTextureMgr::Instance().CreateTextureFor2D( group, filePath, m_compressed );
+            rTexture = CTextureMgr::Instance().createTextureFor2D( group, filePath, m_compressed );
             m_textureIDVec.push_back( rTexture.getID() );
         }
         
@@ -424,8 +424,8 @@ void CObjectVisualData2D::GenerateQuad( const std::string & group )
         vertVec[3].uv.v = 0.0;
     }
 
-    m_vbo = CVertBufMgr::Instance().CreateVBO( group, "quad_0011" + horzStr + vertStr, vertVec );
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, "quad_0123", indexData, sizeof(indexData) );
+    m_vbo = CVertBufMgr::Instance().createVBO( group, "quad_0011" + horzStr + vertStr, vertVec );
+    m_ibo = CVertBufMgr::Instance().createIBO( group, "quad_0123", indexData, sizeof(indexData) );
 
     // A quad has 4 ibos
     m_iboCount = 4;
@@ -446,7 +446,7 @@ void CObjectVisualData2D::GenerateScaledFrame(
     std::string vboName = boost::str( boost::format("scaled_frame_%d_%d_%d_%d_%d_%d_%d_%d") 
         % frameSize.w % frameSize.h % m_scaledFrame.m_frame.w % m_scaledFrame.m_frame.h % textureSize.w % textureSize.h % glyphSize.w % glyphSize.h );
 
-    m_vbo = CVertBufMgr::Instance().CreateScaledFrame(
+    m_vbo = CVertBufMgr::Instance().createScaledFrame(
         group, vboName, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, std::vector<CVertex2D>() );
 
     uint8_t indexData[] = {
@@ -461,7 +461,7 @@ void CObjectVisualData2D::GenerateScaledFrame(
         3,7,1,     3,10,7 };
 
     // Create the reusable IBO buffer
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, "scaled_frame", indexData, sizeof(indexData) );
+    m_ibo = CVertBufMgr::Instance().createIBO( group, "scaled_frame", indexData, sizeof(indexData) );
 
     // Set the ibo count depending on the number of quads being rendered
     // If the center quad is not used, just adjust the ibo count because
@@ -508,7 +508,7 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     }
 
     // See if it already exists before loading the mesh file
-    m_vbo = CVertBufMgr::Instance().IsVBO( group, name );
+    m_vbo = CVertBufMgr::Instance().isVBO( group, name );
     if( m_vbo == 0 )
     {
         std::vector<CVertex2D> vertVec;
@@ -517,12 +517,12 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
         LoadMeshFromXML( group, textureSize, frameSize, textureOffset, 16, vertVec, iboVec );
         
         // create the vbo
-        m_vbo = CVertBufMgr::Instance().CreateScaledFrame(
+        m_vbo = CVertBufMgr::Instance().createScaledFrame(
             group, name, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, vertVec );
     }
 
     // Create the unique IBO buffer
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
+    m_ibo = CVertBufMgr::Instance().createIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
 
 }   // GenerateScaledFrameMeshFile
@@ -540,7 +540,7 @@ void CObjectVisualData2D::GenerateFromMeshFile(
     std::string name = "mesh_file_" + m_meshFilePath;
 
     // See if it already exists before loading the mesh file
-    m_vbo = CVertBufMgr::Instance().IsVBO( group, name );
+    m_vbo = CVertBufMgr::Instance().isVBO( group, name );
     if( m_vbo == 0 )
     {
         std::vector<CVertex2D> vertVec;
@@ -549,11 +549,11 @@ void CObjectVisualData2D::GenerateFromMeshFile(
         LoadMeshFromXML( group, textureSize, size, CRect<float>(), 16, vertVec, iboVec );
 
         // create the vbo
-        m_vbo = CVertBufMgr::Instance().CreateVBO( group, name, vertVec );
+        m_vbo = CVertBufMgr::Instance().createVBO( group, name, vertVec );
     }
     
     // Create the unique IBO buffer
-    m_ibo = CVertBufMgr::Instance().CreateIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
+    m_ibo = CVertBufMgr::Instance().createIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
 
 }   // GenerateFromMeshFile

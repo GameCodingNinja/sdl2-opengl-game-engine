@@ -45,39 +45,39 @@ public:
     ////////////////////////////////////////////////////////
 
     // Connect/Disconnect to the smart gui signal
-    void Connect_SmartGui( const SmartGuiControlSignal::slot_type & slot );
-    void Disconnect_SmartGui();
+    void connect_smartGui( const SmartGuiControlSignal::slot_type & slot );
+    void disconnect_smartGui();
 
     // Connect to the smart menu signal
-    void Connect_SmartMenu( const SmartMenuSignal::slot_type & slot );
-    void Disconnect_SmartMenu();
+    void connect_smartMenu( const SmartMenuSignal::slot_type & slot );
+    void disconnect_smartMenu();
     
     // Connect to the Ai Sprite create signal
-    void Connect_AICreate( const AICreateSignal::slot_type & slot );
-    void Disconnect_AICreate();
+    void connect_aICreate( const AICreateSignal::slot_type & slot );
+    void disconnect_aICreate();
     
     // Connect/Disconnect to the load signal
-    void Connect_Load( const BasicFunction::slot_type & slot );
-    void Disconnect_Load();
+    //void connect_load( const BasicFunction::slot_type & slot );
+    //void disconnect_load();
     
     // Connect/Disconnect to the resolution change signal
-    void Connect_ResolutionChange( const BasicFunction::slot_type & slot );
-    void Disconnect_ResolutionChange();
+    void connect_resolutionChange( const BasicFunction::slot_type & slot );
+    void disconnect_resolutionChange();
 
     // Broadcast smart gui control signal
-    void Broadcast( CUIControl * pControl );
+    void broadcast( CUIControl * pControl );
 
     // Broadcast smart menu signal
-    void Broadcast( CMenu * pMenu );
+    void broadcast( CMenu * pMenu );
     
     // Broadcast AI Sprite create signal
-    void Broadcast( const std::string & aiName, iSprite * pSprite );
+    void broadcast( const std::string & aiName, iSprite * pSprite );
     
     // Broadcast the load signal
-    void Broadcast_LoadSignal();
+    void broadcast_LoadSignal();
     
     // Broadcast the resolution change
-    void Broadcast_ResolutionChange();
+    void broadcast_ResolutionChange();
 
 private:
 

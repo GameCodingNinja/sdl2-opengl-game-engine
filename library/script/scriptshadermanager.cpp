@@ -27,7 +27,7 @@ namespace NScriptShaderManager
     {
         try
         {
-            CShaderMgr::Instance().LoadFromXML( filePath );
+            CShaderMgr::Instance().loadFromXML( filePath );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -49,10 +49,10 @@ namespace NScriptShaderManager
         asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void Shader_Load(string &in)", asFUNCTION(LoadFromXML), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, CColor color )", asMETHODPR(CShaderMgr, SetAllShaderColor, (const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, SetAllShaderColor, (const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, CColor color )", asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
         
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, CColor color )", asMETHODPR(CShaderMgr, SetShaderColor, (const std::string &, const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, SetShaderColor, (const std::string &, const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, CColor color )", asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
     }
 }

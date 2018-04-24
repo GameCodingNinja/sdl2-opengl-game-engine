@@ -137,7 +137,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
         const std::string group = stopSoundNode.getAttribute( "group" );
         const std::string soundId = stopSoundNode.getAttribute( "soundId" );
         
-        m_pSpinStopSnd = &CSoundMgr::Instance().GetSound( group, soundId );
+        m_pSpinStopSnd = &CSoundMgr::Instance().getSound( group, soundId );
     }
     
     // Init the reel strip with symbols
@@ -364,7 +364,7 @@ void CReelStripView::Update()
                     
                     if( m_allowStopSounds && (m_pSpinStopSnd != nullptr) )
                     {
-                        const int channel = CSoundMgr::Instance().GetNextChannel();
+                        const int channel = CSoundMgr::Instance().getNextChannel();
                         m_pSpinStopSnd->play( channel );
                     }
                     

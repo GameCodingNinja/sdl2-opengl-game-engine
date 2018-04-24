@@ -73,7 +73,7 @@ void CPlayerShipAI::handleEvent( const SDL_Event & rEvent )
             m_gunXY.y = -rEvent.caxis.value;
         }
     }
-    else if( CActionMgr::Instance().WasAction( rEvent, "Shoot", NDefs::EAP_DOWN ) )
+    else if( CActionMgr::Instance().wasAction( rEvent, "Shoot", NDefs::EAP_DOWN ) )
     {
         handleShooting();
     }

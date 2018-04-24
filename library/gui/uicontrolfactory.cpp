@@ -73,7 +73,7 @@ namespace NUIControlFactory
         pControl->loadFromNode( node );
 
         // Broadcast signal to let the game handle smart gui inits
-        CSignalMgr::Instance().Broadcast( pControl );
+        CSignalMgr::Instance().broadcast( pControl );
 
         // Do any smart gui Create
         pControl->smartCreate();

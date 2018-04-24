@@ -64,7 +64,7 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
 {
     if( visualData.IsActive() )
     {
-        m_pShaderData = &CShaderMgr::Instance().GetShaderData( visualData.GetShaderID() );
+        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.GetShaderID() );
 
         // Common shader members
         m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
@@ -146,10 +146,10 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
         CStatCounter::Instance().IncDisplayCounter();
 
         // Bind the VBO and IBO
-        CVertBufMgr::Instance().Bind( m_vbo, m_ibo );
+        CVertBufMgr::Instance().bind( m_vbo, m_ibo );
 
         // Bind the shader. This must be done before glVertexAttribPointer
-        CShaderMgr::Instance().Bind( m_pShaderData );
+        CShaderMgr::Instance().bind( m_pShaderData );
 
         // Setup the vertex attribute shader data
         glVertexAttribPointer( m_vertexLocation, 3, GL_FLOAT, GL_FALSE, VERTEX_BUF_SIZE, (GLvoid*)0 );
@@ -160,7 +160,7 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
             const int8_t UV_OFFSET( sizeof(CPoint<float>) );
 
             // Bind the texture
-            CTextureMgr::Instance().Bind( m_textureID );
+            CTextureMgr::Instance().bind( m_textureID );
             glUniform1i( m_text0Location, 0); // 0 = TEXTURE0
 
             // Setup the UV attribute shade data
@@ -270,7 +270,7 @@ void CVisualComponent2D::createFontString( const std::string & fontString )
         m_pFontData->m_fontStrSize.reset();
         float lastCharDif(0.f);
 
-        const CFont & font = CFontMgr::Instance().GetFont( m_pFontData->m_fontProp.m_fontName );
+        const CFont & font = CFontMgr::Instance().getFont( m_pFontData->m_fontProp.m_fontName );
 
         m_textureID = font.getTextureID();
 
@@ -287,7 +287,7 @@ void CVisualComponent2D::createFontString( const std::string & fontString )
         m_iboCount = charCount * 6;
 
         // Set a flag to indicate if the IBO should be built
-        const bool BUILD_FONT_IBO = (m_iboCount > CVertBufMgr::Instance().GetCurrentMaxFontIndices());
+        const bool BUILD_FONT_IBO = (m_iboCount > CVertBufMgr::Instance().getCurrentMaxFontIndices());
 
         // Allocate the quad array
         std::unique_ptr<CQuad2D[]> upQuadBuf( new CQuad2D[charCount] );
@@ -493,7 +493,7 @@ void CVisualComponent2D::createFontString( const std::string & fontString )
 
         // All fonts share the same IBO because it's always the same and the only difference is it's length
         // This updates the current IBO if it exceeds the current max
-        m_ibo = CVertBufMgr::Instance().CreateDynamicFontIBO( CFontMgr::Instance().GetGroup(), "dynamic_font_ibo", upIndxBuf.get(), m_iboCount );
+        m_ibo = CVertBufMgr::Instance().createDynamicFontIBO( CFontMgr::Instance().getGroup(), "dynamic_font_ibo", upIndxBuf.get(), m_iboCount );
     }
     else if( m_pFontData &&
              fontString.empty() &&

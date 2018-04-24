@@ -206,7 +206,7 @@ iSprite * CBasicSpriteStrategy::Create(
     
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
-        CSignalMgr::Instance().Broadcast( aiName, iter.first->second );
+        CSignalMgr::Instance().broadcast( aiName, iter.first->second );
     
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -267,7 +267,7 @@ iSprite * CBasicSpriteStrategy::Create(
     
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
-        CSignalMgr::Instance().Broadcast( aiName, iter.first->second );
+        CSignalMgr::Instance().broadcast( aiName, iter.first->second );
     
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -477,7 +477,7 @@ void CBasicSpriteStrategy::Render( const CMatrix & matrix, const CMatrix & rotMa
 
 void CBasicSpriteStrategy::Render()
 {
-    const auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
+    const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
     for( auto iter : m_pSpriteVec )
         iter->render( camera );

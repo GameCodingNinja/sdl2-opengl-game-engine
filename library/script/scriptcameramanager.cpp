@@ -27,8 +27,8 @@ namespace NScriptCameraManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
 
-        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreateOrthographic( string &in, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, CreateOrthographic), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreatePerspective( string &in, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, CreatePerspective), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreateOrthographic( string &in, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, createOrthographic), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreatePerspective( string &in, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, createPerspective), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
     }
 
 }   // NScriptColor

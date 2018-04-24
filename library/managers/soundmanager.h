@@ -27,53 +27,53 @@ public:
     }
 
     // Load all of the sounds of a specific group
-    void LoadGroup( const std::string & group );
+    void loadGroup( const std::string & group );
     
     // Free a sound group
-    void FreeGroup( const std::string & group );
+    void freeGroup( const std::string & group );
     
     // Get the next channel
-    int GetNextChannel();
+    int getNextChannel();
 
     // Play a sound
-    void Play( const std::string & group, const std::string & soundID, int loopCount = 0 );
+    void play( const std::string & group, const std::string & soundID, int loopCount = 0 );
 
     // Pause a sound
-    void Pause( const std::string & group, const std::string & soundID );
+    void pause( const std::string & group, const std::string & soundID );
 
     // Resume a sound
-    void Resume( const std::string & group, const std::string & soundID );
+    void resume( const std::string & group, const std::string & soundID );
 
     // Resume a sound
-    void Stop( const std::string & group, const std::string & soundID );
+    void stop( const std::string & group, const std::string & soundID );
     
     // Set volume for music or channel
-    void SetVolume( const std::string & group, const std::string & soundID, int volume );
-    int GetVolume( const std::string & group, const std::string & soundID );
+    void setVolume( const std::string & group, const std::string & soundID, int volume );
+    int getVolume( const std::string & group, const std::string & soundID );
     
     // Is music or channel playing?
-    bool IsPlaying( const std::string & group, const std::string & soundID );
+    bool isPlaying( const std::string & group, const std::string & soundID );
     
     // Is music or channel paused?
-    bool IsPaused( const std::string & group, const std::string & soundID );
+    bool isPaused( const std::string & group, const std::string & soundID );
 
     // Get the sound
-    CSound & GetSound( const std::string & group, const std::string & soundID );
+    CSound & getSound( const std::string & group, const std::string & soundID );
     
     // Get the playlist
-    CPlayList & GetPlayList( const std::string & group, const std::string & playLstID );
+    CPlayList & getPlayList( const std::string & group, const std::string & playLstID );
     
     // Is music playing?
-    bool IsMusicPlaying();
+    bool isMusicPlaying();
     
     // Is music paused?
-    bool IsMusicPaused();
+    bool isMusicPaused();
     
     // Stop the music
-    void StopMusic();
+    void stopMusic();
     
     // Pause the music
-    void PauseMusic();
+    void pauseMusic();
 
 private:
 
@@ -84,7 +84,7 @@ private:
     virtual ~CSoundMgr();
 
     // Load all object information from an xml
-    void LoadFromXML( const std::string & group, const std::string & filePath );
+    void loadFromXML( const std::string & group, const std::string & filePath );
 
 private:
 

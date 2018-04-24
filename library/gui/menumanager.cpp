@@ -142,10 +142,7 @@ void CMenuManager::initGroup( const std::string & group )
     if( menuMapIter != m_menuMapMap.end() )
     {
         for( auto & iter : menuMapIter->second )
-        {
-            CSignalMgr::Instance().Broadcast_LoadSignal();
             iter.second.init();
-        }
     }
     else
     {
@@ -162,8 +159,6 @@ void CMenuManager::initGroup( const std::string & group )
  ************************************************************************/
 void CMenuManager::cleanUpGroup( const std::string & group )
 {
-    CSignalMgr::Instance().Broadcast_LoadSignal();
-
     auto menuMapIter = m_menuMapMap.find( group );
     if( menuMapIter != m_menuMapMap.end() )
     {
@@ -235,7 +230,7 @@ void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode &
         iter.first->second.loadFromXML( menuNode.getAttribute( "file" ) );
 
         // Broadcast signal to let the game handle smart menu inits
-        CSignalMgr::Instance().Broadcast( &iter.first->second );
+        CSignalMgr::Instance().broadcast( &iter.first->second );
 
         // Handle any smart menu creates
         iter.first->second.smartCreate();
@@ -608,7 +603,7 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
             }*/
 
             // Only the default tree can execute an escape or toggle when none are active.
-            if( CActionMgr::Instance().WasAction( rEvent, m_escapeAction, NDefs::EAP_DOWN ) )
+            if( CActionMgr::Instance().wasAction( rEvent, m_escapeAction, NDefs::EAP_DOWN ) )
             {
                 CMenuTree * pTree = getActiveTree();
 
@@ -617,7 +612,7 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
                 else
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION, 0, &pTree->getName() );
             }
-            else if( CActionMgr::Instance().WasAction( rEvent, m_toggleAction, NDefs::EAP_DOWN ) )
+            else if( CActionMgr::Instance().wasAction( rEvent, m_toggleAction, NDefs::EAP_DOWN ) )
             {
                 CMenuTree * pTree = getActiveTree();
 
@@ -637,12 +632,12 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
                     handleEventForTrees( rEvent );
                 }
                 // Need to pack multiple data items into one 32-bit int for this message
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_selectAction )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_selectAction )) > NDefs::EAP_IDLE )
                 {
                     // Need to pack a lot of information into one 32 bit int
                     CSelectMsgCracker msgCracker;
                     msgCracker.setPressType( pressType );
-                    msgCracker.setDeviceId( CActionMgr::Instance().GetLastDeviceUsed() );
+                    msgCracker.setDeviceId( CActionMgr::Instance().getLastDeviceUsed() );
 
                     if( msgCracker.getDeviceId() == NDefs::MOUSE )
                     {
@@ -652,25 +647,25 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
 
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_SELECT_ACTION, msgCracker.getPackedUnit() );
                 }
-                else if( CActionMgr::Instance().WasAction( rEvent, m_backAction, NDefs::EAP_DOWN ) )
+                else if( CActionMgr::Instance().wasAction( rEvent, m_backAction, NDefs::EAP_DOWN ) )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_BACK_ACTION );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_upAction )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_upAction )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_UP_ACTION, pressType );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_downAction )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_downAction )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_DOWN_ACTION, pressType );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_leftAction )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_leftAction )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_LEFT_ACTION, pressType );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_rightAction )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_rightAction )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_RIGHT_ACTION, pressType );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_tabLeft )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_tabLeft )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_TAB_LEFT, pressType );
 
-                else if( (pressType = CActionMgr::Instance().WasAction( rEvent, m_tabRight )) > NDefs::EAP_IDLE )
+                else if( (pressType = CActionMgr::Instance().wasAction( rEvent, m_tabRight )) > NDefs::EAP_IDLE )
                     NGenFunc::DispatchEvent( NMenu::EGE_MENU_TAB_RIGHT, pressType );
 
                 // If none of the predefined actions have been hit, just send the message for processing

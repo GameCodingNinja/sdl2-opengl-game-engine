@@ -21,7 +21,7 @@ class CManagerBase
 public:
 
     // Load the data list table
-    void LoadListTable( const std::string & filePath );
+    void loadListTable( const std::string & filePath );
 
 protected:
 

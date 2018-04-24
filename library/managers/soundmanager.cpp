@@ -34,7 +34,7 @@ CSoundMgr::CSoundMgr() :
     // Init for the OGG compressed file format
     if( Mix_Init(MIX_INIT_OGG) == 0 )
     {
-        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer init error (%s).\n\n%s\nLine: %s") 
+        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer init error (%s).\n\n%s\nLine: %s")
                     % SDL_GetError() % __FUNCTION__ % __LINE__ ) );
     }
 
@@ -46,18 +46,17 @@ CSoundMgr::CSoundMgr() :
         CSettings::Instance().GetSoundChannels(), // mono, stero, quad, suround, etc
         CSettings::Instance().GetChunkSize() ) == 0 )
     {
-        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s") 
+        NGenFunc::PostDebugMsg( boost::str( boost::format("Sound mixer open error (%s).\n\n%s\nLine: %s")
                         % SDL_GetError() % __FUNCTION__ % __LINE__ ) );
     }
-            
+
     if( CSettings::Instance().GetMixChannels() != m_maxMixChannels )
         m_maxMixChannels = Mix_AllocateChannels( CSettings::Instance().GetMixChannels() );
-    
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CSoundMgr::~CSoundMgr()
 {
@@ -69,8 +68,7 @@ CSoundMgr::~CSoundMgr()
             mapIter.second.free();
         }
     }
-
-}	// destructor
+}
 
 
 /************************************************************************
@@ -78,20 +76,20 @@ CSoundMgr::~CSoundMgr()
 *
 *    param: string & group - specified group of scripts to load
 ************************************************************************/
-void CSoundMgr::LoadGroup( const std::string & group )
+void CSoundMgr::loadGroup( const std::string & group )
 {
     // Make sure the group we are looking has been defined in the list table file
     auto listTableIter = m_listTableMap.find( group );
     if( listTableIter == m_listTableMap.end() )
         throw NExcept::CCriticalException("Sound List Load Group Data Error!",
-            boost::str( boost::format("Sound list group name can't be found (%s).\n\n%s\nLine: %s") 
+            boost::str( boost::format("Sound list group name can't be found (%s).\n\n%s\nLine: %s")
                 % group % __FUNCTION__ % __LINE__ ));
 
     // Load the group data if it doesn't already exist
     if( m_soundMapMap.find( group ) == m_soundMapMap.end() )
     {
         for( auto & iter : listTableIter->second )
-            LoadFromXML( group, iter );
+            loadFromXML( group, iter );
     }
     else
     {
@@ -99,8 +97,7 @@ void CSoundMgr::LoadGroup( const std::string & group )
             boost::str( boost::format("Sound data list group has alread been loaded (%s).\n\n%s\nLine: %s")
                 % group % __FUNCTION__ % __LINE__ ));
     }
-
-}   // LoadGroup
+}
 
 
 /************************************************************************
@@ -108,7 +105,7 @@ void CSoundMgr::LoadGroup( const std::string & group )
 *
 *	 param:	string & filePath - file path of the object data list XML
 ************************************************************************/
-void CSoundMgr::LoadFromXML( const std::string & group, const std::string & filePath )
+void CSoundMgr::loadFromXML( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "soundList" );
@@ -180,14 +177,13 @@ void CSoundMgr::LoadFromXML( const std::string & group, const std::string & file
             iter.first->second.loadFromNode( playListNode, group, soundMapIter->second );
         }
     }
-
-}   // LoadFromXML
+}
 
 
 /************************************************************************
 *    desc:  Free a sound group
 ************************************************************************/
-void CSoundMgr::FreeGroup( const std::string & group )
+void CSoundMgr::freeGroup( const std::string & group )
 {
     // Free the sound group if it exists
     auto soundMapIter = m_soundMapMap.find( group );
@@ -200,19 +196,18 @@ void CSoundMgr::FreeGroup( const std::string & group )
         // Erase this group
         m_soundMapMap.erase( soundMapIter );
     }
-    
+
     // Free the playlist group if it exists
     auto playLstMapIter = m_playListMapMap.find( group );
     if( playLstMapIter != m_playListMapMap.end() )
         m_playListMapMap.erase( playLstMapIter );
-
-}   // FreeGroup
+}
 
 
 /************************************************************************
 *    desc:  Get the sound
 ************************************************************************/
-CSound & CSoundMgr::GetSound( const std::string & group, const std::string & soundID )
+CSound & CSoundMgr::getSound( const std::string & group, const std::string & soundID )
 {
     // Check if this is a playlist sound ID
     auto playListMapIter = m_playListMapMap.find( group );
@@ -236,16 +231,15 @@ CSound & CSoundMgr::GetSound( const std::string & group, const std::string & sou
         NGenFunc::PostDebugMsg( boost::str( boost::format("Sound ID can't be found (%s - %s).") % group % soundID ) );
         return m_dummySound;
     }
-        
-    return iter->second;
 
-}   // GetSound
+    return iter->second;
+}
 
 
 /************************************************************************
 *    desc:  Get the playlist
 ************************************************************************/
-CPlayList & CSoundMgr::GetPlayList( const std::string & group, const std::string & playLstID )
+CPlayList & CSoundMgr::getPlayList( const std::string & group, const std::string & playLstID )
 {
     auto playListMapIter = m_playListMapMap.find( group );
     if( playListMapIter != m_playListMapMap.end() )
@@ -254,135 +248,121 @@ CPlayList & CSoundMgr::GetPlayList( const std::string & group, const std::string
         if( iter != playListMapIter->second.end() )
             return iter->second;
     }
-    
+
     return m_dummyPlayLst;
-    
-}   // GetPlayList
+}
 
 
 /************************************************************************
 *    desc:  Get the next channel
 ************************************************************************/
-int CSoundMgr::GetNextChannel()
+int CSoundMgr::getNextChannel()
 {
     m_mixChannel = (m_mixChannel + 1) % m_maxMixChannels;
     return m_mixChannel;
-
-}   // GetNextChannel
+}
 
 
 /************************************************************************
 *    desc:  Play a sound
 ************************************************************************/
-void CSoundMgr::Play( const std::string & group, const std::string & soundID, int loopCount )
+void CSoundMgr::play( const std::string & group, const std::string & soundID, int loopCount )
 {
-    GetSound( group, soundID ).play( GetNextChannel(), loopCount );
-
-}   // Play
+    getSound( group, soundID ).play( getNextChannel(), loopCount );
+}
 
 
 /************************************************************************
 *    desc:  Pause a sound
 ************************************************************************/
-void CSoundMgr::Pause( const std::string & group, const std::string & soundID )
+void CSoundMgr::pause( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).pause();
-
-}   // Pause
+    getSound( group, soundID ).pause();
+}
 
 
 /************************************************************************
 *    desc:  Resume a sound
 ************************************************************************/
-void CSoundMgr::Resume( const std::string & group, const std::string & soundID )
+void CSoundMgr::resume( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).resume();
-
-}   // Resume
+    getSound( group, soundID ).resume();
+}
 
 
 /************************************************************************
 *    desc:  Resume a sound
 ************************************************************************/
-void CSoundMgr::Stop( const std::string & group, const std::string & soundID )
+void CSoundMgr::stop( const std::string & group, const std::string & soundID )
 {
-    GetSound( group, soundID ).stop();
-
-}   // Resume
+    getSound( group, soundID ).stop();
+}
 
 
 /************************************************************************
 *    desc: Set/Get the volume for music or channel
 ************************************************************************/
-void CSoundMgr::SetVolume( const std::string & group, const std::string & soundID, int volume )
+void CSoundMgr::setVolume( const std::string & group, const std::string & soundID, int volume )
 {
-    GetSound( group, soundID ).setVolume( volume );
-    
-}   // SetVolume
+    getSound( group, soundID ).setVolume( volume );
+}
 
-int CSoundMgr::GetVolume( const std::string & group, const std::string & soundID )
+int CSoundMgr::getVolume( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).getVolume();
-    
-}   // GetVolume
+    return getSound( group, soundID ).getVolume();
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel playing?
 ************************************************************************/
-bool CSoundMgr::IsPlaying( const std::string & group, const std::string & soundID )
+bool CSoundMgr::isPlaying( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).isPlaying();
-
-}   // IsPlaying
+    return getSound( group, soundID ).isPlaying();
+}
 
 
 /************************************************************************
 *    desc:  Is music or channel paused?
 ************************************************************************/
-bool CSoundMgr::IsPaused( const std::string & group, const std::string & soundID )
+bool CSoundMgr::isPaused( const std::string & group, const std::string & soundID )
 {
-    return GetSound( group, soundID ).isPaused();
-    
-}   // IsPaused
+    return getSound( group, soundID ).isPaused();
+}
 
 
 /************************************************************************
 *    desc:  Is music playing?
 ************************************************************************/
-bool CSoundMgr::IsMusicPlaying()
+bool CSoundMgr::isMusicPlaying()
 {
     return Mix_PlayingMusic();
-
-}   // IsMusicPlaying
+}
 
 
 /************************************************************************
 *    desc:  Is music paused?
 ************************************************************************/
-bool CSoundMgr::IsMusicPaused()
+bool CSoundMgr::isMusicPaused()
 {
     return Mix_PausedMusic();
-
-}   // IsMusicPaused
+}
 
 
 /************************************************************************
 *    desc:  Stop the music
 ************************************************************************/
-void CSoundMgr::StopMusic()
+void CSoundMgr::stopMusic()
 {
     Mix_HaltMusic();
-
-}   // StopMusic
+}
 
 
 /************************************************************************
 *    desc:  Pause the music
 ************************************************************************/
-void CSoundMgr::PauseMusic()
+void CSoundMgr::pauseMusic()
 {
     if( Mix_PlayingMusic() )
         Mix_PauseMusic();
-
-}   // PauseMusic
+}

@@ -29,27 +29,26 @@ CSpriteSheetMgr::~CSpriteSheetMgr()
 /************************************************************************
 *    desc:  Load the glyph data from XML file
 ************************************************************************/
-const CSpriteSheet & CSpriteSheetMgr::Load( const std::string & filePath )
+const CSpriteSheet & CSpriteSheetMgr::load( const std::string & filePath )
 {
     auto mapIter = m_spriteSheetMap.find( filePath );
     if( mapIter == m_spriteSheetMap.end() )
     {
         // Add a new entry to the map
         mapIter = m_spriteSheetMap.emplace( filePath, CSpriteSheet() ).first;
-        
+
         // Load the glyph data from XML file
         mapIter->second.loadFromXML( filePath );
     }
 
     return mapIter->second;
-    
-}   // Load
+}
 
 
 /************************************************************************
 *    desc:  Clear all the sprite sheet data
 ************************************************************************/
-void CSpriteSheetMgr::Clear()
+void CSpriteSheetMgr::clear()
 {
     m_spriteSheetMap.clear();
 }

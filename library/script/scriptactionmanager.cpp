@@ -27,22 +27,22 @@ namespace NScriptActionManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("void Action_Load( string &in )", asMETHOD(CActionMgr, LoadActionFromXML), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Action_Load( string &in )", asMETHOD(CActionMgr, loadActionFromXML), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
 
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasEvent( string &in, int actionPress = 1)", asMETHOD(CActionMgr, WasEvent), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasEvent( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasEvent), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
         
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasKeyboard( string &in, int actionPress = 1)", asMETHOD(CActionMgr, WasKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasMouse( string &in, int actionPress = 1)", asMETHOD(CActionMgr, WasMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasGamepad( string &in, int actionPress = 1)", asMETHOD(CActionMgr, WasGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasKeyboard( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasMouse( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasGamepad( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
         
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseAbsolutePos()", asMETHOD(CActionMgr, GetMouseAbsolutePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseRelativePos()", asMETHOD(CActionMgr, GetMouseRelativePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosLeft()", asMETHOD(CActionMgr, GetControllerPosLeft), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosRight()", asMETHOD(CActionMgr, GetControllerPosRight), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseAbsolutePos()", asMETHOD(CActionMgr, getMouseAbsolutePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseRelativePos()", asMETHOD(CActionMgr, getMouseRelativePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosLeft()", asMETHOD(CActionMgr, getControllerPosLeft), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosRight()", asMETHOD(CActionMgr, getControllerPosRight), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
         
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceGamepad()", asMETHOD(CActionMgr, WasLastDeviceGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceKeyboard()", asMETHOD(CActionMgr, WasLastDeviceKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceMouse()", asMETHOD(CActionMgr, WasLastDeviceMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceGamepad()", asMETHOD(CActionMgr, wasLastDeviceGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceKeyboard()", asMETHOD(CActionMgr, wasLastDeviceKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceMouse()", asMETHOD(CActionMgr, wasLastDeviceMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
     }
 
 }   // NScriptColor

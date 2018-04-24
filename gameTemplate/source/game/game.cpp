@@ -47,10 +47,10 @@
 ************************************************************************/
 CGame::CGame()
 {
-    CSignalMgr::Instance().Connect_SmartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_SmartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
-    CShaderMgr::Instance().Connect_InitShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
+    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
+    CSignalMgr::Instance().connect_aICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
+    CShaderMgr::Instance().connect_initShader( boost::bind(&CGame::ShaderInitCallBack, this, _1) );
     
     if( NBDefs::IsDebugMode() )
         CStatCounter::Instance().Connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
@@ -147,7 +147,7 @@ void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
 void CGame::ShaderInitCallBack( const std::string & shaderId )
 {
     // Init the color for fading in
-    CShaderMgr::Instance().SetShaderColor( shaderId, "additive", CColor(0,0,0,1) );
+    CShaderMgr::Instance().setShaderColor( shaderId, "additive", CColor(0,0,0,1) );
     
 }   // ShaderInitCallBack
 

@@ -185,7 +185,7 @@ void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
     else if( rEvent.type == SDL_APP_WILLENTERBACKGROUND )
     {
         if( m_slotGame.GetState() == NSlotDefs::ESLOT_IDLE )
-            CSoundMgr::Instance().StopMusic();
+            CSoundMgr::Instance().stopMusic();
     }
 
 }   // HandleEvent
@@ -240,7 +240,7 @@ void CBigPayBackState::Transform()
 ****************************************************************************/
 void CBigPayBackState::PreRender()
 {
-    const CMatrix & orthoMatrix = CCameraMgr::Instance().GetDefaultProjMatrix();
+    const CMatrix & orthoMatrix = CCameraMgr::Instance().getDefaultProjMatrix();
     m_background.render( orthoMatrix );
     m_slotGame.Render( orthoMatrix );
     m_pig.render( orthoMatrix );
@@ -276,7 +276,7 @@ namespace NBigPayBack
         CMenuManager::Instance().loadGroup("(big_pay_back)", CMenuManager::DONT_INIT_GROUP);
         
         // Load sound resources for the game
-        CSoundMgr::Instance().LoadGroup("(big_pay_back)");
+        CSoundMgr::Instance().loadGroup("(big_pay_back)");
         
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(big_pay_back)");
@@ -291,7 +291,7 @@ namespace NBigPayBack
         CBetMgr::Instance().SetTotalLines( CSlotMathMgr::Instance().GetPaylineSet("40_4x5").GetLineData().size() );
         
         // Free the sprite sheet data manager because it's no longer needed
-        CSpriteSheetMgr::Instance().Clear();
+        CSpriteSheetMgr::Instance().clear();
         
         // Preload some needed XML files
         CXMLPreloader::Instance().Clear();
@@ -332,7 +332,7 @@ namespace NBigPayBack
         CScriptManager::Instance().FreeGroup("(big_pay_back)");
         
         // Unload sound resources for the game
-        CSoundMgr::Instance().FreeGroup("(big_pay_back)");
+        CSoundMgr::Instance().freeGroup("(big_pay_back)");
 
     }   // Unload
 

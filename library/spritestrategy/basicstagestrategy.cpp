@@ -145,7 +145,7 @@ void CBasicStageStrategy::Render( const CMatrix & matrix, const CMatrix & rotMat
 
 void CBasicStageStrategy::Render()
 {
-    const auto & camera = CCameraMgr::Instance().GetCamera( m_cameraId );
+    const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
     for( auto & iter : m_sectorDeq )
         iter.Render( camera );

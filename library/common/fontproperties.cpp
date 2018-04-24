@@ -25,7 +25,7 @@ CFontProperties::CFontProperties( const std::string fontName ) :
     m_fontName(fontName)
 {
     // Throws an exception if font is not loaded
-    CFontMgr::Instance().IsFont( m_fontName );
+    CFontMgr::Instance().isFont( m_fontName );
 }
 
 CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignment hAlign, NDefs::EVertAlignment vAlign ) :
@@ -34,7 +34,7 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
     m_vAlign(vAlign)
 {
     // Throws an exception if font is not loaded
-    CFontMgr::Instance().IsFont( m_fontName );
+    CFontMgr::Instance().isFont( m_fontName );
 }
 
 CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignment hAlign, NDefs::EVertAlignment vAlign, float kerning ) :
@@ -44,7 +44,7 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
     m_kerning(kerning)
 {
     // Throws an exception if font is not loaded
-    CFontMgr::Instance().IsFont( m_fontName );
+    CFontMgr::Instance().isFont( m_fontName );
 }
 
 
@@ -62,7 +62,7 @@ void CFontProperties::copy( const CFontProperties & obj )
     m_lineWrapHeight = obj.m_lineWrapHeight;
     
     // Throws an exception if font is not loaded
-    CFontMgr::Instance().IsFont( m_fontName );
+    CFontMgr::Instance().isFont( m_fontName );
 }
 
 
@@ -75,7 +75,7 @@ void CFontProperties::loadFromNode( const XMLNode & node )
     m_fontName = node.getAttribute( "fontName" );
     
     // Throws an exception if font is not loaded
-    CFontMgr::Instance().IsFont( m_fontName );
+    CFontMgr::Instance().isFont( m_fontName );
 
     // Get the attributes node
     const XMLNode attrNode = node.getChildNode( "attributes" );

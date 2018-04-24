@@ -110,7 +110,7 @@ void CSmartResolutionBtn::setResolutionChange()
 
     CSettings::Instance().SetSize( m_resVec[m_resIndex] );
     CSettings::Instance().CalcRatio();
-    CCameraMgr::Instance().CreateProjMatrix();
+    CCameraMgr::Instance().createProjMatrix();
 
 }   // SetResolutionChange
 

@@ -15,42 +15,21 @@
 // Physical component dependency
 #include "game.h"
 
-// Game dependencies
-/*#include "../state/startupstate.h"
-#include "../state/titlescreenstate.h"
-#include "../state/loadstate.h"
-#include "../state/runstate.h"
-#include "../ai/ballai.h"
-#include "../smartGUI/smartconfirmbtn.h"
-#include "../smartGUI/smartresolutionbtn.h"
-#include "../smartGUI/smartapplysettingsbtn.h"
-#include "../smartGUI/smartfullscreencheckbox.h"
-#include "../smartGUI/smartvsynccheckbox.h"
-#include "../smartGUI/smartdeadzoneslider.h"
-#include "../smartGUI/smartkeybindbtn.h"*/
-
 // Game lib dependencies
+#include <common/build_defs.h>
 #include <system/device.h>
-#include <managers/signalmanager.h>
-#include <managers/shadermanager.h>
-#include <managers/texturemanager.h>
-#include <managers/vertexbuffermanager.h>
-#include <managers/meshmanager.h>
-#include <managers/cameramanager.h>
-#include <managers/actionmanager.h>
-#include <spritestrategy/spritestrategymanager.h>
-#include <gui/menumanager.h>
-#include <gui/uicontrol.h>
-#include <gui/menu.h>
-#include <utilities/exceptionhandling.h>
 #include <utilities/settings.h>
 #include <utilities/statcounter.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/genfunc.h>
-#include <common/isprite.h>
-#include <common/color.h>
-#include <common/build_defs.h>
-#include <objectdata/objectdatamanager.h>
+#include <spritestrategy/spritestrategymanager.h>
+#include <managers/actionmanager.h>
+#include <managers/cameramanager.h>
+#include <managers/shadermanager.h>
+#include <managers/texturemanager.h>
+#include <managers/vertexbuffermanager.h>
+#include <managers/meshmanager.h>
+#include <gui/menumanager.h>
 #include <script/scriptmanager.h>
 #include <script/scriptcolor.h>
 #include <script/scriptsound.h>
@@ -66,7 +45,6 @@
 #include <script/scriptobjectdatamanager.h>
 #include <script/scriptstrategymanager.h>
 #include <script/scriptactionmanager.h>
-#include <system/device.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -85,10 +63,6 @@ CGame::CGame()
       m_gameRunning(false),
       m_clearBufferMask(0)
 {
-    CSignalMgr::Instance().Connect_SmartGui( boost::bind(&CGame::SmartGuiControlCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_SmartMenu( boost::bind(&CGame::SmartMenuCreateCallBack, this, _1) );
-    CSignalMgr::Instance().Connect_AICreate( boost::bind(&CGame::AICreateCallBack, this, _1, _2) );
-    
     if( NBDefs::IsDebugMode() )
         CStatCounter::Instance().Connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
 
@@ -201,7 +175,7 @@ void CGame::Init()
     PollEvents();
     
     // Load the script list table
-    CScriptManager::Instance().LoadListTable( "source/scriptListTable.lst" );
+    CScriptManager::Instance().loadListTable( "source/scriptListTable.lst" );
     
     // Register the script items
     RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
@@ -240,12 +214,12 @@ void CGame::PollEvents()
     // Event handler
     SDL_Event msgEvent;
     
-    CActionMgr::Instance().ClearQueue();
+    CActionMgr::Instance().clearQueue();
 
     // Handle events on queue
     while( SDL_PollEvent( &msgEvent ) )
     {
-        CActionMgr::Instance().QueueEvent( msgEvent );
+        CActionMgr::Instance().queueEvent( msgEvent );
         
         // let the game handle the event
         // turns true on quit
@@ -286,16 +260,16 @@ bool CGame::GameLoop()
         CSpriteStrategyMgr::Instance().MiscProcess();
         CSpriteStrategyMgr::Instance().Update();
         CSpriteStrategyMgr::Instance().Transform();
-        CCameraMgr::Instance().Transform();
+        CCameraMgr::Instance().transform();
         CSpriteStrategyMgr::Instance().Render();
         
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );
         
         // Unbind everything after a round of rendering
-        CShaderMgr::Instance().Unbind();
-        CTextureMgr::Instance().Unbind();
-        CVertBufMgr::Instance().Unbind();
+        CShaderMgr::Instance().unbind();
+        CTextureMgr::Instance().unbind();
+        CVertBufMgr::Instance().unbind();
 
         // Inc the cycle
         if( NBDefs::IsDebugMode() )
@@ -305,55 +279,6 @@ bool CGame::GameLoop()
     return m_gameRunning;
     
 }   // ScriptGameLoop
-
-
-/************************************************************************
-*    desc:  Callback for when a smart gui control is created
-************************************************************************/
-void CGame::SmartGuiControlCreateCallBack( CUIControl * pUIControl )
-{
-    /*if( pUIControl->GetFaction() == "decision_btn" )
-        pUIControl->SetSmartGui( new CSmartConfirmBtn( pUIControl ) );
-    
-    else if( pUIControl->GetFaction() == "key_binding_btn" )
-        pUIControl->SetSmartGui( new CSmartKeyBindBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "resolution_btn_lst" )
-        pUIControl->SetSmartGui( new CSmartResolutionBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "settings_apply_btn" )
-        pUIControl->SetSmartGui( new CSmartApplySettingsBtn( pUIControl ) );
-
-    else if( pUIControl->GetName() == "full_screen_check_box" )
-        pUIControl->SetSmartGui( new CSmartScrnCheckBox( pUIControl ) );
-
-    else if( pUIControl->GetName() == "v-sync_check_box" )
-            pUIControl->SetSmartGui( new CSmartVSyncCheckBox( pUIControl ) );
-
-    else if( pUIControl->GetName() == "settings_dead_zone_slider" )
-            pUIControl->SetSmartGui( new CSmartDeadZoneSlider( pUIControl ) );*/
-
-}   // SmartGuiControlCreateCallBack
-
-
-/************************************************************************
-*    desc:  Callback for when a smart menu is created
-************************************************************************/
-void CGame::SmartMenuCreateCallBack( CMenu * pMenu )
-{
-
-}   // SmartMenuCreateCallBack
-
-
-/***************************************************************************
-*    decs:  Call back function to create sprite ai
-****************************************************************************/
-void CGame::AICreateCallBack( const std::string & aiName, iSprite * pSprite )
-{
-    /*if( aiName == "aiBall" )
-        pSprite->SetAI( new CBallAI( pSprite ) );*/
-
-}   // AICreateCallBack
 
 
 /************************************************************************

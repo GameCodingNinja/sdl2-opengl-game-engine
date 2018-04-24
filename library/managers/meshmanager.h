@@ -33,27 +33,27 @@ public:
     }
 
     // Load mesh from file
-    void LoadFromFile(
+    void loadFromFile(
         const std::string & group,
         const std::string & filePath );
 
     // Load collision mesh from file
-    void LoadFromFile(
+    void loadFromFile(
         const std::string & group,
         const std::string & filePath,
         CCollisionMesh3D & collisionMesh );
     
-    void CreateFromData(
+    void createFromData(
         const std::string & group,
         const std::string & filePath,
         CMesh3D & mesh3d );
     
-    void CreateFromData(
+    void createFromData(
         const std::string & group,
         CMesh3D & mesh3d );
     
     // Delete mesh buffer group
-    void DeleteBufferGroup(const std::string & group);
+    void deleteBufferGroup(const std::string & group);
 
 private:
 
@@ -64,18 +64,18 @@ private:
     ~CMeshMgr();
 
     // Load 3d mesh file
-    void LoadFrom3DM(
+    void loadFrom3DM(
         const std::string & group,
         const std::string & filePath,
         CMesh3D & mesh3d );
     
     // Load 3d collision mesh file
-    void LoadFrom3DM(
+    void loadFrom3DM(
         const std::string & filePath,
         CCollisionMesh3D & collisionMesh );
 
     // Load 3d mesh file with textures
-    void LoadFromFile(
+    void loadFromFile(
         SDL_RWops * pFile,
         const CMeshBinaryFileHeader & fileHeader,
         const std::string & group,
@@ -83,14 +83,14 @@ private:
         CMesh3D & mesh3d );
 
     // Load 3d mesh file without textures
-    void LoadFromFile(
+    void loadFromFile(
         SDL_RWops * pFile,
         const CMeshBinaryFileHeader & fileHeader,
         const std::string & filePath,
         CMesh3D & mesh3d );
 
     // Do the tag check to insure we are in the correct spot
-    void TagCheck( SDL_RWops * file, const std::string & filePath );
+    void tagCheck( SDL_RWops * file, const std::string & filePath );
 
 private:
 

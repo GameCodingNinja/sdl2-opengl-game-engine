@@ -112,7 +112,7 @@ void CTitleScreenState::Transform()
 ****************************************************************************/
 void CTitleScreenState::PreRender()
 {
-    const CMatrix & orthoMatrix = CCameraMgr::Instance().GetDefaultProjMatrix();
+    const CMatrix & orthoMatrix = CCameraMgr::Instance().getDefaultProjMatrix();
     m_background.render( orthoMatrix );
     m_title.render( orthoMatrix );
     

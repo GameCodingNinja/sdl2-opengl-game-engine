@@ -32,7 +32,7 @@ CActionMgr::CActionMgr() :
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("RETURN",  SDLK_RETURN) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("ESCAPE",  SDLK_ESCAPE) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("AC_BACK",  SDLK_AC_BACK) );
-    
+
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("ARROW UP",    SDLK_UP) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("ARROW DOWN",  SDLK_DOWN) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("ARROW LEFT",  SDLK_LEFT) );
@@ -77,7 +77,7 @@ CActionMgr::CActionMgr() :
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("F10", SDLK_F10) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("F11", SDLK_F11) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("F12", SDLK_F12) );
-    
+
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("0",  SDLK_0) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("1",  SDLK_1) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("2",  SDLK_2) );
@@ -114,7 +114,7 @@ CActionMgr::CActionMgr() :
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("RIGHT SHIFT", SDLK_RSHIFT) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("LEFT ALT",    SDLK_LALT) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("RIGHT ALT",   SDLK_RALT) );
-    
+
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("PRINT SCREEN", SDLK_PRINTSCREEN) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("SCROLL LOCK",  SDLK_SCROLLLOCK) );
     m_keyboardKeyCodeMap.insert( keyCodeMapType::value_type("PAUSE",        SDLK_PAUSE) );
@@ -177,99 +177,93 @@ CActionMgr::CActionMgr() :
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("L STICK DOWN",  ANALOG1_DOWN) );
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("L STICK LEFT",  ANALOG1_LEFT) );
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("L STICK RIGHT", ANALOG1_RIGHT) );
-    
+
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("R STICK UP",    ANALOG2_UP) );
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("R STICK DOWN",  ANALOG2_DOWN) );
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("R STICK LEFT",  ANALOG2_LEFT) );
     m_gamepadKeyCodeMap.insert( keyCodeMapType::value_type("R STICK RIGHT", ANALOG2_RIGHT) );
-
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CActionMgr::~CActionMgr()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the action mappings from xml
-*  
+*
 *    param: std::string filePath - path to file
 ************************************************************************/
-void CActionMgr::LoadActionFromXML( const std::string & filePath )
+void CActionMgr::loadActionFromXML( const std::string & filePath )
 {
     m_saveFilePath = filePath;
     m_mainNode = XMLNode::openFileHelper( filePath.c_str(), "controllerMapping" );
 
     // Load the keyboard/mouse/gamepad mapping
-    LoadAction();
-
-}   // LoadActionFromXML
+    loadAction();
+}
 
 
 /************************************************************************
 *    desc:  Load the keyboard/mouse/gamepad mapping
 ************************************************************************/
-void CActionMgr::LoadAction()
+void CActionMgr::loadAction()
 {
     // Load the keyboard/mouse/gamepad mapping
-    LoadKeyboardMappingFromNode( m_mainNode.getChildNode( "keyboardMapping" ) );
-    LoadMouseMappingFromNode( m_mainNode.getChildNode( "mouseMapping" ) );
-    LoadGamepadMappingFromNode( m_mainNode.getChildNode( "gamepadMapping" ) );
-
-}   // LoadAction
+    loadKeyboardMappingFromNode( m_mainNode.getChildNode( "keyboardMapping" ) );
+    loadMouseMappingFromNode( m_mainNode.getChildNode( "mouseMapping" ) );
+    loadGamepadMappingFromNode( m_mainNode.getChildNode( "gamepadMapping" ) );
+}
 
 
 /************************************************************************
 *    desc:  Load the keyboard mapping from node
 ************************************************************************/
-void CActionMgr::LoadKeyboardMappingFromNode( const XMLNode & node )
+void CActionMgr::loadKeyboardMappingFromNode( const XMLNode & node )
 {
     // Load the player hidden controls
-    LoadActionFromNode( node.getChildNode("playerHidden"), m_keyboardKeyCodeMap, m_keyboardActionMap );
+    loadActionFromNode( node.getChildNode("playerHidden"), m_keyboardKeyCodeMap, m_keyboardActionMap );
 
     // Load the player visible controls
-    LoadActionFromNode( node.getChildNode("playerVisible"), m_keyboardKeyCodeMap, m_keyboardActionMap );
-
-}   // LoadKeyboardMappingFromNode
+    loadActionFromNode( node.getChildNode("playerVisible"), m_keyboardKeyCodeMap, m_keyboardActionMap );
+}
 
 
 /************************************************************************
 *    desc:  Load the mouse mapping from node
 ************************************************************************/
-void CActionMgr::LoadMouseMappingFromNode( const XMLNode & node )
+void CActionMgr::loadMouseMappingFromNode( const XMLNode & node )
 {
     // Load the player hidden controls
-    LoadActionFromNode( node.getChildNode("playerHidden"), m_mouseKeyCodeMap, m_mouseActionMap );
+    loadActionFromNode( node.getChildNode("playerHidden"), m_mouseKeyCodeMap, m_mouseActionMap );
 
     // Load the player visible controls
-    LoadActionFromNode( node.getChildNode("playerVisible"), m_mouseKeyCodeMap, m_mouseActionMap );
-
-}   // LoadMouseMappingFromNode
+    loadActionFromNode( node.getChildNode("playerVisible"), m_mouseKeyCodeMap, m_mouseActionMap );
+}
 
 
 /************************************************************************
 *    desc:  Load the gamepad mapping from node
 ************************************************************************/
-void CActionMgr::LoadGamepadMappingFromNode( const XMLNode & node )
+void CActionMgr::loadGamepadMappingFromNode( const XMLNode & node )
 {
     // Load the player hidden controls
-    LoadActionFromNode( node.getChildNode("playerHidden"), m_gamepadKeyCodeMap, m_gamepadActionMap );
+    loadActionFromNode( node.getChildNode("playerHidden"), m_gamepadKeyCodeMap, m_gamepadActionMap );
 
     // Load the player visible controls
-    LoadActionFromNode( node.getChildNode("playerVisible"), m_gamepadKeyCodeMap, m_gamepadActionMap );
-
-}   // LoadGamepadMappingFromNode
+    loadActionFromNode( node.getChildNode("playerVisible"), m_gamepadKeyCodeMap, m_gamepadActionMap );
+}
 
 
 /************************************************************************
 *    desc:  Load action data from xml node
 ************************************************************************/
-void CActionMgr::LoadActionFromNode( 
-    const XMLNode & node, 
+void CActionMgr::loadActionFromNode(
+    const XMLNode & node,
     keyCodeMapType & keyCodeMap,
     actionMapType & actionMap )
 {
@@ -304,36 +298,35 @@ void CActionMgr::LoadActionFromNode(
             }
         }
     }
-}   // LoadActionFromXMLNode
+}
 
 
 /************************************************************************
 *    desc:  Was this an action
 ************************************************************************/
-bool CActionMgr::WasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress actionPress )
 {
-    if( WasAction( rEvent, actionStr ) == actionPress )
+    if( wasAction( rEvent, actionStr ) == actionPress )
         return true;
 
     return false;
-
-}   // WasAction
+}
 
 
 /************************************************************************
 *    desc:  Was this an action
 ************************************************************************/
-NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::string & actionStr )
+NDefs::EActionPress CActionMgr::wasAction( const SDL_Event & rEvent, const std::string & actionStr )
 {
     NDefs::EActionPress result( NDefs::EAP_IDLE);
-    
+
     if( m_allowAction )
     {
         if( (rEvent.type == SDL_CONTROLLERBUTTONDOWN) || (rEvent.type == SDL_CONTROLLERBUTTONUP) )
         {
             m_lastDeviceUsed = NDefs::GAMEPAD;
 
-            if( WasAction( rEvent.cbutton.button, actionStr, m_gamepadActionMap ) )
+            if( wasAction( rEvent.cbutton.button, actionStr, m_gamepadActionMap ) )
             {
                 result = NDefs::EAP_UP;
 
@@ -347,7 +340,7 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
         {
             m_lastDeviceUsed = NDefs::KEYBOARD;
 
-            if( WasAction( rEvent.key.keysym.sym, actionStr, m_keyboardActionMap ) )
+            if( wasAction( rEvent.key.keysym.sym, actionStr, m_keyboardActionMap ) )
             {
                 result = NDefs::EAP_UP;
 
@@ -361,7 +354,7 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
         {
             m_lastDeviceUsed = NDefs::MOUSE;
 
-            if( WasAction( rEvent.button.button, actionStr, m_mouseActionMap ) )
+            if( wasAction( rEvent.button.button, actionStr, m_mouseActionMap ) )
             {
                 result = NDefs::EAP_UP;
 
@@ -380,18 +373,18 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
             {
                 if( m_analogLXButtonStateAry[rEvent.caxis.which] == NDefs::EAP_IDLE )
                 {
-                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && WasAction( ANALOG1_LEFT, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && wasAction( ANALOG1_LEFT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
 
-                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && WasAction( ANALOG1_RIGHT, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && wasAction( ANALOG1_RIGHT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
                 }
                 else if( m_analogLXButtonStateAry[rEvent.caxis.which] == NDefs::EAP_DOWN )
                 {
-                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && WasAction( ANALOG1_LEFT, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && wasAction( ANALOG1_LEFT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
 
-                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && WasAction( ANALOG1_RIGHT, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && wasAction( ANALOG1_RIGHT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
                 }
 
@@ -409,18 +402,18 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
             {
                 if( m_analogLYButtonStateAry[rEvent.caxis.which] == NDefs::EAP_IDLE )
                 {
-                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && WasAction( ANALOG1_UP, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && wasAction( ANALOG1_UP, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
 
-                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && WasAction( ANALOG1_DOWN, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && wasAction( ANALOG1_DOWN, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
                 }
                 else if( m_analogLYButtonStateAry[rEvent.caxis.which] == NDefs::EAP_DOWN )
                 {
-                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && WasAction( ANALOG1_UP, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && wasAction( ANALOG1_UP, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
 
-                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && WasAction( ANALOG1_DOWN, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && wasAction( ANALOG1_DOWN, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
                 }
 
@@ -438,18 +431,18 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
             {
                 if( m_analogRXButtonStateAry[rEvent.caxis.which] == NDefs::EAP_IDLE )
                 {
-                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && WasAction( ANALOG2_LEFT, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && wasAction( ANALOG2_LEFT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
 
-                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && WasAction( ANALOG2_RIGHT, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && wasAction( ANALOG2_RIGHT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
                 }
                 else if( m_analogRXButtonStateAry[rEvent.caxis.which] == NDefs::EAP_DOWN )
                 {
-                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && WasAction( ANALOG2_LEFT, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && wasAction( ANALOG2_LEFT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
 
-                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && WasAction( ANALOG2_RIGHT, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && wasAction( ANALOG2_RIGHT, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
                 }
 
@@ -467,18 +460,18 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
             {
                 if( m_analogRYButtonStateAry[rEvent.caxis.which] == NDefs::EAP_IDLE )
                 {
-                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && WasAction( ANALOG2_UP, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value < -ANALOG_STICK_MSG_MAX) && wasAction( ANALOG2_UP, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
 
-                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && WasAction( ANALOG2_DOWN, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value > ANALOG_STICK_MSG_MAX) && wasAction( ANALOG2_DOWN, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_DOWN;
                 }
                 else if( m_analogRYButtonStateAry[rEvent.caxis.which] == NDefs::EAP_DOWN )
                 {
-                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && WasAction( ANALOG2_UP, actionStr, m_gamepadActionMap ) )
+                    if( (rEvent.caxis.value > -ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value < 0) && wasAction( ANALOG2_UP, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
 
-                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && WasAction( ANALOG2_DOWN, actionStr, m_gamepadActionMap ) )
+                    else if( (rEvent.caxis.value < ANALOG_STICK_MSG_MAX) && (rEvent.caxis.value > 0) && wasAction( ANALOG2_DOWN, actionStr, m_gamepadActionMap ) )
                         result = NDefs::EAP_UP;
                 }
 
@@ -496,14 +489,13 @@ NDefs::EActionPress CActionMgr::WasAction( const SDL_Event & rEvent, const std::
     }
 
     return result;
-
-}   // WasAction
+}
 
 
 /************************************************************************
 *    desc:  Was this an action
 ************************************************************************/
-bool CActionMgr::WasAction( 
+bool CActionMgr::wasAction(
     const int Id,
     const std::string & actionStr,
     const actionMapType & actionMap )
@@ -520,29 +512,28 @@ bool CActionMgr::WasAction(
     }
 
     return result;
-
-}   // WasAction
+}
 
 
 /************************************************************************
 *    desc:  What was the last device
 ************************************************************************/
-bool CActionMgr::WasLastDeviceGamepad()
+bool CActionMgr::wasLastDeviceGamepad()
 {
     return (m_lastDeviceUsed == NDefs::GAMEPAD);
 }
 
-bool CActionMgr::WasLastDeviceKeyboard()
+bool CActionMgr::wasLastDeviceKeyboard()
 {
     return (m_lastDeviceUsed == NDefs::KEYBOARD);
 }
 
-bool CActionMgr::WasLastDeviceMouse()
+bool CActionMgr::wasLastDeviceMouse()
 {
     return (m_lastDeviceUsed == NDefs::MOUSE);
 }
 
-NDefs::EDeviceId CActionMgr::GetLastDeviceUsed()
+NDefs::EDeviceId CActionMgr::getLastDeviceUsed()
 {
     return m_lastDeviceUsed;
 }
@@ -551,7 +542,7 @@ NDefs::EDeviceId CActionMgr::GetLastDeviceUsed()
 /************************************************************************
 *    desc:  Reset the last used device
 ************************************************************************/
-void CActionMgr::ResetLastUsedDevice()
+void CActionMgr::resetLastUsedDevice()
 {
     m_lastDeviceUsed = NDefs::DEVICE_NULL;
 }
@@ -560,12 +551,12 @@ void CActionMgr::ResetLastUsedDevice()
 /************************************************************************
 *    desc:  Get the mouse position
 ************************************************************************/
-const CPoint<float> & CActionMgr::GetMouseAbsolutePos() const
+const CPoint<float> & CActionMgr::getMouseAbsolutePos() const
 {
     return m_mouseAbsolutePos;
 }
 
-const CPoint<float> & CActionMgr::GetMouseRelativePos() const
+const CPoint<float> & CActionMgr::getMouseRelativePos() const
 {
     return m_mouseRelativePos;
 }
@@ -574,12 +565,12 @@ const CPoint<float> & CActionMgr::GetMouseRelativePos() const
 /************************************************************************
 *    desc:  Get the last controller position
 ************************************************************************/
-const CPoint<float> & CActionMgr::GetControllerPosLeft() const
+const CPoint<float> & CActionMgr::getControllerPosLeft() const
 {
     return m_lastAnalogLeft;
 }
 
-const CPoint<float> & CActionMgr::GetControllerPosRight() const
+const CPoint<float> & CActionMgr::getControllerPosRight() const
 {
     return m_lastAnalogRight;
 }
@@ -588,7 +579,7 @@ const CPoint<float> & CActionMgr::GetControllerPosRight() const
 /************************************************************************
 *    desc:  Get the action/component strings for the give device id
 ************************************************************************/
-bool CActionMgr::GetDeviceActionStr( 
+bool CActionMgr::getDeviceActionStr(
     NDefs::EDeviceId deviceId,
     const std::string & actionNameStr,
     std::string & componetIdStr,
@@ -604,20 +595,19 @@ bool CActionMgr::GetDeviceActionStr(
     {
         mappingName = "gamepadMapping";
     }
-    
+
     XMLNode playerVisibleNode = m_mainNode.getChildNode( mappingName.c_str() ).getChildNode( "playerVisible" );
-    return (GetActionStr( playerVisibleNode, actionNameStr, componetIdStr, configurable ) > UNDEFINED_ACTION);
-    
-}   // GetDeviceActionStr
+    return (getActionStr( playerVisibleNode, actionNameStr, componetIdStr, configurable ) > UNDEFINED_ACTION);
+}
 
 
 /************************************************************************
 *    desc:  Get the action/component strings for the keyboard device id
 ************************************************************************/
-int CActionMgr::GetActionStr(
-    const XMLNode & playerVisibleNode, 
-    const std::string & actionNameStr, 
-    std::string & componetIdStr, 
+int CActionMgr::getActionStr(
+    const XMLNode & playerVisibleNode,
+    const std::string & actionNameStr,
+    std::string & componetIdStr,
     bool & configurable )
 {
     for( int i = 0; i < playerVisibleNode.nChildNode(); ++i )
@@ -636,36 +626,33 @@ int CActionMgr::GetActionStr(
             return i;
         }
     }
-    
-    return UNDEFINED_ACTION;
 
-}   // GetActionStr
+    return UNDEFINED_ACTION;
+}
 
 
 /************************************************************************
 *    desc:  Enable/Disable action handling
 ************************************************************************/
-void CActionMgr::EnableAction( bool value )
+void CActionMgr::enableAction( bool value )
 {
     m_allowAction = value;
-    
-}   // EnableAction
+}
 
 
 /************************************************************************
 *    desc:  Is action handling allowed
 ************************************************************************/
-bool CActionMgr::IsAction()
+bool CActionMgr::isAction()
 {
     return m_allowAction;
-    
-}   // EnableAction
+}
 
 
 /************************************************************************
 *    desc:  Reset the action
 ************************************************************************/
-NDefs::EDeviceId CActionMgr::ResetAction(
+NDefs::EDeviceId CActionMgr::resetAction(
     const SDL_Event & rEvent,
     const std::string & actionNameStr,
     std::string & componetIdStr )
@@ -700,25 +687,25 @@ NDefs::EDeviceId CActionMgr::ResetAction(
         pKeyCodeMap = &m_gamepadKeyCodeMap;
         pActionMap = &m_gamepadActionMap;
     }
-    
+
     bool configurable;
     std::string oldIdStr;
-    
+
     // If this action ID can be found and is configurable, reset it
     XMLNode playerVisibleNode = m_mainNode.getChildNode( mappingName.c_str() ).getChildNode( "playerVisible" );
-    int xmlNodeIndex = GetActionStr( playerVisibleNode, actionNameStr, oldIdStr, configurable );
-  
+    int xmlNodeIndex = getActionStr( playerVisibleNode, actionNameStr, oldIdStr, configurable );
+
     if( (xmlNodeIndex > UNDEFINED_ACTION) && configurable )
     {
         std::string newKeyCodeStr;
-        if( GetKeyCodeStr( *pKeyCodeMap, newKeyCodeId, newKeyCodeStr ) )
+        if( getKeyCodeStr( *pKeyCodeMap, newKeyCodeId, newKeyCodeStr ) )
         {
             if( newKeyCodeStr != oldIdStr )
                 componetIdStr = newKeyCodeStr;
             else
                 componetIdStr = UNBOUND_KEYCODE_STR_ID;
-            
-            int oldKeyCodeId = GetKeyCode( *pKeyCodeMap, oldIdStr );
+
+            int oldKeyCodeId = getKeyCode( *pKeyCodeMap, oldIdStr );
 
             // Check for the action to remove the old key code
             auto iter = pActionMap->find( actionNameStr );
@@ -726,30 +713,29 @@ NDefs::EDeviceId CActionMgr::ResetAction(
             {
                 // Remove the old key code Id
                 iter->second.removeId( oldKeyCodeId );
-                
+
                 // Add the new key code Id
                 iter->second.setId( newKeyCodeId );
-                
+
                 // Update the XML node with the change
                 XMLNode node = playerVisibleNode.getChildNode( "actionMap", xmlNodeIndex );
                 node.updateAttribute(componetIdStr.c_str(), "componetId", "componetId");
-                
+
                 m_xmlActionChange = true;
-                
+
                 return deviceId;
             }
         }
     }
-    
+
     return NDefs::DEVICE_NULL;
-    
-}   // ResetAction
+}
 
 
 /************************************************************************
 *    desc:  Get the string associated with the key code
 ************************************************************************/
-bool CActionMgr::GetKeyCodeStr( keyCodeMapType & keyCodeMap, const int keyCode, std::string & componetIdStr )
+bool CActionMgr::getKeyCodeStr( keyCodeMapType & keyCodeMap, const int keyCode, std::string & componetIdStr )
 {
     // See if we can find the string that represents the key code id
     auto keyCodeIter = keyCodeMap.right.find( keyCode );
@@ -760,16 +746,15 @@ bool CActionMgr::GetKeyCodeStr( keyCodeMapType & keyCodeMap, const int keyCode, 
         componetIdStr = keyCodeIter->second;
         return true;
     }
-    
-    return false;
 
-}   // GetKeyCodeStr
+    return false;
+}
 
 
 /************************************************************************
 *    desc:  Get the key code associated with the string
 ************************************************************************/
-int CActionMgr::GetKeyCode( keyCodeMapType & keyCodeMap, const std::string & componetIdStr )
+int CActionMgr::getKeyCode( keyCodeMapType & keyCodeMap, const std::string & componetIdStr )
 {
     // See if we can find the string that represents the key code id
     auto keyCodeIter = keyCodeMap.left.find( componetIdStr );
@@ -777,40 +762,38 @@ int CActionMgr::GetKeyCode( keyCodeMapType & keyCodeMap, const std::string & com
     // Add it in if we found it
     if( keyCodeIter != keyCodeMap.left.end() )
         return keyCodeIter->second;
-    
-    return UNBOUND_KEYCODE_ID;
 
-}   // GetKeyCode
+    return UNBOUND_KEYCODE_ID;
+}
 
 
 /************************************************************************
 *    desc:  Save the xml to file
 ************************************************************************/
-void CActionMgr::SaveToFile()
+void CActionMgr::saveToFile()
 {
     // Save it to file
     if( m_xmlActionChange )
         m_mainNode.writeToFile(m_saveFilePath.c_str(), "utf-8");
 
     m_xmlActionChange = false;
-
-}   // SaveToFile
+}
 
 
 /************************************************************************
 *    desc:  Reset all the key bindings to their default settings
 ************************************************************************/
-void CActionMgr::ResetKeyBindingsToDefault()
+void CActionMgr::resetKeyBindingsToDefault()
 {
     std::vector<std::string> stringPathsVec = {
         "keyboardMapping/playerVisible",
         "mouseMapping/playerVisible",
         "gamepadMapping/playerVisible" };
-    
+
     for( auto & iter : stringPathsVec )
     {
         XMLNode playerVisibleNode = m_mainNode.getChildNodeByPath( iter.c_str() );
-        
+
         for( int i = 0; i < playerVisibleNode.nChildNode("actionMap"); ++i )
         {
             XMLNode node = playerVisibleNode.getChildNode( "actionMap", i );
@@ -823,35 +806,34 @@ void CActionMgr::ResetKeyBindingsToDefault()
             }
         }
     }
-    
+
     // Clear out all the actions
     m_keyboardActionMap.clear();
     m_mouseActionMap.clear();
     m_gamepadActionMap.clear();
-    
+
     // Load the keyboard/mouse/gamepad mapping from node
-    LoadAction();
-    
+    loadAction();
+
     // Save the xml to file
     m_mainNode.writeToFile(m_saveFilePath.c_str(), "utf-8");
-
-}   // ResetKeyBindingsToDefault
+}
 
 
 /************************************************************************
 *    desc:  Queue the event
 ************************************************************************/
-void CActionMgr::QueueEvent( const SDL_Event & rEvent )
+void CActionMgr::queueEvent( const SDL_Event & rEvent )
 {
     if( m_allowAction )
     {
         m_eventQueue.emplace_back( rEvent );
-        
+
         if( rEvent.type == SDL_MOUSEMOTION )
         {
             m_mouseAbsolutePos.x = rEvent.motion.x;
             m_mouseAbsolutePos.y = rEvent.motion.y;
-            
+
             m_mouseRelativePos.x += rEvent.motion.xrel;
             m_mouseRelativePos.y += rEvent.motion.yrel;
         }
@@ -862,7 +844,7 @@ void CActionMgr::QueueEvent( const SDL_Event & rEvent )
 
             else if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_LEFTY )
                 m_lastAnalogLeft.y += rEvent.caxis.value;
-            
+
             if( rEvent.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTX )
                 m_lastAnalogRight.x += rEvent.caxis.value;
 
@@ -870,16 +852,16 @@ void CActionMgr::QueueEvent( const SDL_Event & rEvent )
                 m_lastAnalogRight.y += rEvent.caxis.value;
         }
     }
-}   // QueueEvent
+}
 
 
 /************************************************************************
 *    desc:  Clear the queue
 ************************************************************************/
-void CActionMgr::ClearQueue()
+void CActionMgr::clearQueue()
 {
     m_eventQueue.clear();
-    
+
     m_lastAnalogLeft.clear();
     m_lastAnalogRight.clear();
     m_mouseRelativePos.clear();
@@ -889,29 +871,28 @@ void CActionMgr::ClearQueue()
 /************************************************************************
 *    desc:  Was this an event in the Queue
 ************************************************************************/
-bool CActionMgr::WasEvent( const std::string & actionStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasEvent( const std::string & actionStr, NDefs::EActionPress actionPress )
 {
     if( m_allowAction )
     {
         for( auto & iter : m_eventQueue )
-            if( WasAction( iter, actionStr ) == actionPress )
+            if( wasAction( iter, actionStr ) == actionPress )
                 return true;
     }
 
     return false;
-
-}   // WasEvent
+}
 
 
 /************************************************************************
 *    desc:  Device specific key checks
 ************************************************************************/
-bool CActionMgr::WasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress )
 {
     if( m_allowAction )
     {
         const auto keyCodeIter = m_keyboardKeyCodeMap.left.find( componentIdStr );
-        
+
         if( keyCodeIter != m_keyboardKeyCodeMap.left.end() )
         {
             for( auto & iter : m_eventQueue )
@@ -932,15 +913,14 @@ bool CActionMgr::WasKeyboard( const std::string & componentIdStr, NDefs::EAction
     }
 
     return false;
+}
 
-}   // WasKeyboard
-
-bool CActionMgr::WasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasMouse( const std::string & componentIdStr, NDefs::EActionPress actionPress )
 {
     if( m_allowAction )
     {
         const auto keyCodeIter = m_mouseKeyCodeMap.left.find( componentIdStr );
-        
+
         if( keyCodeIter != m_mouseKeyCodeMap.left.end() )
         {
             for( auto & iter : m_eventQueue )
@@ -959,15 +939,14 @@ bool CActionMgr::WasMouse( const std::string & componentIdStr, NDefs::EActionPre
     }
 
     return false;
+}
 
-}   // WasMouse
-
-bool CActionMgr::WasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasGamepad( const std::string & componentIdStr, NDefs::EActionPress actionPress )
 {
     if( m_allowAction )
     {
         const auto keyCodeIter = m_gamepadKeyCodeMap.left.find( componentIdStr );
-        
+
         if( keyCodeIter != m_gamepadKeyCodeMap.left.end() )
         {
             for( auto & iter : m_eventQueue )
@@ -986,5 +965,4 @@ bool CActionMgr::WasGamepad( const std::string & componentIdStr, NDefs::EActionP
     }
 
     return false;
-
-}   // WasGamepad
+}
