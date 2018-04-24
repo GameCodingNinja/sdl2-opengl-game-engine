@@ -30,16 +30,16 @@ public:
     }
 
     // Create the physics world
-    void CreateWorld( const std::string & group );
+    void createWorld( const std::string & group );
     
     // Destroy the physics world
-    void DestroyWorld( const std::string & group );
+    void destroyWorld( const std::string & group );
 
     // Get the physics world
-    CPhysicsWorld3D & GetWorld( const std::string & group );
+    CPhysicsWorld3D & getWorld( const std::string & group );
     
     // Delete all worlds
-    void Clear();
+    void clear();
 
 private:
 
@@ -50,7 +50,7 @@ private:
     ~CPhysicsWorldManager3D();
 
     // Load the physics worlds from an XML
-    void LoadFromXML( const std::string & group, const std::string & LoadFromXML );
+    void loadFromXML( const std::string & group, const std::string & LoadFromXML );
 
 private:
 

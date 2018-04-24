@@ -35,25 +35,25 @@ public:
     ~CObjectVisualData3D();
 
     // Load thes object data from node
-    void LoadFromNode( const XMLNode & objectNode );
+    void loadFromNode( const XMLNode & objectNode );
     
     // Load the mesh data from file
-    void LoadMeshData( const std::string & group );
+    void loadMeshData( const std::string & group );
 
     // Create the object from data
-    void CreateFromData( const std::string & group );
+    void createFromData( const std::string & group );
 
     // Get the name of the shader ID
-    const std::string & GetShaderID() const;
+    const std::string & getShaderID() const;
 
     // Get the color
-    const CColor & GetColor() const;
+    const CColor & getColor() const;
 
     // Whether or not the visual tag was specified
-    bool IsActive() const;
+    bool isActive() const;
 
     // Get the mesh3d vector
-    const CMesh3D & GetMesh3D() const;
+    const CMesh3D & getMesh3D() const;
     
 private:
 

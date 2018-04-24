@@ -76,7 +76,7 @@ void CActorSprite2D::create( const CActorData & actorData )
     for( auto & iter: spriteDataVec )
     {
         // Allocate the sprite and add it to the map for easy access
-        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( iter ), iter.getId() );
+        m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( iter ), iter.getId() );
         
         // If there's a name for this sprite, add it to the map
         if( !iter.getName().empty() )
@@ -96,7 +96,7 @@ void CActorSprite2D::create( const CActorData & actorData )
         m_spriteDeq.back().copyTransform( &iter );
 
         // Find the largest size width and height of the different sprites for the controls size
-        const CSize<float> & size = m_spriteDeq.back().getObjectData().GetSize();
+        const CSize<float> & size = m_spriteDeq.back().getObjectData().getSize();
         const CPoint<CWorldValue> & pos = m_spriteDeq.back().getPos();
         const CPoint<float> & scale = m_spriteDeq.back().getScale();
 

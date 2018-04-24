@@ -21,7 +21,7 @@ CObjectData2D::CObjectData2D() :
     m_radius(0),
     m_radiusSquared(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -30,23 +30,21 @@ CObjectData2D::CObjectData2D() :
 CObjectData2D::CObjectData2D( const CObjectData2D & obj )
 {
     *this = obj;
-
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CObjectData2D::~CObjectData2D()
 {
-    // NOTE: Nothing should ever be deleted here
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the object data from the passed in node
 ************************************************************************/
-void CObjectData2D::LoadFromNode( const XMLNode & node, const std::string & group, const std::string & name )
+void CObjectData2D::loadFromNode( const XMLNode & node, const std::string & group, const std::string & name )
 {
     m_name = name;
     m_group = group;
@@ -55,107 +53,97 @@ void CObjectData2D::LoadFromNode( const XMLNode & node, const std::string & grou
     m_size = NParseHelper::LoadSize( node );
 
     // Load the visual data
-    m_visualData.LoadFromNode( node );
-    
+    m_visualData.loadFromNode( node );
+
     // Load the image data from file
-    m_visualData.LoadImage( group );
+    m_visualData.loadImage( group );
 
     // Load the physics data
-    m_physicsData.LoadFromNode( node );
-
-}   // LoadObjectFromNode
+    m_physicsData.loadFromNode( node );
+}
 
 
 /************************************************************************
 *    desc:  Create the objects from data
 ************************************************************************/
-void CObjectData2D::CreateFromData( const std::string & group )
+void CObjectData2D::createFromData( const std::string & group )
 {
     // Create the visuals
-    m_visualData.CreateFromData( group, m_size );
+    m_visualData.createFromData( group, m_size );
 
     // Calculate the radii
     m_radiusSquared = pow((float)m_size.w / 2, 2) + pow((float)m_size.h / 2, 2);
     m_radius = sqrt( m_radiusSquared );
-
-}   // CreateFromData
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the visual data
 ************************************************************************/
-const CObjectVisualData2D & CObjectData2D::GetVisualData() const 
+const CObjectVisualData2D & CObjectData2D::getVisualData() const
 {
     return m_visualData;
-
-}   // GetVisualData
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the physics data
 ************************************************************************/
-const CObjectPhysicsData2D & CObjectData2D::GetPhysicsData() const 
+const CObjectPhysicsData2D & CObjectData2D::getPhysicsData() const
 {
     return m_physicsData;
-
-}   // GetPhysicsData
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the data name
 ************************************************************************/
-const std::string & CObjectData2D::GetName() const 
+const std::string & CObjectData2D::getName() const
 {
     return m_name;
-
-}   // GetName
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the data group
 ************************************************************************/
-const std::string & CObjectData2D::GetGroup() const 
+const std::string & CObjectData2D::getGroup() const
 {
     return m_group;
-
-}   // GetGroup
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the size
 ************************************************************************/
-const CSize<int> & CObjectData2D::GetSize() const 
+const CSize<int> & CObjectData2D::getSize() const
 {
     return m_size;
-
-}   // GetSize
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the radius
 ************************************************************************/
-float CObjectData2D::GetRadius() const 
+float CObjectData2D::getRadius() const
 {
     return m_radius;
-
-}   // GetRadius
+}
 
 
 /************************************************************************
 *    desc:  Access functions for the radius squared
 ************************************************************************/
-float CObjectData2D::GetRadiusSquared() const 
+float CObjectData2D::getRadiusSquared() const
 {
     return m_radiusSquared;
-
-}   // GetRadiusSquared
+}
 
 
 /************************************************************************
 *    desc:  Is the generation type font
 ************************************************************************/
-bool CObjectData2D::IsGenTypeFont() const 
+bool CObjectData2D::isGenTypeFont() const
 {
-    return m_visualData.GetGenerationType() == NDefs::EGT_FONT;
-
-}   // IsGenTypeFont
+    return m_visualData.getGenerationType() == NDefs::EGT_FONT;
+}

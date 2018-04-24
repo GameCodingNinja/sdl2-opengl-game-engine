@@ -29,34 +29,34 @@ public:
     ~CObjectData2D();
 
     // Load the object data from the passed in node
-    void LoadFromNode( const XMLNode & node, const std::string & group, const std::string & name );
+    void loadFromNode( const XMLNode & node, const std::string & group, const std::string & name );
 
     // Create the objects from data
-    void CreateFromData( const std::string & group );
+    void createFromData( const std::string & group );
 
     // Access functions for the visual data
-    const CObjectVisualData2D & GetVisualData() const;
+    const CObjectVisualData2D & getVisualData() const;
 
     // Access functions for the physics data
-    const CObjectPhysicsData2D & GetPhysicsData() const;
+    const CObjectPhysicsData2D & getPhysicsData() const;
 
     // Access functions for the data name
-    const std::string & GetName() const;
+    const std::string & getName() const;
 
     // Access functions for the data group
-    const std::string & GetGroup() const;
+    const std::string & getGroup() const;
 
     // Access functions for the size
-    const CSize<int> & GetSize() const;
+    const CSize<int> & getSize() const;
 
     // Access functions for the radius
-    float GetRadius() const;
+    float getRadius() const;
 
     // Access functions for the radius squared
-    float GetRadiusSquared() const;
+    float getRadiusSquared() const;
 
     // Is the generation type font
-    bool IsGenTypeFont() const;
+    bool isGenTypeFont() const;
 
 private:
 

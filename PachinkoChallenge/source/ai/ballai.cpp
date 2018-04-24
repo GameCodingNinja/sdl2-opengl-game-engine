@@ -45,7 +45,7 @@ void CBallAI::init()
     m_sprite.prepareFuncId( "fadeIn" );
     
     // Put ball into a random rotation
-    auto pBody = m_sprite.getPhysicsComponent().GetBody();
+    auto pBody = m_sprite.getPhysicsComponent().getBody();
     pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
     
     // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there

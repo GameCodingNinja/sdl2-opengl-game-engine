@@ -47,8 +47,8 @@
 CBigPayBackState::CBigPayBackState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_BIG_CASH_BACK, NGameDefs::EGS_GAME_LOAD ),
         m_stateGroup( group ),
-        m_background( CObjectDataMgr::Instance().GetData2D( group, "background" ) ),
-	m_pig( CObjectDataMgr::Instance().GetData2D( group, "Payback Pig" ) ),
+        m_background( CObjectDataMgr::Instance().getData2D( group, "background" ) ),
+	m_pig( CObjectDataMgr::Instance().getData2D( group, "Payback Pig" ) ),
         m_baseGameMusic( group, "SlotGame_StartSpinMusic", "SlotGame_StopSpinMusic", "SlotGame_FastStopSpinMusic", 7000 )
 {
 }   // Constructor
@@ -261,13 +261,13 @@ namespace NBigPayBack
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(big_pay_back)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(big_pay_back)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(big_pay_back)" );
+        CObjectDataMgr::Instance().createFromData2D( "(big_pay_back)" );
     }
     
     void Load()
@@ -314,7 +314,7 @@ namespace NBigPayBack
     void CriticalUnload()
     {
         CMenuManager::Instance().cleanUpGroup("(big_pay_back)");
-        CObjectDataMgr::Instance().FreeGroup2D( "(big_pay_back)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(big_pay_back)" );
         
         // Unload the slot group stuff
         CSymbolSetViewMgr::Instance().Clear();

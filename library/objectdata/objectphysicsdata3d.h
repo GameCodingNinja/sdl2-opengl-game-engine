@@ -26,39 +26,39 @@ public:
     ~CObjectPhysicsData3D();
 
     // Load thes object data from node
-    void LoadFromNode( const XMLNode & objectNode );
+    void loadFromNode( const XMLNode & objectNode );
     
     // Get the name of the physics world
-    const std::string & GetWorld() const;
+    const std::string & getWorld() const;
 
     // Get the body type
-    const std::string & GetBodyShape() const;
+    const std::string & getBodyShape() const;
 
     // Get the mass of physics body
-    float GetMass() const;
+    float getMass() const;
 
     // Get the damping
-    float GetLinearDamping() const;
-    float GetAngularDamping() const;
+    float getLinearDamping() const;
+    float getAngularDamping() const;
 
     // Get the friction
-    float GetFriction() const;
-    float GetRollingFriction() const;
+    float getFriction() const;
+    float getRollingFriction() const;
 
     // Get the restitution - the amount of bounce
-    float GetRestitution() const;
+    float getRestitution() const;
 
     // Get the collision filter
-    short GetCollisionGroup() const;
+    short getCollisionGroup() const;
 
     // Get the collision mask
-    short GetCollisionMask() const;
+    short getCollisionMask() const;
 
     // Get the plane normal
-    const CPoint<float> & GetPlaneNormal() const;
+    const CPoint<float> & getPlaneNormal() const;
 
     // Specify if physics is active
-    bool IsActive() const;
+    bool isActive() const;
 
 private:
 

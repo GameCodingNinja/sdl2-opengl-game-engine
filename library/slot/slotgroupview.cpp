@@ -59,7 +59,7 @@ void CSlotGroupView::Create(
     const std::string objectName = cycleResultsTxtNode.getAttribute( "objectName" );
     
     // Allocate the cycle results text
-    m_upCycleResultsTxtSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( group, objectName ) ) );
+    m_upCycleResultsTxtSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( group, objectName ) ) );
     m_upCycleResultsTxtSprite->setVisible( false );
     m_upCycleResultsTxtSprite->loadTransFromNode( cycleResultsTxtNode );
     

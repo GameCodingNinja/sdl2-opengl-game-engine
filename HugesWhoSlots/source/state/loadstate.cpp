@@ -55,7 +55,7 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
 ************************************************************************/
 CLoadState::~CLoadState()
 {
-    CObjectDataMgr::Instance().FreeGroup2D( "(loadingScreen)" );
+    CObjectDataMgr::Instance().freeGroup2D( "(loadingScreen)" );
     
 }   // destructer
 
@@ -66,10 +66,10 @@ CLoadState::~CLoadState()
 void CLoadState::Init()
 {
     // Load the start up animation group
-    CObjectDataMgr::Instance().LoadGroup2D( "(loadingScreen)" );
+    CObjectDataMgr::Instance().loadGroup2D( "(loadingScreen)" );
     
     // Allocate the sprite to fade in
-    m_upSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( "(loadingScreen)", "loadAnim" ) ) );
+    m_upSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( "(loadingScreen)", "loadAnim" ) ) );
     
     // Get the position, scale and half the screen size
     CSize<float> scrnHalf = CSettings::Instance().GetDefaultSizeHalf();

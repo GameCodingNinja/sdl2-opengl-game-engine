@@ -48,22 +48,21 @@ CObjectVisualData2D::CObjectVisualData2D() :
     m_defaultUniformScale(1),
     m_mirror(NDefs::EM_NULL)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CObjectVisualData2D::~CObjectVisualData2D()
 {
-    // NOTE: Nothing should ever be deleted here
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the object data from node
 ************************************************************************/
-void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
+void CObjectVisualData2D::loadFromNode( const XMLNode & objectNode )
 {
     const XMLNode visualNode = objectNode.getChildNode( "visual" );
     if( !visualNode.isEmpty() )
@@ -78,7 +77,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 {
                     // Get the object data node
                     const XMLNode resNode = resSwapNode.getChildNode(i);
-        
+
                     // Get the value of the height that is compaired against the render resolution of the device
                     const int heightOrLess = std::atoi( resNode.getAttribute( "heightOrLess" ) );
 
@@ -86,23 +85,23 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     if( static_cast<int>(CSettings::Instance().GetSize().getH()) <= heightOrLess )
                     {
                         m_defaultUniformScale = std::atof( resNode.getAttribute( "defaultUniformScale" ) );
-                        
+
                         // File extension for these graphics
                         m_resExt = resNode.getAttribute( "ext" );
-                        
+
                         break;
                     }
                 }
             }
         }
-        
+
         // See if we have a texture to load
         const XMLNode textureNode = visualNode.getChildNode("texture");
         if( !textureNode.isEmpty() )
         {
             if( textureNode.isAttributeSet("count") )
                 m_textureSequenceCount = std::atoi( textureNode.getAttribute( "count" ) );
-            
+
             if( textureNode.isAttributeSet("file") )
                 m_textureFilePath = textureNode.getAttribute( "file" );
 
@@ -121,10 +120,10 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
 
                 if( genTypeStr == "quad" )
                     m_genType = NDefs::EGT_QUAD;
-                
+
                 else if( genTypeStr == "sprite_sheet" )
                     m_genType = NDefs::EGT_SPRITE_SHEET;
-                
+
                 else if( genTypeStr == "scaled_frame" )
                     m_genType = NDefs::EGT_SCALED_FRAME;
 
@@ -134,14 +133,14 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 else if( genTypeStr == "font" )
                     m_genType = NDefs::EGT_FONT;
             }
-            
+
             if( meshNode.isAttributeSet("file") )
                 m_meshFilePath = meshNode.getAttribute( "file" );
-            
+
             if( meshNode.isAttributeSet("mirror") )
             {
                 std::string mirrorTypeStr = meshNode.getAttribute( "mirror" );
-                
+
                 if( mirrorTypeStr == "horizontal" )
                     m_mirror = NDefs::EM_HORIZONTAL;
 
@@ -151,13 +150,13 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 else if( mirrorTypeStr == "horizontal_vertical" )
                     m_mirror = NDefs::EM_HORIZONTAL_VERTICAL;
             }
-            
+
             const XMLNode spriteSheetNode = meshNode.getChildNode("spriteSheet");
             if( !spriteSheetNode.isEmpty() )
             {
                 if( spriteSheetNode.isAttributeSet("defIndex") )
                     m_spriteSheet.setDefaultIndex( std::atoi( spriteSheetNode.getAttribute( "defIndex" ) ) );
-                
+
                 // Make sure all elements are defined for manually building the sprite sheet data
                 if( spriteSheetNode.isAttributeSet("glyphCount") )
                 {
@@ -168,7 +167,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                         m_spriteSheet.setGlyphColumns( std::atoi( spriteSheetNode.getAttribute( "columns" ) ) );
                     }
                 }
-                
+
                 if( spriteSheetNode.isAttributeSet("formatCodeOffset") )
                     m_spriteSheet.setFormatCodeOffset( std::atoi( spriteSheetNode.getAttribute( "formatCodeOffset" ) ) );
 
@@ -179,12 +178,12 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                 // Get the sprite sheet glyph file
                 if( spriteSheetNode.isAttributeSet("file") )
                     m_spriteSheetFilePath = spriteSheetNode.getAttribute( "file" );
-                
+
                 // See if any glyph Id's have been defined
                 m_glyphIDs.reserve(spriteSheetNode.nChildNode());
                 for( int i = 0; i < spriteSheetNode.nChildNode(); ++i )
                     m_glyphIDs.push_back( spriteSheetNode.getChildNode(i).getAttribute( "id" ) );
-                
+
                 // Build the sprite sheet from XML data
                 if( !m_spriteSheetFilePath.empty() )
                 {
@@ -211,7 +210,7 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
 
                 if( scaledFrameNode.isAttributeSet("centerQuad") )
                     m_scaledFrame.m_centerQuad = (std::strcmp(scaledFrameNode.getAttribute( "centerQuad" ), "false") != 0);
-                
+
                 if( scaledFrameNode.isAttributeSet("frameBottom") )
                     m_scaledFrame.m_bottomFrame = (std::strcmp(scaledFrameNode.getAttribute( "frameBottom" ), "false") != 0);
             }
@@ -235,13 +234,13 @@ void CObjectVisualData2D::LoadFromNode( const XMLNode & objectNode )
                     % __FUNCTION__ % __LINE__ ));
         }
     }
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Load the image data from file
 ************************************************************************/
-void CObjectVisualData2D::LoadImage( const std::string & group )
+void CObjectVisualData2D::loadImage( const std::string & group )
 {
     if( !m_textureFilePath.empty() )
     {
@@ -273,25 +272,24 @@ void CObjectVisualData2D::LoadImage( const std::string & group )
             CTextureMgr::Instance().loadImageFor2D( group, filePath );
         }
     }
-    
-}   // LoadImage
+}
 
 
 /************************************************************************
 *    desc:  Create the object from data
 ************************************************************************/
-void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> & rSize )
+void CObjectVisualData2D::createFromData( const std::string & group, CSize<int> & rSize )
 {
     CTexture texture;
 
     // Create the texture from loaded image data
-    CreateTexture( group, texture, rSize );
+    createTexture( group, texture, rSize );
 
     if( m_genType == NDefs::EGT_QUAD )
     {
         // Generate a quad
-        GenerateQuad( group );
-        
+        generateQuad( group );
+
         // For this generation type, the image size is the default scale
         // Size is an int and needs to handled this way
         m_vertexScale = rSize * m_defaultUniformScale;
@@ -303,9 +301,9 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
         // Build the simple (grid) sprite sheet from XML data
         if( m_spriteSheetFilePath.empty() )
             m_spriteSheet.build( rSize );
-        
+
         // Generate a quad
-        GenerateQuad( group );
+        generateQuad( group );
 
         // For this generation type, the glyph size is the default scale
         rSize = m_vertexScale = m_spriteSheet.getGlyph().getSize() * m_defaultUniformScale;
@@ -316,45 +314,44 @@ void CObjectVisualData2D::CreateFromData( const std::string & group, CSize<int> 
         {
             // Get the glyph to make the frame with
             auto rGlyph = m_spriteSheet.findGlyph( m_glyphIDs.back() );
-            
+
             // Create the scaled frame using glyph info
             if( m_meshFilePath.empty() )
-                GenerateScaledFrame( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
+                generateScaledFrame( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
             else
-                GenerateScaledFrameMeshFile( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
+                generateScaledFrameMeshFile( group, texture.getSize(), rGlyph.getSize(), rSize, rGlyph.getUV() );
         }
         // Generate a scaled frame
         else if( m_meshFilePath.empty() )
-            GenerateScaledFrame( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
+            generateScaledFrame( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
 
         else
-            GenerateScaledFrameMeshFile( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
+            generateScaledFrameMeshFile( group, texture.getSize(), texture.getSize(), rSize, CRect<float>() );
     }
-
-}   // CreateFromData
+}
 
 
 /************************************************************************
 *    desc:  Create the texture from loaded image data
 ************************************************************************/
-void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize )
+void CObjectVisualData2D::createTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize )
 {
     if( !m_textureFilePath.empty() )
     {
         if( m_textureSequenceCount > 0 )
         {
             m_textureIDVec.reserve( m_textureSequenceCount );
-            
+
             for( int i = 0; i < m_textureSequenceCount; ++i )
             {
                 const std::string file = boost::str( boost::format(m_textureFilePath) % i );
-                
+
                 std::string filePath = file;
-            
+
                 // Add in the resource swap file extension if needed
                 if( !m_resExt.empty() )
                     NGenFunc::AddFileExt( file, filePath, m_resExt );
-                
+
                 rTexture = CTextureMgr::Instance().createTextureFor2D( group, filePath, m_compressed );
                 m_textureIDVec.push_back( rTexture.getID() );
             }
@@ -362,30 +359,29 @@ void CObjectVisualData2D::CreateTexture( const std::string & group, CTexture & r
         else
         {
             std::string filePath = m_textureFilePath;
-            
+
             // Add in the resource swap file extension if needed
             if( !m_resExt.empty() )
                 NGenFunc::AddFileExt( m_textureFilePath, filePath, m_resExt );
-            
+
             rTexture = CTextureMgr::Instance().createTextureFor2D( group, filePath, m_compressed );
             m_textureIDVec.push_back( rTexture.getID() );
         }
-        
+
         // If the passed in size reference is empty, set it to the texture size
         if( rSize.isEmpty() )
             rSize = rTexture.getSize();
     }
-    
-}   // CreateTexture
+}
 
 
 /************************************************************************
 *    desc:  Generate a quad
 ************************************************************************/
-void CObjectVisualData2D::GenerateQuad( const std::string & group )
+void CObjectVisualData2D::generateQuad( const std::string & group )
 {
     uint8_t indexData[] = {0, 1, 2, 3};
-    
+
     // VBO data
     // The order of the verts is counter clockwise
     // 1----0
@@ -400,14 +396,14 @@ void CObjectVisualData2D::GenerateQuad( const std::string & group )
         {{-0.5f, -0.5f, 0.0},  {0.0, 1.0}},
         {{ 0.5f, -0.5f, 0.0},  {1.0, 1.0}}
     };
-    
+
     std::string horzStr = "";
     std::string vertStr = "";
-    
+
     if( (m_mirror == NDefs::EM_HORIZONTAL) || (m_mirror == NDefs::EM_HORIZONTAL_VERTICAL) )
     {
         horzStr = "_horz";
-        
+
         vertVec[0].uv.u = 0.0;
         vertVec[1].uv.u = 1.0;
         vertVec[2].uv.u = 1.0;
@@ -417,7 +413,7 @@ void CObjectVisualData2D::GenerateQuad( const std::string & group )
     if( (m_mirror == NDefs::EM_VERTICAL) || (m_mirror == NDefs::EM_HORIZONTAL_VERTICAL) )
     {
         vertStr = "_vert";
-        
+
         vertVec[0].uv.v = 1.0;
         vertVec[1].uv.v = 1.0;
         vertVec[2].uv.v = 0.0;
@@ -429,21 +425,20 @@ void CObjectVisualData2D::GenerateQuad( const std::string & group )
 
     // A quad has 4 ibos
     m_iboCount = 4;
-        
-}   // GenerateQuad
+}
 
 
 /************************************************************************
 *    desc:  Generate a scaled frame
 ************************************************************************/
-void CObjectVisualData2D::GenerateScaledFrame(
+void CObjectVisualData2D::generateScaledFrame(
     const std::string & group,
     const CSize<int> & textureSize,
     const CSize<int> & glyphSize,
     const CSize<int> & frameSize,
     const CRect<float> & textureOffset )
 {
-    std::string vboName = boost::str( boost::format("scaled_frame_%d_%d_%d_%d_%d_%d_%d_%d") 
+    std::string vboName = boost::str( boost::format("scaled_frame_%d_%d_%d_%d_%d_%d_%d_%d")
         % frameSize.w % frameSize.h % m_scaledFrame.m_frame.w % m_scaledFrame.m_frame.h % textureSize.w % textureSize.h % glyphSize.w % glyphSize.h );
 
     m_vbo = CVertBufMgr::Instance().createScaledFrame(
@@ -474,14 +469,13 @@ void CObjectVisualData2D::GenerateScaledFrame(
 
     else if( !m_scaledFrame.m_bottomFrame )
 	m_iboCount -= 6 * 3;
-        
-}   // GenerateScaledFrame
+}
 
 
 /************************************************************************
 *    desc:  Generate a scaled frame with a mesh file
 ************************************************************************/
-void CObjectVisualData2D::GenerateScaledFrameMeshFile( 
+void CObjectVisualData2D::generateScaledFrameMeshFile(
     const std::string & group,
     const CSize<int> & textureSize,
     const CSize<int> & glyphSize,
@@ -512,10 +506,10 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     if( m_vbo == 0 )
     {
         std::vector<CVertex2D> vertVec;
-        
+
         // Load a mesh from XML file
-        LoadMeshFromXML( group, textureSize, frameSize, textureOffset, 16, vertVec, iboVec );
-        
+        loadMeshFromXML( group, textureSize, frameSize, textureOffset, 16, vertVec, iboVec );
+
         // create the vbo
         m_vbo = CVertBufMgr::Instance().createScaledFrame(
             group, name, m_scaledFrame, textureSize, glyphSize, frameSize, textureOffset, vertVec );
@@ -524,18 +518,17 @@ void CObjectVisualData2D::GenerateScaledFrameMeshFile(
     // Create the unique IBO buffer
     m_ibo = CVertBufMgr::Instance().createIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
-
-}   // GenerateScaledFrameMeshFile
+}
 
 
 /************************************************************************
 *    desc:  Generate a mesh file
 ************************************************************************/
-void CObjectVisualData2D::GenerateFromMeshFile( 
+void CObjectVisualData2D::generateFromMeshFile(
     const std::string & group, const CSize<int> & textureSize, const CSize<int> & size )
 {
     std::vector<uint8_t> iboVec;
-    
+
     // Construct the name used for vbo and ibo
     std::string name = "mesh_file_" + m_meshFilePath;
 
@@ -546,23 +539,22 @@ void CObjectVisualData2D::GenerateFromMeshFile(
         std::vector<CVertex2D> vertVec;
 
         // Load a mesh from XML file
-        LoadMeshFromXML( group, textureSize, size, CRect<float>(), 16, vertVec, iboVec );
+        loadMeshFromXML( group, textureSize, size, CRect<float>(), 16, vertVec, iboVec );
 
         // create the vbo
         m_vbo = CVertBufMgr::Instance().createVBO( group, name, vertVec );
     }
-    
+
     // Create the unique IBO buffer
     m_ibo = CVertBufMgr::Instance().createIBO( group, name, iboVec.data(), sizeof(uint8_t)*iboVec.size() );
     m_iboCount = iboVec.size();
-
-}   // GenerateFromMeshFile
+}
 
 
 /************************************************************************
 *    desc:  Load a mesh from XML file
 ************************************************************************/
-void CObjectVisualData2D::LoadMeshFromXML(
+void CObjectVisualData2D::loadMeshFromXML(
     const std::string & group,
     const CSize<int> & textureSize,
     const CSize<int> & size,
@@ -588,7 +580,7 @@ void CObjectVisualData2D::LoadMeshFromXML(
     if( !vboNode.isEmpty() )
     {
         CVertex2D vert;
-        
+
         rVertVec.reserve( vboNode.nChildNode() );
 
         for( int i = 0; i < vboNode.nChildNode(); ++i )
@@ -608,7 +600,7 @@ void CObjectVisualData2D::LoadMeshFromXML(
 
     const XMLNode iboNode = mainNode.getChildNode( "ibo" );
     if( !iboNode.isEmpty() )
-    {            
+    {
         for( int i = 0; i < iboNode.nChildNode(); ++i )
         {
             const XMLNode iNode = iboNode.getChildNode( "i", i );
@@ -616,14 +608,13 @@ void CObjectVisualData2D::LoadMeshFromXML(
             rIboVec.push_back( iboOffset + std::atoi(iNode.getText()) );
         }
     }
-
-}   // LoadMeshFromXML
+}
 
 
 /************************************************************************
 *    desc:  Get the gne type
 ************************************************************************/
-NDefs::EGenerationType CObjectVisualData2D::GetGenerationType() const 
+NDefs::EGenerationType CObjectVisualData2D::getGenerationType() const
 {
     return m_genType;
 }
@@ -632,7 +623,7 @@ NDefs::EGenerationType CObjectVisualData2D::GetGenerationType() const
 /************************************************************************
 *    desc:  Get the texture ID
 ************************************************************************/
-uint32_t CObjectVisualData2D::GetTextureID( uint index ) const 
+uint32_t CObjectVisualData2D::getTextureID( uint index ) const
 {
     if( m_textureIDVec.empty() )
         return 0;
@@ -644,7 +635,7 @@ uint32_t CObjectVisualData2D::GetTextureID( uint index ) const
 /************************************************************************
 *    desc:  Get the name of the shader ID
 ************************************************************************/
-const std::string & CObjectVisualData2D::GetShaderID() const
+const std::string & CObjectVisualData2D::getShaderID() const
 {
     return m_shaderID;
 }
@@ -653,7 +644,7 @@ const std::string & CObjectVisualData2D::GetShaderID() const
 /************************************************************************
 *    desc:  Get the color
 ************************************************************************/
-const CColor & CObjectVisualData2D::GetColor() const 
+const CColor & CObjectVisualData2D::getColor() const
 {
     return m_color;
 }
@@ -662,7 +653,7 @@ const CColor & CObjectVisualData2D::GetColor() const
 /************************************************************************
 *    desc:  Get the VBO
 ************************************************************************/
-uint32_t CObjectVisualData2D::GetVBO() const 
+uint32_t CObjectVisualData2D::getVBO() const
 {
     return m_vbo;
 }
@@ -671,7 +662,7 @@ uint32_t CObjectVisualData2D::GetVBO() const
 /************************************************************************
 *    desc:  Get the IBO
 ************************************************************************/
-uint32_t CObjectVisualData2D::GetIBO() const 
+uint32_t CObjectVisualData2D::getIBO() const
 {
     return m_ibo;
 }
@@ -680,7 +671,7 @@ uint32_t CObjectVisualData2D::GetIBO() const
 /************************************************************************
 *    desc:  Get the vertex count
 ************************************************************************/
-int CObjectVisualData2D::GetIBOCount() const 
+int CObjectVisualData2D::getIBOCount() const
 {
     return m_iboCount;
 }
@@ -689,11 +680,11 @@ int CObjectVisualData2D::GetIBOCount() const
 /************************************************************************
 *    desc:  Get the frame count
 ************************************************************************/
-size_t CObjectVisualData2D::GetFrameCount() const 
+size_t CObjectVisualData2D::getFrameCount() const
 {
     if( m_genType == NDefs::EGT_SPRITE_SHEET )
         return m_spriteSheet.getCount();
-    
+
     return m_textureIDVec.size();
 }
 
@@ -701,7 +692,7 @@ size_t CObjectVisualData2D::GetFrameCount() const
 /************************************************************************
 *    desc:  Get the vertex scale
 ************************************************************************/
-const CSize<float> & CObjectVisualData2D::GetVertexScale() const 
+const CSize<float> & CObjectVisualData2D::getVertexScale() const
 {
     return m_vertexScale;
 }
@@ -710,7 +701,7 @@ const CSize<float> & CObjectVisualData2D::GetVertexScale() const
 /************************************************************************
 *    desc:  Whether or not the visual tag was specified
 ************************************************************************/
-bool CObjectVisualData2D::IsActive() const 
+bool CObjectVisualData2D::isActive() const
 {
     return (m_genType != NDefs::EGT_NULL);
 }
@@ -719,7 +710,7 @@ bool CObjectVisualData2D::IsActive() const
 /************************************************************************
 *    desc:  Get the sprite sheet
 ************************************************************************/
-const CSpriteSheet & CObjectVisualData2D::GetSpriteSheet() const 
+const CSpriteSheet & CObjectVisualData2D::getSpriteSheet() const
 {
     return m_spriteSheet;
 }
@@ -728,8 +719,7 @@ const CSpriteSheet & CObjectVisualData2D::GetSpriteSheet() const
 /************************************************************************
 *    desc:  Access functions for the default scale
 ************************************************************************/
-float CObjectVisualData2D::GetDefaultUniformScale() const 
+float CObjectVisualData2D::getDefaultUniformScale() const
 {
     return m_defaultUniformScale;
-
-}   // GetDefaultUniformScale
+}

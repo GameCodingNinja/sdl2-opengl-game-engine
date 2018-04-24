@@ -79,7 +79,7 @@ CStartUpState::CStartUpState() :
 ************************************************************************/
 CStartUpState::~CStartUpState()
 {
-    CObjectDataMgr::Instance().FreeGroup2D( "(startup)" );
+    CObjectDataMgr::Instance().freeGroup2D( "(startup)" );
     
 }   // destructer
 
@@ -96,10 +96,10 @@ void CStartUpState::Init()
     CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
     
     // Load the start up animation group
-    CObjectDataMgr::Instance().LoadGroup2D( "(startup)" );
+    CObjectDataMgr::Instance().loadGroup2D( "(startup)" );
     
     // Allocate the sprite to fade in
-    m_upSpriteLogo.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( "(startup)", "waffles" ) ) );
+    m_upSpriteLogo.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( "(startup)", "waffles" ) ) );
     m_upSpriteLogo->transform();
     
     // Reset the elapsed time before entering game loop
@@ -195,10 +195,7 @@ void CStartUpState::AssetLoad()
     NScriptShaderManager::Register();
 
     // Load all of the meshes and materials in these groups
-    CObjectDataMgr::Instance().LoadGroup2D("(menu)");
-    
-    // Free the sprite sheet data because it's no longer needed
-    CSpriteSheetMgr::Instance().clear();
+    CObjectDataMgr::Instance().loadGroup2D("(menu)");
 
     // Load group specific script items
     CScriptManager::Instance().LoadGroup("(menu)");

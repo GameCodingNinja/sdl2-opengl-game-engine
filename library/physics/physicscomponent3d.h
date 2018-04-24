@@ -43,28 +43,28 @@ public:
     // Init the physics by creating the body and fixture
     // NOTE: Function must be called externally at the right time
     //       when the sprite has been setup with it's initial offsets
-    void Init(const CSprite3D & sprite);
+    void init(const CSprite3D & sprite);
 
     // Remove the body
-    void RemoveBody();
+    void removeBody();
 
     // Add the body
-    void AddBody();
+    void addBody();
 
     // Set the linear velocity
-    void SetLinearVelocity(const CPoint<float> & vec);
+    void setLinearVelocity(const CPoint<float> & vec);
 
     // Set the angular velocity
-    void SetAngularVelocity(const CPoint<float> & vec);
+    void setAngularVelocity(const CPoint<float> & vec);
 
     // Set the restitution
-    void SetRestitution(const float rest);
+    void setRestitution(const float rest);
 
     // Update the physics
-    void Update(CSprite3D * pSprite);
+    void update(CSprite3D * pSprite);
 
     // Is this component active?
-    bool IsActive();
+    bool isActive();
 
 private:
 

@@ -89,7 +89,7 @@ void CUIButtonList::loadControlFromNode( const XMLNode & node )
     // See if there is an image list
     for( size_t i = 0; i < m_spriteDeq.size(); ++i )
     {
-	if( m_spriteDeq[i].getObjectData().GetVisualData().GetFrameCount() > 1 )
+	if( m_spriteDeq[i].getObjectData().getVisualData().getFrameCount() > 1 )
         {
             m_imageLstIndex = i;
             break;

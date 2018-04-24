@@ -46,7 +46,7 @@
 ************************************************************************/
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
-        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) ),
+        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().getWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.GetData("strawberry").get<CSpriteData>()),
         m_rMultiplierLabel(CMenuManager::Instance().getMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
@@ -59,8 +59,8 @@ CLevel1State::CLevel1State() :
 {
     // The state inherits from b2ContactListener to handle physics collisions
     // so this state is the collision listener
-    m_rPhysicsWorld.GetWorld().SetContactListener(this);
-    m_rPhysicsWorld.GetWorld().SetDestructionListener(this);
+    m_rPhysicsWorld.getWorld().SetContactListener(this);
+    m_rPhysicsWorld.getWorld().SetDestructionListener(this);
     
 }   // Constructor
 
@@ -70,8 +70,8 @@ CLevel1State::CLevel1State() :
 ************************************************************************/
 CLevel1State::~CLevel1State()
 {
-    m_rPhysicsWorld.GetWorld().SetDestructionListener(nullptr);
-    m_rPhysicsWorld.GetWorld().SetContactListener(nullptr);
+    m_rPhysicsWorld.getWorld().SetDestructionListener(nullptr);
+    m_rPhysicsWorld.getWorld().SetContactListener(nullptr);
     CSignalMgr::Instance().disconnect_resolutionChange();
     
 }   // destructor
@@ -184,7 +184,7 @@ void CLevel1State::Physics()
 {
     if( !CMenuManager::Instance().isMenuActive() )
     {
-        m_rPhysicsWorld.VariableTimeStep();
+        m_rPhysicsWorld.variableTimeStep();
     }
 
 }   // Physics
@@ -321,15 +321,15 @@ namespace NLevel1State
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(level1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        CObjectDataMgr::Instance().LoadGroup2D( "(levels)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(level1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(levels)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(level1)" );
-        CObjectDataMgr::Instance().CreateFromData2D( "(levels)" );
+        CObjectDataMgr::Instance().createFromData2D( "(level1)" );
+        CObjectDataMgr::Instance().createFromData2D( "(levels)" );
     }
     
     void Load()
@@ -340,7 +340,7 @@ namespace NLevel1State
         // Load state specific AngelScript functions
         CScriptManager::Instance().LoadGroup("(level1)");
         
-        CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
+        CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
         
         // Load the sprite strategies
         CSpriteStrategyMgr::Instance().AddStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
@@ -364,8 +364,8 @@ namespace NLevel1State
     {        
         CMenuManager::Instance().cleanUpGroup("(levels)");
         CSpriteStrategyMgr::Instance().CleanUp();
-        CObjectDataMgr::Instance().FreeGroup2D( "(level1)" );
-        CObjectDataMgr::Instance().FreeGroup2D( "(levels)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(level1)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(levels)" );
     }
     
     void Unload()
@@ -380,7 +380,7 @@ namespace NLevel1State
         CScriptManager::Instance().FreeGroup("(level1)");
         
         // All physics entities are destroyed and all heap memory is released.
-        CPhysicsWorldManager2D::Instance().DestroyWorld( "(game)" );
+        CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
     }
 
 }   // NTitleScreenState

@@ -29,37 +29,37 @@ public:
     virtual ~CPhysicsWorld2D();
 
     // Load the physics world from the passed in node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
 
     // Get the physics world
-    const b2World & GetWorld() const;
-    b2World & GetWorld();
+    const b2World & getWorld() const;
+    b2World & getWorld();
 
     // Create and destroy a physics body
-    b2Body * CreateBody( const b2BodyDef & pDef );
-    void DestroyBody( b2Body * pBody );
+    b2Body * createBody( const b2BodyDef & pDef );
+    void destroyBody( b2Body * pBody );
 
     // Perform fixed time step physics simulation
-    void FixedTimeStep();
+    void fixedTimeStep();
     
     // Perform variable time step physics simulation
-    void VariableTimeStep();
+    void variableTimeStep();
 
     // Get the focus
-    const CPoint<int> & GetFocus() const;
+    const CPoint<int> & getFocus() const;
 
     // Set the fps to run the simulation at
-    void SetFPS( float fps );
+    void setFPS( float fps );
 
     // The the time ratio
-    float GetTimeRatio() const;
+    float getTimeRatio() const;
 
     // Set-Get the activity of the physics world
-    void SetActive( bool value );
-    bool IsActive() const;
+    void setActive( bool value );
+    bool isActive() const;
     
     // Get the pixels per meter
-    double GetPixelsPerMeter() const;
+    double getPixelsPerMeter() const;
 
 private:
 

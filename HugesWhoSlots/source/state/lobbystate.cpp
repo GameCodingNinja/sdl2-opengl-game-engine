@@ -41,7 +41,7 @@
 CLobbyState::CLobbyState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_LOBBY, NGameDefs::EGS_GAME_LOAD ),
         m_group( group ),
-        m_background( CObjectDataMgr::Instance().GetData2D( group, "background" ) )
+        m_background( CObjectDataMgr::Instance().getData2D( group, "background" ) )
 {
 }   // Constructer
 
@@ -173,13 +173,13 @@ namespace NLobby
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(lobby)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(lobby)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(lobby)" );
+        CObjectDataMgr::Instance().createFromData2D( "(lobby)" );
     }
     
     void Load()
@@ -211,7 +211,7 @@ namespace NLobby
     void CriticalUnload()
     {
 	CMenuManager::Instance().cleanUpGroup("(lobby)");
-        CObjectDataMgr::Instance().FreeGroup2D( "(lobby)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(lobby)" );
     }
     
     void Unload()

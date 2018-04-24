@@ -30,7 +30,7 @@
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
-        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().GetWorld( "(game)" ) )
+        m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().getWorld( "(game)" ) )
 {
 }   // Constructor
 
@@ -78,7 +78,7 @@ void CRunState::Physics()
 {
     if( !CMenuManager::Instance().isActive() )
     {
-        m_rPhysicsWorld.FixedTimeStep();
+        m_rPhysicsWorld.fixedTimeStep();
     }
 
 }   // Physics
@@ -135,19 +135,19 @@ namespace NRunState
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(run)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(run)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(run)" );
+        CObjectDataMgr::Instance().createFromData2D( "(run)" );
     }
     
     void Load()
     {
 	// All physics entities are destroyed and all heap memory is released.
-        CPhysicsWorldManager2D::Instance().CreateWorld( "(game)" );
+        CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
         CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CBasicStageStrategy );
         CSpriteStrategyMgr::Instance().AddStrategy( "(sprite)", new CBasicSpriteStrategy );
     }
@@ -168,14 +168,13 @@ namespace NRunState
     void CriticalUnload()
     {
         CSpriteStrategyMgr::Instance().CleanUp();
-        CObjectDataMgr::Instance().FreeGroup2D( "(run)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(run)" );
     }
     
     void Unload()
     {
         CSpriteStrategyMgr::Instance().Clear();
-        CPhysicsWorldManager2D::Instance().DestroyWorld( "(game)" );
-        
+        CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
     }
 
 }   // NTitleScreenState

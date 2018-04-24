@@ -47,13 +47,13 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 	m_colorLocation( -1 ),
 	m_matrixLocation( -1 ),
 	m_normalMatrixLocation( -1 ),
-	m_mesh3d( visualData.GetMesh3D() ),
-	m_color( visualData.GetColor() ),
-        m_VERTEX_BUF_SIZE( visualData.GetMesh3D().meshEmpty() || visualData.GetMesh3D().textEmpty() ? sizeof(CVertex3D_no_txt) : sizeof(CVertex3D) )
+	m_mesh3d( visualData.getMesh3D() ),
+	m_color( visualData.getColor() ),
+        m_VERTEX_BUF_SIZE( visualData.getMesh3D().meshEmpty() || visualData.getMesh3D().textEmpty() ? sizeof(CVertex3D_no_txt) : sizeof(CVertex3D) )
 {
-    if( visualData.IsActive() )
+    if( visualData.isActive() )
     {
-        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.GetShaderID() );
+        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.getShaderID() );
 
         m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
         m_normalLocation = m_pShaderData->getAttributeLocation( "in_normal" );
@@ -165,5 +165,5 @@ float CVisualComponent3D::getAlpha() const
 ************************************************************************/
 void CVisualComponent3D::setDefaultColor()
 {
-    m_color = m_visualData.GetColor();
+    m_color = m_visualData.getColor();
 }

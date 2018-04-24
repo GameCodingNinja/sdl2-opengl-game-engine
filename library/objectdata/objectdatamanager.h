@@ -32,29 +32,29 @@ public:
     }
 
     // Get a specific object's data
-    const CObjectData2D & GetData2D( const std::string & group, const std::string & name ) const;
-    const CObjectData2D & GetData2D( const CSpriteData & spriteData ) const;
-    const CObjectData3D & GetData3D( const std::string & group, const std::string & name ) const;
+    const CObjectData2D & getData2D( const std::string & group, const std::string & name ) const;
+    const CObjectData2D & getData2D( const CSpriteData & spriteData ) const;
+    const CObjectData3D & getData3D( const std::string & group, const std::string & name ) const;
 
     // Load all of the meshes and materials of a specific data group
-    void LoadGroup2D( const std::string & group, const bool createFromData = true );
-    void LoadGroup3D( const std::string & group, const bool createFromData = true );
+    void loadGroup2D( const std::string & group, const bool createFromData = true );
+    void loadGroup3D( const std::string & group, const bool createFromData = true );
     
     // Create the group's VBO, IBO, textures, etc
-    void CreateFromData2D( const std::string & group );
-    void CreateFromData3D( const std::string & group );
+    void createFromData2D( const std::string & group );
+    void createFromData3D( const std::string & group );
 
     // Free all of the meshes and materials of a specific data group
-    void FreeGroup2D( const std::string & group, const bool freeOpenGLObjects = true );
-    void FreeGroup3D( const std::string & group, const bool freeOpenGLObjects = true );
+    void freeGroup2D( const std::string & group, const bool freeOpenGLObjects = true );
+    void freeGroup3D( const std::string & group, const bool freeOpenGLObjects = true );
     
     // Free all OpenGL objects created from these groups
-    void FreeOpenGL2D( const std::string & group );
-    void FreeOpenGL3D( const std::string & group );
+    void freeOpenGL2D( const std::string & group );
+    void freeOpenGL3D( const std::string & group );
     
     // Is data part of 2d/3d
-    bool IsData2D( const std::string & group, const std::string & name ) const;
-    bool IsData3D( const std::string & group, const std::string & name ) const;
+    bool isData2D( const std::string & group, const std::string & name ) const;
+    bool isData3D( const std::string & group, const std::string & name ) const;
 
 private:
 
@@ -62,8 +62,8 @@ private:
     virtual ~CObjectDataMgr();
 
     // Load all object information from an xml
-    void LoadFromXML2D( const std::string & group, const std::string & filePath, const bool createFromData );
-    void LoadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData );
+    void loadFromXML2D( const std::string & group, const std::string & filePath, const bool createFromData );
+    void loadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData );
 
 private:
 

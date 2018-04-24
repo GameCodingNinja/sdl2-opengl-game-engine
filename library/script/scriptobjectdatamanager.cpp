@@ -45,7 +45,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().LoadGroup2D( group, createFromData );
+            CObjectDataMgr::Instance().loadGroup2D( group, createFromData );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -61,7 +61,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().LoadGroup3D( group, createFromData );
+            CObjectDataMgr::Instance().loadGroup3D( group, createFromData );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -80,7 +80,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().CreateFromData2D( group );
+            CObjectDataMgr::Instance().createFromData2D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -96,7 +96,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().CreateFromData2D( group );
+            CObjectDataMgr::Instance().createFromData2D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -115,7 +115,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().FreeGroup2D( group, freeOpenGLObjects );
+            CObjectDataMgr::Instance().freeGroup2D( group, freeOpenGLObjects );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -131,7 +131,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().FreeGroup3D( group, freeOpenGLObjects );
+            CObjectDataMgr::Instance().freeGroup3D( group, freeOpenGLObjects );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -150,7 +150,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().FreeOpenGL2D( group );
+            CObjectDataMgr::Instance().freeOpenGL2D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -166,7 +166,7 @@ namespace NScriptObjectDataManager
     {
         try
         {
-            CObjectDataMgr::Instance().FreeOpenGL3D( group );
+            CObjectDataMgr::Instance().freeOpenGL3D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {

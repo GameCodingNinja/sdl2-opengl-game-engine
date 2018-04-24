@@ -24,17 +24,17 @@
 CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     iSprite(id),
     m_rObjectData(objectData),
-    m_visualComponent(objectData.GetVisualData()),
-    m_physicsComponent(objectData.GetPhysicsData())
+    m_visualComponent(objectData.getVisualData()),
+    m_physicsComponent(objectData.getPhysicsData())
 {
     // If there's no visual data, set the hide flag
-    setVisible( objectData.GetVisualData().IsActive() );
+    setVisible( objectData.getVisualData().isActive() );
     
     // Set the sprite type
     m_parameters.Add( NDefs::SPRITE2D );
     
-    if( objectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-        setCropOffset( objectData.GetVisualData().GetSpriteSheet().getGlyph().getCropOffset() );
+    if( objectData.getVisualData().getGenerationType() == NDefs::EGT_SPRITE_SHEET )
+        setCropOffset( objectData.getVisualData().getSpriteSheet().getGlyph().getCropOffset() );
 }
 
 
@@ -99,7 +99,7 @@ void CSprite2D::cleanUp()
     
     // Deleting the physics always needs to be done externally and
     // under the right conditions
-    m_physicsComponent.DestroyBody();
+    m_physicsComponent.destroyBody();
 }
 
 
@@ -148,7 +148,7 @@ bool CSprite2D::prepareFuncId( const std::string & scriptFuncId, bool forceUpdat
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
     {
-        m_scriptComponent.Prepare( m_rObjectData.GetGroup(), iter->second, {this});
+        m_scriptComponent.Prepare( m_rObjectData.getGroup(), iter->second, {this});
         
         // Allow the script to execute and return it's context to the queue
         // for the scripts that don't animate
@@ -166,7 +166,7 @@ void CSprite2D::prepare(
     const std::vector<CScriptParam> & paramVec,
     bool forceUpdate )
 {
-    m_scriptComponent.Prepare( m_rObjectData.GetGroup(), funcName, paramVec);
+    m_scriptComponent.Prepare( m_rObjectData.getGroup(), funcName, paramVec);
     
     // Allow the script to execute and return it's context to the queue
     // for the scripts that don't animate
@@ -180,7 +180,7 @@ void CSprite2D::prepare(
 ************************************************************************/
 void CSprite2D::initPhysics()
 {
-    m_physicsComponent.Init(*this);
+    m_physicsComponent.init(*this);
 }
 
 
@@ -211,7 +211,7 @@ void CSprite2D::update()
 ************************************************************************/
 void CSprite2D::physicsUpdate()
 {
-    m_physicsComponent.Update( this );
+    m_physicsComponent.update( this );
 }
 
 
@@ -299,7 +299,7 @@ void CSprite2D::setColor( float r, float g, float b, float a )
 ************************************************************************/
 void CSprite2D::setDefaultColor()
 {
-    m_visualComponent.setColor( m_rObjectData.GetVisualData().GetColor() );
+    m_visualComponent.setColor( m_rObjectData.getVisualData().getColor() );
 }
 
 
@@ -317,7 +317,7 @@ const CColor & CSprite2D::getColor() const
 ************************************************************************/
 const CColor & CSprite2D::getDefaultColor() const
 {
-    return m_rObjectData.GetVisualData().GetColor();
+    return m_rObjectData.getVisualData().getColor();
 }
 
 
@@ -347,7 +347,7 @@ float CSprite2D::getAlpha() const
 ************************************************************************/
 float CSprite2D::getDefaultAlpha() const
 {
-    return m_rObjectData.GetVisualData().GetColor().getA();
+    return m_rObjectData.getVisualData().getColor().getA();
 }
 
 
@@ -356,7 +356,7 @@ float CSprite2D::getDefaultAlpha() const
 ************************************************************************/
 void CSprite2D::setDefaultAlpha()
 {
-    m_visualComponent.setAlpha( m_rObjectData.GetVisualData().GetColor().getA() );
+    m_visualComponent.setAlpha( m_rObjectData.getVisualData().getColor().getA() );
 }
 
 
@@ -365,7 +365,7 @@ void CSprite2D::setDefaultAlpha()
 ************************************************************************/
 uint CSprite2D::getFrameCount() const 
 {
-    return m_rObjectData.GetVisualData().GetFrameCount();
+    return m_rObjectData.getVisualData().getFrameCount();
 }
 
 
@@ -387,8 +387,8 @@ void CSprite2D::setFrame( uint index )
     {
         m_visualComponent.setFrame( index );
         
-        if( m_rObjectData.GetVisualData().GetGenerationType() == NDefs::EGT_SPRITE_SHEET )
-            setCropOffset( m_rObjectData.GetVisualData().GetSpriteSheet().getGlyph(index).getCropOffset() );
+        if( m_rObjectData.getVisualData().getGenerationType() == NDefs::EGT_SPRITE_SHEET )
+            setCropOffset( m_rObjectData.getVisualData().getSpriteSheet().getGlyph(index).getCropOffset() );
     }
 }
 
@@ -416,5 +416,5 @@ const CSize<float> & CSprite2D::getFontSize() const
 ************************************************************************/
 void CSprite2D::setPhysicsTransform( float x, float y, float angle, bool resetVelocity )
 {
-    m_physicsComponent.SetTransform( x, y, angle, resetVelocity );
+    m_physicsComponent.setTransform( x, y, angle, resetVelocity );
 }

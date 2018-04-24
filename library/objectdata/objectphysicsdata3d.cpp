@@ -29,22 +29,21 @@ CObjectPhysicsData3D::CObjectPhysicsData3D() :
     m_collisionGroup(0),
     m_collisionMask(0)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CObjectPhysicsData3D::~CObjectPhysicsData3D()
 {
-    // NOTE: Nothing should ever be deleted here
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CObjectPhysicsData3D::LoadFromNode( const XMLNode & objectNode )
+void CObjectPhysicsData3D::loadFromNode( const XMLNode & objectNode )
 {
     const XMLNode physicsNode = objectNode.getChildNode( "physics" );
 
@@ -53,7 +52,7 @@ void CObjectPhysicsData3D::LoadFromNode( const XMLNode & objectNode )
     {
         if( physicsNode.isAttributeSet( "world" ) )
             m_world = physicsNode.getAttribute( "world" );
-            
+
         // The body of the physics sprite used for physics
         const XMLNode bodyNode = physicsNode.getChildNode( "body" );
         if( !bodyNode.isEmpty() )
@@ -100,14 +99,13 @@ void CObjectPhysicsData3D::LoadFromNode( const XMLNode & objectNode )
         if( !planeNormalNode.isEmpty() )
             m_planeNormal = NParseHelper::LoadXYZ( planeNormalNode );
     }
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Get the name of the physics world
 ************************************************************************/
-const std::string & CObjectPhysicsData3D::GetWorld() const 
+const std::string & CObjectPhysicsData3D::getWorld() const
 {
     return m_world;
 }
@@ -116,7 +114,7 @@ const std::string & CObjectPhysicsData3D::GetWorld() const
 /************************************************************************
 *    desc:  Get the type of physics body
 ************************************************************************/
-const std::string & CObjectPhysicsData3D::GetBodyShape() const 
+const std::string & CObjectPhysicsData3D::getBodyShape() const
 {
     return m_bodyShape;
 }
@@ -125,7 +123,7 @@ const std::string & CObjectPhysicsData3D::GetBodyShape() const
 /************************************************************************
 *    desc:  Get the mass of physics body
 ************************************************************************/
-float CObjectPhysicsData3D::GetMass() const 
+float CObjectPhysicsData3D::getMass() const
 {
     return m_mass;
 }
@@ -134,7 +132,7 @@ float CObjectPhysicsData3D::GetMass() const
 /************************************************************************
 *    desc:  Get the friction
 ************************************************************************/
-float CObjectPhysicsData3D::GetFriction() const
+float CObjectPhysicsData3D::getFriction() const
 {
     return m_friction;
 }
@@ -143,7 +141,7 @@ float CObjectPhysicsData3D::GetFriction() const
 /************************************************************************
 *    desc:  Get the rolling friction
 ************************************************************************/
-float CObjectPhysicsData3D::GetRollingFriction() const
+float CObjectPhysicsData3D::getRollingFriction() const
 {
     return m_rollingFiction;
 }
@@ -152,7 +150,7 @@ float CObjectPhysicsData3D::GetRollingFriction() const
 /************************************************************************
 *    desc:  Get the linear damping
 ************************************************************************/
-float CObjectPhysicsData3D::GetLinearDamping() const
+float CObjectPhysicsData3D::getLinearDamping() const
 {
     return m_linearDamping;
 }
@@ -161,7 +159,7 @@ float CObjectPhysicsData3D::GetLinearDamping() const
 /************************************************************************
 *    desc:  Get the angular damping
 ************************************************************************/
-float CObjectPhysicsData3D::GetAngularDamping() const
+float CObjectPhysicsData3D::getAngularDamping() const
 {
     return m_angularDamping;
 }
@@ -170,7 +168,7 @@ float CObjectPhysicsData3D::GetAngularDamping() const
 /************************************************************************
 *    desc:  Get the restitution - the amount of bounce
 ************************************************************************/
-float CObjectPhysicsData3D::GetRestitution() const
+float CObjectPhysicsData3D::getRestitution() const
 {
     return m_restitution;
 }
@@ -179,7 +177,7 @@ float CObjectPhysicsData3D::GetRestitution() const
 /************************************************************************
 *    desc:  Get the plane normal
 ************************************************************************/
-const CPoint<float> & CObjectPhysicsData3D::GetPlaneNormal() const
+const CPoint<float> & CObjectPhysicsData3D::getPlaneNormal() const
 {
     return m_planeNormal;
 }
@@ -188,7 +186,7 @@ const CPoint<float> & CObjectPhysicsData3D::GetPlaneNormal() const
 /************************************************************************
 *    desc:  Specify if physics is active
 ************************************************************************/
-bool CObjectPhysicsData3D::IsActive() const 
+bool CObjectPhysicsData3D::isActive() const
 {
     return (!m_world.empty() && !m_bodyShape.empty());
 }
@@ -197,7 +195,7 @@ bool CObjectPhysicsData3D::IsActive() const
 /************************************************************************
 *    desc:  Get the collision filter
 ************************************************************************/
-short CObjectPhysicsData3D::GetCollisionGroup() const
+short CObjectPhysicsData3D::getCollisionGroup() const
 {
     return m_collisionGroup;
 }
@@ -206,7 +204,7 @@ short CObjectPhysicsData3D::GetCollisionGroup() const
 /************************************************************************
 *    desc:  Get the collision mask
 ************************************************************************/
-short CObjectPhysicsData3D::GetCollisionMask() const
+short CObjectPhysicsData3D::getCollisionMask() const
 {
     return m_collisionMask;
 }

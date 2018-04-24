@@ -142,7 +142,7 @@ void CUIControl::loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     std::string objectName = node.getAttribute( "objectName" );
 
     // Internally allocate the sprite in the deque
-    m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( m_group, objectName ) );
+    m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( m_group, objectName ) );
     auto & rSprite = m_spriteDeq.back();
 
     // Load the sprite data
@@ -160,8 +160,8 @@ void CUIControl::loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
     else
     {
         // Find the largest size width and height of the different sprites for the controls size
-        const float width( rSprite.getObjectData().GetSize().w + std::fabs( rSprite.getPos().x ) );
-        const float height( rSprite.getObjectData().GetSize().h + std::fabs( rSprite.getPos().y ) );
+        const float width( rSprite.getObjectData().getSize().w + std::fabs( rSprite.getPos().x ) );
+        const float height( rSprite.getObjectData().getSize().h + std::fabs( rSprite.getPos().y ) );
 
         if( width > m_size.w )
             m_size.w = width;

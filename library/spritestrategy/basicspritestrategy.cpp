@@ -164,7 +164,7 @@ iSprite * CBasicSpriteStrategy::Create(
             spriteId = rData.getId();
         
         // Allocate the sprite
-        iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
+        iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().getData2D( rData ), spriteId ) );
         
         // Load the rest from sprite data
         dynamic_cast<CSprite2D *>(iter.first->second)->load( rData );
@@ -235,7 +235,7 @@ iSprite * CBasicSpriteStrategy::Create(
             spriteId = rData.getId();
         
         // Allocate the sprite
-        iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().GetData2D( rData ), spriteId ) );
+        iter = m_spriteMap.emplace( spriteId, new CSprite2D( CObjectDataMgr::Instance().getData2D( rData ), spriteId ) );
         
         // Load the rest from sprite data
         dynamic_cast<CSprite2D *>(iter.first->second)->load( rData );
@@ -290,14 +290,14 @@ iSprite * CBasicSpriteStrategy::Create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
     
     // Allocate the sprite
-    if( CObjectDataMgr::Instance().IsData2D( group, name ) )
+    if( CObjectDataMgr::Instance().isData2D( group, name ) )
     {
-        auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
+        auto & objData = CObjectDataMgr::Instance().getData2D( group, name );
         iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
     }
-    else if( CObjectDataMgr::Instance().IsData3D( group, name ) )
+    else if( CObjectDataMgr::Instance().isData3D( group, name ) )
     {
-        auto & objData = CObjectDataMgr::Instance().GetData3D( group, name );
+        auto & objData = CObjectDataMgr::Instance().getData3D( group, name );
         iter = m_spriteMap.emplace( spriteId, new CSprite3D( objData, spriteId ) );
     }
         
@@ -340,14 +340,14 @@ iSprite * CBasicSpriteStrategy::Create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
     
     // Allocate the sprite
-    if( CObjectDataMgr::Instance().IsData2D( group, name ) )
+    if( CObjectDataMgr::Instance().isData2D( group, name ) )
     {
-        auto & objData = CObjectDataMgr::Instance().GetData2D( group, name );
+        auto & objData = CObjectDataMgr::Instance().getData2D( group, name );
         iter = m_spriteMap.emplace( spriteId, new CSprite2D( objData, spriteId ) );
     }
-    else if( CObjectDataMgr::Instance().IsData3D( group, name ) )
+    else if( CObjectDataMgr::Instance().isData3D( group, name ) )
     {
-        auto & objData = CObjectDataMgr::Instance().GetData3D( group, name );
+        auto & objData = CObjectDataMgr::Instance().getData3D( group, name );
         iter = m_spriteMap.emplace( spriteId, new CSprite3D( objData, spriteId ) );
     }
         

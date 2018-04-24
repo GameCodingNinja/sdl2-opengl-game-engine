@@ -27,20 +27,19 @@
  ************************************************************************/
 CObjectVisualData3D::CObjectVisualData3D()
 {
-}   // constructor
+}
 
 /************************************************************************
  *    desc:  Destructor                                                             
  ************************************************************************/
 CObjectVisualData3D::~CObjectVisualData3D()
 {
-    // NOTE: Nothing should ever be deleted here
-}   // Destructor
+}
 
 /************************************************************************
  *    desc:  Load the object data from node
  ************************************************************************/
-void CObjectVisualData3D::LoadFromNode( const XMLNode & objectNode )
+void CObjectVisualData3D::loadFromNode( const XMLNode & objectNode )
 {
     const XMLNode visualNode = objectNode.getChildNode( "visual" );
     if( !visualNode.isEmpty() )
@@ -65,36 +64,33 @@ void CObjectVisualData3D::LoadFromNode( const XMLNode & objectNode )
                     % __FUNCTION__ % __LINE__ ));
         }
     }
-
-}   // LoadFromNode
+}
 
 
 /************************************************************************
  *    desc:  Load the mesh data from file
  ************************************************************************/
-void CObjectVisualData3D::LoadMeshData( const std::string & group )
+void CObjectVisualData3D::loadMeshData( const std::string & group )
 {
     // Temporary implementation to just get cube on screen - remove
     if( !m_meshFile.empty() )
         CMeshMgr::Instance().loadFromFile( group, m_meshFile );
-
-}   // CreateFromData
+}
 
 /************************************************************************
  *    desc:  Create the object from data
  ************************************************************************/
-void CObjectVisualData3D::CreateFromData( const std::string & group )
+void CObjectVisualData3D::createFromData( const std::string & group )
 {
     // Temporary implementation to just get cube on screen - remove
     if( !m_meshFile.empty() )
         CMeshMgr::Instance().createFromData( group, m_meshFile, m_mesh3d );
-
-}   // CreateFromData
+}
 
 /************************************************************************
  *    desc:  Get the name of the shader ID
  ************************************************************************/
-const std::string & CObjectVisualData3D::GetShaderID() const
+const std::string & CObjectVisualData3D::getShaderID() const
 {
     return m_shaderID;
 }
@@ -102,7 +98,7 @@ const std::string & CObjectVisualData3D::GetShaderID() const
 /************************************************************************
  *    desc:  Get the color
  ************************************************************************/
-const CColor & CObjectVisualData3D::GetColor() const
+const CColor & CObjectVisualData3D::getColor() const
 {
     return m_color;
 }
@@ -110,7 +106,7 @@ const CColor & CObjectVisualData3D::GetColor() const
 /************************************************************************
  *    desc:  Whether or not the visual tag was specified
  ************************************************************************/
-bool CObjectVisualData3D::IsActive() const
+bool CObjectVisualData3D::isActive() const
 {
     return !m_meshFile.empty();
 }
@@ -118,7 +114,7 @@ bool CObjectVisualData3D::IsActive() const
 /************************************************************************
  *    desc:  Get the mesh3d vector
  ************************************************************************/
-const CMesh3D & CObjectVisualData3D::GetMesh3D() const
+const CMesh3D & CObjectVisualData3D::getMesh3D() const
 {
     return m_mesh3d;
 }

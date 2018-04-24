@@ -134,10 +134,10 @@ void CUIScrollBox::loadControlFromNode( const XMLNode & node )
     {
         const std::string objectName = stencilMaskNode.getAttribute( "objectName" );
 
-        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( getGroup(), objectName ) ) );
+        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( getGroup(), objectName ) ) );
 
         // Get the cull height
-        m_cullHeight = (m_upStencilMaskSprite->getObjectData().GetSize().getW() + m_controlHeight) / 2;
+        m_cullHeight = (m_upStencilMaskSprite->getObjectData().getSize().getW() + m_controlHeight) / 2;
 
         // Load the transform data
         m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );

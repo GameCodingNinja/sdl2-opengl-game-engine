@@ -25,11 +25,11 @@
 CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
     iSprite(id),
     m_objectData(objectData),
-    m_visualComponent(objectData.GetVisualData()),
-    m_physicsComponent(objectData.GetPhysicsData())
+    m_visualComponent(objectData.getVisualData()),
+    m_physicsComponent(objectData.getPhysicsData())
 {
     // If there's no visual data, set the hide flag
-    setVisible( objectData.GetVisualData().IsActive() );
+    setVisible( objectData.getVisualData().isActive() );
     
     // Set the sprite type
     m_parameters.Add( NDefs::SPRITE3D );
@@ -49,7 +49,7 @@ CSprite3D::~CSprite3D()
  ************************************************************************/
 void CSprite3D::initPhysics()
 {
-    m_physicsComponent.Init( *this );
+    m_physicsComponent.init( *this );
 }
 
 
@@ -101,7 +101,7 @@ void CSprite3D::handleEvent( const SDL_Event & rEvent )
 void CSprite3D::update()
 {
     if( isVisible() )
-        m_physicsComponent.Update( this );
+        m_physicsComponent.update( this );
 
     m_scriptComponent.Update();
 
@@ -115,7 +115,7 @@ void CSprite3D::update()
 ************************************************************************/
 void CSprite3D::physicsUpdate()
 {
-    m_physicsComponent.Update( this );
+    m_physicsComponent.update( this );
 }
 
 
@@ -203,7 +203,7 @@ void CSprite3D::setColor( float r, float g, float b, float a )
  ************************************************************************/
 void CSprite3D::setDefaultColor()
 {
-    m_visualComponent.setColor( m_objectData.GetVisualData().GetColor() );
+    m_visualComponent.setColor( m_objectData.getVisualData().getColor() );
 }
 
 
@@ -221,7 +221,7 @@ const CColor & CSprite3D::getColor() const
  ************************************************************************/
 const CColor & CSprite3D::getDefaultColor() const
 {
-    return m_objectData.GetVisualData().GetColor();
+    return m_objectData.getVisualData().getColor();
 }
 
 
@@ -251,7 +251,7 @@ float CSprite3D::getAlpha() const
  ************************************************************************/
 float CSprite3D::getDefaultAlpha() const
 {
-    return m_objectData.GetVisualData().GetColor().getA();
+    return m_objectData.getVisualData().getColor().getA();
 }
 
 
@@ -260,5 +260,5 @@ float CSprite3D::getDefaultAlpha() const
 ************************************************************************/
 void CSprite3D::setDefaultAlpha()
 {
-    m_visualComponent.setAlpha( m_objectData.GetVisualData().GetColor().getA() );
+    m_visualComponent.setAlpha( m_objectData.getVisualData().getColor().getA() );
 }

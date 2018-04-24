@@ -186,15 +186,15 @@ namespace NLevel_1
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(stage1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        CObjectDataMgr::Instance().LoadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(stage1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(actor)" );
-        CObjectDataMgr::Instance().CreateFromData2D( "(stage1)" );
+        CObjectDataMgr::Instance().createFromData2D( "(actor)" );
+        CObjectDataMgr::Instance().createFromData2D( "(stage1)" );
     }
     
     void Load()
@@ -217,8 +217,8 @@ namespace NLevel_1
     ****************************************************************************/
     void CriticalUnload()
     {
-        CObjectDataMgr::Instance().FreeGroup2D( "(stage1)" );
-        CObjectDataMgr::Instance().FreeGroup2D( "(actor)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(stage1)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(actor)" );
     }
     
     void Unload()

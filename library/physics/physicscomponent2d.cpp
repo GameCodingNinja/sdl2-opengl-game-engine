@@ -28,18 +28,18 @@
 *    desc:  Constructor
 ************************************************************************/
 CPhysicsComponent2D::CPhysicsComponent2D( const CObjectPhysicsData2D & physicsData ) :
-    BODY_TYPE( physicsData.GetBodyType() ),
+    BODY_TYPE( physicsData.getBodyType() ),
     m_pBody(nullptr),
     PIXELS_TO_METERS(0),
     METERS_TO_PIXELS(0),
     m_pWorld(nullptr)
 {
-    if( physicsData.IsActive() )
+    if( physicsData.isActive() )
     {
-        m_pWorld = &CPhysicsWorldManager2D::Instance().GetWorld( physicsData.GetWorld() );
+        m_pWorld = &CPhysicsWorldManager2D::Instance().getWorld( physicsData.getWorld() );
 
         // Re-init the constants to the values needed
-        const_cast<float&>(METERS_TO_PIXELS) = m_pWorld->GetPixelsPerMeter();
+        const_cast<float&>(METERS_TO_PIXELS) = m_pWorld->getPixelsPerMeter();
         const_cast<float&>(PIXELS_TO_METERS) = 1 / METERS_TO_PIXELS;
     }
 }   // constructor
@@ -51,7 +51,7 @@ CPhysicsComponent2D::CPhysicsComponent2D() :
     METERS_TO_PIXELS(0),
     m_pWorld(nullptr)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -63,8 +63,7 @@ CPhysicsComponent2D::~CPhysicsComponent2D()
     // Only delete externally under the right conditions because Box2D
     // does it's own internal cleanup and deleting here could end
     // up trying to delete a dangling pointer.
-    
-}   // destructor
+}
 
 
 /************************************************************************
@@ -72,73 +71,70 @@ CPhysicsComponent2D::~CPhysicsComponent2D()
 *           NOTE: Function must be called externally at the right time
 *                 when the sprite has been setup with it's initial offsets
 ************************************************************************/
-void CPhysicsComponent2D::Init( const CSprite2D & sprite )
+void CPhysicsComponent2D::init( const CSprite2D & sprite )
 {
-    if( sprite.getObjectData().GetPhysicsData().IsActive() )
+    if( sprite.getObjectData().getPhysicsData().isActive() )
     {
-        CreateBody( sprite );
-        CreateFixture( sprite );
+        createBody( sprite );
+        createFixture( sprite );
     }
-
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Create the body
 ************************************************************************/
-void CPhysicsComponent2D::CreateBody( const CSprite2D & sprite )
+void CPhysicsComponent2D::createBody( const CSprite2D & sprite )
 {
-    const CObjectPhysicsData2D & physicsData = sprite.getObjectData().GetPhysicsData();
+    const CObjectPhysicsData2D & physicsData = sprite.getObjectData().getPhysicsData();
 
-    if( physicsData.GetBodyType() != b2BodyType(-1) )
+    if( physicsData.getBodyType() != b2BodyType(-1) )
     {
         // Fill in the body structure
         b2BodyDef bodyDef;
-        bodyDef.type = physicsData.GetBodyType();
-        bodyDef.linearDamping = physicsData.GetLinearDamping();
-        bodyDef.angularDamping = physicsData.GetAngularDamping();
-        bodyDef.fixedRotation = physicsData.IsRotationFixed();
+        bodyDef.type = physicsData.getBodyType();
+        bodyDef.linearDamping = physicsData.getLinearDamping();
+        bodyDef.angularDamping = physicsData.getAngularDamping();
+        bodyDef.fixedRotation = physicsData.isRotationFixed();
         bodyDef.position.Set( sprite.getPos().getX() * PIXELS_TO_METERS, -(sprite.getPos().getY() * PIXELS_TO_METERS) );
         bodyDef.angle = -sprite.getRot().getZ();
         bodyDef.userData = (void*)&sprite;
 
         // Create the body
-        m_pBody = m_pWorld->CreateBody( bodyDef );
+        m_pBody = m_pWorld->createBody( bodyDef );
     }
-
-}   // CreateBody
+}
 
 
 /************************************************************************
 *    desc:  Create the fixture
 ************************************************************************/
-void CPhysicsComponent2D::CreateFixture( const CSprite2D & sprite )
+void CPhysicsComponent2D::createFixture( const CSprite2D & sprite )
 {
-    const auto & fixture = sprite.getObjectData().GetPhysicsData().GetFixtureVec();
+    const auto & fixture = sprite.getObjectData().getPhysicsData().getFixtureVec();
 
     for( auto & iter : fixture )
     {
         // Create the fixture
         if( iter.m_shape == b2Shape::e_circle )
-            CreateCircularShapeFixture( sprite, iter );
+            createCircularShapeFixture( sprite, iter );
 
         else if( iter.m_shape == b2Shape::e_edge )
-            CreateEdgeShapeFixture( sprite, iter );
+            createEdgeShapeFixture( sprite, iter );
 
         else if( iter.m_shape == b2Shape::e_polygon )
-            CreatePolygonShapeFixture( sprite, iter );
+            createPolygonShapeFixture( sprite, iter );
 
         else if( iter.m_shape == b2Shape::e_chain )
-            CreateChainShapeFixture( sprite, iter );
+            createChainShapeFixture( sprite, iter );
     }
-
-}   // CreateFixture
+}
 
 
 /************************************************************************
 *    desc:  Create the circular shape fixture
 ************************************************************************/
-void CPhysicsComponent2D::CreateCircularShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
+void CPhysicsComponent2D::createCircularShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
     b2CircleShape shape;
     shape.m_radius = (fixture.m_radius * sprite.getScale().getX()) * PIXELS_TO_METERS;
@@ -153,8 +149,7 @@ void CPhysicsComponent2D::CreateCircularShapeFixture( const CSprite2D & sprite, 
     f.userData = (void*)&sprite;
 
     m_pBody->CreateFixture( &f );
-
-}   // CreateCircularShapeFixture
+}
 
 
 /************************************************************************
@@ -162,23 +157,23 @@ void CPhysicsComponent2D::CreateCircularShapeFixture( const CSprite2D & sprite, 
 *           NOTE: An edge is a line segment of two points
 *                 This is no different then making a polygon from points
 ************************************************************************/
-void CPhysicsComponent2D::CreateEdgeShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
+void CPhysicsComponent2D::createEdgeShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
     // Do a sanity check because we need two points to define an edge
     if( fixture.m_vertVec.size() != 2 )
         throw NExcept::CCriticalException("Physics Edge Fixture error!",
             boost::str( boost::format("Physics object has incorrect number of points defined (%d/%s).\n\n%s\nLine: %s")
-                % fixture.m_vertVec.size() % sprite.getObjectData().GetName() % __FUNCTION__ % __LINE__ ));
-                
+                % fixture.m_vertVec.size() % sprite.getObjectData().getName() % __FUNCTION__ % __LINE__ ));
+
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.getObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().getSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
     // Convert the points to world location in meters
     std::vector<b2Vec2> pointVec;
-    ConvertPoints( pointVec, fixture, size, scale );
+    convertPoints( pointVec, fixture, size, scale );
 
     // These points must exist if this is to work. Use "at()" for bounds checking)
     b2EdgeShape shape;
@@ -194,20 +189,19 @@ void CPhysicsComponent2D::CreateEdgeShapeFixture( const CSprite2D & sprite, cons
     f.userData = (void*)&sprite;
 
     m_pBody->CreateFixture( &f );
-
-}   // CreateEdgeShapeFixture
+}
 
 
 /************************************************************************
 *    desc:  Create the polygon shape fixture
 ************************************************************************/
-void CPhysicsComponent2D::CreatePolygonShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
+void CPhysicsComponent2D::createPolygonShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
     std::vector<b2Vec2> pointVec;
 
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.getObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().getSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
@@ -215,7 +209,7 @@ void CPhysicsComponent2D::CreatePolygonShapeFixture( const CSprite2D & sprite, c
     if( !fixture.m_vertVec.empty() )
     {
         // Convert the points to world location in meters
-        ConvertPoints( pointVec, fixture, size, scale );
+        convertPoints( pointVec, fixture, size, scale );
     }
 	// If vector points are not supplied, build a square based on the object size
     else
@@ -261,30 +255,29 @@ void CPhysicsComponent2D::CreatePolygonShapeFixture( const CSprite2D & sprite, c
     f.userData = (void*)&sprite;
 
     m_pBody->CreateFixture( &f );
-
-}   // CreatePolygonShapeFixture
+}
 
 
 /************************************************************************
 *    desc:  Create the chain shape fixture
 ************************************************************************/
-void CPhysicsComponent2D::CreateChainShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
+void CPhysicsComponent2D::createChainShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
     // Do a sanity check because we need more then 1 point to define a chain
     if( fixture.m_vertVec.size() > 1 )
         throw NExcept::CCriticalException("Physics Edge Fixture error!",
             boost::str( boost::format("Physics object has incorrect number of points defined (%d/%s).\n\n%s\nLine: %s")
-                % fixture.m_vertVec.size() % sprite.getObjectData().GetName() % __FUNCTION__ % __LINE__ ));
-                
+                % fixture.m_vertVec.size() % sprite.getObjectData().getName() % __FUNCTION__ % __LINE__ ));
+
     // Apply scale to the size and divide by 2
     // Object data holds size as int so need to convert it to a float
-    const CSize<float> objectSize = sprite.getObjectData().GetSize();
+    const CSize<float> objectSize = sprite.getObjectData().getSize();
     const CSize<float> scale( sprite.getScale().getX(), sprite.getScale().getY() );
     const CSize<float> size = objectSize * scale * 0.5f;
 
     // Convert the points to world location in meters
     std::vector<b2Vec2> pointVec;
-    ConvertPoints( pointVec, fixture, size, scale );
+    convertPoints( pointVec, fixture, size, scale );
 
     b2ChainShape shape;
     if( fixture.m_chainLoop )
@@ -302,14 +295,13 @@ void CPhysicsComponent2D::CreateChainShapeFixture( const CSprite2D & sprite, con
     f.userData = (void*)&sprite;
 
     m_pBody->CreateFixture( &f );
-
-}   // CreateChainShapeFixture
+}
 
 
 /************************************************************************
 *    desc:  Convert the points to world location in meters
 ************************************************************************/
-void CPhysicsComponent2D::ConvertPoints(
+void CPhysicsComponent2D::convertPoints(
     std::vector<b2Vec2> & polyPointVec,
     const CFixture & fixture,
     const CSize<float> & size,
@@ -325,18 +317,18 @@ void CPhysicsComponent2D::ConvertPoints(
             ((iter.x * scale.w) - size.w) * PIXELS_TO_METERS,
             ((iter.y * scale.h) - size.h) * PIXELS_TO_METERS );
     }
-}   // ConvertPoints
+}
 
 
 /************************************************************************
 *    desc:  Update the physics
 ************************************************************************/
-void CPhysicsComponent2D::Update( CSprite2D * pSprite )
+void CPhysicsComponent2D::update( CSprite2D * pSprite )
 {
     if( m_pBody != nullptr )
     {
         CStatCounter::Instance().IncPhysicsObjectsCounter();
-        
+
         if( (BODY_TYPE > b2_staticBody) && m_pBody->IsAwake() )
         {
             const b2Vec2 & pos = m_pBody->GetPosition();
@@ -345,87 +337,80 @@ void CPhysicsComponent2D::Update( CSprite2D * pSprite )
             pSprite->setRot( 0, 0, -angle, false );
         }
     }
-
-}   // Update
+}
 
 
 /************************************************************************
 *    desc:  Is this component active?
 *           If this sprite is using physics then it must have a fixture
 ************************************************************************/
-bool CPhysicsComponent2D::IsActive()
+bool CPhysicsComponent2D::isActive()
 {
     return (m_pBody != nullptr);
-
-}   // IsActive
+}
 
 
 /************************************************************************
 *    desc:  Destry the body
 ************************************************************************/
-void CPhysicsComponent2D::DestroyBody()
+void CPhysicsComponent2D::destroyBody()
 {
     if( m_pBody != nullptr )
     {
-        m_pWorld->DestroyBody( m_pBody );
+        m_pWorld->destroyBody( m_pBody );
         m_pBody = nullptr;
     }
-
-}   // DestroyBody
+}
 
 
 /************************************************************************
 *    desc:  Set the physics position and rotation
 ************************************************************************/
-void CPhysicsComponent2D::SetTransform( float x, float y, float angle, bool resetVelocity )
+void CPhysicsComponent2D::setTransform( float x, float y, float angle, bool resetVelocity )
 {
     if( m_pBody != nullptr )
     {
         m_pBody->SetTransform( b2Vec2( x * PIXELS_TO_METERS, -(y * PIXELS_TO_METERS) ), angle );
-        
+
         if( resetVelocity )
         {
             m_pBody->SetLinearVelocity( b2Vec2(0,0) );
             m_pBody->SetAngularVelocity( 0 );
         }
     }
-
-}   // SetTransform
+}
 
 
 /************************************************************************
 *    desc:  Set the linear velocity
 ************************************************************************/
-void CPhysicsComponent2D::SetLinearVelocity( float x, float y )
+void CPhysicsComponent2D::setLinearVelocity( float x, float y )
 {
     if( m_pBody != nullptr )
         m_pBody->SetLinearVelocity( b2Vec2( x * PIXELS_TO_METERS, -(y * PIXELS_TO_METERS) ) );
-
-}   // SetLinearVelocity
+}
 
 
 /************************************************************************
 *    desc:  Set the angular velocity
 ************************************************************************/
-void CPhysicsComponent2D::SetAngularVelocity( float value )
+void CPhysicsComponent2D::setAngularVelocity( float value )
 {
     if( m_pBody != nullptr )
         m_pBody->SetAngularVelocity( value );
-
-}   // SetAngularVelocity
+}
 
 
 /************************************************************************
 *    desc:  Get the body
 ************************************************************************/
-b2Body * CPhysicsComponent2D::GetBody()
+b2Body * CPhysicsComponent2D::getBody()
 {
     // Do a sanity check because we need more then 1 point to define a chain
     if( m_pBody == nullptr )
         throw NExcept::CCriticalException("Acess To Null Body!",
             boost::str( boost::format("Physics body in question is NULL.\n\n%s\nLine: %s")
                 % __FUNCTION__ % __LINE__ ));
-    
-    return m_pBody;
 
-}   // GetBody
+    return m_pBody;
+}

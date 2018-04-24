@@ -113,7 +113,7 @@ void CWheelView::LoadWheelSprites( const XMLNode & node, const std::string & gro
                     boost::str( boost::format("Wheel view object name missing (%s)!\n\n%s\nLine: %s")
                         % group % __FUNCTION__ % __LINE__ ));
 
-            m_wheelSpriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, spriteNode.getAttribute("objectName") ) );
+            m_wheelSpriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( group, spriteNode.getAttribute("objectName") ) );
             m_wheelSpriteDeq.back().loadTransFromNode( spriteNode );
         }
     }
@@ -168,7 +168,7 @@ void CWheelView::LoadSprites( const XMLNode & node, const std::string & group )
                     boost::str( boost::format("Wheel view object name missing (%s)!\n\n%s\nLine: %s")
                         % group % __FUNCTION__ % __LINE__ ));
 
-            m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, spriteNode.getAttribute("objectName") ) );
+            m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( group, spriteNode.getAttribute("objectName") ) );
             m_spriteDeq.back().loadTransFromNode( spriteNode );
         }
     }

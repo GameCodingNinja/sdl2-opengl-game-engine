@@ -43,28 +43,28 @@
 ************************************************************************/
 CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData ) :
     m_pShaderData(nullptr),
-    m_vbo( visualData.GetVBO() ),
-    m_ibo( visualData.GetIBO() ),
-    m_textureID( visualData.GetTextureID() ),
+    m_vbo( visualData.getVBO() ),
+    m_ibo( visualData.getIBO() ),
+    m_textureID( visualData.getTextureID() ),
     m_vertexLocation(-1),
     m_uvLocation(-1),
     m_text0Location(-1),
     m_colorLocation(-1),
     m_matrixLocation(-1),
     m_glyphLocation(-1),
-    GENERATION_TYPE( visualData.GetGenerationType() ),
-    m_quadVertScale( visualData.GetVertexScale() ),
+    GENERATION_TYPE( visualData.getGenerationType() ),
+    m_quadVertScale( visualData.getVertexScale() ),
     m_rVisualData( visualData ),
-    m_color( visualData.GetColor() ),
-    m_iboCount( visualData.GetIBOCount() ),
-    m_drawMode( (visualData.GetGenerationType() == NDefs::EGT_QUAD || visualData.GetGenerationType() == NDefs::EGT_SPRITE_SHEET) ? GL_TRIANGLE_FAN : GL_TRIANGLES ),
-    m_indiceType( (visualData.GetGenerationType() == NDefs::EGT_FONT) ? GL_UNSIGNED_SHORT : GL_UNSIGNED_BYTE ),
+    m_color( visualData.getColor() ),
+    m_iboCount( visualData.getIBOCount() ),
+    m_drawMode( (visualData.getGenerationType() == NDefs::EGT_QUAD || visualData.getGenerationType() == NDefs::EGT_SPRITE_SHEET) ? GL_TRIANGLE_FAN : GL_TRIANGLES ),
+    m_indiceType( (visualData.getGenerationType() == NDefs::EGT_FONT) ? GL_UNSIGNED_SHORT : GL_UNSIGNED_BYTE ),
     m_frameIndex(0),
     m_pFontData(nullptr)
 {
-    if( visualData.IsActive() )
+    if( visualData.isActive() )
     {
-        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.GetShaderID() );
+        m_pShaderData = &CShaderMgr::Instance().getShaderData( visualData.getShaderID() );
 
         // Common shader members
         m_vertexLocation = m_pShaderData->getAttributeLocation( "in_position" );
@@ -83,8 +83,8 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
         {
             m_glyphLocation = m_pShaderData->getUniformLocation( "glyphRect" );
 
-            m_glyphUV = visualData.GetSpriteSheet().getGlyph().getUV();
-            m_frameIndex = visualData.GetSpriteSheet().getDefaultIndex();
+            m_glyphUV = visualData.getSpriteSheet().getGlyph().getUV();
+            m_frameIndex = visualData.getSpriteSheet().getDefaultIndex();
         }
 
         // Allocate the storage for the font if this is a font sprite
@@ -669,10 +669,10 @@ const CColor & CVisualComponent2D::getColor() const
 ************************************************************************/
 void CVisualComponent2D::setAlpha( float alpha, bool allowToExceed )
 {
-    if( allowToExceed || (alpha < m_rVisualData.GetColor().a) )
+    if( allowToExceed || (alpha < m_rVisualData.getColor().a) )
         m_color.a = alpha;
     else
-        alpha = m_rVisualData.GetColor().a;
+        alpha = m_rVisualData.getColor().a;
 }
 
 float CVisualComponent2D::getAlpha() const
@@ -688,12 +688,12 @@ void CVisualComponent2D::setFrame( uint index )
 {
     if( GENERATION_TYPE == NDefs::EGT_SPRITE_SHEET )
     {
-        auto rGlyph = m_rVisualData.GetSpriteSheet().getGlyph( index );
+        auto rGlyph = m_rVisualData.getSpriteSheet().getGlyph( index );
         m_glyphUV = rGlyph.getUV();
-        m_quadVertScale = rGlyph.getSize() * m_rVisualData.GetDefaultUniformScale();
+        m_quadVertScale = rGlyph.getSize() * m_rVisualData.getDefaultUniformScale();
     }
     else
-        m_textureID = m_rVisualData.GetTextureID( index );
+        m_textureID = m_rVisualData.getTextureID( index );
 
     m_frameIndex = index;
 }
@@ -713,7 +713,7 @@ uint CVisualComponent2D::getCurrentFrame() const
 ************************************************************************/
 void CVisualComponent2D::setDefaultColor()
 {
-    m_color = m_rVisualData.GetColor();
+    m_color = m_rVisualData.getColor();
 }
 
 

@@ -126,13 +126,13 @@ void CUIProgressBar::loadControlFromNode( const XMLNode & controlNode )
 
         if( !objectName.empty() )
         {
-            m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( getGroup(), objectName ) ) );
+            m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( getGroup(), objectName ) ) );
 
             // Load the transform data
             m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
 
             // Get the size
-            m_size = m_upStencilMaskSprite->getObjectData().GetSize();
+            m_size = m_upStencilMaskSprite->getObjectData().getSize();
 
             // Get the initial position
             m_pos = m_upStencilMaskSprite->getPos();
@@ -143,7 +143,7 @@ void CUIProgressBar::loadControlFromNode( const XMLNode & controlNode )
         else
         {
             // Get the size
-            m_size = m_spriteDeq.at(m_spriteApplyIndex).getObjectData().GetSize();
+            m_size = m_spriteDeq.at(m_spriteApplyIndex).getObjectData().getSize();
 
             // Get the initial position
             m_pos = m_spriteDeq.at(m_spriteApplyIndex).getPos();

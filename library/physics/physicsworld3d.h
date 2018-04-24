@@ -29,35 +29,35 @@ public:
     virtual ~CPhysicsWorld3D();
 
     // Load the physics world from the passed in node
-    void LoadFromNode( const XMLNode & node );
+    void loadFromNode( const XMLNode & node );
 
     // Get the physics world
-    const btDiscreteDynamicsWorld & GetWorld() const;
+    const btDiscreteDynamicsWorld & getWorld() const;
 
     // Add a rigid body to the world
-    void AddRigidBody( btRigidBody * pBody );
+    void addRigidBody( btRigidBody * pBody );
 
     // Add collision filtering
-    void AddRigidBody( btRigidBody * pBody, short filterGroup, short mask );
+    void addRigidBody( btRigidBody * pBody, short filterGroup, short mask );
 
     // Remove a rigid body to the world
-    void RemoveRigidBody( btRigidBody * pBody );
+    void removeRigidBody( btRigidBody * pBody );
 
     // Perform fixed time step physics simulation
-    void FixedTimeStep();
+    void fixedTimeStep();
     
     // Perform variable time step physics simulation
-    void VariableTimeStep();
+    void variableTimeStep();
 
     // Set the fps to run the simulation at
-    void SetFPS( float fps );
+    void setFPS( float fps );
 
     // The the time ratio
-    float GetTimeRatio() const;
+    float getTimeRatio() const;
 
     // Set-Get the activity of the physics world
-    void SetActive( bool value );
-    bool IsActive() const;
+    void setActive( bool value );
+    bool isActive() const;
 
 private:
 

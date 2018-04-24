@@ -26,9 +26,9 @@
 ************************************************************************/
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
-        m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
+        m_background( CObjectDataMgr::Instance().getData2D( "(title_screen)", "background" ) ),
         //m_spriteSheetTest( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "spriteSheetTest2" ) ),
-        m_cube( CObjectDataMgr::Instance().GetData3D( "(cube)", "cube" ) )
+        m_cube( CObjectDataMgr::Instance().getData3D( "(cube)", "cube" ) )
 {
 }   // Constructor
 
@@ -146,17 +146,17 @@ namespace NTitleScreenState
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
         
         //CObjectDataMgr::Instance().LoadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
-        CObjectDataMgr::Instance().LoadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup3D( "(cube)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(title_screen)" );
-        CObjectDataMgr::Instance().CreateFromData3D( "(cube)" );
+        CObjectDataMgr::Instance().createFromData2D( "(title_screen)" );
+        CObjectDataMgr::Instance().createFromData3D( "(cube)" );
     }
     
     void Load()
@@ -176,8 +176,8 @@ namespace NTitleScreenState
     ****************************************************************************/
     void CriticalUnload()
     {
-        CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)" );
-        CObjectDataMgr::Instance().FreeGroup3D( "(cube)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(title_screen)" );
+        CObjectDataMgr::Instance().freeGroup3D( "(cube)" );
     }
     
     void Unload()

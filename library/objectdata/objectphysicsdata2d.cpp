@@ -27,22 +27,21 @@ CObjectPhysicsData2D::CObjectPhysicsData2D() :
     m_angularDamping(0),
     m_fixedRotation(false)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    desc:  Destructor
 ************************************************************************/
 CObjectPhysicsData2D::~CObjectPhysicsData2D()
 {
-    // NOTE: Nothing should ever be deleted here
-}   // Destructor
+}
 
 
 /************************************************************************
 *    desc:  Load thes object data from node
 ************************************************************************/
-void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
+void CObjectPhysicsData2D::loadFromNode( const XMLNode & objectNode )
 {
     const XMLNode physicsNode = objectNode.getChildNode( "physics" );
 
@@ -51,7 +50,7 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
     {
         if( physicsNode.isAttributeSet( "world" ) )
             m_world = physicsNode.getAttribute( "world" );
-            
+
         // The body of the physics sprite used for physics
         const XMLNode bodyNode = physicsNode.getChildNode( "body" );
         if( !bodyNode.isEmpty() )
@@ -63,10 +62,10 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
 
                 if( bodyType == "static" )
                     m_bodyType = b2_staticBody;
-                
+
                 else if( bodyType == "dynamic" )
                     m_bodyType = b2_dynamicBody;
-                
+
                 else if( bodyType == "kinematic" )
                     m_bodyType = b2_kinematicBody;
             }
@@ -83,19 +82,19 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
             if( bodyNode.isAttributeSet("fixedRotation") )
                 m_fixedRotation = (std::strcmp( bodyNode.getAttribute("fixedRotation"), "true") == 0);
         }
-        
+
         // The body of the physics sprite used for physics
         const XMLNode fixtureLstNode = physicsNode.getChildNode( "fixtureLst" );
         if( !fixtureLstNode.isEmpty() )
         {
             // Allocate all the needed fixtures
             m_fixtureVec.resize( fixtureLstNode.nChildNode() );
-            
+
             int counter(0);
             for( auto & iter : m_fixtureVec )
             {
                 const XMLNode fixtureNode = fixtureLstNode.getChildNode( "fixture", counter++ );
-            
+
                 // Get the fixture shape
                 if( fixtureNode.isAttributeSet( "shape" ) )
                 {
@@ -125,15 +124,15 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
                 // The restitution is the percentage of velocity retained upon physics
                 if( fixtureNode.isAttributeSet("restitution") )
                     iter.m_restitution = std::atof( fixtureNode.getAttribute( "restitution" ) );
-                
+
                 // Radius if shape is a circle
                 if( fixtureNode.isAttributeSet("radius") )
                     iter.m_radius = std::atof( fixtureNode.getAttribute( "radius" ) );
-                
+
                 // Is chain shape a loop?
                 if( fixtureNode.isAttributeSet("chainLoop") )
                     iter.m_chainLoop = (std::strcmp(fixtureNode.getAttribute( "chainLoop" ), "true") == 0);
-                
+
                 // Is fixture a sensor?
                 if( fixtureNode.isAttributeSet("sensor") )
                     iter.m_sensor = (std::strcmp(fixtureNode.getAttribute( "sensor" ), "true") == 0);
@@ -153,17 +152,17 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
                             std::atof( vertNode.getAttribute("y") ) );
                     }
                 }
-                
+
                 // See if the filter is defined
                 const XMLNode filterNode = fixtureNode.getChildNode("collisionFilter");
                 if( !filterNode.isEmpty() )
                 {
                     if( filterNode.isAttributeSet("categoryBits") )
                         iter.m_filter.categoryBits = std::atoi( filterNode.getAttribute("categoryBits") );
-                    
+
                     if( filterNode.isAttributeSet("maskBits") )
                         iter.m_filter.maskBits = std::atoi( filterNode.getAttribute("maskBits") );
-                    
+
                     if( filterNode.isAttributeSet("groupIndex") )
                         iter.m_filter.groupIndex = std::atoi( filterNode.getAttribute("groupIndex") );
                 }
@@ -187,13 +186,13 @@ void CObjectPhysicsData2D::LoadFromNode( const XMLNode & objectNode )
             }
         }
     }
-}   // LoadFromNode
+}
 
 
 /************************************************************************
 *    desc:  Get the name of the physics world
 ************************************************************************/
-const std::string & CObjectPhysicsData2D::GetWorld() const 
+const std::string & CObjectPhysicsData2D::getWorld() const
 {
     return m_world;
 }
@@ -202,7 +201,7 @@ const std::string & CObjectPhysicsData2D::GetWorld() const
 /************************************************************************
 *    desc:  Get the type of physics body
 ************************************************************************/
-b2BodyType CObjectPhysicsData2D::GetBodyType() const 
+b2BodyType CObjectPhysicsData2D::getBodyType() const
 {
     return m_bodyType;
 }
@@ -211,7 +210,7 @@ b2BodyType CObjectPhysicsData2D::GetBodyType() const
 /************************************************************************
 *    desc:  Get the linear damping
 ************************************************************************/
-float CObjectPhysicsData2D::GetLinearDamping() const
+float CObjectPhysicsData2D::getLinearDamping() const
 {
     return m_linearDamping;
 }
@@ -220,7 +219,7 @@ float CObjectPhysicsData2D::GetLinearDamping() const
 /************************************************************************
 *    desc:  Get the angular damping
 ************************************************************************/
-float CObjectPhysicsData2D::GetAngularDamping() const
+float CObjectPhysicsData2D::getAngularDamping() const
 {
     return m_angularDamping;
 }
@@ -229,7 +228,7 @@ float CObjectPhysicsData2D::GetAngularDamping() const
 /************************************************************************
 *    desc:  Is the rotation fixed
 ************************************************************************/
-bool CObjectPhysicsData2D::IsRotationFixed() const
+bool CObjectPhysicsData2D::isRotationFixed() const
 {
     return m_fixedRotation;
 }
@@ -238,7 +237,7 @@ bool CObjectPhysicsData2D::IsRotationFixed() const
 /************************************************************************
 *    desc:  Get the fixture data
 ************************************************************************/
-const std::vector<CFixture> & CObjectPhysicsData2D::GetFixtureVec() const
+const std::vector<CFixture> & CObjectPhysicsData2D::getFixtureVec() const
 {
     return m_fixtureVec;
 }
@@ -247,7 +246,7 @@ const std::vector<CFixture> & CObjectPhysicsData2D::GetFixtureVec() const
 /************************************************************************
 *    desc:  Specify if physics is active
 ************************************************************************/
-bool CObjectPhysicsData2D::IsActive() const 
+bool CObjectPhysicsData2D::isActive() const
 {
     return (!m_world.empty() && (m_bodyType != b2BodyType(-1)));
 }

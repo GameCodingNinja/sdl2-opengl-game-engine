@@ -33,9 +33,9 @@ CPhysicsWorld2D::CPhysicsWorld2D() :
     m_velStepCount(6),
     m_posStepCount(2)
 {
-    SetFPS(30);
+    setFPS(30);
 
-}   // constructor
+}
 
 
 /************************************************************************
@@ -43,13 +43,13 @@ CPhysicsWorld2D::CPhysicsWorld2D() :
 ************************************************************************/
 CPhysicsWorld2D::~CPhysicsWorld2D()
 {
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Load the physics world from XML node
 ************************************************************************/
-void CPhysicsWorld2D::LoadFromNode( const XMLNode & node )
+void CPhysicsWorld2D::loadFromNode( const XMLNode & node )
 {
     // Get the world's settings, if any are set
     XMLNode settingsNode = node.getChildNode( "settings" );
@@ -76,22 +76,22 @@ void CPhysicsWorld2D::LoadFromNode( const XMLNode & node )
     {
         m_velStepCount = std::atoi( steppingNode.getAttribute( "velocity" ) );
         m_posStepCount = std::atoi( steppingNode.getAttribute( "position" ) );
-        
+
         float fps = std::atof( steppingNode.getAttribute( "fps" ) );
-        
+
         // If the number is negative, get the current refresh rate
         if( fps < 0.f )
         {
             SDL_DisplayMode dm;
             SDL_GetDesktopDisplayMode(0, &dm);
-            
+
             if( dm.refresh_rate == 0 )
                 fps = 60.f;
             else
                 fps = dm.refresh_rate;
         }
 
-        SetFPS( fps );
+        setFPS( fps );
     }
 
     // Get the conversion of pixels per meter because Box2D works in meters
@@ -100,31 +100,28 @@ void CPhysicsWorld2D::LoadFromNode( const XMLNode & node )
     {
         m_pixelsPerMeter = std::atof( conversionNode.getAttribute( "pixelsPerMeter" ) );
     }
-
-}   // LoadFromXML
+}
 
 
 /************************************************************************
 *    desc:  Get the world
 ************************************************************************/
-const b2World & CPhysicsWorld2D::GetWorld() const
+const b2World & CPhysicsWorld2D::getWorld() const
 {
     return m_world;
+}
 
-}   // GetWorld
-
-b2World & CPhysicsWorld2D::GetWorld()
+b2World & CPhysicsWorld2D::getWorld()
 {
     return m_world;
-
-}   // GetWorld
+}
 
 
 /************************************************************************
 *    desc:  Create a physics body
 *           NOTE: Function should only be called from physics component
 ************************************************************************/
-b2Body * CPhysicsWorld2D::CreateBody( const b2BodyDef & pDef )
+b2Body * CPhysicsWorld2D::createBody( const b2BodyDef & pDef )
 {
     // NOTE: Class doesn't not own the data. Do Not Delete!
     b2Body * pTmpBody = m_world.CreateBody( &pDef );
@@ -137,15 +134,14 @@ b2Body * CPhysicsWorld2D::CreateBody( const b2BodyDef & pDef )
     m_pBodySet.insert( pTmpBody );
 
     return pTmpBody;
-
-}   // CreateBody
+}
 
 
 /************************************************************************
 *    desc:  Destroy a physics body
 *           NOTE: Function should only be called from physics component
 ************************************************************************/
-void CPhysicsWorld2D::DestroyBody( b2Body * pBody )
+void CPhysicsWorld2D::destroyBody( b2Body * pBody )
 {
     auto iter = m_pBodySet.find( pBody );
 
@@ -157,14 +153,13 @@ void CPhysicsWorld2D::DestroyBody( b2Body * pBody )
         // Remove the body from the set
         m_pBodySet.erase( iter );
     }
-
-}   // DestroyBody
+}
 
 
 /************************************************************************
 *    desc:  Perform fixed time step physics simulation
 ************************************************************************/
-void CPhysicsWorld2D::FixedTimeStep()
+void CPhysicsWorld2D::fixedTimeStep()
 {
     if( m_active )
     {
@@ -181,21 +176,19 @@ void CPhysicsWorld2D::FixedTimeStep()
 
         m_timeRatio = m_timer / m_stepTime;
     }
-
-}   // FixedTimeStep
+}
 
 /************************************************************************
 *    desc:  Perform variable time step physics simulation
 ************************************************************************/
-void CPhysicsWorld2D::VariableTimeStep()
+void CPhysicsWorld2D::variableTimeStep()
 {
     if( m_active )
     {
         // Begin the physics world step
         m_world.Step( CHighResTimer::Instance().GetElapsedTime() / 1000.f, m_velStepCount, m_posStepCount );
     }
-
-}   // VariableTimeStep
+}
 
 
 /************************************************************************
@@ -203,17 +196,16 @@ void CPhysicsWorld2D::VariableTimeStep()
 *
 *	 ret:	const CPointInt & - focus of the physics world
 ************************************************************************/
-const CPoint<int> & CPhysicsWorld2D::GetFocus() const
+const CPoint<int> & CPhysicsWorld2D::getFocus() const
 {
     return m_focus;
-
-}   // GetFocus
+}
 
 
 /************************************************************************
 *    desc:  Set the fps to run the simulation at
 ************************************************************************/
-void CPhysicsWorld2D::SetFPS( float fps )
+void CPhysicsWorld2D::setFPS( float fps )
 {
     // Make sure we don't have a negative or zero fps
     if( fps > 1.f )
@@ -225,45 +217,40 @@ void CPhysicsWorld2D::SetFPS( float fps )
         // Set the timer so that we'll begin a step next time we call Update
         m_timer = m_stepTime;
     }
-
-}   // SetFPS
+}
 
 
 /************************************************************************
 *    desc:  The the time ratio
 ************************************************************************/
-float CPhysicsWorld2D::GetTimeRatio() const
+float CPhysicsWorld2D::getTimeRatio() const
 {
     return m_timeRatio;
-
-}   // GetTimeRatio
+}
 
 
 /************************************************************************
 *    desc:  Set the activity of the physics world
 ************************************************************************/
-void CPhysicsWorld2D::SetActive( bool value )
+void CPhysicsWorld2D::setActive( bool value )
 {
     m_active = value;
-
-}   // SetActive
+}
 
 
 /************************************************************************
 *    desc:  Is the physics world active
 ************************************************************************/
-bool CPhysicsWorld2D::IsActive() const
+bool CPhysicsWorld2D::isActive() const
 {
     return m_active;
-
-}   // IsActive
+}
 
 
 /************************************************************************
 *    desc:  Get the pixels per meter
 ************************************************************************/
-double CPhysicsWorld2D::GetPixelsPerMeter() const
+double CPhysicsWorld2D::getPixelsPerMeter() const
 {
     return m_pixelsPerMeter;
-
-}   // GetPixelsPerMeter
+}

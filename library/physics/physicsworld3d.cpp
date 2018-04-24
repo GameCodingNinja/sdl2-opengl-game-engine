@@ -34,21 +34,20 @@ m_timeRatio(0)
 {
     // Init with default values
     m_world.setGravity( btVector3(0.f, -10.f, 0.f) );
-    SetFPS(30);
-
-}   // constructor
+    setFPS(30);
+}
 
 /************************************************************************
  *    desc:  destructor
  ************************************************************************/
 CPhysicsWorld3D::~CPhysicsWorld3D()
 {
-}   // destructor
+}
 
 /************************************************************************
  *    desc:  Load the physics world from the passed in XML node
  ************************************************************************/
-void CPhysicsWorld3D::LoadFromNode( const XMLNode & node )
+void CPhysicsWorld3D::loadFromNode( const XMLNode & node )
 {
     // Get the world's settings, if any are set
     XMLNode settingsNode = node.getChildNode( "settings" );
@@ -75,50 +74,45 @@ void CPhysicsWorld3D::LoadFromNode( const XMLNode & node )
     // Get the stepping which determins how accurate the physics are
     XMLNode steppingNode = node.getChildNode( "stepping" );
     if( !steppingNode.isEmpty() )
-        SetFPS( std::atof( steppingNode.getAttribute( "fps" ) ) );
-
-}   // LoadFromXML
+        setFPS( std::atof( steppingNode.getAttribute( "fps" ) ) );
+}
 
 /************************************************************************
  *    desc:  Get the world
  ************************************************************************/
-const btDiscreteDynamicsWorld & CPhysicsWorld3D::GetWorld() const
+const btDiscreteDynamicsWorld & CPhysicsWorld3D::getWorld() const
 {
     return m_world;
-
-}	// GetWorld
+}
 
 /************************************************************************
  *    desc:  Add a rigid body to the world
  ************************************************************************/
-void CPhysicsWorld3D::AddRigidBody( btRigidBody * pBody )
+void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody )
 {
     m_world.addRigidBody( pBody );
-
-}   // AddRigidBody
+}
 
 /************************************************************************
  *    desc:  Add collision filtering when adding a rigid body
  ************************************************************************/
-void CPhysicsWorld3D::AddRigidBody( btRigidBody * pBody, short filterGroup, short mask )
+void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody, short filterGroup, short mask )
 {
     m_world.addRigidBody( pBody, filterGroup, mask );
-
-}   // AddRigidBody
+}
 
 /************************************************************************
  *    desc:  Remove a rigid body to the world
  ************************************************************************/
-void CPhysicsWorld3D::RemoveRigidBody( btRigidBody * pBody )
+void CPhysicsWorld3D::removeRigidBody( btRigidBody * pBody )
 {
     m_world.removeRigidBody( pBody );
-
-}   // AddRigidBody
+}
 
 /************************************************************************
  *    desc:  Perform fixed time step physics simulation
  ************************************************************************/
-void CPhysicsWorld3D::FixedTimeStep()
+void CPhysicsWorld3D::fixedTimeStep()
 {
     if( m_active )
     {
@@ -135,26 +129,24 @@ void CPhysicsWorld3D::FixedTimeStep()
 
         m_timeRatio = m_timer / m_stepTime;
     }
-
-}   // FixedTimeStep
+}
 
 /************************************************************************
  *    desc:  Perform variable time step physics simulation
  ************************************************************************/
-void CPhysicsWorld3D::VariableTimeStep()
+void CPhysicsWorld3D::variableTimeStep()
 {
     if( m_active )
     {
         auto elapsedTime = CHighResTimer::Instance().GetElapsedTime() / 1000.f;
         m_world.stepSimulation( elapsedTime, 1, elapsedTime );
     }
-    
-}   // VariableTimeStep
+}
 
 /************************************************************************
  *    desc:  Set the fps to run the simulation at
  ************************************************************************/
-void CPhysicsWorld3D::SetFPS( float fps )
+void CPhysicsWorld3D::setFPS( float fps )
 {
     // Make sure we don't have a negative or zero fps
     if( fps > 0.f )
@@ -166,33 +158,28 @@ void CPhysicsWorld3D::SetFPS( float fps )
         // Set the timer so that we'll begin a step next time we call Update
         m_timer = m_stepTime;
     }
-
-}   // SetFPS
+}
 
 /************************************************************************
  *    desc:  The the time ratio
  ************************************************************************/
-float CPhysicsWorld3D::GetTimeRatio() const
+float CPhysicsWorld3D::getTimeRatio() const
 {
     return m_timeRatio;
-
-}   // GetTimeRatio
+}
 
 /************************************************************************
  *    desc:  Set the activity of the physics world
  ************************************************************************/
-void CPhysicsWorld3D::SetActive( bool value )
+void CPhysicsWorld3D::setActive( bool value )
 {
     m_active = value;
-
-}   // SetActive
+}
 
 /************************************************************************
  *    desc:  Is the physics world active
  ************************************************************************/
-bool CPhysicsWorld3D::IsActive() const
+bool CPhysicsWorld3D::isActive() const
 {
     return m_active;
-
-}   // IsActive
-
+}

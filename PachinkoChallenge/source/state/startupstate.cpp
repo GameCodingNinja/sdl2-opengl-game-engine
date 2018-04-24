@@ -80,7 +80,7 @@ CStartUpState::CStartUpState() :
 ************************************************************************/
 CStartUpState::~CStartUpState()
 {
-    CObjectDataMgr::Instance().FreeGroup2D( "(startup)" );
+    CObjectDataMgr::Instance().freeGroup2D( "(startup)" );
     
 }   // destructor
 
@@ -97,12 +97,12 @@ void CStartUpState::Init()
     CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
     
     // Load the start up animation group
-    CObjectDataMgr::Instance().LoadGroup2D( "(startup)" );
+    CObjectDataMgr::Instance().loadGroup2D( "(startup)" );
     
     // Allocate the sprites
-    m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().GetData2D( "(startup)", "solid_white_bk" ) );
+    m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().getData2D( "(startup)", "solid_white_bk" ) );
     m_SpriteDeque.back().transform();
-    m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().GetData2D( "(startup)", "logo" ) );
+    m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().getData2D( "(startup)", "logo" ) );
     m_SpriteDeque.back().transform();
     
     // Reset the elapsed time before entering game loop
@@ -205,10 +205,7 @@ void CStartUpState::AssetLoad()
     CScriptManager::Instance().LoadGroup("(menu)");
 
     // Load all of the meshes and materials in these groups
-    CObjectDataMgr::Instance().LoadGroup2D("(menu)");
-    
-    // Free the sprite sheet data because it's no longer needed
-    CSpriteSheetMgr::Instance().clear();
+    CObjectDataMgr::Instance().loadGroup2D("(menu)");
     
     // Load the menu group
     CMenuManager::Instance().loadGroup("(menu)");

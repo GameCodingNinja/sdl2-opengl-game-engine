@@ -35,60 +35,60 @@ public:
     ~CObjectVisualData2D();
 
     // Load thes object data from node
-    void LoadFromNode( const XMLNode & objectNode );
+    void loadFromNode( const XMLNode & objectNode );
     
     // Load the image data from file
-    void LoadImage( const std::string & group );
+    void loadImage( const std::string & group );
 
     // Create the object from data
-    void CreateFromData( const std::string & group, CSize<int> & rSize );
+    void createFromData( const std::string & group, CSize<int> & rSize );
 
     // Get the gne type
-    NDefs::EGenerationType GetGenerationType() const;
+    NDefs::EGenerationType getGenerationType() const;
 
     // Get the texture ID
-    uint32_t GetTextureID( uint index = 0 ) const;
+    uint32_t getTextureID( uint index = 0 ) const;
 
     // Get the name of the shader ID
-    const std::string & GetShaderID() const;
+    const std::string & getShaderID() const;
 
     // Get the color
-    const CColor & GetColor() const;
+    const CColor & getColor() const;
 
     // Get the vertex scale
-    const CSize<float> & GetVertexScale() const;
+    const CSize<float> & getVertexScale() const;
 
     // Get the VBO
-    uint32_t GetVBO() const;
+    uint32_t getVBO() const;
 
     // Get the IBO
-    uint32_t GetIBO() const;
+    uint32_t getIBO() const;
 
     // Get the ibo count
-    int GetIBOCount() const;
+    int getIBOCount() const;
 
     // Get the frame count
-    size_t GetFrameCount() const;
+    size_t getFrameCount() const;
 
     // Whether or not the visual tag was specified
-    bool IsActive() const;
+    bool isActive() const;
     
     // Get the sprite sheet
-    const CSpriteSheet & GetSpriteSheet() const;
+    const CSpriteSheet & getSpriteSheet() const;
     
     // Access functions for the default uniform scale
-    float GetDefaultUniformScale() const;
+    float getDefaultUniformScale() const;
 
 private:
     
     // Create the texture from loaded image data
-    void CreateTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize );
+    void createTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize );
     
     // Generate a quad
-    void GenerateQuad( const std::string & group );
+    void generateQuad( const std::string & group );
     
     // Generate a scaled frame
-    void GenerateScaledFrame(
+    void generateScaledFrame(
         const std::string & group,
         const CSize<int> & textureSize,
         const CSize<int> & glyphSize,
@@ -96,7 +96,7 @@ private:
         const CRect<float> & textureOffset );
     
     // Generate a scaled frame with a mesh file
-    void GenerateScaledFrameMeshFile( 
+    void generateScaledFrameMeshFile( 
         const std::string & group,
         const CSize<int> & textureSize,
         const CSize<int> & glyphSize,
@@ -104,11 +104,11 @@ private:
         const CRect<float> & textureOffset );
     
     // Generate a mesh file
-    void GenerateFromMeshFile( 
+    void generateFromMeshFile( 
         const std::string & group, const CSize<int> & textureSize, const CSize<int> & size );
     
     // Load a mesh from XML file
-    void LoadMeshFromXML(
+    void loadMeshFromXML(
         const std::string & group,
         const CSize<int> & textureSize,
         const CSize<int> & size,

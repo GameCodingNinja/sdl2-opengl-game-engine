@@ -62,26 +62,26 @@ public:
     ~CObjectPhysicsData2D();
 
     // Load thes object data from node
-    void LoadFromNode( const XMLNode & objectNode );
+    void loadFromNode( const XMLNode & objectNode );
     
     // Get the name of the physics world
-    const std::string & GetWorld() const;
+    const std::string & getWorld() const;
 
     // Get the body type
-    b2BodyType GetBodyType() const;
+    b2BodyType getBodyType() const;
     
     // Get the damping
-    float GetLinearDamping() const;
-    float GetAngularDamping() const;
+    float getLinearDamping() const;
+    float getAngularDamping() const;
 
     // Is the rotation fixed
-    bool IsRotationFixed() const;
+    bool isRotationFixed() const;
     
     // Get the fixture data
-    const std::vector<CFixture> & GetFixtureVec() const;
+    const std::vector<CFixture> & getFixtureVec() const;
 
     // Specify if physics is active
-    bool IsActive() const;
+    bool isActive() const;
 
 private:
 

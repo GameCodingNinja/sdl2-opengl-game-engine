@@ -106,7 +106,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
         const std::string objectName = stencilMaskNode.getAttribute( "objectName" );
 
         // Allocate the stencil
-        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D( group, objectName ) ) );
+        m_upStencilMaskSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( group, objectName ) ) );
         
         // Load the transform data
         m_upStencilMaskSprite->loadTransFromNode( stencilMaskNode );
@@ -123,7 +123,7 @@ void CReelStripView::Create( const XMLNode & node, const std::string & group )
             // Get the type of object
             const std::string objectName = spriteNode.getAttribute( "objectName" );
             
-            m_spriteDeq.emplace_back( CObjectDataMgr::Instance().GetData2D( group, objectName ) );
+            m_spriteDeq.emplace_back( CObjectDataMgr::Instance().getData2D( group, objectName ) );
             
             // Load the transform data
             m_spriteDeq.back().loadTransFromNode( spriteNode );

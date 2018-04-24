@@ -24,8 +24,8 @@
 ************************************************************************/
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
-        m_background( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "background" ) ),
-        m_title( CObjectDataMgr::Instance().GetData2D( "(title_screen)", "title" ) )
+        m_background( CObjectDataMgr::Instance().getData2D( "(title_screen)", "background" ) ),
+        m_title( CObjectDataMgr::Instance().getData2D( "(title_screen)", "title" ) )
 {
 }   // Constructor
 
@@ -132,13 +132,13 @@ namespace NTitleScreenState
     ****************************************************************************/
     void ObjectDataLoad()
     {
-        CObjectDataMgr::Instance().LoadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
+        CObjectDataMgr::Instance().loadGroup2D( "(title_screen)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
     
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
-        CObjectDataMgr::Instance().CreateFromData2D( "(title_screen)" );
+        CObjectDataMgr::Instance().createFromData2D( "(title_screen)" );
     }
     
     void Load()
@@ -158,7 +158,7 @@ namespace NTitleScreenState
     ****************************************************************************/
     void CriticalUnload()
     {
-        CObjectDataMgr::Instance().FreeGroup2D( "(title_screen)" );
+        CObjectDataMgr::Instance().freeGroup2D( "(title_screen)" );
     }
     
     void Unload()

@@ -29,28 +29,28 @@ public:
     ~CObjectData3D();
 
     // Load the object data from the passed in node
-    void LoadFromNode( const XMLNode & node, const std::string & group, const std::string & name );
+    void loadFromNode( const XMLNode & node, const std::string & group, const std::string & name );
 
     // Create the objects from data
-    void CreateFromData( const std::string & group );
+    void createFromData( const std::string & group );
 
     // Access functions for the visual data
-    const CObjectVisualData3D & GetVisualData() const;
+    const CObjectVisualData3D & getVisualData() const;
 
     // Access functions for the physics data
-    const CObjectPhysicsData3D & GetPhysicsData() const;
+    const CObjectPhysicsData3D & getPhysicsData() const;
 
     // Access functions for the data name
-    const std::string & GetName() const;
+    const std::string & getName() const;
 
     // Access functions for the data group
-    const std::string & GetGroup() const;
+    const std::string & getGroup() const;
 
     // Access functions for the radius
-    float GetRadius() const;
+    float getRadius() const;
 
     // Access functions for the radius squared
-    float GetRadiusSquared() const;
+    float getRadiusSquared() const;
 
 private:
 

@@ -100,8 +100,8 @@ void CGame::Init()
     if( NBDefs::IsDebugMode() )
     {
         // Debug output - Object data list should be loaded at this point
-        CObjectDataMgr::Instance().LoadGroup2D( "(debug)" );
-        upDebugDisplay.reset( new CSprite2D( CObjectDataMgr::Instance().GetData2D("(debug)", "debugString_font") ) );
+        CObjectDataMgr::Instance().loadGroup2D( "(debug)" );
+        upDebugDisplay.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D("(debug)", "debugString_font") ) );
         const CSize<float> & rSize = CSettings::Instance().GetDefaultSizeHalf();
         CFontMgr::Instance().loadFromXML( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->setPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
