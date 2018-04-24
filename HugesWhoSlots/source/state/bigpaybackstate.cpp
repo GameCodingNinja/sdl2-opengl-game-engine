@@ -120,7 +120,7 @@ void CBigPayBackState::Init()
     CXMLPreloader::Instance().Clear();
     
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( m_stateGroup, "Screen_FadeIn" );
+    m_scriptComponent.prepare( m_stateGroup, "Screen_FadeIn" );
     
     AllowMusic( CGameSave::Instance().GetPlaySpinMusic() );
     AllowStopSounds( CGameSave::Instance().GetPlayStopSounds() );
@@ -178,7 +178,7 @@ void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN )
         {
-            m_scriptComponent.Prepare( m_stateGroup, "Screen_FadeOut" );
+            m_scriptComponent.prepare( m_stateGroup, "Screen_FadeOut" );
             m_baseGameMusic.FastFadeDown();
         }
     }
@@ -208,9 +208,9 @@ void CBigPayBackState::Update()
 {
     CCommonState::Update();
     
-    CScriptManager::Instance().Update();
+    CScriptManager::Instance().update();
     
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
     
     m_baseGameMusic.Update();
     
@@ -279,7 +279,7 @@ namespace NBigPayBack
         CSoundMgr::Instance().loadGroup("(big_pay_back)");
         
         // Load state specific AngelScript functions
-        CScriptManager::Instance().LoadGroup("(big_pay_back)");
+        CScriptManager::Instance().loadGroup("(big_pay_back)");
         
         // Load the slot group stuff
         CSymbolSetViewMgr::Instance().LoadGroup( "(big_pay_back)" );
@@ -329,7 +329,7 @@ namespace NBigPayBack
         CSlotMathMgr::Instance().Clear();
         
         // Unload state specific AngelScript functions
-        CScriptManager::Instance().FreeGroup("(big_pay_back)");
+        CScriptManager::Instance().freeGroup("(big_pay_back)");
         
         // Unload sound resources for the game
         CSoundMgr::Instance().freeGroup("(big_pay_back)");

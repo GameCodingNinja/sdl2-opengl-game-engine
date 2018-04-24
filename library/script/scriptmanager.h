@@ -39,45 +39,45 @@ public:
     }
 
     // Get the pointer to the script engine
-    asIScriptEngine * GetEnginePtr();
+    asIScriptEngine * getEnginePtr();
 
     // Load all of the scripts of a specific group
-    void LoadGroup( const std::string & group );
+    void loadGroup( const std::string & group );
 
     // Free all of the scripts of a specific data group
-    void FreeGroup( const std::string & group );
+    void freeGroup( const std::string & group );
 
     // Get the script engine contex from a managed pool
     // NOTE: The receiver of this pointer is the owner if it's still 
     //       holding on to it when the game terminates
-    asIScriptContext * GetContext();
+    asIScriptContext * getContext();
     
     // Update the active scripts
-    void Update();
-    void Update( std::vector<asIScriptContext *> & pContextVec );
+    void update();
+    void update( std::vector<asIScriptContext *> & pContextVec );
 
     // Add the script context back to the managed pool
-    void RecycleContext( asIScriptContext * pContext );
+    void recycleContext( asIScriptContext * pContext );
 
     // Get pointer to function
-    asIScriptFunction * GetPtrToFunc( const std::string & group, const std::string & name );
+    asIScriptFunction * getPtrToFunc( const std::string & group, const std::string & name );
     
     // Prepare the script function to run
-    void Prepare(
+    void prepare(
         const std::string & group,
         const std::string & funcName,
         std::vector<asIScriptContext *> & pContextVec,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>() );
     
-    void Prepare(
+    void prepare(
         const std::string & group,
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>() );
     
     // Prepare the spawn script function to run
-    void PrepareSpawn( const std::string & funcName );
-    void PrepareSpawnVoid( const std::string & funcName, void * pVoid );
-    void PrepareLocalSpawnVoid( const std::string & funcName, void * pVoid );
+    void prepareSpawn( const std::string & funcName );
+    void prepareSpawnVoid( const std::string & funcName, void * pVoid );
+    void prepareLocalSpawnVoid( const std::string & funcName, void * pVoid );
 
 private:
 
@@ -88,13 +88,13 @@ private:
     virtual ~CScriptManager();
 
     // Add the script to the module
-    void AddScript( asIScriptModule * pScriptModule, const std::string & filePath );
+    void addScript( asIScriptModule * pScriptModule, const std::string & filePath );
 
     // Build all the scripts added to the module
-    void BuildScript( asIScriptModule * pScriptModule, const std::string & group );
+    void buildScript( asIScriptModule * pScriptModule, const std::string & group );
 
     // Call back to display AngelScript messages
-    void MessageCallback(const asSMessageInfo & msg);
+    void messageCallback(const asSMessageInfo & msg);
 
 private:
 

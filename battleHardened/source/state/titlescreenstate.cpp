@@ -40,7 +40,7 @@ void CTitleScreenState::Init()
     CMenuManager::Instance().activateTree( "title_screen_tree");
     
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
+    m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -60,7 +60,7 @@ void CTitleScreenState::HandleEvent( const SDL_Event & rEvent )
     {
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN ) 
-            m_scriptComponent.Prepare( "(menu)", "Screen_FadeOut" );
+            m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
 
 }   // HandleEvent
@@ -108,7 +108,7 @@ void CTitleScreenState::Update()
 {
     CCommonState::Update();
     
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
 }   // Update
 

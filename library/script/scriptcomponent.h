@@ -33,22 +33,22 @@ public:
     ~CScriptComponent();
     
     // Prepare the script function to run
-    void Prepare(
+    void prepare(
         const std::string & group,
         const std::string & funcName,
         const std::vector<CScriptParam> & paramVec = std::vector<CScriptParam>() );
 
     // Update the script
-    void Update();
+    void update();
 
     // Reset the contexts and recycle
-    void ResetAndRecycle();
+    void resetAndRecycle();
     
     // Stop a function if it is being called and recycle it
-    void StopAndRecycle( const std::string & funcName );
+    void stopAndRecycle( const std::string & funcName );
 
     // Is this component active?
-    bool IsActive();
+    bool isActive();
 
 private:
 

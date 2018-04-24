@@ -148,12 +148,12 @@ bool CSprite2D::prepareFuncId( const std::string & scriptFuncId, bool forceUpdat
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
     {
-        m_scriptComponent.Prepare( m_rObjectData.getGroup(), iter->second, {this});
+        m_scriptComponent.prepare( m_rObjectData.getGroup(), iter->second, {this});
         
         // Allow the script to execute and return it's context to the queue
         // for the scripts that don't animate
         if( forceUpdate )
-            m_scriptComponent.Update();
+            m_scriptComponent.update();
         
         return true;
     }
@@ -166,12 +166,12 @@ void CSprite2D::prepare(
     const std::vector<CScriptParam> & paramVec,
     bool forceUpdate )
 {
-    m_scriptComponent.Prepare( m_rObjectData.getGroup(), funcName, paramVec);
+    m_scriptComponent.prepare( m_rObjectData.getGroup(), funcName, paramVec);
     
     // Allow the script to execute and return it's context to the queue
     // for the scripts that don't animate
     if( forceUpdate )
-        m_scriptComponent.Update();
+        m_scriptComponent.update();
 }
 
 
@@ -199,7 +199,7 @@ void CSprite2D::handleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CSprite2D::update()
 {
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
     
     if( m_upAI )
         m_upAI->update();

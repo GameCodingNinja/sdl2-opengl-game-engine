@@ -103,7 +103,7 @@ void CSprite3D::update()
     if( isVisible() )
         m_physicsComponent.update( this );
 
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
     if( m_upAI )
         m_upAI->update();

@@ -25,7 +25,7 @@ namespace NScriptActionManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void Action_Load( string &in )", asMETHOD(CActionMgr, loadActionFromXML), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
 

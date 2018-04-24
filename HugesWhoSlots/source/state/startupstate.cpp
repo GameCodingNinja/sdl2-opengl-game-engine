@@ -188,7 +188,7 @@ void CStartUpState::AssetLoad()
     CSoundMgr::Instance().loadGroup("(standard)");
     
     // Register AngelScript the script items
-    auto pScriptEngine = CScriptManager::Instance().GetEnginePtr();
+    auto pScriptEngine = CScriptManager::Instance().getEnginePtr();
     RegisterStdString( pScriptEngine );
     RegisterScriptArray( pScriptEngine, false );
     NScriptGlobals::Register();
@@ -202,7 +202,7 @@ void CStartUpState::AssetLoad()
     NScriptShaderManager::Register();
     
     // Load group specific script items
-    CScriptManager::Instance().LoadGroup("(menu)");
+    CScriptManager::Instance().loadGroup("(menu)");
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().loadGroup2D("(menu)");

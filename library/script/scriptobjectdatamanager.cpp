@@ -186,7 +186,7 @@ namespace NScriptObjectDataManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void ObjectData_LoadListTable(string &in)", asFUNCTION(LoadListTable), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void ObjectData_LoadGroup2D(string &in, bool createFromData = true)", asFUNCTION(LoadGroup2D), asCALL_CDECL) );

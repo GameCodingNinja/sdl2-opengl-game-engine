@@ -25,7 +25,7 @@ namespace NScriptActorSprite2D
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "CActorSprite2D", 0, asOBJ_REF|asOBJ_NOCOUNT) );

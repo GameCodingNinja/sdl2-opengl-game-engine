@@ -49,7 +49,7 @@ namespace NScriptSound
     {
         using namespace NScriptGlobals;
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType("CSound", sizeof(CSound), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS | asOBJ_APP_CLASS_CONSTRUCTOR | asOBJ_APP_CLASS_COPY_CONSTRUCTOR | asOBJ_APP_CLASS_DESTRUCTOR ) );

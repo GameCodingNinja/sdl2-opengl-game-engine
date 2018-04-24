@@ -109,7 +109,7 @@ namespace NScriptCamera
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "CCamera", 0, asOBJ_REF|asOBJ_NOCOUNT) );

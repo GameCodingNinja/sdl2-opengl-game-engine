@@ -194,8 +194,8 @@ void CStartUpState::AssetLoad()
     CPhysicsWorldManager2D::Instance().loadListTable( "data/objects/2d/physics/physicsListTable.lst" );
     
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
-    RegisterScriptArray( CScriptManager::Instance().GetEnginePtr(), false );
+    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
+    RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
@@ -207,7 +207,7 @@ void CStartUpState::AssetLoad()
     NScriptShaderManager::Register();
     
     // Load group specific script items
-    CScriptManager::Instance().LoadGroup("(menu)");
+    CScriptManager::Instance().loadGroup("(menu)");
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().loadGroup2D("(menu)");

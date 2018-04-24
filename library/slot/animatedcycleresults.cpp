@@ -55,7 +55,7 @@ void CAnimatedCycleResults::Update()
         auto & rSymbPos = rPay.GetSymbPos();
 
         for( auto & iter : rSymbPos )
-            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().getScriptComponent().Update();
+            rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos())->GetSprite().getScriptComponent().update();
     }
     
 }   // Update
@@ -122,7 +122,7 @@ void CAnimatedCycleResults::StartAnimation()
             for( auto sympIter : iter )
             {
                 sympIter->GetSprite().setAlpha( 0.20f );
-                sympIter->GetSprite().getScriptComponent().ResetAndRecycle();
+                sympIter->GetSprite().getScriptComponent().resetAndRecycle();
                 sympIter->SetDeferredRender( false );
             }
         }
@@ -157,7 +157,7 @@ void CAnimatedCycleResults::StopAnimation()
             for( auto sympIter : iter )
             {
                 sympIter->GetSprite().setDefaultColor();
-                sympIter->GetSprite().getScriptComponent().ResetAndRecycle();
+                sympIter->GetSprite().getScriptComponent().resetAndRecycle();
                 sympIter->SetDeferredRender( false );
             }
         }
@@ -182,7 +182,7 @@ bool CAnimatedCycleResults::IsAnimating()
         for( auto & iter : rSymbPos )
         {
             auto symbol = rCycleResultSymb.at(iter.GetReel()).at(iter.GetPos());
-            if( symbol->GetSprite().getScriptComponent().IsActive() )
+            if( symbol->GetSprite().getScriptComponent().isActive() )
                 return true;
         }
     }

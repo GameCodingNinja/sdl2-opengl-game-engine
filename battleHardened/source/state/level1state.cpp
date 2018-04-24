@@ -48,7 +48,7 @@ void CLevel1State::Init()
     //CCamera::Instance().SetPos( CStageMgr::Instance().GetDefaultCameraPos().GetPos() );
 
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
+    m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Create the actors
     CSpriteStrategyMgr::Instance().Create("(actor)", "enemy_ship");
@@ -80,7 +80,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     {
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN ) 
-            m_scriptComponent.Prepare( "(menu)", "Screen_FadeOut" );
+            m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
 
     // Check for the "change state" message
@@ -138,7 +138,7 @@ void CLevel1State::Update()
 {
     CCommonState::Update();
     
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
     if( !CMenuManager::Instance().isActive() )
     {
@@ -203,7 +203,7 @@ namespace NLevel_1
         CSpriteStrategyMgr::Instance().AddStrategy( "(stage1)", new CLoopStageStrategy );
         
         // Load state specific AngelScript functions
-        CScriptManager::Instance().LoadGroup("(actor)");
+        CScriptManager::Instance().loadGroup("(actor)");
     }
     
     void CriticalInit()

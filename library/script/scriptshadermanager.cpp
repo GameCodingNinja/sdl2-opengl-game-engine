@@ -46,7 +46,7 @@ namespace NScriptShaderManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void Shader_Load(string &in)", asFUNCTION(LoadFromXML), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, CColor color )", asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );

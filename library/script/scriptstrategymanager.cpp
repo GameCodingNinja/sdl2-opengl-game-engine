@@ -201,7 +201,7 @@ namespace NScriptStrategyManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, string &in, int idOffset = 0, int idDir = 1)", asFUNCTIONPR(CreateBasicSpriteStrategy, (const std::string &, const std::string &, int, int), void), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Strategy_CreateBasicSpriteStrategy(string &in, int idOffset = 0, int idDir = 1)", asFUNCTIONPR(CreateBasicSpriteStrategy, (const std::string &, int, int), void), asCALL_CDECL) );

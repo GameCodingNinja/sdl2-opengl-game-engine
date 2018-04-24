@@ -27,59 +27,55 @@
 ************************************************************************/
 CScriptComponent::CScriptComponent()
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CScriptComponent::~CScriptComponent()
 {
     // Release the contextes we are still holding on to
     for( auto iter : m_pContextVec )
         iter->Release();
-
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Prepare the script function to run
 ************************************************************************/
-void CScriptComponent::Prepare(
+void CScriptComponent::prepare(
     const std::string & group,
     const std::string & funcName,
     const std::vector<CScriptParam> & paramVec )
 {
-    CScriptManager::Instance().Prepare( group, funcName, m_pContextVec, paramVec );
-
-}   // Prepare
+    CScriptManager::Instance().prepare( group, funcName, m_pContextVec, paramVec );
+}
 
 
 /************************************************************************
 *    desc:  Update the script
 ************************************************************************/
-void CScriptComponent::Update()
+void CScriptComponent::update()
 {
     if( !m_pContextVec.empty() )
-        CScriptManager::Instance().Update( m_pContextVec );
-
-}   // Update
+        CScriptManager::Instance().update( m_pContextVec );
+}
 
 
 /************************************************************************
 *    desc:  Is this component active?
 ************************************************************************/
-bool CScriptComponent::IsActive()
+bool CScriptComponent::isActive()
 {
     return !m_pContextVec.empty();
-
-}   // IsActive
+}
 
 
 /************************************************************************
 *    desc:  Reset the contexts and recycle
 ************************************************************************/
-void CScriptComponent::ResetAndRecycle()
+void CScriptComponent::resetAndRecycle()
 {
     if( !m_pContextVec.empty() )
     {
@@ -88,25 +84,24 @@ void CScriptComponent::ResetAndRecycle()
             if( iter->GetState() == asEXECUTION_SUSPENDED )
                 iter->Abort();
 
-            CScriptManager::Instance().RecycleContext( iter );
+            CScriptManager::Instance().recycleContext( iter );
         }
 
         m_pContextVec.clear();
     }
-
-}   // ResetAndRecycle
+}
 
 
 /************************************************************************
 *    desc:  Stop a function if it is being called and recycle it
 *           This function assume you're checking for the original calling function
 ************************************************************************/
-void CScriptComponent::StopAndRecycle( const std::string & funcName )
+void CScriptComponent::stopAndRecycle( const std::string & funcName )
 {
     if( !m_pContextVec.empty() )
     {
         // See if the function in question is still running
-        auto iter = std::find_if( m_pContextVec.begin(), m_pContextVec.end(), 
+        auto iter = std::find_if( m_pContextVec.begin(), m_pContextVec.end(),
             [funcName](asIScriptContext * pContex)
             { return (funcName == pContex->GetFunction(pContex->GetCallstackSize()-1)->GetName()); } );
 
@@ -115,10 +110,9 @@ void CScriptComponent::StopAndRecycle( const std::string & funcName )
             if( (*iter)->GetState() == asEXECUTION_SUSPENDED )
                 (*iter)->Abort();
 
-            CScriptManager::Instance().RecycleContext( (*iter) );
+            CScriptManager::Instance().recycleContext( (*iter) );
 
             m_pContextVec.erase( iter );
         }
     }
-    
-}   // StopAndRecycle
+}

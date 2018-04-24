@@ -178,8 +178,8 @@ void CGame::Init()
     CScriptManager::Instance().loadListTable( "source/scriptListTable.lst" );
     
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
-    RegisterScriptArray( CScriptManager::Instance().GetEnginePtr(), false );
+    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
+    RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
@@ -195,8 +195,8 @@ void CGame::Init()
     NScriptCameraManager::Register();
     NScriptActionManager::Register();
 
-    CScriptManager::Instance().LoadGroup("(main)");
-    CScriptManager::Instance().Prepare("(main)", "main");
+    CScriptManager::Instance().loadGroup("(main)");
+    CScriptManager::Instance().prepare("(main)", "main");
     
     CHighResTimer::Instance().CalcElapsedTime();
     
@@ -249,7 +249,7 @@ bool CGame::GameLoop()
     CHighResTimer::Instance().CalcElapsedTime();
     
     // Main script update
-    CScriptManager::Instance().Update();
+    CScriptManager::Instance().update();
     
     if( m_gameRunning )
     {

@@ -25,7 +25,7 @@ namespace NScriptSoundManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
 
         Throw( pEngine->RegisterGlobalFunction("void PlaySound( string &in, string &in, int loopCount = 0 )", asMETHOD(CSoundMgr, play), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
         Throw( pEngine->RegisterGlobalFunction("void PauseSound( string &in, string &in )", asMETHOD(CSoundMgr, pause), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );

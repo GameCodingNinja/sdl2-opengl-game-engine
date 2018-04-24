@@ -395,7 +395,7 @@ void CMenu::activateMenu()
 ************************************************************************/
 void CMenu::update()
 {
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
     if( isVisible() )
     {
@@ -781,7 +781,7 @@ void CMenu::prepare( const std::string & scriptFuncId )
 {
     auto iter = m_scriptFunctionMap.find( scriptFuncId );
     if( iter != m_scriptFunctionMap.end() )
-        m_scriptComponent.Prepare(m_group, iter->second, {this});
+        m_scriptComponent.prepare(m_group, iter->second, {this});
 }
 
 

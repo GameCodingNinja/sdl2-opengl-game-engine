@@ -64,10 +64,10 @@ void CLobbyState::Init()
     CMenuManager::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().GetCredits() );
     
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( m_group, "Screen_FadeIn" );
+    m_scriptComponent.prepare( m_group, "Screen_FadeIn" );
     
     if( CGameSave::Instance().GetPlayLobbyMusic() )
-        m_scriptComponent.Prepare( m_group, "Lobby_PlayMusic" );
+        m_scriptComponent.prepare( m_group, "Lobby_PlayMusic" );
     
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().CalcElapsedTime();
@@ -82,13 +82,13 @@ void CLobbyState::AllowMusic( bool allow )
 {
     if( allow )
     {
-        m_scriptComponent.StopAndRecycle( "Lobby_FastStopMusic" );
-        m_scriptComponent.Prepare( m_group, "Lobby_PlayMusic" );
+        m_scriptComponent.stopAndRecycle( "Lobby_FastStopMusic" );
+        m_scriptComponent.prepare( m_group, "Lobby_PlayMusic" );
     }
     else
     {
-        m_scriptComponent.StopAndRecycle( "Lobby_PlayMusic" );
-        m_scriptComponent.Prepare( m_group, "Lobby_FastStopMusic" );
+        m_scriptComponent.stopAndRecycle( "Lobby_PlayMusic" );
+        m_scriptComponent.prepare( m_group, "Lobby_FastStopMusic" );
     }
     
 }   // AllowMusic
@@ -107,8 +107,8 @@ void CLobbyState::HandleEvent( const SDL_Event & rEvent )
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN )
         {
-            m_scriptComponent.Prepare( m_group, "Screen_FadeOut" );
-            m_scriptComponent.Prepare( m_group, "Lobby_FastStopMusic" );
+            m_scriptComponent.prepare( m_group, "Screen_FadeOut" );
+            m_scriptComponent.prepare( m_group, "Lobby_FastStopMusic" );
         }
     }
 
@@ -131,7 +131,7 @@ void CLobbyState::Update()
 {
     CCommonState::Update();
     
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
 }   // Update
 
@@ -189,7 +189,7 @@ namespace NLobby
         
         CSoundMgr::Instance().loadGroup("(lobby)");
         
-        CScriptManager::Instance().LoadGroup("(lobby)");
+        CScriptManager::Instance().loadGroup("(lobby)");
 
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
@@ -217,7 +217,7 @@ namespace NLobby
     void Unload()
     {
         CMenuManager::Instance().freeGroup("(lobby)");
-        CScriptManager::Instance().FreeGroup("(lobby)");
+        CScriptManager::Instance().freeGroup("(lobby)");
         CSoundMgr::Instance().freeGroup("(lobby)");
 
     }   // Unload

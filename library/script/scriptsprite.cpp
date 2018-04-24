@@ -114,7 +114,7 @@ namespace NScriptSprite
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().GetEnginePtr();
+        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "iSprite", 0, asOBJ_REF|asOBJ_NOCOUNT) );
@@ -165,7 +165,7 @@ namespace NScriptSprite
         Throw( pEngine->RegisterObjectMethod("iSprite", "const CPoint & getScale()",     asFUNCTION(GetScale),   asCALL_CDECL_OBJLAST) );
 
         
-        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, iSprite @)", asMETHOD(CScriptManager, PrepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, iSprite @)", asMETHOD(CScriptManager, PrepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, iSprite @)", asMETHOD(CScriptManager, prepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, iSprite @)", asMETHOD(CScriptManager, prepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
     }
 }

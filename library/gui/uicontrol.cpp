@@ -177,7 +177,7 @@ void CUIControl::loadSpriteFromNode( const XMLNode & node, size_t & fontSpriteCo
 ************************************************************************/
 void CUIControl::update()
 {
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
 
     for( auto & iter : m_spriteDeq )
         iter.update();
@@ -628,7 +628,7 @@ void CUIControl::prepareControlScriptFunction( NUIControl::EControlState control
     auto iter = m_scriptFunction.find( controlState );
 
     if( iter != m_scriptFunction.end() )
-        m_scriptComponent.Prepare(m_group, iter->second);
+        m_scriptComponent.prepare(m_group, iter->second);
 }
 
 
@@ -651,7 +651,7 @@ void CUIControl::reset( bool complete )
 void CUIControl::recycleContext()
 {
     for( auto & iter : m_spriteDeq )
-        iter.getScriptComponent().ResetAndRecycle();
+        iter.getScriptComponent().resetAndRecycle();
 }
 
 

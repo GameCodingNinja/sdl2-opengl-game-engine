@@ -37,13 +37,13 @@ CBaseGameMusic::CBaseGameMusic(
 ****************************************************************************/
 void CBaseGameMusic::Update()
 {
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
     
     // Fade down the music if the player is not spinning
     if( m_allowSpinMusic && m_musicTimer.Expired() )
     {
         m_musicTimer.Disable( true );
-        m_scriptComponent.Prepare( m_group, m_stopMusicFunc );
+        m_scriptComponent.prepare( m_group, m_stopMusicFunc );
     }
     
 }   // Update
@@ -56,8 +56,8 @@ void CBaseGameMusic::StartMusic()
 {
     if( m_allowSpinMusic )
     {
-        m_scriptComponent.ResetAndRecycle();
-        m_scriptComponent.Prepare( m_group, m_startMusicFunc );
+        m_scriptComponent.resetAndRecycle();
+        m_scriptComponent.prepare( m_group, m_startMusicFunc );
     }
     
 }   // StartMusic
@@ -85,8 +85,8 @@ void CBaseGameMusic::FastFadeDown()
 {
     if( m_allowSpinMusic )
     {
-        m_scriptComponent.ResetAndRecycle();
-        m_scriptComponent.Prepare( m_group, m_fastFadeFunc );
+        m_scriptComponent.resetAndRecycle();
+        m_scriptComponent.prepare( m_group, m_fastFadeFunc );
     }
     
 }   // ForceFadeDown

@@ -105,7 +105,7 @@ void CLevel1State::Init()
           {-640,-480,-320,-160,0,160,320,480,640} };
     
     // Prepare the script to fade in the screen
-    m_scriptComponent.Prepare( "(menu)", "Screen_FadeIn" );
+    m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
     
     // Set the initial camera scale
     CCameraMgr::Instance().createOrthographic("game", 5.f, 1000.f, 1.65);
@@ -147,7 +147,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
     {
         // Prepare the script to fade in the screen. The script will send the end message
         if( rEvent.user.code == NMenu::ETC_BEGIN ) 
-            m_scriptComponent.Prepare( "(menu)", "Screen_FadeOut" );
+            m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
     else if( rEvent.type == SDL_MOUSEBUTTONUP)
     {
@@ -197,9 +197,9 @@ void CLevel1State::Update()
 {
     CCommonState::Update();
     
-    m_scriptComponent.Update();
+    m_scriptComponent.update();
     
-    CScriptManager::Instance().Update();
+    CScriptManager::Instance().update();
     
     if( !CMenuManager::Instance().isMenuActive() )
     {
@@ -338,7 +338,7 @@ namespace NLevel1State
         CMenuManager::Instance().loadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
         
         // Load state specific AngelScript functions
-        CScriptManager::Instance().LoadGroup("(level1)");
+        CScriptManager::Instance().loadGroup("(level1)");
         
         CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
         
@@ -377,7 +377,7 @@ namespace NLevel1State
         CSpriteStrategyMgr::Instance().Clear();
         
         // Unload state specific AngelScript functions
-        CScriptManager::Instance().FreeGroup("(level1)");
+        CScriptManager::Instance().freeGroup("(level1)");
         
         // All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
