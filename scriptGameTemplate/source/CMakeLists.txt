@@ -2,8 +2,8 @@
 # Add the game level executable files
 add_executable(
     ${PROJECT_NAME}
-    main/game.cpp
-    main/main.cpp )
+    game/game.cpp
+    game/main.cpp )
 
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^arm")
     # List all the libraries to link against

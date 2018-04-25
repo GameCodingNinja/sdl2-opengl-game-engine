@@ -14,15 +14,15 @@ void Lobby_PlayMusic()
     
     CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
     
-    playLst.SetVolume( MAX_SOUND_VOLUME );
-    playLst.Play();
+    playLst.setVolume( MAX_SOUND_VOLUME );
+    playLst.play();
     
     do
     {
         Hold( 1000 );
         
-        if( !playLst.IsPlaying() )
-            playLst.Play();
+        if( !playLst.isPlaying() )
+            playLst.play();
 
     }
     while( true );
@@ -36,9 +36,9 @@ void Lobby_FastStopMusic()
 {
     CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
     
-    if( playLst.IsPlaying() )
+    if( playLst.isPlaying() )
     {
         VolumeTo( 500.f, 0.f, playLst );
-        playLst.Stop();
+        playLst.stop();
     }
 }

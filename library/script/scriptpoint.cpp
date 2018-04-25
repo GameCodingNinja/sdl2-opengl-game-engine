@@ -102,27 +102,27 @@ namespace NScriptPoint
         Throw( pEngine->RegisterObjectProperty("CPoint", "float z", asOFFSET(CPoint<float>, z)) );
 
         // Class members
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void ClearX()",       asMETHOD(CPoint<float>, clearX), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void ClearY()",       asMETHOD(CPoint<float>, clearY), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void ClearZ()",       asMETHOD(CPoint<float>, clearZ), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void Clear()",        asMETHOD(CPoint<float>, clear), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void Cap( float x )", asMETHOD(CPoint<float>, capFloat), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "bool IsEmpty()",      asMETHOD(CPoint<float>, isEmpty), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "bool IsXEmpty()",     asMETHOD(CPoint<float>, isXEmpty), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "bool IsYEmpty()",     asMETHOD(CPoint<float>, isYEmpty), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "bool IsZEmpty()",     asMETHOD(CPoint<float>, isZEmpty), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void Invert()",       asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void InvertX()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void InvertY()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void InvertZ()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "CPoint GetInvert()",  asMETHOD(CPoint<float>, getInvert), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void Normalize()",    asMETHOD(CPoint<float>, normalize), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "void Normalize2D()",  asMETHOD(CPoint<float>, normalize2D), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void clearX()",       asMETHOD(CPoint<float>, clearX), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void clearY()",       asMETHOD(CPoint<float>, clearY), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void clearZ()",       asMETHOD(CPoint<float>, clearZ), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void clear()",        asMETHOD(CPoint<float>, clear), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void cap( float x )", asMETHOD(CPoint<float>, capFloat), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "bool isEmpty()",      asMETHOD(CPoint<float>, isEmpty), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "bool isXEmpty()",     asMETHOD(CPoint<float>, isXEmpty), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "bool isYEmpty()",     asMETHOD(CPoint<float>, isYEmpty), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "bool isZEmpty()",     asMETHOD(CPoint<float>, isZEmpty), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void invert()",       asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void invertX()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void invertY()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void invertZ()",      asMETHOD(CPoint<float>, invert), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "CPoint getInvert()",  asMETHOD(CPoint<float>, getInvert), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void normalize()",    asMETHOD(CPoint<float>, normalize), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "void normalize2D()",  asMETHOD(CPoint<float>, normalize2D), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CPoint", "bool IsEquilEnough( const CPoint & in, float val )", asMETHOD(CPoint<float>, isEquilEnoughFloat), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "bool isEquilEnough( const CPoint & in, float val )", asMETHOD(CPoint<float>, isEquilEnoughFloat), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CPoint", "float GetDotProduct( const CPoint & in )",    asMETHOD(CPoint<float>, getDotProductFloat), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "float GetDotProduct2D( const CPoint & in )",  asMETHOD(CPoint<float>, getDotProduct2DFloat), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CPoint", "CPoint GetCrossProduct( const CPoint & in )", asMETHOD(CPoint<float>, getCrossProduct), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "float getDotProduct( const CPoint & in )",    asMETHOD(CPoint<float>, getDotProductFloat), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "float getDotProduct2D( const CPoint & in )",  asMETHOD(CPoint<float>, getDotProduct2DFloat), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CPoint", "CPoint getCrossProduct( const CPoint & in )", asMETHOD(CPoint<float>, getCrossProduct), asCALL_THISCALL) );
     }
 }

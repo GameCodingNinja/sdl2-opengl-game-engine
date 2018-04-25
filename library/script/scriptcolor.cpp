@@ -97,8 +97,8 @@ namespace NScriptColor
         Throw( pEngine->RegisterObjectProperty("CColor", "float a", asOFFSET(CColor, a)) );
 
         // Class members
-        Throw( pEngine->RegisterObjectMethod("CColor", "void Set( float r, float g, float b, float a )",       asMETHOD(CColor, set), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CColor", "void TransformHSV( float hue, float sat, float val )", asMETHOD(CColor, transformHSV), asCALL_THISCALL) );
-	Throw( pEngine->RegisterObjectMethod("CColor", "void Convert()", asMETHOD( CColor, convert ), asCALL_THISCALL ) );
+        Throw( pEngine->RegisterObjectMethod("CColor", "void set( float r, float g, float b, float a )",       asMETHOD(CColor, set), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CColor", "void transformHSV( float hue, float sat, float val )", asMETHOD(CColor, transformHSV), asCALL_THISCALL) );
+	Throw( pEngine->RegisterObjectMethod("CColor", "void convert()", asMETHOD( CColor, convert ), asCALL_THISCALL ) );
     }
 }

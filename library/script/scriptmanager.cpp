@@ -281,25 +281,25 @@ void CScriptManager::prepare(
     {
         int returnVal(0);
 
-        if( paramVec[i].GetType() == CScriptParam::EPT_BOOL )
+        if( paramVec[i].getType() == CScriptParam::EPT_BOOL )
         {
-            returnVal = pContext->SetArgByte(i, paramVec[i].Get<bool>());
+            returnVal = pContext->SetArgByte(i, paramVec[i].get<bool>());
         }
-        else if( paramVec[i].GetType() == CScriptParam::EPT_INT )
+        else if( paramVec[i].getType() == CScriptParam::EPT_INT )
         {
-            returnVal = pContext->SetArgDWord(i, paramVec[i].Get<int>());
+            returnVal = pContext->SetArgDWord(i, paramVec[i].get<int>());
         }
-        else if( paramVec[i].GetType() == CScriptParam::EPT_UINT )
+        else if( paramVec[i].getType() == CScriptParam::EPT_UINT )
         {
-            returnVal = pContext->SetArgDWord(i, paramVec[i].Get<uint>());
+            returnVal = pContext->SetArgDWord(i, paramVec[i].get<uint>());
         }
-        else if( paramVec[i].GetType() == CScriptParam::EPT_FLOAT )
+        else if( paramVec[i].getType() == CScriptParam::EPT_FLOAT )
         {
-            returnVal = pContext->SetArgFloat(i, paramVec[i].Get<float>());
+            returnVal = pContext->SetArgFloat(i, paramVec[i].get<float>());
         }
-        else if( paramVec[i].GetType() == CScriptParam::EPT_REG_OBJ )
+        else if( paramVec[i].getType() == CScriptParam::EPT_REG_OBJ )
         {
-            returnVal = pContext->SetArgObject(i, paramVec[i].Get<void *>());
+            returnVal = pContext->SetArgObject(i, paramVec[i].get<void *>());
         }
 
         if( returnVal < 0 )

@@ -60,17 +60,17 @@ private:
 public:
     
     template<typename T>
-    T Get() const;
+    T get() const;
     
-    EParamType GetType() const
+    EParamType getType() const
     { return m_type; }
 };
 
-template<> inline bool   CScriptParam::Get() const { return m_paramVal.boolVal; }
-template<> inline int    CScriptParam::Get() const { return m_paramVal.intVal; }
-template<> inline uint   CScriptParam::Get() const { return m_paramVal.uintVal; }
-template<> inline float  CScriptParam::Get() const { return m_paramVal.floatVal; }
-template<> inline void * CScriptParam::Get() const { return m_paramVal.pRegObjVal; }
+template<> inline bool   CScriptParam::get() const { return m_paramVal.boolVal; }
+template<> inline int    CScriptParam::get() const { return m_paramVal.intVal; }
+template<> inline uint   CScriptParam::get() const { return m_paramVal.uintVal; }
+template<> inline float  CScriptParam::get() const { return m_paramVal.floatVal; }
+template<> inline void * CScriptParam::get() const { return m_paramVal.pRegObjVal; }
 
 #endif  // __script_defs_h__
 

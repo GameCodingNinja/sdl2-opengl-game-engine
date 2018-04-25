@@ -28,7 +28,7 @@ void Control_OnSelect()
 ************************************************************************/
 void Menu_TransIn( CMenu & menu )
 {
-    menu.SetVisible( true );
+    menu.setVisible( true );
     
     AlphaTo( 250, 1.f, menu );
     
@@ -43,7 +43,7 @@ void Menu_TransOut( CMenu & menu )
 {
     AlphaTo( 250, 0.f, menu );
     
-    menu.SetVisible( false );
+    menu.setVisible( false );
     
     DispatchEvent( EGE_MENU_TRANS_OUT, ETC_END );
 }
@@ -55,7 +55,7 @@ void Menu_TransOut( CMenu & menu )
 void Control_Disabled( CSprite2D & sprite )
 {
     CColor color = sprite.GetDefaultColor();
-    color.TransformHSV( 0, 0, 1 );
+    color.transformHSV( 0, 0, 1 );
 
     sprite.SetColor( color );
 }
@@ -87,10 +87,10 @@ void Ctrl_Active( CSprite2D & sprite, float hiHSV, float lowHSV )
     sprite.SetVisible( true );
 
     CColor hiColor = sprite.GetDefaultColor();
-    hiColor.TransformHSV( 0, 1, hiHSV );
+    hiColor.transformHSV( 0, 1, hiHSV );
 
     CColor lowColor = sprite.GetDefaultColor();
-    lowColor.TransformHSV( 0, 1, lowHSV );
+    lowColor.transformHSV( 0, 1, lowHSV );
 
     while(true)
     {
@@ -118,10 +118,10 @@ void Ctrl_Selected( CSprite2D & sprite, float hiHSV, float lowHSV )
     sprite.SetVisible( true );
 
     CColor hiColor = sprite.GetDefaultColor();
-    hiColor.TransformHSV( 0, 1, hiHSV );
+    hiColor.transformHSV( 0, 1, hiHSV );
 
     CColor lowColor = sprite.GetDefaultColor();
-    lowColor.TransformHSV( 0, 1, lowHSV );
+    lowColor.transformHSV( 0, 1, lowHSV );
 
     sprite.SetColor( hiColor );
 
@@ -203,8 +203,8 @@ void Ctrl_Fast_Selected( CSprite2D & sprite, float hiHSV )
 {
     sprite.SetVisible( true );
 
-    CColor hiColor = sprite.GetDefaultColor();
-    hiColor.TransformHSV( 0, 1, hiHSV );
+    CColor hiColor = sprite.getDefaultColor();
+    hiColor.transformHSV( 0, 1, hiHSV );
 
     sprite.SetColor( hiColor );
 }

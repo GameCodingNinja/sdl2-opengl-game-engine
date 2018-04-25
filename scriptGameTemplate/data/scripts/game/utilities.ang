@@ -103,7 +103,7 @@ void AlphaTo( float time, float final, CMenu & menu )
     if( final > 1.5 )
         final *= 0.00390625f;
 
-    float current = menu.GetAlpha();
+    float current = menu.getAlpha();
     float inc = (final - current) / time;
 
     do
@@ -112,12 +112,12 @@ void AlphaTo( float time, float final, CMenu & menu )
 
         if( time < 0 )
         {
-            menu.SetAlpha( final );
+            menu.setAlpha( final );
         }
         else
         {
             current += inc * GetElapsedTime();
-            menu.SetAlpha( current );
+            menu.setAlpha( current );
         }
 
         Suspend();
@@ -132,7 +132,7 @@ void AlphaTo( float time, float final, CMenu & menu )
 ************************************************************************/
 void VolumeTo( float time, int final, CSound &in sound )
 {
-    float current = sound.GetVolume();
+    float current = sound.getVolume();
     float inc = (float(final) - current) / time;
     int lastVolume = int(current);
 
@@ -142,7 +142,7 @@ void VolumeTo( float time, int final, CSound &in sound )
 
         if( time < 0 )
         {
-            sound.SetVolume( int(final) );
+            sound.setVolume( int(final) );
         }
         else
         {
@@ -150,7 +150,7 @@ void VolumeTo( float time, int final, CSound &in sound )
         
             if( lastVolume != int(current) )
             {
-                sound.SetVolume( int(current) );
+                sound.setVolume( int(current) );
                 lastVolume = int(current);
             }
         }

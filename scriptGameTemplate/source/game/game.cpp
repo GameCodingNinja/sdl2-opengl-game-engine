@@ -168,7 +168,7 @@ void CGame::init()
     pollEvents();
 
     // Load the script list table
-    CScriptManager::Instance().loadListTable( "source/scriptListTable.lst" );
+    CScriptManager::Instance().loadListTable( "data/scripts/scriptListTable.lst" );
 
     // Register the script items
     RegisterStdString( CScriptManager::Instance().getEnginePtr() );

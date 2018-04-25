@@ -62,14 +62,14 @@ namespace NScriptSound
         // assignment operator
         Throw( pEngine->RegisterObjectMethod("CSound", "CSound & opAssign(const CSound & in)", asMETHODPR(CSound, operator =, (const CSound &), CSound &), asCALL_THISCALL) );
 
-        Throw( pEngine->RegisterObjectMethod("CSound", "void Play( int channel = -1, int loopCount = 0 )", asMETHOD(CSound, play),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "void Stop()",                                      asMETHOD(CSound, stop),      asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "void Pause()",                                     asMETHOD(CSound, pause),     asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "void Resume()",                                    asMETHOD(CSound, resume),    asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "void SetVolume( int volume )",                     asMETHOD(CSound, setVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "int GetVolume()",                                  asMETHOD(CSound, getVolume), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "bool IsPlaying()",                                 asMETHOD(CSound, isPlaying), asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CSound", "bool IsPaused()",                                  asMETHOD(CSound, isPaused),  asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "void play( int channel = -1, int loopCount = 0 )", asMETHOD(CSound, play),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "void stop()",                                      asMETHOD(CSound, stop),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "void pause()",                                     asMETHOD(CSound, pause),     asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "void resume()",                                    asMETHOD(CSound, resume),    asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "void setVolume( int volume )",                     asMETHOD(CSound, setVolume), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "int getVolume()",                                  asMETHOD(CSound, getVolume), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "bool isPlaying()",                                 asMETHOD(CSound, isPlaying), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSound", "bool isPaused()",                                  asMETHOD(CSound, isPaused),  asCALL_THISCALL) );
 
     }
 }
