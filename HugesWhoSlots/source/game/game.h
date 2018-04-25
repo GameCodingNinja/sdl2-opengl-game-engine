@@ -88,7 +88,6 @@ protected:
     
     // Debug output
     std::unique_ptr<CSprite2D> upDebugDisplay;
-
 };
 
 int FilterEvents( void * userdata, SDL_Event * pEvent );

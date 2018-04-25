@@ -34,27 +34,26 @@ public:
     }
     
     // Load the game data
-    void Load();
+    void load();
     
     // Save/Save/Close the game data
-    void OpenSaveClose();
-    
+    void openSaveClose();
     
     // Set/Get play lobby music
-    void SetPlayLobbyMusic( bool value );
-    bool GetPlayLobbyMusic() const;
+    void setPlayLobbyMusic( bool value );
+    bool getPlayLobbyMusic() const;
     
     // Set/Get play stop sounds
-    void SetPlayStopSounds( bool value );
-    bool GetPlayStopSounds() const;
+    void setPlayStopSounds( bool value );
+    bool getPlayStopSounds() const;
     
     // Set/Get play spin music
-    void SetPlaySpinMusic( bool value );
-    bool GetPlaySpinMusic() const;
+    void setPlaySpinMusic( bool value );
+    bool getPlaySpinMusic() const;
     
     // Set/Get total credits
-    void SetTotalCredits( uint value );
-    uint GetTotalCredits() const;
+    void setTotalCredits( uint value );
+    uint getTotalCredits() const;
     
 private:
 
@@ -65,13 +64,13 @@ private:
     ~CGameSave();
     
     // Open the game data
-    bool Open();
+    bool open();
     
     // Save the game data
-    void Save();
+    void save();
     
     // Close the game data file
-    void Close();
+    void close();
     
 private:
 
@@ -80,9 +79,6 @@ private:
     
     // Save Data
     SSaveData m_saveData;
-
 };
 
 #endif  // __game_save_h__
-
-

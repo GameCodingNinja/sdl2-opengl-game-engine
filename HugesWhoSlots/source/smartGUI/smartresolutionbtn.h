@@ -46,7 +46,6 @@ private:
 
     // Resolution index
     int m_resIndex;
-
 };
 
 #endif  // __smart_resolution_btn_h__

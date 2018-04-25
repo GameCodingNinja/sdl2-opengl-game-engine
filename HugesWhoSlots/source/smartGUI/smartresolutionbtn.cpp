@@ -28,7 +28,7 @@ CSmartResolutionBtn::CSmartResolutionBtn( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl ),
     m_resIndex(-1)
 {
-}   // constructor
+}
 
 
 /***************************************************************************
@@ -50,9 +50,9 @@ void CSmartResolutionBtn::create()
 
         if( SDL_GetDisplayMode(0, i, &mode) == 0 )
         {
-            //NGenFunc::PostDebugMsg( 
+            //NGenFunc::PostDebugMsg(
             //    boost::str( boost::format("%d, %d - %d x %d") % SDL_BITSPERPIXEL(mode.format) % mode.refresh_rate % mode.w % mode.h ) );
-                    
+
             CSize<int> size(mode.w, mode.h);
 
             // Keep out any duplicates
@@ -76,8 +76,7 @@ void CSmartResolutionBtn::create()
 
         ++counter;
     }
-
-}   // Create
+}
 
 
 /***************************************************************************
@@ -87,8 +86,7 @@ void CSmartResolutionBtn::handleEvent( const SDL_Event & rEvent )
 {
     if( (m_resIndex > -1) && (rEvent.type == NMenu::EGE_MENU_TRANS_IN) )
         (*dynamic_cast<CUIButtonList *>(m_pUIControl)).updateDisplay( m_resIndex );
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
@@ -97,8 +95,7 @@ void CSmartResolutionBtn::handleEvent( const SDL_Event & rEvent )
 void CSmartResolutionBtn::execute()
 {
     enableDisableApplyBtn();
-
-}   // Execute
+}
 
 
 /***************************************************************************
@@ -111,8 +108,7 @@ void CSmartResolutionBtn::setResolutionChange()
     CSettings::Instance().setSize( m_resVec[m_resIndex] );
     CSettings::Instance().calcRatio();
     CCameraMgr::Instance().createProjMatrix();
-
-}   // SetResolutionChange
+}
 
 
 /***************************************************************************
@@ -124,6 +120,4 @@ bool CSmartResolutionBtn::wasResolutionChanged()
         return true;
 
     return false;
-
-}   // WasResolutionChanged
-
+}

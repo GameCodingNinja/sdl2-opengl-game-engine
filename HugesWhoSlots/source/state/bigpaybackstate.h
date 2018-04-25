@@ -37,32 +37,32 @@ public:
     virtual ~CBigPayBackState(){};
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Handle any misc processing before the real work is started
-    void MiscProcess() override;
+    void miscProcess() override;
     
     // Update objects that require them
-    void Update() override;
+    void update() override;
 
     // Transform the game objects
-    void Transform() override;
+    void transform() override;
 
     // 2D/3D Render of game content
-    void PreRender() override;
+    void preRender() override;
     
     // Do we allow lobby music?
-    void AllowMusic( bool allow ) override;
+    void allowMusic( bool allow ) override;
     
     // Do we allow the stop sounds?
-    void AllowStopSounds( bool allow ) override;
+    void allowStopSounds( bool allow ) override;
     
 private:
     
-    void TotalBetCallBack(CUIControl *);
+    void totalBetCallBack(CUIControl *);
     
 private:
     

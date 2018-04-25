@@ -26,19 +26,19 @@ public:
     virtual ~CTitleScreenState(){};
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Update objects that require them
-    void Update() override;
+    void update() override;
 
     // Transform the game objects
-    void Transform() override;
+    void transform() override;
 
     // 2D/3D Render of game content
-    void PreRender() override;
+    void preRender() override;
 
 private:
     

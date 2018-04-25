@@ -24,7 +24,7 @@
 CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************

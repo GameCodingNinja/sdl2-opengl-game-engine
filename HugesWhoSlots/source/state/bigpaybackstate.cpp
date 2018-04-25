@@ -51,23 +51,23 @@ CBigPayBackState::CBigPayBackState( const std::string & group ) :
 	m_pig( CObjectDataMgr::Instance().getData2D( group, "Payback Pig" ) ),
         m_baseGameMusic( group, "SlotGame_StartSpinMusic", "SlotGame_StopSpinMusic", "SlotGame_FastStopSpinMusic", 7000 )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CBigPayBackState::Init()
+void CBigPayBackState::init()
 {
-    CCommonState::Init();
-    
+    CCommonState::init();
+
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().allow();
     CMenuManager::Instance().activateTree( "menu_tree");
     CMenuManager::Instance().activateTree( "confirmation_tree");
     CMenuManager::Instance().activateTree( "buy_tree");
     CMenuManager::Instance().activateTree( "base_game_tree");
-    
+
     // Hook the Play button to the reel group
     CUIButton & rPlayBtn = CMenuManager::Instance().getMenuControl<CUIButton>( "base_game_menu", "play_btn" );
     rPlayBtn.connect_executionAction( boost::bind(&CSlotGame::playGame, &m_slotGame, _1) );
@@ -76,12 +76,12 @@ void CBigPayBackState::Init()
     auto & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
     auto & rTotalBetDecBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_dec_btn") );
     auto & rTotalBetIncBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_inc_btn") );
-    rTotalBetDecBtn.connect_executionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
-    rTotalBetIncBtn.connect_executionAction( boost::bind(&CBigPayBackState::TotalBetCallBack, this, _1) );
-    
+    rTotalBetDecBtn.connect_executionAction( boost::bind(&CBigPayBackState::totalBetCallBack, this, _1) );
+    rTotalBetIncBtn.connect_executionAction( boost::bind(&CBigPayBackState::totalBetCallBack, this, _1) );
+
     // Create a play result
     auto & rPlayResult = m_slotGame.createPlayResult();
-    
+
     // Create the slot group
     m_slotGame.addSlotGroup(
         NSlotGroupFactory::Create(
@@ -94,7 +94,7 @@ void CBigPayBackState::Init()
             CSymbolSetViewMgr::Instance().get( m_stateGroup, "base_game" ),
             rPlayResult,
             std::move(std::unique_ptr<iCycleResults>(new CAnimatedCycleResults( &rPlayResult ))) ) );
-    
+
     // Init the front panel
     std::vector<CUIControl *> btnVec = {
         &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "home_btn" ),
@@ -102,75 +102,71 @@ void CBigPayBackState::Init()
         &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
         &rTotalBetMeter };
     m_frontPanel.setButtons( &rPlayBtn, btnVec );
-    
+
     m_frontPanel.setMeters(
         &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
         &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
-    
+
     // Add slot game component
     m_slotGame.setFrontPanel( &m_frontPanel );
     m_slotGame.setGameMusic( &m_baseGameMusic );
-    
+
     m_pig.setPos( CPoint<float>(-875,-200,0) );
-    
+
     // Init the credit meter
     CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits()  );
-    
+
     // Clear any preloaded XML files
     CXMLPreloader::Instance().clear();
-    
+
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( m_stateGroup, "Screen_FadeIn" );
-    
-    AllowMusic( CGameSave::Instance().GetPlaySpinMusic() );
-    AllowStopSounds( CGameSave::Instance().GetPlayStopSounds() );
-    
+
+    allowMusic( CGameSave::Instance().getPlaySpinMusic() );
+    allowStopSounds( CGameSave::Instance().getPlayStopSounds() );
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Do we play the spin music
 ************************************************************************/
-void CBigPayBackState::AllowMusic( bool allow )
+void CBigPayBackState::allowMusic( bool allow )
 {
     if( !allow )
         m_baseGameMusic.fastFadeDown();
-    
+
     m_baseGameMusic.allowMusic( allow );
-    
-}   // AllowSpinMusic
+}
 
 
 /************************************************************************
 *    desc:  Do we allow the stop sounds?
 ************************************************************************/
-void CBigPayBackState::AllowStopSounds( bool allow )
+void CBigPayBackState::allowStopSounds( bool allow )
 {
     m_slotGame.allowStopSounds( allow );
-    
-}   // AllowStopSounds
+}
 
 
 /***************************************************************************
 *    desc:  Call back for when the total be is changed
 ****************************************************************************/
-void CBigPayBackState::TotalBetCallBack(CUIControl *)
+void CBigPayBackState::totalBetCallBack(CUIControl *)
 {
     const CUIButtonList & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
     CBetMgr::Instance().setLineBet( rTotalBetMeter.getActiveIndex() + 1 );
-    
-}   // TotalBetCallBack
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
+void CBigPayBackState::handleEvent( const SDL_Event & rEvent )
 {
-    CCommonState::HandleEvent( rEvent );
+    CCommonState::handleEvent( rEvent );
 
     // Check for the "change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
@@ -187,67 +183,62 @@ void CBigPayBackState::HandleEvent( const SDL_Event & rEvent )
         if( m_slotGame.getState() == NSlotDefs::ESLOT_IDLE )
             CSoundMgr::Instance().stopMusic();
     }
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ****************************************************************************/
-void CBigPayBackState::MiscProcess()
+void CBigPayBackState::miscProcess()
 {
     m_slotGame.processGameState();
-    
-}   // MiscProcess
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CBigPayBackState::Update()
+void CBigPayBackState::update()
 {
-    CCommonState::Update();
-    
+    CCommonState::update();
+
     CScriptManager::Instance().update();
-    
+
     m_scriptComponent.update();
-    
+
     m_baseGameMusic.update();
-    
+
     if( !CMenuManager::Instance().isMenuActive() )
         m_slotGame.update();
-
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CBigPayBackState::Transform()
+void CBigPayBackState::transform()
 {
-    CCommonState::Transform();
+    CCommonState::transform();
 
     CMenuManager::Instance().transformInterface();
     m_background.transform();
     m_pig.transform();
     m_slotGame.transform();
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  2D/3D Render of game content
 ****************************************************************************/
-void CBigPayBackState::PreRender()
+void CBigPayBackState::preRender()
 {
     const CMatrix & orthoMatrix = CCameraMgr::Instance().getDefaultProjMatrix();
     m_background.render( orthoMatrix );
     m_slotGame.render( orthoMatrix );
     m_pig.render( orthoMatrix );
-    
-    CCommonState::PreRender();
 
-}   // PreRender
+    CCommonState::preRender();
+}
 
 
 /***************************************************************************
@@ -263,43 +254,42 @@ namespace NBigPayBack
     {
         CObjectDataMgr::Instance().loadGroup2D( "(big_pay_back)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
-    
+
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().createFromData2D( "(big_pay_back)" );
     }
-    
+
     void Load()
     {
         // Load the state specific menu group
         CMenuManager::Instance().loadGroup("(big_pay_back)", CMenuManager::DONT_INIT_GROUP);
-        
+
         // Load sound resources for the game
         CSoundMgr::Instance().loadGroup("(big_pay_back)");
-        
+
         // Load state specific AngelScript functions
         CScriptManager::Instance().loadGroup("(big_pay_back)");
-        
+
         // Load the slot group stuff
         CSymbolSetViewMgr::Instance().loadGroup( "(big_pay_back)" );
         CSlotMathMgr::Instance().loadGroup( "(big_pay_back)" );
         CSlotMathMgr::Instance().loadPaylineSetFromFile( "data/objects/2d/slot/payline_4x5.cfg" );
-        
+
         // Set the line bet and the total number of lines bet
         CBetMgr::Instance().setLineBet(1);
         CBetMgr::Instance().setTotalLines( CSlotMathMgr::Instance().getPaylineSet("40_4x5").getLineData().size() );
-        
+
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
-        
+
         // Preload some needed XML files
         CXMLPreloader::Instance().clear();
         CXMLPreloader::Instance().load( std::get<0>(reelGrpCfg), std::get<1>(reelGrpCfg) );
         CXMLPreloader::Instance().load( std::get<0>(spinProfileCfg), std::get<1>(spinProfileCfg) );
+    }
 
-    }   // Load
-    
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
@@ -315,25 +305,24 @@ namespace NBigPayBack
     {
         CMenuManager::Instance().cleanUpGroup("(big_pay_back)");
         CObjectDataMgr::Instance().freeGroup2D( "(big_pay_back)" );
-        
+
         // Unload the slot group stuff
         CSymbolSetViewMgr::Instance().clear();
     }
-    
+
     void Unload()
     {
         // Unload the state specific menu group
         CMenuManager::Instance().freeGroup("(big_pay_back)");
-        
+
         // Unload the slot group stuff
         CSlotMathMgr::Instance().clear();
-        
+
         // Unload state specific AngelScript functions
         CScriptManager::Instance().freeGroup("(big_pay_back)");
-        
+
         // Unload sound resources for the game
         CSoundMgr::Instance().freeGroup("(big_pay_back)");
+    }
 
-    }   // Unload
-
-}   // NBigPayBack
+}

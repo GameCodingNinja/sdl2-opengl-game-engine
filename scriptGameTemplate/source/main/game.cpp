@@ -64,13 +64,12 @@ CGame::CGame()
       m_clearBufferMask(0)
 {
     if( NBDefs::IsDebugMode() )
-        CStatCounter::Instance().connect( boost::bind(&CGame::StatStringCallBack, this, _1) );
-
-}   // constructor
+        CStatCounter::Instance().connect( boost::bind(&CGame::statStringCallBack, this, _1) );
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CGame::~CGame()
 {
@@ -84,14 +83,13 @@ CGame::~CGame()
 
     // Quit SDL subsystems
     SDL_Quit();
-    
-}   // destructor
+}
 
 
 /***************************************************************************
 *   desc:  Create the game Window
  ****************************************************************************/
-void CGame::Create()
+void CGame::create()
 {
     // Create the window and OpenGL context
     CDevice::Instance().create();
@@ -101,19 +99,18 @@ void CGame::Create()
     m_context = CDevice::Instance().getContext();
 
     // Game start init
-    Init();
-
-}   // Create
+    init();
+}
 
 
 /************************************************************************
 *    desc:  OpenGL Init
 ************************************************************************/
-void CGame::OpenGLInit()
+void CGame::openGLInit()
 {
     // Init the clear color
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
+
     // Init the stencil clear mask based on the bit size of the mask
     // Stencil buffer can only be 1 or 8 bits per pixel
     if( CSettings::Instance().getStencilBufferBitSize() == 1 )
@@ -139,44 +136,40 @@ void CGame::OpenGLInit()
 
     if( CSettings::Instance().getEnableDepthBuffer() )
         m_clearBufferMask |= GL_DEPTH_BUFFER_BIT;
-    
+
     if( CSettings::Instance().getClearStencilBuffer() )
         m_clearBufferMask |= GL_STENCIL_BUFFER_BIT;
-        
+
     if( CSettings::Instance().getEnableDepthBuffer() )
         glEnable( GL_DEPTH_TEST );
-    
+
     // Clear the back buffer and flip it prior to showing the window
     // Keeps us from seeing a flash or flicker of pre init junk
     glClear( GL_COLOR_BUFFER_BIT );
     SDL_GL_SwapWindow( m_pWindow );
-    
+
     // Show the window
     CDevice::Instance().showWindow( true );
-    
+
     // Display a black screen
     glClear( GL_COLOR_BUFFER_BIT );
     SDL_GL_SwapWindow( m_pWindow );
-
-}   // OpenGLInit
+}
 
 
 /************************************************************************
 *    desc:  Init the game
 ************************************************************************/
-void CGame::Init()
+void CGame::init()
 {
-    OpenGLInit();
+    openGLInit();
 
-    // Setup the message filtering
-    //SDL_SetEventFilter(FilterEvents, 0);
-    
     // Handle some events on startup
-    PollEvents();
-    
+    pollEvents();
+
     // Load the script list table
     CScriptManager::Instance().loadListTable( "source/scriptListTable.lst" );
-    
+
     // Register the script items
     RegisterStdString( CScriptManager::Instance().getEnginePtr() );
     RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
@@ -197,33 +190,32 @@ void CGame::Init()
 
     CScriptManager::Instance().loadGroup("(main)");
     CScriptManager::Instance().prepare("(main)", "main");
-    
-    CHighResTimer::Instance().calcElapsedTime();
-    
-    // Let the games begin
-    StartGame();
 
-}   // Init
+    CHighResTimer::Instance().calcElapsedTime();
+
+    // Let the games begin
+    startGame();
+}
 
 
 /***************************************************************************
 *   desc:  Poll for game events
 ****************************************************************************/
-void CGame::PollEvents()
+void CGame::pollEvents()
 {
     // Event handler
     SDL_Event msgEvent;
-    
+
     CActionMgr::Instance().clearQueue();
 
     // Handle events on queue
     while( SDL_PollEvent( &msgEvent ) )
     {
         CActionMgr::Instance().queueEvent( msgEvent );
-        
+
         // let the game handle the event
         // turns true on quit
-        if( HandleEvent( msgEvent ) )
+        if( handleEvent( msgEvent ) )
         {
             // Stop the game
             m_gameRunning = false;
@@ -234,38 +226,38 @@ void CGame::PollEvents()
             break;
         }
     }
-}   // PollEvents
+}
 
 
 /***************************************************************************
 *   desc:  Main game loop
 ****************************************************************************/
-bool CGame::GameLoop()
+bool CGame::gameLoop()
 {
     // Poll for game events
-    PollEvents();
-    
+    pollEvents();
+
     // Get our elapsed time
     CHighResTimer::Instance().calcElapsedTime();
-    
+
     // Main script update
     CScriptManager::Instance().update();
-    
+
     if( m_gameRunning )
     {
         // Clear the buffers
         glClear( m_clearBufferMask );
-        
+
         // Process all game states
         CSpriteStrategyMgr::Instance().miscProcess();
         CSpriteStrategyMgr::Instance().update();
         CSpriteStrategyMgr::Instance().transform();
         CCameraMgr::Instance().transform();
         CSpriteStrategyMgr::Instance().render();
-        
+
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );
-        
+
         // Unbind everything after a round of rendering
         CShaderMgr::Instance().unbind();
         CTextureMgr::Instance().unbind();
@@ -275,28 +267,26 @@ bool CGame::GameLoop()
         if( NBDefs::IsDebugMode() )
             CStatCounter::Instance().incCycle();
     }
-    
+
     return m_gameRunning;
-    
-}   // ScriptGameLoop
+}
 
 
 /************************************************************************
 *    desc:  Callback for the state string
 ************************************************************************/
-void CGame::StatStringCallBack( const std::string & statStr )
+void CGame::statStringCallBack( const std::string & statStr )
 {
     if( !CSettings::Instance().getFullScreen() )
         SDL_SetWindowTitle( m_pWindow, statStr.c_str() );
-
-}   // StatStringCallBack
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-bool CGame::HandleEvent( const SDL_Event & rEvent )
-{  
+bool CGame::handleEvent( const SDL_Event & rEvent )
+{
     if( (rEvent.type == SDL_QUIT) || (rEvent.type == SDL_APP_TERMINATING) )
         return true;
 
@@ -311,47 +301,43 @@ bool CGame::HandleEvent( const SDL_Event & rEvent )
         CDevice::Instance().removeGamepad( rEvent.cdevice.which );
 
     else if( rEvent.type == SDL_APP_LOWMEMORY )
-        DisplayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
-    
+        displayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
+
     // In a traditional game, want the pause menu to display when the game is sent to the background
     else if( (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().isMenuActive() )
         NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );
 
     return false;
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
 *   desc:  Display error massage
 ****************************************************************************/
-void CGame::DisplayErrorMsg( const std::string & title, const std::string & msg )
+void CGame::displayErrorMsg( const std::string & title, const std::string & msg )
 {
     printf("Error: %s, %s", title.c_str(), msg.c_str() );
 
     SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, title.c_str(), msg.c_str(), m_pWindow );
-
-}   // DisplayErrorMsg
+}
 
 
 /***************************************************************************
 *   desc:  Start the game
 ****************************************************************************/
-void CGame::StartGame()
+void CGame::startGame()
 {
     m_gameRunning = true;
-
-}   // StartGame
+}
 
 
 /***************************************************************************
 *   desc:  Stop the game
 ****************************************************************************/
-void CGame::StopGame()
+void CGame::stopGame()
 {
     m_gameRunning = false;
-
-}   // StopGame
+}
 
 
 /***************************************************************************
@@ -359,11 +345,10 @@ void CGame::StopGame()
 *
 *  ret: bool - true or false if game is running
 ****************************************************************************/
-bool CGame::IsGameRunning() const
+bool CGame::isGameRunning() const
 {
     return m_gameRunning;
-
-}   // IsGameRunning
+}
 
 
 /***************************************************************************
@@ -377,7 +362,7 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
     if( pEvent->type == SDL_CONTROLLERAXISMOTION )
     {
         // Analog stick max values -32768 to 32767
-        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() * 
+        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() *
             defs_ANALOG_PERCENTAGE_CONVERTION;
 
         if( ((pEvent->caxis.axis >= SDL_CONTROLLER_AXIS_LEFTX) &&
@@ -389,5 +374,4 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
 
     // Return 1 to indicate that the event should stay in the event queue
     return 1;
-
-}   // FilterEvents
+}

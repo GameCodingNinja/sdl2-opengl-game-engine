@@ -19,7 +19,7 @@
 CSmartVSyncCheckBox::CSmartVSyncCheckBox( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
@@ -29,8 +29,7 @@ void CSmartVSyncCheckBox::handleEvent( const SDL_Event & rEvent )
 {
     if( rEvent.type == NMenu::EGE_MENU_TRANS_IN )
         (*dynamic_cast<CUICheckBox *>(m_pUIControl)).setToggleState( CSettings::Instance().getVSync() );
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
@@ -39,6 +38,4 @@ void CSmartVSyncCheckBox::handleEvent( const SDL_Event & rEvent )
 void CSmartVSyncCheckBox::execute()
 {
     enableDisableApplyBtn();
-
-}   // Execute
-
+}

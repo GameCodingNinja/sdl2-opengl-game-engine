@@ -25,7 +25,6 @@ protected:
 
     // Were the buttons in the settings menu changed
     bool wasSettingsButtonsChanged();
-
 };
 
 #endif  // __smart_btn_h__

@@ -42,7 +42,7 @@
 #include <cstdlib>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_LEVEL_1, NGameDefs::EGS_GAME_LOAD ),
@@ -61,8 +61,7 @@ CLevel1State::CLevel1State() :
     // so this state is the collision listener
     m_rPhysicsWorld.getWorld().SetContactListener(this);
     m_rPhysicsWorld.getWorld().SetDestructionListener(this);
-    
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -73,26 +72,25 @@ CLevel1State::~CLevel1State()
     m_rPhysicsWorld.getWorld().SetDestructionListener(nullptr);
     m_rPhysicsWorld.getWorld().SetContactListener(nullptr);
     CSignalMgr::Instance().disconnect_resolutionChange();
-    
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CLevel1State::Init()
+void CLevel1State::init()
 {
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().allow();
     CMenuManager::Instance().activateTree("pause_tree");
     CMenuManager::Instance().activateTree("base_game_tree");
-    
+
     //CMenuManager::Instance().ActivateMenu("pause_tree", "confirmation_menu");
-    
+
     m_ballVec = {"circle_green", "circle_blue", "circle_red",
                  "square_green", "square_blue", "square_red",
                  "triangle_green", "triangle_blue", "triangle_red"};
-    m_multiXPosVec = 
+    m_multiXPosVec =
         { {-160,0,160,320,480,640},
           {0,160,320,480,640},
           {160,320,480,640},
@@ -103,24 +101,24 @@ void CLevel1State::Init()
           {-640,-480,-320,-160,0},
           {-640,-480,-320,-160,0,160},
           {-640,-480,-320,-160,0,160,320,480,640} };
-    
+
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
-    
+
     // Set the initial camera scale
     CCameraMgr::Instance().createOrthographic("game", 5.f, 1000.f, 1.65);
     CCameraMgr::Instance().transform();
-    
+
     // Reset the camera
     //m_camera.SetPos( CSpriteStrategyMgr::Instance().Get<CBasicStageStrategy2D>("(stage1)").GetDefaultCameraPos().GetPos() );
     //m_camera.Transform();
-    
+
     // Since these interface elements don't move only need to transform them once.
     CMenuManager::Instance().transformInterface();
-    
+
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
-    
+
     // Add the first strawberry
     std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.back().size()-1);
     m_multiIndexPos = multiPosRand(m_generator);
@@ -128,25 +126,24 @@ void CLevel1State::Init()
         "(level1_spriteStrategy)",
         "strawberry",
         CPoint<float>(m_multiXPosVec.back().at(m_multiIndexPos),-1450.f) );
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CLevel1State::HandleEvent( const SDL_Event & rEvent )
+void CLevel1State::handleEvent( const SDL_Event & rEvent )
 {
-    CCommonState::HandleEvent( rEvent );
+    CCommonState::handleEvent( rEvent );
 
     // Check for the "change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
     {
         // Prepare the script to fade in the screen. The script will send the end message
-        if( rEvent.user.code == NMenu::ETC_BEGIN ) 
+        if( rEvent.user.code == NMenu::ETC_BEGIN )
             m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
     else if( rEvent.type == SDL_MOUSEBUTTONUP)
@@ -160,79 +157,73 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
             CSpriteStrategyMgr::Instance().create("(level1_spriteStrategy)", m_ballVec.at(m_ballRand(m_generator)), CPoint<float>(x, 1050));
         }
     }
-
-}   // HandleEvent
+}
 
 
 /************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ************************************************************************/
-void CLevel1State::MiscProcess()
+void CLevel1State::miscProcess()
 {
     if( !CMenuManager::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().miscProcess();
     }
-    
-}   // MiscProcess
+}
 
 
 /***************************************************************************
 *    desc:  Handle the physics
 ****************************************************************************/
-void CLevel1State::Physics()
+void CLevel1State::physics()
 {
     if( !CMenuManager::Instance().isMenuActive() )
     {
         m_rPhysicsWorld.variableTimeStep();
     }
-
-}   // Physics
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CLevel1State::Update()
+void CLevel1State::update()
 {
-    CCommonState::Update();
-    
+    CCommonState::update();
+
     m_scriptComponent.update();
-    
+
     CScriptManager::Instance().update();
-    
+
     if( !CMenuManager::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().update();
     }
-
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CLevel1State::Transform()
+void CLevel1State::transform()
 {
-    CCommonState::Transform();
-    
-    CSpriteStrategyMgr::Instance().transform();
+    CCommonState::transform();
 
-}   // Transform
+    CSpriteStrategyMgr::Instance().transform();
+}
 
 
 /***************************************************************************
 *    desc:  Do the 2D rendering
 ****************************************************************************/
-void CLevel1State::PreRender()
+void CLevel1State::preRender()
 {
-    CCommonState::PreRender();
-    
+    CCommonState::preRender();
+
     CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getActiveCameraMatrix() );
 
     CMenuManager::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
-
-}   // PreRender
+}
 
 
 /************************************************************************
@@ -242,36 +233,35 @@ void CLevel1State::BeginContact(b2Contact* contact)
 {
     CSprite2D * pSpriteA = (CSprite2D *)contact->GetFixtureA()->GetUserData();
     CSprite2D * pSpriteB = (CSprite2D *)contact->GetFixtureB()->GetUserData();
-    
+
     if( (pSpriteA != nullptr) && (pSpriteB != nullptr) )
     {
         const int spriteAid = pSpriteA->getId();
         const int spriteBid = pSpriteB->getId();
-        
+
         if( spriteAid == SPRITE_PEG )
             pSpriteA->setFrame(1);
-        
+
         else if( spriteBid == SPRITE_PEG )
             pSpriteB->setFrame(1);
-        
+
         else if( (spriteAid == STRAWBERRY) || (spriteBid == STRAWBERRY) )
         {
             m_rStrategy.setToDestroy( STRAWBERRY );
-            
+
             m_rMultiplierLabel.createFontString( std::to_string(++m_multiplier) + "x" );
-            
+
             // Randomly pick the new position of the multiplier
             std::uniform_int_distribution<int> multiPosRand(0, m_multiXPosVec.at(m_multiIndexPos).size()-1);
             int multiPos = m_multiXPosVec.at(m_multiIndexPos).at(multiPosRand(m_generator));
             m_multiIndexPos = std::find(m_multiXPosVec.back().begin(), m_multiXPosVec.back().end(), multiPos) - m_multiXPosVec.back().begin();
-            
+
             // Add another strawberry
             m_rStrawberryData.setPos( multiPos, -1450.f );
             m_rStrategy.setToCreate( "strawberry" );
         }
     }
-    
-}   // BeginContact
+}
 
 
 /************************************************************************
@@ -281,17 +271,16 @@ void CLevel1State::EndContact(b2Contact* contact)
 {
     CSprite2D * pSpriteA = reinterpret_cast<CSprite2D *>(contact->GetFixtureA()->GetUserData());
     CSprite2D * pSpriteB = reinterpret_cast<CSprite2D *>(contact->GetFixtureB()->GetUserData());
-    
+
     if( (pSpriteA != nullptr) && (pSpriteB != nullptr) )
     {
         if( pSpriteA->getId() == SPRITE_PEG )
             pSpriteA->setFrame(0);
-        
+
         else if( pSpriteB->getId() == SPRITE_PEG )
             pSpriteB->setFrame(0);
     }
-    
-}   // EndContact
+}
 
 
 /************************************************************************
@@ -300,14 +289,13 @@ void CLevel1State::EndContact(b2Contact* contact)
 void CLevel1State::SayGoodbye(b2Fixture* fixture)
 {
     CSprite2D * pSprite = reinterpret_cast<CSprite2D *>(fixture->GetUserData());
-    
+
     if( (pSprite->getId() > 1000) && (std::fabs( pSprite->getPos().getX() ) < 720.f) )
     {
         m_totalWin += m_multiplier;
         m_rWinMeter.startBangUp( m_totalWin );
     }
-    
-}   // SayGoodbye
+}
 
 
 /***************************************************************************
@@ -324,34 +312,34 @@ namespace NLevel1State
         CObjectDataMgr::Instance().loadGroup2D( "(level1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
         CObjectDataMgr::Instance().loadGroup2D( "(levels)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
-    
+
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().createFromData2D( "(level1)" );
         CObjectDataMgr::Instance().createFromData2D( "(levels)" );
     }
-    
+
     void Load()
     {
         // Load the state specific menu group
         CMenuManager::Instance().loadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
-        
+
         // Load state specific AngelScript functions
         CScriptManager::Instance().loadGroup("(level1)");
-        
+
         CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
-        
+
         // Load the sprite strategies
         CSpriteStrategyMgr::Instance().addStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
         CSpriteStrategyMgr::Instance().addStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy );
     }
-    
+
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
         CMenuManager::Instance().initGroup("(levels)");
-        
+
         CSpriteStrategyMgr::Instance().init();
     }
 
@@ -361,26 +349,25 @@ namespace NLevel1State
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()
-    {        
+    {
         CMenuManager::Instance().cleanUpGroup("(levels)");
         CSpriteStrategyMgr::Instance().cleanUp();
         CObjectDataMgr::Instance().freeGroup2D( "(level1)" );
         CObjectDataMgr::Instance().freeGroup2D( "(levels)" );
     }
-    
+
     void Unload()
     {
         // Unload the state specific menu group
         CMenuManager::Instance().freeGroup("(levels)");
-        
+
         // Unload the strategy group stuff
         CSpriteStrategyMgr::Instance().clear();
-        
+
         // Unload state specific AngelScript functions
         CScriptManager::Instance().freeGroup("(level1)");
-        
+
         // All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
     }
-
-}   // NTitleScreenState
+}

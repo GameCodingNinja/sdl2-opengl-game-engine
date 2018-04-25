@@ -27,7 +27,6 @@ public:
     
     // Handle events
     void handleEvent( const SDL_Event & rEvent ) override;
-
 };
 
 #endif  // __smart_key_bind_btn_h__

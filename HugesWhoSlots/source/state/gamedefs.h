@@ -19,8 +19,7 @@ namespace NGameDefs
         EGS_BIG_CASH_BACK,
         EGS_GAME_LOAD
     };
-    
-}   // NGameDefs
+}
 
 #endif  // __game_defs_h__
 

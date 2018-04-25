@@ -19,32 +19,31 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CGameSave::CGameSave() :
     m_file(nullptr)
 {
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructer                                                             
+*    desc:  destructor
 ************************************************************************/
 CGameSave::~CGameSave()
 {
-    Close();
-
-}   // destructer
+    close();
+}
 
 
 /************************************************************************
 *    desc:  Load the game data
 ************************************************************************/
-void CGameSave::Load()
+void CGameSave::load()
 {
-    if( Open() )
+    if( open() )
     {
-        Save();
+        save();
     }
     else
     {
@@ -52,35 +51,33 @@ void CGameSave::Load()
         if( SDL_RWread( m_file, &m_saveData, 1, sizeof(m_saveData)) == 0 )
             throw NExcept::CCriticalException("Error reading game save data!", "No data was read in!" );
     }
-    
-    Close();
-    
-}   // Load
+
+    close();
+}
 
 
 /************************************************************************
 *    desc:  Save/Save/Close the game data
 ************************************************************************/
-void CGameSave::OpenSaveClose()
+void CGameSave::openSaveClose()
 {
-    Open();
-    Save();
-    Close();
-    
-}   // OpenSaveClose
+    open();
+    save();
+    close();
+}
 
 
 /************************************************************************
 *    desc:  Open the game data
 ************************************************************************/
-bool CGameSave::Open()
+bool CGameSave::open()
 {
     bool result(false);
-    
+
     if( m_file == nullptr )
     {
         std::string filePath;
-    
+
         #if defined(__ANDROID__)
             char * pChar = SDL_GetPrefPath("HugesWhoProduction", "HugesWhoSlots");
             filePath = pChar;
@@ -96,7 +93,7 @@ bool CGameSave::Open()
             // Create a new one from scratch
             if( (m_file = SDL_RWFromFile( filePath.c_str(), "wb+" )) == nullptr )
                 throw NExcept::CCriticalException("Error creating save file!", SDL_GetError() );
-            
+
             result = true;
         }
     }
@@ -104,51 +101,48 @@ bool CGameSave::Open()
     {
         throw NExcept::CCriticalException("Game Save File Error!", "Game save file has already been opened." );
     }
-    
+
     return result;
-    
-}   // Open
+}
 
 
 /************************************************************************
 *    desc:  Save the game data
 ************************************************************************/
-void CGameSave::Save()
+void CGameSave::save()
 {
     if( m_file == nullptr )
         throw NExcept::CCriticalException("Game Save File Error!", "Game save file has NOT been loaded!" );
-    
+
     SDL_RWseek( m_file, 0, RW_SEEK_SET );
-    
+
     if( SDL_RWwrite( m_file, &m_saveData, 1, sizeof(m_saveData)) != sizeof(m_saveData) )
         throw NExcept::CCriticalException("Game Save File Error!", "Not all the data was written to file!" );
-    
-}   // Save
+}
 
 
 /************************************************************************
 *    desc:  Close the game data file
 ************************************************************************/
-void CGameSave::Close()
+void CGameSave::close()
 {
     if( m_file != nullptr )
     {
         SDL_RWclose(m_file);
         m_file = nullptr;
     }
-    
-}   // Close
+}
 
 
 /************************************************************************
 *    desc:  Set/Get play lobby music
 ************************************************************************/
-void CGameSave::SetPlayLobbyMusic( bool value )
+void CGameSave::setPlayLobbyMusic( bool value )
 {
     m_saveData.m_playLobbyMusic = value;
 }
 
-bool CGameSave::GetPlayLobbyMusic() const
+bool CGameSave::getPlayLobbyMusic() const
 {
     return m_saveData.m_playLobbyMusic;
 }
@@ -157,12 +151,12 @@ bool CGameSave::GetPlayLobbyMusic() const
 /************************************************************************
 *    desc:  Set/Get play stop sounds
 ************************************************************************/
-void CGameSave::SetPlayStopSounds( bool value )
+void CGameSave::setPlayStopSounds( bool value )
 {
     m_saveData.m_playStopSounds = value;
 }
 
-bool CGameSave::GetPlayStopSounds() const
+bool CGameSave::getPlayStopSounds() const
 {
     return m_saveData.m_playStopSounds;
 }
@@ -171,12 +165,12 @@ bool CGameSave::GetPlayStopSounds() const
 /************************************************************************
 *    desc:  Set/Get play spin music
 ************************************************************************/
-void CGameSave::SetPlaySpinMusic( bool value )
+void CGameSave::setPlaySpinMusic( bool value )
 {
     m_saveData.m_playSpinMusic = value;
 }
 
-bool CGameSave::GetPlaySpinMusic() const
+bool CGameSave::getPlaySpinMusic() const
 {
     return m_saveData.m_playSpinMusic;
 }
@@ -185,12 +179,12 @@ bool CGameSave::GetPlaySpinMusic() const
 /************************************************************************
 *    desc:  Set/Get total credits
 ************************************************************************/
-void CGameSave::SetTotalCredits( uint value )
+void CGameSave::setTotalCredits( uint value )
 {
     m_saveData.m_totalCredits = value;
 }
 
-uint CGameSave::GetTotalCredits() const
+uint CGameSave::getTotalCredits() const
 {
     return m_saveData.m_totalCredits;
 }

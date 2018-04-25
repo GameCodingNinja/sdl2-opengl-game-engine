@@ -38,5 +38,4 @@ void CSmartScrnCheckBox::handleEvent( const SDL_Event & rEvent )
 void CSmartScrnCheckBox::execute()
 {
     enableDisableApplyBtn();
-
 }

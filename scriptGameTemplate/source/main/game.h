@@ -32,39 +32,39 @@ public:
     virtual ~CGame();
     
     // Create the game Window
-    void Create();
+    void create();
     
     // Main game loop for script driven games
-    bool GameLoop();
+    bool gameLoop();
     
     // Display error massage
-    void DisplayErrorMsg( const std::string & title, const std::string & msg );
+    void displayErrorMsg( const std::string & title, const std::string & msg );
     
     // Is the game running?
-    bool IsGameRunning() const;
+    bool isGameRunning() const;
 
 private:
 
     // OpenGL Init
-    void OpenGLInit();
+    void openGLInit();
     
     // Game start init
-    void Init();
+    void init();
     
     // Poll for game events
-    void PollEvents();
+    void pollEvents();
 
     // Handle events
-    bool HandleEvent( const SDL_Event & rEvent );
+    bool handleEvent( const SDL_Event & rEvent );
     
     // Start the game
-    void StartGame();
+    void startGame();
 
     // Stop the game
-    void StopGame();
+    void stopGame();
     
     // Callback for the state string
-    void StatStringCallBack( const std::string & statStr );
+    void statStringCallBack( const std::string & statStr );
     
 private:
     
@@ -79,7 +79,6 @@ private:
 
     // Clear buffer mask
     uint m_clearBufferMask;
-
 };
 
 int FilterEvents( void * userdata, SDL_Event * pEvent );

@@ -28,22 +28,22 @@ public:
     virtual ~CRunState(){};
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
 
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
 
     // Handle the physics
-    void Physics() override;
+    void physics() override;
 
     // Update objects that require them
-    void Update() override;
+    void update() override;
 
     // Transform the game objects
-    void Transform() override;
+    void transform() override;
 
     // Do the rendering
-    void PreRender() override;
+    void preRender() override;
 
 private:
     
@@ -63,8 +63,7 @@ namespace NRunState
     void Load();
     void Unload();
     void CriticalInit();
-    
-}   // NTitleScreenState
+}
 
 
 #endif  // __run_up_state_h__

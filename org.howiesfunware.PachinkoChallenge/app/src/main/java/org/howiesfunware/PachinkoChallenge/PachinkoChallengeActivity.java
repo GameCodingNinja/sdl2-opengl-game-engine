@@ -1,4 +1,4 @@
-package org.howiesfunware.PachinkoChallenge;
+package org.lapcatgames.PachinkoChallenge;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;

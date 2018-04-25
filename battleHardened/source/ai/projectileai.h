@@ -51,7 +51,6 @@ private:
     
     // Reference to sprite strategy.
     CBasicSpriteStrategy & m_rStrategy;
-
 };
 
 #endif  // __projectile_ai_h__

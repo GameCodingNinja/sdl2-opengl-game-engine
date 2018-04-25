@@ -26,7 +26,6 @@ public:
 
     // Called when the control is executed
     void execute() override;
-
 };
 
 #endif  // __smart_full_screen_check_box_h__

@@ -30,24 +30,24 @@ public:
     virtual ~CLoadState();
     
     // Do any pre-load init's
-    void Init() override;
+    void init() override;
 
     // Is the state done
-    bool DoStateChange() override;
+    bool doStateChange() override;
 
     // Get the next state to load
-    NGameDefs::EGameState GetNextState() override;
+    NGameDefs::EGameState getNextState() override;
 
 private:
 
     // Load during the startup screen
-    void Animate();
+    void animate();
 
     // Load the assets
-    void ObjectDataLoad();
-    void AssetsLoad();
-    void CriticalLoad();
-    void CriticalInit();
+    void objectDataLoad();
+    void assetsLoad();
+    void criticalLoad();
+    void criticalInit();
     
 private:
     

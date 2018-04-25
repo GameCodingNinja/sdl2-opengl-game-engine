@@ -39,25 +39,25 @@ public:
     virtual ~CLobbyState(){};
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Handle any misc processing before the real work is started
-    void MiscProcess() override;
+    void miscProcess() override;
     
     // Update objects that require them
-    void Update() override;
+    void update() override;
 
     // Transform the game objects
-    void Transform() override;
+    void transform() override;
 
     // 2D/3D Render of game content
-    void PreRender() override;
+    void preRender() override;
     
     // Do we allow lobby music?
-    void AllowMusic( bool allow ) override;
+    void allowMusic( bool allow ) override;
     
 private:
     
@@ -84,8 +84,7 @@ namespace NLobby
     void Load();
     void Unload();
     void CriticalInit();
-    
-}   // NLobby
+}
 
 #endif  // __lobby_state_h__
 

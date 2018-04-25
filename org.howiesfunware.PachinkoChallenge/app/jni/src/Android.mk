@@ -37,28 +37,17 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(LOCAL_PATH)/library/objectdata/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/system/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/managers/*.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/physics/physicsworldmanager2d.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/physics/physicsworld2d.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/physics/physicscomponent2d.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/physics/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/2d/*.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/3d/object3d.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/3d/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/common/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/utilities/*.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/slot/*.cpp) \
 	$(wildcard $(LOCAL_PATH)/library/soil/*.c) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptmanager.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptglobals.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptcolor.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptcomponent.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptpoint.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptsprite2d.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptsound.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptplaylist.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptsoundmanager.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptobject.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptmenu.cpp) \
-	$(wildcard $(LOCAL_PATH)/library/script/scriptshadermanager.cpp))
+	$(wildcard $(LOCAL_PATH)/library/script/*.cpp) \
+	$(wildcard $(LOCAL_PATH)/library/spritestrategy/*.cpp))
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_mixer Box2D angelscript
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_mixer bulletPhysics Box2D angelscript
 
 LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 

@@ -20,7 +20,6 @@ public:
 
     // Called when the control is executed
     void execute() override;
-
 };
 
 #endif  // __smart_exit_btn_h__

@@ -56,21 +56,20 @@
 CGame::CGame()
 {
     CSignalMgr::Instance().connect_smartGui( boost::bind(&CGame::smartGuiControlCreateCallBack, this, _1) );
-    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::smartMenuCreateCallBack, this, _1) );  
+    CSignalMgr::Instance().connect_smartMenu( boost::bind(&CGame::smartMenuCreateCallBack, this, _1) );
     CShaderMgr::Instance().connect_initShader( boost::bind(&CGame::shaderInitCallBack, this, _1) );
-    
+
     if( NBDefs::IsDebugMode() )
         CStatCounter::Instance().connect( boost::bind(&CGame::statStringCallBack, this, _1) );
-
-}   // constructor
+}
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    desc:  destructor
 ************************************************************************/
 CGame::~CGame()
 {
-}   // destructer
+}
 
 
 /************************************************************************
@@ -82,20 +81,20 @@ void CGame::init()
 
     // Setup the message filtering
     //SDL_SetEventFilter(FilterEvents, 0);
-    
+
     // Handle some events on startup
     pollEvents();
-    
+
     // Load the game save data
-    CGameSave::Instance().Load();
-    
+    CGameSave::Instance().load();
+
     // Init with the total amount of credits
-    CBetMgr::Instance().setCredits( CGameSave::Instance().GetTotalCredits() );
+    CBetMgr::Instance().setCredits( CGameSave::Instance().getTotalCredits() );
 
     // Create the startup state
     upGameState.reset( new CStartUpState );
-    upGameState->Init();
-    
+    upGameState->init();
+
     // Setup the sprite to be used as a debug string
     if( NBDefs::IsDebugMode() )
     {
@@ -111,8 +110,7 @@ void CGame::init()
 
     // Let the games begin
     startGame();
-
-}   // Init
+}
 
 
 /************************************************************************
@@ -122,7 +120,7 @@ void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 {
     if( pUIControl->getFaction() == "decision_btn" )
         pUIControl->setSmartGui( new CSmartConfirmBtn( pUIControl ) );
-    
+
     else if( pUIControl->getFaction() == "key_binding_btn" )
         pUIControl->setSmartGui( new CSmartKeyBindBtn( pUIControl ) );
 
@@ -140,41 +138,40 @@ void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 
     else if( pUIControl->getName() == "settings_dead_zone_slider" )
         pUIControl->setSmartGui( new CSmartDeadZoneSlider( pUIControl ) );
-    
+
     else if( pUIControl->getName() == "lobby_music_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlayLobbyMusic() );
-        
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().getPlayLobbyMusic() );
+
         pUIControl->connect_executionAction( boost::bind(&CGame::lobbyMusicCallBack, this, _1) );
     }
     else if( pUIControl->getName() == "spin_music_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlaySpinMusic() );
-        
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().getPlaySpinMusic() );
+
         pUIControl->connect_executionAction( boost::bind(&CGame::spinMusicCallBack, this, _1) );
     }
     else if( pUIControl->getName() == "stop_sounds_check_box" )
     {
-        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().GetPlayStopSounds() );
-        
+        NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CGameSave::Instance().getPlayStopSounds() );
+
         pUIControl->connect_executionAction( boost::bind(&CGame::stopSoundsCallBack, this, _1) );
     }
-    
+
     // Dev Debug call backs
     else if( pUIControl->getName() == "dev-option-v-sync_check_box" )
     {
         NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CSettings::Instance().getVSync() );
-        
+
         pUIControl->connect_executionAction( boost::bind(&CGame::devDebugVSyncCallBack, this, _1) );
     }
     else if( pUIControl->getName() == "debug_string_check_box" )
     {
         NGenFunc::DynCast<CUICheckBox>(pUIControl)->setToggleState( CSettings::Instance().getDebugStrVisible() );
-        
+
         pUIControl->connect_executionAction( boost::bind(&CGame::devDebugStringCallBack, this, _1) );
     }
-
-}   // SmartGuiControlCreate
+}
 
 
 /************************************************************************
@@ -182,7 +179,7 @@ void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 ************************************************************************/
 void CGame::smartMenuCreateCallBack( CMenu * pMenu )
 {
-}   // SmartMenuCreate
+}
 
 
 /************************************************************************
@@ -191,35 +188,34 @@ void CGame::smartMenuCreateCallBack( CMenu * pMenu )
 void CGame::lobbyMusicCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlayLobbyMusic( pCtrl->getToggleState() );
-    CGameSave::Instance().OpenSaveClose();
-    
-    if( (upGameState != nullptr) && (upGameState->GetState() == NGameDefs::EGS_LOBBY) )
-        upGameState->AllowMusic( pCtrl->getToggleState() );
-    
+    CGameSave::Instance().setPlayLobbyMusic( pCtrl->getToggleState() );
+    CGameSave::Instance().openSaveClose();
+
+    if( (upGameState != nullptr) && (upGameState->getState() == NGameDefs::EGS_LOBBY) )
+        upGameState->allowMusic( pCtrl->getToggleState() );
+
 }   // LobbyMusicCallBack
 
 void CGame::spinMusicCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlaySpinMusic( pCtrl->getToggleState() );
-    CGameSave::Instance().OpenSaveClose();
-    
-    if( (upGameState != nullptr) && (upGameState->GetState() != NGameDefs::EGS_LOBBY) )
-        upGameState->AllowMusic( pCtrl->getToggleState() );
-    
+    CGameSave::Instance().setPlaySpinMusic( pCtrl->getToggleState() );
+    CGameSave::Instance().openSaveClose();
+
+    if( (upGameState != nullptr) && (upGameState->getState() != NGameDefs::EGS_LOBBY) )
+        upGameState->allowMusic( pCtrl->getToggleState() );
+
 }   // SpinMusicCallBack
 
 void CGame::stopSoundsCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    CGameSave::Instance().SetPlayStopSounds( pCtrl->getToggleState() );
-    CGameSave::Instance().OpenSaveClose();
-    
-    if( (upGameState != nullptr) && (upGameState->GetState() != NGameDefs::EGS_LOBBY) )
-        upGameState->AllowStopSounds( pCtrl->getToggleState() );
-    
-}   // SpinMusicCallBack
+    CGameSave::Instance().setPlayStopSounds( pCtrl->getToggleState() );
+    CGameSave::Instance().openSaveClose();
+
+    if( (upGameState != nullptr) && (upGameState->getState() != NGameDefs::EGS_LOBBY) )
+        upGameState->allowStopSounds( pCtrl->getToggleState() );
+}
 
 
 /************************************************************************
@@ -229,8 +225,7 @@ void CGame::shaderInitCallBack( const std::string & shaderId )
 {
     // Init the color for fading in
     CShaderMgr::Instance().setShaderColor( shaderId, "additive", CColor(0,0,0,1) );
-    
-}   // ShaderInitCallBack
+}
 
 
 /************************************************************************
@@ -250,8 +245,7 @@ void CGame::statStringCallBack( const std::string & statStr )
         else
             upDebugDisplay->createFontString( statStr );
     }
-
-}   // StatStringCallBack
+}
 
 
 /************************************************************************
@@ -260,18 +254,16 @@ void CGame::statStringCallBack( const std::string & statStr )
 void CGame::devDebugVSyncCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    
+
     CDevice::Instance().enableVSync( pCtrl->getToggleState() );
-    
-}   // DevDebugVSyncCallBack
+}
 
 void CGame::devDebugStringCallBack( CUIControl * pUIControl )
 {
     auto pCtrl = NGenFunc::DynCast<CUICheckBox>(pUIControl);
-    
+
     CSettings::Instance().setDebugStrVisible( pCtrl->getToggleState() );
-    
-}   // DevDebugVSyncCallBack
+}
 
 
 /***************************************************************************
@@ -279,27 +271,27 @@ void CGame::devDebugStringCallBack( CUIControl * pUIControl )
 ****************************************************************************/
 void CGame::doStateChange()
 {
-    if( upGameState->DoStateChange() )
+    if( upGameState->doStateChange() )
     {
         // Get the game state we are currently in
-        const NGameDefs::EGameState curState = upGameState->GetState();
+        const NGameDefs::EGameState curState = upGameState->getState();
 
         // Get the game state we are moving to
-        const NGameDefs::EGameState nextState = upGameState->GetNextState();
+        const NGameDefs::EGameState nextState = upGameState->getNextState();
 
         // Get the message to the next state
-        const CStateMessage stateMessage = upGameState->GetStateMessage();
-        
+        const CStateMessage stateMessage = upGameState->getStateMessage();
+
         // Free the current state to ensure no messages will be processed by a state
         upGameState.reset();
-        
+
         // Process any lingering messages so that the new state isn't
         // getting hammered by a bunch of queued up messages
         pollEvents();
-        
+
         if( nextState == NGameDefs::EGS_LOBBY )
             upGameState.reset( new CLobbyState("(lobby)") );
-        
+
         else if( nextState == NGameDefs::EGS_BIG_CASH_BACK )
             upGameState.reset( new CBigPayBackState("(big_pay_back)") );
 
@@ -310,12 +302,11 @@ void CGame::doStateChange()
             throw NExcept::CCriticalException("Error Invalid game state",
                 boost::str( boost::format("Next state not valid (cur %d, next %d).\n\n%s\nLine: %s")
                     % curState % nextState % __FUNCTION__ % __LINE__ ));
-        
-        // Do any pre-game loop init's
-        upGameState->Init();
-    }
 
-}   // DoStateChange
+        // Do any pre-game loop init's
+        upGameState->init();
+    }
+}
 
 
 /************************************************************************
@@ -335,10 +326,10 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 
     else if( rEvent.type == SDL_CONTROLLERDEVICEREMOVED )
         CDevice::Instance().removeGamepad( rEvent.cdevice.which );
-    
+
     else if( rEvent.type == SDL_APP_LOWMEMORY )
         displayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
-    
+
     else if( rEvent.type == SDL_WINDOWEVENT )
     {
         if( (rEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) && upDebugDisplay )
@@ -351,11 +342,10 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 
     // Handle events
     if( upGameState )
-        upGameState->HandleEvent( rEvent );
+        upGameState->handleEvent( rEvent );
 
     return false;
-
-}   // HandleEvent
+}
 
 
 /************************************************************************
@@ -363,9 +353,8 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CGame::miscProcess()
 {
-    upGameState->MiscProcess();
-    
-}   // MiscProcess
+    upGameState->miscProcess();
+}
 
 
 /************************************************************************
@@ -373,9 +362,8 @@ void CGame::miscProcess()
 ************************************************************************/
 void CGame::physics()
 {
-    upGameState->Physics();
-    
-}   // Physics
+    upGameState->physics();
+}
 
 
 /***************************************************************************
@@ -383,9 +371,8 @@ void CGame::physics()
 ****************************************************************************/
 void CGame::update()
 {
-    upGameState->Update();
-
-}   // Update
+    upGameState->update();
+}
 
 
 /***************************************************************************
@@ -393,9 +380,8 @@ void CGame::update()
 ****************************************************************************/
 void CGame::transform()
 {
-    upGameState->Transform();
-
-}   // Transform
+    upGameState->transform();
+}
 
 
 /***************************************************************************
@@ -403,9 +389,9 @@ void CGame::transform()
 ****************************************************************************/
 void CGame::render()
 {
-    upGameState->PreRender();
-    
-    upGameState->PostRender();
+    upGameState->preRender();
+
+    upGameState->postRender();
 
     if( NBDefs::IsDebugMode() )
     {
@@ -420,8 +406,7 @@ void CGame::render()
                 upDebugDisplay->render( CCameraMgr::Instance().getDefaultProjMatrix() );
         }
     }
-
-}   // PostGameRender2D
+}
 
 
 /***************************************************************************
@@ -435,7 +420,7 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
     if( pEvent->type == SDL_CONTROLLERAXISMOTION )
     {
         // Analog stick max values -32768 to 32767
-        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() * 
+        const int deadZone = CSettings::Instance().getGamePadStickDeadZone() *
             defs_ANALOG_PERCENTAGE_CONVERTION;
 
         if( ((pEvent->caxis.axis >= SDL_CONTROLLER_AXIS_LEFTX) &&
@@ -447,5 +432,4 @@ int FilterEvents( void * userdata, SDL_Event * pEvent )
 
     // Return 1 to indicate that the event should stay in the event queue
     return 1;
-
-}   // FilterEvents
+}

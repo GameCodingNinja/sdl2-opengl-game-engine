@@ -24,7 +24,7 @@
 CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
@@ -86,12 +86,4 @@ void CSmartConfirmBtn::execute()
     pYesBtn->setActionType( actionType );
     pYesBtn->setExecutionAction( executionAction );
     pMegLbl->createFontString( conformationMsg );
-
-}   // Execute
-
-
-
-
-
-
-
+}

@@ -26,102 +26,96 @@
 #include <vector>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().getWorld( "(game)" ) )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CRunState::Init()
+void CRunState::init()
 {
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().allow();
     CMenuManager::Instance().activateTree("pause_tree");
-    
+
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CRunState::HandleEvent( const SDL_Event & rEvent )
+void CRunState::handleEvent( const SDL_Event & rEvent )
 {
-    CCommonState::HandleEvent( rEvent );
+    CCommonState::handleEvent( rEvent );
 
     // Check for the "change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
     {
         // Prepare the script to fade in the screen. The script will send the end message
-        if( rEvent.user.code == NMenu::ETC_BEGIN ) 
+        if( rEvent.user.code == NMenu::ETC_BEGIN )
             m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
 *    desc:  Handle the physics
 ****************************************************************************/
-void CRunState::Physics()
+void CRunState::physics()
 {
     if( !CMenuManager::Instance().isActive() )
     {
         m_rPhysicsWorld.fixedTimeStep();
     }
-
-}   // Physics
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CRunState::Update()
+void CRunState::update()
 {
-    CCommonState::Update();
-    
+    CCommonState::update();
+
     m_scriptComponent.update();
-    
+
     if( !CMenuManager::Instance().isActive() )
         CSpriteStrategyMgr::Instance().update();
-
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CRunState::Transform()
+void CRunState::transform()
 {
-    CCommonState::Transform();
-    
+    CCommonState::transform();
+
     if( !CMenuManager::Instance().isActive() )
         CSpriteStrategyMgr::Instance().transform();
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  Do the 2D rendering
 ****************************************************************************/
-void CRunState::PreRender()
+void CRunState::preRender()
 {
-    CCommonState::PreRender();
-    
-    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CCommonState::preRender();
 
-}   // PreRender
+    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+}
 
 
 /***************************************************************************
@@ -137,13 +131,13 @@ namespace NRunState
     {
         CObjectDataMgr::Instance().loadGroup2D( "(run)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
-    
+
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().createFromData2D( "(run)" );
     }
-    
+
     void Load()
     {
 	// All physics entities are destroyed and all heap memory is released.
@@ -151,11 +145,11 @@ namespace NRunState
         CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CBasicStageStrategy );
         CSpriteStrategyMgr::Instance().addStrategy( "(sprite)", new CBasicSpriteStrategy );
     }
-    
+
     void CriticalInit()
     {
         const char* shapes[] = {"triangle_blue", "triangle_green", "circle_blue", "circle_green", "circle_red", "square_red"};
-        
+
         for( int i = 0; i < 24; ++i )
             CSpriteStrategyMgr::Instance().create( "(sprite)", shapes[i % 6] );
     }
@@ -170,11 +164,10 @@ namespace NRunState
         CSpriteStrategyMgr::Instance().cleanUp();
         CObjectDataMgr::Instance().freeGroup2D( "(run)" );
     }
-    
+
     void Unload()
     {
         CSpriteStrategyMgr::Instance().clear();
         CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );
     }
-
-}   // NTitleScreenState
+}

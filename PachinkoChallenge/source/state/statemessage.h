@@ -15,13 +15,13 @@ class CStateMessage
 {
 public:
     
-    NGameDefs::EGameState GetLoadState()
+    NGameDefs::EGameState getLoadState()
     { return m_loadState; }
     
-    NGameDefs::EGameState GetUnloadState()
+    NGameDefs::EGameState getUnloadState()
     { return m_unloadState; }
     
-    void SetMsg( NGameDefs::EGameState loadState, NGameDefs::EGameState unloadState )
+    void setMsg( NGameDefs::EGameState loadState, NGameDefs::EGameState unloadState )
     {
         m_loadState = loadState;
         m_unloadState = unloadState;

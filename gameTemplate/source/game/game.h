@@ -78,7 +78,6 @@ protected:
 
     // scoped pointer Game State
     std::unique_ptr<iGameState> upGameState;
-
 };
 
 int FilterEvents( void * userdata, SDL_Event * pEvent );

@@ -36,49 +36,48 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CLobbyState::CLobbyState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_LOBBY, NGameDefs::EGS_GAME_LOAD ),
         m_group( group ),
         m_background( CObjectDataMgr::Instance().getData2D( group, "background" ) )
 {
-}   // Constructer
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CLobbyState::Init()
+void CLobbyState::init()
 {
-    CCommonState::Init();
-    
+    CCommonState::init();
+
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().allow();
     CMenuManager::Instance().activateTree( "menu_tree");
     CMenuManager::Instance().activateTree( "buy_tree");
     CMenuManager::Instance().activateTree( "confirmation_tree");
     CMenuManager::Instance().activateTree( "lobby_tree");
-    
+
     // Init the credit meter
     CMenuManager::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits() );
-    
+
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( m_group, "Screen_FadeIn" );
-    
-    if( CGameSave::Instance().GetPlayLobbyMusic() )
+
+    if( CGameSave::Instance().getPlayLobbyMusic() )
         m_scriptComponent.prepare( m_group, "Lobby_PlayMusic" );
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Do we allow lobby music
 ************************************************************************/
-void CLobbyState::AllowMusic( bool allow )
+void CLobbyState::allowMusic( bool allow )
 {
     if( allow )
     {
@@ -90,16 +89,15 @@ void CLobbyState::AllowMusic( bool allow )
         m_scriptComponent.stopAndRecycle( "Lobby_PlayMusic" );
         m_scriptComponent.prepare( m_group, "Lobby_FastStopMusic" );
     }
-    
-}   // AllowMusic
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CLobbyState::HandleEvent( const SDL_Event & rEvent )
+void CLobbyState::handleEvent( const SDL_Event & rEvent )
 {
-    CCommonState::HandleEvent( rEvent );
+    CCommonState::handleEvent( rEvent );
 
     // Check for the "game change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
@@ -111,55 +109,50 @@ void CLobbyState::HandleEvent( const SDL_Event & rEvent )
             m_scriptComponent.prepare( m_group, "Lobby_FastStopMusic" );
         }
     }
-
-}   // HandleEvent
+}
 
 
 /***************************************************************************
 *    desc:  Handle any misc processing before the real work is started
 ****************************************************************************/
-void CLobbyState::MiscProcess()
+void CLobbyState::miscProcess()
 {
-    
-}   // MiscProcess
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CLobbyState::Update()
+void CLobbyState::update()
 {
-    CCommonState::Update();
-    
-    m_scriptComponent.update();
+    CCommonState::update();
 
-}   // Update
+    m_scriptComponent.update();
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CLobbyState::Transform()
+void CLobbyState::transform()
 {
-    CCommonState::Transform();
-    
+    CCommonState::transform();
+
     CMenuManager::Instance().transformInterface();
 
     m_background.transform();
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  2D/3D Render of game content
 ****************************************************************************/
-void CLobbyState::PreRender()
+void CLobbyState::preRender()
 {
     m_background.render( CCameraMgr::Instance().getDefaultProjMatrix() );
-    
-    CCommonState::PreRender();
 
-}   // PreRender
+    CCommonState::preRender();
+}
 
 
 /***************************************************************************
@@ -175,28 +168,27 @@ namespace NLobby
     {
         CObjectDataMgr::Instance().loadGroup2D( "(lobby)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
-    
+
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().createFromData2D( "(lobby)" );
     }
-    
+
     void Load()
     {
         // Load the state specific menu group
         CMenuManager::Instance().loadGroup("(lobby)", CMenuManager::DONT_INIT_GROUP);
-        
+
         CSoundMgr::Instance().loadGroup("(lobby)");
-        
+
         CScriptManager::Instance().loadGroup("(lobby)");
 
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
         CXMLPreloader::Instance().clear();
-        
-    }   // ThreadLoad
-    
+    }
+
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
@@ -213,13 +205,12 @@ namespace NLobby
 	CMenuManager::Instance().cleanUpGroup("(lobby)");
         CObjectDataMgr::Instance().freeGroup2D( "(lobby)" );
     }
-    
+
     void Unload()
     {
         CMenuManager::Instance().freeGroup("(lobby)");
         CScriptManager::Instance().freeGroup("(lobby)");
         CSoundMgr::Instance().freeGroup("(lobby)");
 
-    }   // Unload
-
-}   // NLobby
+    }
+}

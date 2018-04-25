@@ -27,7 +27,7 @@
 CSmartSettingsMenuBtn::CSmartSettingsMenuBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )
 {
-}   // constructor
+}
 
 
 /***************************************************************************
@@ -42,8 +42,7 @@ void CSmartSettingsMenuBtn::enableDisableApplyBtn()
         rMenu.getPtrToControl( "settings_apply_btn" )->changeState(NUIControl::ECS_INACTIVE);
     else
         rMenu.getPtrToControl( "settings_apply_btn" )->changeState(NUIControl::ECS_DISABLED);
-
-}   // EnableDisableSettingsApplyBtn
+}
 
 
 /***************************************************************************
@@ -78,12 +77,4 @@ bool CSmartSettingsMenuBtn::wasSettingsButtonsChanged()
         return true;
 
     return false;
-
-}   // WasSettingsChanged
-
-
-
-
-
-
-
+}

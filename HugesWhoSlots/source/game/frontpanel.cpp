@@ -23,7 +23,7 @@ CFrontPanel::CFrontPanel() :
     m_pWinMeter(nullptr),
     m_pCreditMeter(nullptr)
 {
-}   // constructor
+}
 
 
 /************************************************************************

@@ -31,18 +31,18 @@ public:
     virtual ~CStartUpState();
     
     // Do any pre-load init's
-    void Init() override;
+    void init() override;
 
     // Is the state done
-    bool DoStateChange() override;
+    bool doStateChange() override;
 
 private:
     
     // Load the assets
-    void AssetLoad();
+    void assetLoad();
 
     // Fade to color
-    void Fade(
+    void fade(
         CSprite2D & sprite,
         float time,
         const CColor & cur,
@@ -52,7 +52,6 @@ private:
     
     // Logo to fade in and out
     std::unique_ptr<CSprite2D> m_upSpriteLogo;
-
 };
 
 #endif  // __start_up_state_h__

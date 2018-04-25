@@ -38,44 +38,44 @@ public:
     virtual ~iGameState(){};
     
     // Do any pre-game loop init's
-    virtual void Init(){};
+    virtual void init(){};
 
     // Handle events
-    virtual void HandleEvent( const SDL_Event & rEvent ){};
+    virtual void handleEvent( const SDL_Event & rEvent ){};
 
     // Act upon what the user is doing
-    virtual void GetUserInput( bool hasFocus ){};
+    virtual void getUserInput( bool hasFocus ){};
     
     // Handle any misc processing before the real work is started
-    virtual void MiscProcess(){};
+    virtual void miscProcess(){};
 
     // Handle the physics
-    virtual void Physics(){};
+    virtual void physics(){};
 
     // Update objects that require them
-    virtual void Update(){};
+    virtual void update(){};
 
     // Transform the game objects
-    virtual void Transform(){};
+    virtual void transform(){};
 
     // 2D/3D Render of game content
-    virtual void PreRender(){};
-    virtual void PostRender(){};
+    virtual void preRender(){};
+    virtual void postRender(){};
 
     // Is the state done
-    virtual bool DoStateChange()
+    virtual bool doStateChange()
     { return m_changeState; };
 
     // Get the currect game state
-    NGameDefs::EGameState GetState()
+    NGameDefs::EGameState getState()
     { return m_gameState; }
 
     // Get the next game state
-    virtual NGameDefs::EGameState GetNextState()
+    virtual NGameDefs::EGameState getNextState()
     { return m_nextState; }
 
     // Get the message
-    const CStateMessage & GetStateMessage()
+    const CStateMessage & getStateMessage()
     { return m_stateMessage; }
 
 protected:
@@ -91,7 +91,6 @@ protected:
     
     // Flag to indicate state change
     bool m_changeState = false;
-
 };
 
 #endif  // __i_game_state_h__

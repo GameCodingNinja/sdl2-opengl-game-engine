@@ -23,7 +23,6 @@ public:
 
     // Called when the control is executed
     void execute() override;
-
 };
 
 #endif  // __smart_vsync_check_box_h__

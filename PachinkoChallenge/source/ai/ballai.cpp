@@ -26,7 +26,7 @@ CBallAI::CBallAI( iSprite * pSprite ) :
     m_angularImpulse(-1, 1),
     m_rotation(-M_PI, M_PI)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -34,24 +34,23 @@ CBallAI::CBallAI( iSprite * pSprite ) :
 ************************************************************************/
 CBallAI::~CBallAI()
 {
-}   // destructor
+}
 
 
 /************************************************************************
-*    desc:  Do any initializing                                                            
+*    desc:  Do any initializing
 ************************************************************************/
 void CBallAI::init()
 {
     m_sprite.prepareFuncId( "fadeIn" );
-    
+
     // Put ball into a random rotation
     auto pBody = m_sprite.getPhysicsComponent().getBody();
     pBody->SetTransform( pBody->GetPosition(), m_rotation(m_generator) );
-    
+
     // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
     pBody->ApplyAngularImpulse( m_angularImpulse(m_generator), false );
-    
-}   // Init
+}
 
 
 /************************************************************************
@@ -61,5 +60,5 @@ void CBallAI::update()
 {
     if( m_sprite.getPos().y < -1650.0f )
         m_rStrategy.setToDestroy( m_sprite.getId() );
-        
-}   // Update
+
+}

@@ -19,8 +19,7 @@ namespace NGameDefs
         EGS_GAME_LOAD,
         EGS_Level_1
     };
-
-}   // NGameDefs
+}
 
 #endif  // __game_defs_h__
 

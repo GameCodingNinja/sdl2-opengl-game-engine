@@ -81,6 +81,19 @@
       <sourceFolder url="file://$MODULE_DIR$/jni/angelscript/add_on/scriptarray" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/angelscript/add_on/scriptstdstring" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/angelscript/source" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletCollision/BroadphaseCollision" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletCollision/CollisionDispatch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletCollision/CollisionShapes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletCollision/Gimpact" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletCollision/NarrowPhaseCollision" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/Character" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/ConstraintSolver" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/Dynamics" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/Featherstone" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/MLCPSolvers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletDynamics/Vehicle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/BulletSoftBody" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/bulletPhysics/src/LinearMath" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/SDL/src/main/android" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/2d" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/3d" isTestSource="false" />
@@ -90,7 +103,9 @@
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/objectdata" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/physics" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/script" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/src/library/slot" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/soil" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jni/src/library/spritestrategy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/system" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/library/utilities" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/jni/src/source/ai" isTestSource="false" />
@@ -162,29 +177,18 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-apk" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/ndkBuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />

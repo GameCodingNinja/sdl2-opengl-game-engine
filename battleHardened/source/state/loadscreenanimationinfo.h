@@ -31,51 +31,51 @@ public:
         m_counter(0)
     {}
       
-    void AllocateSprite( const CObjectData2D & objectData )
+    void allocateSprite( const CObjectData2D & objectData )
     { m_spSprite2D = std::make_shared<CSprite2D>( objectData ); }
     
-    std::shared_ptr<CSprite2D> & GetSprite()
+    std::shared_ptr<CSprite2D> & getSprite()
     { return m_spSprite2D; }
     
-    void SetFadeTime( int fadeTime )
+    void setFadeTime( int fadeTime )
     { m_fadeTime = fadeTime; }
     
-    int GetFadeTime()
+    int getFadeTime()
     { return m_fadeTime; }
 
     // Delay of displaying the art
-    void SetDisplayDelay( int displayDelay )
+    void setDisplayDelay( int displayDelay )
     { m_displayDelay = displayDelay; }
     
-    int GetDisplayDelay()
+    int getDisplayDelay()
     { return m_displayDelay; }
     
     // Delay after animations
-    void SetEndDelay( int spaceDelay )
+    void setEndDelay( int spaceDelay )
     { m_endDelay = spaceDelay; }
     
-    int GetEndDelay()
+    int getEndDelay()
     { return m_endDelay; }
     
     
-    void SetFrameCount( int frameCount )
+    void setFrameCount( int frameCount )
     { m_frameCount = frameCount; }
     
-    int GetFrameCount()
+    int getFrameCount()
     { return m_frameCount; }
     
     
-    void SetFPS( int fps )
+    void setFPS( int fps )
     { m_fps = fps; }
     
-    int GetFPS()
+    int getFPS()
     { return m_fps; }
     
     
-    void IncCounter()
+    void incCounter()
     { ++m_counter; }
     
-    int GetCounter()
+    int getCounter()
     { return m_counter; }
     
     

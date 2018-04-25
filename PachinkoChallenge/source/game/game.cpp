@@ -75,7 +75,7 @@ void CGame::init()
 
     // Create the startup state
     upGameState.reset( new CStartUpState );
-    upGameState->Init();
+    upGameState->init();
 
     // Let the games begin
     startGame();
@@ -141,16 +141,16 @@ void CGame::statStringCallBack( const std::string & statStr )
 ****************************************************************************/
 void CGame::doStateChange()
 {
-    if( upGameState->DoStateChange() )
+    if( upGameState->doStateChange() )
     {
         // Get the game state we are moving to
-        const NGameDefs::EGameState curState = upGameState->GetState();
+        const NGameDefs::EGameState curState = upGameState->getState();
 
         // Get the game state we are moving to
-        const NGameDefs::EGameState nextState = upGameState->GetNextState();
+        const NGameDefs::EGameState nextState = upGameState->getNextState();
 
         // Get the message to the next state
-        const CStateMessage stateMessage = upGameState->GetStateMessage();
+        const CStateMessage stateMessage = upGameState->getStateMessage();
         
         // Free the current state to ensure no messages will be processed by a state
         upGameState.reset();
@@ -174,7 +174,7 @@ void CGame::doStateChange()
                     % curState % nextState % __FUNCTION__ % __LINE__ ));
         
         // Do any pre-game loop init's
-        upGameState->Init();
+        upGameState->init();
     }
 
 }   // DoStateChange
@@ -207,7 +207,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 
     // Handle events
     if( upGameState )
-        upGameState->HandleEvent( rEvent );
+        upGameState->handleEvent( rEvent );
 
     return false;
 
@@ -219,7 +219,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CGame::miscProcess()
 {
-    upGameState->MiscProcess();
+    upGameState->miscProcess();
     
 }   // MiscProcess
 
@@ -229,7 +229,7 @@ void CGame::miscProcess()
 ************************************************************************/
 void CGame::physics()
 {
-    upGameState->Physics();
+    upGameState->physics();
     
 }   // Physics
 
@@ -239,7 +239,7 @@ void CGame::physics()
 ****************************************************************************/
 void CGame::update()
 {
-    upGameState->Update();
+    upGameState->update();
 
 }   // Update
 
@@ -249,7 +249,7 @@ void CGame::update()
 ****************************************************************************/
 void CGame::transform()
 {
-    upGameState->Transform();
+    upGameState->transform();
 
 }   // Transform
 
@@ -259,9 +259,9 @@ void CGame::transform()
 ****************************************************************************/
 void CGame::render()
 {
-    upGameState->PreRender();
+    upGameState->preRender();
     
-    upGameState->PostRender();
+    upGameState->postRender();
 
 }   // Render
 

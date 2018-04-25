@@ -67,12 +67,12 @@
 #include <chrono>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    desc:  Constructor
 ************************************************************************/
 CStartUpState::CStartUpState() :
     iGameState( NGameDefs::EGS_STARTUP, NGameDefs::EGS_TITLE_SCREEN )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
@@ -81,47 +81,45 @@ CStartUpState::CStartUpState() :
 CStartUpState::~CStartUpState()
 {
     CObjectDataMgr::Instance().freeGroup2D( "(startup)" );
-    
-}   // destructor
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-load init's
 ************************************************************************/
-void CStartUpState::Init()
+void CStartUpState::init()
 {
     // Load the object data list table
     CObjectDataMgr::Instance().loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
-    
+
     // Load the shader
     CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
-    
+
     // Load the start up animation group
     CObjectDataMgr::Instance().loadGroup2D( "(startup)" );
-    
+
     // Allocate the sprites
     m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().getData2D( "(startup)", "solid_white_bk" ) );
     m_SpriteDeque.back().transform();
     m_SpriteDeque.emplace_back( CObjectDataMgr::Instance().getData2D( "(startup)", "logo" ) );
     m_SpriteDeque.back().transform();
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
- 
-}   // Init
+}
 
 
 /************************************************************************
-*    desc:  Fade to color                                                             
+*    desc:  Fade to color
 ************************************************************************/
-void CStartUpState::Fade(
+void CStartUpState::fade(
     float time,
     const CColor & cur,
     const CColor & finalColor )
 {
     CColor inc = (finalColor - cur) / time;
     CColor current = cur;
-    
+
     // Need the projection matrix
     const CMatrix & matrix = CCameraMgr::Instance().getDefaultProjMatrix();
 
@@ -154,40 +152,39 @@ void CStartUpState::Fade(
         std::this_thread::sleep_for( std::chrono::milliseconds( 2 ) );
     }
     while( time > 0 );
-
-}   // Fade
+}
 
 
 /***************************************************************************
 *    desc:  Load the assets
 ****************************************************************************/
-void CStartUpState::AssetLoad()
+void CStartUpState::assetLoad()
 {
     // Load in any fonts
     CFontMgr::Instance().loadFromXML( "data/textures/fonts/font.lst" );
-    
+
     // Load the sprite list table
     CSpriteStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().loadActionFromXML( "data/settings/controllerMapping.cfg" );
-    
+
     // Load menu list table
     CMenuManager::Instance().loadListTable( "data/objects/2d/menu/menuListTable.lst" );
-    
+
     // Load the menu action list
     CMenuManager::Instance().loadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
-    
+
     // Load sound resources for the menu
     CSoundMgr::Instance().loadListTable( "data/sound/soundListTable.lst" );
     CSoundMgr::Instance().loadGroup("(menu)");
 
     // Load the script list table
     CScriptManager::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
-    
+
     // Load the physics list table
     CPhysicsWorldManager2D::Instance().loadListTable( "data/objects/2d/physics/physicsListTable.lst" );
-    
+
     // Register the script items
     RegisterStdString( CScriptManager::Instance().getEnginePtr() );
     RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
@@ -200,46 +197,43 @@ void CStartUpState::AssetLoad()
     NScriptSoundManager::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
-    
+
     // Load group specific script items
     CScriptManager::Instance().loadGroup("(menu)");
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().loadGroup2D("(menu)");
-    
+
     // Load the menu group
     CMenuManager::Instance().loadGroup("(menu)");
-    
+
     // Do the state specific load
     NTitleScreenState::ObjectDataLoad();
     NTitleScreenState::CriticalLoad();
     NTitleScreenState::Load();
     NTitleScreenState::CriticalInit();
-    
-}   // AssetLoad
+}
 
 
 /***************************************************************************
 *    desc:  Is the state done
 ****************************************************************************/
-bool CStartUpState::DoStateChange()
+bool CStartUpState::doStateChange()
 {
     // Do the fade in
-    Fade( 500.f, CColor(0,0,0,1), CColor(1,1,1,1) );
-    
+    fade( 500.f, CColor(0,0,0,1), CColor(1,1,1,1) );
+
     CHighResTimer::Instance().timerStart();
-    
-    AssetLoad();
-    
+
+    assetLoad();
+
     const int time = static_cast<int>(CHighResTimer::Instance().timerStop());
-    
+
     if( time < 2000.f )
         std::this_thread::sleep_for( std::chrono::milliseconds( 2000 - time ) );
-    
+
     // Do the fade out
-    Fade( 500.f, CColor(1,1,1,1), CColor(0,0,0,1) );
+    fade( 500.f, CColor(1,1,1,1), CColor(0,0,0,1) );
 
     return true;
-
-}   // DoStateChange
-
+}

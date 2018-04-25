@@ -28,7 +28,7 @@ CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
     m_gunRotation(0),
     m_playerShootTimer(200, true)
 {
-}   // constructor
+}
 
 
 /************************************************************************
@@ -36,7 +36,7 @@ CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
 ************************************************************************/
 CPlayerShipAI::~CPlayerShipAI()
 {
-}   // destructor
+}
 
 
 /************************************************************************
@@ -45,8 +45,7 @@ CPlayerShipAI::~CPlayerShipAI()
 void CPlayerShipAI::init()
 {
     m_fireTailSprite.prepare( "Play", {24, &m_fireTailSprite, true} );
-
-}   // Init
+}
 
 
 /************************************************************************
@@ -77,8 +76,7 @@ void CPlayerShipAI::handleEvent( const SDL_Event & rEvent )
     {
         handleShooting();
     }
-
-}   // HandleEvent
+}
 
 
 /************************************************************************
@@ -88,8 +86,7 @@ void CPlayerShipAI::update()
 {
     m_gunRotation = atan2( m_gunXY.y, m_gunXY.x );
     m_gunSprite.setRot( 0, 0, m_gunRotation - m_sprite.getRot().z, false );
-
-}   // Update
+}
 
 
 /************************************************************************
@@ -102,7 +99,7 @@ void CPlayerShipAI::handleShooting()
     {
         const CPoint<float> & centerPos = m_gunSprite.getCenterPos();
         const CPoint<float> & pos = m_gunSprite.getPos();
-        
+
         CPoint<float> projectileOffset;
         const float OFFSET(60.f);
         projectileOffset.x = (OFFSET * cos( m_gunRotation )) - centerPos.x + pos.x;
@@ -114,5 +111,4 @@ void CPlayerShipAI::handleShooting()
 
         m_playerShootTimer.reset();
     }
-
-}   // HandleShooting
+}

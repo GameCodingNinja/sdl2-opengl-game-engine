@@ -26,30 +26,29 @@ public:
     virtual ~CCommonState();
 
     // Handle events
-    virtual void HandleEvent( const SDL_Event & rEvent ) override;
+    virtual void handleEvent( const SDL_Event & rEvent ) override;
 
     // Update objects that require them
-    virtual void Update() override;
+    virtual void update() override;
 
     // Transform the game objects
-    virtual void Transform() override;
+    virtual void transform() override;
     
     // 2D/3D Render of game content
-    virtual void PreRender() override;
+    virtual void preRender() override;
 
     // 2D/3D Render of game content
-    virtual void PostRender() override;
+    virtual void postRender() override;
     
 protected:
     
     // Get the load state
-    NGameDefs::EGameState GetLoadState( void * pVoid );
+    NGameDefs::EGameState getLoadState( void * pVoid );
     
 private:
         
     // game state map
     std::map<std::string, NGameDefs::EGameState> m_gameStateMap;
-
 };
 
 #endif  // __common_state_h__

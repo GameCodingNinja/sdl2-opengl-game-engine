@@ -24,26 +24,24 @@ int main( int argc, char* args[] )
     try
     {
         // Create the game
-        game.Create();
+        game.create();
 
         // Call the game loop
-        while( game.GameLoop() )
+        while( game.gameLoop() )
         { }
     }
     catch( NExcept::CCriticalException & ex )
     {
-        game.DisplayErrorMsg( ex.getErrorTitle(), ex.getErrorMsg() );
+        game.displayErrorMsg( ex.getErrorTitle(), ex.getErrorMsg() );
     }
     catch( std::exception const & ex )
     {
-        game.DisplayErrorMsg( "Standard Exception", ex.what() );
+        game.displayErrorMsg( "Standard Exception", ex.what() );
     }
     catch(...)
     {
-        game.DisplayErrorMsg( "Unknown Error", "Something bad happened and I'm not sure what it was." );
+        game.displayErrorMsg( "Unknown Error", "Something bad happened and I'm not sure what it was." );
     }
 
     return 0;
-
-}   // main
-
+}

@@ -30,56 +30,55 @@
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_Level_1, NGameDefs::EGS_GAME_LOAD )
 {
-}   // Constructor
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-game loop init's
 ************************************************************************/
-void CLevel1State::Init()
+void CLevel1State::init()
 {
-    CCommonState::Init();
-    
+    CCommonState::init();
+
     // Unblock the menu messaging and activate needed trees
     CMenuManager::Instance().allow();
     CMenuManager::Instance().activateTree("pause_tree");
-    
+
     // Reset the camera
     //CCamera::Instance().SetPos( CStageMgr::Instance().GetDefaultCameraPos().GetPos() );
 
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
-    
+
     // Create the actors
     CSpriteStrategyMgr::Instance().create("(actor)", "enemy_ship");
     m_pPlayerShip = CSpriteStrategyMgr::Instance().createSprite<CActorSprite2D>("(actor)", "player_ship");
-    
+
     // Get pointer to the player ship
     //m_pPlayerShip = &CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)").Get<CActorSprite2D>(id);
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CLevel1State::HandleEvent( const SDL_Event & rEvent )
+void CLevel1State::handleEvent( const SDL_Event & rEvent )
 {
-    CCommonState::HandleEvent( rEvent );
-    
+    CCommonState::handleEvent( rEvent );
+
     if( !CMenuManager::Instance().isActive() )
     {
         m_pPlayerShip->handleEvent( rEvent );
     }
-    
+
     // Check for the "change state" message
     if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
     {
         // Prepare the script to fade in the screen. The script will send the end message
-        if( rEvent.user.code == NMenu::ETC_BEGIN ) 
+        if( rEvent.user.code == NMenu::ETC_BEGIN )
             m_scriptComponent.prepare( "(menu)", "Screen_FadeOut" );
     }
 
@@ -96,7 +95,7 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
         // Unload the object data
         m_stateMessage.m_groupUnload.push_back("(actor)");
         m_stateMessage.m_groupUnload.push_back("(stage1)");
-        
+
         // Unload scripts
         m_stateMessage.m_scriptUnload.push_back("(actor)");
 
@@ -104,40 +103,37 @@ void CLevel1State::HandleEvent( const SDL_Event & rEvent )
 
         m_changeState = true;
     }*/
-
-}   // HandleEvent
+}
 
 
 /************************************************************************
 *    desc:  Handle events
 ************************************************************************/
-void CLevel1State::MiscProcess()
+void CLevel1State::miscProcess()
 {
     CSpriteStrategyMgr::Instance().miscProcess();
-    
-}   // MiscProcess
+}
 
 
 /***************************************************************************
 *    desc:  Handle the physics
 ****************************************************************************/
-void CLevel1State::Physics()
+void CLevel1State::physics()
 {
     if( !CMenuManager::Instance().isActive() )
     {
 
     }
-
-}   // Physics
+}
 
 
 /***************************************************************************
 *    desc:  Update objects that require them
 ****************************************************************************/
-void CLevel1State::Update()
+void CLevel1State::update()
 {
-    CCommonState::Update();
-    
+    CCommonState::update();
+
     m_scriptComponent.update();
 
     if( !CMenuManager::Instance().isActive() )
@@ -145,33 +141,30 @@ void CLevel1State::Update()
         //CCamera::Instance().IncPos( CPoint<float>( -0.05f * CHighResTimer::Instance().GetElapsedTime(), 0.f ) );
         CSpriteStrategyMgr::Instance().update();
     }
-
-}   // Update
+}
 
 
 /***************************************************************************
 *    desc:  Transform the game objects
 ****************************************************************************/
-void CLevel1State::Transform()
+void CLevel1State::transform()
 {
-    CCommonState::Transform();
+    CCommonState::transform();
 
     //CCamera::Instance().Transform();
     CSpriteStrategyMgr::Instance().transform();
-
-}   // Transform
+}
 
 
 /***************************************************************************
 *    desc:  Do the 2D rendering
 ****************************************************************************/
-void CLevel1State::PreRender()
+void CLevel1State::preRender()
 {
-    CCommonState::PreRender();
-    
-    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CCommonState::preRender();
 
-}   // PreRender
+    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+}
 
 
 
@@ -189,23 +182,23 @@ namespace NLevel_1
         CObjectDataMgr::Instance().loadGroup2D( "(stage1)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
         CObjectDataMgr::Instance().loadGroup2D( "(actor)", CObjectDataMgr::DONT_CREATE_FROM_DATA );
     }
-    
+
     void CriticalLoad()
     {
         // Create the group's VBO, IBO, textures, etc
         CObjectDataMgr::Instance().createFromData2D( "(actor)" );
         CObjectDataMgr::Instance().createFromData2D( "(stage1)" );
     }
-    
+
     void Load()
     {
         CSpriteStrategyMgr::Instance().addStrategy( "(actor)", new CBasicSpriteStrategy );
         CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CLoopStageStrategy );
-        
+
         // Load state specific AngelScript functions
         CScriptManager::Instance().loadGroup("(actor)");
     }
-    
+
     void CriticalInit()
     {
     }
@@ -220,11 +213,10 @@ namespace NLevel_1
         CObjectDataMgr::Instance().freeGroup2D( "(stage1)" );
         CObjectDataMgr::Instance().freeGroup2D( "(actor)" );
     }
-    
+
     void Unload()
     {
         CSpriteStrategyMgr::Instance().clear();
-        
-    }   // Unload
+    }
 
-}   // NLevel_1
+}

@@ -39,7 +39,7 @@
 #include <thread>
 
 /************************************************************************
-*    desc:  Constructer
+*    desc:  Constructor
 ************************************************************************/
 CLoadState::CLoadState( const CStateMessage & stateMsg ) :
     iGameState( NGameDefs::EGS_GAME_LOAD, stateMsg ),
@@ -47,56 +47,54 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
     m_time(0),
     m_frame(0)
 {
-}   // Constructer
+}
 
 
 /************************************************************************
-*    desc:  destructer
+*    desc:  destructor
 ************************************************************************/
 CLoadState::~CLoadState()
 {
     CObjectDataMgr::Instance().freeGroup2D( "(loadingScreen)" );
-    
-}   // destructer
+}
 
 
 /************************************************************************
 *    desc:  Do any pre-load init's
 ************************************************************************/
-void CLoadState::Init()
+void CLoadState::init()
 {
     // Load the start up animation group
     CObjectDataMgr::Instance().loadGroup2D( "(loadingScreen)" );
-    
+
     // Allocate the sprite to fade in
     m_upSprite.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D( "(loadingScreen)", "loadAnim" ) ) );
-    
+
     // Get the position, scale and half the screen size
     CSize<float> scrnHalf = CSettings::Instance().getDefaultSizeHalf();
 
     // Set the position
     m_upSprite->setPos( CPoint<float>(scrnHalf.w, -scrnHalf.h) + CPoint<float>(-150, 150) );
-    m_upSprite->transform(); 
-    
+    m_upSprite->transform();
+
     // Setup the fade in
     CShaderMgr::Instance().setShaderColor( "shader_2d_spriteSheet", "additive", CColor(1,1,1,1) );
-    
+
     // Reset the elapsed time before entering game loop
     CHighResTimer::Instance().calcElapsedTime();
-    
-}   // Init
+}
 
 
 /***************************************************************************
 *    desc:  Animate from thread durring the load
 ****************************************************************************/
-void CLoadState::Animate()
+void CLoadState::animate()
 {
     // Get the elapsed time
     CHighResTimer::Instance().calcElapsedTime();
 
     m_time += CHighResTimer::Instance().getElapsedTime();
-        
+
     if( m_time > 83.f )
     {
         // Clear the screen
@@ -113,28 +111,27 @@ void CLoadState::Animate()
         CShaderMgr::Instance().unbind();
         CTextureMgr::Instance().unbind();
         CVertBufMgr::Instance().unbind();
-        
+
         int dif = m_time / 83;
         m_time = m_time - (dif * 83);
     }
-
-}   // Animate
+}
 
 
 /***************************************************************************
 *    desc:  Object Data Load
 ****************************************************************************/
-void CLoadState::ObjectDataLoad()
+void CLoadState::objectDataLoad()
 {
     try
     {
         // Test code to see loading animation!!!!
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
-        
-        if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
+
+        if( m_stateMessage.getLoadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::ObjectDataLoad();
 
-        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_Level_1 )
+        else if( m_stateMessage.getLoadState() == NGameDefs::EGS_Level_1 )
             NLevel_1::ObjectDataLoad();
     }
     catch (NExcept::CCriticalException & ex)
@@ -152,75 +149,72 @@ void CLoadState::ObjectDataLoad()
         m_errorTitle = "Unknown Error";
         m_errorMsg = "Something bad happened and I'm not sure what it was.";
     }
-    
+
     // Set the flag to indicate the load is complete
     m_threadActive = false;
-    
-}   // ObjectDataLoad
+}
 
 
 
 /***************************************************************************
 *    desc:  Load the assets
 ****************************************************************************/
-void CLoadState::CriticalLoad()
-{ 
+void CLoadState::criticalLoad()
+{
     // ----------------- UNLOAD SECTION -----------------
-    
-    if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
+
+    if( m_stateMessage.getUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalUnload();
-    
-    else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_Level_1 )
+
+    else if( m_stateMessage.getUnloadState() == NGameDefs::EGS_Level_1 )
         NLevel_1::CriticalUnload();
-    
-    
+
+
     // ------------------ LOAD SECTION ------------------
 
-    if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
+    if( m_stateMessage.getLoadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalLoad();
 
-    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_Level_1 )
+    else if( m_stateMessage.getLoadState() == NGameDefs::EGS_Level_1 )
         NLevel_1::CriticalLoad();
-    
-}   // CriticalLoad
+}
 
 
 /***************************************************************************
 *    desc:  Critical inits
 ****************************************************************************/
-void CLoadState::CriticalInit()
+void CLoadState::criticalInit()
 {
-    if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
+    if( m_stateMessage.getLoadState() == NGameDefs::EGS_TITLE_SCREEN )
         NTitleScreenState::CriticalInit();
 
-    else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_Level_1 )
+    else if( m_stateMessage.getLoadState() == NGameDefs::EGS_Level_1 )
         NLevel_1::CriticalInit();
-    
-}   // CriticalInit
+}
 
 
 /***************************************************************************
 *    desc:  Load the assets
 ****************************************************************************/
-void CLoadState::AssetsLoad()
+void CLoadState::assetsLoad()
 {
     try
     {
         // ----------------- UNLOAD SECTION -----------------
 
-        if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
+        if( m_stateMessage.getUnloadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::Unload();
 
-        else if( m_stateMessage.GetUnloadState() == NGameDefs::EGS_Level_1 )
+        else if( m_stateMessage.getUnloadState() == NGameDefs::EGS_Level_1 )
             NLevel_1::Unload();
 
 
         // ------------------ LOAD SECTION ------------------
 
-        if( m_stateMessage.GetLoadState() == NGameDefs::EGS_TITLE_SCREEN )
+        if( m_stateMessage.getLoadState() == NGameDefs::EGS_TITLE_SCREEN )
             NTitleScreenState::Load();
 
-        else if( m_stateMessage.GetLoadState() == NGameDefs::EGS_Level_1 )
+        else if( m_stateMessage.getLoadState() == NGameDefs::EGS_Level_1 )
             NLevel_1::Load();
     }
     catch (NExcept::CCriticalException & ex)
@@ -238,65 +232,61 @@ void CLoadState::AssetsLoad()
         m_errorTitle = "Unknown Error";
         m_errorMsg = "Something bad happened and I'm not sure what it was.";
     }
-    
+
     // Set the flag to indicate the load is complete
     m_threadActive = false;
-
-}   // AssetsLoad
+}
 
 
 /***************************************************************************
 *    desc:  Is the state done
 ****************************************************************************/
-bool CLoadState::DoStateChange()
+bool CLoadState::doStateChange()
 {
     CActionMgr::Instance().resetLastUsedDevice();
 
-    std::thread objLoadThread( &CLoadState::ObjectDataLoad, this );
+    std::thread objLoadThread( &CLoadState::objectDataLoad, this );
     objLoadThread.detach();
-    
+
     do
     {
-        Animate();
+        animate();
         std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
     }
     while(m_threadActive);
-    
+
     // If there was an error in the load thread, re-throw exception
     if( !m_errorMsg.empty() )
         throw NExcept::CCriticalException(m_errorTitle, m_errorMsg);
-    
-    CriticalLoad();
-    
+
+    criticalLoad();
+
     // Start the loading/unloading thread
     m_threadActive = true;
-    std::thread loadThread( &CLoadState::AssetsLoad, this );
+    std::thread loadThread( &CLoadState::assetsLoad, this );
     loadThread.detach();
-    
+
     do
     {
-        Animate();
+        animate();
         std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
     }
     while(m_threadActive);
-    
+
     // If there was an error in the load thread, re-throw exception
     if( !m_errorMsg.empty() )
         throw NExcept::CCriticalException(m_errorTitle, m_errorMsg);
-    
-    CriticalInit();
-    
-    return true;
 
-}   // DoStateChange
+    criticalInit();
+
+    return true;
+}
 
 
 /***************************************************************************
 *    desc:  Get the next state to load
 ****************************************************************************/
-NGameDefs::EGameState CLoadState::GetNextState()
+NGameDefs::EGameState CLoadState::getNextState()
 {
-    return m_stateMessage.GetLoadState();
-
-}   // GetNextState
-
+    return m_stateMessage.getLoadState();
+}

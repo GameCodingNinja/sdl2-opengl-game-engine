@@ -28,25 +28,25 @@ public:
     virtual ~CLevel1State(){};
     
     // Do any pre-game loop init's
-    void Init() override;
+    void init() override;
     
     // Handle events
-    void HandleEvent( const SDL_Event & rEvent ) override;
+    void handleEvent( const SDL_Event & rEvent ) override;
     
     // Handle any misc processing before the real work is started
-    void MiscProcess() override;
+    void miscProcess() override;
 
     // Handle the physics
-    void Physics() override;
+    void physics() override;
 
     // Update objects that require them
-    void Update() override;
+    void update() override;
 
     // Transform the game objects
-    void Transform() override;
+    void transform() override;
 
     // Do the rendering
-    void PreRender() override;
+    void preRender() override;
     
 private:
         
