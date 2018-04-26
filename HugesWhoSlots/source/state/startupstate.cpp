@@ -55,6 +55,7 @@
 #include <utilities/xmlpreloader.h>
 #include <slot/slotmathmanager.h>
 #include <slot/symbolsetviewmanager.h>
+#include <script/scripthighresolutiontimer.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -197,6 +198,7 @@ void CStartUpState::assetLoad()
     NScriptSoundManager::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
+    NScriptHighResolutionTimer::Register();
 
     // Load group specific script items
     CScriptManager::Instance().loadGroup("(menu)");

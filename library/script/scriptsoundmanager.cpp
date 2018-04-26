@@ -26,18 +26,22 @@ namespace NScriptSoundManager
         using namespace NScriptGlobals; // Used for Throw
         
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
-
-        Throw( pEngine->RegisterGlobalFunction("void PlaySound( string &in, string &in, int loopCount = 0 )", asMETHOD(CSoundMgr, play), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void PauseSound( string &in, string &in )", asMETHOD(CSoundMgr, pause), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void ResumeSound( string &in, string &in )", asMETHOD(CSoundMgr, resume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void StopSound( string &in, string &in )", asMETHOD(CSoundMgr, stop), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void SetVolume( string &in, string &in, int volume )", asMETHOD(CSoundMgr, setVolume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("int GetVolume( string &in, string &in )", asMETHOD(CSoundMgr, getVolume), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool IsSoundPlaying( string &in, string &in )", asMETHOD(CSoundMgr, isPlaying), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool IsSoundPaused( string &in, string &in )", asMETHOD(CSoundMgr, isPaused), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("int GetNextSoundChannel()",               asMETHOD(CSoundMgr, getNextChannel), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CSound & GetSound( string &in, string &in )", asMETHOD(CSoundMgr, getSound), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CPlayList & GetPlayList( string &in, string &in )", asMETHOD(CSoundMgr, getPlayList), asCALL_THISCALL_ASGLOBAL, &CSoundMgr::Instance()) );
+        
+        // Register type
+        Throw( pEngine->RegisterObjectType( "CSoundMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
+        
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "void play(string &in, string &in, int loopCount=0)", asMETHOD(CSoundMgr, play),        asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "void pause(string &in, string &in)",                 asMETHOD(CSoundMgr, pause),       asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "void resume(string &in, string &in)",                asMETHOD(CSoundMgr, resume),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "void stop(string &in, string &in)",                  asMETHOD(CSoundMgr, stop),        asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "void setVolume(string &in, string &in, int)",        asMETHOD(CSoundMgr, setVolume),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "int getVolume(string &in, string &in)",              asMETHOD(CSoundMgr, getVolume),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "bool isPlaying(string &in, string &in)",             asMETHOD(CSoundMgr, isPlaying),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "bool isPaused(string &in, string &in)",              asMETHOD(CSoundMgr, isPaused),    asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "CSound & getSound(string &in, string &in)",          asMETHOD(CSoundMgr, getSound),    asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CSoundMgr", "CPlayList & getPlayList(string &in, string &in)",    asMETHOD(CSoundMgr, getPlayList), asCALL_THISCALL) );
+        
+        // Set this object registration as a global property to simulate a singleton
+        Throw( pEngine->RegisterGlobalProperty("CSoundMgr SoundMgr", &CSoundMgr::Instance()) );
     }
-
-}   // NScriptColor
+}

@@ -14,7 +14,7 @@
 ************************************************************************/
 void Control_OnActive()
 {
-    PlaySound( "(menu)", "active" );
+    SoundMgr.play( "(menu)", "active" );
 }
 
 
@@ -23,7 +23,7 @@ void Control_OnActive()
 ************************************************************************/
 void Control_OnSelect()
 {
-    PlaySound( "(menu)", "select" );
+    SoundMgr.play( "(menu)", "select" );
 }
 
 /************************************************************************
@@ -34,8 +34,7 @@ shared void Screen_FadeIn()
     CColor current(0,0,0,1);
     CColor final(1,1,1,1);
     ShaderColorTo( 500, current, final, "additive" );
-    
-}   // Screen_FadeIn
+}
 
 
 /************************************************************************
@@ -46,10 +45,9 @@ shared void Screen_FadeOut()
     CColor current(1,1,1,1);
     CColor final(0,0,0,1);
     ShaderColorTo( 500, current, final, "additive" );
-    
+
     DispatchEvent( EGE_MENU_GAME_STATE_CHANGE, ETC_END );
-    
-}   // Screen_FadeOut
+}
 
 
 /************************************************************************
@@ -58,10 +56,10 @@ shared void Screen_FadeOut()
 shared void MenuBtnActOver_Selected( iSprite & sprite )
 {
     sprite.setVisible( true );
-    
+
     AlphaTo( 40, 0, sprite );
     Hold( 25 );
-    
+
     AlphaTo( 40, 1, sprite );
     Hold( 50 );
     AlphaTo( 40, 0, sprite );
@@ -69,7 +67,7 @@ shared void MenuBtnActOver_Selected( iSprite & sprite )
     AlphaTo( 40, 1, sprite );
     Hold( 50 );
     AlphaTo( 40, 0, sprite );
-    
+
     sprite.setVisible( false );
 
     DispatchEvent( EGE_MENU_SELECT_EXECUTE );
@@ -79,11 +77,11 @@ shared void MenuBtnActOver_Selected( iSprite & sprite )
 shared void MenuBtnActOver_FastSelected( iSprite & sprite )
 {
     sprite.setVisible( true );
-    
+
     AlphaTo( 30, 1, sprite );
     Hold( 50 );
     AlphaTo( 30, 0, sprite );
-    
+
     sprite.setVisible( false );
 
     DispatchEvent( EGE_MENU_SELECT_EXECUTE );
@@ -94,7 +92,7 @@ shared void MenuBtnActOver_Active( iSprite & sprite )
 {
     sprite.setAlpha( 0 );
     sprite.setVisible( true );
-    
+
     while(true)
     {
         AlphaTo( 500, 0.8, sprite );

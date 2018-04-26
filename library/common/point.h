@@ -100,10 +100,6 @@ public:
 
     /************************************************************************
     *    desc:  The equality operator
-    *
-    *    param:  CPoint & point - point to equate
-    *
-    *    return: bool - true or false
     ************************************************************************/
     bool operator == ( const CPoint & point ) const
     {
@@ -115,10 +111,6 @@ public:
 
     /************************************************************************
     *    desc:  The inequality operator
-    *
-    *    param:  CPoint & point - point to check
-    *
-    *    return: bool - true or false
     ************************************************************************/
     bool operator != ( const CPoint & point ) const
     {
@@ -131,10 +123,6 @@ public:
     
     /************************************************************************
     *    desc:  Greater than operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator > ( const CPoint & point ) const
     {
@@ -155,10 +143,6 @@ public:
     
     /************************************************************************
     *    desc:  Greater than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator >= ( const CPoint & point ) const
     {
@@ -179,10 +163,6 @@ public:
     
     /************************************************************************
     *    desc:  Less than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator < ( const CPoint & point ) const
     {
@@ -203,10 +183,6 @@ public:
     
     /************************************************************************
     *    desc:  Less than or equal to operator
-    *
-    *	 param: const value - value to compare
-    *
-    *	 ret:	bool - true or false
     ************************************************************************/
     bool operator <= ( const CPoint & point ) const
     {
@@ -227,10 +203,6 @@ public:
     
     /************************************************************************
     *    desc:  The subtraction operator
-    *
-    *    param:  CPoint & point - point to subtract
-    *
-    *    return: CPoint - subtracted point
     ************************************************************************/
     CPoint operator - ( const CPoint & point ) const
     {
@@ -242,13 +214,6 @@ public:
         return tmp;
     }
 
-    /************************************************************************
-    *    desc:  The subtraction operator
-    *
-    *    param:  type * value - value to subtract
-    *
-    *    return: CPoint - subtracted point
-    ************************************************************************/
     CPoint operator - ( type value ) const
     {
         CPoint tmp;
@@ -261,10 +226,6 @@ public:
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  CPoint & point - point to add
-    *
-    *    return: CPoint - added point
     ************************************************************************/
     CPoint operator + ( const CPoint & point ) const
     {
@@ -276,13 +237,6 @@ public:
         return tmp;
     }
 
-    /************************************************************************
-    *    desc:  The addition operator
-    *
-    *    param:  type value - value to add
-    *
-    *    return: CPoint - added point
-    ************************************************************************/
     CPoint operator + ( type value ) const
     {
         CPoint tmp;
@@ -295,10 +249,6 @@ public:
 
     /************************************************************************
     *    desc:  The division operator
-    *
-    *    param:  CPoint & point - point to divide by
-    *
-    *    return: CPoint - divided by point
     ************************************************************************/
     CPoint operator / ( const CPoint & point ) const
     {
@@ -310,13 +260,6 @@ public:
         return tmp;
     }
 
-    /************************************************************************
-    *    desc:  The addition operator
-    *
-    *    param:  type value - value to divide by
-    *
-    *    return: CPoint - divided by point
-    ************************************************************************/
     CPoint operator / ( type value ) const
     {
         CPoint tmp;
@@ -329,10 +272,6 @@ public:
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  CPoint & point - point to add
-    *
-    *    return: CPoint - added point
     ************************************************************************/
     CPoint operator += ( const CPoint & point )
     {
@@ -345,10 +284,6 @@ public:
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  type value - value to add
-    *
-    *    return: CPoint - added point
     ************************************************************************/
     CPoint operator += ( type value )
     {
@@ -361,10 +296,6 @@ public:
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  CPoint & point - point to add
-    *
-    *    return: CPoint - added point
     ************************************************************************/
     CPoint operator -= ( const CPoint & point )
     {
@@ -377,10 +308,6 @@ public:
 
     /************************************************************************
     *    desc:  The addition operator
-    *
-    *    param:  type value - value to add
-    *
-    *    return: CPoint - added point
     ************************************************************************/
     CPoint operator -= ( type value )
     {
@@ -393,10 +320,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  CPoint & point * point to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator * ( const CPoint & point ) const
     {
@@ -410,10 +333,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  type value - value to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator * ( type value ) const
     {
@@ -427,10 +346,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  CMatrix & matrix - matrix to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator * ( type * pMat ) const
     {
@@ -445,10 +360,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  CPoint & point - point to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator *= ( const CPoint & point )
     {
@@ -461,10 +372,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  type value - value to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator *= ( type value )
     {
@@ -477,10 +384,6 @@ public:
 
     /************************************************************************
     *    desc:  The multiplication operator
-    *
-    *    param:  CMatrix & matrix - matrix to multiply
-    *
-    *    return: CPoint - multiplied point
     ************************************************************************/
     CPoint operator *= ( type * pMat )
     {
@@ -499,10 +402,6 @@ public:
 
     /************************************************************************
     *    desc:  The division operator
-    *
-    *    param:  CPoint & point - point to divide
-    *
-    *    return: CPoint - divided point
     ************************************************************************/
     CPoint operator /= ( const CPoint & point )
     {
@@ -515,10 +414,6 @@ public:
 
     /************************************************************************
     *    desc:  The division operator
-    *
-    *    param:  type value - value to divide
-    *
-    *    return: CPoint - divided point
     ************************************************************************/
     CPoint operator /= ( type value )
     {
@@ -631,8 +526,6 @@ public:
 
     /************************************************************************
     *    desc:  Does this point not have any data?
-    *
-    *    return: bool
     ************************************************************************/
     bool isEmpty() const
     {
@@ -724,8 +617,6 @@ public:
 
     /************************************************************************
     *    desc:  Get the length of the point from the origin
-    *
-    *    ret:	float - length of point
     ************************************************************************/
     type getLength() const
     {
@@ -735,10 +626,6 @@ public:
 
     /************************************************************************
     *    desc:  Get the length between two points
-    *
-    *    param: CPoint & point - point
-    *
-    *    ret:	float - distance between two points
     ************************************************************************/
     type getLength( const CPoint & point ) const
     {
@@ -749,8 +636,6 @@ public:
     /************************************************************************
     *    desc:  Get the length of the point from the origin along the x and y
     *			axis
-    *
-    *    ret:	float - length of point
     ************************************************************************/
     type getLength2D() const
     {
@@ -764,10 +649,6 @@ public:
 
     /************************************************************************
     *    desc:  Get the squared length between two points
-    *
-    *    param: CPoint & point - point
-    *
-    *    ret:	float - squared distance between two points
     ************************************************************************/
     type getLengthSquared( const CPoint & point ) const
     {
@@ -776,8 +657,6 @@ public:
 
     /************************************************************************
     *    desc:  Get the squared length of the point from the origin
-    *
-    *    return: type - length of point
     ************************************************************************/
     type getLengthSquared() const
     {
@@ -786,8 +665,6 @@ public:
 
     /************************************************************************
     *    desc:  Get the squared length of the point from the origin
-    *
-    *    return: type - length of point
     ************************************************************************/
     type getLengthSquared2D() const
     {
@@ -870,11 +747,6 @@ public:
 
     /************************************************************************
     *    desc:  Create a displacement vector
-    *
-    *    param:  CPoint & point
-    *            type amount - amount of displacement
-    *
-    *    return: CPoint - the dislacement vector
     ************************************************************************/
     CPoint getDisplacement( const CPoint & point, type amount ) const
     {
@@ -891,8 +763,6 @@ public:
     ***********************************************************************************/
     /************************************************************************
     *    desc:  Return a copy of the point with its signs flipped
-    *
-    *	 ret:	CPoint - point with signs flipped
     ************************************************************************/
     CPoint operator - () const
     {

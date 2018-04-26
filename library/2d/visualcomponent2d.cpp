@@ -267,7 +267,7 @@ void CVisualComponent2D::createFontString( const std::string & fontString )
         !m_pFontData->m_fontProp.m_fontName.empty() &&
         ((fontString != m_pFontData->m_fontString) || (m_vbo == 0)) )
     {
-        m_pFontData->m_fontStrSize.reset();
+        m_pFontData->m_fontStrSize.clear();
         float lastCharDif(0.f);
 
         const CFont & font = CFontMgr::Instance().getFont( m_pFontData->m_fontProp.m_fontName );

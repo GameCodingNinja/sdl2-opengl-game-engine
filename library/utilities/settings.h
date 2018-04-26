@@ -128,6 +128,7 @@ public:
     
     // Get the Anisotropic setting
     int getAnisotropicLevel() const;
+    void setAnisotropicLevel( int level );
     
     // Get the projection type
     NDefs::EProjectionType getProjectionType() const;

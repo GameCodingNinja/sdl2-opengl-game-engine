@@ -1,15 +1,14 @@
 
-/************************************************************************
-*    FILE NAME:       shared_utilities.ang
-*
-*    DESCRIPTION:     General purpose shared utility scripts
-*                     The keyword "shared" allows for only one copy to
-*                     loaded and used among all modules
-************************************************************************/
+//
+//  FILE NAME:  utilities.ang
+//
+//  DESC:       General purpose shared utility scripts
+//
 
-/************************************************************************
-*    desc:  Color to the final color in time
-************************************************************************/
+
+//
+//  DESC: Color to the final color in time
+//
 void ColorTo( float time, CColor &in final, iSprite & sprite )
 {
     CColor current = sprite.getColor();
@@ -17,7 +16,7 @@ void ColorTo( float time, CColor &in final, iSprite & sprite )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -25,49 +24,45 @@ void ColorTo( float time, CColor &in final, iSprite & sprite )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             sprite.setColor( current );
         }
 
         Suspend();
     }
     while( time > 0 );
+}
 
-}   // ColorTo
-
-
-/************************************************************************
-*    desc:  Shader color to the final color in time
-************************************************************************/
+//
+//  DESC: Shader color to the final color in time
+//
 void ShaderColorTo( float time, CColor current, CColor &in final, const string &in shaderMember )
 {
     CColor inc = (final - current) / time;
 
     do
     {
-        time -= GetElapsedTime();
-        
+        time -= HighResTimer.getElapsedTime();
+
         if( time < 0 )
         {
-            Shader_SetAllShaderColor( shaderMember, final );
+            ShaderMgr.setAllShaderColor( shaderMember, final );
         }
         else
         {
-            current += inc * GetElapsedTime();
-            
-            Shader_SetAllShaderColor( shaderMember, current );
+            current += inc * HighResTimer.getElapsedTime();
+
+            ShaderMgr.setAllShaderColor( shaderMember, current );
         }
 
         Suspend();
     }
     while( time > 0 );
+}
 
-}   // ShaderColorTo
-
-
-/************************************************************************
-*    desc:  Alpha to the final alpha
-************************************************************************/
+//
+//  DESC: Alpha to the final alpha
+//
 void AlphaTo( float time, float final, iSprite & sprite )
 {
     // Convert from RGB value to normalized value
@@ -79,7 +74,7 @@ void AlphaTo( float time, float final, iSprite & sprite )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -87,15 +82,14 @@ void AlphaTo( float time, float final, iSprite & sprite )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             sprite.setAlpha( current );
         }
 
         Suspend();
     }
     while( time > 0 );
-
-}   // AlphaTo
+}
 
 void AlphaTo( float time, float final, CMenu & menu )
 {
@@ -108,7 +102,7 @@ void AlphaTo( float time, float final, CMenu & menu )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -116,21 +110,19 @@ void AlphaTo( float time, float final, CMenu & menu )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             menu.setAlpha( current );
         }
 
         Suspend();
     }
     while( time > 0 );
+}
 
-}   // AlphaTo
-
-
-/************************************************************************
-*    desc:  Volume to the final volume
-************************************************************************/
-void VolumeTo( float time, int final, CSound &in sound )
+//
+//  DESC: Volume to the final volume
+//
+void VolumeTo( float time, int final, CSound & sound )
 {
     float current = sound.getVolume();
     float inc = (float(final) - current) / time;
@@ -138,7 +130,7 @@ void VolumeTo( float time, int final, CSound &in sound )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -146,79 +138,70 @@ void VolumeTo( float time, int final, CSound &in sound )
         }
         else
         {
-            current += inc * GetElapsedTime();
-        
+            current += inc * HighResTimer.getElapsedTime();
+
             if( lastVolume != int(current) )
             {
                 sound.setVolume( int(current) );
                 lastVolume = int(current);
             }
         }
-        
+
         Suspend();
     }
     while( time > 0 );
+}
 
-}   // VolumeTo
-
-
-/************************************************************************
-*    desc:  Play the animation
-************************************************************************/
-/*void Play( int fps, iSprite & sprite, bool loop = false )
+//
+//  DESC: Play the animation
+//
+void Play( int fps, iSprite & sprite, bool loop = false )
 {
     float time = 1000.0 / fps;
-    uint frameCount = sprite.GetFrameCount();
+    uint frameCount = sprite.getFrameCount();
 
     do
     {
         for( uint i = 0; i < frameCount; ++i )
         {
-            sprite.SetFrame( i );
+            sprite.setFrame( i );
 
             Hold( time );
         }
     }
     while( loop );
+}
 
-}*/   // Play
-
-
-/************************************************************************
-*    desc:  Hold the sprite execution in time
-************************************************************************/
+//
+//  DESC: Hold the execution in time
+//
 void Hold( float time )
 {
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         Suspend();
     }
     while( time > 0 );
+}
 
-}   // Hold
-
-
-/************************************************************************
-*    desc:  Screen fade in script
-************************************************************************/
+//
+//  DESC: Screen fade in script
+//
 void Screen_FadeIn()
 {
     CColor current(0,0,0,1);
     CColor final(1,1,1,1);
     ShaderColorTo( 500, current, final, "additive" );
-    
-}   // Screen_FadeIn
+}
 
-
-/************************************************************************
-*    desc:  Screen fade out script
-************************************************************************/
+//
+//  DESC: Screen fade out script
+//
 void Screen_FadeOut()
 {
     CColor current(1,1,1,1);
     CColor final(0,0,0,1);
     ShaderColorTo( 500, current, final, "additive" );
-    
-}   // Screen_FadeOut
+}

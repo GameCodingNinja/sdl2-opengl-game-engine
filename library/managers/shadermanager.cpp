@@ -381,7 +381,7 @@ void CShaderMgr::connect_initShader( const InitShaderSignal::slot_type & slot )
 /************************************************************************
 *    desc:  Set the shader member variable
 ************************************************************************/
-void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string & locationId, CColor color )
+void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string & locationId, const CColor & color )
 {
     setShaderColor( getShaderData( shaderId ), locationId, color );
 }
@@ -391,7 +391,7 @@ void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string
     setShaderColor( getShaderData( shaderId ), locationId, CColor(r,g,b,a) );
 }
 
-void CShaderMgr::setShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color )
+void CShaderMgr::setShaderColor( CShaderData & shaderData, const std::string & locationId, const CColor & color )
 {
     // Check for the shader location
     if( shaderData.hasUniformLocation( locationId ) )
@@ -414,7 +414,7 @@ void CShaderMgr::setShaderColor( CShaderData & shaderData, const std::string & l
 /************************************************************************
 *    desc:  Set all the shaders using this color location
 ************************************************************************/
-void CShaderMgr::setAllShaderColor( const std::string & locationId, CColor color )
+void CShaderMgr::setAllShaderColor( const std::string & locationId, const CColor & color )
 {
     for( auto & iter : m_shaderMap )
         setShaderColor( iter.second, locationId, color );

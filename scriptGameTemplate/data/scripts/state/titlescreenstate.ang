@@ -22,14 +22,14 @@ final class CTitleScreenState : iGameState
     //
     void Init() override
     {
-        Strategy_CreateSprite( "strategyFor2D", "(title_screen)", "background" );
+        StrategyMgr.createSprite( "strategyFor2D", "(title_screen)", "background" );
         
-        Strategy_CreateBasicSpriteStrategy( "strategyFor3D", "camera3D" );
+        StrategyMgr.createBasicSpriteStrategy( "strategyFor3D", "camera3D" );
         
-        CCamera @camera = Camera_CreatePerspective("camera3D");
+        CCamera @camera = CameraMgr.createPerspective("camera3D");
         camera.setPos( 0, 0, 20 );
      
-        @cube = Strategy_CreateSprite( "strategyFor3D", "(cube)", "cube" );
+        @cube = StrategyMgr.createSprite( "strategyFor3D", "(cube)", "cube" );
         cube.setScale(3,3,3);
         
         Spawn("Screen_FadeIn");
@@ -40,7 +40,7 @@ final class CTitleScreenState : iGameState
     //
     void Update() override
     {
-        float rot = GetElapsedTime() * 0.04;
+        float rot = HighResTimer.getElapsedTime() * 0.04;
         cube.incRot( rot, rot, 0 );
     }
 };

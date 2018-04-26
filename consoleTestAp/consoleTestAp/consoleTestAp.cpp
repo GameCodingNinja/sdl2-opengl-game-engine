@@ -1,26 +1,59 @@
 // consoleTestAp.cpp : Defines the entry point for the console application.
 //
 
+/*#include <iostream>
+
+int main()
+{
+    // This does not correlate to the number of pi digits currently 1,717 digits
+    const int max_range = 6000;
+    
+    int r[max_range + 1];
+    int i, k, b, d, c = 0;
+    for (i = 0; i < max_range; i++) {
+        r[i] = 2000;
+    }
+    for (k = max_range; k > 0; k -= 14) {
+        d = 0;
+        i = k;
+        for (;;) {
+            d += r[i] * 10000;
+            b = 2 * i - 1;
+            r[i] = d % b;
+            d /= b;
+            i--;
+            if (i == 0) break;
+            d *= i;
+        }
+        printf("%.4d", c + d / 10000);
+        c = d % 10000;
+    }
+    
+    return 0;
+}*/
+
 #include <iostream>
 #include <script/scriptmanager.h>
 #include <script/scriptglobals.h>
+#include <script/scripthighresolutiontimer.h>
 
 #include <scriptstdstring/scriptstdstring.h>
 
 int main()
 {
     // Load the script list table
-    CScriptManager::Instance().LoadListTable( "scriptListTable.lst" );
+    CScriptManager::Instance().loadListTable( "scriptListTable.lst" );
     
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().GetEnginePtr() );
+    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
     NScriptGlobals::Register();
+    NScriptHighResolutionTimer::Register();
 
-    CScriptManager::Instance().LoadGroup("(test)");
+    CScriptManager::Instance().loadGroup("(test)");
 
-    CScriptManager::Instance().Prepare("(test)", "Script_Run");
+    CScriptManager::Instance().prepare("(test)", "Script_Run");
     
-    CScriptManager::Instance().Update();
+    CScriptManager::Instance().update();
     
     return 0;
 }
@@ -82,26 +115,24 @@ int main()
 
     return 0;
 }*/
-/*
-#include <iostream>
+
+/*#include <iostream>
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/matrix.h>
 
-int main()
+int main()  // 7124.35 ms
 {
-    uint64_t value = 0;
-    uint64_t test;
-    uint64_t maxValue = 1000000;
-    
-    CMatrix matrix1, matrix2;
+    long long int value = 0;
+    long long int test;
+    long long int maxValue = 10000000;
    
     std::cout << "Test started..." << std::endl;
-    CHighResTimer::Instance().TimerStart();
+    
+    CHighResTimer::Instance().timerStart();
     
     do
     {
-        matrix2.MergeMatrix( matrix1 );
         test = ++value;
 
         do
@@ -115,10 +146,9 @@ int main()
         }
         while (test > 1);
     }
-    //while ((test > 0) && (value < 100000000));
-    while (++value < maxValue);
+    while ((test > 0) && (value < maxValue));
     
-    std::cout << "Execution time: " << CHighResTimer::Instance().TimerStop() << std::endl;
+    std::cout << "Value: " << value << ", Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
     
     return 0;
 }*/

@@ -26,9 +26,20 @@ namespace NScriptCameraManager
         using namespace NScriptGlobals; // Used for Throw
         
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
-
-        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreateOrthographic( string &in, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, createOrthographic), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("CCamera & Camera_CreatePerspective( string &in, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f )", asMETHOD(CCameraMgr, createPerspective), asCALL_THISCALL_ASGLOBAL, &CCameraMgr::Instance()) );
+        
+        // Register type
+        Throw( pEngine->RegisterObjectType( "CCameraMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
+        
+        Throw( pEngine->RegisterObjectMethod(
+            "CCameraMgr",
+            "CCamera & createOrthographic(string &in, float minZDist = 5, float maxZDist = 1000, float scale = 1.f)",
+            asMETHOD(CCameraMgr, createOrthographic), asCALL_THISCALL) );
+        
+        Throw( pEngine->RegisterObjectMethod("CCameraMgr",
+            "CCamera & createPerspective(string &in, float angle = 45, float minZDist = 5, float maxZDist = 1000, float scale = 1.f)",
+            asMETHOD(CCameraMgr, createPerspective), asCALL_THISCALL) );
+        
+        // Set this object registration as a global property to simulate a singleton
+        Throw( pEngine->RegisterGlobalProperty("CCameraMgr CameraMgr", &CCameraMgr::Instance()) );
     }
-
-}   // NScriptColor
+}

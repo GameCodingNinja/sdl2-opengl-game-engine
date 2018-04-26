@@ -9,16 +9,16 @@ class MyClass
 {
     void Execute()
     {
-        uint64 value = 0;
-        uint64 test;
-        uint64 maxValue = 1000000;
+        uint value = 0;
+        uint test;
+        uint maxValue = 1000000;
 
         do
         {
             test = ++value;
 
             do
-            {
+            { 
                 if ((test & 1) == 0)
                     test /= 2;
                 //if( (test % 2) == 0 )
@@ -28,7 +28,9 @@ class MyClass
             }
             while (test > 1);
         }
-        while (++value < maxValue); // 100000000
+        while ((test > 0) && (value < maxValue));
+        
+        Print("Final value: " + value);
     }
 };
 
@@ -39,12 +41,12 @@ void Script_Run()
 {
     Print("Test Started.");
     
-    TimerStart();
+    HighResTimer.timerStart();
     
     MyClass myClass;
     myClass.Execute();
     
-    Print("Test Completed: " + TimerStop());
+    Print("Test Completed: " + HighResTimer.timerStop());
 }
 
 

@@ -35,6 +35,7 @@
 #include <script/scriptsound.h>
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
+#include <script/scriptsize.h>
 #include <script/scriptglobals.h>
 #include <script/scriptsprite.h>
 #include <script/scriptsoundmanager.h>
@@ -45,6 +46,8 @@
 #include <script/scriptobjectdatamanager.h>
 #include <script/scriptstrategymanager.h>
 #include <script/scriptactionmanager.h>
+#include <script/scriptsettings.h>
+#include <script/scripthighresolutiontimer.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -176,6 +179,7 @@ void CGame::init()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
+    NScriptSize::Register();
     NScriptCamera::Register();
     NScriptSprite::Register();
     NScriptSound::Register();
@@ -187,6 +191,8 @@ void CGame::init()
     NScriptStrategyManager::Register();
     NScriptCameraManager::Register();
     NScriptActionManager::Register();
+    NScriptSettings::Register();
+    NScriptHighResolutionTimer::Register();
 
     CScriptManager::Instance().loadGroup("(main)");
     CScriptManager::Instance().prepare("(main)", "main");

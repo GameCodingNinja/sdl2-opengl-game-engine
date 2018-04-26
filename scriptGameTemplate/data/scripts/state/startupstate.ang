@@ -23,40 +23,40 @@ final class CStartUpState : iGameState
     void Init() override
     {
         // Create a basic strategy for 2d sprites
-        Strategy_CreateBasicSpriteStrategy( "strategyFor2D" );
+        StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
         
         // Load the 2d object data list tables
-        ObjectData_LoadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
+        ObjectDataMgr.loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
         
         // Load the shaders
-        Shader_Load( "data/shaders/shader.cfg" );
-        Shader_SetAllShaderColor( "additive", 0, 0, 0, 1 );
+        ShaderMgr.load( "data/shaders/shader.cfg" );
+        ShaderMgr.setAllShaderColor( "additive", 0, 0, 0, 1 );
         
         // Load the start up animation group
-        ObjectData_LoadGroup2D( "(startup)" );
+        ObjectDataMgr.loadGroup2D( "(startup)" );
         
         // Add the logo
-        @m_logo = Strategy_CreateSprite( "strategyFor2D", "(startup)", "logo" );
+        @m_logo = StrategyMgr.createSprite( "strategyFor2D", "(startup)", "logo" );
         
         // Do the fade in
         Screen_FadeIn();
         
         // Load the action manager - Must be loaded before memu system
-        Action_Load( "data/settings/controllerMapping.cfg" );
+        ActionMgr.load( "data/settings/controllerMapping.cfg" );
         
         // Load the 3d object data list tables
-        ObjectData_LoadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
+        ObjectDataMgr.loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
         
         // Load the start up animation group
-        ObjectData_LoadGroup2D( "(title_screen)" );
-        ObjectData_LoadGroup3D( "(cube)" );
+        ObjectDataMgr.loadGroup2D( "(title_screen)" );
+        ObjectDataMgr.loadGroup3D( "(cube)" );
         
         Hold(1000);
 
         Screen_FadeOut();
         
-        ObjectData_FreeGroup2D( "(startup)" );
-        Strategy_DeleteSprite( "strategyFor2D", m_logo.getId() );
+        ObjectDataMgr.freeGroup2D( "(startup)" );
+        StrategyMgr.deleteSprite( "strategyFor2D", m_logo.getId() );
         Print("Sprite Hold Test: ");
         
         DoChangeState();

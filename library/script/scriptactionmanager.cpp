@@ -1,6 +1,6 @@
 
 /************************************************************************
-*    FILE NAME:       scriptsoundmanager.cpp
+*    FILE NAME:       scriptactionmanager.cpp
 *
 *    DESCRIPTION:     CActionMgr script object registration
 ************************************************************************/
@@ -27,22 +27,23 @@ namespace NScriptActionManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("void Action_Load( string &in )", asMETHOD(CActionMgr, loadActionFromXML), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasEvent( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasEvent), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        // Register type
+        Throw( pEngine->RegisterObjectType( "CActionMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasKeyboard( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasMouse( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasGamepad( string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void load(string &in)",                             asMETHOD(CActionMgr, loadActionFromXML),     asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasEvent(string &in, int actionPress = 1)",    asMETHOD(CActionMgr, wasEvent),              asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasKeyboard(string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasKeyboard),           asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasMouse(string &in, int actionPress = 1)",    asMETHOD(CActionMgr, wasMouse),              asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasGamepad(string &in, int actionPress = 1)",  asMETHOD(CActionMgr, wasGamepad),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getMouseAbsolutePos()",              asMETHOD(CActionMgr, getMouseAbsolutePos),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getMouseRelativePos()",              asMETHOD(CActionMgr, getMouseRelativePos),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getControllerPosLeft()",             asMETHOD(CActionMgr, getControllerPosLeft),  asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getControllerPosRight()",            asMETHOD(CActionMgr, getControllerPosRight), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasLastDeviceGamepad()",                       asMETHOD(CActionMgr, wasLastDeviceGamepad),  asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasLastDeviceKeyboard()",                      asMETHOD(CActionMgr, wasLastDeviceKeyboard), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasLastDeviceMouse()",                         asMETHOD(CActionMgr, wasLastDeviceMouse),    asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseAbsolutePos()", asMETHOD(CActionMgr, getMouseAbsolutePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetMouseRelativePos()", asMETHOD(CActionMgr, getMouseRelativePos), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosLeft()", asMETHOD(CActionMgr, getControllerPosLeft), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("const CPoint & Action_GetControllerPosRight()", asMETHOD(CActionMgr, getControllerPosRight), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceGamepad()", asMETHOD(CActionMgr, wasLastDeviceGamepad), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceKeyboard()", asMETHOD(CActionMgr, wasLastDeviceKeyboard), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("bool Action_WasLastDeviceMouse()", asMETHOD(CActionMgr, wasLastDeviceMouse), asCALL_THISCALL_ASGLOBAL, &CActionMgr::Instance()) );
+        // Set this object registration as a global property to simulate a singleton
+        Throw( pEngine->RegisterGlobalProperty("CActionMgr ActionMgr", &CActionMgr::Instance()) );
     }
-
-}   // NScriptColor
+}

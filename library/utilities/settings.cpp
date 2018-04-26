@@ -601,11 +601,16 @@ int CSettings::getMaxThreadCount() const
 
 
 /************************************************************************
-*    desc:  Get the Anisotropic setting
+*    desc:  Get/Set the Anisotropic setting
 ************************************************************************/
 int CSettings::getAnisotropicLevel() const
 {
     return m_anisotropicLevel;
+}
+
+void CSettings::setAnisotropicLevel( int level )
+{
+    m_anisotropicLevel = (NDefs::ETextFilter)level;
 }
 
 

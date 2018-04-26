@@ -23,11 +23,11 @@ namespace NScriptShaderManager
     /************************************************************************
     *    desc:  Load the shader from xml file path                                                        
     ************************************************************************/
-    void LoadFromXML( const std::string & filePath )
+    void LoadFromXML( const std::string & filePath, CShaderMgr & rShaderMgr )
     {
         try
         {
-            CShaderMgr::Instance().loadFromXML( filePath );
+            rShaderMgr.loadFromXML( filePath );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -48,11 +48,16 @@ namespace NScriptShaderManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("void Shader_Load(string &in)", asFUNCTION(LoadFromXML), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, CColor color )", asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetAllShaderColor( string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        // Register type
+        Throw( pEngine->RegisterObjectType( "CShaderMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, CColor color )", asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, CColor), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void Shader_SetShaderColor( string &in, string &in, float r, float g, float b, float a )", asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, float, float, float, float), void), asCALL_THISCALL_ASGLOBAL, &CShaderMgr::Instance()) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void load(string &in)",                                                   asFUNCTION(LoadFromXML), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setAllShaderColor(string &in, CColor &in)",                          asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, const CColor &), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setAllShaderColor(string &in, float, float, float, float)",          asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, float, float, float, float), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setShaderColor(string &in, string &in, CColor &in)",                 asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, const CColor &), void), asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setShaderColor(string &in, string &in, float, float, float, float)", asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, float, float, float, float), void), asCALL_THISCALL) );
+
+        // Set this object registration as a global property to simulate a singleton
+        Throw( pEngine->RegisterGlobalProperty("CShaderMgr ShaderMgr", &CShaderMgr::Instance()) );
     }
 }

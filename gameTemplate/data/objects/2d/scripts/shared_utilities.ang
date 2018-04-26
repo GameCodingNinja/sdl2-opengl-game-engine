@@ -17,7 +17,7 @@ shared void ColorTo( float time, CColor &in final, iSprite & sprite )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -25,7 +25,7 @@ shared void ColorTo( float time, CColor &in final, iSprite & sprite )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             sprite.setColor( current );
         }
 
@@ -45,17 +45,17 @@ shared void ShaderColorTo( float time, CColor current, CColor &in final, const s
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
         
         if( time < 0 )
         {
-            Shader_SetAllShaderColor( shaderMember, final );
+            ShaderMgr.setAllShaderColor( shaderMember, final );
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             
-            Shader_SetAllShaderColor( shaderMember, current );
+            ShaderMgr.setAllShaderColor( shaderMember, current );
         }
 
         Suspend();
@@ -79,7 +79,7 @@ shared void AlphaTo( float time, float final, iSprite & sprite )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -87,7 +87,7 @@ shared void AlphaTo( float time, float final, iSprite & sprite )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             sprite.setAlpha( current );
         }
 
@@ -108,7 +108,7 @@ shared void AlphaTo( float time, float final, CMenu & menu )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -116,7 +116,7 @@ shared void AlphaTo( float time, float final, CMenu & menu )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
             menu.setAlpha( current );
         }
 
@@ -130,7 +130,7 @@ shared void AlphaTo( float time, float final, CMenu & menu )
 /************************************************************************
 *    desc:  Volume to the final volume
 ************************************************************************/
-shared void VolumeTo( float time, int final, CSound &in sound )
+shared void VolumeTo( float time, int final, CSound & sound )
 {
     float current = sound.getVolume();
     float inc = (float(final) - current) / time;
@@ -138,7 +138,7 @@ shared void VolumeTo( float time, int final, CSound &in sound )
 
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         if( time < 0 )
         {
@@ -146,7 +146,7 @@ shared void VolumeTo( float time, int final, CSound &in sound )
         }
         else
         {
-            current += inc * GetElapsedTime();
+            current += inc * HighResTimer.getElapsedTime();
         
             if( lastVolume != int(current) )
             {
@@ -191,7 +191,7 @@ shared void Hold( float time )
 {
     do
     {
-        time -= GetElapsedTime();
+        time -= HighResTimer.getElapsedTime();
 
         Suspend();
     }

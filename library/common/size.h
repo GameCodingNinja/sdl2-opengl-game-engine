@@ -82,36 +82,7 @@ public:
 
         return tmp;
     }
-
-
-    /************************************************************************
-    *    desc:  The division equal operator
-    ************************************************************************/
-    CSize operator *= ( const CSize & size )
-    {
-        w *= size.w;
-        h *= size.h;
-
-        return *this;
-    }
-
-    CSize operator *= ( float value )
-    {
-        w *= static_cast<type>(value);
-        h *= static_cast<type>(value);
-
-        return *this;
-    }
-
-    CSize operator *= ( int value )
-    {
-        w *= static_cast<type>(value);
-        h *= static_cast<type>(value);
-
-        return *this;
-    }
-
-
+    
     /************************************************************************
     *    desc:  The division operator
     ************************************************************************/
@@ -141,7 +112,94 @@ public:
 
         return tmp;
     }
+    
+    /************************************************************************
+    *    desc:  The addition operator
+    ************************************************************************/
+    CSize operator + ( const CSize & size ) const
+    {
+        CSize tmp;
+        tmp.w = w + size.w;
+        tmp.h = h + size.h;
 
+        return tmp;
+    }
+    
+    CSize operator + ( float value ) const
+    {
+        CSize tmp;
+        tmp.w = w + static_cast<type>(value);
+        tmp.h = h + static_cast<type>(value);
+
+        return tmp;
+    }
+    
+    CSize operator + ( int value ) const
+    {
+        CSize tmp;
+        tmp.w = w + static_cast<type>(value);
+        tmp.h = h + static_cast<type>(value);
+
+        return tmp;
+    }
+
+    /************************************************************************
+    *    desc:  The subtraction operator
+    ************************************************************************/
+    CSize operator - ( const CSize & size ) const
+    {
+        CSize tmp;
+        tmp.w = w - size.w;
+        tmp.h = h - size.h;
+
+        return tmp;
+    }
+    
+    CSize operator - ( float value ) const
+    {
+        CSize tmp;
+        tmp.w = w - static_cast<type>(value);
+        tmp.h = h - static_cast<type>(value);
+
+        return tmp;
+    }
+    
+    CSize operator - ( int value ) const
+    {
+        CSize tmp;
+        tmp.w = w - static_cast<type>(value);
+        tmp.h = h - static_cast<type>(value);
+
+        return tmp;
+    }
+
+
+    /************************************************************************
+    *    desc:  The multiplication equal operator
+    ************************************************************************/
+    CSize operator *= ( const CSize & size )
+    {
+        w *= size.w;
+        h *= size.h;
+
+        return *this;
+    }
+
+    CSize operator *= ( float value )
+    {
+        w *= static_cast<type>(value);
+        h *= static_cast<type>(value);
+
+        return *this;
+    }
+
+    CSize operator *= ( int value )
+    {
+        w *= static_cast<type>(value);
+        h *= static_cast<type>(value);
+
+        return *this;
+    }
 
     /************************************************************************
     *    desc:  The division equal operator
@@ -170,31 +228,6 @@ public:
         return *this;
     }
 
-    
-    /************************************************************************
-    *    desc:  The addition operator
-    ************************************************************************/
-    CSize operator + ( const CSize & size ) const
-    {
-        CSize tmp;
-        tmp.w = w + size.w;
-        tmp.h = h + size.h;
-
-        return tmp;
-    }
-
-    /************************************************************************
-    *    desc:  The subtraction operator
-    ************************************************************************/
-    CSize operator - ( const CSize & size ) const
-    {
-        CSize tmp;
-        tmp.w = w - size.w;
-        tmp.h = h - size.h;
-
-        return tmp;
-    }
-
     /************************************************************************
     *    desc:  The addition operator
     ************************************************************************/
@@ -202,6 +235,22 @@ public:
     {
         w += size.w;
         h += size.h;
+
+        return *(this);
+    }
+    
+    CSize operator += ( float value )
+    {
+        w += static_cast<type>(value);
+        h += static_cast<type>(value);
+
+        return *(this);
+    }
+    
+    CSize operator += ( int value )
+    {
+        w += static_cast<type>(value);
+        h += static_cast<type>(value);
 
         return *(this);
     }
@@ -213,6 +262,22 @@ public:
     {
         w -= size.w;
         h -= size.h;
+
+        return *(this);
+    }
+    
+    CSize operator -= ( float value )
+    {
+        w -= static_cast<type>(value);
+        h -= static_cast<type>(value);
+
+        return *(this);
+    }
+    
+    CSize operator -= ( int value )
+    {
+        w -= static_cast<type>(value);
+        h -= static_cast<type>(value);
 
         return *(this);
     }
@@ -305,9 +370,9 @@ public:
     }
 
     /************************************************************************
-    *    desc:  Reset the data
+    *    desc:  Clear the data
     ************************************************************************/
-    void reset()
+    void clear()
     {
         w = 0;
         h = 0;

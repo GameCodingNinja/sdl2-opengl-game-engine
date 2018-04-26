@@ -12,7 +12,7 @@ void Lobby_PlayMusic()
 {
     Hold( 500 );
     
-    CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
+    CPlayList @playLst = SoundMgr.getPlayList( "(lobby)", "lobby_music" );
     
     playLst.setVolume( MAX_SOUND_VOLUME );
     playLst.play();
@@ -34,7 +34,7 @@ void Lobby_PlayMusic()
 ************************************************************************/
 void Lobby_FastStopMusic()
 {
-    CPlayList playLst = GetPlayList( "(lobby)", "lobby_music" );
+    CPlayList @playLst = SoundMgr.getPlayList( "(lobby)", "lobby_music" );
     
     if( playLst.isPlaying() )
     {

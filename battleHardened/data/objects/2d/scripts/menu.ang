@@ -10,7 +10,7 @@
 ************************************************************************/
 void Control_OnActive()
 {
-    PlaySound( "(menu)", "active" );
+    SoundMgr.play( "(menu)", "active" );
 }
 
 
@@ -19,7 +19,7 @@ void Control_OnActive()
 ************************************************************************/
 void Control_OnSelect()
 {
-    PlaySound( "(menu)", "select" );
+    SoundMgr.play( "(menu)", "select" );
 }
 
 

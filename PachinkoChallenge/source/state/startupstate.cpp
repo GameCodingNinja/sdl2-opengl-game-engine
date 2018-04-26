@@ -43,6 +43,7 @@
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
+#include <script/scripthighresolutiontimer.h>
 #include <2d/sprite2d.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
@@ -197,6 +198,7 @@ void CStartUpState::assetLoad()
     NScriptSoundManager::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
+    NScriptHighResolutionTimer::Register();
 
     // Load group specific script items
     CScriptManager::Instance().loadGroup("(menu)");

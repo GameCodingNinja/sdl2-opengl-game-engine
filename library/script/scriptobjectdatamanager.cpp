@@ -22,11 +22,11 @@ namespace NScriptObjectDataManager
     /************************************************************************
     *    desc:  Load the data list table                                                            
     ************************************************************************/
-    void LoadListTable( const std::string & filePath )
+    void LoadListTable( const std::string & filePath, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().loadListTable( filePath );
+            rObjectDataMgr.loadListTable( filePath );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -41,11 +41,11 @@ namespace NScriptObjectDataManager
     /************************************************************************
     *    desc:  Load all of the meshes and materials of a specific data group                                                           
     ************************************************************************/
-    void LoadGroup2D( const std::string & group, bool createFromData )
+    void LoadGroup2D( const std::string & group, bool createFromData, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().loadGroup2D( group, createFromData );
+            rObjectDataMgr.loadGroup2D( group, createFromData );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -57,11 +57,11 @@ namespace NScriptObjectDataManager
         }
     }
 
-    void LoadGroup3D( const std::string & group, bool createFromData )
+    void LoadGroup3D( const std::string & group, bool createFromData, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().loadGroup3D( group, createFromData );
+            rObjectDataMgr.loadGroup3D( group, createFromData );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -76,11 +76,11 @@ namespace NScriptObjectDataManager
     /************************************************************************
     *    desc:  Create the group's VBO, IBO, textures, etc                                                           
     ************************************************************************/
-    void CreateFromData2D( const std::string & group )
+    void CreateFromData2D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().createFromData2D( group );
+            rObjectDataMgr.createFromData2D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -92,46 +92,11 @@ namespace NScriptObjectDataManager
         }
     }
     
-    void CreateFromData3D( const std::string & group )
+    void CreateFromData3D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().createFromData2D( group );
-        }
-        catch( NExcept::CCriticalException & ex )
-        {
-            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
-        }
-        catch( std::exception const & ex )
-        {
-            asGetActiveContext()->SetException(ex.what());
-        }
-    }
-    
-    /************************************************************************
-    *    desc:  Free all of the meshes and materials of a specific data group                                                           
-    ************************************************************************/
-    void FreeGroup2D( const std::string & group, bool freeOpenGLObjects )
-    {
-        try
-        {
-            CObjectDataMgr::Instance().freeGroup2D( group, freeOpenGLObjects );
-        }
-        catch( NExcept::CCriticalException & ex )
-        {
-            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
-        }
-        catch( std::exception const & ex )
-        {
-            asGetActiveContext()->SetException(ex.what());
-        }
-    }
-    
-    void FreeGroup3D( const std::string & group, bool freeOpenGLObjects )
-    {
-        try
-        {
-            CObjectDataMgr::Instance().freeGroup3D( group, freeOpenGLObjects );
+            rObjectDataMgr.createFromData2D( group );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -146,11 +111,11 @@ namespace NScriptObjectDataManager
     /************************************************************************
     *    desc:  Free all of the meshes and materials of a specific data group                                                           
     ************************************************************************/
-    void FreeOpenGL2D( const std::string & group )
+    void FreeGroup2D( const std::string & group, bool freeOpenGLObjects, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().freeOpenGL2D( group );
+            rObjectDataMgr.freeGroup2D( group, freeOpenGLObjects );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -162,11 +127,11 @@ namespace NScriptObjectDataManager
         }
     }
     
-    void FreeOpenGL3D( const std::string & group )
+    void FreeGroup3D( const std::string & group, bool freeOpenGLObjects, CObjectDataMgr & rObjectDataMgr )
     {
         try
         {
-            CObjectDataMgr::Instance().freeOpenGL3D( group );
+            rObjectDataMgr.freeGroup3D( group, freeOpenGLObjects );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -178,7 +143,41 @@ namespace NScriptObjectDataManager
         }
     }
     
-
+    /************************************************************************
+    *    desc:  Free all of the meshes and materials of a specific data group                                                           
+    ************************************************************************/
+    void FreeOpenGL2D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
+    {
+        try
+        {
+            rObjectDataMgr.freeOpenGL2D( group );
+        }
+        catch( NExcept::CCriticalException & ex )
+        {
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
+        }
+        catch( std::exception const & ex )
+        {
+            asGetActiveContext()->SetException(ex.what());
+        }
+    }
+    
+    void FreeOpenGL3D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
+    {
+        try
+        {
+            rObjectDataMgr.freeOpenGL3D( group );
+        }
+        catch( NExcept::CCriticalException & ex )
+        {
+            asGetActiveContext()->SetException(ex.getErrorMsg().c_str());
+        }
+        catch( std::exception const & ex )
+        {
+            asGetActiveContext()->SetException(ex.what());
+        }
+    }
+    
     /************************************************************************
     *    desc:  Register global functions
     ************************************************************************/
@@ -188,14 +187,20 @@ namespace NScriptObjectDataManager
         
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_LoadListTable(string &in)", asFUNCTION(LoadListTable), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_LoadGroup2D(string &in, bool createFromData = true)", asFUNCTION(LoadGroup2D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_LoadGroup3D(string &in, bool createFromData = true)", asFUNCTION(LoadGroup3D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_CreateFromData2D(string &in)", asFUNCTION(CreateFromData2D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_CreateFromData3D(string &in)", asFUNCTION(CreateFromData3D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_FreeGroup2D(string &in, bool freeOpenGLObjects = true)", asFUNCTION(FreeGroup2D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_FreeGroup3D(string &in, bool freeOpenGLObjects = true)", asFUNCTION(FreeGroup3D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_FreeOpenGL2D(string &in)", asFUNCTION(FreeOpenGL2D), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void ObjectData_FreeOpenGL3D(string &in)", asFUNCTION(FreeOpenGL3D), asCALL_CDECL) );
+        // Register type
+        Throw( pEngine->RegisterObjectType( "CObjectDataMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
+        
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void loadListTable(string &in)",                              asFUNCTION(LoadListTable), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void loadGroup2D(string &in, bool createFromData = true)",    asFUNCTION(LoadGroup2D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void loadGroup3D(string &in, bool createFromData = true)",    asFUNCTION(LoadGroup3D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void createFromData2D(string &in)",                           asFUNCTION(CreateFromData2D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void createFromData3D(string &in)",                           asFUNCTION(CreateFromData3D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void freeGroup2D(string &in, bool freeOpenGLObjects = true)", asFUNCTION(FreeGroup2D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void freeGroup3D(string &in, bool freeOpenGLObjects = true)", asFUNCTION(FreeGroup3D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void freeOpenGL2D(string &in)",                               asFUNCTION(FreeOpenGL2D), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CObjectDataMgr", "void freeOpenGL3D(string &in)",                               asFUNCTION(FreeOpenGL3D), asCALL_CDECL_OBJLAST) );
+        
+        // Set this object registration as a global property to simulate a singleton
+        Throw( pEngine->RegisterGlobalProperty("CObjectDataMgr ObjectDataMgr", &CObjectDataMgr::Instance()) );
     }
 }

@@ -50,11 +50,11 @@ public:
     void freeShader( const std::string & shaderId );
     
     // Set the shader member variable
-    void setShaderColor( const std::string & shaderId, const std::string & locationId, CColor color );
+    void setShaderColor( const std::string & shaderId, const std::string & locationId, const CColor & color );
     void setShaderColor( const std::string & shaderId, const std::string & locationId, float r, float g, float b, float a );
     
     // Set all the shaders using this color location
-    void setAllShaderColor( const std::string & locationId, CColor color );
+    void setAllShaderColor( const std::string & locationId, const CColor & color );
     void setAllShaderColor( const std::string & locationId, float r, float g, float b, float a );
     
     // Connect to the Init Shader signal
@@ -92,7 +92,7 @@ private:
     void getUniformLocation( const XMLNode & node );
     
     // Set the shader member variable
-    void setShaderColor( CShaderData & shaderData, const std::string & locationId, CColor color );
+    void setShaderColor( CShaderData & shaderData, const std::string & locationId, const CColor & color );
 
 private:
 
