@@ -23,11 +23,11 @@ namespace NScriptShaderManager
     /************************************************************************
     *    DESC:  Load the shader from xml file path                                                        
     ************************************************************************/
-    void LoadFromXML( const std::string & filePath, CShaderMgr & rShaderMgr )
+    void Load( const std::string & filePath, CShaderMgr & rShaderMgr )
     {
         try
         {
-            rShaderMgr.loadFromXML( filePath );
+            rShaderMgr.load( filePath );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -51,7 +51,7 @@ namespace NScriptShaderManager
         // Register type
         Throw( pEngine->RegisterObjectType( "CShaderMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void load(string &in)",                                                   asFUNCTION(LoadFromXML), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void load(string &in)",                                                   asFUNCTION(Load), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setAllShaderColor(string &in, CColor &in)",                          asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, const CColor &), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setAllShaderColor(string &in, float, float, float, float)",          asMETHODPR(CShaderMgr, setAllShaderColor, (const std::string &, float, float, float, float), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CShaderMgr", "void setShaderColor(string &in, string &in, CColor &in)",                 asMETHODPR(CShaderMgr, setShaderColor, (const std::string &, const std::string &, const CColor &), void), asCALL_THISCALL) );

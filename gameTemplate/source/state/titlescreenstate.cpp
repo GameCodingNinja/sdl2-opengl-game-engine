@@ -39,8 +39,8 @@ CTitleScreenState::CTitleScreenState() :
 void CTitleScreenState::init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree( "title_screen_tree" );
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree( "title_screen_tree" );
 
     m_cube.setScale( 3, 3, 3 );
 

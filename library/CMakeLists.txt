@@ -46,6 +46,8 @@ add_library(
         script/scriptsettings.cpp
         script/scriptsize.cpp
         script/scripthighresolutiontimer.cpp
+        script/scriptmenumanager.cpp
+        script/scriptfontmanager.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp

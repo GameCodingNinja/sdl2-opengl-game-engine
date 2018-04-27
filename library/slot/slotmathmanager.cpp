@@ -70,7 +70,7 @@ void CSlotMathMgr::loadGroup( const std::string & group )
         // Create a new group map inside of our map
         m_slotMathMapMap.emplace( group, std::map<const std::string, CSlotMath>() );
 
-        loadFromXML( group, listTableIter->second.back() );
+        load( group, listTableIter->second.back() );
     }
     else
     {
@@ -84,7 +84,7 @@ void CSlotMathMgr::loadGroup( const std::string & group )
 /************************************************************************
  *    DESC:  Load all math data from an xml
  ************************************************************************/
-void CSlotMathMgr::loadFromXML( const std::string & group, const std::string & filePath )
+void CSlotMathMgr::load( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "math" );

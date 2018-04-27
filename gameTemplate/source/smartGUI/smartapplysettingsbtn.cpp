@@ -64,7 +64,7 @@ void CSmartApplySettingsBtn::execute()
     bool settingsChangeMade(false);
 
     // Get the settings menu
-    CMenu & rMenu = CMenuManager::Instance().getActiveMenu();
+    CMenu & rMenu = CMenuMgr::Instance().getActiveMenu();
 
     // Check for the resolution button list
     CSmartResolutionBtn & rSmartRes = (*dynamic_cast<CSmartResolutionBtn *>(rMenu.getPtrToControl( "resolution_btn_lst" )->getSmartGuiPtr()));
@@ -138,10 +138,10 @@ void CSmartApplySettingsBtn::execute()
             SDL_WINDOWPOS_CENTERED );
 
         // Reset the transform to recalculate mouse collision
-        CMenuManager::Instance().resetTransform();
+        CMenuMgr::Instance().resetTransform();
 
         // Reset the dynamic positions of menus
-        CMenuManager::Instance().resetDynamicOffset();
+        CMenuMgr::Instance().resetDynamicOffset();
 
         // Need to reset the view port the changing the resolution
         glViewport(0, 0, CSettings::Instance().getSize().getW(), CSettings::Instance().getSize().getH());

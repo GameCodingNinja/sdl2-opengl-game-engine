@@ -35,7 +35,7 @@ public:
     }
 
     // Load the shader from xml file path
-    void loadFromXML( const std::string & filePath );
+    void load( const std::string & filePath );
 
     // Get the shader data
     CShaderData & getShaderData( const std::string & shaderId );

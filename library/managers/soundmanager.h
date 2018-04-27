@@ -84,7 +84,7 @@ private:
     virtual ~CSoundMgr();
 
     // Load all object information from an xml
-    void loadFromXML( const std::string & group, const std::string & filePath );
+    void load( const std::string & group, const std::string & filePath );
 
 private:
 

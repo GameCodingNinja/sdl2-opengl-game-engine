@@ -32,7 +32,7 @@ CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
 ****************************************************************************/
 void CSmartConfirmBtn::execute()
 {
-    CMenu & rMenu = CMenuManager::Instance().getMenu("confirmation_menu");
+    CMenu & rMenu = CMenuMgr::Instance().getMenu("confirmation_menu");
     CUIControl * pYesBtn = rMenu.getPtrToControl("yes_btn");
     CUIControl * pMegLbl = rMenu.getPtrToControl("message_lbl");
 

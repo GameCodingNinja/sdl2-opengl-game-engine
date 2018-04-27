@@ -62,8 +62,8 @@ private:
     virtual ~CObjectDataMgr();
 
     // Load all object information from an xml
-    void loadFromXML2D( const std::string & group, const std::string & filePath, const bool createFromData );
-    void loadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData );
+    void load2D( const std::string & group, const std::string & filePath, const bool createFromData );
+    void load3D( const std::string & group, const std::string & filePath, const bool createFromData );
 
 private:
 

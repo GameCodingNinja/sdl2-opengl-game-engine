@@ -47,7 +47,7 @@ void CPhysicsWorldManager2D::createWorld( const std::string & group )
     // Load the group data if it doesn't already exist
     if( m_pWorld2dMap.find( group ) == m_pWorld2dMap.end() )
     {
-        loadFromXML( group, listTableIter->second.back() );
+        load( group, listTableIter->second.back() );
     }
     else
     {
@@ -61,7 +61,7 @@ void CPhysicsWorldManager2D::createWorld( const std::string & group )
 /************************************************************************
 *    DESC:  Load the physics worlds from an XML
 ************************************************************************/
-void CPhysicsWorldManager2D::loadFromXML( const std::string & group, const std::string & filePath )
+void CPhysicsWorldManager2D::load( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "physics2d" );

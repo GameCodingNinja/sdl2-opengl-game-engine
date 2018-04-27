@@ -29,7 +29,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CMenuManager::CMenuManager() :
+CMenuMgr::CMenuMgr() :
     m_active(false),
     m_scrollTimerId(0),
     m_allow(false)
@@ -40,7 +40,7 @@ CMenuManager::CMenuManager() :
 /************************************************************************
 *    DESC:  destructor
 ************************************************************************/
-CMenuManager::~CMenuManager()
+CMenuMgr::~CMenuMgr()
 {
     SDL_RemoveTimer( m_scrollTimerId );
 }
@@ -49,7 +49,7 @@ CMenuManager::~CMenuManager()
 /************************************************************************
  *    DESC:  Load the menu group
  ************************************************************************/
-void CMenuManager::loadGroup( const std::string & group, const bool doInit )
+void CMenuMgr::loadGroup( const std::string & group, const bool doInit )
 {
     // Check for a hardware extension
     std::string ext;
@@ -72,7 +72,7 @@ void CMenuManager::loadGroup( const std::string & group, const bool doInit )
         m_menuTreeMapMap.emplace( group, std::map<const std::string, CMenuTree>() );
 
         for( auto & iter : listTableIter->second )
-            loadFromXML( group, iter );
+            load( group, iter );
     }
     else
     {
@@ -89,7 +89,7 @@ void CMenuManager::loadGroup( const std::string & group, const bool doInit )
 /************************************************************************
  *    DESC:  Free the menu group
  ************************************************************************/
-void CMenuManager::freeGroup( const std::string & group )
+void CMenuMgr::freeGroup( const std::string & group )
 {
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
@@ -136,7 +136,7 @@ void CMenuManager::freeGroup( const std::string & group )
  *    DESC:  Init a menu group
  *           This allows certain actions to be done after the group load
  ************************************************************************/
-void CMenuManager::initGroup( const std::string & group )
+void CMenuMgr::initGroup( const std::string & group )
 {
     auto menuMapIter = m_menuMapMap.find( group );
     if( menuMapIter != m_menuMapMap.end() )
@@ -157,7 +157,7 @@ void CMenuManager::initGroup( const std::string & group )
  *    DESC:  Clean up a menu group
  *           This allows certain actions to be done after the group load
  ************************************************************************/
-void CMenuManager::cleanUpGroup( const std::string & group )
+void CMenuMgr::cleanUpGroup( const std::string & group )
 {
     auto menuMapIter = m_menuMapMap.find( group );
     if( menuMapIter != m_menuMapMap.end() )
@@ -177,7 +177,7 @@ void CMenuManager::cleanUpGroup( const std::string & group )
 /************************************************************************
 *    DESC:  Load the menu/tree info from file
 ************************************************************************/
-void CMenuManager::loadFromXML( const std::string & group, const std::string & filePath )
+void CMenuMgr::load( const std::string & group, const std::string & filePath )
 {
     // open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "menuTreeList" );
@@ -193,7 +193,7 @@ void CMenuManager::loadFromXML( const std::string & group, const std::string & f
 /************************************************************************
 *    DESC:  Load the menus from node
 ************************************************************************/
-void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode & node )
+void CMenuMgr::loadMenusFromNode( const std::string & group, const XMLNode & node )
 {
     // Get an iterator to the menu group
     auto menuMapIter = m_menuMapMap.find( group );
@@ -227,7 +227,7 @@ void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode &
         iter.first->second.loadDynamicOffsetFromNode( menuNode );
 
         // Have the menu load it's share
-        iter.first->second.loadFromXML( menuNode.getAttribute( "file" ) );
+        iter.first->second.load( menuNode.getAttribute( "file" ) );
 
         // Broadcast signal to let the game handle smart menu inits
         CSignalMgr::Instance().broadcast( &iter.first->second );
@@ -241,7 +241,7 @@ void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode &
 /************************************************************************
 *    DESC:  Load the trees from node
 ************************************************************************/
-void CMenuManager::loadTreesFromNode( const std::string & group, const XMLNode & node )
+void CMenuMgr::loadTreesFromNode( const std::string & group, const XMLNode & node )
 {
     // Get an iterator to the menu group
     auto menuMapIter = m_menuMapMap.find( group );
@@ -313,9 +313,9 @@ void CMenuManager::loadTreesFromNode( const std::string & group, const XMLNode &
 
 
 /************************************************************************
-*    DESC:  Load the menu action list from XML
+*    DESC:  Load the menu action list
 ************************************************************************/
-void CMenuManager::loadMenuActionFromXML( const std::string & filePath )
+void CMenuMgr::loadMenuAction( const std::string & filePath )
 {
     // open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "menuActionList" );
@@ -338,7 +338,7 @@ void CMenuManager::loadMenuActionFromXML( const std::string & filePath )
 *    DESC:  Activate a tree to be used by tree name only
 *           NOTE: Assumes unique tree names
 ************************************************************************/
-void CMenuManager::activateMenu( const std::string & treeStr, const std::string & menuName )
+void CMenuMgr::activateMenu( const std::string & treeStr, const std::string & menuName )
 {
     for( auto & groupIter : m_menuTreeMapMap )
     {
@@ -361,7 +361,7 @@ void CMenuManager::activateMenu( const std::string & treeStr, const std::string 
 /************************************************************************
 *    DESC:  Activate a menu to be used
 ************************************************************************/
-void CMenuManager::activateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName )
+void CMenuMgr::activateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName )
 {
     auto groupIter = m_menuTreeMapMap.find( group );
     if( groupIter != m_menuTreeMapMap.end() )
@@ -399,7 +399,7 @@ void CMenuManager::activateMenu( const std::string & group, const std::string & 
 *    DESC:  Activate a tree to be used by tree name only
 *           NOTE: Assumes unique tree names
 ************************************************************************/
-void CMenuManager::activateTree( const std::string & treeStr )
+void CMenuMgr::activateTree( const std::string & treeStr )
 {
     for( auto & groupIter : m_menuTreeMapMap )
     {
@@ -422,7 +422,7 @@ void CMenuManager::activateTree( const std::string & treeStr )
 /************************************************************************
 *    DESC:  Activate a tree to be used
 ************************************************************************/
-void CMenuManager::activateTree( const std::string & group, const std::string & treeStr )
+void CMenuMgr::activateTree( const std::string & group, const std::string & treeStr )
 {
     auto groupIter = m_menuTreeMapMap.find( group );
     if( groupIter != m_menuTreeMapMap.end() )
@@ -476,7 +476,7 @@ void CMenuManager::activateTree( const std::string & group, const std::string & 
 *    DESC:  Deactivate a tree to be used
 *           NOTE: Assumes unique tree names
 ************************************************************************/
-void CMenuManager::deactivateTree( const std::string & treeStr )
+void CMenuMgr::deactivateTree( const std::string & treeStr )
 {
     for( auto & groupIter : m_menuTreeMapMap )
     {
@@ -499,7 +499,7 @@ void CMenuManager::deactivateTree( const std::string & treeStr )
 /************************************************************************
 *    DESC:  Deactivate a tree that's in use
 ************************************************************************/
-void CMenuManager::deactivateTree( const std::string & group, const std::string & treeStr )
+void CMenuMgr::deactivateTree( const std::string & group, const std::string & treeStr )
 {
     auto groupIter = m_menuTreeMapMap.find( group );
     if( groupIter != m_menuTreeMapMap.end() )
@@ -544,7 +544,7 @@ void CMenuManager::deactivateTree( const std::string & group, const std::string 
 /************************************************************************
 *    DESC:  Clear the active trees
 ************************************************************************/
-void CMenuManager::clearActiveTrees()
+void CMenuMgr::clearActiveTrees()
 {
     m_active = false;
 
@@ -558,7 +558,7 @@ void CMenuManager::clearActiveTrees()
 /************************************************************************
 *    DESC:  Handle input events and dispatch menu events
 ************************************************************************/
-void CMenuManager::handleEvent( const SDL_Event & rEvent )
+void CMenuMgr::handleEvent( const SDL_Event & rEvent )
 {
     if( m_allow )
     {
@@ -700,7 +700,7 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
 /************************************************************************
 *    DESC:  Handle input events depending on if this is a menu or interface tree
 ************************************************************************/
-void CMenuManager::handleEventForTrees( const SDL_Event & rEvent )
+void CMenuMgr::handleEventForTrees( const SDL_Event & rEvent )
 {
     bool menuActive(false);
 
@@ -728,7 +728,7 @@ void CMenuManager::handleEventForTrees( const SDL_Event & rEvent )
 /************************************************************************
 *    DESC:  Handle input events depending on if this is a menu or interface tree
 ************************************************************************/
-void CMenuManager::handleEventForScrolling( const SDL_Event & rEvent )
+void CMenuMgr::handleEventForScrolling( const SDL_Event & rEvent )
 {
     if( m_active )
     {
@@ -744,7 +744,7 @@ void CMenuManager::handleEventForScrolling( const SDL_Event & rEvent )
 /************************************************************************
 *    DESC:  Handle input events for menu scrolling
 ************************************************************************/
-bool CMenuManager::handleMenuScrolling(
+bool CMenuMgr::handleMenuScrolling(
     const SDL_Event & rEvent, const std::vector<CMenuTree *> & activeTreeVec )
 {
     bool menuActive(false);
@@ -774,13 +774,13 @@ bool CMenuManager::handleMenuScrolling(
 /************************************************************************
 *    DESC:  Update the menu
 ************************************************************************/
-void CMenuManager::updateMenu()
+void CMenuMgr::updateMenu()
 {
     if( m_active )
         update( m_pActiveMenuTreeVec );
 }
 
-void CMenuManager::updateInterface()
+void CMenuMgr::updateInterface()
 {
     if( m_active )
         update( m_pActiveInterTreeVec );
@@ -790,7 +790,7 @@ void CMenuManager::updateInterface()
 /************************************************************************
 *    DESC:  Update the menu
 ************************************************************************/
-void CMenuManager::update( const std::vector<CMenuTree *> & activeTreeVec )
+void CMenuMgr::update( const std::vector<CMenuTree *> & activeTreeVec )
 {
     for( auto iter : activeTreeVec )
         if( iter->isActive() )
@@ -801,13 +801,13 @@ void CMenuManager::update( const std::vector<CMenuTree *> & activeTreeVec )
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuManager::transformMenu()
+void CMenuMgr::transformMenu()
 {
     if( m_active )
         transform( m_pActiveMenuTreeVec );
 }
 
-void CMenuManager::transformMenu( const CObject2D & object )
+void CMenuMgr::transformMenu( const CObject2D & object )
 {
     if( m_active )
         transform( m_pActiveMenuTreeVec, object );
@@ -817,13 +817,13 @@ void CMenuManager::transformMenu( const CObject2D & object )
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuManager::transformInterface()
+void CMenuMgr::transformInterface()
 {
     if( m_active )
         transform( m_pActiveInterTreeVec );
 }
 
-void CMenuManager::transformInterface( const CObject2D & object )
+void CMenuMgr::transformInterface( const CObject2D & object )
 {
     if( m_active )
         transform( m_pActiveInterTreeVec, object );
@@ -833,7 +833,7 @@ void CMenuManager::transformInterface( const CObject2D & object )
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec )
+void CMenuMgr::transform( const std::vector<CMenuTree *> & activeTreeVec )
 {
     for( auto iter : activeTreeVec )
     {
@@ -843,7 +843,7 @@ void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec )
     }
 }
 
-void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object )
+void CMenuMgr::transform( const std::vector<CMenuTree *> & activeTreeVec, const CObject2D & object )
 {
     for( auto iter : activeTreeVec )
     {
@@ -857,7 +857,7 @@ void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec, co
 /************************************************************************
 *    DESC:  Render menus
 ************************************************************************/
-void CMenuManager::renderMenu( const CMatrix & matrix )
+void CMenuMgr::renderMenu( const CMatrix & matrix )
 {
     if( m_active )
     {
@@ -871,7 +871,7 @@ void CMenuManager::renderMenu( const CMatrix & matrix )
 /************************************************************************
 *    DESC:  Render interface menus
 ************************************************************************/
-void CMenuManager::renderInterface( const CMatrix & matrix )
+void CMenuMgr::renderInterface( const CMatrix & matrix )
 {
     if( m_active )
     {
@@ -885,7 +885,7 @@ void CMenuManager::renderInterface( const CMatrix & matrix )
 /************************************************************************
 *    DESC:  Is this menu system active?
 ************************************************************************/
-bool CMenuManager::isActive()
+bool CMenuMgr::isActive()
 {
     return m_active;
 }
@@ -894,7 +894,7 @@ bool CMenuManager::isActive()
 /************************************************************************
 *    DESC:  Is this standard menu system active?
 ************************************************************************/
-bool CMenuManager::isMenuActive()
+bool CMenuMgr::isMenuActive()
 {
     if( m_active )
         for( auto iter : m_pActiveMenuTreeVec )
@@ -908,7 +908,7 @@ bool CMenuManager::isMenuActive()
 /************************************************************************
 *    DESC:  Is a menu item active
 ************************************************************************/
-bool CMenuManager::isMenuItemActive()
+bool CMenuMgr::isMenuItemActive()
 {
     bool result(false);
 
@@ -932,7 +932,7 @@ bool CMenuManager::isMenuItemActive()
 /************************************************************************
 *    DESC:  Is a interface item active
 ************************************************************************/
-bool CMenuManager::isInterfaceItemActive()
+bool CMenuMgr::isInterfaceItemActive()
 {
     bool result(false);
 
@@ -956,7 +956,7 @@ bool CMenuManager::isInterfaceItemActive()
 /************************************************************************
 *    DESC:  Set the active state
 ************************************************************************/
-void CMenuManager::setActiveState()
+void CMenuMgr::setActiveState()
 {
     m_active = false;
 
@@ -986,7 +986,7 @@ void CMenuManager::setActiveState()
 /************************************************************************
 *    DESC:  Get reference to the menu in question
 ************************************************************************/
-CMenu & CMenuManager::getMenu( const std::string & nameStr )
+CMenu & CMenuMgr::getMenu( const std::string & nameStr )
 {
     bool found(false);
     std::map<const std::string, CMenu>::iterator menuIter;
@@ -1016,7 +1016,7 @@ CMenu & CMenuManager::getMenu( const std::string & nameStr )
 *    DESC:  Get reference to the first active menu.
 *           NOTE: Only call this function if you are certain it will not fail
 ************************************************************************/
-CMenu & CMenuManager::getActiveMenu()
+CMenu & CMenuMgr::getActiveMenu()
 {
     CMenu * pMenu(nullptr);
 
@@ -1041,7 +1041,7 @@ CMenu & CMenuManager::getActiveMenu()
 /************************************************************************
 *    DESC:  Get a pointer to the active tree
 ************************************************************************/
-CMenuTree * CMenuManager::getActiveTree()
+CMenuTree * CMenuMgr::getActiveTree()
 {
     CMenuTree * pTree(nullptr);
 
@@ -1061,7 +1061,7 @@ CMenuTree * CMenuManager::getActiveTree()
 /************************************************************************
 *    DESC:  Reset the transform
 ************************************************************************/
-void CMenuManager::resetTransform()
+void CMenuMgr::resetTransform()
 {
     for( auto & grpIter : m_menuMapMap )
         for( auto & iter : grpIter.second )
@@ -1072,7 +1072,7 @@ void CMenuManager::resetTransform()
 /************************************************************************
 *    DESC:  Reset the dynamic positions of menus
 ************************************************************************/
-void CMenuManager::resetDynamicOffset()
+void CMenuMgr::resetDynamicOffset()
 {
     for( auto & grpIter : m_menuMapMap )
         for( auto & iter : grpIter.second )
@@ -1083,7 +1083,7 @@ void CMenuManager::resetDynamicOffset()
 /************************************************************************
 *    DESC:  Timer call back function for
 ************************************************************************/
-Uint32 CMenuManager::scrollTimerCallbackFunc( Uint32 interval, void *param )
+Uint32 CMenuMgr::scrollTimerCallbackFunc( Uint32 interval, void *param )
 {
     CScrollParam * pScrollParam = static_cast<CScrollParam *>(param);
 
@@ -1096,7 +1096,7 @@ Uint32 CMenuManager::scrollTimerCallbackFunc( Uint32 interval, void *param )
 /************************************************************************
 *    DESC:  Allow message processing
 ************************************************************************/
-void CMenuManager::allow( bool allow )
+void CMenuMgr::allow( bool allow )
 {
     m_allow = allow;
 }

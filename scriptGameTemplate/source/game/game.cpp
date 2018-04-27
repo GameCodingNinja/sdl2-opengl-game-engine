@@ -48,6 +48,8 @@
 #include <script/scriptactionmanager.h>
 #include <script/scriptsettings.h>
 #include <script/scripthighresolutiontimer.h>
+#include <script/scriptmenumanager.h>
+#include <script/scriptfontmanager.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -193,6 +195,8 @@ void CGame::init()
     NScriptActionManager::Register();
     NScriptSettings::Register();
     NScriptHighResolutionTimer::Register();
+    NScriptMenuManager::Register();
+    NScriptFontManager::Register();
 
     CScriptManager::Instance().loadGroup("(main)");
     CScriptManager::Instance().prepare("(main)", "main");
@@ -297,7 +301,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
         return true;
     
     // Have the menu manager handle events
-    CMenuManager::Instance().handleEvent( rEvent );
+    CMenuMgr::Instance().handleEvent( rEvent );
 
     // Filter out these events. Can't do this through the normal event filter
     if( (rEvent.type >= SDL_JOYAXISMOTION) && (rEvent.type <= SDL_JOYBUTTONUP) )
@@ -313,7 +317,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
         displayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
 
     // In a traditional game, want the pause menu to display when the game is sent to the background
-    else if( (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().isMenuActive() )
+    else if( (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuMgr::Instance().isMenuActive() )
         NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );
 
     return false;

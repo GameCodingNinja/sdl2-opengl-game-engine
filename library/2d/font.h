@@ -41,7 +41,7 @@ public:
     ~CFont();
 
     // Load from XML file
-    void loadFromXML( const std::string & group );
+    void load( const std::string & group );
     
     // Create the font texture from data
     void createFromData( const std::string & group );

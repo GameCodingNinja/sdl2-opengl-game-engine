@@ -1,9 +1,9 @@
 
-/************************************************************************
-*    FILE NAME:       main.ang
-*
-*    DESCRIPTION:     Main game function
-************************************************************************/
+//
+//  FILE NAME:  main.ang
+//
+//  DESC:       Main game function
+//
 
 void main()
 {

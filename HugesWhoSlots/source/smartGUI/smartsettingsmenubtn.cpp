@@ -36,7 +36,7 @@ CSmartSettingsMenuBtn::CSmartSettingsMenuBtn( CUIControl * pUIControl ) :
 void CSmartSettingsMenuBtn::enableDisableApplyBtn()
 {
     // Get the settings menu
-    CMenu & rMenu = CMenuManager::Instance().getActiveMenu();
+    CMenu & rMenu = CMenuMgr::Instance().getActiveMenu();
 
     if( wasSettingsButtonsChanged() )
         rMenu.getPtrToControl( "settings_apply_btn" )->changeState(NUIControl::ECS_INACTIVE);
@@ -51,7 +51,7 @@ void CSmartSettingsMenuBtn::enableDisableApplyBtn()
 bool CSmartSettingsMenuBtn::wasSettingsButtonsChanged()
 {
     // Get the settings menu
-    CMenu & rMenu = CMenuManager::Instance().getActiveMenu();
+    CMenu & rMenu = CMenuMgr::Instance().getActiveMenu();
 
     // Get the control
     CUIControl * pControl;

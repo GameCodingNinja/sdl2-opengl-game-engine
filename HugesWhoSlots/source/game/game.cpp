@@ -102,7 +102,7 @@ void CGame::init()
         CObjectDataMgr::Instance().loadGroup2D( "(debug)" );
         upDebugDisplay.reset( new CSprite2D( CObjectDataMgr::Instance().getData2D("(debug)", "debugString_font") ) );
         const CSize<float> & rSize = CSettings::Instance().getDefaultSizeHalf();
-        CFontMgr::Instance().loadFromXML( "data/textures/fonts/font_debug.lst" );
+        CFontMgr::Instance().load( "data/textures/fonts/font_debug.lst" );
         upDebugDisplay->setPos( CPoint<float>( -(rSize.w-10), rSize.h-10 ) );
         upDebugDisplay->getVisualComponent().setFontProperties( CFontProperties("dejavu_sans_reg_outline_24", NDefs::EHA_HORZ_LEFT, NDefs::EVA_VERT_TOP) );
         upDebugDisplay->transform();

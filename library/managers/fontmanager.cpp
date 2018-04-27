@@ -34,7 +34,7 @@ CFontMgr::~CFontMgr()
 /************************************************************************
 *    DESC:  Load the material from file path
 ************************************************************************/
-void CFontMgr::loadFromXML( const std::string & filePath, const bool createFromData )
+void CFontMgr::load( const std::string & filePath, const bool createFromData )
 {
     // open this file and parse
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "fontLst" );
@@ -63,7 +63,7 @@ void CFontMgr::loadFromXML( const std::string & filePath, const bool createFromD
         }
 
         // Load the character info from file
-        iter.first->second.loadFromXML( m_group );
+        iter.first->second.load( m_group );
 
         if( createFromData )
             iter.first->second.createFromData( m_group );

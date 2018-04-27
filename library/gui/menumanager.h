@@ -28,7 +28,7 @@ class CMenuTree;
 class CUIControl;
 union SDL_Event;
 
-class CMenuManager : public CManagerBase
+class CMenuMgr : public CManagerBase
 {
 public:
     
@@ -36,14 +36,14 @@ public:
     static const bool DONT_INIT_GROUP = false;
 
     // Get the instance of the singleton class
-    static CMenuManager & Instance()
+    static CMenuMgr & Instance()
     {
-        static CMenuManager menuMgr;
+        static CMenuMgr menuMgr;
         return menuMgr;
     }
     
     // Load the menu action list from XML
-    void loadMenuActionFromXML( const std::string & filePath );
+    void loadMenuAction( const std::string & filePath );
     
     // Load the menu group
     void loadGroup( const std::string & group, const bool doInit = true );
@@ -129,13 +129,13 @@ public:
 private:
     
     // Constructor
-    CMenuManager();
+    CMenuMgr();
 
     // Destructor
-    ~CMenuManager();
+    ~CMenuMgr();
     
     // Load the menu info from file
-    void loadFromXML( const std::string & group, const std::string & filePath );
+    void load( const std::string & group, const std::string & filePath );
 
     // Load the from node
     void loadMenusFromNode( const std::string & group, const XMLNode & node );
@@ -211,7 +211,7 @@ private:
 *    desc:  Get the reference to the control in question
 ************************************************************************/
 template <typename Target>
-Target & CMenuManager::getMenuControl( const std::string & menuName, const std::string & controlName )
+Target & CMenuMgr::getMenuControl( const std::string & menuName, const std::string & controlName )
 {
     CMenu & rMenu = getMenu(menuName);
     Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToControl(controlName));
@@ -224,7 +224,7 @@ Target & CMenuManager::getMenuControl( const std::string & menuName, const std::
 *    desc:  Get the pointer to the active control - can return null
 ************************************************************************/
 template <typename Target>
-Target * CMenuManager::getPtrToActiveControl( const std::string & menuName )
+Target * CMenuMgr::getPtrToActiveControl( const std::string & menuName )
 {
     CMenu & rMenu = getMenu(menuName);
     Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToActiveControl());

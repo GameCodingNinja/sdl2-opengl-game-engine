@@ -39,10 +39,8 @@ CFont::~CFont()
 
 /************************************************************************
 *    DESC:  Load from XML file
-*
-*    param: String filePath - path to xml file
 ************************************************************************/
-void CFont::loadFromXML( const std::string & group )
+void CFont::load( const std::string & group )
 {
     // load the image
     CTextureMgr::Instance().loadImageFor2D( group, m_filePath + ".png" );

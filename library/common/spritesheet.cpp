@@ -100,7 +100,7 @@ void CSpriteSheet::build( const CSize<int> & sheetSize )
 *           among many sprites where as no string id is a simple sprite
 *           sheet animation used by maybe one sprite.
 ************************************************************************/
-void CSpriteSheet::loadFromXML( const std::string & filePath )
+void CSpriteSheet::load( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode node = XMLNode::openFileHelper( filePath.c_str(), "spriteSheet" );

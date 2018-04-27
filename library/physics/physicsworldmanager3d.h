@@ -50,7 +50,7 @@ private:
     ~CPhysicsWorldManager3D();
 
     // Load the physics worlds from an XML
-    void loadFromXML( const std::string & group, const std::string & LoadFromXML );
+    void load( const std::string & group, const std::string & filePath );
 
 private:
 

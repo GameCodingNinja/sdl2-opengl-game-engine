@@ -39,7 +39,7 @@ CMenuStrategy::~CMenuStrategy()
 ****************************************************************************/
 void CMenuStrategy::update()
 {
-    CMenuManager::Instance().updateInterface();
+    CMenuMgr::Instance().updateInterface();
 }
 
 
@@ -48,7 +48,7 @@ void CMenuStrategy::update()
 ************************************************************************/
 void CMenuStrategy::transform()
 {
-    CMenuManager::Instance().transformInterface();
+    CMenuMgr::Instance().transformInterface();
 }
 
 
@@ -59,5 +59,5 @@ void CMenuStrategy::render()
 {
     const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
-    CMenuManager::Instance().renderInterface( camera.getFinalMatrix() );
+    CMenuMgr::Instance().renderInterface( camera.getFinalMatrix() );
 }

@@ -1,9 +1,9 @@
 
-/************************************************************************
-*    FILE NAME:       igamestate.ang
-*
-*    DESCRIPTION:     Game state interface class
-************************************************************************/
+//
+//  FILE NAME:  igamestate.ang
+//
+//  DESC:       Game state interface class
+//
 
 class iGameState
 {

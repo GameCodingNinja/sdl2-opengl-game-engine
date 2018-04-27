@@ -53,7 +53,7 @@ CShaderMgr::~CShaderMgr()
 /************************************************************************
 *    DESC:  Load the shader from xml file path
 ************************************************************************/
-void CShaderMgr::loadFromXML( const std::string & filePath )
+void CShaderMgr::load( const std::string & filePath )
 {
     // Open and parse the XML file:
     XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "shaderLst" );

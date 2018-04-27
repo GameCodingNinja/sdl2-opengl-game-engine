@@ -47,7 +47,7 @@ void CPhysicsWorldManager3D::createWorld( const std::string & group )
     // Load the group data if it doesn't already exist
     if( m_pWorld3dMap.find( group ) == m_pWorld3dMap.end() )
     {
-        loadFromXML( group, listTableIter->second.back() );
+        load( group, listTableIter->second.back() );
     }
     else
     {
@@ -63,7 +63,7 @@ void CPhysicsWorldManager3D::createWorld( const std::string & group )
 *
 *	 param:	const string & filePath - file to load
 ************************************************************************/
-void CPhysicsWorldManager3D::loadFromXML( const std::string & group, const std::string & filePath )
+void CPhysicsWorldManager3D::load( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "physics3d" );

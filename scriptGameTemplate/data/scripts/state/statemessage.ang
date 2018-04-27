@@ -1,9 +1,9 @@
 
-/************************************************************************
-*    FILE NAME:       statemessage.ang
-*
-*    DESCRIPTION:     State message class
-************************************************************************/
+//
+//  FILE NAME:  statemessage.ang
+//
+//  DESC:       State message class
+//
 
 class CStateMessage
 {

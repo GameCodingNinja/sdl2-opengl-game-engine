@@ -62,18 +62,18 @@ void CBigPayBackState::init()
     CCommonState::init();
 
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree( "menu_tree");
-    CMenuManager::Instance().activateTree( "confirmation_tree");
-    CMenuManager::Instance().activateTree( "buy_tree");
-    CMenuManager::Instance().activateTree( "base_game_tree");
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree( "menu_tree");
+    CMenuMgr::Instance().activateTree( "confirmation_tree");
+    CMenuMgr::Instance().activateTree( "buy_tree");
+    CMenuMgr::Instance().activateTree( "base_game_tree");
 
     // Hook the Play button to the reel group
-    CUIButton & rPlayBtn = CMenuManager::Instance().getMenuControl<CUIButton>( "base_game_menu", "play_btn" );
+    CUIButton & rPlayBtn = CMenuMgr::Instance().getMenuControl<CUIButton>( "base_game_menu", "play_btn" );
     rPlayBtn.connect_executionAction( boost::bind(&CSlotGame::playGame, &m_slotGame, _1) );
 
     // Hook the total bet call back function to the total bet meter
-    auto & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
+    auto & rTotalBetMeter = CMenuMgr::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
     auto & rTotalBetDecBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_dec_btn") );
     auto & rTotalBetIncBtn = *rTotalBetMeter.findSubControl( std::string("total_bet_inc_btn") );
     rTotalBetDecBtn.connect_executionAction( boost::bind(&CBigPayBackState::totalBetCallBack, this, _1) );
@@ -97,15 +97,15 @@ void CBigPayBackState::init()
 
     // Init the front panel
     std::vector<CUIControl *> btnVec = {
-        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "home_btn" ),
-        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "menu_btn" ),
-        &CMenuManager::Instance().getMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
+        &CMenuMgr::Instance().getMenuControl<CUIControl>( "base_game_menu", "home_btn" ),
+        &CMenuMgr::Instance().getMenuControl<CUIControl>( "base_game_menu", "menu_btn" ),
+        &CMenuMgr::Instance().getMenuControl<CUIControl>( "base_game_menu", "buy_btn" ),
         &rTotalBetMeter };
     m_frontPanel.setButtons( &rPlayBtn, btnVec );
 
     m_frontPanel.setMeters(
-        &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
-        &CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
+        &CMenuMgr::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" ),
+        &CMenuMgr::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ) );
 
     // Add slot game component
     m_slotGame.setFrontPanel( &m_frontPanel );
@@ -114,7 +114,7 @@ void CBigPayBackState::init()
     m_pig.setPos( CPoint<float>(-875,-200,0) );
 
     // Init the credit meter
-    CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits()  );
+    CMenuMgr::Instance().getMenuControl<CUIMeter>( "base_game_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits()  );
 
     // Clear any preloaded XML files
     CXMLPreloader::Instance().clear();
@@ -156,7 +156,7 @@ void CBigPayBackState::allowStopSounds( bool allow )
 ****************************************************************************/
 void CBigPayBackState::totalBetCallBack(CUIControl *)
 {
-    const CUIButtonList & rTotalBetMeter = CMenuManager::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
+    const CUIButtonList & rTotalBetMeter = CMenuMgr::Instance().getMenuControl<CUIButtonList>( "base_game_menu", "total_bet_meter" );
     CBetMgr::Instance().setLineBet( rTotalBetMeter.getActiveIndex() + 1 );
 }
 
@@ -208,7 +208,7 @@ void CBigPayBackState::update()
 
     m_baseGameMusic.update();
 
-    if( !CMenuManager::Instance().isMenuActive() )
+    if( !CMenuMgr::Instance().isMenuActive() )
         m_slotGame.update();
 }
 
@@ -220,7 +220,7 @@ void CBigPayBackState::transform()
 {
     CCommonState::transform();
 
-    CMenuManager::Instance().transformInterface();
+    CMenuMgr::Instance().transformInterface();
     m_background.transform();
     m_pig.transform();
     m_slotGame.transform();
@@ -264,7 +264,7 @@ namespace NBigPayBack
     void Load()
     {
         // Load the state specific menu group
-        CMenuManager::Instance().loadGroup("(big_pay_back)", CMenuManager::DONT_INIT_GROUP);
+        CMenuMgr::Instance().loadGroup("(big_pay_back)", CMenuMgr::DONT_INIT_GROUP);
 
         // Load sound resources for the game
         CSoundMgr::Instance().loadGroup("(big_pay_back)");
@@ -293,7 +293,7 @@ namespace NBigPayBack
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
-        CMenuManager::Instance().initGroup("(big_pay_back)");
+        CMenuMgr::Instance().initGroup("(big_pay_back)");
     }
 
 
@@ -303,7 +303,7 @@ namespace NBigPayBack
     ****************************************************************************/
     void CriticalUnload()
     {
-        CMenuManager::Instance().cleanUpGroup("(big_pay_back)");
+        CMenuMgr::Instance().cleanUpGroup("(big_pay_back)");
         CObjectDataMgr::Instance().freeGroup2D( "(big_pay_back)" );
 
         // Unload the slot group stuff
@@ -313,7 +313,7 @@ namespace NBigPayBack
     void Unload()
     {
         // Unload the state specific menu group
-        CMenuManager::Instance().freeGroup("(big_pay_back)");
+        CMenuMgr::Instance().freeGroup("(big_pay_back)");
 
         // Unload the slot group stuff
         CSlotMathMgr::Instance().clear();

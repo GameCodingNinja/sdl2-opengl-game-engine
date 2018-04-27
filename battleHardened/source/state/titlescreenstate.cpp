@@ -36,8 +36,8 @@ void CTitleScreenState::init()
     CCommonState::init();
 
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree( "title_screen_tree");
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree( "title_screen_tree");
 
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );

@@ -64,7 +64,7 @@ void CObjectDataMgr::loadGroup2D( const std::string & group, const bool createFr
         m_objectData2DMapMap.emplace( group, std::map<const std::string, CObjectData2D>() );
 
         for( auto & iter : listTableIter->second )
-            loadFromXML2D( group, iter, createFromData );
+            load2D( group, iter, createFromData );
     }
     else
     {
@@ -79,9 +79,9 @@ void CObjectDataMgr::loadGroup2D( const std::string & group, const bool createFr
 
 
 /************************************************************************
- *    DESC:  Load all object information from an xml
+ *    DESC:  Load all object information
  ************************************************************************/
-void CObjectDataMgr::loadFromXML2D( const std::string & group, const std::string & filePath, const bool createFromData )
+void CObjectDataMgr::load2D( const std::string & group, const std::string & filePath, const bool createFromData )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "objectDataList2D" );
@@ -258,7 +258,7 @@ void CObjectDataMgr::loadGroup3D( const std::string & group, const bool createFr
         m_objectData3DMapMap.emplace( group, std::map<const std::string, CObjectData3D>() );
 
         for( auto & iter : listTableIter->second )
-            loadFromXML3D( group, iter, createFromData );
+            load3D( group, iter, createFromData );
     }
     else
     {
@@ -291,9 +291,9 @@ void CObjectDataMgr::createFromData3D( const std::string & group )
 
 
 /************************************************************************
- *    DESC:  Load all object information from an xml
+ *    DESC:  Load all object information
  ************************************************************************/
-void CObjectDataMgr::loadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData )
+void CObjectDataMgr::load3D( const std::string & group, const std::string & filePath, const bool createFromData )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "objectDataList3D" );

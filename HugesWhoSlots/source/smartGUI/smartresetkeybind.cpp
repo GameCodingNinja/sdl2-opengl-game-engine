@@ -34,7 +34,7 @@ void CSmartResetKeyBindBtn::execute()
     CActionMgr::Instance().resetKeyBindingsToDefault();
     
     // Get a pointer to the scroll box
-    CMenu & rMenu = CMenuManager::Instance().getMenu( "key_bindings_menu" );
+    CMenu & rMenu = CMenuMgr::Instance().getMenu( "key_bindings_menu" );
     CUIScrollBox * pScrollBoxCtrl = NGenFunc::DynCast<CUIScrollBox>(rMenu.getPtrToControl("key_binding_scroll_box"));
     
     // Reset all the key binding buttons

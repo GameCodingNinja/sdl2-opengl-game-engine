@@ -72,7 +72,7 @@ void CSymbolSetViewMgr::loadGroup( const std::string & group )
         m_symbolSetViewMap.emplace( group, std::map<const std::string, CSymbolSetView>() );
 
         for( auto & iter : listTableIter->second )
-            loadFromXML( group, iter );
+            load( group, iter );
     }
     else
     {
@@ -86,7 +86,7 @@ void CSymbolSetViewMgr::loadGroup( const std::string & group )
 /************************************************************************
  *    DESC:  Load all symbol information from an xml
  ************************************************************************/
-void CSymbolSetViewMgr::loadFromXML( const std::string & group, const std::string & filePath )
+void CSymbolSetViewMgr::load( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode symbolSetListNode = XMLNode::openFileHelper( filePath.c_str(), "symbolSetList" );

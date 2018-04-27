@@ -89,7 +89,7 @@ void CSoundMgr::loadGroup( const std::string & group )
     if( m_soundMapMap.find( group ) == m_soundMapMap.end() )
     {
         for( auto & iter : listTableIter->second )
-            loadFromXML( group, iter );
+            load( group, iter );
     }
     else
     {
@@ -105,7 +105,7 @@ void CSoundMgr::loadGroup( const std::string & group )
 *
 *	 param:	string & filePath - file path of the object data list XML
 ************************************************************************/
-void CSoundMgr::loadFromXML( const std::string & group, const std::string & filePath )
+void CSoundMgr::load( const std::string & group, const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "soundList" );

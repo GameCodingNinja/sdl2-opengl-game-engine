@@ -49,8 +49,8 @@ CLevel1State::CLevel1State() :
         m_rPhysicsWorld( CPhysicsWorldManager2D::Instance().getWorld( "(game)" ) ),
         m_rStrategy(CSpriteStrategyMgr::Instance().get<CBasicSpriteStrategy>("(level1_spriteStrategy)")),
         m_rStrawberryData(m_rStrategy.getData("strawberry").get<CSpriteData>()),
-        m_rMultiplierLabel(CMenuManager::Instance().getMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
-        m_rWinMeter(CMenuManager::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
+        m_rMultiplierLabel(CMenuMgr::Instance().getMenuControl<CUILabel>( "base_game_menu", "multiplier_label" )),
+        m_rWinMeter(CMenuMgr::Instance().getMenuControl<CUIMeter>( "base_game_menu", "win_meter" )),
         m_multiIndexPos(0),
         m_totalWin(0),
         m_multiplier(1),
@@ -81,11 +81,11 @@ CLevel1State::~CLevel1State()
 void CLevel1State::init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree("pause_tree");
-    CMenuManager::Instance().activateTree("base_game_tree");
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree("pause_tree");
+    CMenuMgr::Instance().activateTree("base_game_tree");
 
-    //CMenuManager::Instance().ActivateMenu("pause_tree", "confirmation_menu");
+    //CMenuMgr::Instance().ActivateMenu("pause_tree", "confirmation_menu");
 
     m_ballVec = {"circle_green", "circle_blue", "circle_red",
                  "square_green", "square_blue", "square_red",
@@ -114,7 +114,7 @@ void CLevel1State::init()
     //m_camera.Transform();
 
     // Since these interface elements don't move only need to transform them once.
-    CMenuManager::Instance().transformInterface();
+    CMenuMgr::Instance().transformInterface();
 
     // Flush any user inputs that have been queued up
     SDL_FlushEvents(SDL_KEYDOWN, SDL_MULTIGESTURE);
@@ -148,7 +148,7 @@ void CLevel1State::handleEvent( const SDL_Event & rEvent )
     }
     else if( rEvent.type == SDL_MOUSEBUTTONUP)
     {
-        if( !CMenuManager::Instance().isMenuActive() )
+        if( !CMenuMgr::Instance().isMenuActive() )
         {
             auto camera = CCameraMgr::Instance().getActiveCamera();
             const float ratio = 1.f / camera.getOrthoHeightAspectRatio();
@@ -165,7 +165,7 @@ void CLevel1State::handleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CLevel1State::miscProcess()
 {
-    if( !CMenuManager::Instance().isMenuActive() )
+    if( !CMenuMgr::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().miscProcess();
     }
@@ -177,7 +177,7 @@ void CLevel1State::miscProcess()
 ****************************************************************************/
 void CLevel1State::physics()
 {
-    if( !CMenuManager::Instance().isMenuActive() )
+    if( !CMenuMgr::Instance().isMenuActive() )
     {
         m_rPhysicsWorld.variableTimeStep();
     }
@@ -195,7 +195,7 @@ void CLevel1State::update()
 
     CScriptManager::Instance().update();
 
-    if( !CMenuManager::Instance().isMenuActive() )
+    if( !CMenuMgr::Instance().isMenuActive() )
     {
         CSpriteStrategyMgr::Instance().update();
     }
@@ -222,7 +222,7 @@ void CLevel1State::preRender()
 
     CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getActiveCameraMatrix() );
 
-    CMenuManager::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CMenuMgr::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
 }
 
 
@@ -323,7 +323,7 @@ namespace NLevel1State
     void Load()
     {
         // Load the state specific menu group
-        CMenuManager::Instance().loadGroup("(levels)", CMenuManager::DONT_INIT_GROUP);
+        CMenuMgr::Instance().loadGroup("(levels)", CMenuMgr::DONT_INIT_GROUP);
 
         // Load state specific AngelScript functions
         CScriptManager::Instance().loadGroup("(level1)");
@@ -338,7 +338,7 @@ namespace NLevel1State
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
-        CMenuManager::Instance().initGroup("(levels)");
+        CMenuMgr::Instance().initGroup("(levels)");
 
         CSpriteStrategyMgr::Instance().init();
     }
@@ -350,7 +350,7 @@ namespace NLevel1State
     ****************************************************************************/
     void CriticalUnload()
     {
-        CMenuManager::Instance().cleanUpGroup("(levels)");
+        CMenuMgr::Instance().cleanUpGroup("(levels)");
         CSpriteStrategyMgr::Instance().cleanUp();
         CObjectDataMgr::Instance().freeGroup2D( "(level1)" );
         CObjectDataMgr::Instance().freeGroup2D( "(levels)" );
@@ -359,7 +359,7 @@ namespace NLevel1State
     void Unload()
     {
         // Unload the state specific menu group
-        CMenuManager::Instance().freeGroup("(levels)");
+        CMenuMgr::Instance().freeGroup("(levels)");
 
         // Unload the strategy group stuff
         CSpriteStrategyMgr::Instance().clear();

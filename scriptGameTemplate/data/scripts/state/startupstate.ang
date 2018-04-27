@@ -1,9 +1,9 @@
 
-/************************************************************************
-*    FILE NAME:       startupstate.ang
-*
-*    DESCRIPTION:     Start up game state
-************************************************************************/
+//
+//  FILE NAME:  startupstate.ang
+//
+//  DESC:       Start up game state
+//
 
 final class CStartUpState : iGameState
 {
@@ -22,6 +22,9 @@ final class CStartUpState : iGameState
     //
     void Init() override
     {
+        // Load in any fonts
+        FontMgr.load( "data/textures/fonts/font.lst" );
+    
         // Create a basic strategy for 2d sprites
         StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
         
@@ -50,8 +53,6 @@ final class CStartUpState : iGameState
         // Load the start up animation group
         ObjectDataMgr.loadGroup2D( "(title_screen)" );
         ObjectDataMgr.loadGroup3D( "(cube)" );
-        
-        Hold(1000);
 
         Screen_FadeOut();
         

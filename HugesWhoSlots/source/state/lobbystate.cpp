@@ -54,14 +54,14 @@ void CLobbyState::init()
     CCommonState::init();
 
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree( "menu_tree");
-    CMenuManager::Instance().activateTree( "buy_tree");
-    CMenuManager::Instance().activateTree( "confirmation_tree");
-    CMenuManager::Instance().activateTree( "lobby_tree");
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree( "menu_tree");
+    CMenuMgr::Instance().activateTree( "buy_tree");
+    CMenuMgr::Instance().activateTree( "confirmation_tree");
+    CMenuMgr::Instance().activateTree( "lobby_tree");
 
     // Init the credit meter
-    CMenuManager::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits() );
+    CMenuMgr::Instance().getMenuControl<CUIMeter>( "lobby_menu", "credit_meter" ).set( CBetMgr::Instance().getCredits() );
 
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( m_group, "Screen_FadeIn" );
@@ -138,7 +138,7 @@ void CLobbyState::transform()
 {
     CCommonState::transform();
 
-    CMenuManager::Instance().transformInterface();
+    CMenuMgr::Instance().transformInterface();
 
     m_background.transform();
 }
@@ -178,7 +178,7 @@ namespace NLobby
     void Load()
     {
         // Load the state specific menu group
-        CMenuManager::Instance().loadGroup("(lobby)", CMenuManager::DONT_INIT_GROUP);
+        CMenuMgr::Instance().loadGroup("(lobby)", CMenuMgr::DONT_INIT_GROUP);
 
         CSoundMgr::Instance().loadGroup("(lobby)");
 
@@ -192,7 +192,7 @@ namespace NLobby
     void CriticalInit()
     {
         // Creates the font strings, run init scripts
-        CMenuManager::Instance().initGroup("(lobby)");
+        CMenuMgr::Instance().initGroup("(lobby)");
     }
 
 
@@ -202,13 +202,13 @@ namespace NLobby
     ****************************************************************************/
     void CriticalUnload()
     {
-	CMenuManager::Instance().cleanUpGroup("(lobby)");
+	CMenuMgr::Instance().cleanUpGroup("(lobby)");
         CObjectDataMgr::Instance().freeGroup2D( "(lobby)" );
     }
 
     void Unload()
     {
-        CMenuManager::Instance().freeGroup("(lobby)");
+        CMenuMgr::Instance().freeGroup("(lobby)");
         CScriptManager::Instance().freeGroup("(lobby)");
         CSoundMgr::Instance().freeGroup("(lobby)");
 

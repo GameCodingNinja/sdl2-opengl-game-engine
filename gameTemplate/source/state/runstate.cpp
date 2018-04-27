@@ -41,8 +41,8 @@ CRunState::CRunState() :
 void CRunState::init()
 {
     // Unblock the menu messaging and activate needed trees
-    CMenuManager::Instance().allow();
-    CMenuManager::Instance().activateTree("pause_tree");
+    CMenuMgr::Instance().allow();
+    CMenuMgr::Instance().activateTree("pause_tree");
 
     // Prepare the script to fade in the screen
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
@@ -74,7 +74,7 @@ void CRunState::handleEvent( const SDL_Event & rEvent )
 ****************************************************************************/
 void CRunState::physics()
 {
-    if( !CMenuManager::Instance().isActive() )
+    if( !CMenuMgr::Instance().isActive() )
     {
         m_rPhysicsWorld.fixedTimeStep();
     }
@@ -90,7 +90,7 @@ void CRunState::update()
 
     m_scriptComponent.update();
 
-    if( !CMenuManager::Instance().isActive() )
+    if( !CMenuMgr::Instance().isActive() )
         CSpriteStrategyMgr::Instance().update();
 }
 
@@ -102,7 +102,7 @@ void CRunState::transform()
 {
     CCommonState::transform();
 
-    if( !CMenuManager::Instance().isActive() )
+    if( !CMenuMgr::Instance().isActive() )
         CSpriteStrategyMgr::Instance().transform();
 }
 

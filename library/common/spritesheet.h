@@ -33,8 +33,8 @@ public:
     // Build the simple (grid) sprite sheet
     void build( const CSize<int> & sheetSize );
     
-    // Load the glyph data from XML file
-    void loadFromXML( const std::string & filePath );
+    // Load the glyph data
+    void load( const std::string & filePath );
     
     // Get the glyph
     const CSpriteSheetGlyph & getGlyph( int index = -1 ) const;

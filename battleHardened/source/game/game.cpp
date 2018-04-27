@@ -206,7 +206,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
         displayErrorMsg( "Low Memory Error", "The device is experiencing low memory. Try freeing up some apps." );
     
     // In a traditional game, want the pause menu to display when the game is sent to the background
-    else if( NBDefs::IsDebugMode() && (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuManager::Instance().isMenuActive() )
+    else if( NBDefs::IsDebugMode() && (rEvent.type == SDL_APP_WILLENTERBACKGROUND) && !CMenuMgr::Instance().isMenuActive() )
         NGenFunc::DispatchEvent( NMenu::EGE_MENU_ESCAPE_ACTION );
 
     // Handle events

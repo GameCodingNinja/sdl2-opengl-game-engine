@@ -60,7 +60,7 @@ CMenu::~CMenu()
 /************************************************************************
 *    DESC:  Load the menu info from file
 ************************************************************************/
-void CMenu::loadFromXML( const std::string & filePath )
+void CMenu::load( const std::string & filePath )
 {
     // Open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( filePath.c_str(), "menu" );

@@ -95,7 +95,7 @@ void CStartUpState::init()
     CObjectDataMgr::Instance().loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
 
     // Load the shader
-    CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
+    CShaderMgr::Instance().load( "data/shaders/shader.cfg" );
 
     // Load the start up animation group
     CObjectDataMgr::Instance().loadGroup2D( "(startup)" );
@@ -157,7 +157,7 @@ void CStartUpState::fade(
 void CStartUpState::assetLoad()
 {
     // Load in any fonts
-    CFontMgr::Instance().loadFromXML( "data/textures/fonts/font.lst" );
+    CFontMgr::Instance().load( "data/textures/fonts/font.lst" );
 
     // Load the symbol set view data manager list table
     //CSymbolSetViewMgr::Instance().LoadListTable( "data/objects/2d/slot/symbolSetListTable.lst" );
@@ -175,10 +175,10 @@ void CStartUpState::assetLoad()
     CActionMgr::Instance().loadActionFromXML( "data/settings/controllerMapping.cfg" );
 
     // Load menu list table
-    CMenuManager::Instance().loadListTable( "data/objects/2d/menu/menuListTable.lst" );
+    CMenuMgr::Instance().loadListTable( "data/objects/2d/menu/menuListTable.lst" );
 
     // Load the menu action list
-    CMenuManager::Instance().loadMenuActionFromXML( "data/objects/2d/menu/menu_action.list" );
+    CMenuMgr::Instance().loadMenuAction( "data/objects/2d/menu/menu_action.list" );
 
     // Load sound resources for the menu
     CSoundMgr::Instance().loadListTable( "data/sound/soundListTable.lst" );
@@ -212,7 +212,7 @@ void CStartUpState::assetLoad()
     CObjectDataMgr::Instance().loadGroup2D("(menu)");
 
     // Load the menu group
-    CMenuManager::Instance().loadGroup("(menu)");
+    CMenuMgr::Instance().loadGroup("(menu)");
 
     // Do the state specific load
     NTitleScreenState::ObjectDataLoad();

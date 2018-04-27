@@ -1,9 +1,9 @@
 
-/************************************************************************
-*    FILE NAME:       titlescreenstate.ang
-*
-*    DESCRIPTION:     Title screen state
-************************************************************************/
+//
+//  FILE NAME:  titlescreenstate.ang
+//
+//  DESC:       Title screen state
+//
 
 final class CTitleScreenState : iGameState
 {
@@ -44,4 +44,3 @@ final class CTitleScreenState : iGameState
         cube.incRot( rot, rot, 0 );
     }
 };
-

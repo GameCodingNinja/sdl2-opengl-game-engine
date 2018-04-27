@@ -46,7 +46,7 @@ public:
     virtual ~CMenu();
 
     // Load the menu info from XML file
-    void loadFromXML( const std::string & filePath );
+    void load( const std::string & filePath );
     
     // Init the menu
     void init();

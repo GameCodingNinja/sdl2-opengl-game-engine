@@ -60,7 +60,7 @@ private:
     virtual ~CSlotMathMgr();
     
     // Load all math data from an xml
-    void loadFromXML( const std::string & group, const std::string & filePath );
+    void load( const std::string & group, const std::string & filePath );
     
 private:
     
