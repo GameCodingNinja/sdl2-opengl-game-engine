@@ -32,7 +32,7 @@
 #endif
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotGame::CSlotGame() :
     m_slotState( NSlotDefs::ESLOT_IDLE ),
@@ -43,7 +43,7 @@ CSlotGame::CSlotGame() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotGame::~CSlotGame()
 {
@@ -51,7 +51,7 @@ CSlotGame::~CSlotGame()
 
 
 /************************************************************************
-*    desc:  Add the slot group
+*    DESC:  Add the slot group
 ************************************************************************/
 void CSlotGame::addSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
 {
@@ -60,7 +60,7 @@ void CSlotGame::addSlotGroup( std::unique_ptr<CSlotGroup> slotGroup )
 
 
 /************************************************************************
-*    desc:  Do we allow the stop sounds?
+*    DESC:  Do we allow the stop sounds?
 ************************************************************************/
 void CSlotGame::allowStopSounds( bool allow )
 {
@@ -70,7 +70,7 @@ void CSlotGame::allowStopSounds( bool allow )
 
 
 /***************************************************************************
-*    desc:  Go through the game state
+*    DESC:  Go through the game state
 ****************************************************************************/
 void CSlotGame::processGameState()
 {
@@ -97,7 +97,7 @@ void CSlotGame::processGameState()
 
 
 /***************************************************************************
-*    desc: State Idle slot
+*    DESC: State Idle slot
 ****************************************************************************/
 void CSlotGame::stateIdle()
 {
@@ -105,7 +105,7 @@ void CSlotGame::stateIdle()
 
 
 /***************************************************************************
-*    desc:  State Wait for the cycle results to stop
+*    DESC:  State Wait for the cycle results to stop
 ****************************************************************************/
 void CSlotGame::stateKillCycleResults()
 {
@@ -116,7 +116,7 @@ void CSlotGame::stateKillCycleResults()
 
 
 /***************************************************************************
-*    desc:  State Place Wager
+*    DESC:  State Place Wager
 ****************************************************************************/
 void CSlotGame::statePlaceWager()
 {
@@ -135,7 +135,7 @@ void CSlotGame::statePlaceWager()
 
 
 /***************************************************************************
-*    desc:  State Generate Stops
+*    DESC:  State Generate Stops
 ****************************************************************************/
 void CSlotGame::stateGenerateStops()
 {
@@ -147,7 +147,7 @@ void CSlotGame::stateGenerateStops()
 
 
 /***************************************************************************
-*    desc:  State Evaluate
+*    DESC:  State Evaluate
 ****************************************************************************/
 void CSlotGame::stateEvaluate()
 {
@@ -162,7 +162,7 @@ void CSlotGame::stateEvaluate()
 
 
 /***************************************************************************
-*    desc:  State Pre Spin
+*    DESC:  State Pre Spin
 ****************************************************************************/
 void CSlotGame::statePreSpin()
 {
@@ -174,7 +174,7 @@ void CSlotGame::statePreSpin()
 
 
 /***************************************************************************
-*    desc:  State Spin
+*    DESC:  State Spin
 ****************************************************************************/
 void CSlotGame::stateSpin()
 {
@@ -194,7 +194,7 @@ void CSlotGame::stateSpin()
 
 
 /***************************************************************************
-*    desc:  State Post Spin
+*    DESC:  State Post Spin
 ****************************************************************************/
 void CSlotGame::statePostSpin()
 {
@@ -203,7 +203,7 @@ void CSlotGame::statePostSpin()
 
 
 /***************************************************************************
-*    desc:  State Pre Award Win
+*    DESC:  State Pre Award Win
 ****************************************************************************/
 void CSlotGame::statePreAwardWin()
 {
@@ -212,7 +212,7 @@ void CSlotGame::statePreAwardWin()
 
 
 /***************************************************************************
-*    desc:  State Bonus Decision
+*    DESC:  State Bonus Decision
 ****************************************************************************/
 void CSlotGame::stateBonusDecision()
 {
@@ -221,7 +221,7 @@ void CSlotGame::stateBonusDecision()
 
 
 /***************************************************************************
-*    desc:  State Pre Bonus
+*    DESC:  State Pre Bonus
 ****************************************************************************/
 void CSlotGame::statePreBonus()
 {
@@ -230,7 +230,7 @@ void CSlotGame::statePreBonus()
 
 
 /***************************************************************************
-*    desc:  State Bonus
+*    DESC:  State Bonus
 ****************************************************************************/
 void CSlotGame::stateBonus()
 {
@@ -239,7 +239,7 @@ void CSlotGame::stateBonus()
 
 
 /***************************************************************************
-*    desc:  State Post Bonus
+*    DESC:  State Post Bonus
 ****************************************************************************/
 void CSlotGame::statePostBonus()
 {
@@ -248,7 +248,7 @@ void CSlotGame::statePostBonus()
 
 
 /***************************************************************************
-*    desc:  State Post Award Win
+*    DESC:  State Post Award Win
 ****************************************************************************/
 void CSlotGame::statePostAwardWin()
 {
@@ -270,7 +270,7 @@ void CSlotGame::statePostAwardWin()
 
 
 /***************************************************************************
-*    desc:  State wait for the award to finish it's display
+*    DESC:  State wait for the award to finish it's display
 ****************************************************************************/
 void CSlotGame::stateWaitForAward()
 {
@@ -287,7 +287,7 @@ void CSlotGame::stateWaitForAward()
 
 
 /***************************************************************************
-*    desc:  State End
+*    DESC:  State End
 ****************************************************************************/
 void CSlotGame::stateEnd()
 {
@@ -302,7 +302,7 @@ void CSlotGame::stateEnd()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CSlotGame::handleEvent( const SDL_Event & rEvent )
 {
@@ -310,7 +310,7 @@ void CSlotGame::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CSlotGame::update()
 {
@@ -327,7 +327,7 @@ void CSlotGame::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CSlotGame::transform()
 {
@@ -337,7 +337,7 @@ void CSlotGame::transform()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CSlotGame::render( const CMatrix & matrix )
 {
@@ -347,7 +347,7 @@ void CSlotGame::render( const CMatrix & matrix )
 
 
 /***************************************************************************
-*    desc:  Play a game
+*    DESC:  Play a game
 ****************************************************************************/
 void CSlotGame::playGame(CUIControl *)
 {
@@ -375,7 +375,7 @@ void CSlotGame::playGame(CUIControl *)
 
 
 /***************************************************************************
-*    desc:  Set the front panel
+*    DESC:  Set the front panel
 ****************************************************************************/
 void CSlotGame::setFrontPanel( iFrontPanel * pFrontPanel )
 {
@@ -384,7 +384,7 @@ void CSlotGame::setFrontPanel( iFrontPanel * pFrontPanel )
 
 
 /***************************************************************************
-*    desc:  Set the game music
+*    DESC:  Set the game music
 ****************************************************************************/
 void CSlotGame::setGameMusic( iGameMusic * pGameMusic )
 {
@@ -393,7 +393,7 @@ void CSlotGame::setGameMusic( iGameMusic * pGameMusic )
 
 
 /***************************************************************************
-*    desc:  Get the state
+*    DESC:  Get the state
 ****************************************************************************/
 NSlotDefs::ESlotState CSlotGame::getState()
 {
@@ -402,7 +402,7 @@ NSlotDefs::ESlotState CSlotGame::getState()
 
 
 /************************************************************************
-*    desc:  Is the cycle results animating
+*    DESC:  Is the cycle results animating
 ************************************************************************/
 bool CSlotGame::isCycleResultsAnimating()
 {
@@ -415,7 +415,7 @@ bool CSlotGame::isCycleResultsAnimating()
 
 
 /************************************************************************
-*    desc:  Is the cycle results active
+*    DESC:  Is the cycle results active
 ************************************************************************/
 bool CSlotGame::isCycleResultsActive()
 {
@@ -428,7 +428,7 @@ bool CSlotGame::isCycleResultsActive()
 
 
 /************************************************************************
-*    desc:  Create a play result for a slot group
+*    DESC:  Create a play result for a slot group
 ************************************************************************/
 CPlayResult & CSlotGame::createPlayResult()
 {
@@ -437,7 +437,7 @@ CPlayResult & CSlotGame::createPlayResult()
 
 
 /************************************************************************
-*    desc:  Kill the cycle results
+*    DESC:  Kill the cycle results
 ************************************************************************/
 void CSlotGame::killCycleResults()
 {

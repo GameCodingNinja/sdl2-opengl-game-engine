@@ -15,7 +15,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotStripModel::CSlotStripModel(
     const std::vector<CStripStop> & rMathStripVec,
@@ -35,7 +35,7 @@ CSlotStripModel::CSlotStripModel(
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotStripModel::~CSlotStripModel()
 {
@@ -43,7 +43,7 @@ CSlotStripModel::~CSlotStripModel()
 
 
 /************************************************************************
-*    desc:  Generate the strip stop
+*    DESC:  Generate the strip stop
 ************************************************************************/
 void CSlotStripModel::generateStop()
 {
@@ -66,7 +66,7 @@ void CSlotStripModel::generateStop()
 
 
 /************************************************************************
-*    desc:  Get the last strip stop
+*    DESC:  Get the last strip stop
 ************************************************************************/
 int CSlotStripModel::getLastStop() const
 {
@@ -75,7 +75,7 @@ int CSlotStripModel::getLastStop() const
 
 
 /************************************************************************
-*    desc:  Get the strip stop
+*    DESC:  Get the strip stop
 ************************************************************************/
 int CSlotStripModel::getStop() const
 {
@@ -84,7 +84,7 @@ int CSlotStripModel::getStop() const
 
 
 /************************************************************************
-*    desc:  Get the math symbol
+*    DESC:  Get the math symbol
 ************************************************************************/
 const CMathSymbol & CSlotStripModel::getSymbol( const int stop ) const
 {
@@ -95,7 +95,7 @@ const CMathSymbol & CSlotStripModel::getSymbol( const int stop ) const
 
 
 /************************************************************************
-*    desc:  Get the math symbol index
+*    DESC:  Get the math symbol index
 ************************************************************************/
 int CSlotStripModel::getSymbolIndex( const int stop ) const
 {
@@ -109,7 +109,7 @@ int CSlotStripModel::getSymbolIndex( const int stop ) const
 
 
 /************************************************************************
-*    desc:  Get the evaluation symbol index count
+*    DESC:  Get the evaluation symbol index count
 ************************************************************************/
 const std::vector<int8_t> & CSlotStripModel::getEvalIndexVec() const
 {
@@ -118,7 +118,7 @@ const std::vector<int8_t> & CSlotStripModel::getEvalIndexVec() const
 
 
 /************************************************************************
-*    desc:  Get the math symbol strip vector
+*    DESC:  Get the math symbol strip vector
 ************************************************************************/
 const std::vector<CStripStop> & CSlotStripModel::getStripVec() const
 {

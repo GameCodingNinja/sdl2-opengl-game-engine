@@ -21,7 +21,7 @@
 namespace NScriptShaderManager
 {
     /************************************************************************
-    *    desc:  Load the shader from xml file path                                                        
+    *    DESC:  Load the shader from xml file path                                                        
     ************************************************************************/
     void LoadFromXML( const std::string & filePath, CShaderMgr & rShaderMgr )
     {
@@ -40,7 +40,7 @@ namespace NScriptShaderManager
     }
     
     /************************************************************************
-    *    desc:  Register global functions
+    *    DESC:  Register global functions
     ************************************************************************/
     void Register()
     {

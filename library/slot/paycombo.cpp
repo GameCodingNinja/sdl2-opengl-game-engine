@@ -9,7 +9,7 @@
 #include <slot/paycombo.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPayCombo::CPayCombo( const std::string & symb, const int count, const uint award, const int bonusCode ) :
     m_symbol(symb),
@@ -21,7 +21,7 @@ CPayCombo::CPayCombo( const std::string & symb, const int count, const uint awar
 
 
 /************************************************************************
-*    desc:  Get the symbol ID
+*    DESC:  Get the symbol ID
 ************************************************************************/
 const std::string & CPayCombo::getSymbol() const
 {
@@ -30,7 +30,7 @@ const std::string & CPayCombo::getSymbol() const
 
 
 /************************************************************************
-*    desc:  Get the number of symbols involved in this pay
+*    DESC:  Get the number of symbols involved in this pay
 ************************************************************************/
 int CPayCombo::getCount() const
 {
@@ -39,7 +39,7 @@ int CPayCombo::getCount() const
 
 
 /************************************************************************
-*    desc:  Get the award
+*    DESC:  Get the award
 ************************************************************************/
 uint CPayCombo::getAward() const
 {
@@ -48,7 +48,7 @@ uint CPayCombo::getAward() const
 
 
 /************************************************************************
-*    desc:  Get the bonus code
+*    DESC:  Get the bonus code
 ************************************************************************/
 int CPayCombo::getBonusCode() const
 {

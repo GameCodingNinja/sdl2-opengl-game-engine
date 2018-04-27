@@ -40,7 +40,7 @@
 #include <thread>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLoadState::CLoadState( const CStateMessage & stateMsg ) :
     iGameState( NGameDefs::EGS_GAME_LOAD, stateMsg ),
@@ -52,7 +52,7 @@ CLoadState::CLoadState( const CStateMessage & stateMsg ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CLoadState::~CLoadState()
 {
@@ -61,7 +61,7 @@ CLoadState::~CLoadState()
 
 
 /************************************************************************
-*    desc:  Do any pre-load init's
+*    DESC:  Do any pre-load init's
 ************************************************************************/
 void CLoadState::init()
 {
@@ -87,7 +87,7 @@ void CLoadState::init()
 
 
 /***************************************************************************
-*    desc:  Animate from thread durring the load
+*    DESC:  Animate from thread durring the load
 ****************************************************************************/
 void CLoadState::animate()
 {
@@ -120,7 +120,7 @@ void CLoadState::animate()
 
 
 /***************************************************************************
-*    desc:  Object Data Load
+*    DESC:  Object Data Load
 ****************************************************************************/
 void CLoadState::objectDataLoad()
 {
@@ -157,7 +157,7 @@ void CLoadState::objectDataLoad()
 
 
 /***************************************************************************
-*    desc:  Load the assets
+*    DESC:  Load the assets
 ****************************************************************************/
 void CLoadState::criticalLoad()
 {
@@ -180,7 +180,7 @@ void CLoadState::criticalLoad()
 
 
 /***************************************************************************
-*    desc:  Critical inits
+*    DESC:  Critical inits
 ****************************************************************************/
 void CLoadState::criticalInit()
 {
@@ -193,7 +193,7 @@ void CLoadState::criticalInit()
 
 
 /***************************************************************************
-*    desc:  Load the assets
+*    DESC:  Load the assets
 ****************************************************************************/
 void CLoadState::assetsLoad()
 {
@@ -241,7 +241,7 @@ void CLoadState::assetsLoad()
 
 
 /***************************************************************************
-*    desc:  Is the state done
+*    DESC:  Is the state done
 ****************************************************************************/
 bool CLoadState::doStateChange()
 {
@@ -286,7 +286,7 @@ bool CLoadState::doStateChange()
 
 
 /***************************************************************************
-*    desc:  Get the next state to load
+*    DESC:  Get the next state to load
 ****************************************************************************/
 NGameDefs::EGameState CLoadState::getNextState()
 {

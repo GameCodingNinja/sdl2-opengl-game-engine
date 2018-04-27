@@ -8,7 +8,7 @@
 #include <gui/uibutton.h>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    DESC:  Constructor                                                             
 ************************************************************************/
 CUIButton::CUIButton( const std::string & group ) :
     CUIControl( group )
@@ -19,7 +19,7 @@ CUIButton::CUIButton( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    DESC:  Destructor                                                             
 ************************************************************************/
 CUIButton::~CUIButton()
 {

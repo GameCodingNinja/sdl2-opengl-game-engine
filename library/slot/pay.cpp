@@ -12,7 +12,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPay::CPay(
     const NSlotDefs::EPayType payType,
@@ -32,7 +32,7 @@ CPay::CPay(
 
 
 /************************************************************************
-*    desc:  Get the pay type
+*    DESC:  Get the pay type
 ************************************************************************/
 NSlotDefs::EPayType CPay::getPayType() const
 {
@@ -41,7 +41,7 @@ NSlotDefs::EPayType CPay::getPayType() const
 
 
 /************************************************************************
-*    desc:  Get the award
+*    DESC:  Get the award
 ************************************************************************/
 uint CPay::getBaseAward() const
 {
@@ -50,7 +50,7 @@ uint CPay::getBaseAward() const
 
 
 /************************************************************************
-*    desc:  Get the final award
+*    DESC:  Get the final award
 ************************************************************************/
 uint CPay::getFinalAward() const
 {
@@ -59,7 +59,7 @@ uint CPay::getFinalAward() const
 
 
 /************************************************************************
-*    desc:  Get the multiplier
+*    DESC:  Get the multiplier
 ************************************************************************/
 uint CPay::getMultiplier() const
 {
@@ -68,7 +68,7 @@ uint CPay::getMultiplier() const
 
 
 /************************************************************************
-*    desc:  Get the pay line
+*    DESC:  Get the pay line
 ************************************************************************/
 int CPay::getPayLine() const
 {
@@ -77,7 +77,7 @@ int CPay::getPayLine() const
 
 
 /************************************************************************
-*    desc:  Get the bonus code
+*    DESC:  Get the bonus code
 ************************************************************************/
 int CPay::getBonusCode() const
 {
@@ -86,7 +86,7 @@ int CPay::getBonusCode() const
 
 
 /************************************************************************
-*    desc:  Get the symbol positions
+*    DESC:  Get the symbol positions
 ************************************************************************/
 const std::vector<CSymbPos> & CPay::getSymbPos() const
 {
@@ -95,7 +95,7 @@ const std::vector<CSymbPos> & CPay::getSymbPos() const
 
 
 /************************************************************************
-*    desc:  Debug output
+*    DESC:  Debug output
 ************************************************************************/
 void CPay::debug() const
 {

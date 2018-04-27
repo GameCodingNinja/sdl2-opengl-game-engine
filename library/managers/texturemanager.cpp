@@ -30,7 +30,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CTextureMgr::CTextureMgr() :
     m_currentTextureID(0),
@@ -41,7 +41,7 @@ CTextureMgr::CTextureMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CTextureMgr::~CTextureMgr()
 {
@@ -65,7 +65,7 @@ CTextureMgr::~CTextureMgr()
 
 
 /************************************************************************
-*    desc:  Load the image from file path
+*    DESC:  Load the image from file path
 ************************************************************************/
 void CTextureMgr::loadImageFor2D( const std::string & group, const std::string & filePath )
 {
@@ -92,7 +92,7 @@ void CTextureMgr::loadImageFor2D( const std::string & group, const std::string &
 
 
 /************************************************************************
-*    desc:  Create the texture from file path
+*    DESC:  Create the texture from file path
 ************************************************************************/
 const CTexture & CTextureMgr::createTextureFor2D( const std::string & group, const std::string & filePath, bool compressed )
 {
@@ -129,7 +129,7 @@ const CTexture & CTextureMgr::createTextureFor2D( const std::string & group, con
 
 
 /************************************************************************
-*    desc:  Load the texture from file path
+*    DESC:  Load the texture from file path
 ************************************************************************/
 void CTextureMgr::loadImageFor3D( const std::string & group, const std::string & filePath )
 {
@@ -156,7 +156,7 @@ void CTextureMgr::loadImageFor3D( const std::string & group, const std::string &
 
 
 /************************************************************************
-*    desc:  Load the texture from file path
+*    DESC:  Load the texture from file path
 ************************************************************************/
 const CTexture & CTextureMgr::createTextureFor3D( const std::string & group, const std::string & filePath, bool compressed )
 {
@@ -196,7 +196,7 @@ const CTexture & CTextureMgr::createTextureFor3D( const std::string & group, con
 
 
 /************************************************************************
-*    desc:  Load the texture from file path
+*    DESC:  Load the texture from file path
 ************************************************************************/
 void CTextureMgr::loadTexture( CTexture & texture, const std::string & filePath, bool compressed )
 {
@@ -216,7 +216,7 @@ void CTextureMgr::loadTexture( CTexture & texture, const std::string & filePath,
 
 
 /************************************************************************
-*    desc:  Load the just the image from file path
+*    DESC:  Load the just the image from file path
 ************************************************************************/
 void CTextureMgr::loadImage( CTexture & texture, const std::string & filePath )
 {
@@ -236,7 +236,7 @@ void CTextureMgr::loadImage( CTexture & texture, const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Create the texture from image data loaded into memory
+*    DESC:  Create the texture from image data loaded into memory
 ************************************************************************/
 void CTextureMgr::createTexture( CTexture & texture, bool compressed )
 {
@@ -266,7 +266,7 @@ void CTextureMgr::createTexture( CTexture & texture, bool compressed )
 
 
 /************************************************************************
-*    desc:  Delete a texture in a group
+*    DESC:  Delete a texture in a group
 ************************************************************************/
 void CTextureMgr::deleteTextureGroupFor2D( const std::string & group )
 {
@@ -285,7 +285,7 @@ void CTextureMgr::deleteTextureGroupFor2D( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Delete a texture in a group
+*    DESC:  Delete a texture in a group
 ************************************************************************/
 void CTextureMgr::deleteTextureGroupFor3D( const std::string & group )
 {
@@ -304,7 +304,7 @@ void CTextureMgr::deleteTextureGroupFor3D( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Function call used to manage what texture is currently bound.
+*    DESC:  Function call used to manage what texture is currently bound.
 *           This insures that we don't keep rebinding the same texture
 ************************************************************************/
 void CTextureMgr::bind( uint32_t textureID )
@@ -321,7 +321,7 @@ void CTextureMgr::bind( uint32_t textureID )
 
 
 /************************************************************************
-*    desc:  Unbind the texture and reset the flag
+*    DESC:  Unbind the texture and reset the flag
 ************************************************************************/
 void CTextureMgr::unbind()
 {
@@ -331,7 +331,7 @@ void CTextureMgr::unbind()
 
 
 /************************************************************************
-*    desc:  Init the Anisotropic filtering
+*    DESC:  Init the Anisotropic filtering
 ************************************************************************/
 void CTextureMgr::initAnisotropic()
 {

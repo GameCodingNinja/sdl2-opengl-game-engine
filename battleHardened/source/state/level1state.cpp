@@ -25,7 +25,7 @@
 #include <2d/actorsprite2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLevel1State::CLevel1State() :
     CCommonState( NGameDefs::EGS_Level_1, NGameDefs::EGS_GAME_LOAD )
@@ -34,7 +34,7 @@ CLevel1State::CLevel1State() :
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CLevel1State::init()
 {
@@ -63,7 +63,7 @@ void CLevel1State::init()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CLevel1State::handleEvent( const SDL_Event & rEvent )
 {
@@ -107,7 +107,7 @@ void CLevel1State::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CLevel1State::miscProcess()
 {
@@ -116,7 +116,7 @@ void CLevel1State::miscProcess()
 
 
 /***************************************************************************
-*    desc:  Handle the physics
+*    DESC:  Handle the physics
 ****************************************************************************/
 void CLevel1State::physics()
 {
@@ -128,7 +128,7 @@ void CLevel1State::physics()
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CLevel1State::update()
 {
@@ -145,7 +145,7 @@ void CLevel1State::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CLevel1State::transform()
 {
@@ -157,7 +157,7 @@ void CLevel1State::transform()
 
 
 /***************************************************************************
-*    desc:  Do the 2D rendering
+*    DESC:  Do the 2D rendering
 ****************************************************************************/
 void CLevel1State::preRender()
 {
@@ -169,12 +169,12 @@ void CLevel1State::preRender()
 
 
 /***************************************************************************
-*    desc: Functions for loading/unloading the assets for this state
+*    DESC: Functions for loading/unloading the assets for this state
 ****************************************************************************/
 namespace NLevel_1
 {
     /***************************************************************************
-    *    desc:  Namespace function for loading the assets for this state
+    *    DESC:  Namespace function for loading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void ObjectDataLoad()
@@ -205,7 +205,7 @@ namespace NLevel_1
 
 
     /***************************************************************************
-    *    desc:  Namespace function for unloading the assets for this state
+    *    DESC:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()

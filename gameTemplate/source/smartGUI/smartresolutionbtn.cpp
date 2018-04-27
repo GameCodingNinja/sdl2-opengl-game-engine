@@ -22,7 +22,7 @@
 #include <string>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartResolutionBtn::CSmartResolutionBtn( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl ),

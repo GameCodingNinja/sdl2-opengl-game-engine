@@ -11,7 +11,7 @@
 #include <2d/spritechild2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteChild2D::CSpriteChild2D( const CObjectData2D & objectData, int id ) :
     CSprite2D( objectData, id )
@@ -20,7 +20,7 @@ CSpriteChild2D::CSpriteChild2D( const CObjectData2D & objectData, int id ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CSpriteChild2D::~CSpriteChild2D()
 {
@@ -28,7 +28,7 @@ CSpriteChild2D::~CSpriteChild2D()
 
 
 /************************************************************************
-*    desc:  Transform
+*    DESC:  Transform
 ************************************************************************/
 void CSpriteChild2D::transform()
 {
@@ -61,7 +61,7 @@ void CSpriteChild2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  do the render                                                            
+*    DESC:  do the render                                                            
 ************************************************************************/
 void CSpriteChild2D::render( const CMatrix & matrix )
 {

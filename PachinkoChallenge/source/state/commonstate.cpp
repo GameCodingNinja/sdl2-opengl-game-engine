@@ -20,7 +20,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CCommonState::CCommonState( const NGameDefs::EGameState gameState, const NGameDefs::EGameState nextState ) :
     iGameState( gameState, nextState )
@@ -31,7 +31,7 @@ CCommonState::CCommonState( const NGameDefs::EGameState gameState, const NGameDe
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CCommonState::~CCommonState()
 {
@@ -39,7 +39,7 @@ CCommonState::~CCommonState()
 
 
 /***************************************************************************
-*    desc:  handle events
+*    DESC:  handle events
 ****************************************************************************/
 void CCommonState::handleEvent( const SDL_Event & rEvent )
 {
@@ -70,17 +70,17 @@ void CCommonState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CCommonState::update()
 {
     // Update the menus
-    CMenuManager::Instance().update();
+    CMenuManager::Instance().updateMenu();
 }
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CCommonState::transform()
 {
@@ -90,7 +90,7 @@ void CCommonState::transform()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CCommonState::preRender()
 {
@@ -98,16 +98,16 @@ void CCommonState::preRender()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CCommonState::postRender()
 {
-    CMenuManager::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CMenuManager::Instance().renderMenu( CCameraMgr::Instance().getDefaultProjMatrix() );
 }
 
 
 /***************************************************************************
-*    desc:  Get the load state
+*    DESC:  Get the load state
 ****************************************************************************/
 NGameDefs::EGameState CCommonState::getLoadState( void * pVoid )
 {

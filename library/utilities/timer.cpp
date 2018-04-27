@@ -12,7 +12,7 @@
 #include <utilities/highresolutiontimer.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CTimer::CTimer(double interval, bool startExpired)
     : m_timeInterval(interval),
@@ -35,7 +35,7 @@ CTimer::CTimer()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CTimer::~CTimer()
 {
@@ -43,7 +43,7 @@ CTimer::~CTimer()
 
 
 /***************************************************************************
-*   desc:  Reset the timer to start over
+*   DESC:  Reset the timer to start over
 ****************************************************************************/
 void CTimer::reset()
 {
@@ -53,7 +53,7 @@ void CTimer::reset()
 
 
 /***************************************************************************
-*   desc:  Set the time to have expired
+*   DESC:  Set the time to have expired
 ****************************************************************************/
 void CTimer::setExpired()
 {
@@ -62,7 +62,7 @@ void CTimer::setExpired()
 
 
 /***************************************************************************
-*   desc:  Set the timer interval
+*   DESC:  Set the timer interval
 ****************************************************************************/
 void CTimer::set( double interval )
 {
@@ -72,7 +72,7 @@ void CTimer::set( double interval )
 
 
 /***************************************************************************
-*   desc:  Has the timer expired
+*   DESC:  Has the timer expired
 ****************************************************************************/
 bool CTimer::expired( bool resetOnExpire )
 {
@@ -95,7 +95,7 @@ bool CTimer::expired( bool resetOnExpire )
 
 
 /***************************************************************************
-*   desc:  Disable this timer
+*   DESC:  Disable this timer
 ****************************************************************************/
 void CTimer::disable( bool disabled )
 {
@@ -104,7 +104,7 @@ void CTimer::disable( bool disabled )
 
 
 /***************************************************************************
-*   desc:  Set the value returned by Expired when the timer is disabled
+*   DESC:  Set the value returned by Expired when the timer is disabled
 ****************************************************************************/
 void CTimer::setDisableValue( bool disableValue )
 {

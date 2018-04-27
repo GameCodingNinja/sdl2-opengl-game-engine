@@ -19,7 +19,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CActorData::CActorData(
     const XMLNode & node,
@@ -91,7 +91,7 @@ CActorData::CActorData(
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CActorData::~CActorData()
 {
@@ -99,7 +99,7 @@ CActorData::~CActorData()
 
 
 /************************************************************************
-*    desc:  Get the name of this specific actor sprite instance
+*    DESC:  Get the name of this specific actor sprite instance
 ************************************************************************/
 const std::string & CActorData::getName() const
 {
@@ -109,7 +109,7 @@ const std::string & CActorData::getName() const
 
 
 /************************************************************************
-*    desc:  Get the ai name
+*    DESC:  Get the ai name
 ************************************************************************/
 const std::string & CActorData::getAIName() const
 {
@@ -118,7 +118,7 @@ const std::string & CActorData::getAIName() const
 
 
 /************************************************************************
-*    desc:  Get sprite Data vector
+*    DESC:  Get sprite Data vector
 ************************************************************************/
 const std::vector<CSpriteData> & CActorData::getSpriteData() const
 {
@@ -127,7 +127,7 @@ const std::vector<CSpriteData> & CActorData::getSpriteData() const
 
 
 /************************************************************************
-*    desc:  Is this actor a player
+*    DESC:  Is this actor a player
 ************************************************************************/
 bool CActorData::isPlayerActor() const
 {
@@ -136,7 +136,7 @@ bool CActorData::isPlayerActor() const
 
 
 /************************************************************************
-*    desc:  Get the collision group
+*    DESC:  Get the collision group
 ************************************************************************/
 uint CActorData::getCollisionGroup() const
 {
@@ -145,7 +145,7 @@ uint CActorData::getCollisionGroup() const
 
 
 /************************************************************************
-*    desc:  Get the collision Mask
+*    DESC:  Get the collision Mask
 ************************************************************************/
 uint CActorData::getCollisionMask() const
 {
@@ -154,7 +154,7 @@ uint CActorData::getCollisionMask() const
 
 
 /************************************************************************
-*    desc:  Get the collision Radius Scalar
+*    DESC:  Get the collision Radius Scalar
 ************************************************************************/
 float CActorData::getCollisionRadiusScalar() const
 {
@@ -162,7 +162,7 @@ float CActorData::getCollisionRadiusScalar() const
 }
 
 /************************************************************************
-*    desc:  Get the unique id number
+*    DESC:  Get the unique id number
 ************************************************************************/
 int CActorData::getId() const
 {

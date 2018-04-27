@@ -19,7 +19,7 @@
 #include <utilities/xmlParser.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     iSprite(id),
@@ -39,7 +39,7 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CSprite2D::~CSprite2D()
 {
@@ -47,7 +47,7 @@ CSprite2D::~CSprite2D()
 
 
 /************************************************************************
-*    desc:  Load the sprite data
+*    DESC:  Load the sprite data
 ************************************************************************/
 void CSprite2D::load( const XMLNode & node )
 {
@@ -77,7 +77,7 @@ void CSprite2D::load( const CSpriteData & spriteData )
 
 
 /************************************************************************
-*    desc:  Init the sprite
+*    DESC:  Init the sprite
 *           NOTE: Do not call from a constructor!
 ************************************************************************/
 void CSprite2D::init()
@@ -88,7 +88,7 @@ void CSprite2D::init()
 
 
 /************************************************************************
-*    desc:  Clean up the sprite
+*    DESC:  Clean up the sprite
 *           NOTE: Do not call from a destructor!
 ************************************************************************/
 void CSprite2D::cleanUp()
@@ -104,7 +104,7 @@ void CSprite2D::cleanUp()
 
 
 /************************************************************************
-*    desc:  Init the script functions and add them to the map
+*    DESC:  Init the script functions and add them to the map
 *           This function loads the attribute info reguardless of what it is
 ************************************************************************/
 void CSprite2D::initScriptFunctions( const XMLNode & node )
@@ -131,7 +131,7 @@ void CSprite2D::initScriptFunctions( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Copy over the script functions
+*    DESC:  Copy over the script functions
 ************************************************************************/
 void CSprite2D::copyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap )
 {
@@ -141,7 +141,7 @@ void CSprite2D::copyScriptFunctions( const std::map<std::string, std::string> & 
 
 
 /************************************************************************
-*    desc:  Prepare the script function to run
+*    DESC:  Prepare the script function to run
 ************************************************************************/
 bool CSprite2D::prepareFuncId( const std::string & scriptFuncId, bool forceUpdate )
 {
@@ -176,7 +176,7 @@ void CSprite2D::prepare(
 
 
 /************************************************************************
-*    desc:  Init the physics                                                           
+*    DESC:  Init the physics                                                           
 ************************************************************************/
 void CSprite2D::initPhysics()
 {
@@ -185,7 +185,7 @@ void CSprite2D::initPhysics()
 
 
 /************************************************************************
-*    desc:  React to what the player is doing
+*    DESC:  React to what the player is doing
 ************************************************************************/
 void CSprite2D::handleEvent( const SDL_Event & rEvent )
 {
@@ -195,7 +195,7 @@ void CSprite2D::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Update the sprite                                                           
+*    DESC:  Update the sprite                                                           
 ************************************************************************/
 void CSprite2D::update()
 {
@@ -207,7 +207,7 @@ void CSprite2D::update()
 
 
 /************************************************************************
-*    desc:  Update the physics                                                           
+*    DESC:  Update the physics                                                           
 ************************************************************************/
 void CSprite2D::physicsUpdate()
 {
@@ -216,7 +216,7 @@ void CSprite2D::physicsUpdate()
 
 
 /************************************************************************
-*    desc:  do the render                                                            
+*    DESC:  do the render                                                            
 ************************************************************************/
 void CSprite2D::render( const CMatrix & matrix )
 {
@@ -232,7 +232,7 @@ void CSprite2D::render( const CCamera & camera )
 
 
 /************************************************************************
-*    desc:  Get the visual component                                                            
+*    DESC:  Get the visual component                                                            
 ************************************************************************/
 CVisualComponent2D & CSprite2D::getVisualComponent()
 {
@@ -241,7 +241,7 @@ CVisualComponent2D & CSprite2D::getVisualComponent()
 
 
 /************************************************************************
-*    desc:  Get the physics component                                                            
+*    DESC:  Get the physics component                                                            
 ************************************************************************/
 CPhysicsComponent2D & CSprite2D::getPhysicsComponent()
 {
@@ -250,7 +250,7 @@ CPhysicsComponent2D & CSprite2D::getPhysicsComponent()
 
 
 /************************************************************************
-*    desc:  Get the scripting component                                                            
+*    DESC:  Get the scripting component                                                            
 ************************************************************************/
 CScriptComponent & CSprite2D::getScriptComponent()
 {
@@ -259,7 +259,7 @@ CScriptComponent & CSprite2D::getScriptComponent()
 
 
 /************************************************************************
-*    desc:  Get the object data                                                            
+*    DESC:  Get the object data                                                            
 ************************************************************************/
 const CObjectData2D & CSprite2D::getObjectData() const
 {
@@ -268,7 +268,7 @@ const CObjectData2D & CSprite2D::getObjectData() const
 
 
 /************************************************************************
-*    desc:  Set/Get the AI pointer. This class owns the pointer
+*    DESC:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
 void CSprite2D::setAI( iAIBase * pAIBase )
 {
@@ -280,7 +280,7 @@ void CSprite2D::setAI( iAIBase * pAIBase )
 
 
 /************************************************************************
-*    desc:  Set the color
+*    DESC:  Set the color
 ************************************************************************/
 void CSprite2D::setColor( const CColor & color )
 {
@@ -295,7 +295,7 @@ void CSprite2D::setColor( float r, float g, float b, float a )
 
 
 /************************************************************************
-*    desc:  Set the default color
+*    DESC:  Set the default color
 ************************************************************************/
 void CSprite2D::setDefaultColor()
 {
@@ -304,7 +304,7 @@ void CSprite2D::setDefaultColor()
 
 
 /************************************************************************
-*    desc:  Get the color
+*    DESC:  Get the color
 ************************************************************************/
 const CColor & CSprite2D::getColor() const
 {
@@ -313,7 +313,7 @@ const CColor & CSprite2D::getColor() const
 
 
 /************************************************************************
-*    desc:  Get the default color
+*    DESC:  Get the default color
 ************************************************************************/
 const CColor & CSprite2D::getDefaultColor() const
 {
@@ -322,7 +322,7 @@ const CColor & CSprite2D::getDefaultColor() const
 
 
 /************************************************************************
-*    desc:  Set the Alpha
+*    DESC:  Set the Alpha
 ************************************************************************/
 void CSprite2D::setAlpha( float alpha )
 {
@@ -334,7 +334,7 @@ void CSprite2D::setAlpha( float alpha )
 
 
 /************************************************************************
-*    desc:  Get the Alpha
+*    DESC:  Get the Alpha
 ************************************************************************/
 float CSprite2D::getAlpha() const
 {
@@ -343,7 +343,7 @@ float CSprite2D::getAlpha() const
 
 
 /************************************************************************
-*    desc:  Get the default alpha
+*    DESC:  Get the default alpha
 ************************************************************************/
 float CSprite2D::getDefaultAlpha() const
 {
@@ -352,7 +352,7 @@ float CSprite2D::getDefaultAlpha() const
 
 
 /************************************************************************
-*    desc:  Set the default alpha
+*    DESC:  Set the default alpha
 ************************************************************************/
 void CSprite2D::setDefaultAlpha()
 {
@@ -361,7 +361,7 @@ void CSprite2D::setDefaultAlpha()
 
 
 /************************************************************************
-*    desc:  Get the frame count
+*    DESC:  Get the frame count
 ************************************************************************/
 uint CSprite2D::getFrameCount() const 
 {
@@ -370,7 +370,7 @@ uint CSprite2D::getFrameCount() const
 
 
 /************************************************************************
-*    desc:  Get the current frame
+*    DESC:  Get the current frame
 ************************************************************************/
 uint CSprite2D::getCurrentFrame() const 
 {
@@ -379,7 +379,7 @@ uint CSprite2D::getCurrentFrame() const
 
 
 /************************************************************************
-*    desc:  Set the texture ID from index
+*    DESC:  Set the texture ID from index
 ************************************************************************/
 void CSprite2D::setFrame( uint index )
 {
@@ -394,7 +394,7 @@ void CSprite2D::setFrame( uint index )
 
 
 /************************************************************************
-*    desc:  Create the font string
+*    DESC:  Create the font string
 ************************************************************************/
 void CSprite2D::createFontString( const std::string & fontString )
 {
@@ -403,7 +403,7 @@ void CSprite2D::createFontString( const std::string & fontString )
 
 
 /************************************************************************
-*    desc:  Get the font size
+*    DESC:  Get the font size
 ************************************************************************/
 const CSize<float> & CSprite2D::getFontSize() const
 {
@@ -412,7 +412,7 @@ const CSize<float> & CSprite2D::getFontSize() const
 
 
 /************************************************************************
-*    desc:  Set the physics position and rotation
+*    DESC:  Set the physics position and rotation
 ************************************************************************/
 void CSprite2D::setPhysicsTransform( float x, float y, float angle, bool resetVelocity )
 {

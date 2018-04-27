@@ -19,7 +19,7 @@
 namespace NScriptSound
 {
     /************************************************************************
-    *    desc:  Register the class with AngelScript
+    *    DESC:  Register the class with AngelScript
     ************************************************************************/
     void Register()
     {

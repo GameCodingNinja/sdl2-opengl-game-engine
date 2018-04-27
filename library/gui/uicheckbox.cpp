@@ -12,7 +12,7 @@
 #include <2d/sprite2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUICheckBox::CUICheckBox( const std::string & group ) :
     CUIControl( group ),
@@ -23,7 +23,7 @@ CUICheckBox::CUICheckBox( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CUICheckBox::~CUICheckBox()
 {
@@ -31,7 +31,7 @@ CUICheckBox::~CUICheckBox()
 
 
 /************************************************************************
-*    desc:  Set the Select state of this control
+*    DESC:  Set the Select state of this control
 *  
 *    param: EControlState value - control state
 ************************************************************************/
@@ -42,7 +42,7 @@ void CUICheckBox::setToggleState( bool value )
 
 
 /************************************************************************
-*    desc:  Get the Select state of this control
+*    DESC:  Get the Select state of this control
 *  
 *    ret: EControlState - control state
 ************************************************************************/
@@ -52,7 +52,7 @@ bool CUICheckBox::getToggleState()
 }
 
 /************************************************************************
-*    desc:  Handle OnSelectExecute message
+*    DESC:  Handle OnSelectExecute message
 ************************************************************************/
 void CUICheckBox::onSelectExecute( const SDL_Event & rEvent )
 {
@@ -64,7 +64,7 @@ void CUICheckBox::onSelectExecute( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Render the control
+*    DESC:  Render the control
 ************************************************************************/
 void CUICheckBox::render( const CMatrix & matrix )
 {

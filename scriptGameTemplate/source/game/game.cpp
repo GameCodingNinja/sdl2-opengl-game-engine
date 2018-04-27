@@ -58,7 +58,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CGame::CGame()
     : m_pWindow(nullptr),
@@ -72,7 +72,7 @@ CGame::CGame()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CGame::~CGame()
 {
@@ -90,7 +90,7 @@ CGame::~CGame()
 
 
 /***************************************************************************
-*   desc:  Create the game Window
+*   DESC:  Create the game Window
  ****************************************************************************/
 void CGame::create()
 {
@@ -107,7 +107,7 @@ void CGame::create()
 
 
 /************************************************************************
-*    desc:  OpenGL Init
+*    DESC:  OpenGL Init
 ************************************************************************/
 void CGame::openGLInit()
 {
@@ -161,7 +161,7 @@ void CGame::openGLInit()
 
 
 /************************************************************************
-*    desc:  Init the game
+*    DESC:  Init the game
 ************************************************************************/
 void CGame::init()
 {
@@ -205,7 +205,7 @@ void CGame::init()
 
 
 /***************************************************************************
-*   desc:  Poll for game events
+*   DESC:  Poll for game events
 ****************************************************************************/
 void CGame::pollEvents()
 {
@@ -236,7 +236,7 @@ void CGame::pollEvents()
 
 
 /***************************************************************************
-*   desc:  Main game loop
+*   DESC:  Main game loop
 ****************************************************************************/
 bool CGame::gameLoop()
 {
@@ -279,7 +279,7 @@ bool CGame::gameLoop()
 
 
 /************************************************************************
-*    desc:  Callback for the state string
+*    DESC:  Callback for the state string
 ************************************************************************/
 void CGame::statStringCallBack( const std::string & statStr )
 {
@@ -289,12 +289,15 @@ void CGame::statStringCallBack( const std::string & statStr )
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 bool CGame::handleEvent( const SDL_Event & rEvent )
 {
     if( (rEvent.type == SDL_QUIT) || (rEvent.type == SDL_APP_TERMINATING) )
         return true;
+    
+    // Have the menu manager handle events
+    CMenuManager::Instance().handleEvent( rEvent );
 
     // Filter out these events. Can't do this through the normal event filter
     if( (rEvent.type >= SDL_JOYAXISMOTION) && (rEvent.type <= SDL_JOYBUTTONUP) )
@@ -318,7 +321,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*   desc:  Display error massage
+*   DESC:  Display error massage
 ****************************************************************************/
 void CGame::displayErrorMsg( const std::string & title, const std::string & msg )
 {
@@ -329,7 +332,7 @@ void CGame::displayErrorMsg( const std::string & title, const std::string & msg 
 
 
 /***************************************************************************
-*   desc:  Start the game
+*   DESC:  Start the game
 ****************************************************************************/
 void CGame::startGame()
 {
@@ -338,7 +341,7 @@ void CGame::startGame()
 
 
 /***************************************************************************
-*   desc:  Stop the game
+*   DESC:  Stop the game
 ****************************************************************************/
 void CGame::stopGame()
 {
@@ -347,7 +350,7 @@ void CGame::stopGame()
 
 
 /***************************************************************************
-*  desc:  Is the game running?
+*  DESC:  Is the game running?
 *
 *  ret: bool - true or false if game is running
 ****************************************************************************/

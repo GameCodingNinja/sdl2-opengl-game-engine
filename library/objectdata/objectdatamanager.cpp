@@ -24,7 +24,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CObjectDataMgr::CObjectDataMgr()
 {
@@ -32,7 +32,7 @@ CObjectDataMgr::CObjectDataMgr()
 
 
 /************************************************************************
- *    desc:  Destructor
+ *    DESC:  Destructor
  ************************************************************************/
 CObjectDataMgr::~CObjectDataMgr()
 {
@@ -40,7 +40,7 @@ CObjectDataMgr::~CObjectDataMgr()
 
 
 /************************************************************************
- *    desc:  Load all of the meshes and materials of a specific data group
+ *    DESC:  Load all of the meshes and materials of a specific data group
  ************************************************************************/
 void CObjectDataMgr::loadGroup2D( const std::string & group, const bool createFromData )
 {
@@ -79,7 +79,7 @@ void CObjectDataMgr::loadGroup2D( const std::string & group, const bool createFr
 
 
 /************************************************************************
- *    desc:  Load all object information from an xml
+ *    DESC:  Load all object information from an xml
  ************************************************************************/
 void CObjectDataMgr::loadFromXML2D( const std::string & group, const std::string & filePath, const bool createFromData )
 {
@@ -141,7 +141,7 @@ void CObjectDataMgr::loadFromXML2D( const std::string & group, const std::string
 
 
 /************************************************************************
- *    desc:  Create the group's VBO, IBO, textures, etc
+ *    DESC:  Create the group's VBO, IBO, textures, etc
  ************************************************************************/
 void CObjectDataMgr::createFromData2D( const std::string & group )
 {
@@ -162,7 +162,7 @@ void CObjectDataMgr::createFromData2D( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Free all of the meshes materials and data of a specific group
+ *    DESC:  Free all of the meshes materials and data of a specific group
  ************************************************************************/
 void CObjectDataMgr::freeGroup2D( const std::string & group, const bool freeOpenGLObjects )
 {
@@ -187,7 +187,7 @@ void CObjectDataMgr::freeGroup2D( const std::string & group, const bool freeOpen
 
 
 /************************************************************************
- *    desc:  Free all OpenGL objects created from these groups
+ *    DESC:  Free all OpenGL objects created from these groups
  ************************************************************************/
 void CObjectDataMgr::freeOpenGL2D( const std::string & group )
 {
@@ -197,7 +197,7 @@ void CObjectDataMgr::freeOpenGL2D( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Is this group and name part of 2d data?
+ *    DESC:  Is this group and name part of 2d data?
  ************************************************************************/
 bool CObjectDataMgr::isData2D( const std::string & group, const std::string & name ) const
 {
@@ -214,7 +214,7 @@ bool CObjectDataMgr::isData2D( const std::string & group, const std::string & na
 
 
 /************************************************************************
- *    desc:  Get a specific 2D object's data
+ *    DESC:  Get a specific 2D object's data
  ************************************************************************/
 const CObjectData2D & CObjectDataMgr::getData2D( const std::string & group, const std::string & name ) const
 {
@@ -240,7 +240,7 @@ const CObjectData2D & CObjectDataMgr::getData2D( const CSpriteData & spriteData 
 
 
 /************************************************************************
- *    desc:  Load all of the meshes and materials of a specific data group
+ *    DESC:  Load all of the meshes and materials of a specific data group
  ************************************************************************/
 void CObjectDataMgr::loadGroup3D( const std::string & group, const bool createFromData )
 {
@@ -270,7 +270,7 @@ void CObjectDataMgr::loadGroup3D( const std::string & group, const bool createFr
 
 
 /************************************************************************
- *    desc:  Create the group's VBO, IBO, textures, etc
+ *    DESC:  Create the group's VBO, IBO, textures, etc
  ************************************************************************/
 void CObjectDataMgr::createFromData3D( const std::string & group )
 {
@@ -291,7 +291,7 @@ void CObjectDataMgr::createFromData3D( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Load all object information from an xml
+ *    DESC:  Load all object information from an xml
  ************************************************************************/
 void CObjectDataMgr::loadFromXML3D( const std::string & group, const std::string & filePath, const bool createFromData )
 {
@@ -352,7 +352,7 @@ void CObjectDataMgr::loadFromXML3D( const std::string & group, const std::string
 
 
 /************************************************************************
- *    desc:  Free all of the meshes and materials of a specific data group
+ *    DESC:  Free all of the meshes and materials of a specific data group
  ************************************************************************/
 void CObjectDataMgr::freeGroup3D( const std::string & group, const bool freeOpenGLObjects )
 {
@@ -379,7 +379,7 @@ void CObjectDataMgr::freeGroup3D( const std::string & group, const bool freeOpen
 
 
 /************************************************************************
- *    desc:  Free all OpenGL objects created from these groups
+ *    DESC:  Free all OpenGL objects created from these groups
  ************************************************************************/
 void CObjectDataMgr::freeOpenGL3D( const std::string & group )
 {
@@ -389,7 +389,7 @@ void CObjectDataMgr::freeOpenGL3D( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Get a specific 3D object's data
+ *    DESC:  Get a specific 3D object's data
  ************************************************************************/
 const CObjectData3D & CObjectDataMgr::getData3D( const std::string & group, const std::string & name ) const
 {
@@ -410,7 +410,7 @@ const CObjectData3D & CObjectDataMgr::getData3D( const std::string & group, cons
 
 
 /************************************************************************
- *    desc:  Get a specific 3D object's data
+ *    DESC:  Get a specific 3D object's data
  ************************************************************************/
 bool CObjectDataMgr::isData3D( const std::string & group, const std::string & name ) const
 {

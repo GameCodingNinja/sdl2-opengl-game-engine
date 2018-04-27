@@ -25,7 +25,7 @@
 #include <Box2D/Box2D.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPhysicsComponent2D::CPhysicsComponent2D( const CObjectPhysicsData2D & physicsData ) :
     BODY_TYPE( physicsData.getBodyType() ),
@@ -55,7 +55,7 @@ CPhysicsComponent2D::CPhysicsComponent2D() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CPhysicsComponent2D::~CPhysicsComponent2D()
 {
@@ -67,7 +67,7 @@ CPhysicsComponent2D::~CPhysicsComponent2D()
 
 
 /************************************************************************
-*    desc:  Init the physics by creating the body and fixture
+*    DESC:  Init the physics by creating the body and fixture
 *           NOTE: Function must be called externally at the right time
 *                 when the sprite has been setup with it's initial offsets
 ************************************************************************/
@@ -82,7 +82,7 @@ void CPhysicsComponent2D::init( const CSprite2D & sprite )
 
 
 /************************************************************************
-*    desc:  Create the body
+*    DESC:  Create the body
 ************************************************************************/
 void CPhysicsComponent2D::createBody( const CSprite2D & sprite )
 {
@@ -107,7 +107,7 @@ void CPhysicsComponent2D::createBody( const CSprite2D & sprite )
 
 
 /************************************************************************
-*    desc:  Create the fixture
+*    DESC:  Create the fixture
 ************************************************************************/
 void CPhysicsComponent2D::createFixture( const CSprite2D & sprite )
 {
@@ -132,7 +132,7 @@ void CPhysicsComponent2D::createFixture( const CSprite2D & sprite )
 
 
 /************************************************************************
-*    desc:  Create the circular shape fixture
+*    DESC:  Create the circular shape fixture
 ************************************************************************/
 void CPhysicsComponent2D::createCircularShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
@@ -153,7 +153,7 @@ void CPhysicsComponent2D::createCircularShapeFixture( const CSprite2D & sprite, 
 
 
 /************************************************************************
-*    desc:  Create the edge shape fixture
+*    DESC:  Create the edge shape fixture
 *           NOTE: An edge is a line segment of two points
 *                 This is no different then making a polygon from points
 ************************************************************************/
@@ -193,7 +193,7 @@ void CPhysicsComponent2D::createEdgeShapeFixture( const CSprite2D & sprite, cons
 
 
 /************************************************************************
-*    desc:  Create the polygon shape fixture
+*    DESC:  Create the polygon shape fixture
 ************************************************************************/
 void CPhysicsComponent2D::createPolygonShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
@@ -259,7 +259,7 @@ void CPhysicsComponent2D::createPolygonShapeFixture( const CSprite2D & sprite, c
 
 
 /************************************************************************
-*    desc:  Create the chain shape fixture
+*    DESC:  Create the chain shape fixture
 ************************************************************************/
 void CPhysicsComponent2D::createChainShapeFixture( const CSprite2D & sprite, const CFixture & fixture )
 {
@@ -299,7 +299,7 @@ void CPhysicsComponent2D::createChainShapeFixture( const CSprite2D & sprite, con
 
 
 /************************************************************************
-*    desc:  Convert the points to world location in meters
+*    DESC:  Convert the points to world location in meters
 ************************************************************************/
 void CPhysicsComponent2D::convertPoints(
     std::vector<b2Vec2> & polyPointVec,
@@ -321,7 +321,7 @@ void CPhysicsComponent2D::convertPoints(
 
 
 /************************************************************************
-*    desc:  Update the physics
+*    DESC:  Update the physics
 ************************************************************************/
 void CPhysicsComponent2D::update( CSprite2D * pSprite )
 {
@@ -341,7 +341,7 @@ void CPhysicsComponent2D::update( CSprite2D * pSprite )
 
 
 /************************************************************************
-*    desc:  Is this component active?
+*    DESC:  Is this component active?
 *           If this sprite is using physics then it must have a fixture
 ************************************************************************/
 bool CPhysicsComponent2D::isActive()
@@ -351,7 +351,7 @@ bool CPhysicsComponent2D::isActive()
 
 
 /************************************************************************
-*    desc:  Destry the body
+*    DESC:  Destry the body
 ************************************************************************/
 void CPhysicsComponent2D::destroyBody()
 {
@@ -364,7 +364,7 @@ void CPhysicsComponent2D::destroyBody()
 
 
 /************************************************************************
-*    desc:  Set the physics position and rotation
+*    DESC:  Set the physics position and rotation
 ************************************************************************/
 void CPhysicsComponent2D::setTransform( float x, float y, float angle, bool resetVelocity )
 {
@@ -382,7 +382,7 @@ void CPhysicsComponent2D::setTransform( float x, float y, float angle, bool rese
 
 
 /************************************************************************
-*    desc:  Set the linear velocity
+*    DESC:  Set the linear velocity
 ************************************************************************/
 void CPhysicsComponent2D::setLinearVelocity( float x, float y )
 {
@@ -392,7 +392,7 @@ void CPhysicsComponent2D::setLinearVelocity( float x, float y )
 
 
 /************************************************************************
-*    desc:  Set the angular velocity
+*    DESC:  Set the angular velocity
 ************************************************************************/
 void CPhysicsComponent2D::setAngularVelocity( float value )
 {
@@ -402,7 +402,7 @@ void CPhysicsComponent2D::setAngularVelocity( float value )
 
 
 /************************************************************************
-*    desc:  Get the body
+*    DESC:  Get the body
 ************************************************************************/
 b2Body * CPhysicsComponent2D::getBody()
 {

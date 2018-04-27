@@ -10,7 +10,7 @@
 namespace NParseHelper
 {
     /************************************************************************
-    *    desc:  Load the 2d vertex
+    *    DESC:  Load the 2d vertex
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -42,7 +42,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the position
+    *    DESC:  Load the position
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -95,7 +95,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the rotation
+    *    DESC:  Load the rotation
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -133,7 +133,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the scale
+    *    DESC:  Load the scale
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -177,7 +177,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the center position
+    *    DESC:  Load the center position
     ************************************************************************/
     CPoint<float> LoadCenterPos( const XMLNode & node, bool & loaded )
     {
@@ -213,7 +213,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the generic x, y, z values
+    *    DESC:  Load the generic x, y, z values
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -236,7 +236,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the color
+    *    DESC:  Load the color
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -269,7 +269,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the size
+    *    DESC:  Load the size
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -299,7 +299,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the rect
+    *    DESC:  Load the rect
     *
     *    param: node - passed in node
     ************************************************************************/
@@ -335,7 +335,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the horizontal alignment
+    *    DESC:  Load the horizontal alignment
     *
     *    param: node - passed in node
     *           horzAlignment - passed in default alignment
@@ -363,7 +363,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the vertical alignment
+    *    DESC:  Load the vertical alignment
     *
     *    param: node - passed in node
     *           horzAlignment - passed in default alignment
@@ -391,7 +391,7 @@ namespace NParseHelper
 
 
     /************************************************************************
-    *    desc:  Load the dynamic offset
+    *    DESC:  Load the dynamic offset
     *
     *    param: node - passed in node
     *           dynamicOffset - bitmask to set

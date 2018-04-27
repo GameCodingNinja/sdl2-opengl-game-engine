@@ -15,7 +15,7 @@
 #include <spritestrategy/sector.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLoopStageStrategy::CLoopStageStrategy()
 {
@@ -23,7 +23,7 @@ CLoopStageStrategy::CLoopStageStrategy()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CLoopStageStrategy::~CLoopStageStrategy()
 {
@@ -31,7 +31,7 @@ CLoopStageStrategy::~CLoopStageStrategy()
 
 
 /************************************************************************
-*    desc:  Load thes object data from node
+*    DESC:  Load thes object data from node
 ************************************************************************/
 void CLoopStageStrategy::loadFromNode( const XMLNode & node )
 {
@@ -60,7 +60,7 @@ void CLoopStageStrategy::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Transform the actor
+*    DESC:  Transform the actor
 ************************************************************************/
 void CLoopStageStrategy::transform()
 {

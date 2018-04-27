@@ -12,7 +12,7 @@
 #include <managers/soundmanager.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBaseGameMusic::CBaseGameMusic(
     const std::string & group,
@@ -32,7 +32,7 @@ CBaseGameMusic::CBaseGameMusic(
 
 
 /***************************************************************************
-*    desc:  Handle update checks
+*    DESC:  Handle update checks
 ****************************************************************************/
 void CBaseGameMusic::update()
 {
@@ -48,7 +48,7 @@ void CBaseGameMusic::update()
 
 
 /***************************************************************************
-*    desc:  Start the music
+*    DESC:  Start the music
 ****************************************************************************/
 void CBaseGameMusic::startMusic()
 {
@@ -61,7 +61,7 @@ void CBaseGameMusic::startMusic()
 
 
 /***************************************************************************
-*    desc:  Start the music timeout
+*    DESC:  Start the music timeout
 ****************************************************************************/
 void CBaseGameMusic::setTimeOut()
 {
@@ -75,7 +75,7 @@ void CBaseGameMusic::setTimeOut()
 
 
 /***************************************************************************
-*    desc:  Start the music
+*    DESC:  Start the music
 ****************************************************************************/
 void CBaseGameMusic::fastFadeDown()
 {
@@ -88,7 +88,7 @@ void CBaseGameMusic::fastFadeDown()
 
 
 /************************************************************************
-*    desc:  Do we play the music
+*    DESC:  Do we play the music
 ************************************************************************/
 void CBaseGameMusic::allowMusic( bool allow )
 {

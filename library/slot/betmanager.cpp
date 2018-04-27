@@ -9,7 +9,7 @@
 #include <slot/betmanager.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBetMgr::CBetMgr() :
     m_lineBet(0),
@@ -21,7 +21,7 @@ CBetMgr::CBetMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBetMgr::~CBetMgr()
 {
@@ -29,7 +29,7 @@ CBetMgr::~CBetMgr()
 
 
 /************************************************************************
-*    desc:  Set/Get the line bet
+*    DESC:  Set/Get the line bet
 ************************************************************************/
 void CBetMgr::setLineBet( uint lineBet )
 {
@@ -43,7 +43,7 @@ uint CBetMgr::getLineBet() const
 
 
 /************************************************************************
-*    desc:  Set the total lines being bet
+*    DESC:  Set the total lines being bet
 ************************************************************************/
 void CBetMgr::setTotalLines( uint totalLines )
 {
@@ -52,7 +52,7 @@ void CBetMgr::setTotalLines( uint totalLines )
 
 
 /************************************************************************
-*    desc:  Get the total bet
+*    DESC:  Get the total bet
 ************************************************************************/
 uint CBetMgr::getTotalBet() const
 {
@@ -61,7 +61,7 @@ uint CBetMgr::getTotalBet() const
 
 
 /************************************************************************
-*    desc:  Set/Get the credits
+*    DESC:  Set/Get the credits
 ************************************************************************/
 void CBetMgr::setCredits( uint credits )
 {
@@ -75,7 +75,7 @@ uint CBetMgr::getCredits() const
 
 
 /************************************************************************
-*    desc:  Is there anough credits to play?
+*    DESC:  Is there anough credits to play?
 ************************************************************************/
 bool CBetMgr::allowPlay() const
 {
@@ -84,7 +84,7 @@ bool CBetMgr::allowPlay() const
 
 
 /************************************************************************
-*    desc:  Deduct the bet amount from the credits
+*    DESC:  Deduct the bet amount from the credits
 ************************************************************************/
 void CBetMgr::deductBet()
 {
@@ -94,7 +94,7 @@ void CBetMgr::deductBet()
 
 
 /************************************************************************
-*    desc:  Add in the award
+*    DESC:  Add in the award
 ************************************************************************/
 void CBetMgr::addAward( uint award )
 {

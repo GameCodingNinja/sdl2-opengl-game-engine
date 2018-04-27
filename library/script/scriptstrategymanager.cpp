@@ -23,7 +23,7 @@
 namespace NScriptStrategyManager
 {
     /************************************************************************
-    *    desc:  Create a basic sprite strategy                                                            
+    *    DESC:  Create a basic sprite strategy                                                            
     ************************************************************************/
     void CreateBasicSpriteStrategy1( const std::string & strategyId, const std::string & cameraId, int idOffset, int idDir, CSpriteStrategyMgr & rStrategy )
     {
@@ -58,7 +58,7 @@ namespace NScriptStrategyManager
     }
     
     /************************************************************************
-    *    desc:  Create a basic stage strategy                                                            
+    *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
     void CreateBasicStageStrategy( const std::string & strategyId, const std::string & cameraId, CSpriteStrategyMgr & rStrategy )
     {
@@ -77,7 +77,7 @@ namespace NScriptStrategyManager
     }
     
     /************************************************************************
-    *    desc:  Create a basic stage strategy                                                            
+    *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
     void DeleteStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategy )
     {
@@ -96,7 +96,7 @@ namespace NScriptStrategyManager
     }
 
     /************************************************************************
-    *    desc:  Create a basic stage strategy                                                            
+    *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
     iSprite * CreateSprite1( const std::string & strategyId, const std::string & group, const std::string & name, CSpriteStrategyMgr & rStrategy )
     {
@@ -135,7 +135,7 @@ namespace NScriptStrategyManager
     }
 
     /************************************************************************
-    *    desc:  Set the strategy camera id                                                            
+    *    DESC:  Set the strategy camera id                                                            
     ************************************************************************/
     void SetCameraId( const std::string & strategyId, const std::string & cameraId, CSpriteStrategyMgr & rStrategy )
     {
@@ -155,7 +155,7 @@ namespace NScriptStrategyManager
 
     
     /************************************************************************
-    *    desc:  Register global functions
+    *    DESC:  Register global functions
     ************************************************************************/
     void Register()
     {

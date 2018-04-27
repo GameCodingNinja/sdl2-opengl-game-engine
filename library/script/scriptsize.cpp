@@ -19,7 +19,7 @@
 namespace NScriptSize
 {
     /************************************************************************
-     *    desc:  Constructor
+     *    DESC:  Constructor
      ************************************************************************/
     void Constructor(void * thisPointer)
     {
@@ -27,7 +27,7 @@ namespace NScriptSize
     }
 
     /************************************************************************
-     *    desc:  Copy Constructor
+     *    DESC:  Copy Constructor
      ************************************************************************/
     void CopyConstructor(const CSize<float> & other, void * pThisPointer)
     {
@@ -40,7 +40,7 @@ namespace NScriptSize
     }
 
     /************************************************************************
-     *    desc:  Destructor
+     *    DESC:  Destructor
      ************************************************************************/
     void Destructor(void * pThisPointer)
     {
@@ -48,7 +48,7 @@ namespace NScriptSize
     }
 
     /************************************************************************
-     *    desc:  Register the class with AngelScript
+     *    DESC:  Register the class with AngelScript
      ************************************************************************/
     void Register()
     {

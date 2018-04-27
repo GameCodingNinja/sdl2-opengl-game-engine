@@ -76,7 +76,8 @@ public:
     void handleEvent( const SDL_Event & rEvent );
 
     // Update the menu
-    void update();
+    void updateMenu();
+    void updateInterface();
     
     // Do the transform
     void transformMenu();
@@ -85,7 +86,7 @@ public:
     void transformInterface( const CObject2D & object );
 
     // Render menus
-    void render( const CMatrix & matrix );
+    void renderMenu( const CMatrix & matrix );
     
     // Render interface menus  
     void renderInterface( const CMatrix & matrix );
@@ -159,7 +160,7 @@ private:
         const SDL_Event & rEvent, const std::vector<CMenuTree *> & activeTreeVec );
     
     // Update the menu
-    bool updateMenu( const std::vector<CMenuTree *> & activeTreeVec );
+    void update( const std::vector<CMenuTree *> & activeTreeVec );
     
     // Transform the menu
     void transform( const std::vector<CMenuTree *> & activeTreeVec );

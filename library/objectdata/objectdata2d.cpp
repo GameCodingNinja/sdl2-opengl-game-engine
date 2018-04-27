@@ -15,7 +15,7 @@
 #include <math.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObjectData2D::CObjectData2D() :
     m_radius(0),
@@ -25,7 +25,7 @@ CObjectData2D::CObjectData2D() :
 
 
 /************************************************************************
-*    desc:  Copy Constructor
+*    DESC:  Copy Constructor
 ************************************************************************/
 CObjectData2D::CObjectData2D( const CObjectData2D & obj )
 {
@@ -34,7 +34,7 @@ CObjectData2D::CObjectData2D( const CObjectData2D & obj )
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CObjectData2D::~CObjectData2D()
 {
@@ -42,7 +42,7 @@ CObjectData2D::~CObjectData2D()
 
 
 /************************************************************************
-*    desc:  Load the object data from the passed in node
+*    DESC:  Load the object data from the passed in node
 ************************************************************************/
 void CObjectData2D::loadFromNode( const XMLNode & node, const std::string & group, const std::string & name )
 {
@@ -64,7 +64,7 @@ void CObjectData2D::loadFromNode( const XMLNode & node, const std::string & grou
 
 
 /************************************************************************
-*    desc:  Create the objects from data
+*    DESC:  Create the objects from data
 ************************************************************************/
 void CObjectData2D::createFromData( const std::string & group )
 {
@@ -78,7 +78,7 @@ void CObjectData2D::createFromData( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Access functions for the visual data
+*    DESC:  Access functions for the visual data
 ************************************************************************/
 const CObjectVisualData2D & CObjectData2D::getVisualData() const
 {
@@ -87,7 +87,7 @@ const CObjectVisualData2D & CObjectData2D::getVisualData() const
 
 
 /************************************************************************
-*    desc:  Access functions for the physics data
+*    DESC:  Access functions for the physics data
 ************************************************************************/
 const CObjectPhysicsData2D & CObjectData2D::getPhysicsData() const
 {
@@ -96,7 +96,7 @@ const CObjectPhysicsData2D & CObjectData2D::getPhysicsData() const
 
 
 /************************************************************************
-*    desc:  Access functions for the data name
+*    DESC:  Access functions for the data name
 ************************************************************************/
 const std::string & CObjectData2D::getName() const
 {
@@ -105,7 +105,7 @@ const std::string & CObjectData2D::getName() const
 
 
 /************************************************************************
-*    desc:  Access functions for the data group
+*    DESC:  Access functions for the data group
 ************************************************************************/
 const std::string & CObjectData2D::getGroup() const
 {
@@ -114,7 +114,7 @@ const std::string & CObjectData2D::getGroup() const
 
 
 /************************************************************************
-*    desc:  Access functions for the size
+*    DESC:  Access functions for the size
 ************************************************************************/
 const CSize<int> & CObjectData2D::getSize() const
 {
@@ -123,7 +123,7 @@ const CSize<int> & CObjectData2D::getSize() const
 
 
 /************************************************************************
-*    desc:  Access functions for the radius
+*    DESC:  Access functions for the radius
 ************************************************************************/
 float CObjectData2D::getRadius() const
 {
@@ -132,7 +132,7 @@ float CObjectData2D::getRadius() const
 
 
 /************************************************************************
-*    desc:  Access functions for the radius squared
+*    DESC:  Access functions for the radius squared
 ************************************************************************/
 float CObjectData2D::getRadiusSquared() const
 {
@@ -141,7 +141,7 @@ float CObjectData2D::getRadiusSquared() const
 
 
 /************************************************************************
-*    desc:  Is the generation type font
+*    DESC:  Is the generation type font
 ************************************************************************/
 bool CObjectData2D::isGenTypeFont() const
 {

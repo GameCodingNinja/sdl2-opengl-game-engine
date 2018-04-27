@@ -13,7 +13,7 @@
 #include <managers/cameramanager.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBasicStageStrategy::CBasicStageStrategy( const std::string & cameraId ) :
     iSpriteStrategy(cameraId)
@@ -27,7 +27,7 @@ CBasicStageStrategy::CBasicStageStrategy() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBasicStageStrategy::~CBasicStageStrategy()
 {
@@ -35,7 +35,7 @@ CBasicStageStrategy::~CBasicStageStrategy()
 
 
 /************************************************************************
-*    desc:  Load the sector data from file
+*    DESC:  Load the sector data from file
 ************************************************************************/
 void CBasicStageStrategy::loadFromFile( const std::string & file )
 {
@@ -52,7 +52,7 @@ void CBasicStageStrategy::loadFromFile( const std::string & file )
 
 
 /************************************************************************
-*    desc:  Load thes sector data from node
+*    DESC:  Load thes sector data from node
 ************************************************************************/
 void CBasicStageStrategy::loadFromNode( const XMLNode & node )
 {
@@ -74,7 +74,7 @@ void CBasicStageStrategy::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CBasicStageStrategy::init()
 {
@@ -84,7 +84,7 @@ void CBasicStageStrategy::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CBasicStageStrategy::cleanUp()
 {
@@ -94,7 +94,7 @@ void CBasicStageStrategy::cleanUp()
 
 
 /***************************************************************************
-*    desc:  Update the sector
+*    DESC:  Update the sector
 ****************************************************************************/
 void CBasicStageStrategy::update()
 {
@@ -104,7 +104,7 @@ void CBasicStageStrategy::update()
 
 
 /************************************************************************
-*    desc:  Transform the sector
+*    DESC:  Transform the sector
 ************************************************************************/
 void CBasicStageStrategy::transform()
 {
@@ -120,7 +120,7 @@ void CBasicStageStrategy::transform( const CObject2D & object )
 
 
 /***************************************************************************
-*    desc:  Render the sector
+*    DESC:  Render the sector
 ****************************************************************************/
 void CBasicStageStrategy::render( const CMatrix & matrix )
 {
@@ -144,7 +144,7 @@ void CBasicStageStrategy::render()
 
 
 /************************************************************************
-*    desc:  Get the default camera position
+*    DESC:  Get the default camera position
 ************************************************************************/
 CObject & CBasicStageStrategy::getDefaultCameraPos()
 {
@@ -153,7 +153,7 @@ CObject & CBasicStageStrategy::getDefaultCameraPos()
 
 
 /************************************************************************
- *    desc:  Find if the sprite exists
+ *    DESC:  Find if the sprite exists
  ************************************************************************/
 bool CBasicStageStrategy::find( iSprite * piSprite )
 {

@@ -17,7 +17,7 @@
 #include <utilities/highresolutiontimer.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CProjectileAI::CProjectileAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CSprite2D *>(pSprite) ),
@@ -28,7 +28,7 @@ CProjectileAI::CProjectileAI( iSprite * pSprite ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CProjectileAI::~CProjectileAI()
 {
@@ -36,7 +36,7 @@ CProjectileAI::~CProjectileAI()
 
 
 /************************************************************************
-*    desc:  Do any initalizing
+*    DESC:  Do any initalizing
 ************************************************************************/
 void CProjectileAI::init()
 {
@@ -59,7 +59,7 @@ void CProjectileAI::init()
 
 
 /************************************************************************
-*    desc:  Update animations, move sprites, etc.
+*    DESC:  Update animations, move sprites, etc.
 ************************************************************************/
 void CProjectileAI::update()
 {

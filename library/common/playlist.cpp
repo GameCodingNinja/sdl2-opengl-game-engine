@@ -20,7 +20,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPlayList::CPlayList( const std::string strType ) :
     m_counter(0),
@@ -40,7 +40,7 @@ CPlayList::CPlayList() :
 
 
 /************************************************************************
-*    desc:  Copy Constructor
+*    DESC:  Copy Constructor
 ************************************************************************/
 CPlayList::CPlayList( const CPlayList & playLst ) :
     m_counter(playLst.m_counter),
@@ -52,7 +52,7 @@ CPlayList::CPlayList( const CPlayList & playLst ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CPlayList::~CPlayList()
 {
@@ -60,7 +60,7 @@ CPlayList::~CPlayList()
 
 
 /************************************************************************
-*    desc:  Load  the playlist from node                                                            
+*    DESC:  Load  the playlist from node                                                            
 ************************************************************************/
 void CPlayList::loadFromNode(
     const XMLNode & node,
@@ -96,7 +96,7 @@ void CPlayList::loadFromNode(
 
 
 /************************************************************************
-*    desc:  Get the sound for the playlist                                                             
+*    DESC:  Get the sound for the playlist                                                             
 ************************************************************************/
 CSound & CPlayList::getSound()
 {
@@ -117,7 +117,7 @@ CSound & CPlayList::getSound()
 
 
 /************************************************************************
-*    desc:  Play the play list
+*    DESC:  Play the play list
 ************************************************************************/
 void CPlayList::play( int channel, int loopCount )
 {
@@ -134,7 +134,7 @@ void CPlayList::play( int channel, int loopCount )
 
 
 /************************************************************************
-*    desc:  Stop the sound
+*    DESC:  Stop the sound
 ************************************************************************/
 void CPlayList::stop()
 {
@@ -144,7 +144,7 @@ void CPlayList::stop()
 
 
 /************************************************************************
-*    desc:  Pause the sound
+*    DESC:  Pause the sound
 ************************************************************************/
 void CPlayList::pause()
 {
@@ -154,7 +154,7 @@ void CPlayList::pause()
 
 
 /************************************************************************
-*    desc:  Resume the sound
+*    DESC:  Resume the sound
 ************************************************************************/
 void CPlayList::resume()
 {
@@ -164,7 +164,7 @@ void CPlayList::resume()
 
 
 /************************************************************************
-*    desc: Set/Get the volume for music or channel
+*    DESC: Set/Get the volume for music or channel
 ************************************************************************/
 void CPlayList::setVolume( int volume )
 {
@@ -182,7 +182,7 @@ int CPlayList::getVolume()
 
 
 /************************************************************************
-*    desc:  Is music or channel playing?
+*    DESC:  Is music or channel playing?
 ************************************************************************/
 bool CPlayList::isPlaying()
 {
@@ -194,7 +194,7 @@ bool CPlayList::isPlaying()
 
 
 /************************************************************************
-*    desc:  Is music or channel paused?
+*    DESC:  Is music or channel paused?
 ************************************************************************/
 bool CPlayList::isPaused()
 {
@@ -206,7 +206,7 @@ bool CPlayList::isPaused()
 
 
 /************************************************************************
-*    desc:  Play the play list
+*    DESC:  Play the play list
 ************************************************************************/
 void CPlayList::shuffle()
 {

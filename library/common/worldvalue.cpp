@@ -19,7 +19,7 @@ int CWorldValue::SECTOR_SIZE;
 int CWorldValue::HALF_SECTOR_SIZE;
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CWorldValue::CWorldValue() :
     f(0),
@@ -64,7 +64,7 @@ CWorldValue::CWorldValue( float _f, int _i )
 
 
 /************************************************************************
-*    desc:  Conform the value to the sector size
+*    DESC:  Conform the value to the sector size
 ************************************************************************/
 void CWorldValue::conformValue()
 {
@@ -85,7 +85,7 @@ void CWorldValue::conformValue()
 
 
 /************************************************************************
-*    desc:  Return a copy of the value conformed to the sector size
+*    DESC:  Return a copy of the value conformed to the sector size
 ************************************************************************/
 CWorldValue CWorldValue::getConformedValue() const
 {
@@ -94,7 +94,7 @@ CWorldValue CWorldValue::getConformedValue() const
 
 
 /************************************************************************
-*    desc:  Convert the world value in single float form
+*    DESC:  Convert the world value in single float form
 ************************************************************************/
 void CWorldValue::toFloat()
 {
@@ -107,7 +107,7 @@ void CWorldValue::toFloat()
 
 
 /************************************************************************
-*    desc:  Return a copy of the world value in single float form
+*    DESC:  Return a copy of the world value in single float form
 *
 *	 ret:	float - equal float value
 ************************************************************************/
@@ -124,7 +124,7 @@ float CWorldValue::getFloat() const
 *	COMPARISON OPERATORS
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Equality operator
+*    DESC:  Equality operator
 ************************************************************************/
 bool CWorldValue::operator == ( const CWorldValue & value ) const
 {
@@ -144,7 +144,7 @@ bool CWorldValue::operator == ( const float value ) const
 
 
 /************************************************************************
-*    desc:  Inequality operator
+*    DESC:  Inequality operator
 ************************************************************************/
 bool CWorldValue::operator != ( const CWorldValue & value ) const
 {
@@ -164,7 +164,7 @@ bool CWorldValue::operator != ( const float value ) const
 
 
 /************************************************************************
-*    desc:  Less than operator
+*    DESC:  Less than operator
 ************************************************************************/
 bool CWorldValue::operator < ( const CWorldValue & value ) const
 {
@@ -187,7 +187,7 @@ bool CWorldValue::operator < ( const float value ) const
 
 
 /************************************************************************
-*    desc:  Greater than operator
+*    DESC:  Greater than operator
 ************************************************************************/
 bool CWorldValue::operator > ( const CWorldValue & value ) const
 {
@@ -210,7 +210,7 @@ bool CWorldValue::operator > ( const float value ) const
 
 
 /************************************************************************
-*    desc:  Less than or equal to operator
+*    DESC:  Less than or equal to operator
 ************************************************************************/
 bool CWorldValue::operator <= ( const CWorldValue & value ) const
 {
@@ -233,7 +233,7 @@ bool CWorldValue::operator <= ( const float value ) const
 
 
 /************************************************************************
-*    desc:  Greater than or equal to operator
+*    DESC:  Greater than or equal to operator
 ************************************************************************/
 bool CWorldValue::operator >= ( const CWorldValue & value ) const
 {
@@ -259,7 +259,7 @@ bool CWorldValue::operator >= ( const float value ) const
 *	ASSIGNMENT OPERATOR
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Assignment operator
+*    DESC:  Assignment operator
 ************************************************************************/
 CWorldValue & CWorldValue::operator = ( const CWorldValue & value )
 {
@@ -274,7 +274,7 @@ CWorldValue & CWorldValue::operator = ( const CWorldValue & value )
 *	ADDITION OPERATORS
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Addition operator
+*    DESC:  Addition operator
 ************************************************************************/
 CWorldValue CWorldValue::operator + ( const CWorldValue & value ) const
 {
@@ -287,7 +287,7 @@ CWorldValue CWorldValue::operator + ( const float value ) const
 }
 
 /************************************************************************
-*    desc:  Addition operator
+*    DESC:  Addition operator
 ************************************************************************/
 void CWorldValue::operator += ( const CWorldValue & value )
 {
@@ -304,7 +304,7 @@ void CWorldValue::operator += ( const float value )
 *	SUBTRACTION OPERATORS
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Subtraction operator
+*    DESC:  Subtraction operator
 ************************************************************************/
 CWorldValue CWorldValue::operator - ( const CWorldValue & value ) const
 {
@@ -317,7 +317,7 @@ CWorldValue CWorldValue::operator - ( const float value ) const
 }
 
 /************************************************************************
-*    desc:  Subtraction operator
+*    DESC:  Subtraction operator
 ************************************************************************/
 void CWorldValue::operator -= ( const CWorldValue & value )
 {
@@ -334,7 +334,7 @@ void CWorldValue::operator -= ( const float value )
 *	MULTIPLICATION OPERATORS
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Multiplication operator
+*    DESC:  Multiplication operator
 ************************************************************************/
 CWorldValue CWorldValue::operator * ( const CWorldValue & value ) const
 {
@@ -363,7 +363,7 @@ CWorldValue CWorldValue::operator * ( const float value ) const
 }
 
 /************************************************************************
-*    desc:  Multiplication operator
+*    DESC:  Multiplication operator
 ************************************************************************/
 void CWorldValue::operator *= ( const CWorldValue & value )
 {
@@ -388,7 +388,7 @@ void CWorldValue::operator *= ( const float value )
 *			 answer if the integer value is very high
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Division operator
+*    DESC:  Division operator
 ************************************************************************/
 CWorldValue CWorldValue::operator / ( const CWorldValue & value ) const
 {
@@ -412,7 +412,7 @@ CWorldValue CWorldValue::operator / ( const float value ) const
 }
 
 /************************************************************************
-*    desc:  Division operator
+*    DESC:  Division operator
 ************************************************************************/
 void CWorldValue::operator /= ( const CWorldValue & value )
 {
@@ -429,7 +429,7 @@ void CWorldValue::operator /= ( const float value )
 *	NEGATIVE OPERATOR
 ***********************************************************************************/
 /************************************************************************
-*    desc:  Return a copy of the value with its signs flipped
+*    DESC:  Return a copy of the value with its signs flipped
 ************************************************************************/
 CWorldValue CWorldValue::operator - () const
 {
@@ -438,7 +438,7 @@ CWorldValue CWorldValue::operator - () const
 
 
 /************************************************************************
-*    desc:  Set the sector size
+*    DESC:  Set the sector size
 ************************************************************************/
 void CWorldValue::setSectorSize( int size )
 {

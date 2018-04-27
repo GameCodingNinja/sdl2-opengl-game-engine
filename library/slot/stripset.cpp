@@ -9,7 +9,7 @@
 #include <slot/stripset.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CStripSet::CStripSet( const std::string & id, const std::vector<int8_t> & evalSymbIndexVec ) :
     m_id(id),
@@ -19,7 +19,7 @@ CStripSet::CStripSet( const std::string & id, const std::vector<int8_t> & evalSy
 
 
 /************************************************************************
-*    desc:  Get the paytable ID
+*    DESC:  Get the paytable ID
 ************************************************************************/
 const std::string & CStripSet::getId() const
 {
@@ -28,7 +28,7 @@ const std::string & CStripSet::getId() const
 
 
 /************************************************************************
-*    desc:  Get the evaluation symbol index count
+*    DESC:  Get the evaluation symbol index count
 ************************************************************************/
 const std::vector<int8_t> & CStripSet::getEvalIndexVec() const
 {

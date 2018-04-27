@@ -42,7 +42,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructer
+*    DESC:  Constructer
 ************************************************************************/
 CBigPayBackState::CBigPayBackState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_BIG_CASH_BACK, NGameDefs::EGS_GAME_LOAD ),
@@ -55,7 +55,7 @@ CBigPayBackState::CBigPayBackState( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CBigPayBackState::init()
 {
@@ -131,7 +131,7 @@ void CBigPayBackState::init()
 
 
 /************************************************************************
-*    desc:  Do we play the spin music
+*    DESC:  Do we play the spin music
 ************************************************************************/
 void CBigPayBackState::allowMusic( bool allow )
 {
@@ -143,7 +143,7 @@ void CBigPayBackState::allowMusic( bool allow )
 
 
 /************************************************************************
-*    desc:  Do we allow the stop sounds?
+*    DESC:  Do we allow the stop sounds?
 ************************************************************************/
 void CBigPayBackState::allowStopSounds( bool allow )
 {
@@ -152,7 +152,7 @@ void CBigPayBackState::allowStopSounds( bool allow )
 
 
 /***************************************************************************
-*    desc:  Call back for when the total be is changed
+*    DESC:  Call back for when the total be is changed
 ****************************************************************************/
 void CBigPayBackState::totalBetCallBack(CUIControl *)
 {
@@ -162,7 +162,7 @@ void CBigPayBackState::totalBetCallBack(CUIControl *)
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CBigPayBackState::handleEvent( const SDL_Event & rEvent )
 {
@@ -187,7 +187,7 @@ void CBigPayBackState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Handle any misc processing before the real work is started
+*    DESC:  Handle any misc processing before the real work is started
 ****************************************************************************/
 void CBigPayBackState::miscProcess()
 {
@@ -196,7 +196,7 @@ void CBigPayBackState::miscProcess()
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CBigPayBackState::update()
 {
@@ -214,7 +214,7 @@ void CBigPayBackState::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CBigPayBackState::transform()
 {
@@ -228,7 +228,7 @@ void CBigPayBackState::transform()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CBigPayBackState::preRender()
 {
@@ -242,12 +242,12 @@ void CBigPayBackState::preRender()
 
 
 /***************************************************************************
-*    desc: Functions for loading/unloading the assets for this state
+*    DESC: Functions for loading/unloading the assets for this state
 ****************************************************************************/
 namespace NBigPayBack
 {
     /***************************************************************************
-    *    desc:  Namespace function for loading the assets for this state
+    *    DESC:  Namespace function for loading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void ObjectDataLoad()
@@ -298,7 +298,7 @@ namespace NBigPayBack
 
 
     /***************************************************************************
-    *    desc:  Namespace function for unloading the assets for this state
+    *    DESC:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()

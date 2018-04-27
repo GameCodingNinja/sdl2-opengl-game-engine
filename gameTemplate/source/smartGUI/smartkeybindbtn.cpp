@@ -20,7 +20,7 @@
 #include <vector>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartKeyBindBtn::CSmartKeyBindBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )

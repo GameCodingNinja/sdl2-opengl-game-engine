@@ -11,7 +11,7 @@
 #include <assert.h>
 
 /************************************************************************
-*    desc:  constructor
+*    DESC:  constructor
 ************************************************************************/
 CState::CState() :
     pState(nullptr),
@@ -21,7 +21,7 @@ CState::CState() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CState::~CState()
 {
@@ -29,7 +29,7 @@ CState::~CState()
 
 
 /************************************************************************
-*    desc:  Initilize the state class
+*    DESC:  Initilize the state class
 ************************************************************************/
 void CState::initilize()
 {
@@ -47,7 +47,7 @@ void CState::initilize()
 
 
 /************************************************************************
-*    desc:  Returns the current state value
+*    DESC:  Returns the current state value
 ************************************************************************/
 CState::operator int() const
 {
@@ -63,7 +63,7 @@ CState::operator int() const
 
 
 /************************************************************************
-*    desc:  Set this state's current value.
+*    DESC:  Set this state's current value.
 ************************************************************************/
 int CState::operator = (int newState)
 {
@@ -96,7 +96,7 @@ int CState::operator = (int newState)
 
 
 /************************************************************************
-*    desc:  Create a substate by pushing onto the stack a new state value of zero.
+*    DESC:  Create a substate by pushing onto the stack a new state value of zero.
 ************************************************************************/
 CState CState::newSubState() const
 {

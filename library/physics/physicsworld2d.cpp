@@ -21,7 +21,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPhysicsWorld2D::CPhysicsWorld2D() :
     m_world( b2Vec2(0,0) ),
@@ -39,7 +39,7 @@ CPhysicsWorld2D::CPhysicsWorld2D() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CPhysicsWorld2D::~CPhysicsWorld2D()
 {
@@ -47,7 +47,7 @@ CPhysicsWorld2D::~CPhysicsWorld2D()
 
 
 /************************************************************************
-*    desc:  Load the physics world from XML node
+*    DESC:  Load the physics world from XML node
 ************************************************************************/
 void CPhysicsWorld2D::loadFromNode( const XMLNode & node )
 {
@@ -104,7 +104,7 @@ void CPhysicsWorld2D::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Get the world
+*    DESC:  Get the world
 ************************************************************************/
 const b2World & CPhysicsWorld2D::getWorld() const
 {
@@ -118,7 +118,7 @@ b2World & CPhysicsWorld2D::getWorld()
 
 
 /************************************************************************
-*    desc:  Create a physics body
+*    DESC:  Create a physics body
 *           NOTE: Function should only be called from physics component
 ************************************************************************/
 b2Body * CPhysicsWorld2D::createBody( const b2BodyDef & pDef )
@@ -138,7 +138,7 @@ b2Body * CPhysicsWorld2D::createBody( const b2BodyDef & pDef )
 
 
 /************************************************************************
-*    desc:  Destroy a physics body
+*    DESC:  Destroy a physics body
 *           NOTE: Function should only be called from physics component
 ************************************************************************/
 void CPhysicsWorld2D::destroyBody( b2Body * pBody )
@@ -157,7 +157,7 @@ void CPhysicsWorld2D::destroyBody( b2Body * pBody )
 
 
 /************************************************************************
-*    desc:  Perform fixed time step physics simulation
+*    DESC:  Perform fixed time step physics simulation
 ************************************************************************/
 void CPhysicsWorld2D::fixedTimeStep()
 {
@@ -179,7 +179,7 @@ void CPhysicsWorld2D::fixedTimeStep()
 }
 
 /************************************************************************
-*    desc:  Perform variable time step physics simulation
+*    DESC:  Perform variable time step physics simulation
 ************************************************************************/
 void CPhysicsWorld2D::variableTimeStep()
 {
@@ -192,7 +192,7 @@ void CPhysicsWorld2D::variableTimeStep()
 
 
 /************************************************************************
-*    desc:  Get the focus
+*    DESC:  Get the focus
 *
 *	 ret:	const CPointInt & - focus of the physics world
 ************************************************************************/
@@ -203,7 +203,7 @@ const CPoint<int> & CPhysicsWorld2D::getFocus() const
 
 
 /************************************************************************
-*    desc:  Set the fps to run the simulation at
+*    DESC:  Set the fps to run the simulation at
 ************************************************************************/
 void CPhysicsWorld2D::setFPS( float fps )
 {
@@ -221,7 +221,7 @@ void CPhysicsWorld2D::setFPS( float fps )
 
 
 /************************************************************************
-*    desc:  The the time ratio
+*    DESC:  The the time ratio
 ************************************************************************/
 float CPhysicsWorld2D::getTimeRatio() const
 {
@@ -230,7 +230,7 @@ float CPhysicsWorld2D::getTimeRatio() const
 
 
 /************************************************************************
-*    desc:  Set the activity of the physics world
+*    DESC:  Set the activity of the physics world
 ************************************************************************/
 void CPhysicsWorld2D::setActive( bool value )
 {
@@ -239,7 +239,7 @@ void CPhysicsWorld2D::setActive( bool value )
 
 
 /************************************************************************
-*    desc:  Is the physics world active
+*    DESC:  Is the physics world active
 ************************************************************************/
 bool CPhysicsWorld2D::isActive() const
 {
@@ -248,7 +248,7 @@ bool CPhysicsWorld2D::isActive() const
 
 
 /************************************************************************
-*    desc:  Get the pixels per meter
+*    DESC:  Get the pixels per meter
 ************************************************************************/
 double CPhysicsWorld2D::getPixelsPerMeter() const
 {

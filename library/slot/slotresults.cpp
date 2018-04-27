@@ -9,7 +9,7 @@
 #include <slot/slotresults.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotResults::CSlotResults() :
     m_totalWinAmount(0)
@@ -18,7 +18,7 @@ CSlotResults::CSlotResults() :
 
 
 /************************************************************************
-*    desc:  Create a new play results entry into the vector
+*    DESC:  Create a new play results entry into the vector
 ************************************************************************/
 CPlayResult & CSlotResults::create()
 {
@@ -29,7 +29,7 @@ CPlayResult & CSlotResults::create()
 
 
 /************************************************************************
-*    desc:  Clear the pays
+*    DESC:  Clear the pays
 ************************************************************************/
 void CSlotResults::clear()
 {
@@ -41,7 +41,7 @@ void CSlotResults::clear()
 
 
 /************************************************************************
-*    desc:  Sort the pays
+*    DESC:  Sort the pays
 ************************************************************************/
 void CSlotResults::sortPays()
 {
@@ -51,7 +51,7 @@ void CSlotResults::sortPays()
 
 
 /************************************************************************
-*    desc:  Add up the win
+*    DESC:  Add up the win
 ************************************************************************/
 void CSlotResults::addUpWin()
 {
@@ -63,7 +63,7 @@ void CSlotResults::addUpWin()
 
 
 /************************************************************************
-*    desc:  Get the total win
+*    DESC:  Get the total win
 ************************************************************************/
 uint CSlotResults::getTotalWin()
 {
@@ -72,7 +72,7 @@ uint CSlotResults::getTotalWin()
 
 
 /************************************************************************
-*    desc:  Do we have a win
+*    DESC:  Do we have a win
 ************************************************************************/
 bool CSlotResults::isWin()
 {

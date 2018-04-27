@@ -9,7 +9,7 @@
 #include <3d/light.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLight::CLight( NDefs::ELightType lightType ) :
     m_type(lightType),
@@ -20,7 +20,7 @@ CLight::CLight( NDefs::ELightType lightType ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CLight::~CLight()
 {
@@ -28,7 +28,7 @@ CLight::~CLight()
 
 
 /************************************************************************
-*    desc:  Enable/disable light
+*    DESC:  Enable/disable light
 ************************************************************************/
 void CLight::enable( bool value )
 {
@@ -37,7 +37,7 @@ void CLight::enable( bool value )
 
 
 /************************************************************************
-*    desc:  Set/Get the position / direction
+*    DESC:  Set/Get the position / direction
 ************************************************************************/
 void CLight::setPosDir( CPoint<float> & value )
 {
@@ -51,7 +51,7 @@ const CPoint<float> & CLight::getPosDir() const
 
 
 /************************************************************************
-*    desc:  Set/Get the color
+*    DESC:  Set/Get the color
 ************************************************************************/
 void CLight::setColor( CPoint<float> & value )
 {

@@ -39,7 +39,7 @@
 #include <memory>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData ) :
     m_pShaderData(nullptr),
@@ -96,7 +96,7 @@ CVisualComponent2D::CVisualComponent2D( const CObjectVisualData2D & visualData )
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CVisualComponent2D::~CVisualComponent2D()
 {
@@ -112,7 +112,7 @@ CVisualComponent2D::~CVisualComponent2D()
 
 
 /************************************************************************
-*    desc:  Delete the custom VBO for this font
+*    DESC:  Delete the custom VBO for this font
 *
 *           Added a VBO delete function so that deleting the VBO can be
 *           handled separately so that the sprite can be allocated and
@@ -134,7 +134,7 @@ void CVisualComponent2D::deleteFontVBO()
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matrix )
 {
@@ -215,7 +215,7 @@ void CVisualComponent2D::render( const CMatrix & objMatrix, const CMatrix & matr
 
 
 /************************************************************************
-*    desc:  Load the font properties from XML node
+*    DESC:  Load the font properties from XML node
 ************************************************************************/
 void CVisualComponent2D::loadFontPropFromNode( const XMLNode & node )
 {
@@ -225,7 +225,7 @@ void CVisualComponent2D::loadFontPropFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Set the font data
+*    DESC:  Set the font data
 ************************************************************************/
 void CVisualComponent2D::setFontData( const CFontData & fontData )
 {
@@ -235,7 +235,7 @@ void CVisualComponent2D::setFontData( const CFontData & fontData )
 
 
 /************************************************************************
-*    desc:  Set the font properties
+*    DESC:  Set the font properties
 ************************************************************************/
 void CVisualComponent2D::setFontProperties( const CFontProperties & fontProp )
 {
@@ -245,7 +245,7 @@ void CVisualComponent2D::setFontProperties( const CFontProperties & fontProp )
 
 
 /************************************************************************
-*    desc:  Create the font string
+*    DESC:  Create the font string
 ************************************************************************/
 void CVisualComponent2D::createFontString()
 {
@@ -255,7 +255,7 @@ void CVisualComponent2D::createFontString()
 
 
 /************************************************************************
-*    desc:  Create the font string
+*    DESC:  Create the font string
 *
 *    NOTE: Line wrap feature only supported for horizontal left
 ************************************************************************/
@@ -506,7 +506,7 @@ void CVisualComponent2D::createFontString( const std::string & fontString )
 
 
 /************************************************************************
-*    desc:  Add up all the character widths
+*    DESC:  Add up all the character widths
 ************************************************************************/
 std::vector<float> CVisualComponent2D::calcLineWidthOffset(
     const CFont & font,
@@ -598,7 +598,7 @@ std::vector<float> CVisualComponent2D::calcLineWidthOffset(
 
 
 /************************************************************************
-*    desc:  Add the line width to the vector based on horz alignment
+*    DESC:  Add the line width to the vector based on horz alignment
 ************************************************************************/
 void CVisualComponent2D::addLineWithToVec(
     const CFont & font,
@@ -623,7 +623,7 @@ void CVisualComponent2D::addLineWithToVec(
 
 
 /************************************************************************
-*    desc:  Get/Set the displayed font string
+*    DESC:  Get/Set the displayed font string
 ************************************************************************/
 const std::string & CVisualComponent2D::getFontString()
 {
@@ -645,7 +645,7 @@ void CVisualComponent2D::setFontString( const std::string & fontString )
 
 
 /************************************************************************
-*    desc:  Set/Get the color
+*    DESC:  Set/Get the color
 ************************************************************************/
 void CVisualComponent2D::setColor( const CColor & color )
 {
@@ -665,7 +665,7 @@ const CColor & CVisualComponent2D::getColor() const
 
 
 /************************************************************************
-*    desc:  Set/Get the alpha
+*    DESC:  Set/Get the alpha
 ************************************************************************/
 void CVisualComponent2D::setAlpha( float alpha, bool allowToExceed )
 {
@@ -682,7 +682,7 @@ float CVisualComponent2D::getAlpha() const
 
 
 /************************************************************************
-*    desc:  Set the frame ID from index
+*    DESC:  Set the frame ID from index
 ************************************************************************/
 void CVisualComponent2D::setFrame( uint index )
 {
@@ -700,7 +700,7 @@ void CVisualComponent2D::setFrame( uint index )
 
 
 /************************************************************************
-*    desc:  Get the current frame index
+*    DESC:  Get the current frame index
 ************************************************************************/
 uint CVisualComponent2D::getCurrentFrame() const
 {
@@ -709,7 +709,7 @@ uint CVisualComponent2D::getCurrentFrame() const
 
 
 /************************************************************************
-*    desc:  Set the default color
+*    DESC:  Set the default color
 ************************************************************************/
 void CVisualComponent2D::setDefaultColor()
 {
@@ -718,7 +718,7 @@ void CVisualComponent2D::setDefaultColor()
 
 
 /************************************************************************
-*    desc:  Is rendering allowed?
+*    DESC:  Is rendering allowed?
 ************************************************************************/
 bool CVisualComponent2D::allowRender()
 {
@@ -728,7 +728,7 @@ bool CVisualComponent2D::allowRender()
 
 
 /************************************************************************
-*    desc:  Is this a font sprite
+*    DESC:  Is this a font sprite
 ************************************************************************/
 bool CVisualComponent2D::isFontSprite()
 {
@@ -737,7 +737,7 @@ bool CVisualComponent2D::isFontSprite()
 
 
 /************************************************************************
-*    desc:  Get the font size
+*    DESC:  Get the font size
 ************************************************************************/
 const CSize<float> & CVisualComponent2D::getFontSize() const
 {

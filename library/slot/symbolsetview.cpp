@@ -21,7 +21,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSymbolSetView::CSymbolSetView( const std::string & group ) :
     m_group( group )
@@ -30,7 +30,7 @@ CSymbolSetView::CSymbolSetView( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSymbolSetView::~CSymbolSetView()
 {
@@ -38,7 +38,7 @@ CSymbolSetView::~CSymbolSetView()
 
 
 /************************************************************************
-*    desc:  Load thes reel group data from node
+*    DESC:  Load thes reel group data from node
 ************************************************************************/
 void CSymbolSetView::loadFromNode( const XMLNode & node, const std::string & name )
 {
@@ -68,7 +68,7 @@ void CSymbolSetView::loadFromNode( const XMLNode & node, const std::string & nam
 
 
 /************************************************************************
-*    desc:  Get the vector of sprite data
+*    DESC:  Get the vector of sprite data
 ************************************************************************/
 const std::vector<CSpriteData> & CSymbolSetView::getSpriteData( const std::string & symb ) const
 {
@@ -86,7 +86,7 @@ const std::vector<CSpriteData> & CSymbolSetView::getSpriteData( const std::strin
 
 
 /************************************************************************
-*    desc:  Build the visible symbol set
+*    DESC:  Build the visible symbol set
 ************************************************************************/
 void CSymbolSetView::buildSymbolSetView()
 {
@@ -114,7 +114,7 @@ void CSymbolSetView::buildSymbolSetView()
 
 
 /************************************************************************
-*    desc:  Get the symbol set created by the data
+*    DESC:  Get the symbol set created by the data
 ************************************************************************/
 CSymbol2d & CSymbolSetView::getSymbol( const std::string & symb )
 {

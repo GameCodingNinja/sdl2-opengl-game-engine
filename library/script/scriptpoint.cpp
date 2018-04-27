@@ -19,7 +19,7 @@
 namespace NScriptPoint
 {
     /************************************************************************
-     *    desc:  Constructor
+     *    DESC:  Constructor
      ************************************************************************/
     void Constructor(void * thisPointer)
     {
@@ -27,7 +27,7 @@ namespace NScriptPoint
     }
 
     /************************************************************************
-     *    desc:  Copy Constructor
+     *    DESC:  Copy Constructor
      ************************************************************************/
     void CopyConstructor(const CPoint<float> & other, void * pThisPointer)
     {
@@ -45,7 +45,7 @@ namespace NScriptPoint
     }
 
     /************************************************************************
-     *    desc:  Destructor
+     *    DESC:  Destructor
      ************************************************************************/
     void Destructor(void * pThisPointer)
     {
@@ -53,7 +53,7 @@ namespace NScriptPoint
     }
 
     /************************************************************************
-     *    desc:  Register the class with AngelScript
+     *    DESC:  Register the class with AngelScript
      ************************************************************************/
     void Register()
     {

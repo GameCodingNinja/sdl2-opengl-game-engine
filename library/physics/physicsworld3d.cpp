@@ -21,7 +21,7 @@
 #include <cstring>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CPhysicsWorld3D::CPhysicsWorld3D() :
 m_colDisp( &m_defColConf ),
@@ -38,14 +38,14 @@ m_timeRatio(0)
 }
 
 /************************************************************************
- *    desc:  destructor
+ *    DESC:  destructor
  ************************************************************************/
 CPhysicsWorld3D::~CPhysicsWorld3D()
 {
 }
 
 /************************************************************************
- *    desc:  Load the physics world from the passed in XML node
+ *    DESC:  Load the physics world from the passed in XML node
  ************************************************************************/
 void CPhysicsWorld3D::loadFromNode( const XMLNode & node )
 {
@@ -78,7 +78,7 @@ void CPhysicsWorld3D::loadFromNode( const XMLNode & node )
 }
 
 /************************************************************************
- *    desc:  Get the world
+ *    DESC:  Get the world
  ************************************************************************/
 const btDiscreteDynamicsWorld & CPhysicsWorld3D::getWorld() const
 {
@@ -86,7 +86,7 @@ const btDiscreteDynamicsWorld & CPhysicsWorld3D::getWorld() const
 }
 
 /************************************************************************
- *    desc:  Add a rigid body to the world
+ *    DESC:  Add a rigid body to the world
  ************************************************************************/
 void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody )
 {
@@ -94,7 +94,7 @@ void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody )
 }
 
 /************************************************************************
- *    desc:  Add collision filtering when adding a rigid body
+ *    DESC:  Add collision filtering when adding a rigid body
  ************************************************************************/
 void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody, short filterGroup, short mask )
 {
@@ -102,7 +102,7 @@ void CPhysicsWorld3D::addRigidBody( btRigidBody * pBody, short filterGroup, shor
 }
 
 /************************************************************************
- *    desc:  Remove a rigid body to the world
+ *    DESC:  Remove a rigid body to the world
  ************************************************************************/
 void CPhysicsWorld3D::removeRigidBody( btRigidBody * pBody )
 {
@@ -110,7 +110,7 @@ void CPhysicsWorld3D::removeRigidBody( btRigidBody * pBody )
 }
 
 /************************************************************************
- *    desc:  Perform fixed time step physics simulation
+ *    DESC:  Perform fixed time step physics simulation
  ************************************************************************/
 void CPhysicsWorld3D::fixedTimeStep()
 {
@@ -132,7 +132,7 @@ void CPhysicsWorld3D::fixedTimeStep()
 }
 
 /************************************************************************
- *    desc:  Perform variable time step physics simulation
+ *    DESC:  Perform variable time step physics simulation
  ************************************************************************/
 void CPhysicsWorld3D::variableTimeStep()
 {
@@ -144,7 +144,7 @@ void CPhysicsWorld3D::variableTimeStep()
 }
 
 /************************************************************************
- *    desc:  Set the fps to run the simulation at
+ *    DESC:  Set the fps to run the simulation at
  ************************************************************************/
 void CPhysicsWorld3D::setFPS( float fps )
 {
@@ -161,7 +161,7 @@ void CPhysicsWorld3D::setFPS( float fps )
 }
 
 /************************************************************************
- *    desc:  The the time ratio
+ *    DESC:  The the time ratio
  ************************************************************************/
 float CPhysicsWorld3D::getTimeRatio() const
 {
@@ -169,7 +169,7 @@ float CPhysicsWorld3D::getTimeRatio() const
 }
 
 /************************************************************************
- *    desc:  Set the activity of the physics world
+ *    DESC:  Set the activity of the physics world
  ************************************************************************/
 void CPhysicsWorld3D::setActive( bool value )
 {
@@ -177,7 +177,7 @@ void CPhysicsWorld3D::setActive( bool value )
 }
 
 /************************************************************************
- *    desc:  Is the physics world active
+ *    DESC:  Is the physics world active
  ************************************************************************/
 bool CPhysicsWorld3D::isActive() const
 {

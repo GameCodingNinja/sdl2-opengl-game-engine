@@ -15,7 +15,7 @@
 #include <common/defs.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CFontProperties::CFontProperties()
 {
@@ -49,7 +49,7 @@ CFontProperties::CFontProperties( const std::string fontName, NDefs::EHorzAlignm
 
 
 /************************************************************************
-*    desc:  Copy the data
+*    DESC:  Copy the data
 ************************************************************************/ 
 void CFontProperties::copy( const CFontProperties & obj )
 {
@@ -67,7 +67,7 @@ void CFontProperties::copy( const CFontProperties & obj )
 
 
 /************************************************************************
-*    desc:  Load the font properties from XML node
+*    DESC:  Load the font properties from XML node
 ************************************************************************/
 void CFontProperties::loadFromNode( const XMLNode & node )
 {

@@ -9,7 +9,7 @@
 #include <3d/object3d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObject3D::CObject3D()
 {
@@ -23,7 +23,7 @@ CObject3D::CObject3D( const CObject3D & obj ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CObject3D::~CObject3D()
 {
@@ -31,7 +31,7 @@ CObject3D::~CObject3D()
 
 
 /************************************************************************
-*    desc:  Apply the rotation
+*    DESC:  Apply the rotation
 ************************************************************************/
 void CObject3D::applyRotation( CMatrix & matrix )
 {
@@ -56,7 +56,7 @@ void CObject3D::applyRotation( CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get the object's rotation matrix
+*    DESC:  Get the object's rotation matrix
 ************************************************************************/
 const CMatrix & CObject3D::getRotMatrix() const
 {

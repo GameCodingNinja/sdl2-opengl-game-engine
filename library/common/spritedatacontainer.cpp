@@ -14,7 +14,7 @@
 #include <utilities/deletefuncs.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData, int type ) :
     m_type(type),
@@ -30,7 +30,7 @@ CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, int type ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CSpriteDataContainer::~CSpriteDataContainer()
 {
@@ -43,7 +43,7 @@ CSpriteDataContainer::~CSpriteDataContainer()
 
 
 /************************************************************************
-*    desc:  Get the data type                                                             
+*    DESC:  Get the data type                                                             
 ************************************************************************/
 int CSpriteDataContainer::getType() const
 {

@@ -17,7 +17,7 @@
 #include <vector>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSimpleCycleresults::CSimpleCycleresults( CPlayResult * pPlayResult ) :
     iCycleResults( pPlayResult )
@@ -26,7 +26,7 @@ CSimpleCycleresults::CSimpleCycleresults( CPlayResult * pPlayResult ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSimpleCycleresults::~CSimpleCycleresults()
 {
@@ -34,7 +34,7 @@ CSimpleCycleresults::~CSimpleCycleresults()
 
 
 /***************************************************************************
-*    desc:  Do some inits
+*    DESC:  Do some inits
 ****************************************************************************/
 void CSimpleCycleresults::init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
 {
@@ -43,7 +43,7 @@ void CSimpleCycleresults::init( std::shared_ptr<CSlotGroupView> & spSlotGroupVie
 
 
 /***************************************************************************
-*    desc:  Start the cycle results
+*    DESC:  Start the cycle results
 ****************************************************************************/
 void CSimpleCycleresults::activate()
 {
@@ -57,7 +57,7 @@ void CSimpleCycleresults::activate()
 
 
 /***************************************************************************
-*    desc:  Deactivate the cycle results
+*    DESC:  Deactivate the cycle results
 ****************************************************************************/
 void CSimpleCycleresults::deactivate()
 {
@@ -71,7 +71,7 @@ void CSimpleCycleresults::deactivate()
 
 
 /***************************************************************************
-*    desc:  Start the cycle results animation
+*    DESC:  Start the cycle results animation
 ****************************************************************************/
 void CSimpleCycleresults::startAnimation()
 {
@@ -100,7 +100,7 @@ void CSimpleCycleresults::startAnimation()
 
 
 /***************************************************************************
-*    desc:  Stop the cycle results animation
+*    DESC:  Stop the cycle results animation
 ****************************************************************************/
 void CSimpleCycleresults::stopAnimation()
 {
@@ -121,7 +121,7 @@ void CSimpleCycleresults::stopAnimation()
 
 
 /***************************************************************************
-*    desc:  Are we still animating
+*    DESC:  Are we still animating
 ****************************************************************************/
 bool CSimpleCycleresults::isAnimating()
 {

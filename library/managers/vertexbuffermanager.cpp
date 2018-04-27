@@ -24,7 +24,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CVertBufMgr::CVertBufMgr()
     : m_currentVBOID(0),
@@ -35,7 +35,7 @@ CVertBufMgr::CVertBufMgr()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CVertBufMgr::~CVertBufMgr()
 {
@@ -60,7 +60,7 @@ CVertBufMgr::~CVertBufMgr()
 
 
 /************************************************************************
-*    desc: Create VBO
+*    DESC: Create VBO
 ************************************************************************/
 uint32_t CVertBufMgr::createVBO(
     const std::string & group,
@@ -95,7 +95,7 @@ uint32_t CVertBufMgr::createVBO(
 
 
 /************************************************************************
-*    desc:  Create a IBO buffer
+*    DESC:  Create a IBO buffer
 ************************************************************************/
 uint32_t CVertBufMgr::createIBO( const std::string & group, const std::string & name, uint8_t indexData[], int sizeInBytes )
 {
@@ -127,7 +127,7 @@ uint32_t CVertBufMgr::createIBO( const std::string & group, const std::string & 
 
 
 /************************************************************************
-*    desc:  Create a dynamic font IBO buffer
+*    DESC:  Create a dynamic font IBO buffer
 ************************************************************************/
 uint32_t CVertBufMgr::createDynamicFontIBO( const std::string & group, const std::string & name, uint16_t * pIndexData, int maxIndicies )
 {
@@ -166,7 +166,7 @@ uint32_t CVertBufMgr::createDynamicFontIBO( const std::string & group, const std
 
 
 /************************************************************************
-*    desc:  Create a scaled frame
+*    DESC:  Create a scaled frame
 *    NOTE: This is a bit of a brute force implementation but writing an
 *          algorithm that takes into account an index buffer is difficult
 ************************************************************************/
@@ -218,7 +218,7 @@ uint32_t CVertBufMgr::createScaledFrame(
 
 
 /************************************************************************
-*    desc: Generate a scaled frame
+*    DESC: Generate a scaled frame
 *    NOTE: This is a bit of a brute force implementation but writing an
 *          algorithm that takes into account an index buffer is difficult
 ************************************************************************/
@@ -338,7 +338,7 @@ void CVertBufMgr::generateScaledFrame(
 
 
 /************************************************************************
-*    desc:  Create a quad
+*    DESC:  Create a quad
 ************************************************************************/
 void CVertBufMgr::createQuad(
     const CPoint<float> & vert,
@@ -390,7 +390,7 @@ void CVertBufMgr::createQuad(
 
 
 /************************************************************************
-*    desc: See if a VBO already exists
+*    DESC: See if a VBO already exists
 ************************************************************************/
 uint32_t CVertBufMgr::isVBO( const std::string & group, const std::string & name )
 {
@@ -409,7 +409,7 @@ uint32_t CVertBufMgr::isVBO( const std::string & group, const std::string & name
 
 
 /************************************************************************
-*    desc:  Function call used to manage what buffer is currently bound.
+*    DESC:  Function call used to manage what buffer is currently bound.
 *           This insures that we don't keep rebinding the same buffer
 ************************************************************************/
 void CVertBufMgr::bind( uint32_t vboID, uint32_t iboID )
@@ -435,7 +435,7 @@ void CVertBufMgr::bind( uint32_t vboID, uint32_t iboID )
 
 
 /************************************************************************
-*    desc:  Unbind the buffers and reset the flag
+*    DESC:  Unbind the buffers and reset the flag
 ************************************************************************/
 void CVertBufMgr::unbind()
 {
@@ -447,7 +447,7 @@ void CVertBufMgr::unbind()
 
 
 /************************************************************************
-*    desc:  Delete buffer group
+*    DESC:  Delete buffer group
 ************************************************************************/
 void CVertBufMgr::deleteBufferGroupFor2D( const std::string & group )
 {
@@ -484,7 +484,7 @@ void CVertBufMgr::deleteBufferGroupFor2D( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Get the current max font indices
+*    DESC:  Get the current max font indices
 ************************************************************************/
 int CVertBufMgr::getCurrentMaxFontIndices()
 {

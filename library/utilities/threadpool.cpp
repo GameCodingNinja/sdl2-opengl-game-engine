@@ -12,7 +12,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CThreadPool::CThreadPool()
 {
@@ -67,7 +67,7 @@ CThreadPool::CThreadPool()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CThreadPool::~CThreadPool()
 {
@@ -86,7 +86,7 @@ CThreadPool::~CThreadPool()
 
 
 /************************************************************************
-*    desc:  Wait for the jobs to complete
+*    DESC:  Wait for the jobs to complete
 ************************************************************************/
 void CThreadPool::wait()
 {
@@ -102,7 +102,7 @@ void CThreadPool::wait()
 
 
 /************************************************************************
-*    desc:  Lock mutex for Synchronization
+*    DESC:  Lock mutex for Synchronization
 ************************************************************************/
 void CThreadPool::lock()
 {
@@ -113,7 +113,7 @@ void CThreadPool::lock()
 
 
 /************************************************************************
-*    desc:  Unlock mutex for Synchronization
+*    DESC:  Unlock mutex for Synchronization
 ************************************************************************/
 void CThreadPool::unlock()
 {
@@ -124,7 +124,7 @@ void CThreadPool::unlock()
 
 
 /************************************************************************
-*    desc:  Get the mutex
+*    DESC:  Get the mutex
 ************************************************************************/
 std::mutex & CThreadPool::getMutex()
 {

@@ -24,7 +24,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
     iSprite(id),
@@ -44,7 +44,7 @@ CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CActorSprite2D::~CActorSprite2D()
 {
@@ -52,7 +52,7 @@ CActorSprite2D::~CActorSprite2D()
 
 
 /************************************************************************
-*    desc:  Set/Get the AI pointer. This class owns the pointer
+*    DESC:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
 void CActorSprite2D::setAI( iAIBase * pAIBase )
 {
@@ -65,7 +65,7 @@ void CActorSprite2D::setAI( iAIBase * pAIBase )
 
 
 /************************************************************************
-*    desc:  Create the actor's sprites
+*    DESC:  Create the actor's sprites
 ************************************************************************/
 void CActorSprite2D::create( const CActorData & actorData )
 {
@@ -131,7 +131,7 @@ void CActorSprite2D::create( const CActorData & actorData )
 
 
 /************************************************************************
-*    desc:  Init the sprite
+*    DESC:  Init the sprite
 *           NOTE: Do not call from a constructor!
 ************************************************************************/
 void CActorSprite2D::init()
@@ -143,7 +143,7 @@ void CActorSprite2D::init()
 
 
 /************************************************************************
-*    desc:  Clean up the sprite
+*    DESC:  Clean up the sprite
 *           NOTE: Do not call from a destructor!
 ************************************************************************/
 void CActorSprite2D::cleanUp()
@@ -155,7 +155,7 @@ void CActorSprite2D::cleanUp()
 
 
 /************************************************************************
-*    desc:  Init the physics                                                           
+*    DESC:  Init the physics                                                           
 ************************************************************************/
 void CActorSprite2D::initPhysics()
 {
@@ -164,7 +164,7 @@ void CActorSprite2D::initPhysics()
 
 
 /************************************************************************
-*    desc:  React to what the player is doing
+*    DESC:  React to what the player is doing
 ************************************************************************/
 void CActorSprite2D::handleEvent( const SDL_Event & rEvent )
 {
@@ -175,7 +175,7 @@ void CActorSprite2D::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Update the actor
+*    DESC:  Update the actor
 ************************************************************************/
 void CActorSprite2D::update()
 {
@@ -189,7 +189,7 @@ void CActorSprite2D::update()
 
 
 /************************************************************************
-*    desc:  Update the physics
+*    DESC:  Update the physics
 ************************************************************************/
 void CActorSprite2D::physicsUpdate()
 {
@@ -198,7 +198,7 @@ void CActorSprite2D::physicsUpdate()
 
 
 /************************************************************************
-*    desc:  Transform the actor
+*    DESC:  Transform the actor
 ************************************************************************/
 void CActorSprite2D::transform()
 {
@@ -229,7 +229,7 @@ void CActorSprite2D::transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  Render the actor
+*    DESC:  Render the actor
 ************************************************************************/
 void CActorSprite2D::render( const CMatrix & matrix )
 {
@@ -244,7 +244,7 @@ void CActorSprite2D::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get the physics component                                                            
+*    DESC:  Get the physics component                                                            
 ************************************************************************/
 CPhysicsComponent2D & CActorSprite2D::getPhysicsComponent()
 {
@@ -254,7 +254,7 @@ CPhysicsComponent2D & CActorSprite2D::getPhysicsComponent()
 
 
 /************************************************************************
-*    desc:  Get the sprite
+*    DESC:  Get the sprite
 ************************************************************************/
 CSprite2D & CActorSprite2D::getSprite( int index )
 {
@@ -267,7 +267,7 @@ CSprite2D & CActorSprite2D::getSprite( int index )
 
 
 /************************************************************************
-*    desc:  Get the sprite group
+*    DESC:  Get the sprite group
 ************************************************************************/
 CSprite2D & CActorSprite2D::getSprite( const std::string & name )
 {
@@ -283,7 +283,7 @@ CSprite2D & CActorSprite2D::getSprite( const std::string & name )
 
 
 /************************************************************************
-*    desc:  Render the actor
+*    DESC:  Render the actor
 ************************************************************************/
 bool CActorSprite2D::inView()
 {
@@ -299,7 +299,7 @@ bool CActorSprite2D::inView()
 
 
 /************************************************************************
- *    desc:  Check if an object is within the orthographic view frustum
+ *    DESC:  Check if an object is within the orthographic view frustum
  ************************************************************************/
 bool CActorSprite2D::inOrthographicView()
 {
@@ -320,7 +320,7 @@ bool CActorSprite2D::inOrthographicView()
 
 
 /************************************************************************
- *    desc:  Check if an object is within the perspective view frustum
+ *    DESC:  Check if an object is within the perspective view frustum
  ************************************************************************/
 bool CActorSprite2D::inPerspectiveView()
 {
@@ -341,7 +341,7 @@ bool CActorSprite2D::inPerspectiveView()
 
 
 /************************************************************************
-*    desc:  Apply the scale to the radius
+*    DESC:  Apply the scale to the radius
 ************************************************************************/
 void CActorSprite2D::applyScale( CMatrix & matrix )
 {
@@ -361,7 +361,7 @@ void CActorSprite2D::applyScale( CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get the collision group
+*    DESC:  Get the collision group
 ************************************************************************/
 uint CActorSprite2D::getCollisionGroup() const
 {
@@ -370,7 +370,7 @@ uint CActorSprite2D::getCollisionGroup() const
 
 
 /************************************************************************
-*    desc:  Get the collision radius
+*    DESC:  Get the collision radius
 ************************************************************************/
 float CActorSprite2D::getCollisionRadius() const
 {
@@ -379,7 +379,7 @@ float CActorSprite2D::getCollisionRadius() const
 
 
 /***************************************************************************
-*    desc:  Check for broad phase collision against other actor sprite
+*    DESC:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
 bool CActorSprite2D::isCollision( CActorSprite2D & rActor )
 {
@@ -396,7 +396,7 @@ bool CActorSprite2D::isCollision( CActorSprite2D & rActor )
 
 
 /***************************************************************************
-*    desc:  Check for broad phase collision against other actor sprite
+*    DESC:  Check for broad phase collision against other actor sprite
 ****************************************************************************/
 bool CActorSprite2D::checkBroadPhase( CActorSprite2D & rActor )
 {

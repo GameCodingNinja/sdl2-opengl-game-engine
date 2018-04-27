@@ -21,7 +21,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteStrategyMgr::CSpriteStrategyMgr() :
     m_spriteInc(0)
@@ -30,7 +30,7 @@ CSpriteStrategyMgr::CSpriteStrategyMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSpriteStrategyMgr::~CSpriteStrategyMgr()
 {
@@ -39,7 +39,7 @@ CSpriteStrategyMgr::~CSpriteStrategyMgr()
 
 
 /************************************************************************
- *    desc:  Add strategy
+ *    DESC:  Add strategy
  ************************************************************************/
 void CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
 {
@@ -65,7 +65,7 @@ void CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStr
 
 
 /************************************************************************
- *    desc:  Delete strategy
+ *    DESC:  Delete strategy
  ************************************************************************/
 void CSpriteStrategyMgr::deleteStrategy( const std::string & strategyId )
 {
@@ -86,7 +86,7 @@ void CSpriteStrategyMgr::deleteStrategy( const std::string & strategyId )
 
 
 /************************************************************************
- *    desc:  Delete sprite
+ *    DESC:  Delete sprite
  ************************************************************************/
 void CSpriteStrategyMgr::deleteSprite( const std::string & strategyId, int spriteId )
 {
@@ -98,7 +98,7 @@ void CSpriteStrategyMgr::deleteSprite( const std::string & strategyId, int sprit
 
 
 /************************************************************************
-*    desc:  create the sprite and provide a unique id number for each one
+*    DESC:  create the sprite and provide a unique id number for each one
 ************************************************************************/
 iSprite * CSpriteStrategyMgr::create(
     const std::string & strategyId,
@@ -166,7 +166,7 @@ iSprite * CSpriteStrategyMgr::create(
 
 
 /************************************************************************
-*    desc:  Delete all the sprites
+*    DESC:  Delete all the sprites
 ************************************************************************/
 void CSpriteStrategyMgr::clear()
 {
@@ -181,7 +181,7 @@ void CSpriteStrategyMgr::clear()
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CSpriteStrategyMgr::init()
 {
@@ -191,7 +191,7 @@ void CSpriteStrategyMgr::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CSpriteStrategyMgr::cleanUp()
 {
@@ -201,7 +201,7 @@ void CSpriteStrategyMgr::cleanUp()
 
 
 /************************************************************************
-*    desc:  Handle any misc processing before the real work is started
+*    DESC:  Handle any misc processing before the real work is started
 ************************************************************************/
 void CSpriteStrategyMgr::miscProcess()
 {
@@ -211,7 +211,7 @@ void CSpriteStrategyMgr::miscProcess()
 
 
 /***************************************************************************
-*    desc:  Update the sprites
+*    DESC:  Update the sprites
 ****************************************************************************/
 void CSpriteStrategyMgr::update()
 {
@@ -221,7 +221,7 @@ void CSpriteStrategyMgr::update()
 
 
 /************************************************************************
-*    desc:  Transform the sprite
+*    DESC:  Transform the sprite
 ************************************************************************/
 void CSpriteStrategyMgr::transform()
 {
@@ -237,7 +237,7 @@ void CSpriteStrategyMgr::transform( const CObject2D & object )
 
 
 /***************************************************************************
-*    desc:  Render the sprites
+*    DESC:  Render the sprites
 ****************************************************************************/
 void CSpriteStrategyMgr::render()
 {
@@ -259,7 +259,7 @@ void CSpriteStrategyMgr::render( const CMatrix & matrix, const CMatrix & rotMatr
 
 
 /************************************************************************
-*    desc:  Get the pointer to the strategy
+*    DESC:  Get the pointer to the strategy
 ************************************************************************/
 iSpriteStrategy * CSpriteStrategyMgr::getStrategy( const std::string & strategyId )
 {

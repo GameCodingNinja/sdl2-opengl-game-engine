@@ -44,7 +44,7 @@
 namespace NGenFunc
 {
     /************************************************************************
-    *    desc:  Count the number of occurrences of sub string
+    *    DESC:  Count the number of occurrences of sub string
     ************************************************************************/
     int CountStrOccurrence( const std::string & searchStr, const std::string & subStr )
     {
@@ -66,7 +66,7 @@ namespace NGenFunc
 
 
     /************************************************************************
-    *    desc:  Read in a file and return it as a buffer
+    *    DESC:  Read in a file and return it as a buffer
     ************************************************************************/
     std::shared_ptr<char> FileToBuf( const std::string & file, size_t & sizeInBytes )
     {
@@ -122,7 +122,7 @@ namespace NGenFunc
 
 
     /************************************************************************
-    *    desc:  Dispatch and event
+    *    DESC:  Dispatch and event
     *
     * _event.user.code = (code4 << 24) | (code3 << 16) | (code2 << 8) | code1;
     ************************************************************************/
@@ -140,7 +140,7 @@ namespace NGenFunc
 
 
     /************************************************************************
-    *    desc: Output string info
+    *    DESC: Output string info
     ************************************************************************/
     void PostDebugMsg( const std::string & msg )
     {
@@ -157,7 +157,7 @@ namespace NGenFunc
 
 
     /************************************************************************
-    *    desc:  Convert 2d screen coordinates to 3D perspective space
+    *    DESC:  Convert 2d screen coordinates to 3D perspective space
     ************************************************************************/
     void Convert2Dto3D( float & destX, float & destY, float x, float y, float width, float height )
     {
@@ -178,7 +178,7 @@ namespace NGenFunc
 
 
     /************************************************************************
-    *    desc:  Uniform int random number generation
+    *    DESC:  Uniform int random number generation
     ************************************************************************/
     int UniformRandomInt( int startRange, int endRange, int seed )
     {
@@ -199,7 +199,7 @@ namespace NGenFunc
     }
 
     /************************************************************************
-    *    desc:  Uniform float random number generation
+    *    DESC:  Uniform float random number generation
     ************************************************************************/
     float UniformRandomFloat( float startRange, float endRange, int seed )
     {
@@ -221,7 +221,7 @@ namespace NGenFunc
     
     
     /************************************************************************
-    *    desc:  Add a name extension to a file
+    *    DESC:  Add a name extension to a file
     ************************************************************************/
     void AddFileExt( const std::string & source, std::string & dest, const std::string & ext )
     {

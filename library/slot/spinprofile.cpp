@@ -21,7 +21,7 @@
 
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpinProfile::CSpinProfile() :
     m_startDelay(0),
@@ -39,7 +39,7 @@ CSpinProfile::CSpinProfile() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSpinProfile::~CSpinProfile()
 {
@@ -47,7 +47,7 @@ CSpinProfile::~CSpinProfile()
 
 
 /************************************************************************
-*    desc:  Load thes reel strip data from node
+*    DESC:  Load thes reel strip data from node
 ************************************************************************/
 void CSpinProfile::loadFromNode( const XMLNode & node )
 {
@@ -95,7 +95,7 @@ void CSpinProfile::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Get the start delay
+*    DESC:  Get the start delay
 ************************************************************************/
 int CSpinProfile::getStartDelay() const
 {
@@ -104,7 +104,7 @@ int CSpinProfile::getStartDelay() const
 
 
 /************************************************************************
-*    desc:  Get the acceleration
+*    DESC:  Get the acceleration
 ************************************************************************/
 double CSpinProfile::getAccelation() const
 {
@@ -112,7 +112,7 @@ double CSpinProfile::getAccelation() const
 }
 
 /************************************************************************
-*    desc:  Get the impulse
+*    DESC:  Get the impulse
 ************************************************************************/
 double CSpinProfile::getImpulse() const
 {
@@ -121,7 +121,7 @@ double CSpinProfile::getImpulse() const
 
 
 /************************************************************************
-*    desc:  Get the max velocity
+*    DESC:  Get the max velocity
 ************************************************************************/
 double CSpinProfile::getMaxVelocity() const
 {
@@ -130,7 +130,7 @@ double CSpinProfile::getMaxVelocity() const
 
 
 /************************************************************************
-*    desc:  Get the max speed time
+*    DESC:  Get the max speed time
 ************************************************************************/
 int CSpinProfile::getMaxVelocityTime() const
 {
@@ -139,7 +139,7 @@ int CSpinProfile::getMaxVelocityTime() const
 
 
 /************************************************************************
-*    desc:  Get the bounce drag
+*    DESC:  Get the bounce drag
 ************************************************************************/
 double CSpinProfile::getBounceDrag() const
 {
@@ -148,7 +148,7 @@ double CSpinProfile::getBounceDrag() const
 
 
 /************************************************************************
-*    desc:  Get the bounce correction
+*    DESC:  Get the bounce correction
 ************************************************************************/
 int CSpinProfile::getBounceCorrection() const
 {
@@ -157,7 +157,7 @@ int CSpinProfile::getBounceCorrection() const
 
 
 /************************************************************************
-*    desc:  Get the time out delay
+*    DESC:  Get the time out delay
 ************************************************************************/
 double CSpinProfile::getTimeOutDelay() const
 {
@@ -166,7 +166,7 @@ double CSpinProfile::getTimeOutDelay() const
 
 
 /************************************************************************
-*    desc:  Get the deceleration rotation count
+*    DESC:  Get the deceleration rotation count
 ************************************************************************/
 double CSpinProfile::getDecelerationRotationCount() const
 {
@@ -175,7 +175,7 @@ double CSpinProfile::getDecelerationRotationCount() const
 
 
 /************************************************************************
-*    desc:  Get the safety check divisor
+*    DESC:  Get the safety check divisor
 ************************************************************************/
 double CSpinProfile::getSafetyCheckDivisor() const
 {

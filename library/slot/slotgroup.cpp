@@ -26,7 +26,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotGroup::CSlotGroup(
     std::shared_ptr<CSlotGroupModel> spSlotGroupModel,
@@ -38,7 +38,7 @@ CSlotGroup::CSlotGroup(
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotGroup::~CSlotGroup()
 {
@@ -46,7 +46,7 @@ CSlotGroup::~CSlotGroup()
 
 
 /************************************************************************
-*    desc:  Get the slot group model
+*    DESC:  Get the slot group model
 ************************************************************************/
 CSlotGroupModel * CSlotGroup::getModel()
 {
@@ -55,7 +55,7 @@ CSlotGroupModel * CSlotGroup::getModel()
 
 
 /************************************************************************
-*    desc:  Get the slot group view
+*    DESC:  Get the slot group view
 ************************************************************************/
 CSlotGroupView * CSlotGroup::getView()
 {

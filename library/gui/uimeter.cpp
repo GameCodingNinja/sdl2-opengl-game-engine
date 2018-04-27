@@ -26,7 +26,7 @@
 #include <map>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUIMeter::CUIMeter( const std::string & group ) :
     CUIControl( group ),
@@ -46,7 +46,7 @@ CUIMeter::CUIMeter( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CUIMeter::~CUIMeter()
 {
@@ -54,7 +54,7 @@ CUIMeter::~CUIMeter()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 *
 *    param: node - XML node
 ************************************************************************/
@@ -98,7 +98,7 @@ void CUIMeter::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 ************************************************************************/
 void CUIMeter::loadControlFromNode( const XMLNode & controlNode )
 {
@@ -123,7 +123,7 @@ void CUIMeter::loadControlFromNode( const XMLNode & controlNode )
 
 
 /************************************************************************
-*    desc:  Set the amount to the meter without banging up
+*    DESC:  Set the amount to the meter without banging up
 ************************************************************************/
 void CUIMeter::set( const double amount )
 {
@@ -139,7 +139,7 @@ void CUIMeter::set( const double amount )
 
 
 /************************************************************************
-*    desc:  Start the bang range
+*    DESC:  Start the bang range
 ************************************************************************/
 void CUIMeter::startBangUp( const double amount )
 {
@@ -154,7 +154,7 @@ void CUIMeter::startBangUp( const double amount )
 
 
 /************************************************************************
-*    desc:  Set the bang range
+*    DESC:  Set the bang range
 ************************************************************************/
 void CUIMeter::setBangRange()
 {
@@ -176,7 +176,7 @@ void CUIMeter::setBangRange()
 
 
 /************************************************************************
-*    desc:  Init the bang range
+*    DESC:  Init the bang range
 ************************************************************************/
 void CUIMeter::initBangRange( const CBangRange & bangRange )
 {
@@ -220,7 +220,7 @@ void CUIMeter::initBangRange( const CBangRange & bangRange )
 
 
 /************************************************************************
-*    desc:  Do a fast bang
+*    DESC:  Do a fast bang
 ************************************************************************/
 void CUIMeter::fastBang()
 {
@@ -236,7 +236,7 @@ void CUIMeter::fastBang()
 
 
 /************************************************************************
-*    desc:  Update the control
+*    DESC:  Update the control
 ************************************************************************/
 void CUIMeter::update()
 {
@@ -315,7 +315,7 @@ void CUIMeter::update()
 
 
 /************************************************************************
-*    desc:  Display the value in the meter
+*    DESC:  Display the value in the meter
 ************************************************************************/
 void CUIMeter::displayValue()
 {
@@ -348,7 +348,7 @@ void CUIMeter::displayValue()
 
 
 /************************************************************************
-*    desc:  Is the meter banging
+*    DESC:  Is the meter banging
 ************************************************************************/
 bool CUIMeter::isBanging()
 {
@@ -357,7 +357,7 @@ bool CUIMeter::isBanging()
 
 
 /************************************************************************
-*    desc:  Clear the meter
+*    DESC:  Clear the meter
 ************************************************************************/
 void CUIMeter::clear()
 {

@@ -19,7 +19,7 @@
 namespace NScriptCamera
 {
     /************************************************************************
-    *    desc:  Wrapper function due to virtual inheritance
+    *    DESC:  Wrapper function due to virtual inheritance
     ************************************************************************/
     void SetPos1(const CPoint<float> & pos, CCamera & camera)
     {
@@ -103,7 +103,7 @@ namespace NScriptCamera
     
     
     /************************************************************************
-    *    desc:  Register the class with AngelScript
+    *    DESC:  Register the class with AngelScript
     ************************************************************************/
     void Register()
     {

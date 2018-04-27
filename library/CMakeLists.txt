@@ -95,6 +95,7 @@ add_library(
         spritestrategy/spritestrategymanager.cpp
         spritestrategy/ispritestrategy.cpp
         spritestrategy/basestrategy.cpp
+        spritestrategy/menustrategy.cpp
         common/sound.cpp
         common/playlist.cpp
         common/worldvalue.cpp

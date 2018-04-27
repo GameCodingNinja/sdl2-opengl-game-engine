@@ -45,7 +45,7 @@ CMenu::CMenu( const std::string & name, const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CMenu::~CMenu()
 {
@@ -58,7 +58,7 @@ CMenu::~CMenu()
 
 
 /************************************************************************
-*    desc:  Load the menu info from file
+*    DESC:  Load the menu info from file
 ************************************************************************/
 void CMenu::loadFromXML( const std::string & filePath )
 {
@@ -147,7 +147,7 @@ void CMenu::loadFromXML( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Init the script functions and add them to the map
+*    DESC:  Init the script functions and add them to the map
 *           This function loads the attribute info reguardless of what it is
 ************************************************************************/
 void CMenu::initScriptFunctions( const XMLNode & node )
@@ -174,7 +174,7 @@ void CMenu::initScriptFunctions( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load a static sprite from an XML node
+*    DESC:  Load a static sprite from an XML node
 ************************************************************************/
 void CMenu::loadStaticSpriteFromNode( const XMLNode & node )
 {
@@ -193,7 +193,7 @@ void CMenu::loadStaticSpriteFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load static controls from an XML node
+*    DESC:  Load static controls from an XML node
 ************************************************************************/
 void CMenu::loadStaticControlFromNode( XMLNode & node )
 {
@@ -210,7 +210,7 @@ void CMenu::loadStaticControlFromNode( XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load mouse only controls from an XML node
+*    DESC:  Load mouse only controls from an XML node
 ************************************************************************/
 void CMenu::loadMouseOnlyControlFromNode( const XMLNode & node )
 {
@@ -224,7 +224,7 @@ void CMenu::loadMouseOnlyControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load a control from an XML node
+*    DESC:  Load a control from an XML node
 ************************************************************************/
 void CMenu::loadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap )
 {
@@ -258,7 +258,7 @@ void CMenu::loadControlFromNode( XMLNode & node, NavHelperMap & navNodeMap )
 
 
 /************************************************************************
-*    desc:  Load the dynamic offset data from node
+*    DESC:  Load the dynamic offset data from node
 ************************************************************************/
 void CMenu::loadDynamicOffsetFromNode( const XMLNode & node )
 {
@@ -271,7 +271,7 @@ void CMenu::loadDynamicOffsetFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Set the dynamic position
+*    DESC:  Set the dynamic position
 ************************************************************************/
 void CMenu::setDynamicPos()
 {
@@ -282,7 +282,7 @@ void CMenu::setDynamicPos()
 
 
 /************************************************************************
-*    desc:  Reset the dynamic position
+*    DESC:  Reset the dynamic position
 ************************************************************************/
 void CMenu::resetDynamicPos()
 {
@@ -300,7 +300,7 @@ void CMenu::resetDynamicPos()
 
 
 /************************************************************************
-*    desc:  Find the reference nodes
+*    DESC:  Find the reference nodes
 ************************************************************************/
 void CMenu::findNodes(
     const XMLNode & node,
@@ -319,7 +319,7 @@ void CMenu::findNodes(
 
 
 /************************************************************************
-*    desc:  Find the reference nodes
+*    DESC:  Find the reference nodes
 ************************************************************************/
 void CMenu::setNodes(
     const XMLNode & node,
@@ -347,7 +347,7 @@ void CMenu::setNodes(
 
 
 /************************************************************************
-*    desc:  Init the menu controls
+*    DESC:  Init the menu controls
 ************************************************************************/
 void CMenu::init()
 {
@@ -363,7 +363,7 @@ void CMenu::init()
 
 
 /************************************************************************
-*    desc:  Cleanup the menu controls. Currently only for font usage
+*    DESC:  Cleanup the menu controls. Currently only for font usage
 ************************************************************************/
 void CMenu::cleanUp()
 {
@@ -379,7 +379,7 @@ void CMenu::cleanUp()
 
 
 /************************************************************************
-*    desc:  Activate this menu because it's probably a root menu
+*    DESC:  Activate this menu because it's probably a root menu
 ************************************************************************/
 void CMenu::activateMenu()
 {
@@ -391,7 +391,7 @@ void CMenu::activateMenu()
 
 
 /************************************************************************
-*    desc:  Update the menu
+*    DESC:  Update the menu
 ************************************************************************/
 void CMenu::update()
 {
@@ -415,7 +415,7 @@ void CMenu::update()
 
 
 /************************************************************************
-*    desc:  Transform the menu
+*    DESC:  Transform the menu
 ************************************************************************/
 void CMenu::transform()
 {
@@ -459,7 +459,7 @@ void CMenu::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CMenu::render( const CMatrix & matrix )
 {
@@ -481,7 +481,7 @@ void CMenu::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get the name of the menu
+*    DESC:  Get the name of the menu
 ************************************************************************/
 const std::string & CMenu::getName() const
 {
@@ -490,7 +490,7 @@ const std::string & CMenu::getName() const
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CMenu::handleEvent( const SDL_Event & rEvent )
 {
@@ -573,7 +573,7 @@ void CMenu::handleEvent( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnUpAction message
+*    DESC:  Handle OnUpAction message
 ************************************************************************/
 void CMenu::onUpAction( const SDL_Event & rEvent )
 {
@@ -581,7 +581,7 @@ void CMenu::onUpAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnMenuDown message
+*    DESC:  Handle OnMenuDown message
 ************************************************************************/
 void CMenu::onDownAction( const SDL_Event & rEvent )
 {
@@ -589,7 +589,7 @@ void CMenu::onDownAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnMenuLeft message
+*    DESC:  Handle OnMenuLeft message
 ************************************************************************/
 void CMenu::onLeftAction( const SDL_Event & rEvent )
 {
@@ -597,7 +597,7 @@ void CMenu::onLeftAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightAction message
+*    DESC:  Handle OnRightAction message
 ************************************************************************/
 void CMenu::onRightAction( const SDL_Event & rEvent )
 {
@@ -606,7 +606,7 @@ void CMenu::onRightAction( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Navigate the menu. Find the next control node that isn't
+*    DESC:  Navigate the menu. Find the next control node that isn't
 *           disabled and make it the active control node
 ************************************************************************/
 void CMenu::navigateMenu( CUIControlNavNode::ENavNode navNodeAction )
@@ -641,7 +641,7 @@ void CMenu::navigateMenu( CUIControlNavNode::ENavNode navNodeAction )
 
 
 /************************************************************************
-*    desc:  Handle OnMouseMove message
+*    DESC:  Handle OnMouseMove message
 ************************************************************************/
 void CMenu::onMouseMove( const SDL_Event & rEvent )
 {
@@ -660,7 +660,7 @@ void CMenu::onMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle OnSelectAction message
+*    DESC:  Handle OnSelectAction message
 ************************************************************************/
 void CMenu::onSelectAction( const SDL_Event & rEvent )
 {
@@ -722,7 +722,7 @@ void CMenu::onSelectAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnSetActiveControl message
+*    DESC:  Handle OnSetActiveControl message
 ************************************************************************/
 void CMenu::onSetActiveControl( const SDL_Event & rEvent )
 {
@@ -732,7 +732,7 @@ void CMenu::onSetActiveControl( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnReactivate message
+*    DESC:  Handle OnReactivate message
 ************************************************************************/
 void CMenu::onReactivate( const SDL_Event & rEvent )
 {
@@ -740,7 +740,7 @@ void CMenu::onReactivate( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTransIn message
+*    DESC:  Handle OnTransIn message
 ************************************************************************/
 void CMenu::onTransIn( const SDL_Event & rEvent )
 {
@@ -757,7 +757,7 @@ void CMenu::onTransIn( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTransOut message
+*    DESC:  Handle OnTransOut message
 ************************************************************************/
 void CMenu::onTransOut( const SDL_Event & rEvent )
 {
@@ -775,7 +775,7 @@ void CMenu::onTransOut( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Prepare the script function to run
+*    DESC:  Prepare the script function to run
 ************************************************************************/
 void CMenu::prepare( const std::string & scriptFuncId )
 {
@@ -786,7 +786,7 @@ void CMenu::prepare( const std::string & scriptFuncId )
 
 
 /************************************************************************
-*    desc:  Set the first inactive control to be active
+*    DESC:  Set the first inactive control to be active
 ************************************************************************/
 void CMenu::activateFirstInactiveControl()
 {
@@ -810,7 +810,7 @@ void CMenu::activateFirstInactiveControl()
 
 
 /************************************************************************
-*    desc:  Reset all controls
+*    DESC:  Reset all controls
 ************************************************************************/
 void CMenu::reset()
 {
@@ -823,7 +823,7 @@ void CMenu::reset()
 
 
 /************************************************************************
-*    desc:  Get the pointer to the control in question
+*    DESC:  Get the pointer to the control in question
 ************************************************************************/
 CUIControl * CMenu::getPtrToControl( const std::string & name )
 {
@@ -842,7 +842,7 @@ CUIControl * CMenu::getPtrToControl( const std::string & name )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the active control
+*    DESC:  Get the pointer to the active control
 ************************************************************************/
 CUIControl * CMenu::getPtrToActiveControl()
 {
@@ -862,7 +862,7 @@ CUIControl * CMenu::getPtrToActiveControl()
 
 
 /************************************************************************
-*    desc:  Does this menu use dynamic offsets
+*    DESC:  Does this menu use dynamic offsets
 ************************************************************************/
 bool CMenu::isDynamicOffset()
 {
@@ -871,7 +871,7 @@ bool CMenu::isDynamicOffset()
 
 
 /************************************************************************
-*    desc:  Get the scroll params
+*    DESC:  Get the scroll params
 ************************************************************************/
 CScrollParam & CMenu::getScrollParam( int msg )
 {
@@ -886,7 +886,7 @@ CScrollParam & CMenu::getScrollParam( int msg )
 
 
 /************************************************************************
-*    desc:  Set the smart menu pointer. This class owns the pointer
+*    DESC:  Set the smart menu pointer. This class owns the pointer
 ************************************************************************/
 void CMenu::setSmartGui( CSmartGuiMenu * pSmartGuiMenu )
 {
@@ -895,7 +895,7 @@ void CMenu::setSmartGui( CSmartGuiMenu * pSmartGuiMenu )
 
 
 /************************************************************************
-*    desc:  Do any smart create
+*    DESC:  Do any smart create
 ************************************************************************/
 void CMenu::smartCreate()
 {
@@ -905,7 +905,7 @@ void CMenu::smartCreate()
 
 
 /************************************************************************
-*    desc:  Do any smart event handling
+*    DESC:  Do any smart event handling
 ************************************************************************/
 void CMenu::smartHandleEvent( const SDL_Event & rEvent )
 {
@@ -915,7 +915,7 @@ void CMenu::smartHandleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Set/Get the alpha value of this menu
+*    DESC:  Set/Get the alpha value of this menu
 ************************************************************************/
 void CMenu::setAlpha( float alpha )
 {
@@ -944,7 +944,7 @@ float CMenu::getAlpha()
 
 
 /************************************************************************
-*    desc:  Is the menu idle
+*    DESC:  Is the menu idle
 ************************************************************************/
 bool CMenu::isIdle()
 {
@@ -953,7 +953,7 @@ bool CMenu::isIdle()
 
 
 /************************************************************************
-*    desc:  Is the menu active
+*    DESC:  Is the menu active
 ************************************************************************/
 bool CMenu::isActive()
 {

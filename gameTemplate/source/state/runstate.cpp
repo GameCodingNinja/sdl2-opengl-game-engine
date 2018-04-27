@@ -26,7 +26,7 @@
 #include <vector>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CRunState::CRunState() :
     CCommonState( NGameDefs::EGS_RUN, NGameDefs::EGS_GAME_LOAD ),
@@ -36,7 +36,7 @@ CRunState::CRunState() :
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CRunState::init()
 {
@@ -53,7 +53,7 @@ void CRunState::init()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CRunState::handleEvent( const SDL_Event & rEvent )
 {
@@ -70,7 +70,7 @@ void CRunState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Handle the physics
+*    DESC:  Handle the physics
 ****************************************************************************/
 void CRunState::physics()
 {
@@ -82,7 +82,7 @@ void CRunState::physics()
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CRunState::update()
 {
@@ -96,7 +96,7 @@ void CRunState::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CRunState::transform()
 {
@@ -108,7 +108,7 @@ void CRunState::transform()
 
 
 /***************************************************************************
-*    desc:  Do the 2D rendering
+*    DESC:  Do the 2D rendering
 ****************************************************************************/
 void CRunState::preRender()
 {
@@ -119,12 +119,12 @@ void CRunState::preRender()
 
 
 /***************************************************************************
-*    desc: Functions for loading/unloading the assets for this state
+*    DESC: Functions for loading/unloading the assets for this state
 ****************************************************************************/
 namespace NRunState
 {
     /***************************************************************************
-    *    desc:  Namespace function for loading the assets for this state
+    *    DESC:  Namespace function for loading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void ObjectDataLoad()
@@ -156,7 +156,7 @@ namespace NRunState
 
 
     /***************************************************************************
-    *    desc:  Namespace function for unloading the assets for this state
+    *    DESC:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()

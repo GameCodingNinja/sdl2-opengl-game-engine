@@ -11,7 +11,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CHighResTimer::CHighResTimer()
     : m_inverseTimerFrequency(0.0),
@@ -28,7 +28,7 @@ CHighResTimer::CHighResTimer()
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CHighResTimer::~CHighResTimer()
 {
@@ -36,7 +36,7 @@ CHighResTimer::~CHighResTimer()
 
 
 /***************************************************************************
-*    desc:  Simple timer start
+*    DESC:  Simple timer start
 ****************************************************************************/
 void CHighResTimer::timerStart()
 {
@@ -46,7 +46,7 @@ void CHighResTimer::timerStart()
 
 
 /***************************************************************************
-*    desc:  Simple timer duration
+*    DESC:  Simple timer duration
 ****************************************************************************/
 float CHighResTimer::timerStop()
 {
@@ -59,7 +59,7 @@ float CHighResTimer::timerStop()
 
 
 /***************************************************************************
-*    desc:  Calc the elapsed time
+*    DESC:  Calc the elapsed time
 ****************************************************************************/
 void CHighResTimer::calcElapsedTime()
 {
@@ -84,7 +84,7 @@ void CHighResTimer::calcElapsedTime()
 
 
 /***************************************************************************
-*    desc:  Get the elapsed time
+*    DESC:  Get the elapsed time
 ****************************************************************************/
 double CHighResTimer::getElapsedTime()
 {
@@ -93,7 +93,7 @@ double CHighResTimer::getElapsedTime()
 
 
 /***************************************************************************
-*    desc:  get the elapsed time
+*    DESC:  get the elapsed time
 ****************************************************************************/
 float CHighResTimer::getFPS()
 {
@@ -102,7 +102,7 @@ float CHighResTimer::getFPS()
 
 
 /***************************************************************************
-*    desc:  get the raw time
+*    DESC:  get the raw time
 ****************************************************************************/
 double CHighResTimer::getTime()
 {

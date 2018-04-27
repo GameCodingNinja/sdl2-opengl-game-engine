@@ -25,7 +25,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSoundMgr::CSoundMgr() :
     m_mixChannel(0),
@@ -56,7 +56,7 @@ CSoundMgr::CSoundMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSoundMgr::~CSoundMgr()
 {
@@ -72,7 +72,7 @@ CSoundMgr::~CSoundMgr()
 
 
 /************************************************************************
-*    desc:  Load all of the sounds of a specific group
+*    DESC:  Load all of the sounds of a specific group
 *
 *    param: string & group - specified group of scripts to load
 ************************************************************************/
@@ -101,7 +101,7 @@ void CSoundMgr::loadGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Load all object information from an xml
+*    DESC:  Load all object information from an xml
 *
 *	 param:	string & filePath - file path of the object data list XML
 ************************************************************************/
@@ -181,7 +181,7 @@ void CSoundMgr::loadFromXML( const std::string & group, const std::string & file
 
 
 /************************************************************************
-*    desc:  Free a sound group
+*    DESC:  Free a sound group
 ************************************************************************/
 void CSoundMgr::freeGroup( const std::string & group )
 {
@@ -205,7 +205,7 @@ void CSoundMgr::freeGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Get the sound
+*    DESC:  Get the sound
 ************************************************************************/
 CSound & CSoundMgr::getSound( const std::string & group, const std::string & soundID )
 {
@@ -237,7 +237,7 @@ CSound & CSoundMgr::getSound( const std::string & group, const std::string & sou
 
 
 /************************************************************************
-*    desc:  Get the playlist
+*    DESC:  Get the playlist
 ************************************************************************/
 CPlayList & CSoundMgr::getPlayList( const std::string & group, const std::string & playLstID )
 {
@@ -254,7 +254,7 @@ CPlayList & CSoundMgr::getPlayList( const std::string & group, const std::string
 
 
 /************************************************************************
-*    desc:  Get the next channel
+*    DESC:  Get the next channel
 ************************************************************************/
 int CSoundMgr::getNextChannel()
 {
@@ -264,7 +264,7 @@ int CSoundMgr::getNextChannel()
 
 
 /************************************************************************
-*    desc:  Play a sound
+*    DESC:  Play a sound
 ************************************************************************/
 void CSoundMgr::play( const std::string & group, const std::string & soundID, int loopCount )
 {
@@ -273,7 +273,7 @@ void CSoundMgr::play( const std::string & group, const std::string & soundID, in
 
 
 /************************************************************************
-*    desc:  Pause a sound
+*    DESC:  Pause a sound
 ************************************************************************/
 void CSoundMgr::pause( const std::string & group, const std::string & soundID )
 {
@@ -282,7 +282,7 @@ void CSoundMgr::pause( const std::string & group, const std::string & soundID )
 
 
 /************************************************************************
-*    desc:  Resume a sound
+*    DESC:  Resume a sound
 ************************************************************************/
 void CSoundMgr::resume( const std::string & group, const std::string & soundID )
 {
@@ -291,7 +291,7 @@ void CSoundMgr::resume( const std::string & group, const std::string & soundID )
 
 
 /************************************************************************
-*    desc:  Resume a sound
+*    DESC:  Resume a sound
 ************************************************************************/
 void CSoundMgr::stop( const std::string & group, const std::string & soundID )
 {
@@ -300,7 +300,7 @@ void CSoundMgr::stop( const std::string & group, const std::string & soundID )
 
 
 /************************************************************************
-*    desc: Set/Get the volume for music or channel
+*    DESC: Set/Get the volume for music or channel
 ************************************************************************/
 void CSoundMgr::setVolume( const std::string & group, const std::string & soundID, int volume )
 {
@@ -314,7 +314,7 @@ int CSoundMgr::getVolume( const std::string & group, const std::string & soundID
 
 
 /************************************************************************
-*    desc:  Is music or channel playing?
+*    DESC:  Is music or channel playing?
 ************************************************************************/
 bool CSoundMgr::isPlaying( const std::string & group, const std::string & soundID )
 {
@@ -323,7 +323,7 @@ bool CSoundMgr::isPlaying( const std::string & group, const std::string & soundI
 
 
 /************************************************************************
-*    desc:  Is music or channel paused?
+*    DESC:  Is music or channel paused?
 ************************************************************************/
 bool CSoundMgr::isPaused( const std::string & group, const std::string & soundID )
 {
@@ -332,7 +332,7 @@ bool CSoundMgr::isPaused( const std::string & group, const std::string & soundID
 
 
 /************************************************************************
-*    desc:  Is music playing?
+*    DESC:  Is music playing?
 ************************************************************************/
 bool CSoundMgr::isMusicPlaying()
 {
@@ -341,7 +341,7 @@ bool CSoundMgr::isMusicPlaying()
 
 
 /************************************************************************
-*    desc:  Is music paused?
+*    DESC:  Is music paused?
 ************************************************************************/
 bool CSoundMgr::isMusicPaused()
 {
@@ -350,7 +350,7 @@ bool CSoundMgr::isMusicPaused()
 
 
 /************************************************************************
-*    desc:  Stop the music
+*    DESC:  Stop the music
 ************************************************************************/
 void CSoundMgr::stopMusic()
 {
@@ -359,7 +359,7 @@ void CSoundMgr::stopMusic()
 
 
 /************************************************************************
-*    desc:  Pause the music
+*    DESC:  Pause the music
 ************************************************************************/
 void CSoundMgr::pauseMusic()
 {

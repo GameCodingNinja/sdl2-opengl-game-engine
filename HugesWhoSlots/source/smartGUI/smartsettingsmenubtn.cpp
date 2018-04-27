@@ -22,7 +22,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartSettingsMenuBtn::CSmartSettingsMenuBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )

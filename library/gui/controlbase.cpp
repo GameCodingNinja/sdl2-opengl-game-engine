@@ -15,7 +15,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CControlBase::CControlBase( const std::string & group ) :
     m_group(group),
@@ -25,7 +25,7 @@ CControlBase::CControlBase( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CControlBase::~CControlBase()
 {
@@ -33,7 +33,7 @@ CControlBase::~CControlBase()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 *
 *    param: node - XML node
 ************************************************************************/
@@ -77,7 +77,7 @@ void CControlBase::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the dynamic offset data from node
+*    DESC:  Load the dynamic offset data from node
 ************************************************************************/
 void CControlBase::loadDynamicOffsetFromNode( const XMLNode & node )
 {
@@ -90,7 +90,7 @@ void CControlBase::loadDynamicOffsetFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Set the dynamic position
+*    DESC:  Set the dynamic position
 ************************************************************************/
 void CControlBase::setDynamicPos()
 {
@@ -101,7 +101,7 @@ void CControlBase::setDynamicPos()
 
 
 /************************************************************************
-*    desc:  Get the object group name
+*    DESC:  Get the object group name
 ************************************************************************/
 const std::string & CControlBase::getGroup() const
 {
@@ -110,7 +110,7 @@ const std::string & CControlBase::getGroup() const
 
 
 /************************************************************************
-*    desc:  Get the control name
+*    DESC:  Get the control name
 ************************************************************************/
 const std::string & CControlBase::getName() const
 {
@@ -119,7 +119,7 @@ const std::string & CControlBase::getName() const
 
 
 /************************************************************************
-*    desc:  Get the control type
+*    DESC:  Get the control type
 ************************************************************************/
 NUIControl::EControlType CControlBase::getType() const
 {
@@ -128,7 +128,7 @@ NUIControl::EControlType CControlBase::getType() const
 
 
 /************************************************************************
-*    desc:  Get the faction name
+*    DESC:  Get the faction name
 ************************************************************************/
 const std::string & CControlBase::getFaction() const
 {

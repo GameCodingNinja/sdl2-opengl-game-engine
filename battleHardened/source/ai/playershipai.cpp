@@ -19,7 +19,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CActorSprite2D *>(pSprite) ),
@@ -32,7 +32,7 @@ CPlayerShipAI::CPlayerShipAI( iSprite * pSprite ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CPlayerShipAI::~CPlayerShipAI()
 {
@@ -40,7 +40,7 @@ CPlayerShipAI::~CPlayerShipAI()
 
 
 /************************************************************************
-*    desc:  Do any initalizing
+*    DESC:  Do any initalizing
 ************************************************************************/
 void CPlayerShipAI::init()
 {
@@ -49,7 +49,7 @@ void CPlayerShipAI::init()
 
 
 /************************************************************************
-*    desc:  Handle player related messages
+*    DESC:  Handle player related messages
 ************************************************************************/
 void CPlayerShipAI::handleEvent( const SDL_Event & rEvent )
 {
@@ -80,7 +80,7 @@ void CPlayerShipAI::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Update animations, move sprites, etc.
+*    DESC:  Update animations, move sprites, etc.
 ************************************************************************/
 void CPlayerShipAI::update()
 {
@@ -90,7 +90,7 @@ void CPlayerShipAI::update()
 
 
 /************************************************************************
-*    desc:  Handle the ship's shooting
+*    DESC:  Handle the ship's shooting
 ************************************************************************/
 void CPlayerShipAI::handleShooting()
 {

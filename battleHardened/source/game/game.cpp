@@ -39,7 +39,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CGame::CGame()
 {
@@ -55,7 +55,7 @@ CGame::CGame()
 
 
 /************************************************************************
-*    desc:  destructer                                                             
+*    DESC:  destructer                                                             
 ************************************************************************/
 CGame::~CGame()
 {
@@ -63,7 +63,7 @@ CGame::~CGame()
 
 
 /************************************************************************
-*    desc:  Init the game
+*    DESC:  Init the game
 ************************************************************************/
 void CGame::init()
 {
@@ -86,7 +86,7 @@ void CGame::init()
 
 
 /************************************************************************
-*    desc:  Callback for when a smart gui control is created
+*    DESC:  Callback for when a smart gui control is created
 ************************************************************************/
 void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 {
@@ -97,7 +97,7 @@ void CGame::smartGuiControlCreateCallBack( CUIControl * pUIControl )
 
 
 /************************************************************************
-*    desc:  Callback for when a smart menu is created
+*    DESC:  Callback for when a smart menu is created
 ************************************************************************/
 void CGame::smartMenuCreateCallBack( CMenu * pMenu )
 {
@@ -120,7 +120,7 @@ void CGame::aICreateCallBack( const std::string & aiName, iSprite * pSprite )
 
 
 /************************************************************************
-*    desc:  Callback for shader init
+*    DESC:  Callback for shader init
 ************************************************************************/
 void CGame::shaderInitCallBack( const std::string & shaderId )
 {
@@ -131,7 +131,7 @@ void CGame::shaderInitCallBack( const std::string & shaderId )
 
 
 /************************************************************************
-*    desc:  Callback for the state string
+*    DESC:  Callback for the state string
 ************************************************************************/
 void CGame::statStringCallBack( const std::string & statStr )
 {
@@ -185,7 +185,7 @@ void CGame::doStateChange()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 bool CGame::handleEvent( const SDL_Event & rEvent )
 {
@@ -219,7 +219,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle any misc processing before the real work is started.
+*    DESC:  Handle any misc processing before the real work is started.
 ************************************************************************/
 void CGame::miscProcess()
 {
@@ -229,7 +229,7 @@ void CGame::miscProcess()
 
 
 /************************************************************************
-*    desc:  Handle the physics.
+*    DESC:  Handle the physics.
 ************************************************************************/
 void CGame::physics()
 {
@@ -249,7 +249,7 @@ void CGame::update()
 
 
 /***************************************************************************
-*    desc:  Transform game objects
+*    DESC:  Transform game objects
 ****************************************************************************/
 void CGame::transform()
 {

@@ -26,7 +26,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CWheelView::CWheelView( const CSlotStripModel & rSlotStripModel, CSymbolSetView & rSymbolSetView, const int wheelId ) :
     m_rSlotStripModel(rSlotStripModel),
@@ -54,7 +54,7 @@ CWheelView::CWheelView( const CSlotStripModel & rSlotStripModel, CSymbolSetView 
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CWheelView::~CWheelView()
 {
@@ -62,7 +62,7 @@ CWheelView::~CWheelView()
 
 
 /************************************************************************
-*    desc:  Create the reel strip from data node
+*    DESC:  Create the reel strip from data node
 ************************************************************************/
 void CWheelView::create( const XMLNode & node, const std::string & group )
 {
@@ -92,7 +92,7 @@ void CWheelView::create( const XMLNode & node, const std::string & group )
 
 
 /************************************************************************
-*    desc:  Load the wheel wedges from node
+*    DESC:  Load the wheel wedges from node
 *           NOTE: These sprites spin with the wheel
 ************************************************************************/
 void CWheelView::loadWheelSprites( const XMLNode & node, const std::string & group )
@@ -119,7 +119,7 @@ void CWheelView::loadWheelSprites( const XMLNode & node, const std::string & gro
 
 
 /************************************************************************
-*    desc:  Load the wheel wedges from node
+*    DESC:  Load the wheel wedges from node
 ************************************************************************/
 void CWheelView::loadWedges( const XMLNode & node, const std::string & group )
 {
@@ -145,7 +145,7 @@ void CWheelView::loadWedges( const XMLNode & node, const std::string & group )
 
 
 /************************************************************************
-*    desc:  Load the wheel wedges from node
+*    DESC:  Load the wheel wedges from node
 *           NOTE: These are sprites that don't spin with the wheel
 ************************************************************************/
 void CWheelView::loadSprites( const XMLNode & node, const std::string & group )
@@ -172,7 +172,7 @@ void CWheelView::loadSprites( const XMLNode & node, const std::string & group )
 
 
 /************************************************************************
-*    desc:  One time transform to set the non-spinning wheel sprites
+*    DESC:  One time transform to set the non-spinning wheel sprites
 ************************************************************************/
 void CWheelView::preTransform()
 {
@@ -182,7 +182,7 @@ void CWheelView::preTransform()
 
 
 /************************************************************************
-*    desc:  Set the spin profile
+*    DESC:  Set the spin profile
 ************************************************************************/
 void CWheelView::setSpinProfile( const CSpinProfile & spinProfile )
 {
@@ -191,7 +191,7 @@ void CWheelView::setSpinProfile( const CSpinProfile & spinProfile )
 
 
 /************************************************************************
-*    desc:  Update the reel strip
+*    DESC:  Update the reel strip
 ************************************************************************/
 void CWheelView::update()
 {
@@ -340,7 +340,7 @@ void CWheelView::update()
 
 
 /************************************************************************
-*    desc:  Inc the wheel spin
+*    DESC:  Inc the wheel spin
 ************************************************************************/
 void CWheelView::incSpin( float velocity )
 {
@@ -356,7 +356,7 @@ void CWheelView::incSpin( float velocity )
 
 
 /************************************************************************
-*    desc:  Transform the reel strip
+*    DESC:  Transform the reel strip
 ************************************************************************/
 void CWheelView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
@@ -371,7 +371,7 @@ void CWheelView::transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  Do the render
+*    DESC:  Do the render
 ************************************************************************/
 void CWheelView::render( const CMatrix & matrix )
 {
@@ -387,7 +387,7 @@ void CWheelView::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Do the deferred render
+*    DESC:  Do the deferred render
 ************************************************************************/
 void CWheelView::deferredRender( const CMatrix & matrix )
 {
@@ -396,7 +396,7 @@ void CWheelView::deferredRender( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Start the spin
+*    DESC:  Start the spin
 ************************************************************************/
 void CWheelView::startSpin()
 {
@@ -405,7 +405,7 @@ void CWheelView::startSpin()
 
 
 /************************************************************************
-*    desc:  Stop the spin
+*    DESC:  Stop the spin
 ************************************************************************/
 void CWheelView::stopSpin()
 {
@@ -415,7 +415,7 @@ void CWheelView::stopSpin()
 
 
 /************************************************************************
-*    desc:  Get the spin state
+*    DESC:  Get the spin state
 ************************************************************************/
 NSlotDefs::ESpinState CWheelView::getSpinState() const
 {
@@ -424,7 +424,7 @@ NSlotDefs::ESpinState CWheelView::getSpinState() const
 
 
 /************************************************************************
-*    desc:  Connect to the spin state signal
+*    DESC:  Connect to the spin state signal
 ************************************************************************/
 void CWheelView::connect_spinState( const SpinStateSignal::slot_type & slot )
 {
@@ -433,7 +433,7 @@ void CWheelView::connect_spinState( const SpinStateSignal::slot_type & slot )
 
 
 /************************************************************************
-*    desc:  Do we allow the stop sounds?
+*    DESC:  Do we allow the stop sounds?
 ************************************************************************/
 void CWheelView::allowStopSounds( bool allow )
 {
@@ -442,7 +442,7 @@ void CWheelView::allowStopSounds( bool allow )
 
 
 /************************************************************************
-*    desc:  Get the number of visible symbols (wedges) on this wheel
+*    DESC:  Get the number of visible symbols (wedges) on this wheel
 ************************************************************************/
 size_t CWheelView::getVisibleSymbolCount() const
 {
@@ -451,7 +451,7 @@ size_t CWheelView::getVisibleSymbolCount() const
 
 
 /************************************************************************
-*    desc:  Get the symbol for this spot on the wheel
+*    DESC:  Get the symbol for this spot on the wheel
 ************************************************************************/
 CSymbol2d & CWheelView::getSymbol( int index )
 {

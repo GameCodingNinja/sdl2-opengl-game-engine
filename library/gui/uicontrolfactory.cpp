@@ -27,7 +27,7 @@
 namespace NUIControlFactory
 {
     /************************************************************************
-    *    desc:  Load the control info from XML node
+    *    DESC:  Load the control info from XML node
     ************************************************************************/
     CUIControl * Create( const XMLNode & node, const std::string & group )
     {

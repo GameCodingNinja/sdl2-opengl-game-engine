@@ -19,7 +19,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObjectPhysicsData2D::CObjectPhysicsData2D() :
     m_bodyType(b2BodyType(-1)),
@@ -31,7 +31,7 @@ CObjectPhysicsData2D::CObjectPhysicsData2D() :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CObjectPhysicsData2D::~CObjectPhysicsData2D()
 {
@@ -39,7 +39,7 @@ CObjectPhysicsData2D::~CObjectPhysicsData2D()
 
 
 /************************************************************************
-*    desc:  Load thes object data from node
+*    DESC:  Load thes object data from node
 ************************************************************************/
 void CObjectPhysicsData2D::loadFromNode( const XMLNode & objectNode )
 {
@@ -190,7 +190,7 @@ void CObjectPhysicsData2D::loadFromNode( const XMLNode & objectNode )
 
 
 /************************************************************************
-*    desc:  Get the name of the physics world
+*    DESC:  Get the name of the physics world
 ************************************************************************/
 const std::string & CObjectPhysicsData2D::getWorld() const
 {
@@ -199,7 +199,7 @@ const std::string & CObjectPhysicsData2D::getWorld() const
 
 
 /************************************************************************
-*    desc:  Get the type of physics body
+*    DESC:  Get the type of physics body
 ************************************************************************/
 b2BodyType CObjectPhysicsData2D::getBodyType() const
 {
@@ -208,7 +208,7 @@ b2BodyType CObjectPhysicsData2D::getBodyType() const
 
 
 /************************************************************************
-*    desc:  Get the linear damping
+*    DESC:  Get the linear damping
 ************************************************************************/
 float CObjectPhysicsData2D::getLinearDamping() const
 {
@@ -217,7 +217,7 @@ float CObjectPhysicsData2D::getLinearDamping() const
 
 
 /************************************************************************
-*    desc:  Get the angular damping
+*    DESC:  Get the angular damping
 ************************************************************************/
 float CObjectPhysicsData2D::getAngularDamping() const
 {
@@ -226,7 +226,7 @@ float CObjectPhysicsData2D::getAngularDamping() const
 
 
 /************************************************************************
-*    desc:  Is the rotation fixed
+*    DESC:  Is the rotation fixed
 ************************************************************************/
 bool CObjectPhysicsData2D::isRotationFixed() const
 {
@@ -235,7 +235,7 @@ bool CObjectPhysicsData2D::isRotationFixed() const
 
 
 /************************************************************************
-*    desc:  Get the fixture data
+*    DESC:  Get the fixture data
 ************************************************************************/
 const std::vector<CFixture> & CObjectPhysicsData2D::getFixtureVec() const
 {
@@ -244,7 +244,7 @@ const std::vector<CFixture> & CObjectPhysicsData2D::getFixtureVec() const
 
 
 /************************************************************************
-*    desc:  Specify if physics is active
+*    DESC:  Specify if physics is active
 ************************************************************************/
 bool CObjectPhysicsData2D::isActive() const
 {

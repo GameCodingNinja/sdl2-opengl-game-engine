@@ -12,7 +12,7 @@
 #include <2d/sprite2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBallAI::CBallAI( iSprite * pSprite ) :
     m_sprite(*dynamic_cast<CSprite2D *>(pSprite)),
@@ -22,7 +22,7 @@ CBallAI::CBallAI( iSprite * pSprite ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBallAI::~CBallAI()
 {
@@ -30,7 +30,7 @@ CBallAI::~CBallAI()
 
 
 /************************************************************************
-*    desc:  Do any initializing                                                            
+*    DESC:  Do any initializing                                                            
 ************************************************************************/
 void CBallAI::init()
 {
@@ -40,7 +40,7 @@ void CBallAI::init()
 
 
 /************************************************************************
-*    desc:  Update animations, move sprites, etc.
+*    DESC:  Update animations, move sprites, etc.
 ************************************************************************/
 void CBallAI::update()
 {
@@ -51,7 +51,7 @@ void CBallAI::update()
 
 
 /************************************************************************
-*    desc:  Init the ball placement
+*    DESC:  Init the ball placement
 ************************************************************************/
 void CBallAI::initPhysics()
 {

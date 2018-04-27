@@ -23,7 +23,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUISubControl::CUISubControl( const std::string & group ) :
     CUIControl( group ),
@@ -35,7 +35,7 @@ CUISubControl::CUISubControl( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CUISubControl::~CUISubControl()
 {
@@ -45,7 +45,7 @@ CUISubControl::~CUISubControl()
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 ************************************************************************/
 void CUISubControl::loadControlFromNode( const XMLNode & node )
 {
@@ -104,7 +104,7 @@ void CUISubControl::loadControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Init the control
+*    DESC:  Init the control
 ************************************************************************/
 void CUISubControl::init()
 {
@@ -117,7 +117,7 @@ void CUISubControl::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CUISubControl::cleanUp()
 {
@@ -130,7 +130,7 @@ void CUISubControl::cleanUp()
 
 
 /************************************************************************
-*    desc:  Find the reference nodes
+*    DESC:  Find the reference nodes
 ************************************************************************/
 void CUISubControl::findNodes(
     const XMLNode & node,
@@ -149,7 +149,7 @@ void CUISubControl::findNodes(
 
 
 /************************************************************************
-*    desc:  Find the reference nodes
+*    DESC:  Find the reference nodes
 ************************************************************************/
 void CUISubControl::setNodes(
     const XMLNode & node,
@@ -177,7 +177,7 @@ void CUISubControl::setNodes(
 
 
 /************************************************************************
-*    desc:  Update the control
+*    DESC:  Update the control
 ************************************************************************/
 void CUISubControl::update()
 {
@@ -191,7 +191,7 @@ void CUISubControl::update()
 
 
 /************************************************************************
-*    desc:  Transform the control
+*    DESC:  Transform the control
 ************************************************************************/
 void CUISubControl::transform( const CObject2D & object )
 {
@@ -205,7 +205,7 @@ void CUISubControl::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Render the sub control
+*    DESC:  Render the sub control
 ************************************************************************/
 void CUISubControl::render( const CMatrix & matrix )
 {
@@ -218,7 +218,7 @@ void CUISubControl::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CUISubControl::handleEvent( const SDL_Event & rEvent )
 {
@@ -283,7 +283,7 @@ void CUISubControl::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle OnUpAction message
+*    DESC:  Handle OnUpAction message
 ************************************************************************/
 void CUISubControl::onUpAction( const SDL_Event & rEvent )
 {
@@ -291,7 +291,7 @@ void CUISubControl::onUpAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnMenuDown message
+*    DESC:  Handle OnMenuDown message
 ************************************************************************/
 void CUISubControl::onDownAction( const SDL_Event & rEvent )
 {
@@ -299,7 +299,7 @@ void CUISubControl::onDownAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnMenuLeft message
+*    DESC:  Handle OnMenuLeft message
 ************************************************************************/
 void CUISubControl::onLeftAction( const SDL_Event & rEvent )
 {
@@ -307,7 +307,7 @@ void CUISubControl::onLeftAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightAction message
+*    DESC:  Handle OnRightAction message
 ************************************************************************/
 void CUISubControl::onRightAction( const SDL_Event & rEvent )
 {
@@ -315,7 +315,7 @@ void CUISubControl::onRightAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnUpScroll message
+*    DESC:  Handle OnUpScroll message
 ************************************************************************/
 void CUISubControl::onUpScroll( const SDL_Event & rEvent )
 {
@@ -323,7 +323,7 @@ void CUISubControl::onUpScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnUpScroll message
+*    DESC:  Handle OnUpScroll message
 ************************************************************************/
 void CUISubControl::onDownScroll( const SDL_Event & rEvent )
 {
@@ -331,7 +331,7 @@ void CUISubControl::onDownScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightScroll message
+*    DESC:  Handle OnRightScroll message
 ************************************************************************/
 void CUISubControl::onLeftScroll( const SDL_Event & rEvent )
 {
@@ -339,7 +339,7 @@ void CUISubControl::onLeftScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightScroll message
+*    DESC:  Handle OnRightScroll message
 ************************************************************************/
 void CUISubControl::onRightScroll( const SDL_Event & rEvent )
 {
@@ -347,7 +347,7 @@ void CUISubControl::onRightScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTabLeft message
+*    DESC:  Handle OnTabLeft message
 ************************************************************************/
 void CUISubControl::onTabLeft( const SDL_Event & rEvent )
 {
@@ -355,7 +355,7 @@ void CUISubControl::onTabLeft( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTabRight message
+*    DESC:  Handle OnTabRight message
 ************************************************************************/
 void CUISubControl::onTabRight( const SDL_Event & rEvent )
 {
@@ -364,7 +364,7 @@ void CUISubControl::onTabRight( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Navigate the menu. Find the next control node that isn't
+*    DESC:  Navigate the menu. Find the next control node that isn't
 *           disabled and make it the active control node
 ************************************************************************/
 void CUISubControl::navigateMenu( CUIControlNavNode::ENavNode navNode )
@@ -399,7 +399,7 @@ void CUISubControl::navigateMenu( CUIControlNavNode::ENavNode navNode )
 
 
 /************************************************************************
-*    desc:  Handle OnStateChange message
+*    DESC:  Handle OnStateChange message
 ************************************************************************/
 void CUISubControl::onStateChange( const SDL_Event & rEvent )
 {
@@ -434,7 +434,7 @@ void CUISubControl::onStateChange( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Reset and recycle the contexts
+*    DESC:  Reset and recycle the contexts
 ************************************************************************/
 void CUISubControl::reset( bool complete )
 {
@@ -446,7 +446,7 @@ void CUISubControl::reset( bool complete )
 
 
 /************************************************************************
-*    desc:  Handle the mouse move
+*    DESC:  Handle the mouse move
 ************************************************************************/
 bool CUISubControl::onMouseMove( const SDL_Event & rEvent )
 {
@@ -463,7 +463,7 @@ bool CUISubControl::onMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle the sub control mouse move
+*    DESC:  Handle the sub control mouse move
 ************************************************************************/
 bool CUISubControl::onSubControlMouseMove( const SDL_Event & rEvent )
 {
@@ -477,7 +477,7 @@ bool CUISubControl::onSubControlMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle the select action
+*    DESC:  Handle the select action
 ************************************************************************/
 bool CUISubControl::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
@@ -497,7 +497,7 @@ bool CUISubControl::handleSelectAction( const CSelectMsgCracker & msgCracker )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the control if found
+*    DESC:  Get the pointer to the control if found
 *
 *    NOTE: This function is mainly for sub controls
 ************************************************************************/
@@ -523,7 +523,7 @@ CUIControl * CUISubControl::findControl( void * pVoid )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the subcontrol if found
+*    DESC:  Get the pointer to the subcontrol if found
 *
 *    NOTE: This function is mainly for sub controls
 ************************************************************************/
@@ -551,7 +551,7 @@ CUIControl * CUISubControl::findSubControl( void * pVoid )
 
 
 /************************************************************************
-*    desc:  Get the sub control via index
+*    DESC:  Get the sub control via index
 *
 *    ret:	CUIControl &
 ************************************************************************/
@@ -567,7 +567,7 @@ CUIControl * CUISubControl::getSubControl( uint index )
 
 
 /************************************************************************
-*    desc: Set the first inactive control to be active
+*    DESC: Set the first inactive control to be active
 *    NOTE: This is mainly here to be virtual for sub controls
 ************************************************************************/
 bool CUISubControl::activateFirstInactiveControl()
@@ -598,7 +598,7 @@ bool CUISubControl::activateFirstInactiveControl()
 
 
 /************************************************************************
-*    desc:  Deactivate the control
+*    DESC:  Deactivate the control
 ************************************************************************/
 void CUISubControl::deactivateControl()
 {
@@ -609,7 +609,7 @@ void CUISubControl::deactivateControl()
 
 
 /************************************************************************
-*    desc:  Deactivate the sub control
+*    DESC:  Deactivate the sub control
 ************************************************************************/
 void CUISubControl::deactivateSubControl()
 {
@@ -619,7 +619,7 @@ void CUISubControl::deactivateSubControl()
 
 
 /************************************************************************
-*    desc:  Check if control is a sub control
+*    DESC:  Check if control is a sub control
 ************************************************************************/
 bool CUISubControl::isSubControl() const
 {
@@ -628,7 +628,7 @@ bool CUISubControl::isSubControl() const
 
 
 /************************************************************************
-*    desc:  Disable the control
+*    DESC:  Disable the control
 ************************************************************************/
 void CUISubControl::disableControl()
 {
@@ -640,7 +640,7 @@ void CUISubControl::disableControl()
 
 
 /************************************************************************
-*    desc:  Enable the control to the inactive state
+*    DESC:  Enable the control to the inactive state
 ************************************************************************/
 void CUISubControl::enableControl()
 {
@@ -652,7 +652,7 @@ void CUISubControl::enableControl()
 
 
 /************************************************************************
-*    desc:  Set the alpha value of this control
+*    DESC:  Set the alpha value of this control
 ************************************************************************/
 void CUISubControl::setAlpha( float alpha )
 {
@@ -664,7 +664,7 @@ void CUISubControl::setAlpha( float alpha )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the active control
+*    DESC:  Get the pointer to the active control
 *           This is mostly needed for sub controls
 ************************************************************************/
 CUIControl * CUISubControl::getPtrToActiveControl()

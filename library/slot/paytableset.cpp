@@ -9,7 +9,7 @@
 #include <slot/paytableset.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPaytableSet::CPaytableSet( const NSlotDefs::EPayType type, const std::string & id ) :
     m_type(type),
@@ -19,7 +19,7 @@ CPaytableSet::CPaytableSet( const NSlotDefs::EPayType type, const std::string & 
 
 
 /************************************************************************
-*    desc:  Get the paytable ID
+*    DESC:  Get the paytable ID
 ************************************************************************/
 const std::string & CPaytableSet::getId() const
 {
@@ -28,7 +28,7 @@ const std::string & CPaytableSet::getId() const
 
 
 /************************************************************************
-*    desc:  Get the paytable type
+*    DESC:  Get the paytable type
 ************************************************************************/
 NSlotDefs::EPayType CPaytableSet::getType() const
 {

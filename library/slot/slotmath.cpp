@@ -20,7 +20,7 @@
 #include <cstdint>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotMath::CSlotMath( const std::string & group ) :
     m_group( group )
@@ -29,7 +29,7 @@ CSlotMath::CSlotMath( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Get the payline set ID
+*    DESC:  Get the payline set ID
 ************************************************************************/
 const std::string & CSlotMath::getPaylineSetID() const
 {
@@ -38,7 +38,7 @@ const std::string & CSlotMath::getPaylineSetID() const
 
 
 /************************************************************************
-*    desc:  Get the symbol set
+*    DESC:  Get the symbol set
 ************************************************************************/
 const std::map<const std::string, CMathSymbol> &
     CSlotMath::getSymbolSet( const std::string & id ) const
@@ -56,7 +56,7 @@ const std::map<const std::string, CMathSymbol> &
 
 
 /************************************************************************
-*    desc:  Get the math strip
+*    DESC:  Get the math strip
 ************************************************************************/
 const std::vector<CStripStop> &
     CSlotMath::getStrip( const std::string & id ) const
@@ -74,7 +74,7 @@ const std::vector<CStripStop> &
 
 
 /************************************************************************
-*    desc:  Get the strip set
+*    DESC:  Get the strip set
 ************************************************************************/
 const std::vector<CStripSet> &
     CSlotMath::getStripSet( const std::string & id ) const
@@ -92,7 +92,7 @@ const std::vector<CStripSet> &
 
 
 /************************************************************************
-*    desc:  Get the pay combo set
+*    DESC:  Get the pay combo set
 ************************************************************************/
 const std::vector<CPayCombo> &
     CSlotMath::getPayComboSet( const std::string & id ) const
@@ -110,7 +110,7 @@ const std::vector<CPayCombo> &
 
 
 /************************************************************************
-*    desc:  Get the paytable set
+*    DESC:  Get the paytable set
 ************************************************************************/
 const std::vector<CPaytableSet> &
     CSlotMath::getPaytableSet( const std::string & id ) const
@@ -128,7 +128,7 @@ const std::vector<CPaytableSet> &
 
 
 /************************************************************************
-*    desc:  Get the weighted table
+*    DESC:  Get the weighted table
 ************************************************************************/
 const CWeightedTable &
     CSlotMath::getWeightedTable( const std::string & id ) const
@@ -146,7 +146,7 @@ const CWeightedTable &
 
 
 /************************************************************************
-*    desc:  Get the value table
+*    DESC:  Get the value table
 ************************************************************************/
 const CValueTable &
     CSlotMath::getValueTable( const std::string & id ) const
@@ -164,7 +164,7 @@ const CValueTable &
 
 
 /************************************************************************
-*    desc:  Load the slot group data from node
+*    DESC:  Load the slot group data from node
 ************************************************************************/
 void CSlotMath::loadFromNode( const XMLNode & node )
 {
@@ -201,7 +201,7 @@ void CSlotMath::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the symbol set data from node
+*    DESC:  Load the symbol set data from node
 ************************************************************************/
 void CSlotMath::loadSymbolSetsFromNode( const XMLNode & node )
 {
@@ -318,7 +318,7 @@ void CSlotMath::loadSymbolSetsFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the math strip data from node
+*    DESC:  Load the math strip data from node
 *           Stores a reference from m_symbolSetMapMap
 ************************************************************************/
 void CSlotMath::loadStripFromNode( const XMLNode & node )
@@ -388,7 +388,7 @@ void CSlotMath::loadStripFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the strip set list data from node
+*    DESC:  Load the strip set list data from node
 ************************************************************************/
 void CSlotMath::loadStripSetListFromNode( const XMLNode & node )
 {
@@ -447,7 +447,7 @@ void CSlotMath::loadStripSetListFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the pay combo data from node
+*    DESC:  Load the pay combo data from node
 ************************************************************************/
 void CSlotMath::loadPayComboFromNode( const XMLNode & node )
 {
@@ -505,7 +505,7 @@ void CSlotMath::loadPayComboFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the paytable set list data from node
+*    DESC:  Load the paytable set list data from node
 ************************************************************************/
 void CSlotMath::loadPaytableSetListFromNode( const XMLNode & node )
 {
@@ -564,7 +564,7 @@ void CSlotMath::loadPaytableSetListFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the weighted table data from node
+*    DESC:  Load the weighted table data from node
 ************************************************************************/
 void CSlotMath::loadWeightedTableFromNode( const XMLNode & node )
 {
@@ -621,7 +621,7 @@ void CSlotMath::loadWeightedTableFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the value table data from node
+*    DESC:  Load the value table data from node
 ************************************************************************/
 void CSlotMath::loadValueTableFromNode( const XMLNode & node )
 {

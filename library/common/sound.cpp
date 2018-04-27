@@ -20,7 +20,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSound::CSound( ESoundType type ) :
     m_type(type),
@@ -36,7 +36,7 @@ CSound::CSound()
 
 
 /************************************************************************
-*    desc:  Copy Constructor
+*    DESC:  Copy Constructor
 ************************************************************************/
 CSound::CSound( const CSound & sound ) :
     m_type(sound.m_type),
@@ -48,7 +48,7 @@ CSound::CSound( const CSound & sound ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CSound::~CSound()
 {
@@ -58,7 +58,7 @@ CSound::~CSound()
 
 
 /************************************************************************
-*    desc:  Free the sound                                                             
+*    DESC:  Free the sound                                                             
 ************************************************************************/
 void CSound::free()
 {
@@ -73,7 +73,7 @@ void CSound::free()
 
 
 /************************************************************************
-*    desc:  Load the sound                                                             
+*    DESC:  Load the sound                                                             
 ************************************************************************/
 void CSound::loadFromNode( const XMLNode & node )
 {
@@ -97,7 +97,7 @@ void CSound::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Play the sound
+*    DESC:  Play the sound
 *    NOTE: Loop and channel default to -1
 ************************************************************************/
 void CSound::play( int channel, int loopCount )
@@ -113,7 +113,7 @@ void CSound::play( int channel, int loopCount )
 
 
 /************************************************************************
-*    desc:  Stop the sound
+*    DESC:  Stop the sound
 ************************************************************************/
 void CSound::stop()
 {
@@ -131,7 +131,7 @@ void CSound::stop()
 
 
 /************************************************************************
-*    desc:  Pause the sound
+*    DESC:  Pause the sound
 ************************************************************************/
 void CSound::pause()
 {
@@ -149,7 +149,7 @@ void CSound::pause()
 
 
 /************************************************************************
-*    desc:  Resume the sound
+*    DESC:  Resume the sound
 ************************************************************************/
 void CSound::resume()
 {
@@ -167,7 +167,7 @@ void CSound::resume()
 
 
 /************************************************************************
-*    desc: Set/Get the volume for music or channel
+*    DESC: Set/Get the volume for music or channel
 ************************************************************************/
 void CSound::setVolume( int volume )
 {
@@ -190,7 +190,7 @@ int CSound::getVolume()
 
 
 /************************************************************************
-*    desc:  Is music or channel playing?
+*    DESC:  Is music or channel playing?
 ************************************************************************/
 bool CSound::isPlaying()
 {
@@ -210,7 +210,7 @@ bool CSound::isPlaying()
 
 
 /************************************************************************
-*    desc:  Is music or channel paused?
+*    DESC:  Is music or channel paused?
 ************************************************************************/
 bool CSound::isPaused()
 {
@@ -230,7 +230,7 @@ bool CSound::isPaused()
 
 
 /************************************************************************
-*    desc:  Find an open channel and set the class member
+*    DESC:  Find an open channel and set the class member
 ************************************************************************/
 void CSound::setOpenChannel()
 {
@@ -252,7 +252,7 @@ void CSound::setOpenChannel()
 }
 
 /************************************************************************
-*    desc:  The equality operator
+*    DESC:  The equality operator
 ************************************************************************/
 bool CSound::operator == ( const CSound & sound ) const
 {
@@ -260,7 +260,7 @@ bool CSound::operator == ( const CSound & sound ) const
 }
 
 /************************************************************************
-*    desc:  The inequality operator
+*    DESC:  The inequality operator
 ************************************************************************/
 bool CSound::operator != ( const CSound & sound ) const
 {

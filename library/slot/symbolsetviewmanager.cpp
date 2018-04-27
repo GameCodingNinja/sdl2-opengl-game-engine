@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSymbolSetViewMgr::CSymbolSetViewMgr()
 {
@@ -25,7 +25,7 @@ CSymbolSetViewMgr::CSymbolSetViewMgr()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSymbolSetViewMgr::~CSymbolSetViewMgr()
 {
@@ -33,7 +33,7 @@ CSymbolSetViewMgr::~CSymbolSetViewMgr()
 
 
 /************************************************************************
- *    desc:  Get the symbol set view
+ *    DESC:  Get the symbol set view
  ************************************************************************/
 CSymbolSetView & CSymbolSetViewMgr::get( const std::string & group, const std::string & name )
 {
@@ -54,7 +54,7 @@ CSymbolSetView & CSymbolSetViewMgr::get( const std::string & group, const std::s
 
 
 /************************************************************************
- *    desc:  Load all of the symbols of a specific group
+ *    DESC:  Load all of the symbols of a specific group
  ************************************************************************/
 void CSymbolSetViewMgr::loadGroup( const std::string & group )
 {
@@ -84,7 +84,7 @@ void CSymbolSetViewMgr::loadGroup( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Load all symbol information from an xml
+ *    DESC:  Load all symbol information from an xml
  ************************************************************************/
 void CSymbolSetViewMgr::loadFromXML( const std::string & group, const std::string & filePath )
 {
@@ -120,7 +120,7 @@ void CSymbolSetViewMgr::loadFromXML( const std::string & group, const std::strin
 
 
 /************************************************************************
-*    desc:  Free a symbol group
+*    DESC:  Free a symbol group
 ************************************************************************/
 void CSymbolSetViewMgr::freeGroup( const std::string & group )
 {
@@ -135,7 +135,7 @@ void CSymbolSetViewMgr::freeGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Clear all the data
+*    DESC:  Clear all the data
 ************************************************************************/
 void CSymbolSetViewMgr::clear()
 {

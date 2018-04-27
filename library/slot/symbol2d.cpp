@@ -14,7 +14,7 @@
 #include <common/fontdata.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std::string & id ) :
     m_id(id),
@@ -41,7 +41,7 @@ CSymbol2d::CSymbol2d( const std::vector<CSpriteData> & rSpriteDataVec, const std
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSymbol2d::~CSymbol2d()
 {
@@ -49,7 +49,7 @@ CSymbol2d::~CSymbol2d()
 
 
 /************************************************************************
-*    desc:  Get the sprite
+*    DESC:  Get the sprite
 ************************************************************************/
 CSprite2D & CSymbol2d::getSprite( int index )
 {
@@ -58,7 +58,7 @@ CSprite2D & CSymbol2d::getSprite( int index )
 
 
 /************************************************************************
-*    desc:  Get the sprite
+*    DESC:  Get the sprite
 ************************************************************************/
 size_t CSymbol2d::getSpriteCount()
 {
@@ -67,7 +67,7 @@ size_t CSymbol2d::getSpriteCount()
 
 
 /************************************************************************
-*    desc:  Get the string id
+*    DESC:  Get the string id
 ************************************************************************/
 const std::string & CSymbol2d::getId()
 {
@@ -76,7 +76,7 @@ const std::string & CSymbol2d::getId()
 
 
 /************************************************************************
-*    desc:  Update the symbol
+*    DESC:  Update the symbol
 ************************************************************************/
 void CSymbol2d::update()
 {
@@ -86,7 +86,7 @@ void CSymbol2d::update()
 
 
 /************************************************************************
-*    desc:  Transform
+*    DESC:  Transform
 ************************************************************************/
 void CSymbol2d::transform()
 {
@@ -125,7 +125,7 @@ void CSymbol2d::transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CSymbol2d::render( const CMatrix & matrix )
 {
@@ -135,7 +135,7 @@ void CSymbol2d::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get/Set if deferred render
+*    DESC:  Get/Set if deferred render
 ************************************************************************/
 bool CSymbol2d::isDeferredRender()
 {

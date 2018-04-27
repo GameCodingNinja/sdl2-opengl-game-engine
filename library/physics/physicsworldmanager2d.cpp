@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPhysicsWorldManager2D::CPhysicsWorldManager2D()
 {
@@ -25,7 +25,7 @@ CPhysicsWorldManager2D::CPhysicsWorldManager2D()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CPhysicsWorldManager2D::~CPhysicsWorldManager2D()
 {
@@ -33,7 +33,7 @@ CPhysicsWorldManager2D::~CPhysicsWorldManager2D()
 
 
 /************************************************************************
-*    desc:  Create the physics world
+*    DESC:  Create the physics world
 ************************************************************************/
 void CPhysicsWorldManager2D::createWorld( const std::string & group )
 {
@@ -59,7 +59,7 @@ void CPhysicsWorldManager2D::createWorld( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Load the physics worlds from an XML
+*    DESC:  Load the physics worlds from an XML
 ************************************************************************/
 void CPhysicsWorldManager2D::loadFromXML( const std::string & group, const std::string & filePath )
 {
@@ -81,7 +81,7 @@ void CPhysicsWorldManager2D::loadFromXML( const std::string & group, const std::
 
 
 /************************************************************************
-*    desc:  Get the physics world
+*    DESC:  Get the physics world
 ************************************************************************/
 CPhysicsWorld2D & CPhysicsWorldManager2D::getWorld( const std::string & group )
 {
@@ -99,7 +99,7 @@ CPhysicsWorld2D & CPhysicsWorldManager2D::getWorld( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Destroy the physics world
+*    DESC:  Destroy the physics world
 ************************************************************************/
 void CPhysicsWorldManager2D::destroyWorld( const std::string & group )
 {
@@ -113,7 +113,7 @@ void CPhysicsWorldManager2D::destroyWorld( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Delete all worlds
+*    DESC:  Delete all worlds
 ************************************************************************/
 void CPhysicsWorldManager2D::clear()
 {

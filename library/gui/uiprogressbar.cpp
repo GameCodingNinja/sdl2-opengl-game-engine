@@ -27,7 +27,7 @@
 
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUIProgressBar::CUIProgressBar( const std::string & group ) :
     CUIControl( group ),
@@ -42,7 +42,7 @@ CUIProgressBar::CUIProgressBar( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CUIProgressBar::~CUIProgressBar()
 {
@@ -50,7 +50,7 @@ CUIProgressBar::~CUIProgressBar()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 *
 *    param: node - XML node
 ************************************************************************/
@@ -108,7 +108,7 @@ void CUIProgressBar::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 *
 *    param: controlNode - XML node
 ************************************************************************/
@@ -156,7 +156,7 @@ void CUIProgressBar::loadControlFromNode( const XMLNode & controlNode )
 
 
 /************************************************************************
-*    desc:  Transform the control
+*    DESC:  Transform the control
 ************************************************************************/
 void CUIProgressBar::transform( const CObject2D & object )
 {
@@ -168,7 +168,7 @@ void CUIProgressBar::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CUIProgressBar::render( const CMatrix & matrix )
 {
@@ -221,7 +221,7 @@ void CUIProgressBar::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Calculate the progress bar size and position
+*    DESC:  Calculate the progress bar size and position
 ************************************************************************/
 void CUIProgressBar::setSizePos()
 {
@@ -268,7 +268,7 @@ void CUIProgressBar::setSizePos()
 
 
 /************************************************************************
-*    desc:  Set/Get/Inc current value
+*    DESC:  Set/Get/Inc current value
 ************************************************************************/
 void CUIProgressBar::setCurValue( float value )
 {
@@ -287,7 +287,7 @@ void CUIProgressBar::incCurValue( float value )
 
 
 /************************************************************************
-*    desc:  Set/Get min value
+*    DESC:  Set/Get min value
 ************************************************************************/
 void CUIProgressBar::setMinValue( float value )
 {
@@ -301,7 +301,7 @@ float CUIProgressBar::getMinValue()
 
 
 /************************************************************************
-*    desc:  Set/Get max value
+*    DESC:  Set/Get max value
 ************************************************************************/
 void CUIProgressBar::setMaxValue( float value )
 {

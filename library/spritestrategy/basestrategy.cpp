@@ -13,7 +13,7 @@
 #include <common/defs.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBaseStrategy::CBaseStrategy( const std::string & cameraId, int idOffset, int idDir ) :
     iSpriteStrategy( cameraId ),
@@ -31,7 +31,7 @@ CBaseStrategy::CBaseStrategy( int idOffset, int idDir ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBaseStrategy::~CBaseStrategy()
 {
@@ -39,7 +39,7 @@ CBaseStrategy::~CBaseStrategy()
 
 
 /************************************************************************
- *    desc:  Set to Destroy the sprite
+ *    DESC:  Set to Destroy the sprite
  ************************************************************************/
 void CBaseStrategy::setToDestroy( int spriteIndex )
 {
@@ -48,7 +48,7 @@ void CBaseStrategy::setToDestroy( int spriteIndex )
 
 
 /************************************************************************
- *    desc:  Set to create the sprite
+ *    DESC:  Set to create the sprite
  ************************************************************************/
 void CBaseStrategy::setToCreate( const std::string & name )
 {
@@ -57,7 +57,7 @@ void CBaseStrategy::setToCreate( const std::string & name )
 
 
 /************************************************************************
-*    desc:  Handle any misc processing before the real work is started
+*    DESC:  Handle any misc processing before the real work is started
 ************************************************************************/
 void CBaseStrategy::miscProcess()
 {
@@ -68,7 +68,7 @@ void CBaseStrategy::miscProcess()
 
 
 /***************************************************************************
-*    desc:  Handle the deleting of any object by Id
+*    DESC:  Handle the deleting of any object by Id
 ****************************************************************************/
 void CBaseStrategy::handleDelete()
 {
@@ -83,7 +83,7 @@ void CBaseStrategy::handleDelete()
 
 
 /***************************************************************************
-*    desc:  Handle the deleting of any object by Id
+*    DESC:  Handle the deleting of any object by Id
 ****************************************************************************/
 void CBaseStrategy::deleteObj( int index )
 {
@@ -92,7 +92,7 @@ void CBaseStrategy::deleteObj( int index )
 
 
 /***************************************************************************
-*    desc:  Handle the creating of new sprite objects by name
+*    DESC:  Handle the creating of new sprite objects by name
 ****************************************************************************/
 void CBaseStrategy::handleCreate()
 {
@@ -107,7 +107,7 @@ void CBaseStrategy::handleCreate()
 
 
 /***************************************************************************
-*    desc:  Handle the creating of any object by name
+*    DESC:  Handle the creating of any object by name
 ****************************************************************************/
 void CBaseStrategy::createObj( const std::string & name )
 {

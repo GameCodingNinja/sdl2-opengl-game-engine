@@ -22,7 +22,7 @@
 #include <common/camera.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSector::CSector() :
     m_projectionType(CSettings::Instance().getProjectionType()),
@@ -32,7 +32,7 @@ CSector::CSector() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSector::~CSector()
 {
@@ -40,7 +40,7 @@ CSector::~CSector()
 
 
 /************************************************************************
-*    desc:  Load the sector data from node
+*    DESC:  Load the sector data from node
 ************************************************************************/
 void CSector::loadFromNode( const XMLNode & node )
 {
@@ -113,7 +113,7 @@ void CSector::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CSector::init()
 {
@@ -125,7 +125,7 @@ void CSector::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CSector::cleanUp()
 {
@@ -137,7 +137,7 @@ void CSector::cleanUp()
 
 
 /************************************************************************
-*    desc:  Destroy this sector
+*    DESC:  Destroy this sector
 ************************************************************************/
 void CSector::destroy()
 {
@@ -146,7 +146,7 @@ void CSector::destroy()
 
 
 /************************************************************************
-*    desc:  Update the actor
+*    DESC:  Update the actor
 ************************************************************************/
 void CSector::update()
 {
@@ -156,7 +156,7 @@ void CSector::update()
 
 
 /************************************************************************
-*    desc:  Transform the actor
+*    DESC:  Transform the actor
 ************************************************************************/
 void CSector::transform()
 {
@@ -176,7 +176,7 @@ void CSector::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Render the actor
+*    DESC:  Render the actor
 ************************************************************************/
 void CSector::render( const CCamera & camera )
 {
@@ -210,7 +210,7 @@ void CSector::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 
 
 /************************************************************************
-*    desc:  Render the actor
+*    DESC:  Render the actor
 ************************************************************************/
 bool CSector::inView()
 {
@@ -225,7 +225,7 @@ bool CSector::inView()
 
 
 /************************************************************************
- *    desc:  Check the sector object is within the orthographic view frustum
+ *    DESC:  Check the sector object is within the orthographic view frustum
  ************************************************************************/
 bool CSector::inOrthographicView()
 {
@@ -245,7 +245,7 @@ bool CSector::inOrthographicView()
 
 
 /************************************************************************
- *    desc:  Check the sector object is within the perspective view frustum
+ *    DESC:  Check the sector object is within the perspective view frustum
  ************************************************************************/
 bool CSector::inPerspectiveView()
 {
@@ -265,7 +265,7 @@ bool CSector::inPerspectiveView()
 
 
 /************************************************************************
- *    desc:  Find if the sprite exists
+ *    DESC:  Find if the sprite exists
  ************************************************************************/
 bool CSector::find( iSprite * piSprite )
 {
@@ -280,7 +280,7 @@ bool CSector::find( iSprite * piSprite )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the sprite
+*    DESC:  Get the pointer to the sprite
 ************************************************************************/
 iSprite * CSector::get( const std::string & spriteName )
 {

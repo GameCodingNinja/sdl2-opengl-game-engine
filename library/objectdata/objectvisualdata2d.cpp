@@ -35,7 +35,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObjectVisualData2D::CObjectVisualData2D() :
     m_vbo(0),
@@ -52,7 +52,7 @@ CObjectVisualData2D::CObjectVisualData2D() :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CObjectVisualData2D::~CObjectVisualData2D()
 {
@@ -60,7 +60,7 @@ CObjectVisualData2D::~CObjectVisualData2D()
 
 
 /************************************************************************
-*    desc:  Load the object data from node
+*    DESC:  Load the object data from node
 ************************************************************************/
 void CObjectVisualData2D::loadFromNode( const XMLNode & objectNode )
 {
@@ -238,7 +238,7 @@ void CObjectVisualData2D::loadFromNode( const XMLNode & objectNode )
 
 
 /************************************************************************
-*    desc:  Load the image data from file
+*    DESC:  Load the image data from file
 ************************************************************************/
 void CObjectVisualData2D::loadImage( const std::string & group )
 {
@@ -276,7 +276,7 @@ void CObjectVisualData2D::loadImage( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Create the object from data
+*    DESC:  Create the object from data
 ************************************************************************/
 void CObjectVisualData2D::createFromData( const std::string & group, CSize<int> & rSize )
 {
@@ -332,7 +332,7 @@ void CObjectVisualData2D::createFromData( const std::string & group, CSize<int> 
 
 
 /************************************************************************
-*    desc:  Create the texture from loaded image data
+*    DESC:  Create the texture from loaded image data
 ************************************************************************/
 void CObjectVisualData2D::createTexture( const std::string & group, CTexture & rTexture, CSize<int> & rSize )
 {
@@ -376,7 +376,7 @@ void CObjectVisualData2D::createTexture( const std::string & group, CTexture & r
 
 
 /************************************************************************
-*    desc:  Generate a quad
+*    DESC:  Generate a quad
 ************************************************************************/
 void CObjectVisualData2D::generateQuad( const std::string & group )
 {
@@ -429,7 +429,7 @@ void CObjectVisualData2D::generateQuad( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Generate a scaled frame
+*    DESC:  Generate a scaled frame
 ************************************************************************/
 void CObjectVisualData2D::generateScaledFrame(
     const std::string & group,
@@ -473,7 +473,7 @@ void CObjectVisualData2D::generateScaledFrame(
 
 
 /************************************************************************
-*    desc:  Generate a scaled frame with a mesh file
+*    DESC:  Generate a scaled frame with a mesh file
 ************************************************************************/
 void CObjectVisualData2D::generateScaledFrameMeshFile(
     const std::string & group,
@@ -522,7 +522,7 @@ void CObjectVisualData2D::generateScaledFrameMeshFile(
 
 
 /************************************************************************
-*    desc:  Generate a mesh file
+*    DESC:  Generate a mesh file
 ************************************************************************/
 void CObjectVisualData2D::generateFromMeshFile(
     const std::string & group, const CSize<int> & textureSize, const CSize<int> & size )
@@ -552,7 +552,7 @@ void CObjectVisualData2D::generateFromMeshFile(
 
 
 /************************************************************************
-*    desc:  Load a mesh from XML file
+*    DESC:  Load a mesh from XML file
 ************************************************************************/
 void CObjectVisualData2D::loadMeshFromXML(
     const std::string & group,
@@ -612,7 +612,7 @@ void CObjectVisualData2D::loadMeshFromXML(
 
 
 /************************************************************************
-*    desc:  Get the gne type
+*    DESC:  Get the gne type
 ************************************************************************/
 NDefs::EGenerationType CObjectVisualData2D::getGenerationType() const
 {
@@ -621,7 +621,7 @@ NDefs::EGenerationType CObjectVisualData2D::getGenerationType() const
 
 
 /************************************************************************
-*    desc:  Get the texture ID
+*    DESC:  Get the texture ID
 ************************************************************************/
 uint32_t CObjectVisualData2D::getTextureID( uint index ) const
 {
@@ -633,7 +633,7 @@ uint32_t CObjectVisualData2D::getTextureID( uint index ) const
 
 
 /************************************************************************
-*    desc:  Get the name of the shader ID
+*    DESC:  Get the name of the shader ID
 ************************************************************************/
 const std::string & CObjectVisualData2D::getShaderID() const
 {
@@ -642,7 +642,7 @@ const std::string & CObjectVisualData2D::getShaderID() const
 
 
 /************************************************************************
-*    desc:  Get the color
+*    DESC:  Get the color
 ************************************************************************/
 const CColor & CObjectVisualData2D::getColor() const
 {
@@ -651,7 +651,7 @@ const CColor & CObjectVisualData2D::getColor() const
 
 
 /************************************************************************
-*    desc:  Get the VBO
+*    DESC:  Get the VBO
 ************************************************************************/
 uint32_t CObjectVisualData2D::getVBO() const
 {
@@ -660,7 +660,7 @@ uint32_t CObjectVisualData2D::getVBO() const
 
 
 /************************************************************************
-*    desc:  Get the IBO
+*    DESC:  Get the IBO
 ************************************************************************/
 uint32_t CObjectVisualData2D::getIBO() const
 {
@@ -669,7 +669,7 @@ uint32_t CObjectVisualData2D::getIBO() const
 
 
 /************************************************************************
-*    desc:  Get the vertex count
+*    DESC:  Get the vertex count
 ************************************************************************/
 int CObjectVisualData2D::getIBOCount() const
 {
@@ -678,7 +678,7 @@ int CObjectVisualData2D::getIBOCount() const
 
 
 /************************************************************************
-*    desc:  Get the frame count
+*    DESC:  Get the frame count
 ************************************************************************/
 size_t CObjectVisualData2D::getFrameCount() const
 {
@@ -690,7 +690,7 @@ size_t CObjectVisualData2D::getFrameCount() const
 
 
 /************************************************************************
-*    desc:  Get the vertex scale
+*    DESC:  Get the vertex scale
 ************************************************************************/
 const CSize<float> & CObjectVisualData2D::getVertexScale() const
 {
@@ -699,7 +699,7 @@ const CSize<float> & CObjectVisualData2D::getVertexScale() const
 
 
 /************************************************************************
-*    desc:  Whether or not the visual tag was specified
+*    DESC:  Whether or not the visual tag was specified
 ************************************************************************/
 bool CObjectVisualData2D::isActive() const
 {
@@ -708,7 +708,7 @@ bool CObjectVisualData2D::isActive() const
 
 
 /************************************************************************
-*    desc:  Get the sprite sheet
+*    DESC:  Get the sprite sheet
 ************************************************************************/
 const CSpriteSheet & CObjectVisualData2D::getSpriteSheet() const
 {
@@ -717,7 +717,7 @@ const CSpriteSheet & CObjectVisualData2D::getSpriteSheet() const
 
 
 /************************************************************************
-*    desc:  Access functions for the default scale
+*    DESC:  Access functions for the default scale
 ************************************************************************/
 float CObjectVisualData2D::getDefaultUniformScale() const
 {

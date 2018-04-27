@@ -23,7 +23,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CScriptComponent::CScriptComponent()
 {
@@ -31,7 +31,7 @@ CScriptComponent::CScriptComponent()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CScriptComponent::~CScriptComponent()
 {
@@ -42,7 +42,7 @@ CScriptComponent::~CScriptComponent()
 
 
 /************************************************************************
-*    desc:  Prepare the script function to run
+*    DESC:  Prepare the script function to run
 ************************************************************************/
 void CScriptComponent::prepare(
     const std::string & group,
@@ -54,7 +54,7 @@ void CScriptComponent::prepare(
 
 
 /************************************************************************
-*    desc:  Update the script
+*    DESC:  Update the script
 ************************************************************************/
 void CScriptComponent::update()
 {
@@ -64,7 +64,7 @@ void CScriptComponent::update()
 
 
 /************************************************************************
-*    desc:  Is this component active?
+*    DESC:  Is this component active?
 ************************************************************************/
 bool CScriptComponent::isActive()
 {
@@ -73,7 +73,7 @@ bool CScriptComponent::isActive()
 
 
 /************************************************************************
-*    desc:  Reset the contexts and recycle
+*    DESC:  Reset the contexts and recycle
 ************************************************************************/
 void CScriptComponent::resetAndRecycle()
 {
@@ -93,7 +93,7 @@ void CScriptComponent::resetAndRecycle()
 
 
 /************************************************************************
-*    desc:  Stop a function if it is being called and recycle it
+*    DESC:  Stop a function if it is being called and recycle it
 *           This function assume you're checking for the original calling function
 ************************************************************************/
 void CScriptComponent::stopAndRecycle( const std::string & funcName )

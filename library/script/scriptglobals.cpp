@@ -24,7 +24,7 @@
 namespace NScriptGlobals
 {
     /************************************************************************
-    *    desc:  Throw an exception for values less then 0
+    *    DESC:  Throw an exception for values less then 0
     ************************************************************************/
     void Throw( int value )
     {
@@ -36,7 +36,7 @@ namespace NScriptGlobals
     }   // Throw
 
     /************************************************************************
-    *    desc:  Suspend the script to the game loop                                                             
+    *    DESC:  Suspend the script to the game loop                                                             
     ************************************************************************/
     void Suspend()
     {
@@ -50,14 +50,12 @@ namespace NScriptGlobals
     
     
     /************************************************************************
-    *    desc:  Register the global functions
+    *    DESC:  Register the global functions
     ************************************************************************/
     void Register()
     {
         asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
         
-        Throw( pEngine->RegisterGlobalFunction("double GetElapsedTime()", asMETHOD(CHighResTimer, getElapsedTime), asCALL_THISCALL_ASGLOBAL, &CHighResTimer::Instance()) );
-
         Throw( pEngine->RegisterGlobalFunction("void Print(string &in)", asFUNCTION(NGenFunc::PostDebugMsg), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Suspend()", asFUNCTION(Suspend), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("int UniformRandomInt(int startRange, int endRange, int seed = 0)", asFUNCTION( NGenFunc::UniformRandomInt), asCALL_CDECL ) );

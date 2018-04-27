@@ -12,7 +12,7 @@
 #include <algorithm>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CMathSymbol::CMathSymbol(
     const std::string & symbolID, const std::vector<std::string> & wildMatches ) :
@@ -23,7 +23,7 @@ CMathSymbol::CMathSymbol(
 
 
 /************************************************************************
-*    desc:  Get the string ID
+*    DESC:  Get the string ID
 ************************************************************************/
 const std::string & CMathSymbol::getID() const
 {
@@ -32,7 +32,7 @@ const std::string & CMathSymbol::getID() const
 
 
 /************************************************************************
-*    desc:  Is this a wild symbol?
+*    DESC:  Is this a wild symbol?
 ************************************************************************/
 bool CMathSymbol::isWild() const
 {
@@ -41,7 +41,7 @@ bool CMathSymbol::isWild() const
 
 
 /************************************************************************
-*    desc:  Is wild for this symbol?
+*    DESC:  Is wild for this symbol?
 ************************************************************************/
 bool CMathSymbol::isWildFor( const std::string & symbolID ) const
 {
@@ -50,7 +50,7 @@ bool CMathSymbol::isWildFor( const std::string & symbolID ) const
 
 
 /************************************************************************
-*    desc:  Does symbol match?
+*    DESC:  Does symbol match?
 ************************************************************************/
 bool CMathSymbol::isMatch( const std::string & symbolID ) const
 {
@@ -59,7 +59,7 @@ bool CMathSymbol::isMatch( const std::string & symbolID ) const
 
 
 /************************************************************************
-*    desc:  Equality operator. The symbols are equal if their id's are
+*    DESC:  Equality operator. The symbols are equal if their id's are
 ************************************************************************/
 bool CMathSymbol::operator == ( const CMathSymbol & mathSymbol ) const
 {

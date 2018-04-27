@@ -9,7 +9,7 @@
 #include <slot/weightedtable.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CWeightedTable::CWeightedTable(
     const int totalWeight,
@@ -23,7 +23,7 @@ CWeightedTable::CWeightedTable(
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CWeightedTable::~CWeightedTable()
 {
@@ -31,7 +31,7 @@ CWeightedTable::~CWeightedTable()
 
 
 /************************************************************************
- *    desc:  Get the value from the weighted table
+ *    DESC:  Get the value from the weighted table
  ************************************************************************/
 int CWeightedTable::getWeightedValue( const int rngValue ) const
 {
@@ -53,7 +53,7 @@ int CWeightedTable::getWeightedValue( const int rngValue ) const
 
 
 /************************************************************************
- *    desc:  Get the total weight value
+ *    DESC:  Get the total weight value
  ************************************************************************/
 int CWeightedTable::getTotalWeight() const
 {

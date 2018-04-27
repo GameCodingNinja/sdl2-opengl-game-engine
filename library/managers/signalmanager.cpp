@@ -23,7 +23,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSignalMgr::CSignalMgr()
 {
@@ -31,7 +31,7 @@ CSignalMgr::CSignalMgr()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSignalMgr::~CSignalMgr()
 {
@@ -39,7 +39,7 @@ CSignalMgr::~CSignalMgr()
 
 
 /************************************************************************
-*    desc:  Connect/Disconnect to the smart gui control signal
+*    DESC:  Connect/Disconnect to the smart gui control signal
 ************************************************************************/
 void CSignalMgr::connect_smartGui( const SmartGuiControlSignal::slot_type & slot )
 {
@@ -53,7 +53,7 @@ void CSignalMgr::disconnect_smartGui()
 
 
 /************************************************************************
-*    desc:  Connect/Disconnect to the smart menu signal
+*    DESC:  Connect/Disconnect to the smart menu signal
 ************************************************************************/
 void CSignalMgr::connect_smartMenu( const SmartMenuSignal::slot_type & slot )
 {
@@ -67,7 +67,7 @@ void CSignalMgr::disconnect_smartMenu()
 
 
 /************************************************************************
-*    desc:  Connect/Disconnect to the Ai create signal
+*    DESC:  Connect/Disconnect to the Ai create signal
 ************************************************************************/
 void CSignalMgr::connect_aICreate( const AICreateSignal::slot_type & slot )
 {
@@ -81,7 +81,7 @@ void CSignalMgr::disconnect_aICreate()
 
 
 /************************************************************************
-*    desc:  Connect/Disconnect to the resolution change signal
+*    DESC:  Connect/Disconnect to the resolution change signal
 ************************************************************************/
 void CSignalMgr::connect_resolutionChange( const BasicFunction::slot_type & slot )
 {
@@ -95,7 +95,7 @@ void CSignalMgr::disconnect_resolutionChange()
 
 
 /************************************************************************
-*    desc:  Broadcast smart gui control signal
+*    DESC:  Broadcast smart gui control signal
 ************************************************************************/
 void CSignalMgr::broadcast( CUIControl * pControl )
 {
@@ -104,7 +104,7 @@ void CSignalMgr::broadcast( CUIControl * pControl )
 
 
 /************************************************************************
-*    desc:  Broadcast smart menu signal
+*    DESC:  Broadcast smart menu signal
 ************************************************************************/
 void CSignalMgr::broadcast( CMenu * pMenu )
 {
@@ -113,7 +113,7 @@ void CSignalMgr::broadcast( CMenu * pMenu )
 
 
 /************************************************************************
-*    desc:  Broadcast AI Sprite create signal
+*    DESC:  Broadcast AI Sprite create signal
 ************************************************************************/
 void CSignalMgr::broadcast( const std::string & aiName, iSprite * pSprite )
 {
@@ -122,7 +122,7 @@ void CSignalMgr::broadcast( const std::string & aiName, iSprite * pSprite )
 
 
 /************************************************************************
-*    desc:  Broadcast the resolution change
+*    DESC:  Broadcast the resolution change
 ************************************************************************/
 void CSignalMgr::broadcast_ResolutionChange()
 {

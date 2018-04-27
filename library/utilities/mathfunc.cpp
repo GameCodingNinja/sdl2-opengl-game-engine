@@ -15,7 +15,7 @@
 namespace NMathFunc
 {
     /************************************************************************
-    *    desc:  Calculate the dot product of the passed in values  
+    *    DESC:  Calculate the dot product of the passed in values  
     *
     *	 param: const CPoint/CWorldPoint & p1 - point to compare
     *			const CPoint/CWorldPoint & p2 - point to compare 
@@ -42,7 +42,7 @@ namespace NMathFunc
 
 
     /************************************************************************
-    *    desc:  Calculate the cross product of the passed in values  
+    *    DESC:  Calculate the cross product of the passed in values  
     *
     *	 param: CPoint/float - value to compare
     *			CPoint/float - value to compare 
@@ -69,7 +69,7 @@ namespace NMathFunc
 
 
     /************************************************************************
-    *    desc:  Perform a modulus operation on the passed in floats 
+    *    DESC:  Perform a modulus operation on the passed in floats 
     *
     *	 param: float v1, v2 - values to mod
     *
@@ -83,7 +83,7 @@ namespace NMathFunc
 
 
     /************************************************************************
-    *    desc:  Get the mouse's position in 3D
+    *    DESC:  Get the mouse's position in 3D
     *
     *	 param: float mx, my - mouse position
     *           CCamera matCam - camera matrix

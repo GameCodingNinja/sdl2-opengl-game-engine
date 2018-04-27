@@ -19,7 +19,7 @@
 namespace NScriptColor
 {
     /************************************************************************
-    *    desc:  Constructor
+    *    DESC:  Constructor
     ************************************************************************/
     void Constructor(void * thisPointer)
     {
@@ -27,7 +27,7 @@ namespace NScriptColor
     }
 
     /************************************************************************
-    *    desc:  Copy Constructor
+    *    DESC:  Copy Constructor
     ************************************************************************/
     void CopyConstructor(const CColor & other, void * pThisPointer)
     {
@@ -40,7 +40,7 @@ namespace NScriptColor
     }
 
     /************************************************************************
-    *    desc:  Destructor
+    *    DESC:  Destructor
     ************************************************************************/
     void Destructor(void * pThisPointer)
     {
@@ -48,7 +48,7 @@ namespace NScriptColor
     }
 
     /************************************************************************
-    *    desc:  Register the class with AngelScript
+    *    DESC:  Register the class with AngelScript
     ************************************************************************/
     void Register()
     {

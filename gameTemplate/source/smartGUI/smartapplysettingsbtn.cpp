@@ -37,7 +37,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartApplySettingsBtn::CSmartApplySettingsBtn( CUIControl * pUIControl ) :
     CSmartSettingsMenuBtn( pUIControl )

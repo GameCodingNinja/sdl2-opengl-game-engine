@@ -31,7 +31,7 @@
 #include <stdio.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBaseGame::CBaseGame()
     : m_pWindow(nullptr),
@@ -43,7 +43,7 @@ CBaseGame::CBaseGame()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBaseGame::~CBaseGame()
 {
@@ -61,7 +61,7 @@ CBaseGame::~CBaseGame()
 
 
 /***************************************************************************
-*   desc:  Create the game Window
+*   DESC:  Create the game Window
  ****************************************************************************/
 void CBaseGame::create()
 {
@@ -78,7 +78,7 @@ void CBaseGame::create()
 
 
 /************************************************************************
-*    desc:  Init the game
+*    DESC:  Init the game
 ************************************************************************/
 void CBaseGame::init()
 {
@@ -132,7 +132,7 @@ void CBaseGame::init()
 
 
 /***************************************************************************
-*   desc:  Poll for game events
+*   DESC:  Poll for game events
 ****************************************************************************/
 void CBaseGame::pollEvents()
 {
@@ -159,7 +159,7 @@ void CBaseGame::pollEvents()
 
 
 /***************************************************************************
-*   desc:  Main game loop
+*   DESC:  Main game loop
 ****************************************************************************/
 bool CBaseGame::gameLoop()
 {
@@ -210,7 +210,7 @@ bool CBaseGame::gameLoop()
 
 
 /***************************************************************************
-*   desc:  Display error massage
+*   DESC:  Display error massage
 ****************************************************************************/
 void CBaseGame::displayErrorMsg( const std::string & title, const std::string & msg )
 {
@@ -221,7 +221,7 @@ void CBaseGame::displayErrorMsg( const std::string & title, const std::string & 
 
 
 /***************************************************************************
-*   desc:  Start the game
+*   DESC:  Start the game
 ****************************************************************************/
 void CBaseGame::startGame()
 {
@@ -230,7 +230,7 @@ void CBaseGame::startGame()
 
 
 /***************************************************************************
-*   desc:  Stop the game
+*   DESC:  Stop the game
 ****************************************************************************/
 void CBaseGame::stopGame()
 {
@@ -239,7 +239,7 @@ void CBaseGame::stopGame()
 
 
 /***************************************************************************
-*  desc:  Is the game running?
+*  DESC:  Is the game running?
 ****************************************************************************/
 bool CBaseGame::isGameRunning() const
 {

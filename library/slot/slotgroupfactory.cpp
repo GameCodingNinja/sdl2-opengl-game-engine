@@ -22,7 +22,7 @@
 namespace NSlotGroupFactory
 {
     /************************************************************************
-    *    desc:  Load the control info from XML node
+    *    DESC:  Load the control info from XML node
     ************************************************************************/
     std::unique_ptr<CSlotGroup> Create(
         const NSlotDefs::ESlotDevice slotDevice,

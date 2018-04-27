@@ -27,7 +27,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CMenuManager::CMenuManager() :
     m_active(false),
@@ -38,7 +38,7 @@ CMenuManager::CMenuManager() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CMenuManager::~CMenuManager()
 {
@@ -47,7 +47,7 @@ CMenuManager::~CMenuManager()
 
 
 /************************************************************************
- *    desc:  Load the menu group
+ *    DESC:  Load the menu group
  ************************************************************************/
 void CMenuManager::loadGroup( const std::string & group, const bool doInit )
 {
@@ -87,7 +87,7 @@ void CMenuManager::loadGroup( const std::string & group, const bool doInit )
 
 
 /************************************************************************
- *    desc:  Free the menu group
+ *    DESC:  Free the menu group
  ************************************************************************/
 void CMenuManager::freeGroup( const std::string & group )
 {
@@ -133,7 +133,7 @@ void CMenuManager::freeGroup( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Init a menu group
+ *    DESC:  Init a menu group
  *           This allows certain actions to be done after the group load
  ************************************************************************/
 void CMenuManager::initGroup( const std::string & group )
@@ -154,7 +154,7 @@ void CMenuManager::initGroup( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Clean up a menu group
+ *    DESC:  Clean up a menu group
  *           This allows certain actions to be done after the group load
  ************************************************************************/
 void CMenuManager::cleanUpGroup( const std::string & group )
@@ -175,7 +175,7 @@ void CMenuManager::cleanUpGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Load the menu/tree info from file
+*    DESC:  Load the menu/tree info from file
 ************************************************************************/
 void CMenuManager::loadFromXML( const std::string & group, const std::string & filePath )
 {
@@ -191,7 +191,7 @@ void CMenuManager::loadFromXML( const std::string & group, const std::string & f
 
 
 /************************************************************************
-*    desc:  Load the menus from node
+*    DESC:  Load the menus from node
 ************************************************************************/
 void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode & node )
 {
@@ -239,7 +239,7 @@ void CMenuManager::loadMenusFromNode( const std::string & group, const XMLNode &
 
 
 /************************************************************************
-*    desc:  Load the trees from node
+*    DESC:  Load the trees from node
 ************************************************************************/
 void CMenuManager::loadTreesFromNode( const std::string & group, const XMLNode & node )
 {
@@ -313,7 +313,7 @@ void CMenuManager::loadTreesFromNode( const std::string & group, const XMLNode &
 
 
 /************************************************************************
-*    desc:  Load the menu action list from XML
+*    DESC:  Load the menu action list from XML
 ************************************************************************/
 void CMenuManager::loadMenuActionFromXML( const std::string & filePath )
 {
@@ -335,7 +335,7 @@ void CMenuManager::loadMenuActionFromXML( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Activate a tree to be used by tree name only
+*    DESC:  Activate a tree to be used by tree name only
 *           NOTE: Assumes unique tree names
 ************************************************************************/
 void CMenuManager::activateMenu( const std::string & treeStr, const std::string & menuName )
@@ -359,7 +359,7 @@ void CMenuManager::activateMenu( const std::string & treeStr, const std::string 
 } 
 
 /************************************************************************
-*    desc:  Activate a menu to be used
+*    DESC:  Activate a menu to be used
 ************************************************************************/
 void CMenuManager::activateMenu( const std::string & group, const std::string & treeStr, const std::string & menuName )
 {
@@ -396,7 +396,7 @@ void CMenuManager::activateMenu( const std::string & group, const std::string & 
 
 
 /************************************************************************
-*    desc:  Activate a tree to be used by tree name only
+*    DESC:  Activate a tree to be used by tree name only
 *           NOTE: Assumes unique tree names
 ************************************************************************/
 void CMenuManager::activateTree( const std::string & treeStr )
@@ -420,7 +420,7 @@ void CMenuManager::activateTree( const std::string & treeStr )
 }
 
 /************************************************************************
-*    desc:  Activate a tree to be used
+*    DESC:  Activate a tree to be used
 ************************************************************************/
 void CMenuManager::activateTree( const std::string & group, const std::string & treeStr )
 {
@@ -473,7 +473,7 @@ void CMenuManager::activateTree( const std::string & group, const std::string & 
 
 
 /************************************************************************
-*    desc:  Deactivate a tree to be used
+*    DESC:  Deactivate a tree to be used
 *           NOTE: Assumes unique tree names
 ************************************************************************/
 void CMenuManager::deactivateTree( const std::string & treeStr )
@@ -497,7 +497,7 @@ void CMenuManager::deactivateTree( const std::string & treeStr )
 }
 
 /************************************************************************
-*    desc:  Deactivate a tree that's in use
+*    DESC:  Deactivate a tree that's in use
 ************************************************************************/
 void CMenuManager::deactivateTree( const std::string & group, const std::string & treeStr )
 {
@@ -542,7 +542,7 @@ void CMenuManager::deactivateTree( const std::string & group, const std::string 
 
 
 /************************************************************************
-*    desc:  Clear the active trees
+*    DESC:  Clear the active trees
 ************************************************************************/
 void CMenuManager::clearActiveTrees()
 {
@@ -556,7 +556,7 @@ void CMenuManager::clearActiveTrees()
 
 
 /************************************************************************
-*    desc:  Handle input events and dispatch menu events
+*    DESC:  Handle input events and dispatch menu events
 ************************************************************************/
 void CMenuManager::handleEvent( const SDL_Event & rEvent )
 {
@@ -698,7 +698,7 @@ void CMenuManager::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle input events depending on if this is a menu or interface tree
+*    DESC:  Handle input events depending on if this is a menu or interface tree
 ************************************************************************/
 void CMenuManager::handleEventForTrees( const SDL_Event & rEvent )
 {
@@ -726,7 +726,7 @@ void CMenuManager::handleEventForTrees( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle input events depending on if this is a menu or interface tree
+*    DESC:  Handle input events depending on if this is a menu or interface tree
 ************************************************************************/
 void CMenuManager::handleEventForScrolling( const SDL_Event & rEvent )
 {
@@ -742,7 +742,7 @@ void CMenuManager::handleEventForScrolling( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle input events for menu scrolling
+*    DESC:  Handle input events for menu scrolling
 ************************************************************************/
 bool CMenuManager::handleMenuScrolling(
     const SDL_Event & rEvent, const std::vector<CMenuTree *> & activeTreeVec )
@@ -772,44 +772,34 @@ bool CMenuManager::handleMenuScrolling(
 
 
 /************************************************************************
-*    desc:  Update the menu
+*    DESC:  Update the menu
 ************************************************************************/
-void CMenuManager::update()
+void CMenuManager::updateMenu()
 {
     if( m_active )
-    {
-        if( !updateMenu( m_pActiveMenuTreeVec ) )
-        {
-            // Only allow Updating for interface menus when regular menus are not active
-            updateMenu( m_pActiveInterTreeVec );
-        }
-    }
+        update( m_pActiveMenuTreeVec );
 }
 
-
-/************************************************************************
-*    desc:  Update the menu
-************************************************************************/
-bool CMenuManager::updateMenu( const std::vector<CMenuTree *> & activeTreeVec )
+void CMenuManager::updateInterface()
 {
-    bool menuActive(false);
-
-    for( auto iter : activeTreeVec )
-    {
-        // See if there's an active menu
-        if( iter->isActive() )
-        {
-            menuActive = true;
-            iter->update();
-        }
-    }
-
-    return menuActive;
+    if( m_active )
+        update( m_pActiveInterTreeVec );
 }
 
 
 /************************************************************************
-*    desc:  Transform the menu
+*    DESC:  Update the menu
+************************************************************************/
+void CMenuManager::update( const std::vector<CMenuTree *> & activeTreeVec )
+{
+    for( auto iter : activeTreeVec )
+        if( iter->isActive() )
+            iter->update();
+}
+
+
+/************************************************************************
+*    DESC:  Transform the menu
 ************************************************************************/
 void CMenuManager::transformMenu()
 {
@@ -825,7 +815,7 @@ void CMenuManager::transformMenu( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Transform the menu
+*    DESC:  Transform the menu
 ************************************************************************/
 void CMenuManager::transformInterface()
 {
@@ -841,7 +831,7 @@ void CMenuManager::transformInterface( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Transform the menu
+*    DESC:  Transform the menu
 ************************************************************************/
 void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec )
 {
@@ -865,9 +855,9 @@ void CMenuManager::transform( const std::vector<CMenuTree *> & activeTreeVec, co
 
 
 /************************************************************************
-*    desc:  Render menus
+*    DESC:  Render menus
 ************************************************************************/
-void CMenuManager::render( const CMatrix & matrix )
+void CMenuManager::renderMenu( const CMatrix & matrix )
 {
     if( m_active )
     {
@@ -879,7 +869,7 @@ void CMenuManager::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Render interface menus
+*    DESC:  Render interface menus
 ************************************************************************/
 void CMenuManager::renderInterface( const CMatrix & matrix )
 {
@@ -893,7 +883,7 @@ void CMenuManager::renderInterface( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Is this menu system active?
+*    DESC:  Is this menu system active?
 ************************************************************************/
 bool CMenuManager::isActive()
 {
@@ -902,7 +892,7 @@ bool CMenuManager::isActive()
 
 
 /************************************************************************
-*    desc:  Is this standard menu system active?
+*    DESC:  Is this standard menu system active?
 ************************************************************************/
 bool CMenuManager::isMenuActive()
 {
@@ -916,7 +906,7 @@ bool CMenuManager::isMenuActive()
 
 
 /************************************************************************
-*    desc:  Is a menu item active
+*    DESC:  Is a menu item active
 ************************************************************************/
 bool CMenuManager::isMenuItemActive()
 {
@@ -940,7 +930,7 @@ bool CMenuManager::isMenuItemActive()
 
 
 /************************************************************************
-*    desc:  Is a interface item active
+*    DESC:  Is a interface item active
 ************************************************************************/
 bool CMenuManager::isInterfaceItemActive()
 {
@@ -964,7 +954,7 @@ bool CMenuManager::isInterfaceItemActive()
 
 
 /************************************************************************
-*    desc:  Set the active state
+*    DESC:  Set the active state
 ************************************************************************/
 void CMenuManager::setActiveState()
 {
@@ -994,7 +984,7 @@ void CMenuManager::setActiveState()
 
 
 /************************************************************************
-*    desc:  Get reference to the menu in question
+*    DESC:  Get reference to the menu in question
 ************************************************************************/
 CMenu & CMenuManager::getMenu( const std::string & nameStr )
 {
@@ -1023,7 +1013,7 @@ CMenu & CMenuManager::getMenu( const std::string & nameStr )
 
 
 /************************************************************************
-*    desc:  Get reference to the first active menu.
+*    DESC:  Get reference to the first active menu.
 *           NOTE: Only call this function if you are certain it will not fail
 ************************************************************************/
 CMenu & CMenuManager::getActiveMenu()
@@ -1049,7 +1039,7 @@ CMenu & CMenuManager::getActiveMenu()
 
 
 /************************************************************************
-*    desc:  Get a pointer to the active tree
+*    DESC:  Get a pointer to the active tree
 ************************************************************************/
 CMenuTree * CMenuManager::getActiveTree()
 {
@@ -1069,7 +1059,7 @@ CMenuTree * CMenuManager::getActiveTree()
 
 
 /************************************************************************
-*    desc:  Reset the transform
+*    DESC:  Reset the transform
 ************************************************************************/
 void CMenuManager::resetTransform()
 {
@@ -1080,7 +1070,7 @@ void CMenuManager::resetTransform()
 
 
 /************************************************************************
-*    desc:  Reset the dynamic positions of menus
+*    DESC:  Reset the dynamic positions of menus
 ************************************************************************/
 void CMenuManager::resetDynamicOffset()
 {
@@ -1091,7 +1081,7 @@ void CMenuManager::resetDynamicOffset()
 
 
 /************************************************************************
-*    desc:  Timer call back function for
+*    DESC:  Timer call back function for
 ************************************************************************/
 Uint32 CMenuManager::scrollTimerCallbackFunc( Uint32 interval, void *param )
 {
@@ -1104,7 +1094,7 @@ Uint32 CMenuManager::scrollTimerCallbackFunc( Uint32 interval, void *param )
 
 
 /************************************************************************
-*    desc:  Allow message processing
+*    DESC:  Allow message processing
 ************************************************************************/
 void CMenuManager::allow( bool allow )
 {

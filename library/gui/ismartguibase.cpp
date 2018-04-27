@@ -13,7 +13,7 @@
 #include <gui/menu.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartGuiControl::CSmartGuiControl( CUIControl * pUIControl ) :
     m_pUIControl(pUIControl)
@@ -22,7 +22,7 @@ CSmartGuiControl::CSmartGuiControl( CUIControl * pUIControl ) :
 
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartGuiMenu::CSmartGuiMenu( CMenu * pUIMenu ) :
     m_pUIMenu(pUIMenu)

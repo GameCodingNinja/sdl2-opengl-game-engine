@@ -11,7 +11,7 @@
 #include <utilities/settings.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CCamera::CCamera() :
     m_orthoHeightAspectRatio(0.f),
@@ -37,7 +37,7 @@ CCamera::CCamera( float angle, float minZDist, float maxZDist, float scale ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CCamera::~CCamera()
 {
@@ -45,7 +45,7 @@ CCamera::~CCamera()
 
 
 /************************************************************************
-*    desc:  Recreate the projection matrix
+*    DESC:  Recreate the projection matrix
 ************************************************************************/
 void CCamera::recreateProjMatrix()
 {
@@ -57,7 +57,7 @@ void CCamera::recreateProjMatrix()
 
 
 /************************************************************************
-*    desc:  Generate a custom perspective projection for this camera
+*    DESC:  Generate a custom perspective projection for this camera
 ************************************************************************/  
 void CCamera::generatePerspectiveProjection( float angle, float minZDist, float maxZDist, float scale )
 {
@@ -78,7 +78,7 @@ void CCamera::generatePerspectiveProjection( float angle, float minZDist, float 
 
 
 /************************************************************************
-*    desc:  Generate a custom orthographic projection for this camera
+*    DESC:  Generate a custom orthographic projection for this camera
 ************************************************************************/  
 void CCamera::generateOrthographicProjection( float minZDist, float maxZDist, float scale )
 {
@@ -106,7 +106,7 @@ void CCamera::generateOrthographicProjection( float minZDist, float maxZDist, fl
 
 
 /************************************************************************
-*    desc:  Get the orthographic projected size
+*    DESC:  Get the orthographic projected size
 ************************************************************************/
 const CSize<float> & CCamera::getOrthoProjSize() const
 {
@@ -115,7 +115,7 @@ const CSize<float> & CCamera::getOrthoProjSize() const
 
 
 /************************************************************************
-*    desc:  Get the orthographic projected size half
+*    DESC:  Get the orthographic projected size half
 ************************************************************************/
 const CSize<float> & CCamera::getOrthoProjSizeHalf() const
 {
@@ -124,7 +124,7 @@ const CSize<float> & CCamera::getOrthoProjSizeHalf() const
 
 
 /************************************************************************
-*    desc:  Height and width screen ratio for render 2D objects
+*    DESC:  Height and width screen ratio for render 2D objects
 *           The difference between screen height and the default height
 ************************************************************************/
 float CCamera::getOrthoHeightAspectRatio() const
@@ -134,7 +134,7 @@ float CCamera::getOrthoHeightAspectRatio() const
 
 
 /************************************************************************
-*    desc:  Get the projected matrix
+*    DESC:  Get the projected matrix
 ************************************************************************/  
 const CMatrix & CCamera::getProjectionMatrix() const
 {
@@ -143,7 +143,7 @@ const CMatrix & CCamera::getProjectionMatrix() const
 
 
 /************************************************************************
-*    desc:  Set the camera's world position
+*    DESC:  Set the camera's world position
 ************************************************************************/  
 void CCamera::setPos( const CPoint<CWorldValue> & position )
 {
@@ -157,7 +157,7 @@ void CCamera::setPos( CWorldValue x, CWorldValue y, CWorldValue z )
 
 
 /************************************************************************
-*    desc:  Increment the camera's world position
+*    DESC:  Increment the camera's world position
 ************************************************************************/  
 void CCamera::incPos( const CPoint<CWorldValue> & position )
 {
@@ -171,7 +171,7 @@ void CCamera::incPos( CWorldValue x, CWorldValue y, CWorldValue z )
 
 
 /************************************************************************
-*    desc:  Transform
+*    DESC:  Transform
 ************************************************************************/
 void CCamera::transform()
 {
@@ -185,7 +185,7 @@ void CCamera::transform()
 
 
 /************************************************************************
-*    desc:  Calculate the final matrix
+*    DESC:  Calculate the final matrix
 ************************************************************************/
 void CCamera::calcFinalMatrix()
 {
@@ -196,7 +196,7 @@ void CCamera::calcFinalMatrix()
 
 
 /************************************************************************
-*    desc:  Get the final matrix
+*    DESC:  Get the final matrix
 ************************************************************************/  
 const CMatrix & CCamera::getFinalMatrix() const
 {

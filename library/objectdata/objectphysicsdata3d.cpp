@@ -16,7 +16,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObjectPhysicsData3D::CObjectPhysicsData3D() :
     m_planeNormal(0.f, 1.f, 0.f),
@@ -33,7 +33,7 @@ CObjectPhysicsData3D::CObjectPhysicsData3D() :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CObjectPhysicsData3D::~CObjectPhysicsData3D()
 {
@@ -41,7 +41,7 @@ CObjectPhysicsData3D::~CObjectPhysicsData3D()
 
 
 /************************************************************************
-*    desc:  Load thes object data from node
+*    DESC:  Load thes object data from node
 ************************************************************************/
 void CObjectPhysicsData3D::loadFromNode( const XMLNode & objectNode )
 {
@@ -103,7 +103,7 @@ void CObjectPhysicsData3D::loadFromNode( const XMLNode & objectNode )
 
 
 /************************************************************************
-*    desc:  Get the name of the physics world
+*    DESC:  Get the name of the physics world
 ************************************************************************/
 const std::string & CObjectPhysicsData3D::getWorld() const
 {
@@ -112,7 +112,7 @@ const std::string & CObjectPhysicsData3D::getWorld() const
 
 
 /************************************************************************
-*    desc:  Get the type of physics body
+*    DESC:  Get the type of physics body
 ************************************************************************/
 const std::string & CObjectPhysicsData3D::getBodyShape() const
 {
@@ -121,7 +121,7 @@ const std::string & CObjectPhysicsData3D::getBodyShape() const
 
 
 /************************************************************************
-*    desc:  Get the mass of physics body
+*    DESC:  Get the mass of physics body
 ************************************************************************/
 float CObjectPhysicsData3D::getMass() const
 {
@@ -130,7 +130,7 @@ float CObjectPhysicsData3D::getMass() const
 
 
 /************************************************************************
-*    desc:  Get the friction
+*    DESC:  Get the friction
 ************************************************************************/
 float CObjectPhysicsData3D::getFriction() const
 {
@@ -139,7 +139,7 @@ float CObjectPhysicsData3D::getFriction() const
 
 
 /************************************************************************
-*    desc:  Get the rolling friction
+*    DESC:  Get the rolling friction
 ************************************************************************/
 float CObjectPhysicsData3D::getRollingFriction() const
 {
@@ -148,7 +148,7 @@ float CObjectPhysicsData3D::getRollingFriction() const
 
 
 /************************************************************************
-*    desc:  Get the linear damping
+*    DESC:  Get the linear damping
 ************************************************************************/
 float CObjectPhysicsData3D::getLinearDamping() const
 {
@@ -157,7 +157,7 @@ float CObjectPhysicsData3D::getLinearDamping() const
 
 
 /************************************************************************
-*    desc:  Get the angular damping
+*    DESC:  Get the angular damping
 ************************************************************************/
 float CObjectPhysicsData3D::getAngularDamping() const
 {
@@ -166,7 +166,7 @@ float CObjectPhysicsData3D::getAngularDamping() const
 
 
 /************************************************************************
-*    desc:  Get the restitution - the amount of bounce
+*    DESC:  Get the restitution - the amount of bounce
 ************************************************************************/
 float CObjectPhysicsData3D::getRestitution() const
 {
@@ -175,7 +175,7 @@ float CObjectPhysicsData3D::getRestitution() const
 
 
 /************************************************************************
-*    desc:  Get the plane normal
+*    DESC:  Get the plane normal
 ************************************************************************/
 const CPoint<float> & CObjectPhysicsData3D::getPlaneNormal() const
 {
@@ -184,7 +184,7 @@ const CPoint<float> & CObjectPhysicsData3D::getPlaneNormal() const
 
 
 /************************************************************************
-*    desc:  Specify if physics is active
+*    DESC:  Specify if physics is active
 ************************************************************************/
 bool CObjectPhysicsData3D::isActive() const
 {
@@ -193,7 +193,7 @@ bool CObjectPhysicsData3D::isActive() const
 
 
 /************************************************************************
-*    desc:  Get the collision filter
+*    DESC:  Get the collision filter
 ************************************************************************/
 short CObjectPhysicsData3D::getCollisionGroup() const
 {
@@ -202,7 +202,7 @@ short CObjectPhysicsData3D::getCollisionGroup() const
 
 
 /************************************************************************
-*    desc:  Get the collision mask
+*    DESC:  Get the collision mask
 ************************************************************************/
 short CObjectPhysicsData3D::getCollisionMask() const
 {

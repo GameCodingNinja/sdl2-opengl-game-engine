@@ -25,7 +25,7 @@
 #include <angelscript.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CScriptManager::CScriptManager()
 {
@@ -50,7 +50,7 @@ CScriptManager::CScriptManager()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CScriptManager::~CScriptManager()
 {
@@ -64,7 +64,7 @@ CScriptManager::~CScriptManager()
 
 
 /************************************************************************
-*    desc:  Load all of the scripts of a specific group
+*    DESC:  Load all of the scripts of a specific group
 *
 *    param: string & group - specified group of scripts to load
 ************************************************************************/
@@ -96,7 +96,7 @@ void CScriptManager::loadGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Add the script to the module
+*    DESC:  Add the script to the module
 ************************************************************************/
 void CScriptManager::addScript( asIScriptModule * pScriptModule, const std::string & filePath )
 {
@@ -114,7 +114,7 @@ void CScriptManager::addScript( asIScriptModule * pScriptModule, const std::stri
 
 
 /************************************************************************
-*    desc:  Build all the scripts added to the module
+*    DESC:  Build all the scripts added to the module
 ************************************************************************/
 void CScriptManager::buildScript( asIScriptModule * pScriptModule, const std::string & group )
 {
@@ -130,7 +130,7 @@ void CScriptManager::buildScript( asIScriptModule * pScriptModule, const std::st
 
 
 /************************************************************************
-*    desc:  Get the script context from a managed pool
+*    DESC:  Get the script context from a managed pool
 *
 *    NOTE: The receiver of this pointer is the owner if it's still
 *          holding on to it when the game terminates
@@ -153,7 +153,7 @@ asIScriptContext * CScriptManager::getContext()
 
 
 /************************************************************************
-*    desc:  Add the script context back to the managed pool
+*    DESC:  Add the script context back to the managed pool
 ************************************************************************/
 void CScriptManager::recycleContext( asIScriptContext * pContext )
 {
@@ -162,7 +162,7 @@ void CScriptManager::recycleContext( asIScriptContext * pContext )
 
 
 /************************************************************************
-*    desc:  Get pointer to function name
+*    DESC:  Get pointer to function name
 ************************************************************************/
 asIScriptFunction * CScriptManager::getPtrToFunc( const std::string & group, const std::string & name )
 {
@@ -204,7 +204,7 @@ asIScriptFunction * CScriptManager::getPtrToFunc( const std::string & group, con
 
 
 /************************************************************************
-*    desc:  Call back to display AngelScript messages
+*    DESC:  Call back to display AngelScript messages
 ************************************************************************/
 void CScriptManager::messageCallback(const asSMessageInfo & msg)
 {
@@ -222,7 +222,7 @@ void CScriptManager::messageCallback(const asSMessageInfo & msg)
 
 
 /************************************************************************
-*    desc:  Get the pointer to the script engine
+*    DESC:  Get the pointer to the script engine
 ************************************************************************/
 asIScriptEngine * CScriptManager::getEnginePtr()
 {
@@ -231,7 +231,7 @@ asIScriptEngine * CScriptManager::getEnginePtr()
 
 
 /************************************************************************
-*    desc:  Free all of the scripts of a specific data group
+*    DESC:  Free all of the scripts of a specific data group
 ************************************************************************/
 void CScriptManager::freeGroup( const std::string & group )
 {
@@ -253,7 +253,7 @@ void CScriptManager::freeGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Prepare the script function to run
+*    DESC:  Prepare the script function to run
 ************************************************************************/
 void CScriptManager::prepare(
     const std::string & group,
@@ -321,7 +321,7 @@ void CScriptManager::prepare(
 
 
 /************************************************************************
-*    desc:  Prepare the spawn script function to run
+*    DESC:  Prepare the spawn script function to run
 ************************************************************************/
 void CScriptManager::prepareSpawn( const std::string & funcName )
 {
@@ -364,7 +364,7 @@ void CScriptManager::prepareLocalSpawnVoid( const std::string & funcName, void *
 
 
 /************************************************************************
-*    desc:  Update the script
+*    DESC:  Update the script
 ************************************************************************/
 void CScriptManager::update()
 {

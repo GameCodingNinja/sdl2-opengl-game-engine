@@ -16,7 +16,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLightLst::CLightLst()
 {
@@ -24,7 +24,7 @@ CLightLst::CLightLst()
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CLightLst::~CLightLst()
 {
@@ -32,7 +32,7 @@ CLightLst::~CLightLst()
 
 
 /************************************************************************
-*    desc:  Add a light
+*    DESC:  Add a light
 ************************************************************************/
 void CLightLst::add(
     const std::string & name,
@@ -55,7 +55,7 @@ void CLightLst::add(
 
 
 /************************************************************************
-*    desc:  Turn the light on or off
+*    DESC:  Turn the light on or off
 ************************************************************************/
 void CLightLst::enable( const std::string & name, bool enable )
 {

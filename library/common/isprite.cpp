@@ -9,7 +9,7 @@
 #include <common/isprite.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 iSprite::iSprite( int id ) :
     m_id(id)
@@ -17,7 +17,7 @@ iSprite::iSprite( int id ) :
 }
 
 /************************************************************************
-*    desc:  Is this a 2D sprite?
+*    DESC:  Is this a 2D sprite?
 ************************************************************************/  
 bool iSprite::isSprite2D() const
 {
@@ -26,7 +26,7 @@ bool iSprite::isSprite2D() const
 
 
 /************************************************************************
-*    desc:  Is this a 2D actor?
+*    DESC:  Is this a 2D actor?
 ************************************************************************/  
 bool iSprite::isActor2D() const
 {
@@ -35,7 +35,7 @@ bool iSprite::isActor2D() const
 
 
 /************************************************************************
-*    desc:  Is this a 3D sprite?
+*    DESC:  Is this a 3D sprite?
 ************************************************************************/  
 bool iSprite::isSprite3D() const
 {
@@ -44,7 +44,7 @@ bool iSprite::isSprite3D() const
 
 
 /************************************************************************
-*    desc:  Is this a 3D actor?
+*    DESC:  Is this a 3D actor?
 ************************************************************************/  
 bool iSprite::isActor3D() const
 {
@@ -53,7 +53,7 @@ bool iSprite::isActor3D() const
 
 
 /************************************************************************
-*    desc:  Get the unique id number
+*    DESC:  Get the unique id number
 ************************************************************************/
 int iSprite::getId() const
 {

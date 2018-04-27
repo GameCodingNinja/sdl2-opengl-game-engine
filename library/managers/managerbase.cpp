@@ -16,7 +16,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CManagerBase::CManagerBase()
 {
@@ -24,7 +24,7 @@ CManagerBase::CManagerBase()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CManagerBase::~CManagerBase()
 {
@@ -32,7 +32,7 @@ CManagerBase::~CManagerBase()
 
 
 /************************************************************************
-*    desc:  Load the data list tables
+*    DESC:  Load the data list tables
 ************************************************************************/
 void CManagerBase::loadListTable( const std::string & filePath )
 {

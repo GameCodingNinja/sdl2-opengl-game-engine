@@ -9,7 +9,7 @@
 #include <slot/valuetable.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CValueTable::CValueTable( const std::vector<int> & valueVec ) :
     m_valueVec(valueVec)
@@ -18,7 +18,7 @@ CValueTable::CValueTable( const std::vector<int> & valueVec ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CValueTable::~CValueTable()
 {
@@ -26,7 +26,7 @@ CValueTable::~CValueTable()
 
 
 /************************************************************************
- *    desc:  Get the value from the value table
+ *    DESC:  Get the value from the value table
  ************************************************************************/
 int CValueTable::getValue( const int index ) const
 {

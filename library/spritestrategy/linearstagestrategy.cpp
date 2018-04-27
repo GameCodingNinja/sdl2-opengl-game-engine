@@ -20,7 +20,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLinearStageStrategy::CLinearStageStrategy() :
     m_startIndex(0),
@@ -30,7 +30,7 @@ CLinearStageStrategy::CLinearStageStrategy() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CLinearStageStrategy::~CLinearStageStrategy()
 {
@@ -38,7 +38,7 @@ CLinearStageStrategy::~CLinearStageStrategy()
 
 
 /************************************************************************
-*    desc:  Load thes object data from node
+*    DESC:  Load thes object data from node
 ************************************************************************/
 void CLinearStageStrategy::loadFromNode( const XMLNode & node )
 {
@@ -71,7 +71,7 @@ void CLinearStageStrategy::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Init the range of sectors to check
+*    DESC:  Init the range of sectors to check
 ************************************************************************/
 void CLinearStageStrategy::initRange()
 {
@@ -84,7 +84,7 @@ void CLinearStageStrategy::initRange()
 
 
 /***************************************************************************
-*    desc:  Set the range based on the sector's visibility
+*    DESC:  Set the range based on the sector's visibility
 ****************************************************************************/
 bool CLinearStageStrategy::setRange( const size_t index )
 {
@@ -121,7 +121,7 @@ bool CLinearStageStrategy::setRange( const size_t index )
 
 
 /***************************************************************************
-*    desc:  Update the actors
+*    DESC:  Update the actors
 ****************************************************************************/
 void CLinearStageStrategy::update()
 {
@@ -131,7 +131,7 @@ void CLinearStageStrategy::update()
 
 
 /************************************************************************
-*    desc:  Transform the actor
+*    DESC:  Transform the actor
 ************************************************************************/
 void CLinearStageStrategy::transform()
 {
@@ -177,7 +177,7 @@ void CLinearStageStrategy::transform( const CObject2D & object )
 
 
 /***************************************************************************
-*    desc:  Render the actors
+*    DESC:  Render the actors
 ****************************************************************************/
 void CLinearStageStrategy::render( const CMatrix & matrix )
 {

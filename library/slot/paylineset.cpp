@@ -16,7 +16,7 @@
 #include <algorithm>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPaylineSet::CPaylineSet( const XMLNode & node )
 {
@@ -52,7 +52,7 @@ CPaylineSet::CPaylineSet( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Get the line data
+*    DESC:  Get the line data
 ************************************************************************/
 const std::vector<std::vector<int8_t>> & CPaylineSet::getLineData() const
 {
@@ -61,7 +61,7 @@ const std::vector<std::vector<int8_t>> & CPaylineSet::getLineData() const
 
 
 /************************************************************************
-*    desc:  See if the scatter eval symbol index is allowed
+*    DESC:  See if the scatter eval symbol index is allowed
 ************************************************************************/
 bool CPaylineSet::indexOfScaterData( int strip, int index ) const
 {

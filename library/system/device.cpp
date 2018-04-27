@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CDevice::CDevice() :
     m_pWindow(nullptr),
@@ -35,7 +35,7 @@ CDevice::CDevice() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CDevice::~CDevice()
 {
@@ -43,7 +43,7 @@ CDevice::~CDevice()
 
 
 /***************************************************************************
-*   desc:  Create the window and OpenGL context
+*   DESC:  Create the window and OpenGL context
  ****************************************************************************/
 void CDevice::create()
 {
@@ -110,7 +110,7 @@ void CDevice::create()
 
 
 /***************************************************************************
-*   desc:  Enable/disable v-sync
+*   DESC:  Enable/disable v-sync
  ****************************************************************************/
 void CDevice::enableVSync( bool enable )
 {
@@ -120,7 +120,7 @@ void CDevice::enableVSync( bool enable )
 
 
 /***************************************************************************
-*   desc:  Show/Hide the Window
+*   DESC:  Show/Hide the Window
  ****************************************************************************/
 void CDevice::showWindow( bool visible )
 {
@@ -132,7 +132,7 @@ void CDevice::showWindow( bool visible )
 
 
 /***************************************************************************
-*   desc:  Set full screen or windowed mode
+*   DESC:  Set full screen or windowed mode
  ****************************************************************************/
 void CDevice::setFullScreen( bool fullscreen )
 {
@@ -147,7 +147,7 @@ void CDevice::setFullScreen( bool fullscreen )
 
 
 /***************************************************************************
-*   desc:  Get the OpenGl Context
+*   DESC:  Get the OpenGl Context
  ****************************************************************************/
 SDL_GLContext CDevice::getContext()
 {
@@ -156,7 +156,7 @@ SDL_GLContext CDevice::getContext()
 
 
 /***************************************************************************
-*   desc:  Get the SDL window
+*   DESC:  Get the SDL window
  ****************************************************************************/
 SDL_Window * CDevice::getWindow()
 {
@@ -165,7 +165,7 @@ SDL_Window * CDevice::getWindow()
 
 
 /***************************************************************************
-*   desc:  Init current gamepads plugged in at startup
+*   DESC:  Init current gamepads plugged in at startup
  ****************************************************************************/
 void CDevice::initStartupGamepads()
 {
@@ -179,7 +179,7 @@ void CDevice::initStartupGamepads()
 
 
 /***************************************************************************
-*   desc:  Add/Remove the game pad
+*   DESC:  Add/Remove the game pad
  ****************************************************************************/
 void CDevice::addGamepad( int id )
 {
@@ -206,7 +206,7 @@ void CDevice::removeGamepad( int id )
 
 
 /***************************************************************************
-*   desc:  Get the gamepad count
+*   DESC:  Get the gamepad count
  ****************************************************************************/
 size_t CDevice::getGamepadCount()
 {

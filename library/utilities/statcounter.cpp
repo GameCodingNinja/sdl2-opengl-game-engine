@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CStatCounter::CStatCounter() :
     m_vObjCounter(0),
@@ -33,7 +33,7 @@ CStatCounter::CStatCounter() :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CStatCounter::~CStatCounter()
 {
@@ -41,7 +41,7 @@ CStatCounter::~CStatCounter()
 
 
 /************************************************************************
-*    desc:  Connect to the signal
+*    DESC:  Connect to the signal
 ************************************************************************/
 void CStatCounter::connect( const StatCounterSignal::slot_type & slot )
 {
@@ -49,7 +49,7 @@ void CStatCounter::connect( const StatCounterSignal::slot_type & slot )
 }
 
 /************************************************************************
-*    desc:  Disconnect all slots
+*    DESC:  Disconnect all slots
 ************************************************************************/
 void CStatCounter::disconnect()
 {
@@ -58,7 +58,7 @@ void CStatCounter::disconnect()
 
 
 /************************************************************************
-*    desc:  Have we run through one cycle.
+*    DESC:  Have we run through one cycle.
 *
 *	 ret: bool - true if one cycle has been completed
 ************************************************************************/
@@ -84,7 +84,7 @@ void CStatCounter::incCycle()
 
 
 /************************************************************************
-*    desc:  Reset the counter
+*    DESC:  Reset the counter
 ************************************************************************/
 void CStatCounter::resetCounters()
 {
@@ -97,7 +97,7 @@ void CStatCounter::resetCounters()
 
 
 /************************************************************************
-*    desc:  Format the stat string
+*    DESC:  Format the stat string
 ************************************************************************/
 void CStatCounter::formatStatString()
 {
@@ -116,7 +116,7 @@ void CStatCounter::formatStatString()
 
 
 /************************************************************************
-*    desc:  Inc the display counter
+*    DESC:  Inc the display counter
 ************************************************************************/
 void CStatCounter::incDisplayCounter( size_t value )
 {
@@ -125,7 +125,7 @@ void CStatCounter::incDisplayCounter( size_t value )
 
 
 /************************************************************************
-*    desc:  Inc the physics objects counter
+*    DESC:  Inc the physics objects counter
 ************************************************************************/
 void CStatCounter::incPhysicsObjectsCounter()
 {
@@ -134,7 +134,7 @@ void CStatCounter::incPhysicsObjectsCounter()
 
 
 /************************************************************************
-*    desc:  Inc the script contex counter
+*    DESC:  Inc the script contex counter
 ************************************************************************/
 void CStatCounter::incScriptContexCounter()
 {
@@ -143,7 +143,7 @@ void CStatCounter::incScriptContexCounter()
 
 
 /************************************************************************
-*    desc:  Inc the active script contex counter
+*    DESC:  Inc the active script contex counter
 ************************************************************************/
 void CStatCounter::incActiveScriptContexCounter()
 {

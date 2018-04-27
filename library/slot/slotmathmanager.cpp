@@ -16,7 +16,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotMathMgr::CSlotMathMgr()
 {
@@ -24,7 +24,7 @@ CSlotMathMgr::CSlotMathMgr()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotMathMgr::~CSlotMathMgr()
 {
@@ -32,7 +32,7 @@ CSlotMathMgr::~CSlotMathMgr()
 
 
 /************************************************************************
- *    desc:  Get the slot math
+ *    DESC:  Get the slot math
  ************************************************************************/
 const CSlotMath & CSlotMathMgr::getSlotMath( const std::string & group, const std::string & id ) const
 {
@@ -53,7 +53,7 @@ const CSlotMath & CSlotMathMgr::getSlotMath( const std::string & group, const st
 
 
 /************************************************************************
- *    desc:  Load all of the reel group data from a specific group
+ *    DESC:  Load all of the reel group data from a specific group
  ************************************************************************/
 void CSlotMathMgr::loadGroup( const std::string & group )
 {
@@ -82,7 +82,7 @@ void CSlotMathMgr::loadGroup( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Load all math data from an xml
+ *    DESC:  Load all math data from an xml
  ************************************************************************/
 void CSlotMathMgr::loadFromXML( const std::string & group, const std::string & filePath )
 {
@@ -112,7 +112,7 @@ void CSlotMathMgr::loadFromXML( const std::string & group, const std::string & f
 
 
 /************************************************************************
-*    desc:  Load the payline configuration from XML file
+*    DESC:  Load the payline configuration from XML file
 ************************************************************************/
 void CSlotMathMgr::loadPaylineSetFromFile( const std::string & filePath )
 {
@@ -140,7 +140,7 @@ void CSlotMathMgr::loadPaylineSetFromFile( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Get the payline set
+*    DESC:  Get the payline set
 ************************************************************************/
 const CPaylineSet & CSlotMathMgr::getPaylineSet( const std::string & id ) const
 {
@@ -156,7 +156,7 @@ const CPaylineSet & CSlotMathMgr::getPaylineSet( const std::string & id ) const
 
 
 /************************************************************************
- *    desc:  Unload all of the reel group data from a specific group
+ *    DESC:  Unload all of the reel group data from a specific group
  ************************************************************************/
 void CSlotMathMgr::freeGroup( const std::string & group )
 {
@@ -176,7 +176,7 @@ void CSlotMathMgr::freeGroup( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Free the payline set
+*    DESC:  Free the payline set
 ************************************************************************/
 void CSlotMathMgr::freePaylineSet()
 {
@@ -185,7 +185,7 @@ void CSlotMathMgr::freePaylineSet()
 
 
 /************************************************************************
-*    desc:  Clear out all the data
+*    DESC:  Clear out all the data
 ************************************************************************/
 void CSlotMathMgr::clear()
 {

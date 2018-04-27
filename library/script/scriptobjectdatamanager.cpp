@@ -20,7 +20,7 @@
 namespace NScriptObjectDataManager
 {
     /************************************************************************
-    *    desc:  Load the data list table                                                            
+    *    DESC:  Load the data list table                                                            
     ************************************************************************/
     void LoadListTable( const std::string & filePath, CObjectDataMgr & rObjectDataMgr )
     {
@@ -39,7 +39,7 @@ namespace NScriptObjectDataManager
     }
     
     /************************************************************************
-    *    desc:  Load all of the meshes and materials of a specific data group                                                           
+    *    DESC:  Load all of the meshes and materials of a specific data group                                                           
     ************************************************************************/
     void LoadGroup2D( const std::string & group, bool createFromData, CObjectDataMgr & rObjectDataMgr )
     {
@@ -74,7 +74,7 @@ namespace NScriptObjectDataManager
     }
     
     /************************************************************************
-    *    desc:  Create the group's VBO, IBO, textures, etc                                                           
+    *    DESC:  Create the group's VBO, IBO, textures, etc                                                           
     ************************************************************************/
     void CreateFromData2D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
     {
@@ -109,7 +109,7 @@ namespace NScriptObjectDataManager
     }
     
     /************************************************************************
-    *    desc:  Free all of the meshes and materials of a specific data group                                                           
+    *    DESC:  Free all of the meshes and materials of a specific data group                                                           
     ************************************************************************/
     void FreeGroup2D( const std::string & group, bool freeOpenGLObjects, CObjectDataMgr & rObjectDataMgr )
     {
@@ -144,7 +144,7 @@ namespace NScriptObjectDataManager
     }
     
     /************************************************************************
-    *    desc:  Free all of the meshes and materials of a specific data group                                                           
+    *    DESC:  Free all of the meshes and materials of a specific data group                                                           
     ************************************************************************/
     void FreeOpenGL2D( const std::string & group, CObjectDataMgr & rObjectDataMgr )
     {
@@ -179,7 +179,7 @@ namespace NScriptObjectDataManager
     }
     
     /************************************************************************
-    *    desc:  Register global functions
+    *    DESC:  Register global functions
     ************************************************************************/
     void Register()
     {

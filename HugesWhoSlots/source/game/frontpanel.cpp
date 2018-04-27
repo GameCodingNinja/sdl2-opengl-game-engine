@@ -16,7 +16,7 @@
 #include <objectdata/objectdatamanager.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CFrontPanel::CFrontPanel() :
     m_pPlayBtn(nullptr),
@@ -27,7 +27,7 @@ CFrontPanel::CFrontPanel() :
 
 
 /************************************************************************
-*    desc:  Set the buttons
+*    DESC:  Set the buttons
 ************************************************************************/
 void CFrontPanel::setButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & pOtherBtnVec )
 {
@@ -37,7 +37,7 @@ void CFrontPanel::setButtons( CUIButton * pPlayBtn, std::vector<CUIControl *> & 
 
 
 /************************************************************************
-*    desc:  Set the meters
+*    DESC:  Set the meters
 ************************************************************************/
 void CFrontPanel::setMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter )
 {
@@ -47,7 +47,7 @@ void CFrontPanel::setMeters( CUIMeter * pWinMeter, CUIMeter * pCreditMeter )
 
 
 /************************************************************************
-*    desc:  Init a new game
+*    DESC:  Init a new game
 ************************************************************************/
 void CFrontPanel::initGame( uint credits )
 {
@@ -63,7 +63,7 @@ void CFrontPanel::initGame( uint credits )
 
 
 /************************************************************************
-*    desc:  Start the bang up
+*    DESC:  Start the bang up
 ************************************************************************/
 void CFrontPanel::startBangUp( uint win, uint credits )
 {
@@ -76,7 +76,7 @@ void CFrontPanel::startBangUp( uint win, uint credits )
 
 
 /************************************************************************
-*    desc:  Are the meters banging
+*    DESC:  Are the meters banging
 ************************************************************************/
 bool CFrontPanel::isBanging()
 {
@@ -93,7 +93,7 @@ bool CFrontPanel::isBanging()
 
 
 /************************************************************************
-*    desc:  Start the fast bang
+*    DESC:  Start the fast bang
 ************************************************************************/
 void CFrontPanel::fastBang()
 {
@@ -106,7 +106,7 @@ void CFrontPanel::fastBang()
 
 
 /************************************************************************
-*    desc:  Enable the buttons
+*    DESC:  Enable the buttons
 ************************************************************************/
 void CFrontPanel::enableButtons( bool allowPlay )
 {

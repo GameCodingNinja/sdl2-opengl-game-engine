@@ -36,7 +36,7 @@
 #include <memory>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData ) :
 	m_visualData( visualData ),
@@ -71,7 +71,7 @@ CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData )
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CVisualComponent3D::~CVisualComponent3D()
 {
@@ -79,7 +79,7 @@ CVisualComponent3D::~CVisualComponent3D()
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalMatrix )
 {
@@ -127,7 +127,7 @@ void CVisualComponent3D::render( const CMatrix & matrix, const CMatrix & normalM
 
 
 /************************************************************************
-*    desc:  Set/Get the color
+*    DESC:  Set/Get the color
 ************************************************************************/
 void CVisualComponent3D::setColor( const CColor & color )
 {
@@ -147,7 +147,7 @@ const CColor & CVisualComponent3D::getColor() const
 
 
 /************************************************************************
-*    desc:  Set/Get the alpha
+*    DESC:  Set/Get the alpha
 ************************************************************************/
 void CVisualComponent3D::setAlpha( float alpha )
 {
@@ -161,7 +161,7 @@ float CVisualComponent3D::getAlpha() const
 
 
 /************************************************************************
-*    desc:  Set the default color
+*    DESC:  Set the default color
 ************************************************************************/
 void CVisualComponent3D::setDefaultColor()
 {

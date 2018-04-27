@@ -14,7 +14,7 @@
 #include <gui/menu.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )

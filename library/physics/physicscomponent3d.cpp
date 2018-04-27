@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CPhysicsComponent3D::CPhysicsComponent3D() :
     m_pWorld( nullptr )
@@ -40,7 +40,7 @@ CPhysicsComponent3D::CPhysicsComponent3D( const CObjectPhysicsData3D & physicsDa
 }
 
 /************************************************************************
- *    desc:  destructor
+ *    DESC:  destructor
  ************************************************************************/
 CPhysicsComponent3D::~CPhysicsComponent3D()
 {
@@ -48,7 +48,7 @@ CPhysicsComponent3D::~CPhysicsComponent3D()
 }
 
 /************************************************************************
- *    desc:  Init the physics by creating the body and fixture
+ *    DESC:  Init the physics by creating the body and fixture
  *           NOTE: Function must be called externally at the right time
  *                 when the sprite has been setup with it's initial offsets
  ************************************************************************/
@@ -133,7 +133,7 @@ void CPhysicsComponent3D::init( const CSprite3D & sprite )
 }
 
 /************************************************************************
- *    desc:  Update the physics
+ *    DESC:  Update the physics
  ************************************************************************/
 void CPhysicsComponent3D::update( CSprite3D * pSprite )
 {
@@ -149,7 +149,7 @@ void CPhysicsComponent3D::update( CSprite3D * pSprite )
 }
 
 /************************************************************************
- *    desc:  Is this component active?
+ *    DESC:  Is this component active?
  *           If this sprite is using physics then it must have a fixture
  ************************************************************************/
 bool CPhysicsComponent3D::isActive()
@@ -158,7 +158,7 @@ bool CPhysicsComponent3D::isActive()
 }
 
 /************************************************************************
- *    desc:  Add the body
+ *    DESC:  Add the body
  ************************************************************************/
 void CPhysicsComponent3D::addBody()
 {
@@ -167,7 +167,7 @@ void CPhysicsComponent3D::addBody()
 }
 
 /************************************************************************
- *    desc:  Remove the body
+ *    DESC:  Remove the body
  ************************************************************************/
 void CPhysicsComponent3D::removeBody()
 {
@@ -176,7 +176,7 @@ void CPhysicsComponent3D::removeBody()
 }
 
 /************************************************************************
- *    desc:  Set the linear velocity
+ *    DESC:  Set the linear velocity
  ************************************************************************/
 void CPhysicsComponent3D::setLinearVelocity( const CPoint<float> & vec )
 {
@@ -185,7 +185,7 @@ void CPhysicsComponent3D::setLinearVelocity( const CPoint<float> & vec )
 }
 
 /************************************************************************
- *    desc:  Set the angular velocity
+ *    DESC:  Set the angular velocity
  ************************************************************************/
 void CPhysicsComponent3D::setAngularVelocity( const CPoint<float> & vec )
 {
@@ -194,7 +194,7 @@ void CPhysicsComponent3D::setAngularVelocity( const CPoint<float> & vec )
 }
 
 /************************************************************************
- *    desc:  Set the restitution
+ *    DESC:  Set the restitution
  ************************************************************************/
 void CPhysicsComponent3D::setRestitution( const float rest )
 {

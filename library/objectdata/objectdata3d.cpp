@@ -12,7 +12,7 @@
 #include <math.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObjectData3D::CObjectData3D() :
     m_radius(0),
@@ -22,7 +22,7 @@ CObjectData3D::CObjectData3D() :
 
 
 /************************************************************************
-*    desc:  Copy Constructor
+*    DESC:  Copy Constructor
 ************************************************************************/
 CObjectData3D::CObjectData3D( const CObjectData3D & obj )
 {
@@ -31,7 +31,7 @@ CObjectData3D::CObjectData3D( const CObjectData3D & obj )
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CObjectData3D::~CObjectData3D()
 {
@@ -39,7 +39,7 @@ CObjectData3D::~CObjectData3D()
 
 
 /************************************************************************
-*    desc:  Load the object data from the passed in node
+*    DESC:  Load the object data from the passed in node
 ************************************************************************/
 void CObjectData3D::loadFromNode( const XMLNode & node, const std::string & group, const std::string & name )
 {
@@ -58,7 +58,7 @@ void CObjectData3D::loadFromNode( const XMLNode & node, const std::string & grou
 
 
 /************************************************************************
-*    desc:  Create the objects from data
+*    DESC:  Create the objects from data
 ************************************************************************/
 void CObjectData3D::createFromData( const std::string & group )
 {
@@ -72,7 +72,7 @@ void CObjectData3D::createFromData( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Access functions for the visual data
+*    DESC:  Access functions for the visual data
 ************************************************************************/
 const CObjectVisualData3D & CObjectData3D::getVisualData() const
 {
@@ -81,7 +81,7 @@ const CObjectVisualData3D & CObjectData3D::getVisualData() const
 
 
 /************************************************************************
-*    desc:  Access functions for the physics data
+*    DESC:  Access functions for the physics data
 ************************************************************************/
 const CObjectPhysicsData3D & CObjectData3D::getPhysicsData() const
 {
@@ -90,7 +90,7 @@ const CObjectPhysicsData3D & CObjectData3D::getPhysicsData() const
 
 
 /************************************************************************
-*    desc:  Access functions for the data name
+*    DESC:  Access functions for the data name
 ************************************************************************/
 const std::string & CObjectData3D::getName() const
 {
@@ -99,7 +99,7 @@ const std::string & CObjectData3D::getName() const
 
 
 /************************************************************************
-*    desc:  Access functions for the data group
+*    DESC:  Access functions for the data group
 ************************************************************************/
 const std::string & CObjectData3D::getGroup() const
 {
@@ -108,7 +108,7 @@ const std::string & CObjectData3D::getGroup() const
 
 
 /************************************************************************
-*    desc:  Access functions for the radius
+*    DESC:  Access functions for the radius
 ************************************************************************/
 float CObjectData3D::getRadius() const
 {
@@ -117,7 +117,7 @@ float CObjectData3D::getRadius() const
 
 
 /************************************************************************
-*    desc:  Access functions for the radius squared
+*    DESC:  Access functions for the radius squared
 ************************************************************************/
 float CObjectData3D::getRadiusSquared() const
 {

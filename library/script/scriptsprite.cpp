@@ -19,7 +19,7 @@
 namespace NScriptSprite
 {
     /************************************************************************
-    *    desc:  Wrapper function due to virtual inheritance
+    *    DESC:  Wrapper function due to virtual inheritance
     ************************************************************************/
     void SetVisible(bool value, iSprite & sprite)
     {
@@ -108,7 +108,7 @@ namespace NScriptSprite
     
     
     /************************************************************************
-    *    desc:  Register the class with AngelScript
+    *    DESC:  Register the class with AngelScript
     ************************************************************************/
     void Register()
     {

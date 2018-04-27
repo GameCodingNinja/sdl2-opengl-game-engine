@@ -33,7 +33,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 *           The visual count is the same as the math's evaluation count.
 *           These values can be found in the math file.
 ************************************************************************/
@@ -64,7 +64,7 @@ CReelStripView::CReelStripView( const CSlotStripModel & rSlotStripModel, CSymbol
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CReelStripView::~CReelStripView()
 {
@@ -72,7 +72,7 @@ CReelStripView::~CReelStripView()
 
 
 /************************************************************************
-*    desc:  Create the reel strip from data node
+*    DESC:  Create the reel strip from data node
 ************************************************************************/
 void CReelStripView::create( const XMLNode & node, const std::string & group )
 {
@@ -145,7 +145,7 @@ void CReelStripView::create( const XMLNode & node, const std::string & group )
 
 
 /************************************************************************
-*    desc:  Init the reel strip with symbols
+*    DESC:  Init the reel strip with symbols
 ************************************************************************/
 void CReelStripView::initReelStrip()
 {
@@ -173,7 +173,7 @@ void CReelStripView::initReelStrip()
 
 
 /************************************************************************
-*    desc:  Get the symbol from the reel strip offset
+*    DESC:  Get the symbol from the reel strip offset
 ************************************************************************/
 CSymbol2d * CReelStripView::getSymbol( int stop )
 {
@@ -185,7 +185,7 @@ CSymbol2d * CReelStripView::getSymbol( int stop )
 
 
 /************************************************************************
-*    desc:  Get the cycle result symbol for this spot on the reel strip
+*    DESC:  Get the cycle result symbol for this spot on the reel strip
 *           NOTE: Index assumes visible symbol that can animate
 *                 Will need to be freed by the recipient of pointer.
 ************************************************************************/
@@ -206,7 +206,7 @@ CSymbol2d * CReelStripView::getCycleResultSymbol( int index )
 
 
 /************************************************************************
-*    desc:  This replaces the temporary cycle symbols with the ones used for spinning
+*    DESC:  This replaces the temporary cycle symbols with the ones used for spinning
 ************************************************************************/
 void CReelStripView::clearCycleResultSymbs()
 {
@@ -220,7 +220,7 @@ void CReelStripView::clearCycleResultSymbs()
 
 
 /************************************************************************
-*    desc:  Set the spin profile
+*    DESC:  Set the spin profile
 ************************************************************************/
 void CReelStripView::setSpinProfile( const CSpinProfile & spinProfile )
 {
@@ -229,7 +229,7 @@ void CReelStripView::setSpinProfile( const CSpinProfile & spinProfile )
 
 
 /************************************************************************
-*    desc:  Update the reel strip
+*    DESC:  Update the reel strip
 ************************************************************************/
 void CReelStripView::update()
 {
@@ -374,7 +374,7 @@ void CReelStripView::update()
 
 
 /************************************************************************
-*    desc:  Inc the reel spin
+*    DESC:  Inc the reel spin
 ************************************************************************/
 void CReelStripView::incSpin( float velocity )
 {
@@ -445,7 +445,7 @@ void CReelStripView::incSpin( float velocity )
 
 
 /************************************************************************
-*    desc:  Hard set the final position of the symbols
+*    DESC:  Hard set the final position of the symbols
 ************************************************************************/
 void CReelStripView::finalizeSymbPos()
 {
@@ -466,7 +466,7 @@ void CReelStripView::finalizeSymbPos()
 
 
 /************************************************************************
-*    desc:  Transform the reel strip
+*    DESC:  Transform the reel strip
 ************************************************************************/
 void CReelStripView::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
@@ -481,7 +481,7 @@ void CReelStripView::transform( const CMatrix & matrix, bool tranformWorldPos )
 
 
 /************************************************************************
-*    desc:  Do the render
+*    DESC:  Do the render
 ************************************************************************/
 void CReelStripView::render( const CMatrix & matrix )
 {
@@ -534,7 +534,7 @@ void CReelStripView::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CReelStripView::deferredRender( const CMatrix & matrix )
 {
@@ -556,7 +556,7 @@ void CReelStripView::deferredRender( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Start the spin
+*    DESC:  Start the spin
 ************************************************************************/
 void CReelStripView::startSpin()
 {
@@ -565,7 +565,7 @@ void CReelStripView::startSpin()
 
 
 /************************************************************************
-*    desc:  Stop the spin
+*    DESC:  Stop the spin
 ************************************************************************/
 void CReelStripView::stopSpin()
 {
@@ -575,7 +575,7 @@ void CReelStripView::stopSpin()
 
 
 /************************************************************************
-*    desc:  Get the spin state
+*    DESC:  Get the spin state
 ************************************************************************/
 NSlotDefs::ESpinState CReelStripView::getSpinState() const
 {
@@ -584,7 +584,7 @@ NSlotDefs::ESpinState CReelStripView::getSpinState() const
 
 
 /************************************************************************
-*    desc:  Connect to the spin state signal
+*    DESC:  Connect to the spin state signal
 ************************************************************************/
 void CReelStripView::connect_spinState( const SpinStateSignal::slot_type & slot )
 {
@@ -593,7 +593,7 @@ void CReelStripView::connect_spinState( const SpinStateSignal::slot_type & slot 
 
 
 /************************************************************************
-*    desc:  Get the number of visible symbols on this reel
+*    DESC:  Get the number of visible symbols on this reel
 ************************************************************************/
 int CReelStripView::getVisibleSymbolCount() const
 {
@@ -602,7 +602,7 @@ int CReelStripView::getVisibleSymbolCount() const
 
 
 /************************************************************************
-*    desc:  Do we allow the stop sounds?
+*    DESC:  Do we allow the stop sounds?
 ************************************************************************/
 void CReelStripView::allowStopSounds( bool allow )
 {

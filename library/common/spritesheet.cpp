@@ -20,7 +20,7 @@
 #include <limits>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteSheet::CSpriteSheet() :
     m_defaultIndex(0),
@@ -32,7 +32,7 @@ CSpriteSheet::CSpriteSheet() :
 
 
 /************************************************************************
-*    desc:  Set/Get the glyph count
+*    DESC:  Set/Get the glyph count
 ************************************************************************/
 void CSpriteSheet::setGlyphCount( uint glyphCount)
 {
@@ -41,7 +41,7 @@ void CSpriteSheet::setGlyphCount( uint glyphCount)
 
 
 /************************************************************************
-*    desc:  Set the glyph columns
+*    DESC:  Set the glyph columns
 ************************************************************************/
 void CSpriteSheet::setGlyphColumns( uint columns )
 {
@@ -50,7 +50,7 @@ void CSpriteSheet::setGlyphColumns( uint columns )
 
 
 /************************************************************************
-*    desc:  Build the simple (grid) sprite sheet data
+*    DESC:  Build the simple (grid) sprite sheet data
 ************************************************************************/
 void CSpriteSheet::build( const CSize<int> & sheetSize )
 {
@@ -91,7 +91,7 @@ void CSpriteSheet::build( const CSize<int> & sheetSize )
 
 
 /************************************************************************
-*    desc:  Load the glyph data from XML file
+*    DESC:  Load the glyph data from XML file
 *
 *           NOTE: The first time the sprite sheet is created, byStrID sets
 *           the stage as to how it is stored. If false, it's all loaded
@@ -135,7 +135,7 @@ void CSpriteSheet::loadFromXML( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Set the gylph data
+*    DESC:  Set the gylph data
 ************************************************************************/
 void CSpriteSheet::set( const CSpriteSheetGlyph & rGlyph )
 {
@@ -160,7 +160,7 @@ void CSpriteSheet::set( const CSpriteSheet & rSpriteSheet, const std::vector<std
 
 
 /************************************************************************
-*    desc:  Copy over the gylph data
+*    DESC:  Copy over the gylph data
 ************************************************************************/
 void CSpriteSheet::copyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::string> & rStrIdVec, bool loadAllGlyphs ) const
 {
@@ -203,7 +203,7 @@ void CSpriteSheet::copyTo( CSpriteSheet & rSpriteSheet, const std::vector<std::s
 
 
 /************************************************************************
-*    desc:  Get the glyph
+*    DESC:  Get the glyph
 ************************************************************************/
 const CSpriteSheetGlyph & CSpriteSheet::getGlyph( int index ) const
 {
@@ -229,7 +229,7 @@ const CSpriteSheetGlyph & CSpriteSheet::findGlyph( const std::string & glyphId )
 
 
 /************************************************************************
-*    desc:  Get the number of gylphs in this sprite sheet
+*    DESC:  Get the number of gylphs in this sprite sheet
 ************************************************************************/
 size_t CSpriteSheet::getCount() const
 {
@@ -247,7 +247,7 @@ size_t CSpriteSheet::getCount() const
 
 
 /************************************************************************
-*    desc:  Set/Get the default index
+*    DESC:  Set/Get the default index
 ************************************************************************/
 void CSpriteSheet::setDefaultIndex( uint index )
 {
@@ -261,7 +261,7 @@ uint CSpriteSheet::getDefaultIndex() const
 
 
 /************************************************************************
-*    desc:  Set/Get the offset for loading with a format code
+*    DESC:  Set/Get the offset for loading with a format code
 ************************************************************************/
 void CSpriteSheet::setFormatCodeOffset( uint index )
 {
@@ -275,7 +275,7 @@ int CSpriteSheet::getFormatCodeOffset() const
 
 
 /************************************************************************
-*    desc:  Clear out the data
+*    DESC:  Clear out the data
 ************************************************************************/
 void CSpriteSheet::clear()
 {

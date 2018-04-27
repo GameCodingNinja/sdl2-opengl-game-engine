@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CXMLPreloader::CXMLPreloader()
 {
@@ -25,7 +25,7 @@ CXMLPreloader::CXMLPreloader()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CXMLPreloader::~CXMLPreloader()
 {
@@ -33,7 +33,7 @@ CXMLPreloader::~CXMLPreloader()
 
 
 /************************************************************************
- *    desc:  Load the XML file
+ *    DESC:  Load the XML file
  ************************************************************************/
 const XMLNode & CXMLPreloader::load( const std::string & filePath, const std::string & firstNode )
 {
@@ -53,7 +53,7 @@ const XMLNode & CXMLPreloader::load( const std::string & filePath, const std::st
 
 
 /************************************************************************
- *    desc:  Get the loaded XML node
+ *    DESC:  Get the loaded XML node
  ************************************************************************/
 const XMLNode & CXMLPreloader::getNode( const std::string & filePath ) const
 {
@@ -69,7 +69,7 @@ const XMLNode & CXMLPreloader::getNode( const std::string & filePath ) const
 
 
 /************************************************************************
- *    desc:  Clear all the XML data
+ *    DESC:  Clear all the XML data
  ************************************************************************/
 void CXMLPreloader::clear()
 {

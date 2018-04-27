@@ -11,7 +11,7 @@
 
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteSheetMgr::CSpriteSheetMgr()
 {
@@ -19,7 +19,7 @@ CSpriteSheetMgr::CSpriteSheetMgr()
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSpriteSheetMgr::~CSpriteSheetMgr()
 {
@@ -27,7 +27,7 @@ CSpriteSheetMgr::~CSpriteSheetMgr()
 
 
 /************************************************************************
-*    desc:  Load the glyph data from XML file
+*    DESC:  Load the glyph data from XML file
 ************************************************************************/
 const CSpriteSheet & CSpriteSheetMgr::load( const std::string & filePath )
 {
@@ -46,7 +46,7 @@ const CSpriteSheet & CSpriteSheetMgr::load( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Clear all the sprite sheet data
+*    DESC:  Clear all the sprite sheet data
 ************************************************************************/
 void CSpriteSheetMgr::clear()
 {

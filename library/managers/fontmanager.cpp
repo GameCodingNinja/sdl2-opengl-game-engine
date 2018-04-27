@@ -16,7 +16,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CFontMgr::CFontMgr()
 {
@@ -24,7 +24,7 @@ CFontMgr::CFontMgr()
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CFontMgr::~CFontMgr()
 {
@@ -32,7 +32,7 @@ CFontMgr::~CFontMgr()
 
 
 /************************************************************************
-*    desc:  Load the material from file path
+*    DESC:  Load the material from file path
 ************************************************************************/
 void CFontMgr::loadFromXML( const std::string & filePath, const bool createFromData )
 {
@@ -72,7 +72,7 @@ void CFontMgr::loadFromXML( const std::string & filePath, const bool createFromD
 
 
 /************************************************************************
- *    desc:  Create the font texture from data
+ *    DESC:  Create the font texture from data
  ************************************************************************/
 void CFontMgr::createFromData()
 {
@@ -82,7 +82,7 @@ void CFontMgr::createFromData()
 
 
 /************************************************************************
-*    desc:  Get the font
+*    DESC:  Get the font
 ************************************************************************/
 const CFont & CFontMgr::getFont( const std::string & name ) const
 {
@@ -99,7 +99,7 @@ const CFont & CFontMgr::getFont( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Is the font in the map. throws exception if not
+*    DESC:  Is the font in the map. throws exception if not
 ************************************************************************/
 void CFontMgr::isFont( const std::string & name ) const
 {
@@ -114,7 +114,7 @@ void CFontMgr::isFont( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Delete a specific mesh
+*    DESC:  Delete a specific mesh
 ************************************************************************/
 void CFontMgr::deleteTheFont( const std::string & key )
 {
@@ -128,7 +128,7 @@ void CFontMgr::deleteTheFont( const std::string & key )
 
 
 /************************************************************************
-*    desc:  Get the group name
+*    DESC:  Get the group name
 ************************************************************************/
 const std::string & CFontMgr::getGroup() const
 {

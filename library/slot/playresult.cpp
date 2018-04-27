@@ -13,7 +13,7 @@
 #include <algorithm>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CPlayResult::CPlayResult() :
     m_totalWinAmount(0)
@@ -22,7 +22,7 @@ CPlayResult::CPlayResult() :
 
 
 /************************************************************************
-*    desc:  Add a slot pay
+*    DESC:  Add a slot pay
 ************************************************************************/
 void CPlayResult::addPay(
     const NSlotDefs::EPayType payType,
@@ -36,7 +36,7 @@ void CPlayResult::addPay(
 
 
 /************************************************************************
-*    desc:  Sort the pays
+*    DESC:  Sort the pays
 ************************************************************************/
 void CPlayResult::sortPays()
 {
@@ -47,7 +47,7 @@ void CPlayResult::sortPays()
 
 
 /************************************************************************
-*    desc:  Add up the win
+*    DESC:  Add up the win
 ************************************************************************/
 uint CPlayResult::addUpWin()
 {
@@ -61,7 +61,7 @@ uint CPlayResult::addUpWin()
 
 
 /************************************************************************
-*    desc:  Clear the pays
+*    DESC:  Clear the pays
 ************************************************************************/
 void CPlayResult::clear()
 {
@@ -71,7 +71,7 @@ void CPlayResult::clear()
 
 
 /************************************************************************
-*    desc:  Get the pay
+*    DESC:  Get the pay
 ************************************************************************/
 const CPay & CPlayResult::getPay( int index ) const
 {
@@ -80,7 +80,7 @@ const CPay & CPlayResult::getPay( int index ) const
 
 
 /************************************************************************
-*    desc:  Get the number of pays
+*    DESC:  Get the number of pays
 ************************************************************************/
 uint CPlayResult::getPayCount() const
 {

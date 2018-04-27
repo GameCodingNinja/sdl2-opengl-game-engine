@@ -9,6 +9,8 @@
     <file path="data/scripts/state/igamestate.ang"/>
     <file path="data/scripts/state/startupstate.ang"/>
     <file path="data/scripts/state/titlescreenstate.ang"/>
+    <file path="data/scripts/menu/menu_defs.ang"/>
+    <file path="data/scripts/menu/menu.ang"/>
   </groupList>
 
 </listTable>

@@ -23,21 +23,21 @@
 #include <boost/format.hpp>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CObjectVisualData3D::CObjectVisualData3D()
 {
 }
 
 /************************************************************************
- *    desc:  Destructor                                                             
+ *    DESC:  Destructor                                                             
  ************************************************************************/
 CObjectVisualData3D::~CObjectVisualData3D()
 {
 }
 
 /************************************************************************
- *    desc:  Load the object data from node
+ *    DESC:  Load the object data from node
  ************************************************************************/
 void CObjectVisualData3D::loadFromNode( const XMLNode & objectNode )
 {
@@ -68,7 +68,7 @@ void CObjectVisualData3D::loadFromNode( const XMLNode & objectNode )
 
 
 /************************************************************************
- *    desc:  Load the mesh data from file
+ *    DESC:  Load the mesh data from file
  ************************************************************************/
 void CObjectVisualData3D::loadMeshData( const std::string & group )
 {
@@ -78,7 +78,7 @@ void CObjectVisualData3D::loadMeshData( const std::string & group )
 }
 
 /************************************************************************
- *    desc:  Create the object from data
+ *    DESC:  Create the object from data
  ************************************************************************/
 void CObjectVisualData3D::createFromData( const std::string & group )
 {
@@ -88,7 +88,7 @@ void CObjectVisualData3D::createFromData( const std::string & group )
 }
 
 /************************************************************************
- *    desc:  Get the name of the shader ID
+ *    DESC:  Get the name of the shader ID
  ************************************************************************/
 const std::string & CObjectVisualData3D::getShaderID() const
 {
@@ -96,7 +96,7 @@ const std::string & CObjectVisualData3D::getShaderID() const
 }
 
 /************************************************************************
- *    desc:  Get the color
+ *    DESC:  Get the color
  ************************************************************************/
 const CColor & CObjectVisualData3D::getColor() const
 {
@@ -104,7 +104,7 @@ const CColor & CObjectVisualData3D::getColor() const
 }
 
 /************************************************************************
- *    desc:  Whether or not the visual tag was specified
+ *    DESC:  Whether or not the visual tag was specified
  ************************************************************************/
 bool CObjectVisualData3D::isActive() const
 {
@@ -112,7 +112,7 @@ bool CObjectVisualData3D::isActive() const
 }
 
 /************************************************************************
- *    desc:  Get the mesh3d vector
+ *    DESC:  Get the mesh3d vector
  ************************************************************************/
 const CMesh3D & CObjectVisualData3D::getMesh3D() const
 {

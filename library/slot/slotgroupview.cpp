@@ -21,7 +21,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotGroupView::CSlotGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     m_spSlotGroupModel( rSlotGroupModel )
@@ -30,7 +30,7 @@ CSlotGroupView::CSlotGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGr
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotGroupView::~CSlotGroupView()
 {
@@ -38,7 +38,7 @@ CSlotGroupView::~CSlotGroupView()
 
 
 /************************************************************************
-*    desc:  Create the view slot strips
+*    DESC:  Create the view slot strips
 ************************************************************************/
 void CSlotGroupView::create(
     const XMLNode & node,
@@ -69,7 +69,7 @@ void CSlotGroupView::create(
 
 
 /************************************************************************
-*    desc:  Set the cycle results text
+*    DESC:  Set the cycle results text
 ************************************************************************/
 void CSlotGroupView::setCycleResultText( bool visible, const CPay * pPay )
 {
@@ -97,7 +97,7 @@ void CSlotGroupView::setCycleResultText( bool visible, const CPay * pPay )
 
 
 /************************************************************************
-*    desc:  Load the spin profile from XML node
+*    DESC:  Load the spin profile from XML node
 ************************************************************************/
 void CSlotGroupView::loadSpinProfileFromNode( const XMLNode & node )
 {
@@ -142,7 +142,7 @@ void CSlotGroupView::loadSpinProfileFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Update the reel group
+*    DESC:  Update the reel group
 ************************************************************************/
 void CSlotGroupView::update()
 {
@@ -152,7 +152,7 @@ void CSlotGroupView::update()
 
 
 /************************************************************************
-*    desc:  Transform the reel group
+*    DESC:  Transform the reel group
 ************************************************************************/
 void CSlotGroupView::transform()
 {
@@ -164,7 +164,7 @@ void CSlotGroupView::transform()
 
 
 /************************************************************************
-*    desc:  Do the render
+*    DESC:  Do the render
 ************************************************************************/
 void CSlotGroupView::render( const CMatrix & matrix )
 {
@@ -174,7 +174,7 @@ void CSlotGroupView::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Activate the cycle results
+*    DESC:  Activate the cycle results
 ************************************************************************/
 void CSlotGroupView::activateCycleResults()
 {
@@ -184,7 +184,7 @@ void CSlotGroupView::activateCycleResults()
 
 
 /************************************************************************
-*    desc:  Deactivate the cycle results
+*    DESC:  Deactivate the cycle results
 ************************************************************************/
 void CSlotGroupView::deactivateCycleResults()
 {
@@ -194,7 +194,7 @@ void CSlotGroupView::deactivateCycleResults()
 
 
 /************************************************************************
-*    desc:  Stop the cycle results animation
+*    DESC:  Stop the cycle results animation
 ************************************************************************/
 void CSlotGroupView::startCycleResultsAnimation()
 {
@@ -204,7 +204,7 @@ void CSlotGroupView::startCycleResultsAnimation()
 
 
 /************************************************************************
-*    desc:  Stop the cycle results animation
+*    DESC:  Stop the cycle results animation
 ************************************************************************/
 void CSlotGroupView::stopCycleResultsAnimation()
 {
@@ -214,7 +214,7 @@ void CSlotGroupView::stopCycleResultsAnimation()
 
 
 /************************************************************************
-*    desc:  Is the cycle results active
+*    DESC:  Is the cycle results active
 ************************************************************************/
 bool CSlotGroupView::isCycleResultsActive()
 {
@@ -226,7 +226,7 @@ bool CSlotGroupView::isCycleResultsActive()
 
 
 /************************************************************************
-*    desc:  Is the cycle results animating
+*    DESC:  Is the cycle results animating
 ************************************************************************/
 bool CSlotGroupView::isCycleResultsAnimating()
 {
@@ -238,7 +238,7 @@ bool CSlotGroupView::isCycleResultsAnimating()
 
 
 /************************************************************************
-*    desc:  Clear the cycle results symbols
+*    DESC:  Clear the cycle results symbols
 ************************************************************************/
 void CSlotGroupView::clearCycleResultSymbs()
 {

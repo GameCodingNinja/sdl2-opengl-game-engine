@@ -19,7 +19,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CGameSave::CGameSave() :
     m_file(nullptr)
@@ -28,7 +28,7 @@ CGameSave::CGameSave() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CGameSave::~CGameSave()
 {
@@ -37,7 +37,7 @@ CGameSave::~CGameSave()
 
 
 /************************************************************************
-*    desc:  Load the game data
+*    DESC:  Load the game data
 ************************************************************************/
 void CGameSave::load()
 {
@@ -57,7 +57,7 @@ void CGameSave::load()
 
 
 /************************************************************************
-*    desc:  Save/Save/Close the game data
+*    DESC:  Save/Save/Close the game data
 ************************************************************************/
 void CGameSave::openSaveClose()
 {
@@ -68,7 +68,7 @@ void CGameSave::openSaveClose()
 
 
 /************************************************************************
-*    desc:  Open the game data
+*    DESC:  Open the game data
 ************************************************************************/
 bool CGameSave::open()
 {
@@ -107,7 +107,7 @@ bool CGameSave::open()
 
 
 /************************************************************************
-*    desc:  Save the game data
+*    DESC:  Save the game data
 ************************************************************************/
 void CGameSave::save()
 {
@@ -122,7 +122,7 @@ void CGameSave::save()
 
 
 /************************************************************************
-*    desc:  Close the game data file
+*    DESC:  Close the game data file
 ************************************************************************/
 void CGameSave::close()
 {
@@ -135,7 +135,7 @@ void CGameSave::close()
 
 
 /************************************************************************
-*    desc:  Set/Get play lobby music
+*    DESC:  Set/Get play lobby music
 ************************************************************************/
 void CGameSave::setPlayLobbyMusic( bool value )
 {
@@ -149,7 +149,7 @@ bool CGameSave::getPlayLobbyMusic() const
 
 
 /************************************************************************
-*    desc:  Set/Get play stop sounds
+*    DESC:  Set/Get play stop sounds
 ************************************************************************/
 void CGameSave::setPlayStopSounds( bool value )
 {
@@ -163,7 +163,7 @@ bool CGameSave::getPlayStopSounds() const
 
 
 /************************************************************************
-*    desc:  Set/Get play spin music
+*    DESC:  Set/Get play spin music
 ************************************************************************/
 void CGameSave::setPlaySpinMusic( bool value )
 {
@@ -177,7 +177,7 @@ bool CGameSave::getPlaySpinMusic() const
 
 
 /************************************************************************
-*    desc:  Set/Get total credits
+*    DESC:  Set/Get total credits
 ************************************************************************/
 void CGameSave::setTotalCredits( uint value )
 {

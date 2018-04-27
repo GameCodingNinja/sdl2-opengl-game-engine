@@ -17,7 +17,7 @@
 #include <vector>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CAnimatedCycleResults::CAnimatedCycleResults( CPlayResult * pPlayResult ) :
     iCycleResults( pPlayResult )
@@ -26,7 +26,7 @@ CAnimatedCycleResults::CAnimatedCycleResults( CPlayResult * pPlayResult ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CAnimatedCycleResults::~CAnimatedCycleResults()
 {
@@ -34,7 +34,7 @@ CAnimatedCycleResults::~CAnimatedCycleResults()
 
 
 /***************************************************************************
-*    desc:  Do some inits
+*    DESC:  Do some inits
 ****************************************************************************/
 void CAnimatedCycleResults::init( std::shared_ptr<CSlotGroupView> & spSlotGroupView )
 {
@@ -43,7 +43,7 @@ void CAnimatedCycleResults::init( std::shared_ptr<CSlotGroupView> & spSlotGroupV
 
 
 /***************************************************************************
-*    desc:  Update the cycle results
+*    DESC:  Update the cycle results
 ****************************************************************************/
 void CAnimatedCycleResults::update()
 {
@@ -60,7 +60,7 @@ void CAnimatedCycleResults::update()
 
 
 /************************************************************************
-*    desc:  Transform
+*    DESC:  Transform
 ************************************************************************/
 void CAnimatedCycleResults::transform( const CMatrix & matrix, bool tranformWorldPos )
 {
@@ -68,7 +68,7 @@ void CAnimatedCycleResults::transform( const CMatrix & matrix, bool tranformWorl
 
 
 /***************************************************************************
-*    desc:  Activate the cycle results
+*    DESC:  Activate the cycle results
 ****************************************************************************/
 void CAnimatedCycleResults::activate()
 {
@@ -82,7 +82,7 @@ void CAnimatedCycleResults::activate()
 
 
 /***************************************************************************
-*    desc:  Deactivate the cycle results
+*    DESC:  Deactivate the cycle results
 ****************************************************************************/
 void CAnimatedCycleResults::deactivate()
 {
@@ -96,7 +96,7 @@ void CAnimatedCycleResults::deactivate()
 
 
 /***************************************************************************
-*    desc:  Start the cycle results animation
+*    DESC:  Start the cycle results animation
 ****************************************************************************/
 void CAnimatedCycleResults::startAnimation()
 {
@@ -137,7 +137,7 @@ void CAnimatedCycleResults::startAnimation()
 
 
 /***************************************************************************
-*    desc:  Stop the cycle results animation
+*    DESC:  Stop the cycle results animation
 ****************************************************************************/
 void CAnimatedCycleResults::stopAnimation()
 {
@@ -162,7 +162,7 @@ void CAnimatedCycleResults::stopAnimation()
 
 
 /***************************************************************************
-*    desc:  Are we still animating
+*    DESC:  Are we still animating
 ****************************************************************************/
 bool CAnimatedCycleResults::isAnimating()
 {
@@ -185,7 +185,7 @@ bool CAnimatedCycleResults::isAnimating()
 
 
 /************************************************************************
-*    desc:  Do the render
+*    DESC:  Do the render
 ************************************************************************/
 void CAnimatedCycleResults::render( const CMatrix & matrix )
 {

@@ -19,7 +19,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CTitleScreenState::CTitleScreenState() :
     CCommonState( NGameDefs::EGS_TITLE_SCREEN, NGameDefs::EGS_GAME_LOAD ),
@@ -29,7 +29,7 @@ CTitleScreenState::CTitleScreenState() :
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CTitleScreenState::init()
 {
@@ -48,7 +48,7 @@ void CTitleScreenState::init()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CTitleScreenState::handleEvent( const SDL_Event & rEvent )
 {
@@ -65,7 +65,7 @@ void CTitleScreenState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Is the state done
+*    DESC:  Is the state done
 ****************************************************************************/
 /*bool CTitleScreenState::DoStateChange()
 {
@@ -100,7 +100,7 @@ void CTitleScreenState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CTitleScreenState::update()
 {
@@ -111,7 +111,7 @@ void CTitleScreenState::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CTitleScreenState::transform()
 {
@@ -122,7 +122,7 @@ void CTitleScreenState::transform()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CTitleScreenState::preRender()
 {
@@ -133,12 +133,12 @@ void CTitleScreenState::preRender()
 
 
 /***************************************************************************
-*    desc: Functions for loading/unloading the assets for this state
+*    DESC: Functions for loading/unloading the assets for this state
 ****************************************************************************/
 namespace NTitleScreenState
 {
     /***************************************************************************
-    *    desc:  Namespace function for loading the assets for this state
+    *    DESC:  Namespace function for loading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void ObjectDataLoad()
@@ -164,7 +164,7 @@ namespace NTitleScreenState
 
 
     /***************************************************************************
-    *    desc:  Namespace function for unloading the assets for this state
+    *    DESC:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()

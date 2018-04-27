@@ -18,7 +18,7 @@
 #include <cstdlib>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSpriteData::CSpriteData( 
     const XMLNode & node,
@@ -83,7 +83,7 @@ CSpriteData::CSpriteData( const CSpriteData & data ) :
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CSpriteData::~CSpriteData()
 {
@@ -91,7 +91,7 @@ CSpriteData::~CSpriteData()
 
 
 /************************************************************************
-*    desc:  Get the name of this specific sprite instance
+*    DESC:  Get the name of this specific sprite instance
 ************************************************************************/
 const std::string & CSpriteData::getName() const
 {
@@ -100,7 +100,7 @@ const std::string & CSpriteData::getName() const
 
 
 /************************************************************************
-*    desc:  Get the group
+*    DESC:  Get the group
 ************************************************************************/
 const std::string & CSpriteData::getGroup() const
 {
@@ -109,7 +109,7 @@ const std::string & CSpriteData::getGroup() const
 
 
 /************************************************************************
-*    desc:  Get the object name
+*    DESC:  Get the object name
 ************************************************************************/
 const std::string & CSpriteData::getObjectName() const
 {
@@ -118,7 +118,7 @@ const std::string & CSpriteData::getObjectName() const
 
 
 /************************************************************************
-*    desc:  Get the ai name
+*    DESC:  Get the ai name
 ************************************************************************/
 const std::string & CSpriteData::getAIName() const
 {
@@ -127,7 +127,7 @@ const std::string & CSpriteData::getAIName() const
 
 
 /************************************************************************
-*    desc:  Get the unique id number
+*    DESC:  Get the unique id number
 ************************************************************************/
 int CSpriteData::getId() const
 {
@@ -136,7 +136,7 @@ int CSpriteData::getId() const
 
 
 /************************************************************************
-*    desc:  Get the font data
+*    DESC:  Get the font data
 ************************************************************************/
 const CFontData * CSpriteData::getFontData() const
 {
@@ -145,7 +145,7 @@ const CFontData * CSpriteData::getFontData() const
 
 
 /************************************************************************
-*    desc:  Get the script functions
+*    DESC:  Get the script functions
 ************************************************************************/
 const std::map<std::string, std::string> & CSpriteData::getScriptFunctions() const
 {
@@ -154,7 +154,7 @@ const std::map<std::string, std::string> & CSpriteData::getScriptFunctions() con
 
 
 /************************************************************************
-*    desc:  Load the script functions and add them to the map
+*    DESC:  Load the script functions and add them to the map
 ************************************************************************/
 void CSpriteData::loadScriptFunctions( const XMLNode & node )
 {

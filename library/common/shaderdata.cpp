@@ -23,7 +23,7 @@
 
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CShaderData::CShaderData()
     : m_programID(0), m_vertexID(0), m_fragmentID(0)
@@ -32,7 +32,7 @@ CShaderData::CShaderData()
 
 
 /************************************************************************
-*    desc:  destructor                                                             
+*    DESC:  destructor                                                             
 ************************************************************************/
 CShaderData::~CShaderData()
 {
@@ -44,7 +44,7 @@ CShaderData::~CShaderData()
 
 
 /************************************************************************
-*    desc:  Set/Get the program ID
+*    DESC:  Set/Get the program ID
 ************************************************************************/
 void CShaderData::setProgramID( uint32_t location )
 {
@@ -58,7 +58,7 @@ uint32_t CShaderData::getProgramID() const
 
 
 /************************************************************************
-*    desc:  Set/Get the vertex ID
+*    DESC:  Set/Get the vertex ID
 ************************************************************************/
 void CShaderData::setVertexID( uint32_t location )
 {
@@ -72,7 +72,7 @@ uint32_t CShaderData::getVertexID() const
 
 
 /************************************************************************
-*    desc:  Set/Get the fragment ID
+*    DESC:  Set/Get the fragment ID
 ************************************************************************/
 void CShaderData::setFragmentID( uint32_t location )
 {
@@ -86,7 +86,7 @@ uint32_t CShaderData::getFragmentID() const
 
 
 /************************************************************************
-*    desc:  Set/Get the attribute location
+*    DESC:  Set/Get the attribute location
 ************************************************************************/
 void CShaderData::setAttributeLocation( const std::string & name, int32_t location )
 {
@@ -114,7 +114,7 @@ int32_t CShaderData::getAttributeLocation( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Set/Get the uniform location
+*    DESC:  Set/Get the uniform location
 ************************************************************************/
 void CShaderData::setUniformLocation( const std::string & name, int32_t location )
 {
@@ -142,7 +142,7 @@ int32_t CShaderData::getUniformLocation( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Check for the uniform location
+*    DESC:  Check for the uniform location
 ************************************************************************/
 bool CShaderData::hasUniformLocation( const std::string & name ) const
 {
@@ -155,7 +155,7 @@ bool CShaderData::hasUniformLocation( const std::string & name ) const
 
 
 /************************************************************************
-*    desc:  Get the vertex attribute count
+*    DESC:  Get the vertex attribute count
 ************************************************************************/
 size_t CShaderData::getVertexAttribCount()
 {
@@ -164,7 +164,7 @@ size_t CShaderData::getVertexAttribCount()
 
 
 /************************************************************************
-*    desc:  Free the data
+*    DESC:  Free the data
 ************************************************************************/
 void CShaderData::free()
 {
@@ -191,7 +191,7 @@ void CShaderData::free()
 
 
 /************************************************************************
-*    desc:  Clear the data
+*    DESC:  Clear the data
 ************************************************************************/
 void CShaderData::clear()
 {

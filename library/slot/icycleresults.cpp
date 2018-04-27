@@ -12,7 +12,7 @@
 #include <slot/playresult.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 iCycleResults::iCycleResults( CPlayResult * pPlayResult ) :
     m_pPlayResult( pPlayResult ),
@@ -25,7 +25,7 @@ iCycleResults::iCycleResults( CPlayResult * pPlayResult ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 iCycleResults::~iCycleResults()
 {
@@ -33,7 +33,7 @@ iCycleResults::~iCycleResults()
 
 
 /***************************************************************************
-*    desc:  Activate the cycle results
+*    DESC:  Activate the cycle results
 ****************************************************************************/
 void iCycleResults::activate()
 {
@@ -45,7 +45,7 @@ void iCycleResults::activate()
 
 
 /***************************************************************************
-*    desc:  Deactivate the cycle results
+*    DESC:  Deactivate the cycle results
 ****************************************************************************/
 void iCycleResults::deactivate()
 {
@@ -54,7 +54,7 @@ void iCycleResults::deactivate()
 
 
 /***************************************************************************
-*    desc:  Did we complete one animation cycle of all the pays?
+*    DESC:  Did we complete one animation cycle of all the pays?
 ****************************************************************************/
 bool iCycleResults::isFirstCycleComplete()
 {
@@ -63,7 +63,7 @@ bool iCycleResults::isFirstCycleComplete()
 
 
 /***************************************************************************
-*    desc:  Is the cycle results active?
+*    DESC:  Is the cycle results active?
 ****************************************************************************/
 bool iCycleResults::isCycleResultsActive()
 {

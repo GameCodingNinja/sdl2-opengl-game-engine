@@ -9,7 +9,7 @@
 #include <spritestrategy/ispritestrategy.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 iSpriteStrategy::iSpriteStrategy(const std::string & cameraId) :
     m_cameraId(cameraId)
@@ -22,7 +22,7 @@ iSpriteStrategy::iSpriteStrategy()
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 iSpriteStrategy::~iSpriteStrategy()
 {
@@ -30,7 +30,7 @@ iSpriteStrategy::~iSpriteStrategy()
 
 
 /************************************************************************
-*    desc:  Transform the sprites
+*    DESC:  Transform the sprites
 ************************************************************************/
 void iSpriteStrategy::setCameraId( const std::string & cameraId )
 {

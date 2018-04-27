@@ -8,7 +8,7 @@
 #include <gui/uilabel.h>
 
 /************************************************************************
-*    desc:  Constructor                                                             
+*    DESC:  Constructor                                                             
 ************************************************************************/
 CUILabel::CUILabel( const std::string & group ) :
     CUIControl( group )
@@ -19,7 +19,7 @@ CUILabel::CUILabel( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Destructor                                                             
+*    DESC:  Destructor                                                             
 ************************************************************************/
 CUILabel::~CUILabel()
 {

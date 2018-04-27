@@ -17,7 +17,7 @@
 #include <cstdlib>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CScrollParam::CScrollParam() : 
     m_startDelay(-1),
@@ -28,7 +28,7 @@ CScrollParam::CScrollParam() :
 
 
 /************************************************************************
-*    desc:  Load the scroll data from node
+*    DESC:  Load the scroll data from node
 ************************************************************************/
 void CScrollParam::loadFromNode( const XMLNode & node )
 {
@@ -54,7 +54,7 @@ void CScrollParam::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Clear out the data
+*    DESC:  Clear out the data
 ************************************************************************/
 bool CScrollParam::canScroll( int msg )
 {
@@ -73,7 +73,7 @@ bool CScrollParam::canScroll( int msg )
 
 
 /************************************************************************
-*    desc:  Clear out the data
+*    DESC:  Clear out the data
 ************************************************************************/
 int CScrollParam::getStartDelay()
 {
@@ -82,7 +82,7 @@ int CScrollParam::getStartDelay()
 
 
 /************************************************************************
-*    desc:  Clear out the data
+*    DESC:  Clear out the data
 ************************************************************************/
 int CScrollParam::getScrollDelay()
 {
@@ -91,7 +91,7 @@ int CScrollParam::getScrollDelay()
 
 
 /************************************************************************
-*    desc:  Get the message
+*    DESC:  Get the message
 ************************************************************************/
 int CScrollParam::getMsg()
 {

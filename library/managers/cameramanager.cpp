@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CCameraMgr::CCameraMgr() :
     m_pActiveCamera(nullptr)
@@ -28,7 +28,7 @@ CCameraMgr::CCameraMgr() :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CCameraMgr::~CCameraMgr()
 {
@@ -36,7 +36,7 @@ CCameraMgr::~CCameraMgr()
 
 
 /************************************************************************
-*    desc:  Create or recreate the projection matrixes for resolution change
+*    DESC:  Create or recreate the projection matrixes for resolution change
 ************************************************************************/
 void CCameraMgr::createProjMatrix()
 {
@@ -71,7 +71,7 @@ void CCameraMgr::createProjMatrix()
 
 
 /************************************************************************
-*    desc:  Get the default projection matrix
+*    DESC:  Get the default projection matrix
 ************************************************************************/
 const CMatrix & CCameraMgr::getDefaultProjMatrix() const
 {
@@ -83,7 +83,7 @@ const CMatrix & CCameraMgr::getDefaultProjMatrix() const
 
 
 /************************************************************************
-*    desc:  Get the projection matrix
+*    DESC:  Get the projection matrix
 ************************************************************************/
 const CMatrix & CCameraMgr::getProjectionMatrix( NDefs::EProjectionType type ) const
 {
@@ -95,7 +95,7 @@ const CMatrix & CCameraMgr::getProjectionMatrix( NDefs::EProjectionType type ) c
 
 
 /************************************************************************
-*    desc:  Create an orthographic camera
+*    DESC:  Create an orthographic camera
 ************************************************************************/
 CCamera & CCameraMgr::createOrthographic( const std::string & id, float minZDist, float maxZDist, float scale )
 {
@@ -109,7 +109,7 @@ CCamera & CCameraMgr::createOrthographic( const std::string & id, float minZDist
 
 
 /************************************************************************
-*    desc:  Create a perspective camera
+*    DESC:  Create a perspective camera
 ************************************************************************/
 CCamera & CCameraMgr::createPerspective( const std::string & id, float angle, float minZDist, float maxZDist, float scale )
 {
@@ -123,7 +123,7 @@ CCamera & CCameraMgr::createPerspective( const std::string & id, float angle, fl
 
 
 /************************************************************************
-*    desc:  Set/Get the active camera
+*    DESC:  Set/Get the active camera
 ************************************************************************/
 void CCameraMgr::setActiveCamera( const std::string & id )
 {
@@ -141,7 +141,7 @@ CCamera & CCameraMgr::getActiveCamera()
 
 
 /************************************************************************
-*    desc:  Get the camera
+*    DESC:  Get the camera
 ************************************************************************/
 CCamera & CCameraMgr::getCamera( const std::string & id )
 {
@@ -163,7 +163,7 @@ const CCamera & CCameraMgr::getCamera( const std::string & id ) const
 
 
 /************************************************************************
-*    desc:  Set the active camera position
+*    DESC:  Set the active camera position
 ************************************************************************/
 void CCameraMgr::setActiveCameraPos( const CPoint<CWorldValue> & position )
 {
@@ -191,7 +191,7 @@ void CCameraMgr::setActiveCameraPos( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Inc the active camera position
+*    DESC:  Inc the active camera position
 ************************************************************************/
 void CCameraMgr::incActiveCameraPos( const CPoint<CWorldValue> & position )
 {
@@ -219,7 +219,7 @@ void CCameraMgr::incActiveCameraPos( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Set the active camera rotation
+*    DESC:  Set the active camera rotation
 ************************************************************************/
 void CCameraMgr::setActiveCameraRot( const CPoint<float> & position )
 {
@@ -235,7 +235,7 @@ void CCameraMgr::setActiveCameraRot( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Inc the active camera rotation
+*    DESC:  Inc the active camera rotation
 ************************************************************************/
 void CCameraMgr::incActiveCameraRot( const CPoint<float> & position )
 {
@@ -251,7 +251,7 @@ void CCameraMgr::incActiveCameraRot( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Set the active camera scale
+*    DESC:  Set the active camera scale
 ************************************************************************/
 void CCameraMgr::setActiveCameraScale( const CPoint<float> & position )
 {
@@ -267,7 +267,7 @@ void CCameraMgr::setActiveCameraScale( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Inc the active camera scale
+*    DESC:  Inc the active camera scale
 ************************************************************************/
 void CCameraMgr::incActiveCameraScale( const CPoint<float> & position )
 {
@@ -283,7 +283,7 @@ void CCameraMgr::incActiveCameraScale( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Get the final matrix
+*    DESC:  Get the final matrix
 ************************************************************************/
 const CMatrix & CCameraMgr::getActiveCameraMatrix() const
 {
@@ -296,7 +296,7 @@ const CMatrix & CCameraMgr::getActiveCameraMatrix() const
 
 
 /************************************************************************
-*    desc:  Get the camera final matrix
+*    DESC:  Get the camera final matrix
 ************************************************************************/
 const CMatrix & CCameraMgr::getCameraMatrix( const std::string & id ) const
 {
@@ -314,7 +314,7 @@ const CMatrix & CCameraMgr::getCameraMatrix( const std::string & id ) const
 
 
 /************************************************************************
-*    desc:  Transform the all cameras
+*    DESC:  Transform the all cameras
 ************************************************************************/
 void CCameraMgr::transform()
 {
@@ -324,7 +324,7 @@ void CCameraMgr::transform()
 
 
 /************************************************************************
-*    desc:  Transform the camera
+*    DESC:  Transform the camera
 ************************************************************************/
 void CCameraMgr::transformCamera( const std::string & id )
 {

@@ -17,7 +17,7 @@
 #include <utilities/genfunc.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSmartResetKeyBindBtn::CSmartResetKeyBindBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )

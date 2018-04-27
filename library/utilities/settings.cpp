@@ -20,7 +20,7 @@
 #include <SDL_mixer.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSettings::CSettings() :
     m_filePath("data/settings/settings.cfg"),
@@ -59,7 +59,7 @@ CSettings::CSettings() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSettings::~CSettings()
 {
@@ -67,7 +67,7 @@ CSettings::~CSettings()
 
 
 /************************************************************************
-*    desc:  Init the file path for loading the settings file
+*    DESC:  Init the file path for loading the settings file
 ************************************************************************/
 void CSettings::initFilePath( const std::string & filePath )
 {
@@ -76,7 +76,7 @@ void CSettings::initFilePath( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Load settings data from xml file
+*    DESC:  Load settings data from xml file
 *
 *    param: string & _filePath - path to file
 *
@@ -298,7 +298,7 @@ void CSettings::loadXML()
 
 
 /************************************************************************
-*    desc:  Calculate the ratios
+*    DESC:  Calculate the ratios
 ************************************************************************/
 void CSettings::calcRatio()
 {
@@ -323,7 +323,7 @@ void CSettings::calcRatio()
 
 
 /************************************************************************
-*    desc:  Get/Set game window size
+*    DESC:  Get/Set game window size
 ************************************************************************/
 const CSize<float> & CSettings::getResolution() const
 {
@@ -342,7 +342,7 @@ void CSettings::setSize( const CSize<float> & size )
 
 
 /************************************************************************
-*    desc:  Get game window size / 2
+*    DESC:  Get game window size / 2
 *
 *    ret: CSize - size of game window / 2
 ************************************************************************/
@@ -353,7 +353,7 @@ const CSize<float> & CSettings::getSizeHalf() const
 
 
 /************************************************************************
-*    desc:  Get native size specified in config file
+*    DESC:  Get native size specified in config file
 ************************************************************************/
 const CSize<float> & CSettings::getNativeSize() const
 {
@@ -362,7 +362,7 @@ const CSize<float> & CSettings::getNativeSize() const
 
 
 /************************************************************************
-*    desc:  Get native size specified in config file and calc width
+*    DESC:  Get native size specified in config file and calc width
 ************************************************************************/
 const CSize<float> & CSettings::getDefaultSize() const
 {
@@ -371,7 +371,7 @@ const CSize<float> & CSettings::getDefaultSize() const
 
 
 /************************************************************************
-*    desc:  Get default size in half
+*    DESC:  Get default size in half
 ************************************************************************/
 const CSize<float> & CSettings::getDefaultSizeHalf() const
 {
@@ -380,7 +380,7 @@ const CSize<float> & CSettings::getDefaultSizeHalf() const
 
 
 /************************************************************************
-*    desc:  Height and width screen ratio for orthographic objects
+*    DESC:  Height and width screen ratio for orthographic objects
 *           The difference between screen and the default size
 ************************************************************************/
 const CSize<float> & CSettings::getOrthoAspectRatio() const
@@ -390,7 +390,7 @@ const CSize<float> & CSettings::getOrthoAspectRatio() const
 
 
 /************************************************************************
-*    desc: Height and width screen ratio for perspective projection
+*    DESC: Height and width screen ratio for perspective projection
 ************************************************************************/
 const CSize<float> & CSettings::getScreenAspectRatio() const
 {
@@ -399,7 +399,7 @@ const CSize<float> & CSettings::getScreenAspectRatio() const
 
 
 /************************************************************************
-*    desc:  Get/Set vSync?
+*    DESC:  Get/Set vSync?
 ************************************************************************/
 bool CSettings::getVSync() const
 {
@@ -413,7 +413,7 @@ void CSettings::setVSync( bool value )
 
 
 /************************************************************************
-*    desc:  Get the OpenGL major version
+*    DESC:  Get the OpenGL major version
 ************************************************************************/
 int CSettings::getMajorVersion() const
 {
@@ -422,7 +422,7 @@ int CSettings::getMajorVersion() const
 
 
 /************************************************************************
-*    desc:  Get the OpenGL minor version
+*    DESC:  Get the OpenGL minor version
 ************************************************************************/
 int CSettings::getMinorVersion() const
 {
@@ -431,7 +431,7 @@ int CSettings::getMinorVersion() const
 
 
 /************************************************************************
-*    desc:  Get the OpenGL profile type
+*    DESC:  Get the OpenGL profile type
 ************************************************************************/
 int CSettings::getProfile() const
 {
@@ -440,7 +440,7 @@ int CSettings::getProfile() const
 
 
 /************************************************************************
-*    desc:  Get the view angle
+*    DESC:  Get the view angle
 ************************************************************************/
 float CSettings::getViewAngle() const
 {
@@ -449,7 +449,7 @@ float CSettings::getViewAngle() const
 
 
 /************************************************************************
-*    desc:  Get the minimum z distance
+*    DESC:  Get the minimum z distance
 ************************************************************************/
 float CSettings::getMinZdist() const
 {
@@ -458,7 +458,7 @@ float CSettings::getMinZdist() const
 
 
 /************************************************************************
-*    desc:  Get the maximum z distance
+*    DESC:  Get the maximum z distance
 ************************************************************************/
 float CSettings::getMaxZdist() const
 {
@@ -467,7 +467,7 @@ float CSettings::getMaxZdist() const
 
 
 /************************************************************************
-*    desc:  Get the gamepad stick dead zone
+*    DESC:  Get the gamepad stick dead zone
 ************************************************************************/
 int CSettings::getGamePadStickDeadZone() const
 {
@@ -476,7 +476,7 @@ int CSettings::getGamePadStickDeadZone() const
 
 
 /************************************************************************
-*    desc:  Set the gamepad stick dead zone
+*    DESC:  Set the gamepad stick dead zone
 ************************************************************************/
 void CSettings::setGamePadStickDeadZone( int value )
 {
@@ -485,7 +485,7 @@ void CSettings::setGamePadStickDeadZone( int value )
 
 
 /************************************************************************
-*    desc:  Get/Set full screen
+*    DESC:  Get/Set full screen
 ************************************************************************/
 bool CSettings::getFullScreen() const
 {
@@ -499,7 +499,7 @@ void CSettings::setFullScreen( bool value )
 
 
 /************************************************************************
-*    desc:  Do we create the depth stencil buffer
+*    DESC:  Do we create the depth stencil buffer
 ************************************************************************/
 bool CSettings::getCreateStencilBuffer() const
 {
@@ -508,7 +508,7 @@ bool CSettings::getCreateStencilBuffer() const
 
 
 /************************************************************************
-*    desc:  Get the bit size of the stencil buffer
+*    DESC:  Get the bit size of the stencil buffer
 ************************************************************************/
 int CSettings::getStencilBufferBitSize() const
 {
@@ -517,7 +517,7 @@ int CSettings::getStencilBufferBitSize() const
 
 
 /************************************************************************
-*    desc:  Do we clear the stencil buffer
+*    DESC:  Do we clear the stencil buffer
 ************************************************************************/
 bool CSettings::getClearStencilBuffer() const
 {
@@ -526,7 +526,7 @@ bool CSettings::getClearStencilBuffer() const
 
 
 /************************************************************************
-*    desc:  Is the depth buffer enabled by default
+*    DESC:  Is the depth buffer enabled by default
 ************************************************************************/
 bool CSettings::getEnableDepthBuffer() const
 {
@@ -535,7 +535,7 @@ bool CSettings::getEnableDepthBuffer() const
 
 
 /************************************************************************
-*    desc:  Do we clear the target buffer
+*    DESC:  Do we clear the target buffer
 ************************************************************************/
 bool CSettings::getClearTargetBuffer() const
 {
@@ -544,7 +544,7 @@ bool CSettings::getClearTargetBuffer() const
 
 
 /************************************************************************
-*    desc:  Get the sound frequency
+*    DESC:  Get the sound frequency
 ************************************************************************/
 int CSettings::getFrequency() const
 {
@@ -553,7 +553,7 @@ int CSettings::getFrequency() const
 
 
 /************************************************************************
-*    desc:  Get the sound channels: mono, stero, quad, suround, etc
+*    DESC:  Get the sound channels: mono, stero, quad, suround, etc
 ************************************************************************/
 int CSettings::getSoundChannels() const
 {
@@ -562,7 +562,7 @@ int CSettings::getSoundChannels() const
 
 
 /************************************************************************
-*    desc:  Get the number of channels used for mixing
+*    DESC:  Get the number of channels used for mixing
 ************************************************************************/
 int CSettings::getMixChannels() const
 {
@@ -571,7 +571,7 @@ int CSettings::getMixChannels() const
 
 
 /************************************************************************
-*    desc:  Get the chunk size. The amount of memory used for mixing.
+*    DESC:  Get the chunk size. The amount of memory used for mixing.
 *           The higher the number, the more latency in sound responce
 *           stopping and starting
 ************************************************************************/
@@ -582,7 +582,7 @@ int CSettings::getChunkSize() const
 
 
 /************************************************************************
-*    desc:  Get the minimum thread count
+*    DESC:  Get the minimum thread count
 ************************************************************************/
 int CSettings::getMinThreadCount() const
 {
@@ -591,7 +591,7 @@ int CSettings::getMinThreadCount() const
 
 
 /************************************************************************
-*    desc:  Get the maximum thread count
+*    DESC:  Get the maximum thread count
 *           Value of zero means use max hardware threads to no of cores
 ************************************************************************/
 int CSettings::getMaxThreadCount() const
@@ -601,7 +601,7 @@ int CSettings::getMaxThreadCount() const
 
 
 /************************************************************************
-*    desc:  Get/Set the Anisotropic setting
+*    DESC:  Get/Set the Anisotropic setting
 ************************************************************************/
 int CSettings::getAnisotropicLevel() const
 {
@@ -615,7 +615,7 @@ void CSettings::setAnisotropicLevel( int level )
 
 
 /************************************************************************
-*    desc:  Get the sector size
+*    DESC:  Get the sector size
 ************************************************************************/
 int CSettings::getSectorSize() const
 {
@@ -623,7 +623,7 @@ int CSettings::getSectorSize() const
 }
 
 /************************************************************************
-*    desc:  Get half of the sector size
+*    DESC:  Get half of the sector size
 ************************************************************************/
 int CSettings::getSectorSizeHalf() const
 {
@@ -632,7 +632,7 @@ int CSettings::getSectorSizeHalf() const
 
 
 /************************************************************************
-*    desc:  Get the projection type
+*    DESC:  Get the projection type
 ************************************************************************/
 NDefs::EProjectionType CSettings::getProjectionType() const
 {
@@ -641,7 +641,7 @@ NDefs::EProjectionType CSettings::getProjectionType() const
 
 
 /************************************************************************
-*    desc:  Get the projection scale
+*    DESC:  Get the projection scale
 ************************************************************************/
 float CSettings::getProjectionScale() const
 {
@@ -650,7 +650,7 @@ float CSettings::getProjectionScale() const
 
 
 /************************************************************************
-*    desc:  Set/Get debug string visible
+*    DESC:  Set/Get debug string visible
 ************************************************************************/
 void CSettings::setDebugStrVisible( bool value )
 {
@@ -664,7 +664,7 @@ bool CSettings::getDebugStrVisible() const
 
 
 /************************************************************************
-*    desc:  Save the settings file
+*    DESC:  Save the settings file
 ************************************************************************/
 void CSettings::saveSettings()
 {

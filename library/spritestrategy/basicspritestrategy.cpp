@@ -27,7 +27,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CBasicSpriteStrategy::CBasicSpriteStrategy( const std::string & cameraId, int idOffset, int idDir ) :
     CBaseStrategy( cameraId, idOffset, idDir )
@@ -41,7 +41,7 @@ CBasicSpriteStrategy::CBasicSpriteStrategy( int idOffset, int idDir ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CBasicSpriteStrategy::~CBasicSpriteStrategy()
 {
@@ -51,7 +51,7 @@ CBasicSpriteStrategy::~CBasicSpriteStrategy()
 
 
 /************************************************************************
- *    desc:  Load the sprite data from node
+ *    DESC:  Load the sprite data from node
  ************************************************************************/
 void CBasicSpriteStrategy::loadFromFile( const std::string & file )
 {
@@ -120,7 +120,7 @@ void CBasicSpriteStrategy::loadFromFile( const std::string & file )
 
 
 /************************************************************************
- *    desc:  Get the sprite data container by name
+ *    DESC:  Get the sprite data container by name
  ************************************************************************/
 CSpriteDataContainer & CBasicSpriteStrategy::getData( const std::string & name )
 {
@@ -135,7 +135,7 @@ CSpriteDataContainer & CBasicSpriteStrategy::getData( const std::string & name )
 
 
 /************************************************************************
-*    desc:  create the sprite sprite
+*    DESC:  create the sprite sprite
 *           NOTE: Function assumes radians
 ************************************************************************/
 iSprite * CBasicSpriteStrategy::create(
@@ -364,7 +364,7 @@ iSprite * CBasicSpriteStrategy::create(
 
 
 /***************************************************************************
-*    desc:  Handle the deleting of any sprites
+*    DESC:  Handle the deleting of any sprites
 ****************************************************************************/
 void CBasicSpriteStrategy::createObj( const std::string & name )
 {
@@ -373,7 +373,7 @@ void CBasicSpriteStrategy::createObj( const std::string & name )
 
 
 /***************************************************************************
-*    desc:  Handle the deleting of any sprites
+*    DESC:  Handle the deleting of any sprites
 *           NOTE: Do not call from a destructor!
 ****************************************************************************/
 void CBasicSpriteStrategy::deleteObj( int index )
@@ -403,7 +403,7 @@ void CBasicSpriteStrategy::deleteObj( int index )
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CBasicSpriteStrategy::init()
 {
@@ -413,7 +413,7 @@ void CBasicSpriteStrategy::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CBasicSpriteStrategy::cleanUp()
 {
@@ -423,7 +423,7 @@ void CBasicSpriteStrategy::cleanUp()
 
 
 /***************************************************************************
-*    desc:  Update the sprites
+*    DESC:  Update the sprites
 ****************************************************************************/
 void CBasicSpriteStrategy::update()
 {
@@ -436,7 +436,7 @@ void CBasicSpriteStrategy::update()
 
 
 /************************************************************************
-*    desc:  Transform the sprites
+*    DESC:  Transform the sprites
 ************************************************************************/
 void CBasicSpriteStrategy::transform()
 {
@@ -446,7 +446,7 @@ void CBasicSpriteStrategy::transform()
 
 
 /***************************************************************************
-*    desc:  Render the sprites
+*    DESC:  Render the sprites
 ****************************************************************************/
 void CBasicSpriteStrategy::render( const CMatrix & matrix )
 {
@@ -470,7 +470,7 @@ void CBasicSpriteStrategy::render()
 
 
 /************************************************************************
-*    desc:  Get the pointer to the sprite
+*    DESC:  Get the pointer to the sprite
 ************************************************************************/
 iSprite * CBasicSpriteStrategy::getSprite( const int id )
 {
@@ -486,7 +486,7 @@ iSprite * CBasicSpriteStrategy::getSprite( const int id )
 
 
 /************************************************************************
- *    desc:  Find if the sprite exists
+ *    DESC:  Find if the sprite exists
  ************************************************************************/
 bool CBasicSpriteStrategy::find( iSprite * piSprite )
 {

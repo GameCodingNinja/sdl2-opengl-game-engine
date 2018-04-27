@@ -12,7 +12,7 @@
 #include <slot/mathsymbol.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CStripStop::CStripStop( const CMathSymbol & rMathSymbol, int weight ) :
     m_rMathSymbol(rMathSymbol),
@@ -22,7 +22,7 @@ CStripStop::CStripStop( const CMathSymbol & rMathSymbol, int weight ) :
 
 
 /************************************************************************
-*    desc:  Get the math symbol weight
+*    DESC:  Get the math symbol weight
 ************************************************************************/
 int CStripStop::getWeight() const
 {
@@ -31,7 +31,7 @@ int CStripStop::getWeight() const
 
 
 /************************************************************************
-*    desc:  Get the math symbol
+*    DESC:  Get the math symbol
 ************************************************************************/
 const CMathSymbol & CStripStop::getMathSymbol() const
 {

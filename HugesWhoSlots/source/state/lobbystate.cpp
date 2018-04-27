@@ -36,7 +36,7 @@
 #include <SDL.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CLobbyState::CLobbyState( const std::string & group ) :
     CCommonState( NGameDefs::EGS_LOBBY, NGameDefs::EGS_GAME_LOAD ),
@@ -47,7 +47,7 @@ CLobbyState::CLobbyState( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  Do any pre-game loop init's
+*    DESC:  Do any pre-game loop init's
 ************************************************************************/
 void CLobbyState::init()
 {
@@ -75,7 +75,7 @@ void CLobbyState::init()
 
 
 /************************************************************************
-*    desc:  Do we allow lobby music
+*    DESC:  Do we allow lobby music
 ************************************************************************/
 void CLobbyState::allowMusic( bool allow )
 {
@@ -93,7 +93,7 @@ void CLobbyState::allowMusic( bool allow )
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CLobbyState::handleEvent( const SDL_Event & rEvent )
 {
@@ -113,7 +113,7 @@ void CLobbyState::handleEvent( const SDL_Event & rEvent )
 
 
 /***************************************************************************
-*    desc:  Handle any misc processing before the real work is started
+*    DESC:  Handle any misc processing before the real work is started
 ****************************************************************************/
 void CLobbyState::miscProcess()
 {
@@ -121,7 +121,7 @@ void CLobbyState::miscProcess()
 
 
 /***************************************************************************
-*    desc:  Update objects that require them
+*    DESC:  Update objects that require them
 ****************************************************************************/
 void CLobbyState::update()
 {
@@ -132,7 +132,7 @@ void CLobbyState::update()
 
 
 /***************************************************************************
-*    desc:  Transform the game objects
+*    DESC:  Transform the game objects
 ****************************************************************************/
 void CLobbyState::transform()
 {
@@ -145,7 +145,7 @@ void CLobbyState::transform()
 
 
 /***************************************************************************
-*    desc:  2D/3D Render of game content
+*    DESC:  2D/3D Render of game content
 ****************************************************************************/
 void CLobbyState::preRender()
 {
@@ -156,12 +156,12 @@ void CLobbyState::preRender()
 
 
 /***************************************************************************
-*    desc: Functions for loading/unloading the assets for this state
+*    DESC: Functions for loading/unloading the assets for this state
 ****************************************************************************/
 namespace NLobby
 {
     /***************************************************************************
-    *    desc:  Namespace function for loading the assets for this state
+    *    DESC:  Namespace function for loading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void ObjectDataLoad()
@@ -197,7 +197,7 @@ namespace NLobby
 
 
     /***************************************************************************
-    *    desc:  Namespace function for unloading the assets for this state
+    *    DESC:  Namespace function for unloading the assets for this state
     *           NOTE: Only call when the class is not allocated
     ****************************************************************************/
     void CriticalUnload()

@@ -24,7 +24,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CReelGroupView::CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGroupModel ) :
     CSlotGroupView( rSlotGroupModel )
@@ -33,7 +33,7 @@ CReelGroupView::CReelGroupView( const std::shared_ptr<CSlotGroupModel> & rSlotGr
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CReelGroupView::~CReelGroupView()
 {
@@ -42,7 +42,7 @@ CReelGroupView::~CReelGroupView()
 
 
 /************************************************************************
-*    desc:  Create the view slot strips
+*    DESC:  Create the view slot strips
 ************************************************************************/
 void CReelGroupView::create(
     const XMLNode & node,
@@ -90,7 +90,7 @@ void CReelGroupView::create(
 
 
 /************************************************************************
-*    desc:  Generate the cycle results symbols
+*    DESC:  Generate the cycle results symbols
 ************************************************************************/
 void CReelGroupView::generateCycleResultSymbs()
 {
@@ -106,7 +106,7 @@ void CReelGroupView::generateCycleResultSymbs()
 
 
 /************************************************************************
-*    desc:  Get the cycle results symbols
+*    DESC:  Get the cycle results symbols
 ************************************************************************/
 std::vector<std::vector<CSymbol2d *>> & CReelGroupView::getCycleResultSymbs()
 {
@@ -115,7 +115,7 @@ std::vector<std::vector<CSymbol2d *>> & CReelGroupView::getCycleResultSymbs()
 
 
 /************************************************************************
-*    desc:  Clear the cycle results symbols
+*    DESC:  Clear the cycle results symbols
 ************************************************************************/
 void CReelGroupView::clearCycleResultSymbs()
 {
@@ -129,7 +129,7 @@ void CReelGroupView::clearCycleResultSymbs()
 
 
 /************************************************************************
-*    desc:  Free the memory allocated for the cycle result symbols
+*    DESC:  Free the memory allocated for the cycle result symbols
 ************************************************************************/
 void CReelGroupView::deleteCycleResultSymbs()
 {
@@ -140,7 +140,7 @@ void CReelGroupView::deleteCycleResultSymbs()
 
 
 /************************************************************************
-*    desc:  Update the reel group
+*    DESC:  Update the reel group
 ************************************************************************/
 void CReelGroupView::update()
 {
@@ -152,7 +152,7 @@ void CReelGroupView::update()
 
 
 /************************************************************************
-*    desc:  Transform the reel group
+*    DESC:  Transform the reel group
 ************************************************************************/
 void CReelGroupView::transform()
 {
@@ -166,7 +166,7 @@ void CReelGroupView::transform()
 
 
 /************************************************************************
-*    desc:  Do the render
+*    DESC:  Do the render
 ************************************************************************/
 void CReelGroupView::render( const CMatrix & matrix )
 {
@@ -180,7 +180,7 @@ void CReelGroupView::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Do the deferred render
+*    DESC:  Do the deferred render
 ************************************************************************/
 void CReelGroupView::deferredRender( const CMatrix & matrix )
 {
@@ -190,7 +190,7 @@ void CReelGroupView::deferredRender( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Start the reels spinning
+*    DESC:  Start the reels spinning
 ************************************************************************/
 void CReelGroupView::startSpin()
 {
@@ -214,7 +214,7 @@ void CReelGroupView::startSpin()
 
 
 /************************************************************************
-*    desc:  Stop the reels spinning
+*    DESC:  Stop the reels spinning
 ************************************************************************/
 void CReelGroupView::stopSpin()
 {
@@ -224,7 +224,7 @@ void CReelGroupView::stopSpin()
 
 
 /************************************************************************
-*    desc:  Is the spin state
+*    DESC:  Is the spin state
 ************************************************************************/
 bool CReelGroupView::isSpinState( NSlotDefs::ESpinState state ) const
 {
@@ -244,7 +244,7 @@ bool CReelGroupView::isSpinState( NSlotDefs::ESpinState state ) const
 
 
 /************************************************************************
-*    desc:  Do we allow the stop sounds?
+*    DESC:  Do we allow the stop sounds?
 ************************************************************************/
 void CReelGroupView::allowStopSounds( bool allow )
 {

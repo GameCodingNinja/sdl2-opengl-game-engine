@@ -19,7 +19,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CMenuTree::CMenuTree(
     const std::string & name,
@@ -45,7 +45,7 @@ CMenuTree::CMenuTree(
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CMenuTree::~CMenuTree()
 {
@@ -53,7 +53,7 @@ CMenuTree::~CMenuTree()
 
 
 /************************************************************************
-*    desc:  Init the tree for use
+*    DESC:  Init the tree for use
 ************************************************************************/
 void CMenuTree::init()
 {
@@ -70,7 +70,7 @@ void CMenuTree::init()
 
 
 /************************************************************************
-*    desc:  Update the menu tree
+*    DESC:  Update the menu tree
 ************************************************************************/
 void CMenuTree::update()
 {
@@ -80,7 +80,7 @@ void CMenuTree::update()
 
 
 /************************************************************************
-*    desc:  Transform the menu tree
+*    DESC:  Transform the menu tree
 ************************************************************************/
 void CMenuTree::transform()
 {
@@ -96,7 +96,7 @@ void CMenuTree::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  do the render
+*    DESC:  do the render
 ************************************************************************/
 void CMenuTree::render( const CMatrix & matrix )
 {
@@ -106,7 +106,7 @@ void CMenuTree::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Is a menu active?
+*    DESC:  Is a menu active?
 ************************************************************************/
 bool CMenuTree::isActive()
 {
@@ -115,7 +115,7 @@ bool CMenuTree::isActive()
 
 
 /************************************************************************
-*    desc:  Does this tee have a root menu
+*    DESC:  Does this tee have a root menu
 ************************************************************************/
 bool CMenuTree::hasRootMenu()
 {
@@ -124,7 +124,7 @@ bool CMenuTree::hasRootMenu()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CMenuTree::handleEvent( const SDL_Event & rEvent )
 {
@@ -176,7 +176,7 @@ void CMenuTree::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Activate a menu
+*    DESC:  Activate a menu
 ************************************************************************/
 void CMenuTree::activateMenu( const std::string & menuName )
 {
@@ -218,7 +218,7 @@ void CMenuTree::activateMenu( const std::string & menuName )
 
 
 /************************************************************************
-*    desc:  Transition the menu
+*    DESC:  Transition the menu
 ************************************************************************/
 void CMenuTree::transitionMenu()
 {
@@ -260,7 +260,7 @@ void CMenuTree::transitionMenu()
 
 
 /************************************************************************
-*    desc:  Handle OnEscape message
+*    DESC:  Handle OnEscape message
 ************************************************************************/
 void CMenuTree::onEscape( const SDL_Event & rEvent )
 {
@@ -272,7 +272,7 @@ void CMenuTree::onEscape( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnToggle message
+*    DESC:  Handle OnToggle message
 ************************************************************************/
 void CMenuTree::onToggle( const SDL_Event & rEvent )
 {
@@ -312,7 +312,7 @@ void CMenuTree::onToggle( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnBack message
+*    DESC:  Handle OnBack message
 ************************************************************************/
 void CMenuTree::onBack( const SDL_Event & rEvent )
 {
@@ -325,7 +325,7 @@ void CMenuTree::onBack( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnToTree message
+*    DESC:  Handle OnToTree message
 ************************************************************************/
 void CMenuTree::onToTree( const SDL_Event & rEvent )
 {
@@ -339,7 +339,7 @@ void CMenuTree::onToTree( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnToMenu message
+*    DESC:  Handle OnToMenu message
 ************************************************************************/
 void CMenuTree::onToMenu( const SDL_Event & rEvent )
 {
@@ -367,7 +367,7 @@ void CMenuTree::onToMenu( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTransOut message
+*    DESC:  Handle OnTransOut message
 ************************************************************************/
 void CMenuTree::onTransOut( const SDL_Event & rEvent )
 {
@@ -398,7 +398,7 @@ void CMenuTree::onTransOut( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTransIn message
+*    DESC:  Handle OnTransIn message
 ************************************************************************/
 void CMenuTree::onTransIn( const SDL_Event & rEvent )
 {
@@ -420,7 +420,7 @@ void CMenuTree::onTransIn( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Get the active menu
+*    DESC:  Get the active menu
 ************************************************************************/
 CMenu & CMenuTree::getActiveMenu()
 {
@@ -434,7 +434,7 @@ CMenu & CMenuTree::getActiveMenu()
 
 
 /************************************************************************
-*    desc:  Get the scroll param data
+*    DESC:  Get the scroll param data
 ************************************************************************/
 CScrollParam & CMenuTree::getScrollParam( int msg )
 {
@@ -448,7 +448,7 @@ CScrollParam & CMenuTree::getScrollParam( int msg )
 
 
 /************************************************************************
-*    desc:  Is a menu item active
+*    DESC:  Is a menu item active
 ************************************************************************/
 bool CMenuTree::isMenuItemActive()
 {
@@ -463,7 +463,7 @@ bool CMenuTree::isMenuItemActive()
 
 
 /************************************************************************
-*    desc:  Is this an interface tree
+*    DESC:  Is this an interface tree
 ************************************************************************/
 bool CMenuTree::isInterfaceTree() const
 {
@@ -472,7 +472,7 @@ bool CMenuTree::isInterfaceTree() const
 
 
 /************************************************************************
-*    desc:  Get the name of the tree
+*    DESC:  Get the name of the tree
 ************************************************************************/
 std::string & CMenuTree::getName()
 {

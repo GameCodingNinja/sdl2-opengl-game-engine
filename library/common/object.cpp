@@ -11,7 +11,7 @@
 #include <utilities/xmlparsehelper.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObject::CObject() :
     m_parameters(NDefs::VISIBLE),
@@ -32,7 +32,7 @@ CObject::CObject( const CObject & obj ) :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CObject::~CObject()
 {
@@ -40,7 +40,7 @@ CObject::~CObject()
 
 
 /************************************************************************
-*    desc:  Get the object's world position
+*    DESC:  Get the object's world position
 ************************************************************************/
 const CPoint<CWorldValue> & CObject::getPos() const
 {
@@ -55,7 +55,7 @@ CPoint<float> CObject::getPosFloat()
 
 
 /************************************************************************
-*    desc:  Set the object's position
+*    DESC:  Set the object's position
 ************************************************************************/
 void CObject::setPos( const CPoint<CWorldValue> & position )
 {
@@ -80,7 +80,7 @@ void CObject::setPos( CWorldValue x, CWorldValue y, CWorldValue z )
 
 
 /************************************************************************
-*    desc:  Inc the object's float position
+*    DESC:  Inc the object's float position
 ************************************************************************/
 void CObject::incPos( const CPoint<CWorldValue> & position )
 {
@@ -105,7 +105,7 @@ void CObject::incPos( CWorldValue x, CWorldValue y, CWorldValue z )
 
 
 /************************************************************************
-*    desc:  Set the object's rotation
+*    DESC:  Set the object's rotation
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
 void CObject::setRot( const CPoint<float> & rotation, bool convertToRadians )
@@ -132,7 +132,7 @@ void CObject::setRot( float x, float y, float z, bool convertToRadians )
 
 
 /************************************************************************
-*    desc:  Inc the pre-translation matrix
+*    DESC:  Inc the pre-translation matrix
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
 void CObject::incRot( const CPoint<float> & rotation, bool convertToRadians )
@@ -159,7 +159,7 @@ void CObject::incRot( float x, float y, float z, bool convertToRadians )
 
 
 /************************************************************************
-*    desc:  Get the object's rotation in radians
+*    DESC:  Get the object's rotation in radians
 *           NOTE: Rotation is stored as radians
 ************************************************************************/
 const CPoint<float> & CObject::getRot() const
@@ -169,7 +169,7 @@ const CPoint<float> & CObject::getRot() const
 
 
 /************************************************************************
-*    desc:  Set the object's scale
+*    DESC:  Set the object's scale
 ************************************************************************/
 void CObject::setScale( const CPoint<float> & scale )
 {
@@ -187,7 +187,7 @@ void CObject::setScale( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Inc the object's scale
+*    DESC:  Inc the object's scale
 ************************************************************************/
 void CObject::incScale( const CPoint<float> & scale )
 {
@@ -205,7 +205,7 @@ void CObject::incScale( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Get the object's scale
+*    DESC:  Get the object's scale
 *
 *    ret:	const CPoint & - sprite scale
 ************************************************************************/
@@ -216,7 +216,7 @@ const CPoint<float> & CObject::getScale() const
 
 
 /************************************************************************
-*    desc:  Get the object's center position
+*    DESC:  Get the object's center position
 ************************************************************************/
 const CPoint<float> & CObject::getCenterPos() const
 {
@@ -225,7 +225,7 @@ const CPoint<float> & CObject::getCenterPos() const
 
 
 /************************************************************************
-*    desc:  Set the object's center position
+*    DESC:  Set the object's center position
 ************************************************************************/
 void CObject::setCenterPos( const CPoint<float> & position )
 {
@@ -243,7 +243,7 @@ void CObject::setCenterPos( float x, float y, float z )
 
 
 /************************************************************************
-*    desc:  Set the object's crop offset
+*    DESC:  Set the object's crop offset
 ************************************************************************/
 void CObject::setCropOffset( const CSize<int16_t> & offset )
 {
@@ -257,7 +257,7 @@ void CObject::setCropOffset( const CSize<int16_t> & offset )
 
 
 /************************************************************************
-*    desc:  Set the object visible
+*    DESC:  Set the object visible
 ************************************************************************/
 void CObject::setVisible( bool value )
 {
@@ -269,7 +269,7 @@ void CObject::setVisible( bool value )
 
 
 /************************************************************************
-*    desc:  Is the object visible
+*    DESC:  Is the object visible
 ************************************************************************/
 bool CObject::isVisible() const
 {
@@ -278,7 +278,7 @@ bool CObject::isVisible() const
 
 
 /************************************************************************
-*    desc:  Copy the transform to the passed in object
+*    DESC:  Copy the transform to the passed in object
 ************************************************************************/
 void CObject::copyTransform( const CObject * pObject )
 {
@@ -300,7 +300,7 @@ void CObject::copyTransform( const CObject * pObject )
 
 
 /************************************************************************
-*    desc:  Load the transform data from node
+*    DESC:  Load the transform data from node
 ************************************************************************/
 void CObject::loadTransFromNode( const XMLNode & node )
 {

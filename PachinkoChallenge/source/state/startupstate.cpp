@@ -68,7 +68,7 @@
 #include <chrono>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CStartUpState::CStartUpState() :
     iGameState( NGameDefs::EGS_STARTUP, NGameDefs::EGS_TITLE_SCREEN )
@@ -77,7 +77,7 @@ CStartUpState::CStartUpState() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CStartUpState::~CStartUpState()
 {
@@ -86,7 +86,7 @@ CStartUpState::~CStartUpState()
 
 
 /************************************************************************
-*    desc:  Do any pre-load init's
+*    DESC:  Do any pre-load init's
 ************************************************************************/
 void CStartUpState::init()
 {
@@ -111,7 +111,7 @@ void CStartUpState::init()
 
 
 /************************************************************************
-*    desc:  Fade to color
+*    DESC:  Fade to color
 ************************************************************************/
 void CStartUpState::fade(
     float time,
@@ -157,7 +157,7 @@ void CStartUpState::fade(
 
 
 /***************************************************************************
-*    desc:  Load the assets
+*    DESC:  Load the assets
 ****************************************************************************/
 void CStartUpState::assetLoad()
 {
@@ -218,7 +218,7 @@ void CStartUpState::assetLoad()
 
 
 /***************************************************************************
-*    desc:  Is the state done
+*    DESC:  Is the state done
 ****************************************************************************/
 bool CStartUpState::doStateChange()
 {

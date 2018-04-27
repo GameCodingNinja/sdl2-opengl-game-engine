@@ -26,7 +26,7 @@
 #include <memory>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CShaderMgr::CShaderMgr() :
     m_pCurrentShaderData(nullptr),
@@ -36,7 +36,7 @@ CShaderMgr::CShaderMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CShaderMgr::~CShaderMgr()
 {
@@ -51,7 +51,7 @@ CShaderMgr::~CShaderMgr()
 
 
 /************************************************************************
-*    desc:  Load the shader from xml file path
+*    DESC:  Load the shader from xml file path
 ************************************************************************/
 void CShaderMgr::loadFromXML( const std::string & filePath )
 {
@@ -70,7 +70,7 @@ void CShaderMgr::loadFromXML( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Create the shader
+*    DESC:  Create the shader
 ************************************************************************/
 void CShaderMgr::createShader( const XMLNode & node )
 {
@@ -117,7 +117,7 @@ void CShaderMgr::createShader( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Create the shader
+*    DESC:  Create the shader
 ************************************************************************/
 void CShaderMgr::createShader( uint32_t shaderType, const std::string & filePath )
 {
@@ -162,7 +162,7 @@ void CShaderMgr::createShader( uint32_t shaderType, const std::string & filePath
 
 
 /************************************************************************
-*    desc:  Create the shader program
+*    DESC:  Create the shader program
 ************************************************************************/
 void CShaderMgr::createProgram()
 {
@@ -182,7 +182,7 @@ void CShaderMgr::createProgram()
 
 
 /************************************************************************
-*    desc:  Bind the attribute location
+*    DESC:  Bind the attribute location
 *           NOTE: This function is called if 0 or greater is specified in
 *           the shader config to allow the defining of the attribute index
 ************************************************************************/
@@ -215,7 +215,7 @@ void CShaderMgr::bindAttributeLocation( const XMLNode & vertexNode )
 
 
 /************************************************************************
-*    desc:  Link the shader program
+*    DESC:  Link the shader program
 ************************************************************************/
 void CShaderMgr::linkProgram()
 {
@@ -235,7 +235,7 @@ void CShaderMgr::linkProgram()
 
 
 /************************************************************************
-*    desc:  Find the location of the custom shader variables
+*    DESC:  Find the location of the custom shader variables
 ************************************************************************/
 void CShaderMgr::locateShaderVariables(
     const XMLNode & vertexNode,
@@ -257,7 +257,7 @@ void CShaderMgr::locateShaderVariables(
 
 
 /************************************************************************
-*    desc:  Get the uniform location
+*    DESC:  Get the uniform location
 ************************************************************************/
 void CShaderMgr::getUniformLocation( const XMLNode & node )
 {
@@ -277,7 +277,7 @@ void CShaderMgr::getUniformLocation( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Get the shader data
+*    DESC:  Get the shader data
 ************************************************************************/
 CShaderData & CShaderMgr::getShaderData( const std::string & shaderId )
 {
@@ -295,7 +295,7 @@ CShaderData & CShaderMgr::getShaderData( const std::string & shaderId )
 
 
 /************************************************************************
-*    desc:  Function call used to manage what shader is currently bound.
+*    DESC:  Function call used to manage what shader is currently bound.
 *           This insures that we don't keep rebinding the same shader
 *           Note: Vertex Attribute Arrays should always be defined in
 *           the shader.cfg starting from 0 to max count. Makes live easy
@@ -339,7 +339,7 @@ void CShaderMgr::bind( CShaderData * pShaderData )
 
 
 /************************************************************************
-*    desc:  Unbind the shader and reset the flag
+*    DESC:  Unbind the shader and reset the flag
 ************************************************************************/
 void CShaderMgr::unbind()
 {
@@ -353,7 +353,7 @@ void CShaderMgr::unbind()
 
 
 /************************************************************************
-*    desc:  Free the shader
+*    DESC:  Free the shader
 ************************************************************************/
 void CShaderMgr::freeShader( const std::string & shaderId )
 {
@@ -370,7 +370,7 @@ void CShaderMgr::freeShader( const std::string & shaderId )
 
 
 /************************************************************************
-*    desc:  Connect to the Init Shader signal
+*    DESC:  Connect to the Init Shader signal
 ************************************************************************/
 void CShaderMgr::connect_initShader( const InitShaderSignal::slot_type & slot )
 {
@@ -379,7 +379,7 @@ void CShaderMgr::connect_initShader( const InitShaderSignal::slot_type & slot )
 
 
 /************************************************************************
-*    desc:  Set the shader member variable
+*    DESC:  Set the shader member variable
 ************************************************************************/
 void CShaderMgr::setShaderColor( const std::string & shaderId, const std::string & locationId, const CColor & color )
 {
@@ -412,7 +412,7 @@ void CShaderMgr::setShaderColor( CShaderData & shaderData, const std::string & l
 
 
 /************************************************************************
-*    desc:  Set all the shaders using this color location
+*    DESC:  Set all the shaders using this color location
 ************************************************************************/
 void CShaderMgr::setAllShaderColor( const std::string & locationId, const CColor & color )
 {

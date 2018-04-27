@@ -30,7 +30,7 @@
 #include <objectdata/objectdata2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUIScrollBox::CUIScrollBox( const std::string & group ) :
     CUISubControl( group ),
@@ -60,7 +60,7 @@ CUIScrollBox::CUIScrollBox( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CUIScrollBox::~CUIScrollBox()
 {
@@ -69,7 +69,7 @@ CUIScrollBox::~CUIScrollBox()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 *
 *    param: node - XML node
 ************************************************************************/
@@ -99,7 +99,7 @@ void CUIScrollBox::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 ************************************************************************/
 void CUIScrollBox::loadControlFromNode( const XMLNode & node )
 {
@@ -146,7 +146,7 @@ void CUIScrollBox::loadControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Add the scroll control from node
+*    DESC:  Add the scroll control from node
 *           NOTE: This function recalulates the scroll box members because
 *                 it is also used for run-time dynamic scroll boxes
 ************************************************************************/
@@ -177,7 +177,7 @@ CUIControl * CUIScrollBox::addScrollControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Init the control
+*    DESC:  Init the control
 ************************************************************************/
 void CUIScrollBox::init()
 {
@@ -190,7 +190,7 @@ void CUIScrollBox::init()
 
 
 /************************************************************************
-*    desc:  Do some cleanup
+*    DESC:  Do some cleanup
 ************************************************************************/
 void CUIScrollBox::cleanUp()
 {
@@ -203,7 +203,7 @@ void CUIScrollBox::cleanUp()
 
 
 /************************************************************************
-*    desc:  Handle events
+*    DESC:  Handle events
 ************************************************************************/
 void CUIScrollBox::handleEvent( const SDL_Event & rEvent )
 {
@@ -216,7 +216,7 @@ void CUIScrollBox::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle OnUpAction message
+*    DESC:  Handle OnUpAction message
 ************************************************************************/
 void CUIScrollBox::onUpAction( const SDL_Event & rEvent )
 {
@@ -228,7 +228,7 @@ void CUIScrollBox::onUpAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnDownAction message
+*    DESC:  Handle OnDownAction message
 ************************************************************************/
 void CUIScrollBox::onDownAction( const SDL_Event & rEvent )
 {
@@ -240,7 +240,7 @@ void CUIScrollBox::onDownAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnUpScroll message
+*    DESC:  Handle OnUpScroll message
 ************************************************************************/
 void CUIScrollBox::onUpScroll( const SDL_Event & rEvent )
 {
@@ -249,7 +249,7 @@ void CUIScrollBox::onUpScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnDownScroll message
+*    DESC:  Handle OnDownScroll message
 ************************************************************************/
 void CUIScrollBox::onDownScroll( const SDL_Event & rEvent )
 {
@@ -258,7 +258,7 @@ void CUIScrollBox::onDownScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTabLeft message
+*    DESC:  Handle OnTabLeft message
 ************************************************************************/
 void CUIScrollBox::onTabLeft( const SDL_Event & rEvent )
 {
@@ -267,7 +267,7 @@ void CUIScrollBox::onTabLeft( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnTabRight message
+*    DESC:  Handle OnTabRight message
 ************************************************************************/
 void CUIScrollBox::onTabRight( const SDL_Event & rEvent )
 {
@@ -277,7 +277,7 @@ void CUIScrollBox::onTabRight( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle the mouse move
+*    DESC:  Handle the mouse move
 ************************************************************************/
 bool CUIScrollBox::onMouseMove( const SDL_Event & rEvent )
 {
@@ -303,7 +303,7 @@ bool CUIScrollBox::onMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Update the control
+*    DESC:  Update the control
 ************************************************************************/
 void CUIScrollBox::update()
 {
@@ -320,7 +320,7 @@ void CUIScrollBox::update()
 
 
 /************************************************************************
-*    desc:  Transform the control
+*    DESC:  Transform the control
 ************************************************************************/
 void CUIScrollBox::transform( const CObject2D & object )
 {
@@ -337,7 +337,7 @@ void CUIScrollBox::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Render the sub control
+*    DESC:  Render the sub control
 ************************************************************************/
 void CUIScrollBox::render( const CMatrix & matrix )
 {
@@ -383,7 +383,7 @@ void CUIScrollBox::render( const CMatrix & matrix )
 
 
 /************************************************************************
-*    desc: Set the first inactive control to be active
+*    DESC: Set the first inactive control to be active
 *    NOTE: Don't want this functuality for the scroll box buttons and slider
 ************************************************************************/
 bool CUIScrollBox::activateFirstInactiveControl()
@@ -405,7 +405,7 @@ bool CUIScrollBox::activateFirstInactiveControl()
 
 
 /************************************************************************
-*    desc:  Handle the select action
+*    DESC:  Handle the select action
 ************************************************************************/
 bool CUIScrollBox::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
@@ -432,7 +432,7 @@ bool CUIScrollBox::handleSelectAction( const CSelectMsgCracker & msgCracker )
 
 
 /************************************************************************
-*    desc:  Handle the page scrolling
+*    DESC:  Handle the page scrolling
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
@@ -490,7 +490,7 @@ void CUIScrollBox::handlePageScroll( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Handle the keyboard/Gamepad scrolling
+*    DESC:  Handle the keyboard/Gamepad scrolling
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
@@ -513,7 +513,7 @@ void CUIScrollBox::handleKeyboardGamepadScroll( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Select the next control
+*    DESC:  Select the next control
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
@@ -540,7 +540,7 @@ CBitmask<uint> CUIScrollBox::selectNextControl( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Do we need to select and reposition the control
+*    DESC:  Do we need to select and reposition the control
 ************************************************************************/
 bool CUIScrollBox::selectAndRepositionCtrl( int scrollVector )
 {
@@ -574,7 +574,7 @@ bool CUIScrollBox::selectAndRepositionCtrl( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Select the paged control
+*    DESC:  Select the paged control
 ************************************************************************/
 void CUIScrollBox::selectPagedControl( int scrollVector )
 {
@@ -599,7 +599,7 @@ void CUIScrollBox::selectPagedControl( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Set the active control to the viewable area
+*    DESC:  Set the active control to the viewable area
 *           This also deactivates the last known active control
 ************************************************************************/
 bool CUIScrollBox::setActiveCtrlToViewableArea( int scrollVector )
@@ -620,7 +620,7 @@ bool CUIScrollBox::setActiveCtrlToViewableArea( int scrollVector )
 
 
 /************************************************************************
-*    desc:  Scroll to the next control in the viewable area
+*    DESC:  Scroll to the next control in the viewable area
 *
 *   param: int scrollVector - direction to scroll
 ************************************************************************/
@@ -660,7 +660,7 @@ CBitmask<uint> CUIScrollBox::scrollToTheNextCtrlInViewableArea( int scrollVector
 
 
 /************************************************************************
-*    desc:  See if we can activate this scroll control
+*    DESC:  See if we can activate this scroll control
 ************************************************************************/
 bool CUIScrollBox::activateScrollCtrl( int scrollControlIndex )
 {
@@ -681,7 +681,7 @@ bool CUIScrollBox::activateScrollCtrl( int scrollControlIndex )
 
 
 /************************************************************************
-*    desc:  Init the variables that scroll the contents of the scroll box
+*    DESC:  Init the variables that scroll the contents of the scroll box
 ************************************************************************/
 void CUIScrollBox::initScrolling( int scrollVector, float distance, bool endScrollSelection, bool paging )
 {
@@ -706,7 +706,7 @@ void CUIScrollBox::initScrolling( int scrollVector, float distance, bool endScro
 
 
 /************************************************************************
-*    desc:  Handle the time based Scrolling of the contents of the scroll box
+*    DESC:  Handle the time based Scrolling of the contents of the scroll box
 ************************************************************************/
 void CUIScrollBox::handleScrollUpdate()
 {
@@ -765,7 +765,7 @@ void CUIScrollBox::handleScrollUpdate()
 
 
 /************************************************************************
-*    desc:  Get the fractional amount the controls are off within the scroll box
+*    DESC:  Get the fractional amount the controls are off within the scroll box
 ************************************************************************/
 float CUIScrollBox::getControlAlignment()
 {
@@ -775,7 +775,7 @@ float CUIScrollBox::getControlAlignment()
 
 
 /************************************************************************
-*    desc:  Is the scroll index in view
+*    DESC:  Is the scroll index in view
 ************************************************************************/
 bool CUIScrollBox::inView( int scrollIndex, int scrollVector )
 {
@@ -785,7 +785,7 @@ bool CUIScrollBox::inView( int scrollIndex, int scrollVector )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the subcontrol if found
+*    DESC:  Get the pointer to the subcontrol if found
 ************************************************************************/
 CUIControl * CUIScrollBox::findSubControl( const std::string & name )
 {
@@ -799,7 +799,7 @@ CUIControl * CUIScrollBox::findSubControl( const std::string & name )
 
 
 /************************************************************************
-*    desc:  Find the sub control via is pointer
+*    DESC:  Find the sub control via is pointer
 ************************************************************************/
 CUIControl * CUIScrollBox::findSubControl( void * pVoid )
 {
@@ -814,7 +814,7 @@ CUIControl * CUIScrollBox::findSubControl( void * pVoid )
 
 
 /************************************************************************
-*    desc:  Handle the sub control mouse move
+*    DESC:  Handle the sub control mouse move
 ************************************************************************/
 bool CUIScrollBox::onSubControlMouseMove( const SDL_Event & rEvent )
 {
@@ -837,7 +837,7 @@ bool CUIScrollBox::onSubControlMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Deactivate the sub control
+*    DESC:  Deactivate the sub control
 ************************************************************************/
 void CUIScrollBox::deactivateSubControl()
 {
@@ -849,7 +849,7 @@ void CUIScrollBox::deactivateSubControl()
 
 
 /************************************************************************
-*    desc:  Set the start and end positions
+*    DESC:  Set the start and end positions
 ************************************************************************/
 void CUIScrollBox::setStartEndPos()
 {
@@ -871,7 +871,7 @@ void CUIScrollBox::setStartEndPos()
 
 
 /************************************************************************
-*    desc:  Reposition the scroll controls
+*    DESC:  Reposition the scroll controls
 ************************************************************************/
 void CUIScrollBox::repositionScrollControls()
 {
@@ -885,7 +885,7 @@ void CUIScrollBox::repositionScrollControls()
 
 
 /************************************************************************
-*    desc:  Align the scroll box to it's proper stopping point
+*    DESC:  Align the scroll box to it's proper stopping point
 *           to account for floating point movement
 ************************************************************************/
 void CUIScrollBox::alignScrollPostion()
@@ -903,7 +903,7 @@ void CUIScrollBox::alignScrollPostion()
 
 
 /************************************************************************
-*    desc:  Only deactivate sub controls
+*    DESC:  Only deactivate sub controls
 ************************************************************************/
 void CUIScrollBox::deactivateControl()
 {
@@ -912,7 +912,7 @@ void CUIScrollBox::deactivateControl()
 
 
 /************************************************************************
-*    desc:  Get the scroll control vector
+*    DESC:  Get the scroll control vector
 ************************************************************************/
 const std::vector<CUIControl *> & CUIScrollBox::getScrollCtrlVec()
 {
@@ -921,7 +921,7 @@ const std::vector<CUIControl *> & CUIScrollBox::getScrollCtrlVec()
 
 
 /************************************************************************
-*    desc:  Set the alpha value of this control
+*    DESC:  Set the alpha value of this control
 ************************************************************************/
 void CUIScrollBox::setAlpha( float alpha )
 {
@@ -933,7 +933,7 @@ void CUIScrollBox::setAlpha( float alpha )
 
 
 /************************************************************************
-*    desc:  Get the pointer to the active control
+*    DESC:  Get the pointer to the active control
 ************************************************************************/
 CUIControl * CUIScrollBox::getPtrToActiveControl()
 {

@@ -37,7 +37,7 @@
 #include <memory>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CMeshMgr::CMeshMgr()
 {
@@ -45,7 +45,7 @@ CMeshMgr::CMeshMgr()
 
 
 /************************************************************************
- *    desc:  destructor
+ *    DESC:  destructor
  ************************************************************************/
 CMeshMgr::~CMeshMgr()
 {
@@ -65,7 +65,7 @@ CMeshMgr::~CMeshMgr()
 
 
 /************************************************************************
- *    desc: Load mesh from file
+ *    DESC: Load mesh from file
  ************************************************************************/
 void CMeshMgr::loadFromFile(
     const std::string & group,
@@ -90,7 +90,7 @@ void CMeshMgr::loadFromFile(
 
 
 /************************************************************************
- *    desc: Load collision mesh from file
+ *    DESC: Load collision mesh from file
  ************************************************************************/
 void CMeshMgr::loadFromFile(
     const std::string & group,
@@ -119,7 +119,7 @@ void CMeshMgr::loadFromFile(
 
 
 /************************************************************************
- *    desc: Load 3d mesh file
+ *    DESC: Load 3d mesh file
  ************************************************************************/
 void CMeshMgr::loadFrom3DM(
     const std::string & group,
@@ -153,7 +153,7 @@ void CMeshMgr::loadFrom3DM(
 
 
 /************************************************************************
- *    desc: Load 3d mesh file with textures
+ *    DESC: Load 3d mesh file with textures
  ************************************************************************/
 void CMeshMgr::loadFromFile(
     SDL_RWops * pFile,
@@ -246,7 +246,7 @@ void CMeshMgr::loadFromFile(
 
 
 /************************************************************************
- *    desc: Create from data
+ *    DESC: Create from data
  ************************************************************************/
 void CMeshMgr::createFromData(
     const std::string & group,
@@ -281,7 +281,7 @@ void CMeshMgr::createFromData(
 
 
 /************************************************************************
- *    desc: Create from the data
+ *    DESC: Create from the data
  ************************************************************************/
 void CMeshMgr::createFromData(
     const std::string & group,
@@ -340,7 +340,7 @@ void CMeshMgr::createFromData(
 
 
 /************************************************************************
- *    desc: Load 3d mesh file without textures
+ *    DESC: Load 3d mesh file without textures
  ************************************************************************/
 void CMeshMgr::loadFromFile(
     SDL_RWops * pFile,
@@ -417,7 +417,7 @@ void CMeshMgr::loadFromFile(
 
 
 /************************************************************************
- *    desc: Load 3d collision mesh file
+ *    DESC: Load 3d collision mesh file
  ************************************************************************/
 void CMeshMgr::loadFrom3DM(
     const std::string & filePath,
@@ -479,7 +479,7 @@ void CMeshMgr::loadFrom3DM(
 
 
 /************************************************************************
- *    desc: Do the tag check to insure we are in the correct spot
+ *    DESC: Do the tag check to insure we are in the correct spot
  ************************************************************************/
 void CMeshMgr::tagCheck( SDL_RWops * file, const std::string & filePath )
 {
@@ -496,7 +496,7 @@ void CMeshMgr::tagCheck( SDL_RWops * file, const std::string & filePath )
 
 
 /************************************************************************
- *    desc:  Delete mesh buffer group
+ *    DESC:  Delete mesh buffer group
  ************************************************************************/
 void CMeshMgr::deleteBufferGroup( const std::string & group )
 {

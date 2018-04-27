@@ -8,7 +8,7 @@
 #include <2d/object2d.h>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CObject2D::CObject2D()
 {
@@ -23,7 +23,7 @@ CObject2D::CObject2D( const CObject2D & obj ) :
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CObject2D::~CObject2D()
 {
@@ -31,7 +31,7 @@ CObject2D::~CObject2D()
 
 
 /************************************************************************
-*    desc:  Get the object's translated position
+*    DESC:  Get the object's translated position
 ************************************************************************/
 const CPoint<float> & CObject2D::getTransPos() const
 {
@@ -40,7 +40,7 @@ const CPoint<float> & CObject2D::getTransPos() const
 
 
 /************************************************************************
-*    desc:  Transform the object in local space
+*    DESC:  Transform the object in local space
 ************************************************************************/
 void CObject2D::transformLocal( CMatrix & matrix )
 {
@@ -72,7 +72,7 @@ void CObject2D::transformLocal( CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Transform
+*    DESC:  Transform
 ************************************************************************/
 void CObject2D::transform()
 {
@@ -109,7 +109,7 @@ void CObject2D::transform( const CObject2D & object )
 
 
 /************************************************************************
-*    desc:  Apply the scale
+*    DESC:  Apply the scale
 ************************************************************************/
 void CObject2D::applyScale( CMatrix & matrix )
 {
@@ -118,7 +118,7 @@ void CObject2D::applyScale( CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Apply the rotation
+*    DESC:  Apply the rotation
 ************************************************************************/
 void CObject2D::applyRotation( CMatrix & matrix )
 {
@@ -135,7 +135,7 @@ void CObject2D::applyRotation( CMatrix & matrix )
 
 
 /************************************************************************
-*    desc:  Get the object's matrix
+*    DESC:  Get the object's matrix
 ************************************************************************/
 const CMatrix & CObject2D::getMatrix() const
 {
@@ -144,7 +144,7 @@ const CMatrix & CObject2D::getMatrix() const
 
 
 /************************************************************************
-*    desc:  Was the world position transformed?
+*    DESC:  Was the world position transformed?
 ************************************************************************/
 bool CObject2D::wasWorldPosTranformed() const
 {
@@ -153,7 +153,7 @@ bool CObject2D::wasWorldPosTranformed() const
 
 
 /************************************************************************
-*    desc:  Force a transform from this point all the way up the line
+*    DESC:  Force a transform from this point all the way up the line
 ************************************************************************/
 void CObject2D::forceTransform()
 {

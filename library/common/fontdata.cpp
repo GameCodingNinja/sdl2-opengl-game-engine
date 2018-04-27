@@ -12,7 +12,7 @@
 #include <utilities/xmlParser.h>
 
 /************************************************************************
-*    desc:  Copy the data
+*    DESC:  Copy the data
 ************************************************************************/ 
 void CFontData::copy( const CFontData & obj )
 {
@@ -23,7 +23,7 @@ void CFontData::copy( const CFontData & obj )
 
 
 /************************************************************************
-*    desc:  Load the font properties from XML node
+*    DESC:  Load the font properties from XML node
 ************************************************************************/ 
 void CFontData::loadFromNode( const XMLNode & node )
 {

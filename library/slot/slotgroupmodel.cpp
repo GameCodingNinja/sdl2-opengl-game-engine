@@ -25,7 +25,7 @@
 #include <chrono>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CSlotGroupModel::CSlotGroupModel( const CSlotMath & rSlotMath, CPlayResult & rPlayResult ) :
     m_rSlotMath( rSlotMath ),
@@ -41,7 +41,7 @@ CSlotGroupModel::CSlotGroupModel( const CSlotMath & rSlotMath, CPlayResult & rPl
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CSlotGroupModel::~CSlotGroupModel()
 {
@@ -49,7 +49,7 @@ CSlotGroupModel::~CSlotGroupModel()
 
 
 /************************************************************************
-*    desc:  Create the model strips
+*    DESC:  Create the model strips
 ************************************************************************/
 void CSlotGroupModel::create(
     const std::string & rStripSetId, const std::string & paytableSetId )
@@ -71,7 +71,7 @@ void CSlotGroupModel::create(
 
 
 /************************************************************************
-*    desc:  Generate the strip stops
+*    DESC:  Generate the strip stops
 ************************************************************************/
 void CSlotGroupModel::generateStops()
 {
@@ -81,7 +81,7 @@ void CSlotGroupModel::generateStops()
 
 
 /************************************************************************
-*    desc:  Evaluate the strips
+*    DESC:  Evaluate the strips
 ************************************************************************/
 void CSlotGroupModel::evaluate()
 {
@@ -101,7 +101,7 @@ void CSlotGroupModel::evaluate()
 
 
 /************************************************************************
-*    desc:  Generate the evaluation symbols
+*    DESC:  Generate the evaluation symbols
 ************************************************************************/
 void CSlotGroupModel::generateEvalSymbs()
 {
@@ -117,7 +117,7 @@ void CSlotGroupModel::generateEvalSymbs()
 
 
 /************************************************************************
-*    desc:  Evaluate the line pays
+*    DESC:  Evaluate the line pays
 ************************************************************************/
 void CSlotGroupModel::evaluateLinePays( const std::string & paytable )
 {
@@ -162,7 +162,7 @@ void CSlotGroupModel::evaluateLinePays( const std::string & paytable )
 
 
 /************************************************************************
-*    desc:  Add line pay to slot result
+*    DESC:  Add line pay to slot result
 ************************************************************************/
 void CSlotGroupModel::addLinePay(
     const CPayCombo & rPayCombo,
@@ -182,7 +182,7 @@ void CSlotGroupModel::addLinePay(
 
 
 /************************************************************************
-*    desc:  Evaluate the scatter pays
+*    DESC:  Evaluate the scatter pays
 ************************************************************************/
 void CSlotGroupModel::evaluateScatters( const std::string & paytable )
 {
@@ -243,7 +243,7 @@ void CSlotGroupModel::evaluateScatters( const std::string & paytable )
 
 
 /************************************************************************
-*    desc:  Get the math strip
+*    DESC:  Get the math strip
 ************************************************************************/
 const CSlotStripModel & CSlotGroupModel::getStrip( int index ) const
 {
@@ -252,7 +252,7 @@ const CSlotStripModel & CSlotGroupModel::getStrip( int index ) const
 
 
 /************************************************************************
-*    desc:  Get the number of math strips
+*    DESC:  Get the number of math strips
 ************************************************************************/
 size_t CSlotGroupModel::getCount() const
 {

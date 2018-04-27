@@ -19,7 +19,7 @@
 namespace NScriptActorSprite2D
 {
     /************************************************************************
-    *    desc:  Register the class with AngelScript
+    *    DESC:  Register the class with AngelScript
     ************************************************************************/
     void Register()
     {

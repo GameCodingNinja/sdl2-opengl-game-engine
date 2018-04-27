@@ -20,7 +20,7 @@
 #include <btBulletCollisionCommon.h>
 
 /************************************************************************
- *    desc:  Constructor
+ *    DESC:  Constructor
  ************************************************************************/
 CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
     iSprite(id),
@@ -37,7 +37,7 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
 
 
 /************************************************************************
- *    desc:  destructor                                                             
+ *    DESC:  destructor                                                             
  ************************************************************************/
 CSprite3D::~CSprite3D()
 {
@@ -45,7 +45,7 @@ CSprite3D::~CSprite3D()
 
 
 /************************************************************************
- *    desc:  Init the physics                                                           
+ *    DESC:  Init the physics                                                           
  ************************************************************************/
 void CSprite3D::initPhysics()
 {
@@ -54,7 +54,7 @@ void CSprite3D::initPhysics()
 
 
 /************************************************************************
-*    desc:  Set the translation/rotation from Bullet Physics
+*    DESC:  Set the translation/rotation from Bullet Physics
 ************************************************************************/
 void CSprite3D::setTransform( const btTransform & trans )
 {
@@ -86,7 +86,7 @@ void CSprite3D::setTransform( const btTransform & trans )
 
 
 /************************************************************************
-*    desc:  React to what the player is doing
+*    DESC:  React to what the player is doing
 ************************************************************************/
 void CSprite3D::handleEvent( const SDL_Event & rEvent )
 {
@@ -96,7 +96,7 @@ void CSprite3D::handleEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
- *    desc:  Update the sprite                                                           
+ *    DESC:  Update the sprite                                                           
  ************************************************************************/
 void CSprite3D::update()
 {
@@ -111,7 +111,7 @@ void CSprite3D::update()
 
 
 /************************************************************************
-*    desc:  Update the physics
+*    DESC:  Update the physics
 ************************************************************************/
 void CSprite3D::physicsUpdate()
 {
@@ -120,7 +120,7 @@ void CSprite3D::physicsUpdate()
 
 
 /************************************************************************
- *    desc:  do the render                                                            
+ *    DESC:  do the render                                                            
  ************************************************************************/
 void CSprite3D::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
@@ -136,7 +136,7 @@ void CSprite3D::render( const CCamera & camera )
 
 
 /************************************************************************
- *    desc:  Get the visual component                                                            
+ *    DESC:  Get the visual component                                                            
  ************************************************************************/
 CVisualComponent3D & CSprite3D::getVisualComponent()
 {
@@ -145,7 +145,7 @@ CVisualComponent3D & CSprite3D::getVisualComponent()
 
 
 /************************************************************************
- *    desc:  Get the physics component                                                            
+ *    DESC:  Get the physics component                                                            
  ************************************************************************/
 CPhysicsComponent3D & CSprite3D::getPhysicsComponent()
 {
@@ -154,7 +154,7 @@ CPhysicsComponent3D & CSprite3D::getPhysicsComponent()
 
 
 /************************************************************************
- *    desc:  Get the scripting component                                                            
+ *    DESC:  Get the scripting component                                                            
  ************************************************************************/
 CScriptComponent & CSprite3D::getScriptComponent()
 {
@@ -163,7 +163,7 @@ CScriptComponent & CSprite3D::getScriptComponent()
 
 
 /************************************************************************
- *    desc:  Get the object data                                                            
+ *    DESC:  Get the object data                                                            
  ************************************************************************/
 const CObjectData3D & CSprite3D::getObjectData() const
 {
@@ -172,7 +172,7 @@ const CObjectData3D & CSprite3D::getObjectData() const
 
 
 /************************************************************************
-*    desc:  Set/Get the AI pointer. This class owns the pointer
+*    DESC:  Set/Get the AI pointer. This class owns the pointer
 ************************************************************************/
 void CSprite3D::setAI( iAIBase * pAIBase )
 {
@@ -184,7 +184,7 @@ void CSprite3D::setAI( iAIBase * pAIBase )
 
 
 /************************************************************************
- *    desc:  Set the color
+ *    DESC:  Set the color
  ************************************************************************/
 void CSprite3D::setColor( const CColor & color )
 {
@@ -199,7 +199,7 @@ void CSprite3D::setColor( float r, float g, float b, float a )
 
 
 /************************************************************************
- *    desc:  Set the default color
+ *    DESC:  Set the default color
  ************************************************************************/
 void CSprite3D::setDefaultColor()
 {
@@ -208,7 +208,7 @@ void CSprite3D::setDefaultColor()
 
 
 /************************************************************************
- *    desc:  Get the color
+ *    DESC:  Get the color
  ************************************************************************/
 const CColor & CSprite3D::getColor() const
 {
@@ -217,7 +217,7 @@ const CColor & CSprite3D::getColor() const
 
 
 /************************************************************************
- *    desc:  Get the default color
+ *    DESC:  Get the default color
  ************************************************************************/
 const CColor & CSprite3D::getDefaultColor() const
 {
@@ -226,7 +226,7 @@ const CColor & CSprite3D::getDefaultColor() const
 
 
 /************************************************************************
- *    desc:  Set the Alpha
+ *    DESC:  Set the Alpha
  ************************************************************************/
 void CSprite3D::setAlpha( float alpha )
 {
@@ -238,7 +238,7 @@ void CSprite3D::setAlpha( float alpha )
 
 
 /************************************************************************
- *    desc:  Get the Alpha
+ *    DESC:  Get the Alpha
  ************************************************************************/
 float CSprite3D::getAlpha() const
 {
@@ -247,7 +247,7 @@ float CSprite3D::getAlpha() const
 
 
 /************************************************************************
- *    desc:  Get the default alpha
+ *    DESC:  Get the default alpha
  ************************************************************************/
 float CSprite3D::getDefaultAlpha() const
 {
@@ -256,7 +256,7 @@ float CSprite3D::getDefaultAlpha() const
 
 
 /************************************************************************
-*    desc:  Set the default alpha
+*    DESC:  Set the default alpha
 ************************************************************************/
 void CSprite3D::setDefaultAlpha()
 {

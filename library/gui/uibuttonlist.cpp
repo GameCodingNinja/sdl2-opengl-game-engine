@@ -22,7 +22,7 @@
 #include <cstring>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUIButtonList::CUIButtonList( const std::string & group ) :
     CUISubControl( group ),
@@ -35,7 +35,7 @@ CUIButtonList::CUIButtonList( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CUIButtonList::~CUIButtonList()
 {
@@ -43,7 +43,7 @@ CUIButtonList::~CUIButtonList()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 ************************************************************************/
 void CUIButtonList::loadFromNode( const XMLNode & node )
 {
@@ -79,7 +79,7 @@ void CUIButtonList::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 ************************************************************************/
 void CUIButtonList::loadControlFromNode( const XMLNode & node )
 {
@@ -99,7 +99,7 @@ void CUIButtonList::loadControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Inc/Dec control
+*    DESC:  Inc/Dec control
 ************************************************************************/
 void CUIButtonList::inc()
 {
@@ -119,7 +119,7 @@ void CUIButtonList::dec()
 
 
 /************************************************************************
-*    desc:  Handle Onmessage
+*    DESC:  Handle Onmessage
 ************************************************************************/
 void CUIButtonList::onDownAction( const SDL_Event & rEvent )
 {
@@ -147,7 +147,7 @@ void CUIButtonList::onRightAction( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle OnLeftScroll message
+*    DESC:  Handle OnLeftScroll message
 ************************************************************************/
 void CUIButtonList::onDownScroll( const SDL_Event & rEvent )
 {
@@ -175,7 +175,7 @@ void CUIButtonList::onRightScroll( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle OnStateChange message
+*    DESC:  Handle OnStateChange message
 ************************************************************************/
 void CUIButtonList::onStateChange( const SDL_Event & rEvent )
 {
@@ -212,7 +212,7 @@ void CUIButtonList::onStateChange( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Inc the list
+*    DESC:  Inc the list
 ************************************************************************/
 void CUIButtonList::incList()
 {
@@ -233,7 +233,7 @@ void CUIButtonList::decList()
 
 
 /************************************************************************
-*    desc:  Update the display
+*    DESC:  Update the display
 ************************************************************************/
 void CUIButtonList::updateDisplay( int index )
 {
@@ -247,7 +247,7 @@ void CUIButtonList::updateDisplay( int index )
 
 
 /************************************************************************
-*    desc: Set the first inactive control to be active
+*    DESC: Set the first inactive control to be active
 *    NOTE: Don't want this functuality for the button list
 ************************************************************************/
 bool CUIButtonList::activateFirstInactiveControl()
@@ -257,7 +257,7 @@ bool CUIButtonList::activateFirstInactiveControl()
 
 
 /************************************************************************
-*    desc:  Get the active index
+*    DESC:  Get the active index
 ************************************************************************/
 int CUIButtonList::getActiveIndex() const
 {

@@ -23,7 +23,7 @@
 #include <iostream>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CUISlider::CUISlider( const std::string & group ) :
     CUISubControl( group ),
@@ -42,7 +42,7 @@ CUISlider::CUISlider( const std::string & group ) :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CUISlider::~CUISlider()
 {
@@ -50,7 +50,7 @@ CUISlider::~CUISlider()
 
 
 /************************************************************************
-*    desc:  Load the control info from XML node
+*    DESC:  Load the control info from XML node
 ************************************************************************/
 void CUISlider::loadFromNode( const XMLNode & node )
 {
@@ -84,7 +84,7 @@ void CUISlider::loadFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the control specific info from XML node
+*    DESC:  Load the control specific info from XML node
 *
 *    param: node - XML node
 ************************************************************************/
@@ -107,7 +107,7 @@ void CUISlider::loadControlFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Init the control
+*    DESC:  Init the control
 ************************************************************************/
 void CUISlider::init()
 {
@@ -118,7 +118,7 @@ void CUISlider::init()
 
 
 /************************************************************************
-*    desc:  Handle OnLeftAction message
+*    DESC:  Handle OnLeftAction message
 ************************************************************************/
 void CUISlider::onLeftAction( const SDL_Event & rEvent )
 {
@@ -128,7 +128,7 @@ void CUISlider::onLeftAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightAction message
+*    DESC:  Handle OnRightAction message
 ************************************************************************/
 void CUISlider::onRightAction( const SDL_Event & rEvent )
 {
@@ -138,7 +138,7 @@ void CUISlider::onRightAction( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnLeftScroll message
+*    DESC:  Handle OnLeftScroll message
 ************************************************************************/
 void CUISlider::onLeftScroll( const SDL_Event & rEvent )
 {
@@ -146,7 +146,7 @@ void CUISlider::onLeftScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnRightScroll message
+*    DESC:  Handle OnRightScroll message
 ************************************************************************/
 void CUISlider::onRightScroll( const SDL_Event & rEvent )
 {
@@ -154,7 +154,7 @@ void CUISlider::onRightScroll( const SDL_Event & rEvent )
 }
 
 /************************************************************************
-*    desc:  Handle OnMouseMove message
+*    DESC:  Handle OnMouseMove message
 ************************************************************************/
 bool CUISlider::onMouseMove( const SDL_Event & rEvent )
 {
@@ -177,7 +177,7 @@ bool CUISlider::onMouseMove( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Handle the select action
+*    DESC:  Handle the select action
 ************************************************************************/
 bool CUISlider::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {
@@ -214,7 +214,7 @@ bool CUISlider::handleSelectAction( const CSelectMsgCracker & msgCracker )
 
 
 /************************************************************************
-*    desc:  Deactivate the control
+*    DESC:  Deactivate the control
 ************************************************************************/
 void CUISlider::deactivateControl()
 {
@@ -225,7 +225,7 @@ void CUISlider::deactivateControl()
 
 
 /************************************************************************
-*    desc:  Handle the slider change
+*    DESC:  Handle the slider change
 ************************************************************************/
 void CUISlider::handleSliderChange( float value, bool prepareOnSelect )
 {
@@ -248,7 +248,7 @@ void CUISlider::handleSliderChange( float value, bool prepareOnSelect )
 
 
 /************************************************************************
-*    desc:  Set the slider min value
+*    DESC:  Set the slider min value
 ************************************************************************/
 void CUISlider::setMinValue( float value )
 {
@@ -257,7 +257,7 @@ void CUISlider::setMinValue( float value )
 
 
 /************************************************************************
-*    desc:  Set the slider max value
+*    DESC:  Set the slider max value
 ************************************************************************/
 void CUISlider::setMaxValue( float value )
 {
@@ -266,7 +266,7 @@ void CUISlider::setMaxValue( float value )
 
 
 /************************************************************************
-*    desc:  Set the slider inc value
+*    DESC:  Set the slider inc value
 ************************************************************************/
 void CUISlider::setSlider( float value )
 {
@@ -278,7 +278,7 @@ void CUISlider::setSlider( float value )
 
 
 /************************************************************************
-*    desc:  Set the slider inc value
+*    DESC:  Set the slider inc value
 ************************************************************************/
 void CUISlider::incSlider( float value )
 {
@@ -290,7 +290,7 @@ void CUISlider::incSlider( float value )
 
 
 /************************************************************************
-*    desc:  Inc the slider based on mouse movement
+*    DESC:  Inc the slider based on mouse movement
 ************************************************************************/
 void CUISlider::incSliderMovePos( float value )
 {
@@ -302,7 +302,7 @@ void CUISlider::incSliderMovePos( float value )
 
 
 /************************************************************************
-*    desc:  Update the slider
+*    DESC:  Update the slider
 ************************************************************************/
 void CUISlider::updateSlider()
 {
@@ -332,7 +332,7 @@ void CUISlider::updateSlider()
 
 
 /************************************************************************
-*    desc:  Cap the slider value
+*    DESC:  Cap the slider value
 ************************************************************************/
 void CUISlider::capSliderValue()
 {
@@ -346,7 +346,7 @@ void CUISlider::capSliderValue()
 
 
 /************************************************************************
-*    desc:  Set the position of the slider
+*    DESC:  Set the position of the slider
 ************************************************************************/
 void CUISlider::setSliderPos()
 {
@@ -365,7 +365,7 @@ void CUISlider::setSliderPos()
 
 
 /************************************************************************
-*    desc:  Cap the slider value
+*    DESC:  Cap the slider value
 ************************************************************************/
 float CUISlider::getValue()
 {
@@ -374,7 +374,7 @@ float CUISlider::getValue()
 
 
 /************************************************************************
-*    desc:  Is the mouse down
+*    DESC:  Is the mouse down
 ************************************************************************/
 bool CUISlider::isMouseDown()
 {

@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CFont::CFont( const std::string & filePath )
     : m_filePath(filePath),
@@ -30,7 +30,7 @@ CFont::CFont( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Destructor
+*    DESC:  Destructor
 ************************************************************************/
 CFont::~CFont()
 {
@@ -38,7 +38,7 @@ CFont::~CFont()
 
 
 /************************************************************************
-*    desc:  Load from XML file
+*    DESC:  Load from XML file
 *
 *    param: String filePath - path to xml file
 ************************************************************************/
@@ -97,7 +97,7 @@ void CFont::loadFromXML( const std::string & group )
 
 
 /************************************************************************
- *    desc:  Create the font texture from data
+ *    DESC:  Create the font texture from data
  ************************************************************************/
 void CFont::createFromData( const std::string & group )
 {
@@ -106,7 +106,7 @@ void CFont::createFromData( const std::string & group )
 
 
 /************************************************************************
-*    desc:  Get the data for this character
+*    DESC:  Get the data for this character
 ************************************************************************/
 const CCharData & CFont::getCharData( char id ) const
 {
@@ -123,7 +123,7 @@ const CCharData & CFont::getCharData( char id ) const
 
 
 /************************************************************************
-*    desc:  Get the line height
+*    DESC:  Get the line height
 ************************************************************************/
 float CFont::getLineHeight() const
 {
@@ -132,7 +132,7 @@ float CFont::getLineHeight() const
 
 
 /************************************************************************
-*    desc:  Get the baseline offset
+*    DESC:  Get the baseline offset
 ************************************************************************/
 float CFont::getBaselineOffset() const
 {
@@ -141,7 +141,7 @@ float CFont::getBaselineOffset() const
 
 
 /************************************************************************
-*    desc:  Get the horzontal padding
+*    DESC:  Get the horzontal padding
 ************************************************************************/
 float CFont::getHorzPadding() const
 {
@@ -150,7 +150,7 @@ float CFont::getHorzPadding() const
 
 
 /************************************************************************
-*    desc:  Get the vertical padding
+*    DESC:  Get the vertical padding
 ************************************************************************/
 float CFont::getVertPadding() const
 {
@@ -159,7 +159,7 @@ float CFont::getVertPadding() const
 
 
 /************************************************************************
-*    desc:  Get the texture size
+*    DESC:  Get the texture size
 ************************************************************************/
 const CSize<int> & CFont::getTextureSize() const
 {
@@ -168,7 +168,7 @@ const CSize<int> & CFont::getTextureSize() const
 
 
 /************************************************************************
-*    desc:  Get the texture ID
+*    DESC:  Get the texture ID
 ************************************************************************/
 uint32_t CFont::getTextureID() const
 {

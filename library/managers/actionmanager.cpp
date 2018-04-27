@@ -17,7 +17,7 @@
 #include <boost/format.hpp>
 
 /************************************************************************
-*    desc:  Constructor
+*    DESC:  Constructor
 ************************************************************************/
 CActionMgr::CActionMgr() :
     m_lastDeviceUsed(NDefs::DEVICE_NULL),
@@ -186,7 +186,7 @@ CActionMgr::CActionMgr() :
 
 
 /************************************************************************
-*    desc:  destructor
+*    DESC:  destructor
 ************************************************************************/
 CActionMgr::~CActionMgr()
 {
@@ -194,7 +194,7 @@ CActionMgr::~CActionMgr()
 
 
 /************************************************************************
-*    desc:  Load the action mappings from xml
+*    DESC:  Load the action mappings from xml
 *
 *    param: std::string filePath - path to file
 ************************************************************************/
@@ -209,7 +209,7 @@ void CActionMgr::loadActionFromXML( const std::string & filePath )
 
 
 /************************************************************************
-*    desc:  Load the keyboard/mouse/gamepad mapping
+*    DESC:  Load the keyboard/mouse/gamepad mapping
 ************************************************************************/
 void CActionMgr::loadAction()
 {
@@ -221,7 +221,7 @@ void CActionMgr::loadAction()
 
 
 /************************************************************************
-*    desc:  Load the keyboard mapping from node
+*    DESC:  Load the keyboard mapping from node
 ************************************************************************/
 void CActionMgr::loadKeyboardMappingFromNode( const XMLNode & node )
 {
@@ -234,7 +234,7 @@ void CActionMgr::loadKeyboardMappingFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the mouse mapping from node
+*    DESC:  Load the mouse mapping from node
 ************************************************************************/
 void CActionMgr::loadMouseMappingFromNode( const XMLNode & node )
 {
@@ -247,7 +247,7 @@ void CActionMgr::loadMouseMappingFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load the gamepad mapping from node
+*    DESC:  Load the gamepad mapping from node
 ************************************************************************/
 void CActionMgr::loadGamepadMappingFromNode( const XMLNode & node )
 {
@@ -260,7 +260,7 @@ void CActionMgr::loadGamepadMappingFromNode( const XMLNode & node )
 
 
 /************************************************************************
-*    desc:  Load action data from xml node
+*    DESC:  Load action data from xml node
 ************************************************************************/
 void CActionMgr::loadActionFromNode(
     const XMLNode & node,
@@ -302,7 +302,7 @@ void CActionMgr::loadActionFromNode(
 
 
 /************************************************************************
-*    desc:  Was this an action
+*    DESC:  Was this an action
 ************************************************************************/
 bool CActionMgr::wasAction( const SDL_Event & rEvent, const std::string & actionStr, NDefs::EActionPress actionPress )
 {
@@ -314,7 +314,7 @@ bool CActionMgr::wasAction( const SDL_Event & rEvent, const std::string & action
 
 
 /************************************************************************
-*    desc:  Was this an action
+*    DESC:  Was this an action
 ************************************************************************/
 NDefs::EActionPress CActionMgr::wasAction( const SDL_Event & rEvent, const std::string & actionStr )
 {
@@ -493,7 +493,7 @@ NDefs::EActionPress CActionMgr::wasAction( const SDL_Event & rEvent, const std::
 
 
 /************************************************************************
-*    desc:  Was this an action
+*    DESC:  Was this an action
 ************************************************************************/
 bool CActionMgr::wasAction(
     const int Id,
@@ -516,7 +516,7 @@ bool CActionMgr::wasAction(
 
 
 /************************************************************************
-*    desc:  What was the last device
+*    DESC:  What was the last device
 ************************************************************************/
 bool CActionMgr::wasLastDeviceGamepad()
 {
@@ -540,7 +540,7 @@ NDefs::EDeviceId CActionMgr::getLastDeviceUsed()
 
 
 /************************************************************************
-*    desc:  Reset the last used device
+*    DESC:  Reset the last used device
 ************************************************************************/
 void CActionMgr::resetLastUsedDevice()
 {
@@ -549,7 +549,7 @@ void CActionMgr::resetLastUsedDevice()
 
 
 /************************************************************************
-*    desc:  Get the mouse position
+*    DESC:  Get the mouse position
 ************************************************************************/
 const CPoint<float> & CActionMgr::getMouseAbsolutePos() const
 {
@@ -563,7 +563,7 @@ const CPoint<float> & CActionMgr::getMouseRelativePos() const
 
 
 /************************************************************************
-*    desc:  Get the last controller position
+*    DESC:  Get the last controller position
 ************************************************************************/
 const CPoint<float> & CActionMgr::getControllerPosLeft() const
 {
@@ -577,7 +577,7 @@ const CPoint<float> & CActionMgr::getControllerPosRight() const
 
 
 /************************************************************************
-*    desc:  Get the action/component strings for the give device id
+*    DESC:  Get the action/component strings for the give device id
 ************************************************************************/
 bool CActionMgr::getDeviceActionStr(
     NDefs::EDeviceId deviceId,
@@ -602,7 +602,7 @@ bool CActionMgr::getDeviceActionStr(
 
 
 /************************************************************************
-*    desc:  Get the action/component strings for the keyboard device id
+*    DESC:  Get the action/component strings for the keyboard device id
 ************************************************************************/
 int CActionMgr::getActionStr(
     const XMLNode & playerVisibleNode,
@@ -632,7 +632,7 @@ int CActionMgr::getActionStr(
 
 
 /************************************************************************
-*    desc:  Enable/Disable action handling
+*    DESC:  Enable/Disable action handling
 ************************************************************************/
 void CActionMgr::enableAction( bool value )
 {
@@ -641,7 +641,7 @@ void CActionMgr::enableAction( bool value )
 
 
 /************************************************************************
-*    desc:  Is action handling allowed
+*    DESC:  Is action handling allowed
 ************************************************************************/
 bool CActionMgr::isAction()
 {
@@ -650,7 +650,7 @@ bool CActionMgr::isAction()
 
 
 /************************************************************************
-*    desc:  Reset the action
+*    DESC:  Reset the action
 ************************************************************************/
 NDefs::EDeviceId CActionMgr::resetAction(
     const SDL_Event & rEvent,
@@ -733,7 +733,7 @@ NDefs::EDeviceId CActionMgr::resetAction(
 
 
 /************************************************************************
-*    desc:  Get the string associated with the key code
+*    DESC:  Get the string associated with the key code
 ************************************************************************/
 bool CActionMgr::getKeyCodeStr( keyCodeMapType & keyCodeMap, const int keyCode, std::string & componetIdStr )
 {
@@ -752,7 +752,7 @@ bool CActionMgr::getKeyCodeStr( keyCodeMapType & keyCodeMap, const int keyCode, 
 
 
 /************************************************************************
-*    desc:  Get the key code associated with the string
+*    DESC:  Get the key code associated with the string
 ************************************************************************/
 int CActionMgr::getKeyCode( keyCodeMapType & keyCodeMap, const std::string & componetIdStr )
 {
@@ -768,7 +768,7 @@ int CActionMgr::getKeyCode( keyCodeMapType & keyCodeMap, const std::string & com
 
 
 /************************************************************************
-*    desc:  Save the xml to file
+*    DESC:  Save the xml to file
 ************************************************************************/
 void CActionMgr::saveToFile()
 {
@@ -781,7 +781,7 @@ void CActionMgr::saveToFile()
 
 
 /************************************************************************
-*    desc:  Reset all the key bindings to their default settings
+*    DESC:  Reset all the key bindings to their default settings
 ************************************************************************/
 void CActionMgr::resetKeyBindingsToDefault()
 {
@@ -821,7 +821,7 @@ void CActionMgr::resetKeyBindingsToDefault()
 
 
 /************************************************************************
-*    desc:  Queue the event
+*    DESC:  Queue the event
 ************************************************************************/
 void CActionMgr::queueEvent( const SDL_Event & rEvent )
 {
@@ -856,7 +856,7 @@ void CActionMgr::queueEvent( const SDL_Event & rEvent )
 
 
 /************************************************************************
-*    desc:  Clear the queue
+*    DESC:  Clear the queue
 ************************************************************************/
 void CActionMgr::clearQueue()
 {
@@ -869,7 +869,7 @@ void CActionMgr::clearQueue()
 
 
 /************************************************************************
-*    desc:  Was this an event in the Queue
+*    DESC:  Was this an event in the Queue
 ************************************************************************/
 bool CActionMgr::wasEvent( const std::string & actionStr, NDefs::EActionPress actionPress )
 {
@@ -885,7 +885,7 @@ bool CActionMgr::wasEvent( const std::string & actionStr, NDefs::EActionPress ac
 
 
 /************************************************************************
-*    desc:  Device specific key checks
+*    DESC:  Device specific key checks
 ************************************************************************/
 bool CActionMgr::wasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress )
 {

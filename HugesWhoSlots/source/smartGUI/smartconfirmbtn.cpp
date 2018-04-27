@@ -19,7 +19,7 @@
 
 
 /************************************************************************
-*    desc:  Constructer
+*    DESC:  Constructer
 ************************************************************************/
 CSmartConfirmBtn::CSmartConfirmBtn( CUIControl * pUIControl ) :
     CSmartGuiControl( pUIControl )

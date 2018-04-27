@@ -19,7 +19,7 @@
 namespace NScriptSettings
 {
     /************************************************************************
-    *    desc:  Register global functions
+    *    DESC:  Register global functions
     ************************************************************************/
     void Register()
     {
