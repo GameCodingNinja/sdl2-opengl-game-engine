@@ -76,20 +76,22 @@ public:
     void handleEvent( const SDL_Event & rEvent );
 
     // Update the menu
+    void update();
     void updateMenu();
     void updateInterface();
     
     // Do the transform
+    void transform();
+    void transform( const CObject2D & object );
     void transformMenu();
     void transformMenu( const CObject2D & object );
     void transformInterface();
     void transformInterface( const CObject2D & object );
 
     // Render menus
-    void renderMenu( const CMatrix & matrix );
-    
-    // Render interface menus  
+    void renderMenu( const CMatrix & matrix ); 
     void renderInterface( const CMatrix & matrix );
+    void render( const CMatrix & matrix );
 
     // Get reference to the menu in questionn
     CMenu & getMenu( const std::string & nameStr );

@@ -33,14 +33,15 @@ add_library(
         script/scriptcomponent.cpp
         script/scriptpoint.cpp
         script/scriptactorsprite2d.cpp
-        script/scriptsprite.cpp
+        script/scriptisprite.cpp
         script/scriptsound.cpp
         script/scriptplaylist.cpp
         script/scriptsoundmanager.cpp
         script/scriptmenu.cpp
         script/scriptshadermanager.cpp
         script/scriptobjectdatamanager.cpp
-        script/scriptstrategymanager.cpp
+        script/scriptspritestrategymanager.cpp
+        script/scriptispritestrategy.cpp
         script/scriptcameramanager.cpp
         script/scriptactionmanager.cpp
         script/scriptsettings.cpp
@@ -48,6 +49,7 @@ add_library(
         script/scripthighresolutiontimer.cpp
         script/scriptmenumanager.cpp
         script/scriptfontmanager.cpp
+        script/scriptscriptmanager.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp
@@ -98,6 +100,7 @@ add_library(
         spritestrategy/ispritestrategy.cpp
         spritestrategy/basestrategy.cpp
         spritestrategy/menustrategy.cpp
+        spritestrategy/menuinterfacestrategy.cpp
         common/sound.cpp
         common/playlist.cpp
         common/worldvalue.cpp

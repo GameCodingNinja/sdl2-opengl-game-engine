@@ -786,31 +786,20 @@ void CMenuMgr::updateInterface()
         update( m_pActiveInterTreeVec );
 }
 
+void CMenuMgr::update()
+{
+    if( m_active )
+    {
+        update( m_pActiveInterTreeVec );
+        update( m_pActiveMenuTreeVec );
+    }
+}
 
-/************************************************************************
-*    DESC:  Update the menu
-************************************************************************/
 void CMenuMgr::update( const std::vector<CMenuTree *> & activeTreeVec )
 {
     for( auto iter : activeTreeVec )
         if( iter->isActive() )
             iter->update();
-}
-
-
-/************************************************************************
-*    DESC:  Transform the menu
-************************************************************************/
-void CMenuMgr::transformMenu()
-{
-    if( m_active )
-        transform( m_pActiveMenuTreeVec );
-}
-
-void CMenuMgr::transformMenu( const CObject2D & object )
-{
-    if( m_active )
-        transform( m_pActiveMenuTreeVec, object );
 }
 
 
@@ -823,16 +812,42 @@ void CMenuMgr::transformInterface()
         transform( m_pActiveInterTreeVec );
 }
 
+void CMenuMgr::transformMenu()
+{
+    if( m_active )
+        transform( m_pActiveMenuTreeVec );
+}
+
 void CMenuMgr::transformInterface( const CObject2D & object )
 {
     if( m_active )
         transform( m_pActiveInterTreeVec, object );
 }
 
+void CMenuMgr::transformMenu( const CObject2D & object )
+{
+    if( m_active )
+        transform( m_pActiveMenuTreeVec, object );
+}
 
-/************************************************************************
-*    DESC:  Transform the menu
-************************************************************************/
+void CMenuMgr::transform()
+{
+    if( m_active )
+    {
+        transform( m_pActiveInterTreeVec );
+        transform( m_pActiveMenuTreeVec );
+    }
+}
+
+void CMenuMgr::transform( const CObject2D & object )
+{
+    if( m_active )
+    {
+        transform( m_pActiveInterTreeVec, object );
+        transform( m_pActiveMenuTreeVec, object );
+    }
+}
+
 void CMenuMgr::transform( const std::vector<CMenuTree *> & activeTreeVec )
 {
     for( auto iter : activeTreeVec )
@@ -867,15 +882,25 @@ void CMenuMgr::renderMenu( const CMatrix & matrix )
     }
 }
 
-
-/************************************************************************
-*    DESC:  Render interface menus
-************************************************************************/
 void CMenuMgr::renderInterface( const CMatrix & matrix )
 {
     if( m_active )
     {
         for( auto iter : m_pActiveInterTreeVec )
+            if( iter->isActive() )
+                iter->render( matrix );
+    }
+}
+
+void CMenuMgr::render( const CMatrix & matrix )
+{
+    if( m_active )
+    {
+        for( auto iter : m_pActiveInterTreeVec )
+            if( iter->isActive() )
+                iter->render( matrix );
+        
+        for( auto iter : m_pActiveMenuTreeVec )
             if( iter->isActive() )
                 iter->render( matrix );
     }

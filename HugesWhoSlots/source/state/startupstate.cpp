@@ -39,7 +39,7 @@
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
@@ -95,7 +95,7 @@ void CStartUpState::init()
     CObjectDataMgr::Instance().loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
 
     // Load the shader
-    CShaderMgr::Instance().loadFromXML( "data/shaders/shader.cfg" );
+    CShaderMgr::Instance().load( "data/shaders/shader.cfg" );
 
     // Load the start up animation group
     CObjectDataMgr::Instance().loadGroup2D( "(startup)" );
@@ -158,9 +158,9 @@ void CStartUpState::assetLoad()
 {
     // Load in any fonts
     if( NBDefs::IsMobileDevice() )
-        CFontMgr::Instance().loadFromXML( "data/textures/fonts/font_mobile.lst" );
+        CFontMgr::Instance().load( "data/textures/fonts/font_mobile.lst" );
     else
-        CFontMgr::Instance().loadFromXML( "data/textures/fonts/font.lst" );
+        CFontMgr::Instance().load( "data/textures/fonts/font.lst" );
 
     // Load the symbol set view data manager list table
     CSymbolSetViewMgr::Instance().loadListTable( "data/objects/2d/slot/symbolSetListTable.lst" );
@@ -178,7 +178,7 @@ void CStartUpState::assetLoad()
     CMenuMgr::Instance().loadMenuAction( "data/objects/2d/menu/menu_action.list" );
 
     // Load the script list table
-    CScriptManager::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
+    CScriptMgr::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
 
     // Load sound resources for the menu
     CSoundMgr::Instance().loadListTable( "data/sound/soundListTable.lst" );
@@ -186,13 +186,13 @@ void CStartUpState::assetLoad()
     CSoundMgr::Instance().loadGroup("(standard)");
 
     // Register AngelScript the script items
-    auto pScriptEngine = CScriptManager::Instance().getEnginePtr();
+    auto pScriptEngine = CScriptMgr::Instance().getEnginePtr();
     RegisterStdString( pScriptEngine );
     RegisterScriptArray( pScriptEngine, false );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
-    NScriptSprite::Register();
+    NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
     NScriptSoundManager::Register();
@@ -201,7 +201,7 @@ void CStartUpState::assetLoad()
     NScriptHighResolutionTimer::Register();
 
     // Load group specific script items
-    CScriptManager::Instance().loadGroup("(menu)");
+    CScriptMgr::Instance().loadGroup("(menu)");
 
     // Load all of the meshes and materials in these groups
     CObjectDataMgr::Instance().loadGroup2D("(menu)");

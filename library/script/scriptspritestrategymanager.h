@@ -8,7 +8,7 @@
 #ifndef __script_strategy_manager_h__
 #define __script_strategy_manager_h__
 
-namespace NScriptStrategyManager
+namespace NScriptSpriteStrategyManager
 {
     // Register Script Object
     void Register();

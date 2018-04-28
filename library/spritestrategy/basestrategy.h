@@ -20,11 +20,10 @@ class CBaseStrategy : public iSpriteStrategy
 public:
 
     // Constructor
-    CBaseStrategy( const std::string & cameraId, int idOffset, int idDir );
-    CBaseStrategy( int idOffset, int idDir );
+    CBaseStrategy();
 
     // Destructor
-    virtual ~CBaseStrategy();
+    virtual ~CBaseStrategy(){}
     
     // Set to Destroy the sprite
     void setToDestroy( int spriteIndex ) override;
@@ -48,14 +47,6 @@ protected:
     
     // Handle the creating of any object by name
     virtual void createObj( const std::string & name );
-    
-protected:
-    
-    // ID Offset for this strategy 
-    int m_idOffset;
-    
-    // ID Direction
-    int m_idDir;
     
 private:
     

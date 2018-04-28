@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/menustrategy.h>
+#include <spritestrategy/menuinterfacestrategy.h>
 
 // Game lib dependencies
 #include <managers/cameramanager.h>
@@ -15,21 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CMenuStrategy::CMenuStrategy( const std::string & cameraId ) :
-    iSpriteStrategy(cameraId)
-{
-}
-
-CMenuStrategy::CMenuStrategy() :
-    iSpriteStrategy()
-{
-}
-
-
-/************************************************************************
-*    DESC:  destructor
-************************************************************************/
-CMenuStrategy::~CMenuStrategy()
+CMenuInterfaceStrategy::CMenuInterfaceStrategy()
 {
 }
 
@@ -37,7 +23,7 @@ CMenuStrategy::~CMenuStrategy()
 /***************************************************************************
 *    DESC:  Update the menu
 ****************************************************************************/
-void CMenuStrategy::update()
+void CMenuInterfaceStrategy::update()
 {
     CMenuMgr::Instance().updateInterface();
 }
@@ -46,7 +32,7 @@ void CMenuStrategy::update()
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuStrategy::transform()
+void CMenuInterfaceStrategy::transform()
 {
     CMenuMgr::Instance().transformInterface();
 }
@@ -55,7 +41,7 @@ void CMenuStrategy::transform()
 /***************************************************************************
 *    DESC:  Render the menu
 ****************************************************************************/
-void CMenuStrategy::render()
+void CMenuInterfaceStrategy::render()
 {
     const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 

@@ -27,7 +27,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CScriptManager::CScriptManager()
+CScriptMgr::CScriptMgr()
 {
     // Create the script engine
     scpEngine.reset( asCreateScriptEngine(ANGELSCRIPT_VERSION) );
@@ -42,7 +42,7 @@ CScriptManager::CScriptManager()
     scpEngine->SetEngineProperty(asEP_BUILD_WITHOUT_LINE_CUES, true);
 
     // Set the message callback to print the messages that the engine gives in case of errors
-    if( scpEngine->SetMessageCallback(asMETHOD(CScriptManager, messageCallback), this, asCALL_THISCALL) < 0 )
+    if( scpEngine->SetMessageCallback(asMETHOD(CScriptMgr, messageCallback), this, asCALL_THISCALL) < 0 )
     throw NExcept::CCriticalException("Error Creating AngelScript Engine!",
         boost::str( boost::format("AngelScript message callback could not be created.\n\n%s\nLine: %s")
             % __FUNCTION__ % __LINE__ ));
@@ -52,7 +52,7 @@ CScriptManager::CScriptManager()
 /************************************************************************
 *    DESC:  destructor
 ************************************************************************/
-CScriptManager::~CScriptManager()
+CScriptMgr::~CScriptMgr()
 {
     // Release the context pool
     for( auto iter : m_pContextPoolVec )
@@ -68,7 +68,7 @@ CScriptManager::~CScriptManager()
 *
 *    param: string & group - specified group of scripts to load
 ************************************************************************/
-void CScriptManager::loadGroup( const std::string & group )
+void CScriptMgr::loadGroup( const std::string & group )
 {
     // Make sure the group we are looking has been defined in the list table file
     auto listTableIter = m_listTableMap.find( group );
@@ -98,7 +98,7 @@ void CScriptManager::loadGroup( const std::string & group )
 /************************************************************************
 *    DESC:  Add the script to the module
 ************************************************************************/
-void CScriptManager::addScript( asIScriptModule * pScriptModule, const std::string & filePath )
+void CScriptMgr::addScript( asIScriptModule * pScriptModule, const std::string & filePath )
 {
     // Load the script file into a charater array
     std::shared_ptr<char> spChar = NGenFunc::FileToBuf( filePath );
@@ -116,7 +116,7 @@ void CScriptManager::addScript( asIScriptModule * pScriptModule, const std::stri
 /************************************************************************
 *    DESC:  Build all the scripts added to the module
 ************************************************************************/
-void CScriptManager::buildScript( asIScriptModule * pScriptModule, const std::string & group )
+void CScriptMgr::buildScript( asIScriptModule * pScriptModule, const std::string & group )
 {
     // Build the script
     int error = pScriptModule->Build();
@@ -135,7 +135,7 @@ void CScriptManager::buildScript( asIScriptModule * pScriptModule, const std::st
 *    NOTE: The receiver of this pointer is the owner if it's still
 *          holding on to it when the game terminates
 ************************************************************************/
-asIScriptContext * CScriptManager::getContext()
+asIScriptContext * CScriptMgr::getContext()
 {
     if( !m_pContextPoolVec.empty() )
     {
@@ -155,7 +155,7 @@ asIScriptContext * CScriptManager::getContext()
 /************************************************************************
 *    DESC:  Add the script context back to the managed pool
 ************************************************************************/
-void CScriptManager::recycleContext( asIScriptContext * pContext )
+void CScriptMgr::recycleContext( asIScriptContext * pContext )
 {
     m_pContextPoolVec.push_back( pContext );
 }
@@ -164,7 +164,7 @@ void CScriptManager::recycleContext( asIScriptContext * pContext )
 /************************************************************************
 *    DESC:  Get pointer to function name
 ************************************************************************/
-asIScriptFunction * CScriptManager::getPtrToFunc( const std::string & group, const std::string & name )
+asIScriptFunction * CScriptMgr::getPtrToFunc( const std::string & group, const std::string & name )
 {
     // Create the map group if it doesn't already exist
     auto mapMapIter = m_scriptFunctMapMap.find( group );
@@ -206,7 +206,7 @@ asIScriptFunction * CScriptManager::getPtrToFunc( const std::string & group, con
 /************************************************************************
 *    DESC:  Call back to display AngelScript messages
 ************************************************************************/
-void CScriptManager::messageCallback(const asSMessageInfo & msg)
+void CScriptMgr::messageCallback(const asSMessageInfo & msg)
 {
     std::string type = "ERROR";
     if( msg.type == asMSGTYPE_WARNING )
@@ -224,7 +224,7 @@ void CScriptManager::messageCallback(const asSMessageInfo & msg)
 /************************************************************************
 *    DESC:  Get the pointer to the script engine
 ************************************************************************/
-asIScriptEngine * CScriptManager::getEnginePtr()
+asIScriptEngine * CScriptMgr::getEnginePtr()
 {
     return scpEngine.get();
 }
@@ -233,7 +233,7 @@ asIScriptEngine * CScriptManager::getEnginePtr()
 /************************************************************************
 *    DESC:  Free all of the scripts of a specific data group
 ************************************************************************/
-void CScriptManager::freeGroup( const std::string & group )
+void CScriptMgr::freeGroup( const std::string & group )
 {
     // Make sure the group we are looking for exists
     auto listTableIter = m_listTableMap.find( group );
@@ -255,7 +255,7 @@ void CScriptManager::freeGroup( const std::string & group )
 /************************************************************************
 *    DESC:  Prepare the script function to run
 ************************************************************************/
-void CScriptManager::prepare(
+void CScriptMgr::prepare(
     const std::string & group,
     const std::string & funcName,
     std::vector<asIScriptContext *> & pContextVec,
@@ -311,7 +311,7 @@ void CScriptManager::prepare(
     }
 }
 
-void CScriptManager::prepare(
+void CScriptMgr::prepare(
     const std::string & group,
     const std::string & funcName,
     const std::vector<CScriptParam> & paramVec )
@@ -323,7 +323,7 @@ void CScriptManager::prepare(
 /************************************************************************
 *    DESC:  Prepare the spawn script function to run
 ************************************************************************/
-void CScriptManager::prepareSpawn( const std::string & funcName )
+void CScriptMgr::prepareSpawn( const std::string & funcName )
 {
     auto pContex = asGetActiveContext();
     if( pContex )
@@ -336,7 +336,7 @@ void CScriptManager::prepareSpawn( const std::string & funcName )
     }
 }
 
-void CScriptManager::prepareSpawnVoid( const std::string & funcName, void * pVoid )
+void CScriptMgr::prepareSpawnVoid( const std::string & funcName, void * pVoid )
 {
     auto pContex = asGetActiveContext();
     if( pContex )
@@ -349,7 +349,7 @@ void CScriptManager::prepareSpawnVoid( const std::string & funcName, void * pVoi
     }
 }
 
-void CScriptManager::prepareLocalSpawnVoid( const std::string & funcName, void * pVoid )
+void CScriptMgr::prepareLocalSpawnVoid( const std::string & funcName, void * pVoid )
 {
     auto pContex = asGetActiveContext();
     if( pContex )
@@ -366,13 +366,13 @@ void CScriptManager::prepareLocalSpawnVoid( const std::string & funcName, void *
 /************************************************************************
 *    DESC:  Update the script
 ************************************************************************/
-void CScriptManager::update()
+void CScriptMgr::update()
 {
     if( !m_pActiveContextVec.empty() )
         update( m_pActiveContextVec );
 }
 
-void CScriptManager::update( std::vector<asIScriptContext *> & pContextVec )
+void CScriptMgr::update( std::vector<asIScriptContext *> & pContextVec )
 {
     // Using a for loop because it simplifies the implementation that new
     // spawns are added to the vector be it through a local spawn or a global spawn.

@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 
 // Game lib dependencies
 #include <common/camera.h>
@@ -109,7 +109,7 @@ namespace NScriptCamera
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "CCamera", 0, asOBJ_REF|asOBJ_NOCOUNT) );

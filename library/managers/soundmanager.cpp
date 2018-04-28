@@ -332,27 +332,42 @@ bool CSoundMgr::isPaused( const std::string & group, const std::string & soundID
 
 
 /************************************************************************
-*    DESC:  Is music playing?
+*    DESC:  Stop all playing sound
 ************************************************************************/
-bool CSoundMgr::isMusicPlaying()
+void CSoundMgr::stopAllSound()
+{
+    for( auto & mapMapIter : m_soundMapMap )
+    {
+        for( auto & mapIter : mapMapIter.second )
+        {
+            mapIter.second.stop();
+        }
+    }
+}
+
+
+/************************************************************************
+*    DESC:  Is the stream playing?
+************************************************************************/
+bool CSoundMgr::isStreamPlaying()
 {
     return Mix_PlayingMusic();
 }
 
 
 /************************************************************************
-*    DESC:  Is music paused?
+*    DESC:  Is the stream paused?
 ************************************************************************/
-bool CSoundMgr::isMusicPaused()
+bool CSoundMgr::isStreamPaused()
 {
     return Mix_PausedMusic();
 }
 
 
 /************************************************************************
-*    DESC:  Stop the music
+*    DESC:  Stop the stream
 ************************************************************************/
-void CSoundMgr::stopMusic()
+void CSoundMgr::stopStream()
 {
     Mix_HaltMusic();
 }
@@ -361,7 +376,7 @@ void CSoundMgr::stopMusic()
 /************************************************************************
 *    DESC:  Pause the music
 ************************************************************************/
-void CSoundMgr::pauseMusic()
+void CSoundMgr::pauseStream()
 {
     if( Mix_PlayingMusic() )
         Mix_PauseMusic();

@@ -15,25 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CBaseStrategy::CBaseStrategy( const std::string & cameraId, int idOffset, int idDir ) :
-    iSpriteStrategy( cameraId ),
-    m_idOffset(idOffset),
-    m_idDir(idDir)
-{
-}   // constructor
-
-CBaseStrategy::CBaseStrategy( int idOffset, int idDir ) :
-    iSpriteStrategy(),
-    m_idOffset(idOffset),
-    m_idDir(idDir)
-{
-}
-
-
-/************************************************************************
-*    DESC:  destructor
-************************************************************************/
-CBaseStrategy::~CBaseStrategy()
+CBaseStrategy::CBaseStrategy()
 {
 }
 

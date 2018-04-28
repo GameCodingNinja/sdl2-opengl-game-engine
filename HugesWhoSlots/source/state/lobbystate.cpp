@@ -182,7 +182,7 @@ namespace NLobby
 
         CSoundMgr::Instance().loadGroup("(lobby)");
 
-        CScriptManager::Instance().loadGroup("(lobby)");
+        CScriptMgr::Instance().loadGroup("(lobby)");
 
         // Free the sprite sheet data manager because it's no longer needed
         CSpriteSheetMgr::Instance().clear();
@@ -209,7 +209,7 @@ namespace NLobby
     void Unload()
     {
         CMenuMgr::Instance().freeGroup("(lobby)");
-        CScriptManager::Instance().freeGroup("(lobby)");
+        CScriptMgr::Instance().freeGroup("(lobby)");
         CSoundMgr::Instance().freeGroup("(lobby)");
 
     }

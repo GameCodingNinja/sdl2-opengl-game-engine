@@ -54,7 +54,7 @@ namespace NScriptGlobals
     ************************************************************************/
     void Register()
     {
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
         
         Throw( pEngine->RegisterGlobalFunction("void Print(string &in)", asFUNCTION(NGenFunc::PostDebugMsg), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Suspend()", asFUNCTION(Suspend), asCALL_CDECL) );
@@ -63,6 +63,6 @@ namespace NScriptGlobals
         // The DispatchEvent function has 4 parameters and because they are not defined here, they only return garbage
         // AngelScript is not allowing the other two voided pointers
         Throw( pEngine->RegisterGlobalFunction("void DispatchEvent(int type, int code = 0)", asFUNCTION(NGenFunc::DispatchEvent), asCALL_CDECL) );
-        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in)", asMETHOD(CScriptManager, prepareSpawn), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in)", asMETHOD(CScriptMgr, prepareSpawn), asCALL_THISCALL_ASGLOBAL, &CScriptMgr::Instance()) );
     }
 }

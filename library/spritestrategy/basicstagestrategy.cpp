@@ -15,13 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CBasicStageStrategy::CBasicStageStrategy( const std::string & cameraId ) :
-    iSpriteStrategy(cameraId)
-{
-}
-
-CBasicStageStrategy::CBasicStageStrategy() :
-    iSpriteStrategy()
+CBasicStageStrategy::CBasicStageStrategy()
 {
 }
 

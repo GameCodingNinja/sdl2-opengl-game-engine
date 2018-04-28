@@ -19,7 +19,6 @@ class CMenuStrategy : public iSpriteStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CMenuStrategy( const std::string & cameraId );
     CMenuStrategy();
 
     // Destructor

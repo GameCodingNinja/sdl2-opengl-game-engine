@@ -17,20 +17,20 @@
 
 // Forward Declarations
 class iSprite;
+union SDL_Event;
 
 class iSpriteStrategy
 {
 public:
 
     // Constructor
-    iSpriteStrategy( const std::string & cameraId );
     iSpriteStrategy();
 
     // Destructor
-    virtual ~iSpriteStrategy();
+    virtual ~iSpriteStrategy(){}
 
     // Load the data from file
-    virtual void loadFromFile( const std::string & file ) = 0;
+    virtual void loadFromFile( const std::string & file ){};
     
     // Set to Destroy the sprite
     virtual void setToDestroy( int spriteIndex ){}
@@ -44,7 +44,6 @@ public:
     // Create the sprite
     virtual iSprite * create(
         const std::string & name,
-        const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ){ return nullptr; }
@@ -52,19 +51,16 @@ public:
     virtual iSprite * create(
         const std::string & group,
         const std::string & name,
-        const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ){ return nullptr; }
 
     virtual iSprite * create(
-        const std::string & name,
-        const int id ){ return nullptr; }
+        const std::string & name ){ return nullptr; }
     
     virtual iSprite * create(
         const std::string & group,
-        const std::string & name,
-        const int id ){ return nullptr; }
+        const std::string & name ){ return nullptr; }
     
     // Do any pre-loop init
     virtual void init(){}
@@ -87,6 +83,15 @@ public:
     virtual void render( const class CMatrix & matrix ) {}
     virtual void render( const CMatrix & matrix, const CMatrix & rotMatrix ) {}
     
+    // Clear the sprite Id counter
+    static void clearSpriteCounter();
+    
+    // Customize sprite id generation by defining an offset
+    void setIdOffset( int offset );
+    
+    // Customize sprite id generation by defining a direction
+    void setIdDir( int dir );
+    
 protected:
     
     // Delete any sprites scheduled to die
@@ -94,8 +99,17 @@ protected:
     
 protected:
     
+    // ID Offset for this strategy 
+    int m_idOffset;
+    
+    // ID Direction
+    int m_idDir;
+    
     // camera id
     std::string m_cameraId;
+    
+    // Sprite Id incrementor
+    static int m_spriteInc;
 };
 
 #endif  // __i_sprite_strategy_h__

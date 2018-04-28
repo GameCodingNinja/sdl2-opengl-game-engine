@@ -29,13 +29,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CBasicSpriteStrategy::CBasicSpriteStrategy( const std::string & cameraId, int idOffset, int idDir ) :
-    CBaseStrategy( cameraId, idOffset, idDir )
-{
-}
-
-CBasicSpriteStrategy::CBasicSpriteStrategy( int idOffset, int idDir ) :
-    CBaseStrategy( idOffset, idDir )
+CBasicSpriteStrategy::CBasicSpriteStrategy()
 {
 }
 
@@ -140,7 +134,6 @@ CSpriteDataContainer & CBasicSpriteStrategy::getData( const std::string & name )
 ************************************************************************/
 iSprite * CBasicSpriteStrategy::create(
     const std::string & dataName,
-    const int id,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
     const CPoint<float> & scale )
@@ -149,7 +142,7 @@ iSprite * CBasicSpriteStrategy::create(
     const CSpriteDataContainer & rSpriteDataContainer = getData( dataName );
 
     // If the sprite defined a unique id then use that
-    int spriteId( (id + m_idOffset) * m_idDir );
+    int spriteId( ((m_spriteInc++) + m_idOffset) * m_idDir );
 
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
@@ -185,7 +178,7 @@ iSprite * CBasicSpriteStrategy::create(
     {
         throw NExcept::CCriticalException("Sprite Create Error!",
             boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
-                % dataName % id % __FUNCTION__ % __LINE__ ));
+                % dataName % spriteId % __FUNCTION__ % __LINE__ ));
     }
 
     // Use passed in transforms if specified
@@ -212,14 +205,13 @@ iSprite * CBasicSpriteStrategy::create(
 }
 
 iSprite * CBasicSpriteStrategy::create(
-    const std::string & dataName,
-    const int id )
+    const std::string & dataName )
 {
     std::string aiName;
     const CSpriteDataContainer & rSpriteDataContainer = getData( dataName );
 
     // If the sprite defined a unique id then use that
-    int spriteId( (id + m_idOffset) * m_idDir );
+    int spriteId( ((m_spriteInc++) + m_idOffset) * m_idDir );
 
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
@@ -258,7 +250,7 @@ iSprite * CBasicSpriteStrategy::create(
     {
         throw NExcept::CCriticalException("Sprite Create Error!",
             boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
-                % dataName % id % __FUNCTION__ % __LINE__ ));
+                % dataName % spriteId % __FUNCTION__ % __LINE__ ));
     }
 
     // Broadcast the signal to create the sprite AI
@@ -274,13 +266,12 @@ iSprite * CBasicSpriteStrategy::create(
 iSprite * CBasicSpriteStrategy::create(
     const std::string & group,
     const std::string & name,
-    const int id,
     const CPoint<CWorldValue> & pos,
     const CPoint<float> & rot,
     const CPoint<float> & scale )
 {
     // If the sprite defined a unique id then use that
-    int spriteId( (id + m_idOffset) * m_idDir );
+    int spriteId( ((m_spriteInc++) + m_idOffset) * m_idDir );
 
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
@@ -301,7 +292,7 @@ iSprite * CBasicSpriteStrategy::create(
     {
         throw NExcept::CCriticalException("Sprite Create Error!",
             boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
-                % name % id % __FUNCTION__ % __LINE__ ));
+                % name % spriteId % __FUNCTION__ % __LINE__ ));
     }
 
     // Use passed in transforms if specified
@@ -325,11 +316,10 @@ iSprite * CBasicSpriteStrategy::create(
 
 iSprite * CBasicSpriteStrategy::create(
     const std::string & group,
-    const std::string & name,
-    const int id )
+    const std::string & name )
 {
     // If the sprite defined a unique id then use that
-    int spriteId( (id + m_idOffset) * m_idDir );
+    int spriteId( ((m_spriteInc++) + m_idOffset) * m_idDir );
 
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
@@ -350,7 +340,7 @@ iSprite * CBasicSpriteStrategy::create(
     {
         throw NExcept::CCriticalException("Sprite Create Error!",
             boost::str( boost::format("Duplicate sprite id (%s - %d).\n\n%s\nLine: %s")
-                % name % id % __FUNCTION__ % __LINE__ ));
+                % name % spriteId % __FUNCTION__ % __LINE__ ));
     }
 
     // Init the physics
@@ -368,7 +358,7 @@ iSprite * CBasicSpriteStrategy::create(
 ****************************************************************************/
 void CBasicSpriteStrategy::createObj( const std::string & name )
 {
-    create( name, 0, CPoint<float>(), CPoint<float>(), CPoint<float>(1,1,1) );
+    create( name, CPoint<float>(), CPoint<float>(), CPoint<float>(1,1,1) );
 }
 
 

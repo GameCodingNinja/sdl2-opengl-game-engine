@@ -46,7 +46,7 @@ namespace NScriptShaderManager
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
         
         // Register type
         Throw( pEngine->RegisterObjectType( "CShaderMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );

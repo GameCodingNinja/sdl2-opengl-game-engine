@@ -38,7 +38,7 @@
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
 #include <script/scriptglobals.h>
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
@@ -174,18 +174,18 @@ void CStartUpState::assetLoad()
     CSoundMgr::Instance().loadGroup("(menu)");
 
     // Load the script list table
-    CScriptManager::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
+    CScriptMgr::Instance().loadListTable( "data/objects/2d/scripts/scriptListTable.lst" );
 
     // Load the physics list table
     //CPhysicsWorldManager::Instance().LoadListTable( "data/objects/2d/physics/physicsListTable.lst" );
 
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
-    RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
+    RegisterStdString( CScriptMgr::Instance().getEnginePtr() );
+    RegisterScriptArray( CScriptMgr::Instance().getEnginePtr(), false );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
-    NScriptSprite::Register();
+    NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
     NScriptSoundManager::Register();
@@ -197,7 +197,7 @@ void CStartUpState::assetLoad()
     CObjectDataMgr::Instance().loadGroup2D("(menu)");
 
     // Load group specific script items
-    CScriptManager::Instance().loadGroup("(menu)");
+    CScriptMgr::Instance().loadGroup("(menu)");
 
     // Create the menu system
     CMenuMgr::Instance().loadGroup("(menu)");

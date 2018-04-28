@@ -82,10 +82,13 @@ void CUIControl::loadFromNode( const XMLNode & node )
             setExecutionAction( std::string(actionNode.getAttribute( "executionAction" )) );
     }
 
-    // Setup the action
+    // Setup the script functions for this control
     XMLNode stateScriptNode = node.getChildNode( "stateScript" );
     if( !stateScriptNode.isEmpty() )
     {
+        if( stateScriptNode.isAttributeSet( "onInit" ) )
+            m_scriptFunction.emplace( NUIControl::ECS_INIT, stateScriptNode.getAttribute( "onInit" ) );
+        
         if( stateScriptNode.isAttributeSet( "onDisabled" ) )
             m_scriptFunction.emplace( NUIControl::ECS_DISABLED, stateScriptNode.getAttribute( "onDisabled" ) );
 
@@ -97,6 +100,12 @@ void CUIControl::loadFromNode( const XMLNode & node )
 
         if( stateScriptNode.isAttributeSet( "onSelect" ) )
             m_scriptFunction.emplace( NUIControl::ECS_SELECTED, stateScriptNode.getAttribute( "onSelect" ) );
+        
+        if( stateScriptNode.isAttributeSet( "onExecute" ) )
+            m_scriptFunction.emplace( NUIControl::ECS_EXECUTE, stateScriptNode.getAttribute( "onExecute" ) );
+        
+        if( stateScriptNode.isAttributeSet( "onEvent" ) )
+            m_scriptFunction.emplace( NUIControl::ECS_EVENT, stateScriptNode.getAttribute( "onEvent" ) );
     }
 
     // Load the scroll data from node
@@ -289,6 +298,9 @@ void CUIControl::handleEvent( const SDL_Event & rEvent )
 
     // Do any smart event handling
     smartHandleEvent( rEvent );
+    
+    // Prepare script functions associated with this event
+    prepareControlScriptFunction( NUIControl::ECS_EVENT );
 }
 
 
@@ -367,6 +379,9 @@ void CUIControl::onSelectExecute( const SDL_Event & rEvent )
 
         // Boost signal execute action
         m_executionActionSignal(this);
+        
+        // Prepare script functions associated with this event
+        prepareControlScriptFunction( NUIControl::ECS_EXECUTE );
     }
 }
 

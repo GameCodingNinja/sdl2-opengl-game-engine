@@ -27,14 +27,14 @@ class asIScriptContext;
 class asIScriptFunction;
 struct asSMessageInfo;
 
-class CScriptManager : public CManagerBase
+class CScriptMgr : public CManagerBase
 {
 public:
 
     // Get the instance of the singleton class
-    static CScriptManager & Instance()
+    static CScriptMgr & Instance()
     {
-        static CScriptManager scriptManager;
+        static CScriptMgr scriptManager;
         return scriptManager;
     }
 
@@ -82,10 +82,10 @@ public:
 private:
 
     // Constructor
-    CScriptManager();
+    CScriptMgr();
 
     // Destructor
-    virtual ~CScriptManager();
+    virtual ~CScriptMgr();
 
     // Add the script to the module
     void addScript( asIScriptModule * pScriptModule, const std::string & filePath );

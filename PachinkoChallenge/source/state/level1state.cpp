@@ -193,7 +193,9 @@ void CLevel1State::update()
 
     m_scriptComponent.update();
 
-    CScriptManager::Instance().update();
+    CScriptMgr::Instance().update();
+    
+    CMenuMgr::Instance().updateInterface();
 
     if( !CMenuMgr::Instance().isMenuActive() )
     {
@@ -208,6 +210,8 @@ void CLevel1State::update()
 void CLevel1State::transform()
 {
     CCommonState::transform();
+    
+    CMenuMgr::Instance().transformInterface();
 
     CSpriteStrategyMgr::Instance().transform();
 }
@@ -326,12 +330,12 @@ namespace NLevel1State
         CMenuMgr::Instance().loadGroup("(levels)", CMenuMgr::DONT_INIT_GROUP);
 
         // Load state specific AngelScript functions
-        CScriptManager::Instance().loadGroup("(level1)");
+        CScriptMgr::Instance().loadGroup("(level1)");
 
         CPhysicsWorldManager2D::Instance().createWorld( "(game)" );
 
         // Load the sprite strategies
-        CSpriteStrategyMgr::Instance().addStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy(1000) );
+        CSpriteStrategyMgr::Instance().addStrategy( "(level1_spriteStrategy)", new CBasicSpriteStrategy )->setIdOffset(1000);
         CSpriteStrategyMgr::Instance().addStrategy( "(level1_stage1Strategy)", new CBasicStageStrategy );
     }
 
@@ -365,7 +369,7 @@ namespace NLevel1State
         CSpriteStrategyMgr::Instance().clear();
 
         // Unload state specific AngelScript functions
-        CScriptManager::Instance().freeGroup("(level1)");
+        CScriptMgr::Instance().freeGroup("(level1)");
 
         // All physics entities are destroyed and all heap memory is released.
         CPhysicsWorldManager2D::Instance().destroyWorld( "(game)" );

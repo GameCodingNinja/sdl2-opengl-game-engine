@@ -54,7 +54,7 @@ namespace NScriptSize
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
         
         // Register type
         Throw( pEngine->RegisterObjectType("CSize", sizeof(CSize<float>), asOBJ_VALUE | asOBJ_POD | asOBJ_APP_CLASS | asOBJ_APP_CLASS_CONSTRUCTOR | asOBJ_APP_CLASS_COPY_CONSTRUCTOR | asOBJ_APP_CLASS_DESTRUCTOR ) );

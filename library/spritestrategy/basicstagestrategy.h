@@ -30,7 +30,6 @@ class CBasicStageStrategy : public iSpriteStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CBasicStageStrategy( const std::string & cameraId );
     CBasicStageStrategy();
 
     // Destructor

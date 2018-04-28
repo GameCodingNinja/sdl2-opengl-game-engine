@@ -23,8 +23,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CSpriteStrategyMgr::CSpriteStrategyMgr() :
-    m_spriteInc(0)
+CSpriteStrategyMgr::CSpriteStrategyMgr()
 {
 }
 
@@ -41,7 +40,7 @@ CSpriteStrategyMgr::~CSpriteStrategyMgr()
 /************************************************************************
  *    DESC:  Add strategy
  ************************************************************************/
-void CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
+iSpriteStrategy * CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
 {
     auto mapIter = m_pStrategyMap.emplace( strategyId, pSpriteStrategy );
 
@@ -61,6 +60,8 @@ void CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStr
 
     // Add the strategy pointer to the vector for rendering
     m_pStrategyVec.push_back( pSpriteStrategy );
+    
+    return pSpriteStrategy;
 }
 
 
@@ -114,7 +115,7 @@ iSprite * CSpriteStrategyMgr::create(
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s")
                 % strategyId % dataName % __FUNCTION__ % __LINE__ ));
 
-    return mapIter->second->create( dataName, ++m_spriteInc, pos, rot, scale );
+    return mapIter->second->create( dataName, pos, rot, scale );
 }
 
 iSprite * CSpriteStrategyMgr::create(
@@ -132,7 +133,7 @@ iSprite * CSpriteStrategyMgr::create(
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
 
-    return mapIter->second->create( group, name, ++m_spriteInc, pos, rot, scale );
+    return mapIter->second->create( group, name, pos, rot, scale );
 }
 
 iSprite * CSpriteStrategyMgr::create(
@@ -146,7 +147,7 @@ iSprite * CSpriteStrategyMgr::create(
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s, %s).\n\n%s\nLine: %s")
                 % strategyId % dataName % __FUNCTION__ % __LINE__ ));
 
-    return mapIter->second->create( dataName, ++m_spriteInc );
+    return mapIter->second->create( dataName );
 }
 
 iSprite * CSpriteStrategyMgr::create(
@@ -161,12 +162,12 @@ iSprite * CSpriteStrategyMgr::create(
             boost::str( boost::format("Sprite Manager strategy id can't be found (%s).\n\n%s\nLine: %s")
                 % strategyId % __FUNCTION__ % __LINE__ ));
 
-    return mapIter->second->create( group, name, ++m_spriteInc );
+    return mapIter->second->create( group, name );
 }
 
 
 /************************************************************************
-*    DESC:  Delete all the sprites
+*    DESC:  Delete all the strategies
 ************************************************************************/
 void CSpriteStrategyMgr::clear()
 {
@@ -176,7 +177,7 @@ void CSpriteStrategyMgr::clear()
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
     m_pStrategyVec.clear();
-    m_spriteInc = 0;
+    iSpriteStrategy::clearSpriteCounter();
 }
 
 

@@ -22,6 +22,8 @@
 
 // Forward Declarations
 class iSprite;
+class iSpriteStrategy;
+union SDL_Event;
 
 class CSpriteStrategyMgr : public CManagerBase
 {
@@ -35,7 +37,7 @@ public:
     }
     
     // Add strategy
-    void addStrategy( const std::string & strategyId, class iSpriteStrategy * pSpriteStrategy );
+    iSpriteStrategy * addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy );
     
     // Delete strategy
     void deleteStrategy( const std::string & strategyId );
@@ -91,6 +93,9 @@ public:
     void render();
     void render( const class CMatrix & matrix );
     void render( const CMatrix & matrix, const CMatrix & cameraMatrix );
+    
+    // Get the pointer to the strategy
+    iSpriteStrategy * getStrategy( const std::string & strategyId );
     
     // Get a reference to the strategy
     template <typename target>
@@ -186,8 +191,7 @@ private:
     // Destructor
     virtual ~CSpriteStrategyMgr();
     
-    // Get the pointer to the strategy
-    iSpriteStrategy * getStrategy( const std::string & strategyId );
+    
 
 private:
 
@@ -196,9 +200,6 @@ private:
     
     // Vector of strategy pointers
     std::vector<iSpriteStrategy *> m_pStrategyVec;
-    
-    // Sprite Id incrementor
-    int m_spriteInc;
     
     // Temporary vector to hold the return ids
     std::vector<iSprite *> m_incReturn;

@@ -35,8 +35,7 @@ class CBasicSpriteStrategy : public CBaseStrategy, boost::noncopyable
 public:
 
     // Constructor
-    CBasicSpriteStrategy( const std::string & cameraId, int idOffset = 0, int idDir = 1 );
-    CBasicSpriteStrategy( int idOffset = 0, int idDir = 1 );
+    CBasicSpriteStrategy();
 
     // Destructor
     virtual ~CBasicSpriteStrategy();
@@ -47,7 +46,6 @@ public:
     // Create the sprite
     virtual iSprite * create(
         const std::string & dataName,
-        const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
@@ -55,19 +53,16 @@ public:
     virtual iSprite * create(
         const std::string & group,
         const std::string & name,
-        const int id,
         const CPoint<CWorldValue> & pos,
         const CPoint<float> & rot,
         const CPoint<float> & scale ) override;
     
     virtual iSprite * create(
-        const std::string & dataName,
-        const int id ) override;
+        const std::string & dataName ) override;
     
     virtual iSprite * create(
         const std::string & group,
-        const std::string & name,
-        const int id ) override;
+        const std::string & name ) override;
     
     // Do any pre-game loop init's
     void init() override;

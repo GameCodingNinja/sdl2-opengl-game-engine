@@ -25,7 +25,7 @@ namespace NScriptMenu
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "CMenu", 0, asOBJ_REF|asOBJ_NOCOUNT) );

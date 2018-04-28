@@ -7,7 +7,11 @@
 
 final class CStartUpState : iGameState
 {
+    // Startup logo
     iSprite @m_logo;
+    
+    // Basic strategy
+    iSpriteStrategy @strategy;
     
     //
     // Constructor
@@ -18,49 +22,85 @@ final class CStartUpState : iGameState
     }
     
     //
+    // Destructor
+    //
+    ~CStartUpState()
+    {
+        ObjectDataMgr.freeGroup2D( "(startup)" );
+        strategy.setToDestroy( m_logo.getId() );
+    }
+    
+    //
     // Init the state
     //
     void Init() override
     {
-        // Load in any fonts
-        FontMgr.load( "data/textures/fonts/font.lst" );
-    
-        // Create a basic strategy for 2d sprites
-        StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
-        
-        // Load the 2d object data list tables
-        ObjectDataMgr.loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
-        
-        // Load the shaders
-        ShaderMgr.load( "data/shaders/shader.cfg" );
-        ShaderMgr.setAllShaderColor( "additive", 0, 0, 0, 1 );
-        
-        // Load the start up animation group
-        ObjectDataMgr.loadGroup2D( "(startup)" );
-        
-        // Add the logo
-        @m_logo = StrategyMgr.createSprite( "strategyFor2D", "(startup)", "logo" );
+        // Load this states assets and display the logo
+        LoadStateAndFade();
         
         // Do the fade in
         Screen_FadeIn();
         
-        // Load the action manager - Must be loaded before memu system
-        ActionMgr.load( "data/settings/controllerMapping.cfg" );
-        
-        // Load the 3d object data list tables
-        ObjectDataMgr.loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
-        
-        // Load the start up animation group
-        ObjectDataMgr.loadGroup2D( "(title_screen)" );
-        ObjectDataMgr.loadGroup3D( "(cube)" );
+        // Load the remaining assets
+        LoadAssets();
 
+        // Loading done, fade out
         Screen_FadeOut();
         
-        ObjectDataMgr.freeGroup2D( "(startup)" );
-        StrategyMgr.deleteSprite( "strategyFor2D", m_logo.getId() );
-        Print("Sprite Hold Test: ");
-        
         DoChangeState();
+    }
+    
+    //
+    // Load this states assets for displaying the logo
+    //
+    void LoadStateAndFade()
+    {
+        // Load the shaders
+        ShaderMgr.load( "data/shaders/shader.cfg" );
+        ShaderMgr.setAllShaderColor( "additive", 0, 0, 0, 1 );
+        
+        // Load the 2d object data list table
+        ObjectDataMgr.loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
+        
+        // Load the start up group
+        ObjectDataMgr.loadGroup2D( "(startup)" );
+        
+        // Create a basic strategy for 2d sprites and create the logo sprite
+        @strategy = StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
+        @m_logo = strategy.createSprite( "(startup)", "logo" );
+    }
+    
+    //
+    // Load the remaining assets
+    //
+    void LoadAssets()
+    {
+        // Load the list tables
+        ObjectDataMgr.loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
+        MenuMgr.loadListTable( "data/objects/2d/menu/menuListTable.lst" );
+        SoundMgr.loadListTable( "data/sound/soundListTable.lst" );
+        
+        // Load the menu scripts
+        ScriptMgr.loadGroup( "(menu)" );
+        
+        // Load in any fonts
+        FontMgr.load( "data/textures/fonts/font.lst" );
+
+        // Load the action manager - Must be loaded before memu system
+        ActionMgr.load( "data/settings/controllerMapping.cfg" );
+
+        // Load the menu action list
+        MenuMgr.loadMenuAction( "data/objects/2d/menu/menu_action.list" );
+
+        // Load the start up animation group
+        ObjectDataMgr.loadGroup2D( "(menu)" );
+        ObjectDataMgr.loadGroup2D( "(title_screen)" );
+        ObjectDataMgr.loadGroup3D( "(cube)" );
+        
+        SoundMgr.loadGroup("(menu)");
+
+        // Load the menu group
+        MenuMgr.loadGroup("(menu)");
     }
 };
 

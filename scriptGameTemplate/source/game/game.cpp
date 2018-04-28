@@ -37,19 +37,21 @@
 #include <script/scriptpoint.h>
 #include <script/scriptsize.h>
 #include <script/scriptglobals.h>
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 #include <script/scriptsoundmanager.h>
 #include <script/scriptcamera.h>
 #include <script/scriptcameramanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
 #include <script/scriptobjectdatamanager.h>
-#include <script/scriptstrategymanager.h>
+#include <script/scriptspritestrategymanager.h>
+#include <script/scriptispritestrategy.h>
 #include <script/scriptactionmanager.h>
 #include <script/scriptsettings.h>
 #include <script/scripthighresolutiontimer.h>
 #include <script/scriptmenumanager.h>
 #include <script/scriptfontmanager.h>
+#include <script/scriptscriptmanager.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -173,33 +175,35 @@ void CGame::init()
     pollEvents();
 
     // Load the script list table
-    CScriptManager::Instance().loadListTable( "data/scripts/scriptListTable.lst" );
+    CScriptMgr::Instance().loadListTable( "data/scripts/scriptListTable.lst" );
 
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
-    RegisterScriptArray( CScriptManager::Instance().getEnginePtr(), false );
+    RegisterStdString( CScriptMgr::Instance().getEnginePtr() );
+    RegisterScriptArray( CScriptMgr::Instance().getEnginePtr(), false );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
     NScriptSize::Register();
     NScriptCamera::Register();
-    NScriptSprite::Register();
+    NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
+    NScriptiSpriteStrategy::Register();
     NScriptSoundManager::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
     NScriptObjectDataManager::Register();
-    NScriptStrategyManager::Register();
+    NScriptSpriteStrategyManager::Register();
     NScriptCameraManager::Register();
     NScriptActionManager::Register();
     NScriptSettings::Register();
     NScriptHighResolutionTimer::Register();
     NScriptMenuManager::Register();
     NScriptFontManager::Register();
+    NScriptScriptManager::Register();
 
-    CScriptManager::Instance().loadGroup("(main)");
-    CScriptManager::Instance().prepare("(main)", "main");
+    CScriptMgr::Instance().loadGroup("(main)");
+    CScriptMgr::Instance().prepare("(main)", "main");
 
     CHighResTimer::Instance().calcElapsedTime();
 
@@ -251,7 +255,7 @@ bool CGame::gameLoop()
     CHighResTimer::Instance().calcElapsedTime();
 
     // Main script update
-    CScriptManager::Instance().update();
+    CScriptMgr::Instance().update();
 
     if( m_gameRunning )
     {
@@ -300,7 +304,7 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
     if( (rEvent.type == SDL_QUIT) || (rEvent.type == SDL_APP_TERMINATING) )
         return true;
     
-    // Have the menu manager handle events
+    // Handle events for the menu manager
     CMenuMgr::Instance().handleEvent( rEvent );
 
     // Filter out these events. Can't do this through the normal event filter

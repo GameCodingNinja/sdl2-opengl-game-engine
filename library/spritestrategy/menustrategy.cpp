@@ -15,13 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CMenuStrategy::CMenuStrategy( const std::string & cameraId ) :
-    iSpriteStrategy(cameraId)
-{
-}
-
-CMenuStrategy::CMenuStrategy() :
-    iSpriteStrategy()
+CMenuStrategy::CMenuStrategy()
 {
 }
 

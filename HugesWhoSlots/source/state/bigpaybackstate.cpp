@@ -181,7 +181,7 @@ void CBigPayBackState::handleEvent( const SDL_Event & rEvent )
     else if( rEvent.type == SDL_APP_WILLENTERBACKGROUND )
     {
         if( m_slotGame.getState() == NSlotDefs::ESLOT_IDLE )
-            CSoundMgr::Instance().stopMusic();
+            CSoundMgr::Instance().stopAllSound();
     }
 }
 
@@ -202,7 +202,7 @@ void CBigPayBackState::update()
 {
     CCommonState::update();
 
-    CScriptManager::Instance().update();
+    CScriptMgr::Instance().update();
 
     m_scriptComponent.update();
 
@@ -220,7 +220,6 @@ void CBigPayBackState::transform()
 {
     CCommonState::transform();
 
-    CMenuMgr::Instance().transformInterface();
     m_background.transform();
     m_pig.transform();
     m_slotGame.transform();
@@ -270,7 +269,7 @@ namespace NBigPayBack
         CSoundMgr::Instance().loadGroup("(big_pay_back)");
 
         // Load state specific AngelScript functions
-        CScriptManager::Instance().loadGroup("(big_pay_back)");
+        CScriptMgr::Instance().loadGroup("(big_pay_back)");
 
         // Load the slot group stuff
         CSymbolSetViewMgr::Instance().loadGroup( "(big_pay_back)" );
@@ -319,7 +318,7 @@ namespace NBigPayBack
         CSlotMathMgr::Instance().clear();
 
         // Unload state specific AngelScript functions
-        CScriptManager::Instance().freeGroup("(big_pay_back)");
+        CScriptMgr::Instance().freeGroup("(big_pay_back)");
 
         // Unload sound resources for the game
         CSoundMgr::Instance().freeGroup("(big_pay_back)");

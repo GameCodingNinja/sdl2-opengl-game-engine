@@ -196,7 +196,7 @@ namespace NLevel_1
         CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CLoopStageStrategy );
 
         // Load state specific AngelScript functions
-        CScriptManager::Instance().loadGroup("(actor)");
+        CScriptMgr::Instance().loadGroup("(actor)");
     }
 
     void CriticalInit()

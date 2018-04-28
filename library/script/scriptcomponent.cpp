@@ -49,7 +49,7 @@ void CScriptComponent::prepare(
     const std::string & funcName,
     const std::vector<CScriptParam> & paramVec )
 {
-    CScriptManager::Instance().prepare( group, funcName, m_pContextVec, paramVec );
+    CScriptMgr::Instance().prepare( group, funcName, m_pContextVec, paramVec );
 }
 
 
@@ -59,7 +59,7 @@ void CScriptComponent::prepare(
 void CScriptComponent::update()
 {
     if( !m_pContextVec.empty() )
-        CScriptManager::Instance().update( m_pContextVec );
+        CScriptMgr::Instance().update( m_pContextVec );
 }
 
 
@@ -84,7 +84,7 @@ void CScriptComponent::resetAndRecycle()
             if( iter->GetState() == asEXECUTION_SUSPENDED )
                 iter->Abort();
 
-            CScriptManager::Instance().recycleContext( iter );
+            CScriptMgr::Instance().recycleContext( iter );
         }
 
         m_pContextVec.clear();
@@ -110,7 +110,7 @@ void CScriptComponent::stopAndRecycle( const std::string & funcName )
             if( (*iter)->GetState() == asEXECUTION_SUSPENDED )
                 (*iter)->Abort();
 
-            CScriptManager::Instance().recycleContext( (*iter) );
+            CScriptMgr::Instance().recycleContext( (*iter) );
 
             m_pContextVec.erase( iter );
         }

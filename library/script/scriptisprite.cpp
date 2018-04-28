@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       scriptsprite.cpp
+*    FILE NAME:       scriptisprite.cpp
 *
-*    DESCRIPTION:     Sprite script object registration
+*    DESCRIPTION:     iSprite script object registration
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 
 // Game lib dependencies
 #include <common/isprite.h>
@@ -16,7 +16,7 @@
 // AngelScript lib dependencies
 #include <angelscript.h>
 
-namespace NScriptSprite
+namespace NScriptiSprite
 {
     /************************************************************************
     *    DESC:  Wrapper function due to virtual inheritance
@@ -114,7 +114,7 @@ namespace NScriptSprite
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "iSprite", 0, asOBJ_REF|asOBJ_NOCOUNT) );
@@ -165,7 +165,7 @@ namespace NScriptSprite
         Throw( pEngine->RegisterObjectMethod("iSprite", "const CPoint & getScale()",     asFUNCTION(GetScale),   asCALL_CDECL_OBJLAST) );
 
         
-        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, iSprite @)", asMETHOD(CScriptManager, prepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
-        Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, iSprite @)", asMETHOD(CScriptManager, prepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptManager::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void Spawn(string &in, iSprite @)", asMETHOD(CScriptMgr, prepareSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalFunction("void LocalSpawn(string &in, iSprite @)", asMETHOD(CScriptMgr, prepareLocalSpawnVoid), asCALL_THISCALL_ASGLOBAL, &CScriptMgr::Instance()) );
     }
 }

@@ -63,17 +63,20 @@ public:
     // Get the playlist
     CPlayList & getPlayList( const std::string & group, const std::string & playLstID );
     
-    // Is music playing?
-    bool isMusicPlaying();
+    // Stop all playing sound
+    void stopAllSound();
     
-    // Is music paused?
-    bool isMusicPaused();
+    // Is the stream playing?
+    bool isStreamPlaying();
     
-    // Stop the music
-    void stopMusic();
+    // Is the stream paused?
+    bool isStreamPaused();
     
-    // Pause the music
-    void pauseMusic();
+    // Stop the stream
+    void stopStream();
+    
+    // Pause the stream
+    void pauseStream();
 
 private:
 

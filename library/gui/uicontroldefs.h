@@ -45,7 +45,9 @@ namespace NUIControl
         ECS_DISABLED,
         ECS_INACTIVE,
         ECS_ACTIVE,
-        ECS_SELECTED
+        ECS_SELECTED,
+        ECS_EXECUTE,
+        ECS_EVENT
     };
 
     enum EControlActionType

@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptsprite.h>
+#include <script/scriptisprite.h>
 
 // Game lib dependencies
 #include <2d/actorsprite2d.h>
@@ -25,7 +25,7 @@ namespace NScriptActorSprite2D
     {
         using namespace NScriptGlobals; // Used for Throw
         
-        asIScriptEngine * pEngine = CScriptManager::Instance().getEnginePtr();
+        asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
 
         // Register type
         Throw( pEngine->RegisterObjectType(  "CActorSprite2D", 0, asOBJ_REF|asOBJ_NOCOUNT) );
