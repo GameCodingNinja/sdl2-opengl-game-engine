@@ -9,10 +9,10 @@
 #define __basic_stage_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 
 // Game lib dependencies
-#include <spritestrategy/sector.h>
+#include <strategy/sector.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
@@ -25,7 +25,7 @@
 class CObject2D;
 class CMatrix;
 
-class CBasicStageStrategy : public iSpriteStrategy, boost::noncopyable
+class CBasicStageStrategy : public iStrategy, boost::noncopyable
 {
 public:
 

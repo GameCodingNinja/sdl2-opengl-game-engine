@@ -31,7 +31,7 @@ final class CTitleScreenState : iGameState
     {
         StrategyMgr.createSprite( "strategyFor2D", "(title_screen)", "background" );
         
-        iSpriteStrategy @strategy = StrategyMgr.createBasicSpriteStrategy( "strategyFor3D" );
+        iStrategy @strategy = StrategyMgr.createBasicSpriteStrategy( "strategyFor3D" );
         strategy.setCameraId( "camera3D" );
         
         CCamera @camera = CameraMgr.createPerspective("camera3D");

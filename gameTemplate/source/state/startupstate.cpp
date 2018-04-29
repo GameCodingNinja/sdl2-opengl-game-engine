@@ -29,7 +29,7 @@
 #include <managers/actionmanager.h>
 #include <managers/spritesheetmanager.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>
@@ -169,7 +169,7 @@ void CStartUpState::assetLoad()
     CObjectDataMgr::Instance().loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
 
     // Load the actor list table
-    CSpriteStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
     // Load the action manager
     CActionMgr::Instance().loadActionFromXML( "data/settings/controllerMapping.cfg" );

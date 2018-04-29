@@ -13,7 +13,7 @@
 #include <2d/sprite2d.h>
 #include <utilities/settings.h>
 #include <managers/actionmanager.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 
 // SDL/OpenGL lib dependencies
 #include <SDL.h>
@@ -106,7 +106,7 @@ void CPlayerShipAI::handleShooting()
         projectileOffset.y = (OFFSET * sin( m_gunRotation )) + centerPos.y + pos.y;
 
         // Create the projectile actor
-        CSpriteStrategyMgr::Instance().create(
+        CStrategyMgr::Instance().create(
             "(actor)", "player_projectile", m_sprite.getPos() + projectileOffset, CPoint<float>(0,0,m_gunRotation) );
 
         m_playerShootTimer.reset();

@@ -674,7 +674,8 @@ void CMenu::onSelectAction( const SDL_Event & rEvent )
         selectionFound = true;
 
         // Set the state to active which will block all messages until the state is reset to idle
-        if( m_pActiveNode->getControl()->getActionType() > NUIControl::ECAT_NULL )
+        auto pCtrl = m_pActiveNode->getControl()->getPtrToActiveControl();
+        if( (pCtrl != nullptr) && (pCtrl->getActionType() > NUIControl::ECAT_IDLE) )
             m_state = NMenu::EMS_ACTIVE;
     }
     else if( msgCracker.isDeviceMouse() )
@@ -687,7 +688,7 @@ void CMenu::onSelectAction( const SDL_Event & rEvent )
                 selectionFound = true;
 
                 // Set the state to active which will block all messages until the state is reset to idle
-                if( iter->getActionType() > NUIControl::ECAT_NULL )
+                if( iter->getActionType() > NUIControl::ECAT_IDLE )
                     m_state = NMenu::EMS_ACTIVE;
 
                 break;
@@ -711,7 +712,8 @@ void CMenu::onSelectAction( const SDL_Event & rEvent )
                 if( iter->handleSelectAction( msgCracker ) )
                 {
                     // Set the state to active which will block all messages until the state is reset to idle
-                    if( m_pActiveNode->getControl()->getActionType() > NUIControl::ECAT_NULL )
+                    auto pCtrl = m_pActiveNode->getControl()->getPtrToActiveControl();
+                    if( (pCtrl != nullptr) && (pCtrl->getActionType() > NUIControl::ECAT_IDLE) )
                         m_state = NMenu::EMS_ACTIVE;
 
                     break;

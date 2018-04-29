@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       menustrategy.cpp
+*    FILE NAME:       menuinterfacestrategy.cpp
 *
-*    DESCRIPTION:     Menu strategy
+*    DESCRIPTION:     Menu interface strategy
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/menustrategy.h>
+#include <strategy/menuinterfacestrategy.h>
 
 // Game lib dependencies
 #include <managers/cameramanager.h>
@@ -15,7 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CMenuStrategy::CMenuStrategy()
+CMenuInterfaceStrategy::CMenuInterfaceStrategy()
 {
 }
 
@@ -23,27 +23,27 @@ CMenuStrategy::CMenuStrategy()
 /***************************************************************************
 *    DESC:  Update the menu
 ****************************************************************************/
-void CMenuStrategy::update()
+void CMenuInterfaceStrategy::update()
 {
-    CMenuMgr::Instance().updateMenu();
+    CMenuMgr::Instance().updateInterface();
 }
 
 
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuStrategy::transform()
+void CMenuInterfaceStrategy::transform()
 {
-    CMenuMgr::Instance().transformMenu();
+    CMenuMgr::Instance().transformInterface();
 }
 
 
 /***************************************************************************
 *    DESC:  Render the menu
 ****************************************************************************/
-void CMenuStrategy::render()
+void CMenuInterfaceStrategy::render()
 {
     const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
-    CMenuMgr::Instance().renderMenu( camera.getFinalMatrix() );
+    CMenuMgr::Instance().renderInterface( camera.getFinalMatrix() );
 }

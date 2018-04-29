@@ -56,7 +56,6 @@
                 <string text="Lobby Music"/>
                 <string text="x"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="stop_sounds_check_box" down="spin_music_check_box"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>
@@ -69,7 +68,6 @@
                 <string text="Spin Music"/>
                 <string text="x"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="stop_sounds_check_box" down="lobby_music_check_box"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>
@@ -82,7 +80,6 @@
                 <string text="Stop Sounds"/>
                 <string text="x"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="spin_music_check_box" down="lobby_music_check_box"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>

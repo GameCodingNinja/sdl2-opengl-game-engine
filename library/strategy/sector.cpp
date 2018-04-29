@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/sector.h>
+#include <strategy/sector.h>
 
 // Game lib dependencies
 #include <common/isprite.h>

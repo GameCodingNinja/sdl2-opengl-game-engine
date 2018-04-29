@@ -1,28 +1,28 @@
 
 /************************************************************************
-*    FILE NAME:       menuinterfacestrategy.h
+*    FILE NAME:       menustrategy.h
 *
-*    DESCRIPTION:     Menu interface strategy
+*    DESCRIPTION:     Menu strategy
 ************************************************************************/
 
-#ifndef __menu_interface_strategy_h__
-#define __menu_interface_strategy_h__
+#ifndef __menu_strategy_h__
+#define __menu_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 
 // Boost lib dependencies
 #include <boost/noncopyable.hpp>
 
-class CMenuInterfaceStrategy : public iSpriteStrategy, boost::noncopyable
+class CMenuStrategy : public iStrategy, boost::noncopyable
 {
 public:
 
     // Constructor
-    CMenuInterfaceStrategy();
+    CMenuStrategy();
 
     // Destructor
-    virtual ~CMenuInterfaceStrategy(){}
+    virtual ~CMenuStrategy(){};
 
     // Update the actors
     virtual void update() override;

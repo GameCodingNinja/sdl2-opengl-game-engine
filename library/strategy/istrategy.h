@@ -2,11 +2,11 @@
 /************************************************************************
 *    FILE NAME:       ispritestrategy.h
 *
-*    DESCRIPTION:     Sprite Strategy Interface Class - Represents a layer of sprites
+*    DESCRIPTION:     Strategy Interface Class
 ************************************************************************/
 
-#ifndef __i_sprite_strategy_h__
-#define __i_sprite_strategy_h__
+#ifndef __i_strategy_h__
+#define __i_strategy_h__
 
 // Game lib dependencies
 #include <common/point.h>
@@ -19,15 +19,15 @@
 class iSprite;
 union SDL_Event;
 
-class iSpriteStrategy
+class iStrategy
 {
 public:
 
     // Constructor
-    iSpriteStrategy();
+    iStrategy();
 
     // Destructor
-    virtual ~iSpriteStrategy(){}
+    virtual ~iStrategy(){}
 
     // Load the data from file
     virtual void loadFromFile( const std::string & file ){};

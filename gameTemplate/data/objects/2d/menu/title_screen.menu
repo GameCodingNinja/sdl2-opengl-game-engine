@@ -28,8 +28,7 @@
             <fontStringLst>
                 <string text="New Game"/>
             </fontStringLst>
-            <!--<action actionType="to_menu" executionAction="settings_menu"/>-->
-            <action actionType="action"/>
+            <action actionType="to_menu" executionAction="settings_menu"/>
             <navigate up="continue_btn" down="load_game_btn"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>

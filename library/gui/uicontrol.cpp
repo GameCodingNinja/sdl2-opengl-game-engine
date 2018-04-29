@@ -590,12 +590,6 @@ void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlS
 
     switch( controlState )
     {
-        case NUIControl::ECS_NULL:
-            throw NExcept::CCriticalException("Control State NULL!",
-                boost::str( boost::format("Control state can't be NULL!\n\n%s\nLine: %s")
-                    %  __FUNCTION__ % __LINE__ ));
-        break;
-
         case NUIControl::ECS_INIT:
             scriptFuncMapKey = "init";
             forceUpdate = true;
@@ -617,6 +611,14 @@ void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlS
 
         case NUIControl::ECS_SELECTED:
             scriptFuncMapKey = "selected";
+        break;
+        
+        case NUIControl::ECS_EXECUTE:
+        case NUIControl::ECS_EVENT:
+        case NUIControl::ECS_NULL:
+            throw NExcept::CCriticalException("Control State NULL!",
+                boost::str( boost::format("Control state can't be EXECUTE, EVENT or NULL!\n\n%s\nLine: %s")
+                    %  __FUNCTION__ % __LINE__ ));
         break;
     };
 
@@ -779,8 +781,8 @@ void CUIControl::setActionType( NUIControl::EControlActionType value )
 
 void CUIControl::setActionType( const std::string & value )
 {
-    if( value == "action" )
-        m_actionType = NUIControl::ECAT_ACTION;
+    if( value == "to_idle" )
+        m_actionType = NUIControl::ECAT_IDLE;
 
     else if( value == "to_tree" )
         m_actionType = NUIControl::ECAT_TO_TREE;
@@ -882,7 +884,7 @@ const std::vector<std::string> & CUIControl::getStringVec() const
 
 /************************************************************************
 *    DESC:  Handle the select action
-*           Only process this message if it's keyboard/gamepad down or mouse up
+*           Only process this message if it's keyboard/gamepad down or mouse select type
 ************************************************************************/
 bool CUIControl::handleSelectAction( const CSelectMsgCracker & msgCracker )
 {

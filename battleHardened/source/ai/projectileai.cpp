@@ -10,8 +10,8 @@
 
 // Game lib dependencies
 #include <2d/sprite2d.h>
-#include <spritestrategy/basicspritestrategy.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/basicspritestrategy.h>
+#include <strategy/strategymanager.h>
 #include <managers/soundmanager.h>
 #include <utilities/settings.h>
 #include <utilities/highresolutiontimer.h>
@@ -22,7 +22,7 @@
 CProjectileAI::CProjectileAI( iSprite * pSprite ) :
     m_sprite( *dynamic_cast<CSprite2D *>(pSprite) ),
     m_firstUpdate(true),
-    m_rStrategy(CSpriteStrategyMgr::Instance().get<CBasicSpriteStrategy>("(actor)"))
+    m_rStrategy(CStrategyMgr::Instance().get<CBasicSpriteStrategy>("(actor)"))
 {
 }
 

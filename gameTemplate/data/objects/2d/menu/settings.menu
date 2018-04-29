@@ -66,7 +66,6 @@
                 <string text="Full Screen"/>
                 <string text="x"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="resolution_btn_lst" down="v-sync_check_box"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>
@@ -79,7 +78,6 @@
                 <string text="V-Sync"/>
                 <string text="x"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="full_screen_check_box" down="settings_dead_zone_slider"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>
@@ -104,7 +102,6 @@
             <fontStringLst>
                 <string text="Apply"/>
             </fontStringLst>
-            <action actionType="action"/>
             <navigate up="settings_dead_zone_slider" down="resolution_btn_lst"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
         </control>

@@ -11,7 +11,7 @@ final class CStartUpState : iGameState
     iSprite @m_logo;
     
     // Basic strategy
-    iSpriteStrategy @strategy;
+    iStrategy @strategy;
     
     //
     // Constructor

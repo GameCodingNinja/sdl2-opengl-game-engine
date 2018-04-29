@@ -47,7 +47,6 @@
             <filePath file="data/objects/2d/ui/bigPayBack/controls/play_btn.ctrl"/>
             <position x="780" y="-470" z="0"/>
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
-            <action actionType="action"/>
             <navigate left="total_bet_meter" right="buy_btn"/>
         </control>
         
@@ -76,7 +75,6 @@
             <stateScript onActive="Control_OnActive" onSelect="Control_OnSelect"/>
             <scroll startDelay="770" scrollDelay="350" left="true" right="true"/>
             <actionResponse up="true" down="true"/>
-            <action actionType="action"/>
         </control>
         
         <!-- Buy Button -->

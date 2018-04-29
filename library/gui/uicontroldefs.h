@@ -52,8 +52,8 @@ namespace NUIControl
 
     enum EControlActionType
     {
-        ECAT_NULL=0,
-        ECAT_ACTION,
+        ECAT_IDLE=-1,
+        ECAT_NULL,
         ECAT_TO_TREE,
         ECAT_TO_MENU,
         ECAT_BACK,

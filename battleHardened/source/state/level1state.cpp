@@ -19,9 +19,9 @@
 #include <managers/cameramanager.h>
 #include <common/camera.h>
 #include <script/scriptmanager.h>
-#include <spritestrategy/basicspritestrategy.h>
-#include <spritestrategy/loopstagestrategy.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/basicspritestrategy.h>
+#include <strategy/loopstagestrategy.h>
+#include <strategy/strategymanager.h>
 #include <2d/actorsprite2d.h>
 
 /************************************************************************
@@ -51,8 +51,8 @@ void CLevel1State::init()
     m_scriptComponent.prepare( "(menu)", "Screen_FadeIn" );
 
     // Create the actors
-    CSpriteStrategyMgr::Instance().create("(actor)", "enemy_ship");
-    m_pPlayerShip = CSpriteStrategyMgr::Instance().createSprite<CActorSprite2D>("(actor)", "player_ship");
+    CStrategyMgr::Instance().create("(actor)", "enemy_ship");
+    m_pPlayerShip = CStrategyMgr::Instance().createSprite<CActorSprite2D>("(actor)", "player_ship");
 
     // Get pointer to the player ship
     //m_pPlayerShip = &CSpriteStrategyMgr::Instance().Get<CBasicSpriteStrategy2D>("(actor)").Get<CActorSprite2D>(id);
@@ -111,7 +111,7 @@ void CLevel1State::handleEvent( const SDL_Event & rEvent )
 ************************************************************************/
 void CLevel1State::miscProcess()
 {
-    CSpriteStrategyMgr::Instance().miscProcess();
+    CStrategyMgr::Instance().miscProcess();
 }
 
 
@@ -139,7 +139,7 @@ void CLevel1State::update()
     if( !CMenuMgr::Instance().isActive() )
     {
         //CCamera::Instance().IncPos( CPoint<float>( -0.05f * CHighResTimer::Instance().GetElapsedTime(), 0.f ) );
-        CSpriteStrategyMgr::Instance().update();
+        CStrategyMgr::Instance().update();
     }
 }
 
@@ -152,7 +152,7 @@ void CLevel1State::transform()
     CCommonState::transform();
 
     //CCamera::Instance().Transform();
-    CSpriteStrategyMgr::Instance().transform();
+    CStrategyMgr::Instance().transform();
 }
 
 
@@ -163,7 +163,7 @@ void CLevel1State::preRender()
 {
     CCommonState::preRender();
 
-    CSpriteStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
+    CStrategyMgr::Instance().render( CCameraMgr::Instance().getDefaultProjMatrix() );
 }
 
 
@@ -192,8 +192,8 @@ namespace NLevel_1
 
     void Load()
     {
-        CSpriteStrategyMgr::Instance().addStrategy( "(actor)", new CBasicSpriteStrategy );
-        CSpriteStrategyMgr::Instance().addStrategy( "(stage1)", new CLoopStageStrategy );
+        CStrategyMgr::Instance().addStrategy( "(actor)", new CBasicSpriteStrategy );
+        CStrategyMgr::Instance().addStrategy( "(stage1)", new CLoopStageStrategy );
 
         // Load state specific AngelScript functions
         CScriptMgr::Instance().loadGroup("(actor)");
@@ -216,7 +216,7 @@ namespace NLevel_1
 
     void Unload()
     {
-        CSpriteStrategyMgr::Instance().clear();
+        CStrategyMgr::Instance().clear();
     }
 
 }

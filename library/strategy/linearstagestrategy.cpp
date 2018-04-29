@@ -7,14 +7,14 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/linearstagestrategy.h>
+#include <strategy/linearstagestrategy.h>
 
 // Game lib dependencies
 #include <utilities/xmlParser.h>
 #include <utilities/xmlparsehelper.h>
 #include <utilities/settings.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/sector.h>
+#include <strategy/sector.h>
 
 // Standard lib dependencies
 #include <cstring>

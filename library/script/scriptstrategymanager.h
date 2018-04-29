@@ -1,14 +1,14 @@
 
 /************************************************************************
-*    FILE NAME:       scriptispritestrategy.h
+*    FILE NAME:       scriptstrategymanager.h
 *
-*    DESCRIPTION:     iSpriteStrategy script object registration
+*    DESCRIPTION:     CStrategyMgr script object registration
 ************************************************************************/
 
-#ifndef __script_isprite_strategy_h__
-#define __script_isprite_strategy_h__
+#ifndef __script_strategy_manager_h__
+#define __script_strategy_manager_h__
 
-namespace NScriptiSpriteStrategy
+namespace NScriptStrategyManager
 {
     // Register Script Object
     void Register();

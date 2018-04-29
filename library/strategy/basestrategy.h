@@ -9,13 +9,13 @@
 #define __base_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 
 // Standard lib dependencies
 #include <set>
 #include <string>
 
-class CBaseStrategy : public iSpriteStrategy
+class CBaseStrategy : public iStrategy
 {
 public:
 

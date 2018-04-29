@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       spritestrategymanager.h
+*    FILE NAME:       strategymanager.h
 *
-*    DESCRIPTION:     Sprite strategy manager singleton
+*    DESCRIPTION:     Strategy manager singleton
 ************************************************************************/
 
-#ifndef __sprite_strategy_manager_h__
-#define __sprite_strategy_manager_h__
+#ifndef __strategy_manager_h__
+#define __strategy_manager_h__
 
 // Physical component dependency
 #include <managers/managerbase.h>
@@ -22,22 +22,22 @@
 
 // Forward Declarations
 class iSprite;
-class iSpriteStrategy;
+class iStrategy;
 union SDL_Event;
 
-class CSpriteStrategyMgr : public CManagerBase
+class CStrategyMgr : public CManagerBase
 {
 public:
 
     // Get the instance of the singleton class
-    static CSpriteStrategyMgr & Instance()
+    static CStrategyMgr & Instance()
     {
-        static CSpriteStrategyMgr spriteStrategyMgr;
+        static CStrategyMgr spriteStrategyMgr;
         return spriteStrategyMgr;
     }
     
     // Add strategy
-    iSpriteStrategy * addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy );
+    iStrategy * addStrategy( const std::string & strategyId, iStrategy * pSpriteStrategy );
     
     // Delete strategy
     void deleteStrategy( const std::string & strategyId );
@@ -95,7 +95,7 @@ public:
     void render( const CMatrix & matrix, const CMatrix & cameraMatrix );
     
     // Get the pointer to the strategy
-    iSpriteStrategy * getStrategy( const std::string & strategyId );
+    iStrategy * getStrategy( const std::string & strategyId );
     
     // Get a reference to the strategy
     template <typename target>
@@ -186,20 +186,18 @@ public:
 private:
 
     // Constructor
-    CSpriteStrategyMgr();
+    CStrategyMgr();
 
     // Destructor
-    virtual ~CSpriteStrategyMgr();
+    virtual ~CStrategyMgr();
     
-    
-
 private:
 
     // Map of strategy pointers
-    std::map<std::string, iSpriteStrategy *> m_pStrategyMap;
+    std::map<std::string, iStrategy *> m_pStrategyMap;
     
     // Vector of strategy pointers
-    std::vector<iSpriteStrategy *> m_pStrategyVec;
+    std::vector<iStrategy *> m_pStrategyVec;
     
     // Temporary vector to hold the return ids
     std::vector<iSprite *> m_incReturn;

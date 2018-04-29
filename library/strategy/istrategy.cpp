@@ -1,19 +1,19 @@
 
 /************************************************************************
-*    FILE NAME:       ispritestrategy.cpp
+*    FILE NAME:       istrategy.cpp
 *
-*    DESCRIPTION:     Sprite Strategy Interface Class - Represents a layer of sprites
+*    DESCRIPTION:     Strategy Interface Class - Represents a layer of sprites
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 
-int iSpriteStrategy::m_spriteInc = 0;
+int iStrategy::m_spriteInc = 0;
 
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-iSpriteStrategy::iSpriteStrategy() :
+iStrategy::iStrategy() :
     m_idOffset(0),
     m_idDir(1)
 {
@@ -23,7 +23,7 @@ iSpriteStrategy::iSpriteStrategy() :
 /************************************************************************
 *    DESC:  Transform the sprites
 ************************************************************************/
-void iSpriteStrategy::setCameraId( const std::string & cameraId )
+void iStrategy::setCameraId( const std::string & cameraId )
 {
     m_cameraId = cameraId;
 }
@@ -32,7 +32,7 @@ void iSpriteStrategy::setCameraId( const std::string & cameraId )
 /************************************************************************
 *    DESC:  Enable event handling
 ************************************************************************/
-void iSpriteStrategy::clearSpriteCounter()
+void iStrategy::clearSpriteCounter()
 {
     m_spriteInc = 0;
 }
@@ -41,7 +41,7 @@ void iSpriteStrategy::clearSpriteCounter()
 /************************************************************************
 *    DESC:  Customize sprite id generation by defining an offset
 ************************************************************************/
-void iSpriteStrategy::setIdOffset( int offset )
+void iStrategy::setIdOffset( int offset )
 {
     m_idOffset = offset;
 }
@@ -50,7 +50,7 @@ void iSpriteStrategy::setIdOffset( int offset )
 /************************************************************************
 *    DESC:  Customize sprite id generation by defining a direction
 ************************************************************************/
-void iSpriteStrategy::setIdDir( int dir )
+void iStrategy::setIdDir( int dir )
 {
     m_idDir = dir;
 }

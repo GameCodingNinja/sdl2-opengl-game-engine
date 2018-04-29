@@ -10,7 +10,7 @@
 #define __loop_stage_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/linearstagestrategy.h>
+#include <strategy/linearstagestrategy.h>
 
 // Game lib dependencies
 #include <common/worldvalue.h>

@@ -1,17 +1,17 @@
 
 /************************************************************************
-*    FILE NAME:       spritestrategymanager.cpp
+*    FILE NAME:       strategymanager.cpp
 *
-*    DESCRIPTION:     Sprite strategy manager singleton
+*    DESCRIPTION:     Strategy manager singleton
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 
 // Game lib dependencies
 #include <2d/object2d.h>
 #include <utilities/deletefuncs.h>
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 #include <utilities/exceptionhandling.h>
 
 // Boost lib dependencies
@@ -23,7 +23,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CSpriteStrategyMgr::CSpriteStrategyMgr()
+CStrategyMgr::CStrategyMgr()
 {
 }
 
@@ -31,7 +31,7 @@ CSpriteStrategyMgr::CSpriteStrategyMgr()
 /************************************************************************
 *    DESC:  destructor
 ************************************************************************/
-CSpriteStrategyMgr::~CSpriteStrategyMgr()
+CStrategyMgr::~CStrategyMgr()
 {
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
 }
@@ -40,7 +40,7 @@ CSpriteStrategyMgr::~CSpriteStrategyMgr()
 /************************************************************************
  *    DESC:  Add strategy
  ************************************************************************/
-iSpriteStrategy * CSpriteStrategyMgr::addStrategy( const std::string & strategyId, iSpriteStrategy * pSpriteStrategy )
+iStrategy * CStrategyMgr::addStrategy( const std::string & strategyId, iStrategy * pSpriteStrategy )
 {
     auto mapIter = m_pStrategyMap.emplace( strategyId, pSpriteStrategy );
 
@@ -68,7 +68,7 @@ iSpriteStrategy * CSpriteStrategyMgr::addStrategy( const std::string & strategyI
 /************************************************************************
  *    DESC:  Delete strategy
  ************************************************************************/
-void CSpriteStrategyMgr::deleteStrategy( const std::string & strategyId )
+void CStrategyMgr::deleteStrategy( const std::string & strategyId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
@@ -89,7 +89,7 @@ void CSpriteStrategyMgr::deleteStrategy( const std::string & strategyId )
 /************************************************************************
  *    DESC:  Delete sprite
  ************************************************************************/
-void CSpriteStrategyMgr::deleteSprite( const std::string & strategyId, int spriteId )
+void CStrategyMgr::deleteSprite( const std::string & strategyId, int spriteId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );
@@ -101,7 +101,7 @@ void CSpriteStrategyMgr::deleteSprite( const std::string & strategyId, int sprit
 /************************************************************************
 *    DESC:  create the sprite and provide a unique id number for each one
 ************************************************************************/
-iSprite * CSpriteStrategyMgr::create(
+iSprite * CStrategyMgr::create(
     const std::string & strategyId,
     const std::string & dataName,
     const CPoint<CWorldValue> & pos,
@@ -118,7 +118,7 @@ iSprite * CSpriteStrategyMgr::create(
     return mapIter->second->create( dataName, pos, rot, scale );
 }
 
-iSprite * CSpriteStrategyMgr::create(
+iSprite * CStrategyMgr::create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name,
@@ -136,7 +136,7 @@ iSprite * CSpriteStrategyMgr::create(
     return mapIter->second->create( group, name, pos, rot, scale );
 }
 
-iSprite * CSpriteStrategyMgr::create(
+iSprite * CStrategyMgr::create(
     const std::string & strategyId,
     const std::string & dataName )
 {
@@ -150,7 +150,7 @@ iSprite * CSpriteStrategyMgr::create(
     return mapIter->second->create( dataName );
 }
 
-iSprite * CSpriteStrategyMgr::create(
+iSprite * CStrategyMgr::create(
     const std::string & strategyId,
     const std::string & group,
     const std::string & name )
@@ -169,7 +169,7 @@ iSprite * CSpriteStrategyMgr::create(
 /************************************************************************
 *    DESC:  Delete all the strategies
 ************************************************************************/
-void CSpriteStrategyMgr::clear()
+void CStrategyMgr::clear()
 {
     // Do the pre-delete cleanup
     cleanUp();
@@ -177,14 +177,14 @@ void CSpriteStrategyMgr::clear()
     NDelFunc::DeleteMapPointers(m_pStrategyMap);
     m_pStrategyMap.clear();
     m_pStrategyVec.clear();
-    iSpriteStrategy::clearSpriteCounter();
+    iStrategy::clearSpriteCounter();
 }
 
 
 /************************************************************************
 *    DESC:  Do any pre-game loop init's
 ************************************************************************/
-void CSpriteStrategyMgr::init()
+void CStrategyMgr::init()
 {
     for( auto iter : m_pStrategyVec )
         iter->init();
@@ -194,7 +194,7 @@ void CSpriteStrategyMgr::init()
 /************************************************************************
 *    DESC:  Do some cleanup
 ************************************************************************/
-void CSpriteStrategyMgr::cleanUp()
+void CStrategyMgr::cleanUp()
 {
     for( auto iter : m_pStrategyVec )
         iter->cleanUp();
@@ -204,7 +204,7 @@ void CSpriteStrategyMgr::cleanUp()
 /************************************************************************
 *    DESC:  Handle any misc processing before the real work is started
 ************************************************************************/
-void CSpriteStrategyMgr::miscProcess()
+void CStrategyMgr::miscProcess()
 {
     for( auto iter : m_pStrategyVec )
         iter->miscProcess();
@@ -214,7 +214,7 @@ void CSpriteStrategyMgr::miscProcess()
 /***************************************************************************
 *    DESC:  Update the sprites
 ****************************************************************************/
-void CSpriteStrategyMgr::update()
+void CStrategyMgr::update()
 {
     for( auto iter : m_pStrategyVec )
         iter->update();
@@ -224,13 +224,13 @@ void CSpriteStrategyMgr::update()
 /************************************************************************
 *    DESC:  Transform the sprite
 ************************************************************************/
-void CSpriteStrategyMgr::transform()
+void CStrategyMgr::transform()
 {
     for( auto iter : m_pStrategyVec )
         iter->transform();
 }
 
-void CSpriteStrategyMgr::transform( const CObject2D & object )
+void CStrategyMgr::transform( const CObject2D & object )
 {
     for( auto iter : m_pStrategyVec )
         iter->transform( object );
@@ -240,19 +240,19 @@ void CSpriteStrategyMgr::transform( const CObject2D & object )
 /***************************************************************************
 *    DESC:  Render the sprites
 ****************************************************************************/
-void CSpriteStrategyMgr::render()
+void CStrategyMgr::render()
 {
     for( auto iter : m_pStrategyVec )
         iter->render();
 }
 
-void CSpriteStrategyMgr::render( const CMatrix & matrix )
+void CStrategyMgr::render( const CMatrix & matrix )
 {
     for( auto iter : m_pStrategyVec )
         iter->render( matrix );
 }
 
-void CSpriteStrategyMgr::render( const CMatrix & matrix, const CMatrix & rotMatrix )
+void CStrategyMgr::render( const CMatrix & matrix, const CMatrix & rotMatrix )
 {
     for( auto iter : m_pStrategyVec )
         iter->render( matrix, rotMatrix );
@@ -262,7 +262,7 @@ void CSpriteStrategyMgr::render( const CMatrix & matrix, const CMatrix & rotMatr
 /************************************************************************
 *    DESC:  Get the pointer to the strategy
 ************************************************************************/
-iSpriteStrategy * CSpriteStrategyMgr::getStrategy( const std::string & strategyId )
+iStrategy * CStrategyMgr::getStrategy( const std::string & strategyId )
 {
     // Make sure the strategy we are looking for is available
     auto mapIter = m_pStrategyMap.find( strategyId );

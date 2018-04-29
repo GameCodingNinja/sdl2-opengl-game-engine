@@ -40,8 +40,8 @@ add_library(
         script/scriptmenu.cpp
         script/scriptshadermanager.cpp
         script/scriptobjectdatamanager.cpp
-        script/scriptspritestrategymanager.cpp
-        script/scriptispritestrategy.cpp
+        script/scriptstrategymanager.cpp
+        script/scriptistrategy.cpp
         script/scriptcameramanager.cpp
         script/scriptactionmanager.cpp
         script/scriptsettings.cpp
@@ -91,16 +91,16 @@ add_library(
         3d/object3d.cpp
         3d/light.cpp
         3d/lightlist.cpp
-        spritestrategy/sector.cpp
-        spritestrategy/basicspritestrategy.cpp
-        spritestrategy/basicstagestrategy.cpp
-        spritestrategy/linearstagestrategy.cpp
-        spritestrategy/loopstagestrategy.cpp
-        spritestrategy/spritestrategymanager.cpp
-        spritestrategy/ispritestrategy.cpp
-        spritestrategy/basestrategy.cpp
-        spritestrategy/menustrategy.cpp
-        spritestrategy/menuinterfacestrategy.cpp
+        strategy/sector.cpp
+        strategy/basicspritestrategy.cpp
+        strategy/basicstagestrategy.cpp
+        strategy/linearstagestrategy.cpp
+        strategy/loopstagestrategy.cpp
+        strategy/strategymanager.cpp
+        strategy/istrategy.cpp
+        strategy/basestrategy.cpp
+        strategy/menustrategy.cpp
+        strategy/menuinterfacestrategy.cpp
         common/sound.cpp
         common/playlist.cpp
         common/worldvalue.cpp

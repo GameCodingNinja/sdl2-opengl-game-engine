@@ -30,7 +30,7 @@
 #include <managers/signalmanager.h>
 #include <managers/spritesheetmanager.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>
@@ -165,7 +165,7 @@ void CStartUpState::assetLoad()
     CFontMgr::Instance().load( "data/textures/fonts/font.lst" );
 
     // Load the sprite list table
-    CSpriteStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
     // Load the action manager - Must be loaded before memu system
     CActionMgr::Instance().loadActionFromXML( "data/settings/controllerMapping.cfg" );

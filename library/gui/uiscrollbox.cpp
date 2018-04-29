@@ -413,7 +413,7 @@ bool CUIScrollBox::handleSelectAction( const CSelectMsgCracker & msgCracker )
 
     // Let the scroll controls handle any selection
     for( size_t i = 0; i < m_pScrollControlVec.size(); ++i )
-        m_pScrollControlVec[i]->handleSelectAction( msgCracker );
+        result |= m_pScrollControlVec[i]->handleSelectAction( msgCracker );
 
     if( msgCracker.isDeviceMouse() && msgCracker.isPressDown() )
     {

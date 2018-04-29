@@ -9,7 +9,7 @@
 #define __basic_sprite_strategy_h__
 
 // Physical component dependency
-#include <spritestrategy/basestrategy.h>
+#include <strategy/basestrategy.h>
 
 // Game lib dependencies
 #include <common/point.h>

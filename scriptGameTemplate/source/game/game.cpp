@@ -22,7 +22,7 @@
 #include <utilities/statcounter.h>
 #include <utilities/highresolutiontimer.h>
 #include <utilities/genfunc.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 #include <managers/actionmanager.h>
 #include <managers/cameramanager.h>
 #include <managers/shadermanager.h>
@@ -44,8 +44,8 @@
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
 #include <script/scriptobjectdatamanager.h>
-#include <script/scriptspritestrategymanager.h>
-#include <script/scriptispritestrategy.h>
+#include <script/scriptstrategymanager.h>
+#include <script/scriptistrategy.h>
 #include <script/scriptactionmanager.h>
 #include <script/scriptsettings.h>
 #include <script/scripthighresolutiontimer.h>
@@ -188,12 +188,12 @@ void CGame::init()
     NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
-    NScriptiSpriteStrategy::Register();
+    NScriptiStrategy::Register();
     NScriptSoundManager::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
     NScriptObjectDataManager::Register();
-    NScriptSpriteStrategyManager::Register();
+    NScriptStrategyManager::Register();
     NScriptCameraManager::Register();
     NScriptActionManager::Register();
     NScriptSettings::Register();
@@ -263,11 +263,11 @@ bool CGame::gameLoop()
         glClear( m_clearBufferMask );
 
         // Process all game states
-        CSpriteStrategyMgr::Instance().miscProcess();
-        CSpriteStrategyMgr::Instance().update();
-        CSpriteStrategyMgr::Instance().transform();
+        CStrategyMgr::Instance().miscProcess();
+        CStrategyMgr::Instance().update();
+        CStrategyMgr::Instance().transform();
         CCameraMgr::Instance().transform();
-        CSpriteStrategyMgr::Instance().render();
+        CStrategyMgr::Instance().render();
 
         // Do the back buffer swap
         SDL_GL_SwapWindow( m_pWindow );

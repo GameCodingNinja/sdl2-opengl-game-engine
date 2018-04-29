@@ -6,7 +6,7 @@
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/basicspritestrategy.h>
+#include <strategy/basicspritestrategy.h>
 
 // Game lib dependencies
 #include <common/spritedata.h>

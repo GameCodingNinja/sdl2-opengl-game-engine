@@ -1,12 +1,12 @@
 
 /************************************************************************
-*    FILE NAME:       menuinterfacestrategy.cpp
+*    FILE NAME:       menustrategy.cpp
 *
-*    DESCRIPTION:     Menu interface strategy
+*    DESCRIPTION:     Menu strategy
 ************************************************************************/
 
 // Physical component dependency
-#include <spritestrategy/menuinterfacestrategy.h>
+#include <strategy/menustrategy.h>
 
 // Game lib dependencies
 #include <managers/cameramanager.h>
@@ -15,7 +15,7 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CMenuInterfaceStrategy::CMenuInterfaceStrategy()
+CMenuStrategy::CMenuStrategy()
 {
 }
 
@@ -23,27 +23,27 @@ CMenuInterfaceStrategy::CMenuInterfaceStrategy()
 /***************************************************************************
 *    DESC:  Update the menu
 ****************************************************************************/
-void CMenuInterfaceStrategy::update()
+void CMenuStrategy::update()
 {
-    CMenuMgr::Instance().updateInterface();
+    CMenuMgr::Instance().updateMenu();
 }
 
 
 /************************************************************************
 *    DESC:  Transform the menu
 ************************************************************************/
-void CMenuInterfaceStrategy::transform()
+void CMenuStrategy::transform()
 {
-    CMenuMgr::Instance().transformInterface();
+    CMenuMgr::Instance().transformMenu();
 }
 
 
 /***************************************************************************
 *    DESC:  Render the menu
 ****************************************************************************/
-void CMenuInterfaceStrategy::render()
+void CMenuStrategy::render()
 {
     const auto & camera = CCameraMgr::Instance().getCamera( m_cameraId );
 
-    CMenuMgr::Instance().renderInterface( camera.getFinalMatrix() );
+    CMenuMgr::Instance().renderMenu( camera.getFinalMatrix() );
 }

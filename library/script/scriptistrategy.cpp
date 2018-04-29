@@ -1,15 +1,15 @@
 
 /************************************************************************
-*    FILE NAME:       scriptispritestrategy.cpp
+*    FILE NAME:       scriptistrategy.cpp
 *
-*    DESCRIPTION:     iSpriteStrategy script object registration
+*    DESCRIPTION:     iStrategy script object registration
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptispritestrategy.h>
+#include <script/scriptistrategy.h>
 
 // Game lib dependencies
-#include <spritestrategy/ispritestrategy.h>
+#include <strategy/istrategy.h>
 #include <script/scriptmanager.h>
 #include <script/scriptglobals.h>
 #include <utilities/exceptionhandling.h>
@@ -17,12 +17,12 @@
 // AngelScript lib dependencies
 #include <angelscript.h>
 
-namespace NScriptiSpriteStrategy
+namespace NScriptiStrategy
 {
     /************************************************************************
     *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
-    iSprite * CreateSprite1( const std::string & group, const std::string & name, iSpriteStrategy & rStrategy )
+    iSprite * CreateSprite1( const std::string & group, const std::string & name, iStrategy & rStrategy )
     {
         try
         {
@@ -40,7 +40,7 @@ namespace NScriptiSpriteStrategy
         return nullptr;
     }
     
-    iSprite * CreateSprite2( const std::string & strategyId, const std::string & name, iSpriteStrategy & rStrategy )
+    iSprite * CreateSprite2( const std::string & strategyId, const std::string & name, iStrategy & rStrategy )
     {
         try
         {
@@ -68,16 +68,16 @@ namespace NScriptiSpriteStrategy
         asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
 
         // Register type
-        Throw( pEngine->RegisterObjectType("iSpriteStrategy", 0, asOBJ_REF|asOBJ_NOCOUNT) );
+        Throw( pEngine->RegisterObjectType("iStrategy", 0, asOBJ_REF|asOBJ_NOCOUNT) );
 
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "void setCameraId(string &in)",   asMETHOD(iSpriteStrategy, setCameraId),         asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "void setIdOffset(int)",          asMETHOD(iSpriteStrategy, setIdOffset),         asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "void setIdDir(int)",             asMETHOD(iSpriteStrategy, setIdDir),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "void setCameraId(string &in)",   asMETHOD(iStrategy, setCameraId),         asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "void setIdOffset(int)",          asMETHOD(iStrategy, setIdOffset),         asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "void setIdDir(int)",             asMETHOD(iStrategy, setIdDir),            asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "void setToDestroy(int)",         asMETHOD(iSpriteStrategy, setToDestroy),        asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "void setToCreate(string &in)",   asMETHOD(iSpriteStrategy, setToCreate),         asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "void setToDestroy(int)",         asMETHOD(iStrategy, setToDestroy),        asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "void setToCreate(string &in)",   asMETHOD(iStrategy, setToCreate),         asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "iSprite & createSprite(string &in, string &in)", asFUNCTION(CreateSprite1), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectMethod("iSpriteStrategy", "iSprite & createSprite(string &in)",             asFUNCTION(CreateSprite1), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "iSprite & createSprite(string &in, string &in)", asFUNCTION(CreateSprite1), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("iStrategy", "iSprite & createSprite(string &in)",             asFUNCTION(CreateSprite1), asCALL_CDECL_OBJLAST) );
     }
 }

@@ -29,7 +29,7 @@
 #include <managers/actionmanager.h>
 #include <managers/spritesheetmanager.h>
 #include <managers/cameramanager.h>
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 #include <objectdata/objectdatamanager.h>
 #include <common/color.h>
 #include <script/scriptmanager.h>
@@ -155,7 +155,7 @@ void CStartUpState::fade(
 void CStartUpState::assetLoad()
 {
     // Load the stage list table
-    CSpriteStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
+    CStrategyMgr::Instance().loadListTable( "data/objects/2d/spritestrategy/strategyListTable.lst" );
 
     // Load in any fonts
     CFontMgr::Instance().load( "data/textures/fonts/font.lst" );

@@ -1,38 +1,38 @@
 
 /************************************************************************
-*    FILE NAME:       scriptstrategymanager.cpp
+*    FILE NAME:       strategymanager.cpp
 *
-*    DESCRIPTION:     CSpriteStrategyMgr script object registration
+*    DESCRIPTION:     CStrategyMgr script object registration
 ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptspritestrategymanager.h>
+#include <script/scriptstrategymanager.h>
 
 // Game lib dependencies
-#include <spritestrategy/spritestrategymanager.h>
+#include <strategy/strategymanager.h>
 #include <script/scriptmanager.h>
 #include <script/scriptglobals.h>
-#include <spritestrategy/basicstagestrategy.h>
-#include <spritestrategy/basicspritestrategy.h>
-#include <spritestrategy/menustrategy.h>
+#include <strategy/basicstagestrategy.h>
+#include <strategy/basicspritestrategy.h>
+#include <strategy/menustrategy.h>
 #include <common/isprite.h>
 #include <utilities/exceptionhandling.h>
 
 // AngelScript lib dependencies
 #include <angelscript.h>
 
-namespace NScriptSpriteStrategyManager
+namespace NScriptStrategyManager
 {
     /************************************************************************
     *    DESC:  Create a basic sprite strategy                                                            
     ************************************************************************/
-    iSpriteStrategy * CreateBasicSpriteStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategyMgr )
+    iStrategy * CreateBasicSpriteStrategy( const std::string & strategyId, CStrategyMgr & rStrategyMgr )
     {
-        iSpriteStrategy * pSpriteStrategy = nullptr;
+        iStrategy * pStrategy = nullptr;
         
         try
         {
-            pSpriteStrategy = rStrategyMgr.addStrategy( strategyId, new CBasicSpriteStrategy );
+            pStrategy = rStrategyMgr.addStrategy( strategyId, new CBasicSpriteStrategy );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -43,19 +43,19 @@ namespace NScriptSpriteStrategyManager
             asGetActiveContext()->SetException(ex.what());
         }
         
-        return pSpriteStrategy;
+        return pStrategy;
     }
     
     /************************************************************************
     *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
-    iSpriteStrategy * CreateBasicStageStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategyMgr )
+    iStrategy * CreateBasicStageStrategy( const std::string & strategyId, CStrategyMgr & rStrategyMgr )
     {
-        iSpriteStrategy * pSpriteStrategy = nullptr;
+        iStrategy * pStrategy = nullptr;
         
         try
         {
-            pSpriteStrategy = rStrategyMgr.addStrategy( strategyId, new CBasicStageStrategy );
+            pStrategy = rStrategyMgr.addStrategy( strategyId, new CBasicStageStrategy );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -66,19 +66,19 @@ namespace NScriptSpriteStrategyManager
             asGetActiveContext()->SetException(ex.what());
         }
         
-        return pSpriteStrategy;
+        return pStrategy;
     }
     
     /************************************************************************
     *    DESC:  Create a menu strategy                                                            
     ************************************************************************/
-    iSpriteStrategy * CreateMenuStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategyMgr )
+    iStrategy * CreateMenuStrategy( const std::string & strategyId, CStrategyMgr & rStrategyMgr )
     {
-        iSpriteStrategy * pSpriteStrategy = nullptr;
+        iStrategy * pStrategy = nullptr;
         
         try
         {
-            pSpriteStrategy = rStrategyMgr.addStrategy( strategyId, new CMenuStrategy );
+            pStrategy = rStrategyMgr.addStrategy( strategyId, new CMenuStrategy );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -89,19 +89,19 @@ namespace NScriptSpriteStrategyManager
             asGetActiveContext()->SetException(ex.what());
         }
         
-        return pSpriteStrategy;
+        return pStrategy;
     }
 
     /************************************************************************
     *    DESC:  Get the sprite strategy                                                            
     ************************************************************************/
-    iSpriteStrategy * GetSpriteStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategyMgr )
+    iStrategy * GetSpriteStrategy( const std::string & strategyId, CStrategyMgr & rStrategyMgr )
     {
-        iSpriteStrategy * pSpriteStrategy = nullptr;
+        iStrategy * pStrategy = nullptr;
         
         try
         {
-            pSpriteStrategy = rStrategyMgr.getStrategy( strategyId );
+            pStrategy = rStrategyMgr.getStrategy( strategyId );
         }
         catch( NExcept::CCriticalException & ex )
         {
@@ -112,13 +112,13 @@ namespace NScriptSpriteStrategyManager
             asGetActiveContext()->SetException(ex.what());
         }
         
-        return pSpriteStrategy;
+        return pStrategy;
     }
 
     /************************************************************************
     *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
-    void DeleteStrategy( const std::string & strategyId, CSpriteStrategyMgr & rStrategyMgr )
+    void DeleteStrategy( const std::string & strategyId, CStrategyMgr & rStrategyMgr )
     {
         try
         {
@@ -137,7 +137,7 @@ namespace NScriptSpriteStrategyManager
     /************************************************************************
     *    DESC:  Create a basic stage strategy                                                            
     ************************************************************************/
-    iSprite * CreateSprite1( const std::string & strategyId, const std::string & group, const std::string & name, CSpriteStrategyMgr & rStrategyMgr )
+    iSprite * CreateSprite1( const std::string & strategyId, const std::string & group, const std::string & name, CStrategyMgr & rStrategyMgr )
     {
         try
         {
@@ -155,7 +155,7 @@ namespace NScriptSpriteStrategyManager
         return nullptr;
     }
     
-    iSprite * CreateSprite2( const std::string & strategyId, const std::string & name, CSpriteStrategyMgr & rStrategyMgr )
+    iSprite * CreateSprite2( const std::string & strategyId, const std::string & name, CStrategyMgr & rStrategyMgr )
     {
         try
         {
@@ -185,16 +185,16 @@ namespace NScriptSpriteStrategyManager
         // Register type
         Throw( pEngine->RegisterObjectType( "CStrategyMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
-        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSpriteStrategy & createBasicSpriteStrategy(string &in)",    asFUNCTION(CreateBasicSpriteStrategy), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSpriteStrategy & createBasicStageStrategy(string &in)",     asFUNCTION(CreateBasicStageStrategy), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSpriteStrategy & createMenuStrategy(string &in)",           asFUNCTION(CreateMenuStrategy), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSpriteStrategy & getStrategy(string &in)",                  asFUNCTION(GetSpriteStrategy), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iStrategy & createBasicSpriteStrategy(string &in)",    asFUNCTION(CreateBasicSpriteStrategy), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iStrategy & createBasicStageStrategy(string &in)",     asFUNCTION(CreateBasicStageStrategy), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iStrategy & createMenuStrategy(string &in)",           asFUNCTION(CreateMenuStrategy), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iStrategy & getStrategy(string &in)",                  asFUNCTION(GetSpriteStrategy), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "void deleteStrategy(string &in)",                            asFUNCTION(DeleteStrategy), asCALL_CDECL_OBJLAST) );
-        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "void deleteSprite(string &in, int)",                         asMETHOD(CSpriteStrategyMgr, deleteSprite),   asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "void deleteSprite(string &in, int)",                         asMETHOD(CStrategyMgr, deleteSprite),   asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSprite & createSprite(string &in, string &in, string &in)", asFUNCTION(CreateSprite1), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("CStrategyMgr", "iSprite & createSprite(string &in, string &in)",             asFUNCTION(CreateSprite2), asCALL_CDECL_OBJLAST) );
 
         // Set this object registration as a global property to simulate a singleton
-        Throw( pEngine->RegisterGlobalProperty("CStrategyMgr StrategyMgr", &CSpriteStrategyMgr::Instance()) );
+        Throw( pEngine->RegisterGlobalProperty("CStrategyMgr StrategyMgr", &CStrategyMgr::Instance()) );
     }
 }
