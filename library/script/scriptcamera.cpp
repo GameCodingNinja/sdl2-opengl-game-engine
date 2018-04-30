@@ -18,6 +18,8 @@
 
 namespace NScriptCamera
 {
+    CPoint<float> point;
+    
     /************************************************************************
     *    DESC:  Wrapper function due to virtual inheritance
     ************************************************************************/
@@ -43,7 +45,8 @@ namespace NScriptCamera
     
     CPoint<float> GetPos(CCamera & camera)
     {
-        return camera.getPosFloat();
+        point = camera.getPos();
+        return point;
     }
     
     void SetRot1(const CPoint<float> & rot, bool convertToRadians, CCamera & camera)

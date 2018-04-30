@@ -16,7 +16,7 @@
                 <script disabled="Control_Hidden"/>
                 <script inactive="Control_Hidden"/>
                 <script active="Control_Active"/>
-                <script selected="Control_Selected_visible"/>
+                <script selected="Control_Selected"/>
             </scriptLst>
         </sprite>
 

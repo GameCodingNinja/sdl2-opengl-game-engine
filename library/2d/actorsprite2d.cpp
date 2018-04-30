@@ -36,9 +36,6 @@ CActorSprite2D::CActorSprite2D( const CActorData & actorData, int id ) :
 {
     // Create the actor based on the data
     create( actorData );
-    
-    // Set the sprite type
-    m_parameters.add( NDefs::ACTOR2D );
 
 }   // constructor
 

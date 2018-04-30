@@ -35,7 +35,6 @@ public:
     void setPos( const CPoint<float> & position );
     void setPos( CWorldValue x = 0, CWorldValue y = 0, CWorldValue z = 0 );
     const CPoint<CWorldValue> & getPos() const;
-    CPoint<float> getPosFloat();
 
     // Increment the object's position
     void incPos( const CPoint<CWorldValue> & position );

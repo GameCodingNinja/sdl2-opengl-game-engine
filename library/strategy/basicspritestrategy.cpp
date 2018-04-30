@@ -82,19 +82,19 @@ void CBasicSpriteStrategy::loadFromFile( const std::string & file )
                 duplicate = !m_dataMap.emplace(
                     std::piecewise_construct,
                     std::forward_as_tuple(name),
-                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::SPRITE2D) ).second;
+                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::EOT_SPRITE2D) ).second;
 
             else if( tag == "sprite3d" )
                 duplicate = !m_dataMap.emplace(
                     std::piecewise_construct,
                     std::forward_as_tuple(name),
-                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::SPRITE3D) ).second;
+                    std::forward_as_tuple(new CSpriteData(spriteNode, defGroup, defObjName, defAIName), NDefs::EOT_SPRITE3D) ).second;
 
             else if( tag == "actor2d" )
                 duplicate = !m_dataMap.emplace(
                     std::piecewise_construct,
                     std::forward_as_tuple(name),
-                    std::forward_as_tuple(new CActorData(spriteNode, defGroup, defObjName, defAIName), NDefs::ACTOR2D) ).second;
+                    std::forward_as_tuple(new CActorData(spriteNode, defGroup, defObjName, defAIName), NDefs::EOT_OBJECT_NODE) ).second;
 
             else
                 throw NExcept::CCriticalException("Sprite Load Error!",
@@ -147,7 +147,7 @@ iSprite * CBasicSpriteStrategy::create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
     // Create the sprite
-    if( rSpriteDataContainer.getType() == NDefs::SPRITE2D )
+    if( rSpriteDataContainer.getType() == NDefs::EOT_SPRITE2D )
     {
         const auto & rData = rSpriteDataContainer.get<CSpriteData>();
         if( rData.getId() != defs_SPRITE_DEFAULT_ID )
@@ -161,7 +161,7 @@ iSprite * CBasicSpriteStrategy::create(
 
         aiName = rData.getAIName();
     }
-    else if( rSpriteDataContainer.getType() == NDefs::ACTOR2D )
+    else if( rSpriteDataContainer.getType() == NDefs::EOT_OBJECT_NODE )
     {
         const auto & rData = rSpriteDataContainer.get<CActorData>();
         if( rData.getId() != defs_SPRITE_DEFAULT_ID )
@@ -193,6 +193,9 @@ iSprite * CBasicSpriteStrategy::create(
 
     // Init the physics
     iter.first->second->initPhysics();
+    
+    // Init the sprite
+    iter.first->second->init();
 
     // Broadcast the signal to create the sprite AI
     if( !aiName.empty() )
@@ -216,7 +219,7 @@ iSprite * CBasicSpriteStrategy::create(
     std::pair<std::map<const int, iSprite *>::iterator, bool> iter;
 
     // Create the sprite
-    if( rSpriteDataContainer.getType() == NDefs::SPRITE2D )
+    if( rSpriteDataContainer.getType() == NDefs::EOT_SPRITE2D )
     {
         const auto & rData = rSpriteDataContainer.get<CSpriteData>();
         if( rData.getId() != defs_SPRITE_DEFAULT_ID )
@@ -230,7 +233,7 @@ iSprite * CBasicSpriteStrategy::create(
 
         aiName = rData.getAIName();
     }
-    else if( rSpriteDataContainer.getType() == NDefs::ACTOR2D )
+    else if( rSpriteDataContainer.getType() == NDefs::EOT_OBJECT_NODE )
     {
         const auto & rData = rSpriteDataContainer.get<CActorData>();
         if( rData.getId() != defs_SPRITE_DEFAULT_ID )
@@ -244,6 +247,9 @@ iSprite * CBasicSpriteStrategy::create(
 
     // Init the physics
     iter.first->second->initPhysics();
+    
+    // Init the sprite
+    iter.first->second->init();
 
     // Check for duplicate id's
     if( !iter.second )
@@ -307,6 +313,9 @@ iSprite * CBasicSpriteStrategy::create(
 
     // Init the physics
     iter.first->second->initPhysics();
+    
+    // Init the sprite
+    iter.first->second->init();
 
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -345,6 +354,9 @@ iSprite * CBasicSpriteStrategy::create(
 
     // Init the physics
     iter.first->second->initPhysics();
+    
+    // Init the sprite
+    iter.first->second->init();
 
     // Add the sprite pointer to the vector for rendering
     m_pSpriteVec.push_back( iter.first->second );
@@ -389,16 +401,6 @@ void CBasicSpriteStrategy::deleteObj( int index )
         NGenFunc::PostDebugMsg( boost::str( boost::format("Sprite index can't be found (%s).\n\n%s\nLine: %s")
             % index % __FUNCTION__ % __LINE__ ) );
     }
-}
-
-
-/************************************************************************
-*    DESC:  Do any pre-game loop init's
-************************************************************************/
-void CBasicSpriteStrategy::init()
-{
-    for( auto iter : m_pSpriteVec )
-        iter->init();
 }
 
 

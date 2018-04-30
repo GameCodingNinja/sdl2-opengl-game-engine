@@ -16,13 +16,13 @@
 /************************************************************************
 *    DESC:  Constructor
 ************************************************************************/
-CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData, int type ) :
+CSpriteDataContainer::CSpriteDataContainer( CSpriteData * pData, NDefs::EObjectType type ) :
     m_type(type),
     m_data(pData)
 {
 }
 
-CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, int type ) :
+CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, NDefs::EObjectType type ) :
     m_type(type),
     m_data(pData)
 {
@@ -34,10 +34,10 @@ CSpriteDataContainer::CSpriteDataContainer( CActorData * pData, int type ) :
 ************************************************************************/
 CSpriteDataContainer::~CSpriteDataContainer()
 {
-    if( m_type == NDefs::SPRITE2D )
+    if( m_type == NDefs::EOT_SPRITE2D )
         NDelFunc::Delete( m_data.m_pSpriteData );
     
-    else if( m_type == NDefs::ACTOR2D )
+    else if( m_type == NDefs::EOT_OBJECT_NODE )
         NDelFunc::Delete( m_data.m_pActorData );
 }
 

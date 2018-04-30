@@ -48,12 +48,6 @@ const CPoint<CWorldValue> & CObject::getPos() const
 }
 
 
-CPoint<float> CObject::getPosFloat()
-{
-    return m_pos;
-}
-
-
 /************************************************************************
 *    DESC:  Set the object's position
 ************************************************************************/

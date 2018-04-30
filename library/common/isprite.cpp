@@ -16,41 +16,6 @@ iSprite::iSprite( int id ) :
 {
 }
 
-/************************************************************************
-*    DESC:  Is this a 2D sprite?
-************************************************************************/  
-bool iSprite::isSprite2D() const
-{
-    return m_parameters.isSet( NDefs::SPRITE2D );
-}
-
-
-/************************************************************************
-*    DESC:  Is this a 2D actor?
-************************************************************************/  
-bool iSprite::isActor2D() const
-{
-    return m_parameters.isSet( NDefs::ACTOR2D );
-}
-
-
-/************************************************************************
-*    DESC:  Is this a 3D sprite?
-************************************************************************/  
-bool iSprite::isSprite3D() const
-{
-    return m_parameters.isSet( NDefs::SPRITE3D );   
-}
-
-
-/************************************************************************
-*    DESC:  Is this a 3D actor?
-************************************************************************/  
-bool iSprite::isActor3D() const
-{
-    return m_parameters.isSet( NDefs::ACTOR3D );    
-}
-
 
 /************************************************************************
 *    DESC:  Get the unique id number

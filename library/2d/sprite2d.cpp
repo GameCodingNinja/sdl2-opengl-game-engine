@@ -30,9 +30,6 @@ CSprite2D::CSprite2D( const CObjectData2D & objectData, int id ) :
     // If there's no visual data, set the hide flag
     setVisible( objectData.getVisualData().isActive() );
     
-    // Set the sprite type
-    m_parameters.add( NDefs::SPRITE2D );
-    
     if( objectData.getVisualData().getGenerationType() == NDefs::EGT_SPRITE_SHEET )
         setCropOffset( objectData.getVisualData().getSpriteSheet().getGlyph().getCropOffset() );
 }
@@ -126,7 +123,12 @@ void CSprite2D::initScriptFunctions( const XMLNode & node )
 
             // Add the attribute name and value to the map
             if( !attrValue.empty() )
+            {
                 m_scriptFunctionMap.emplace( attrName, attrValue );
+                
+                if( attrName == "update" )
+                    m_parameters.add( NDefs::SCRIPT_UPDATE );
+            }
         }
     }
 }
@@ -138,7 +140,12 @@ void CSprite2D::initScriptFunctions( const XMLNode & node )
 void CSprite2D::copyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap )
 {
     for( auto & iter : scriptFunctionMap )
+    {
         m_scriptFunctionMap.emplace( iter );
+        
+        if( iter.first == "update" )
+            m_parameters.add( NDefs::SCRIPT_UPDATE );
+    }
 }
 
 
@@ -202,6 +209,9 @@ void CSprite2D::handleEvent( const SDL_Event & rEvent )
 void CSprite2D::update()
 {
     m_scriptComponent.update();
+    
+    if( m_parameters.isSet( NDefs::SCRIPT_UPDATE ) )
+        prepareFuncId( "update" );
     
     if( m_upAI )
         m_upAI->update();

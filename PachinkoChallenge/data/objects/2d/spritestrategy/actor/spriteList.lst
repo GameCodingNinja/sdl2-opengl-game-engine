@@ -3,57 +3,66 @@
     <sprite2d name="square_green" objectName="square_green">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
 
     <sprite2d name="square_blue" objectName="square_blue">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
 
     <sprite2d name="square_red" objectName="square_red">
         <scale x=".9" y=".9" z="1"/>
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
 
     <sprite2d name="triangle_green" objectName="triangle_green">
     <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
     
     <sprite2d name="triangle_blue" objectName="triangle_blue">
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
     
     <sprite2d name="triangle_red" objectName="triangle_red">
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
 
     <sprite2d name="circle_green" objectName="circle_green">
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
     
     <sprite2d name="circle_blue" objectName="circle_blue">
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
     
     <sprite2d name="circle_red" objectName="circle_red">
         <scriptLst>
-            <script fadeIn="Ball_FadeIn"/>
+            <script init="Ball_FadeIn"/>
+            <script update="Ball_Update"/>
         </scriptLst>
     </sprite2d>
 

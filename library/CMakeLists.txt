@@ -82,7 +82,6 @@ add_library(
         physics/physicscomponent3d.cpp
         2d/font.cpp
         2d/sprite2d.cpp
-        2d/spritechild2d.cpp
         2d/visualcomponent2d.cpp
         2d/object2d.cpp
         2d/actorsprite2d.cpp

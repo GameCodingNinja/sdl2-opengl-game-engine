@@ -18,6 +18,8 @@
 
 namespace NScriptiSprite
 {
+    CPoint<float> point;
+
     /************************************************************************
     *    DESC:  Wrapper function due to virtual inheritance
     ************************************************************************/
@@ -51,9 +53,10 @@ namespace NScriptiSprite
         sprite.incPos(x,y,z);
     }
     
-    CPoint<float> GetPos(iSprite & sprite)
+    const CPoint<float> & GetPos(iSprite & sprite)
     {
-        return sprite.getPosFloat();
+        point = sprite.getPos();
+        return point;
     }
     
     void SetRot1(const CPoint<float> & rot, bool convertToRadians, iSprite & sprite)
@@ -146,7 +149,7 @@ namespace NScriptiSprite
         Throw( pEngine->RegisterObjectMethod("iSprite", "void incPos(CPoint & in)",                            asFUNCTION(IncPos1), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("iSprite", "void incPos(float x = 0, float y = 0, float z = 0)",  asFUNCTION(IncPos2), asCALL_CDECL_OBJLAST) );
         
-        Throw( pEngine->RegisterObjectMethod("iSprite", "CPoint getPos()",                                     asFUNCTION(GetPos),  asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "const CPoint & getPos()",                             asFUNCTION(GetPos),  asCALL_CDECL_OBJLAST) );
 
         Throw( pEngine->RegisterObjectMethod("iSprite", "void setRot(CPoint &in, bool convertToRadians = true)", asFUNCTION(SetRot1), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("iSprite", "void setRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asFUNCTION(SetRot2), asCALL_CDECL_OBJLAST) );
@@ -154,7 +157,7 @@ namespace NScriptiSprite
         Throw( pEngine->RegisterObjectMethod("iSprite", "void incRot(CPoint &in, bool convertToRadians = true)", asFUNCTION(IncRot1), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("iSprite", "void incRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asFUNCTION(IncRot2), asCALL_CDECL_OBJLAST) );
         
-        Throw( pEngine->RegisterObjectMethod("iSprite", "const CPoint & getRot()",                               asFUNCTION(GetRot),               asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("iSprite", "const CPoint & getRot()",                               asFUNCTION(GetRot),    asCALL_CDECL_OBJLAST) );
         
         Throw( pEngine->RegisterObjectMethod("iSprite", "void setScale(CPoint & in)",                            asFUNCTION(SetScale1), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("iSprite", "void setScale(float x = 1, float y = 1, float z = 1)",  asFUNCTION(SetScale2), asCALL_CDECL_OBJLAST) );

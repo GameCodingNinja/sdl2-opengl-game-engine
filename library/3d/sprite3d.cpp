@@ -30,9 +30,6 @@ CSprite3D::CSprite3D( const CObjectData3D & objectData, int id ) :
 {
     // If there's no visual data, set the hide flag
     setVisible( objectData.getVisualData().isActive() );
-    
-    // Set the sprite type
-    m_parameters.add( NDefs::SPRITE3D );
 }
 
 

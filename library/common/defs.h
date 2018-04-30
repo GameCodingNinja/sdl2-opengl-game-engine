@@ -88,12 +88,20 @@ namespace NDefs
 
         // Visible bit
         VISIBLE             = 0x100,
-                
-        // Type bits
-        SPRITE2D            = 0x200,
-        ACTOR2D             = 0x400,
-        SPRITE3D            = 0x800,
-        ACTOR3D             = 0x1000
+        
+        // Script update flag
+        SCRIPT_UPDATE       = 0x200,
+    };
+    
+    enum EObjectType
+    {
+        EOT_NONE,
+        EOT_OBJECT,
+        EOT_OBJECT_NODE,
+        EOT_CAMERA,
+        EOT_LIGHT,
+        EOT_SPRITE2D,
+        EOT_SPRITE3D,
     };
     
     enum EAspectRatio

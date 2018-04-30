@@ -77,13 +77,14 @@
 #define strcasecmp _stricmp
 #endif
 
-
+#include <utilities/exceptionhandling.h>
 
 #include <memory.h>
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdexcept>
 
 XMLCSTR XMLNode::getVersion() { return _CXML("v2.43"); }
 void freeXMLString(XMLSTR t){if(t)free(t);}
@@ -455,10 +456,13 @@ XMLNode XMLNode::openFileHelper(XMLCSTR filename, XMLCSTR tag)
 //#if defined(_XMLWINDOWS) && !defined(UNDER_CE) && !defined(_XMLPARSER_NO_MESSAGEBOX_)
 //        MessageBoxA(NULL,message,"XML Parsing error",MB_OK|MB_ICONERROR|MB_TOPMOST);
 //#endif
-        printf("%s",message);
-        SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "XML Parser Error", message, NULL );
+        //printf("%s",message);
+        //SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "XML Parser Error", message, NULL );
+        
+        // Throwing our exception allows for a cleaner exit
+        throw NExcept::CCriticalException( "XML Parser Error", message );
 
-        exit(255);
+        //exit(255);
     }
     return xnode;
 }

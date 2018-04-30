@@ -43,7 +43,7 @@ namespace NScriptActorSprite2D
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(CPoint & in)",                            asMETHODPR(CObject, incPos, (const CPoint<float> &), void),   asCALL_THISCALL) );
         //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void IncPos(float x = 0, float y = 0, float z = 0)",  asMETHODPR(CObject, IncPos, (float,float,float), void), asCALL_THISCALL) );
         
-        Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "CPoint GetPos()",                                       asMETHOD(CObject, getPosFloat),   asCALL_THISCALL) );
+        //Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "CPoint GetPos()",                                       asMETHOD(CObject, getPosFloat),   asCALL_THISCALL) );
 
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(CPoint &in, bool convertToRadians = true)", asMETHODPR(CObject,   setRot, (const CPoint<float> &, bool), void), asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CActorSprite2D", "void SetRot(float x = 0, float y = 0, float z = 0, bool convertToRadians = true)", asMETHODPR(CObject,   setRot, (float, float, float, bool), void), asCALL_THISCALL) );

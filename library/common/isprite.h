@@ -80,19 +80,7 @@ public:
     
     // Create the font string
     virtual void createFontString( const std::string & fontString ) {}
-    
-    // Is this a 2D sprite?
-    bool isSprite2D() const;
-    
-    // Is this a 2D actor?
-    bool isActor2D() const;
-    
-    // Is this a 3D sprite?
-    bool isSprite3D() const;
-    
-    // Is this a 3D actor?
-    bool isActor3D() const;
-    
+
 protected:
     
     // Unique Id number

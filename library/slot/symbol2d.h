@@ -12,7 +12,7 @@
 #include <2d/object2d.h>
 
 // Game lib dependencies
-#include <2d/spritechild2d.h>
+#include <2d/sprite2d.h>
 
 // Standard lib dependencies
 #include <deque>
@@ -59,7 +59,7 @@ private:
     CMatrix m_finalMatrix;
     
     // This symbol's visual representation
-    std::deque<CSpriteChild2D> m_spriteDeq;
+    std::deque<CSprite2D> m_spriteDeq;
     
     // string Id;
     std::string m_id;

@@ -1,15 +1,26 @@
-/************************************************************************
-*    FILE NAME:       ball.ang
-*
-*    DESCRIPTION:     Scripts for controlling/animating the balls
-************************************************************************/
 
-/************************************************************************
-*    desc:  Fade in the ball
-************************************************************************/
+//
+//  FILE NAME:  ball.ang
+//
+//  DESC:       Scripts for controlling/animating the balls
+//
+
+
+//
+// Fade in the ball
+//
 void Ball_FadeIn( iSprite & sprite )
 {
     sprite.setAlpha(0);
     
     AlphaTo( 500, 1, sprite );
+}
+
+//
+// Do ball related updates
+//
+void Ball_Update( iSprite & sprite )
+{
+    if( sprite.getPos().y < -1650.0f )
+        StrategyMgr.findStrategy( "_spriteStrategy)" ).setToDestroy( sprite.getId() );
 }

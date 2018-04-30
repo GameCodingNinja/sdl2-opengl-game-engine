@@ -20,8 +20,8 @@ class CSpriteDataContainer
 public:
 
     // constructor
-    CSpriteDataContainer( CSpriteData * pData, int type );
-    CSpriteDataContainer( CActorData * pData, int type );
+    CSpriteDataContainer( CSpriteData * pData, NDefs::EObjectType type );
+    CSpriteDataContainer( CActorData * pData, NDefs::EObjectType type );
 
     // destructor
     ~CSpriteDataContainer();
@@ -36,7 +36,7 @@ public:
 private:
 
     // Sprite Type
-    int m_type = NDefs::NONE;
+    NDefs::EObjectType m_type = NDefs::EOT_NONE;
 
     // Pointer to sprite data class. We own the pointer
     union USpriteDataPtr

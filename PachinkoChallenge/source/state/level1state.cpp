@@ -194,8 +194,6 @@ void CLevel1State::update()
     m_scriptComponent.update();
 
     CScriptMgr::Instance().update();
-    
-    CMenuMgr::Instance().updateInterface();
 
     if( !CMenuMgr::Instance().isMenuActive() )
     {
@@ -210,8 +208,6 @@ void CLevel1State::update()
 void CLevel1State::transform()
 {
     CCommonState::transform();
-    
-    CMenuMgr::Instance().transformInterface();
 
     CStrategyMgr::Instance().transform();
 }
@@ -222,11 +218,11 @@ void CLevel1State::transform()
 ****************************************************************************/
 void CLevel1State::preRender()
 {
+    CMenuMgr::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
+    
     CCommonState::preRender();
 
     CStrategyMgr::Instance().render( CCameraMgr::Instance().getActiveCameraMatrix() );
-
-    CMenuMgr::Instance().renderInterface( CCameraMgr::Instance().getDefaultProjMatrix() );
 }
 
 
