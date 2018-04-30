@@ -562,9 +562,6 @@ void CUIControl::init()
     // This allows for delayed VBO create so that the fonts can be allocated during the load screen
     for( auto & iter : m_spriteDeq )
         iter.init();
-
-    // Call any init scripts
-    prepareSpriteScriptFunction( NUIControl::ECS_INIT );
 }
 
 
@@ -585,16 +582,11 @@ void CUIControl::cleanUp()
 ************************************************************************/
 void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlState )
 {
-    std::string scriptFuncMapKey;
+    std::string scriptFuncMapKey = "null";
     bool forceUpdate(false);
 
     switch( controlState )
     {
-        case NUIControl::ECS_INIT:
-            scriptFuncMapKey = "init";
-            forceUpdate = true;
-        break;
-
         case NUIControl::ECS_DISABLED:
             scriptFuncMapKey = "disabled";
             forceUpdate = true;
@@ -613,12 +605,13 @@ void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlS
             scriptFuncMapKey = "selected";
         break;
         
+        case NUIControl::ECS_INIT:
         case NUIControl::ECS_EXECUTE:
         case NUIControl::ECS_EVENT:
         case NUIControl::ECS_NULL:
             throw NExcept::CCriticalException("Control State NULL!",
-                boost::str( boost::format("Control state can't be EXECUTE, EVENT or NULL!\n\n%s\nLine: %s")
-                    %  __FUNCTION__ % __LINE__ ));
+                boost::str( boost::format("Control state can't use this state for sprites (%s)!\n\n%s\nLine: %s")
+                    % scriptFuncMapKey %  __FUNCTION__ % __LINE__ ));
         break;
     };
 

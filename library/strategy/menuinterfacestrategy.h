@@ -24,9 +24,6 @@ public:
     // Destructor
     virtual ~CMenuInterfaceStrategy(){}
 
-    // Update the actors
-    virtual void update() override;
-
     // Transform the actor
     virtual void transform() override;
 

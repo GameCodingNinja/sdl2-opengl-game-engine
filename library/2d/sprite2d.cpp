@@ -84,6 +84,8 @@ void CSprite2D::init()
 {
     if( m_visualComponent.isFontSprite() )
         m_visualComponent.createFontString();
+    
+    prepareFuncId( "init", true );
 }
 
 

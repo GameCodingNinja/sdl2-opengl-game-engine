@@ -77,8 +77,6 @@ public:
 
     // Update the menu
     void update();
-    void updateMenu();
-    void updateInterface();
     
     // Do the transform
     void transform();
@@ -162,7 +160,7 @@ private:
         const SDL_Event & rEvent, const std::vector<CMenuTree *> & activeTreeVec );
     
     // Update the menu
-    void update( const std::vector<CMenuTree *> & activeTreeVec );
+    bool update( const std::vector<CMenuTree *> & activeTreeVec );
     
     // Transform the menu
     void transform( const std::vector<CMenuTree *> & activeTreeVec );

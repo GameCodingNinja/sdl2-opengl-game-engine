@@ -30,7 +30,7 @@ public:
     virtual ~iStrategy(){}
 
     // Load the data from file
-    virtual void loadFromFile( const std::string & file ){};
+    virtual void loadFromFile( const std::string & file ){}
     
     // Set to Destroy the sprite
     virtual void setToDestroy( int spriteIndex ){}
@@ -66,16 +66,16 @@ public:
     virtual void init(){}
     
     // Do some cleanup
-    virtual void cleanUp(){};
+    virtual void cleanUp(){}
     
     // Load the data from file
     virtual void miscProcess(){}
 
     // Update the sprite
-    virtual void update() = 0;
+    virtual void update(){}
 
     // Transform the sprite
-    virtual void transform() = 0;
+    virtual void transform(){}
     virtual void transform( const class CObject2D & object ){}
 
     // Render the sprites

@@ -774,32 +774,34 @@ bool CMenuMgr::handleMenuScrolling(
 /************************************************************************
 *    DESC:  Update the menu
 ************************************************************************/
-void CMenuMgr::updateMenu()
-{
-    if( m_active )
-        update( m_pActiveMenuTreeVec );
-}
-
-void CMenuMgr::updateInterface()
-{
-    if( m_active )
-        update( m_pActiveInterTreeVec );
-}
-
 void CMenuMgr::update()
 {
     if( m_active )
     {
-        update( m_pActiveInterTreeVec );
-        update( m_pActiveMenuTreeVec );
+        if( !update( m_pActiveMenuTreeVec ) )
+        {
+            // Only allow Updating for interface menus when regular menus are not active
+            // Don't want interface menus animating when the menu is displayed
+            update( m_pActiveInterTreeVec );
+        }
     }
 }
 
-void CMenuMgr::update( const std::vector<CMenuTree *> & activeTreeVec )
+bool CMenuMgr::update( const std::vector<CMenuTree *> & activeTreeVec )
 {
+    bool menuActive(false);
+    
     for( auto iter : activeTreeVec )
+    {
+        // See if there's an active menu
         if( iter->isActive() )
+        {
+            menuActive = true;
             iter->update();
+        }
+    }
+    
+    return menuActive;
 }
 
 

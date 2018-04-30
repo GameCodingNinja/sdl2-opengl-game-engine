@@ -265,6 +265,7 @@ bool CGame::gameLoop()
         // Process all game states
         CStrategyMgr::Instance().miscProcess();
         CStrategyMgr::Instance().update();
+        CMenuMgr::Instance().update();
         CStrategyMgr::Instance().transform();
         CCameraMgr::Instance().transform();
         CStrategyMgr::Instance().render();
