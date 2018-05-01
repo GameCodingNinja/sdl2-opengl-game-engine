@@ -236,14 +236,14 @@ void CGame::statStringCallBack( const std::string & statStr )
     if( NBDefs::IsMobileDevice() )
     {
         if( CSettings::Instance().getDebugStrVisible() && upDebugDisplay )
-            upDebugDisplay->createFontString( statStr );
+            upDebugDisplay->getVisualComponent().createFontString( statStr );
     }
     else
     {
         if( !CSettings::Instance().getFullScreen() )
             SDL_SetWindowTitle( m_pWindow, statStr.c_str() );
         else
-            upDebugDisplay->createFontString( statStr );
+            upDebugDisplay->getVisualComponent().createFontString( statStr );
     }
 }
 

@@ -39,7 +39,7 @@
 *    DESC:  Constructor
 ************************************************************************/
 CVisualComponent3D::CVisualComponent3D( const CObjectVisualData3D & visualData ) :
-	m_visualData( visualData ),
+	m_rVisualData( visualData ),
 	m_pShaderData( nullptr ),
 	m_vertexLocation( -1 ),
 	m_uvLocation( -1 ),
@@ -147,11 +147,31 @@ const CColor & CVisualComponent3D::getColor() const
 
 
 /************************************************************************
+*    DESC:  Set/Get the default color
+************************************************************************/
+void CVisualComponent3D::setDefaultColor()
+{
+    m_color = m_rVisualData.getColor();
+}
+
+const CColor & CVisualComponent3D::getDefaultColor() const
+{
+    return m_rVisualData.getColor();
+}
+
+
+/************************************************************************
 *    DESC:  Set/Get the alpha
 ************************************************************************/
-void CVisualComponent3D::setAlpha( float alpha )
+void CVisualComponent3D::setAlpha( float alpha, bool allowToExceed )
 {
-    m_color.a = alpha;
+    if( alpha > 1.5 )
+        alpha *= defs_RGB_TO_DEC;
+    
+    if( allowToExceed || (alpha < m_rVisualData.getColor().a) )
+        m_color.a = alpha;
+    else
+        m_color.a = m_rVisualData.getColor().a;
 }
 
 float CVisualComponent3D::getAlpha() const
@@ -159,11 +179,15 @@ float CVisualComponent3D::getAlpha() const
     return m_color.a;
 }
 
-
 /************************************************************************
-*    DESC:  Set the default color
+*    DESC:  Set/Get the default alpha
 ************************************************************************/
-void CVisualComponent3D::setDefaultColor()
+void CVisualComponent3D::setDefaultAlpha()
 {
-    m_color = m_visualData.getColor();
+    m_color.a = m_rVisualData.getColor().a;
+}
+
+float CVisualComponent3D::getDefaultAlpha() const
+{
+    return m_rVisualData.getColor().a;
 }

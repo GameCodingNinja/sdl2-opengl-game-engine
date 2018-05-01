@@ -66,9 +66,11 @@ public:
 
     // Get the visual component
     CVisualComponent2D & getVisualComponent();
+    iVisualComponent * getVisualInterface();
 
     // Get the physics component
     CPhysicsComponent2D & getPhysicsComponent();
+    iPhysicsComponent * getPhysicsInterface();
 
     // Get the scripting component
     CScriptComponent & getScriptComponent();
@@ -92,27 +94,8 @@ public:
     // Set/Get the AI pointer
     void setAI( iAIBase * pAIBase ) override;
     
-    // Get the font size
-    const CSize<float> & getFontSize() const;
-    
     // Copy over the script functions
     void copyScriptFunctions( const std::map<std::string, std::string> & scriptFunctionMap );
-    
-    // Set the physics position and rotation
-    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override;
-    
-    // Set/Get the color
-    void setColor( const CColor & color ) override;
-    void setColor( float r, float g, float b, float a ) override;
-    void setDefaultColor() override;
-    const CColor & getColor() const override;
-    const CColor & getDefaultColor() const override;
-
-    // Set/Get the alpha
-    void setAlpha( float alpha ) override;
-    float getAlpha() const override;
-    void setDefaultAlpha() override;
-    float getDefaultAlpha() const override;
 
     // Get the frame count
     uint getFrameCount() const override;
@@ -122,9 +105,6 @@ public:
     
     // Get the current frame
     uint getCurrentFrame() const override;
-    
-    // Create the font string
-    void createFontString( const std::string & fontString ) override;
 
 protected:
 

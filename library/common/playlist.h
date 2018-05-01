@@ -91,7 +91,7 @@ private:
     std::vector<CSound> m_soundVec;
     
     // Dummy sound
-    CSound m_DummySound;
+    static CSound m_DummySound;
 
 };
 

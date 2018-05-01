@@ -16,6 +16,9 @@
 union SDL_Event;
 class iAIBase;
 class CCamera;
+class CMatrix;
+class iVisualComponent;
+class iPhysicsComponent;
 
 class iSprite : public virtual CObject2D
 {
@@ -41,7 +44,13 @@ public:
     
     // Update the physics 
     virtual void physicsUpdate() = 0;
-
+    
+    // Get the visual component interface
+    virtual iVisualComponent * getVisualInterface() = 0;
+    
+    // Get the physics component interface
+    virtual iPhysicsComponent * getPhysicsInterface() = 0;
+    
     // do the render
     virtual void render( const CCamera & camera ){};
     virtual void render( const CMatrix & matrix ){};
@@ -53,22 +62,6 @@ public:
     // Set/Get the AI pointer
     virtual void setAI( iAIBase * pAIBase ) = 0;
     
-    // Set/Get the color
-    virtual void setColor( const CColor & color ) = 0;
-    virtual void setColor( float r, float g, float b, float a ) = 0;
-    virtual void setDefaultColor() = 0;
-    virtual const CColor & getColor() const = 0;
-    virtual const CColor & getDefaultColor() const = 0;
-
-    // Set/Get the alpha
-    virtual void setAlpha( float alpha ) = 0;
-    virtual float getAlpha() const = 0;
-    virtual void setDefaultAlpha() = 0;
-    virtual float getDefaultAlpha() const = 0;
-    
-    // Set the physics position and rotation
-    virtual void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) = 0;
-    
     // Get the frame count
     virtual uint getFrameCount() const { return 0; }
 
@@ -77,9 +70,6 @@ public:
     
     // Get the current frame
     virtual uint getCurrentFrame() const { return 0; }
-    
-    // Create the font string
-    virtual void createFontString( const std::string & fontString ) {}
 
 protected:
     
@@ -87,4 +77,4 @@ protected:
     int m_id;
 };
 
-#endif  // __i_sprite_2d_h__
+#endif

@@ -251,6 +251,11 @@ CVisualComponent2D & CSprite2D::getVisualComponent()
     return m_visualComponent;
 }
 
+iVisualComponent * CSprite2D::getVisualInterface()
+{
+    return &m_visualComponent;
+}
+
 
 /************************************************************************
 *    DESC:  Get the physics component                                                            
@@ -258,6 +263,11 @@ CVisualComponent2D & CSprite2D::getVisualComponent()
 CPhysicsComponent2D & CSprite2D::getPhysicsComponent()
 {
     return m_physicsComponent;
+}
+
+iPhysicsComponent * CSprite2D::getPhysicsInterface()
+{
+    return &m_physicsComponent;
 }
 
 
@@ -292,87 +302,6 @@ void CSprite2D::setAI( iAIBase * pAIBase )
 
 
 /************************************************************************
-*    DESC:  Set the color
-************************************************************************/
-void CSprite2D::setColor( const CColor & color )
-{
-    m_visualComponent.setColor( color );
-}
-
-void CSprite2D::setColor( float r, float g, float b, float a )
-{
-    // This function assumes values between 0.0 to 1.0.
-    m_visualComponent.setColor( r, g, b, a );
-}
-
-
-/************************************************************************
-*    DESC:  Set the default color
-************************************************************************/
-void CSprite2D::setDefaultColor()
-{
-    m_visualComponent.setColor( m_rObjectData.getVisualData().getColor() );
-}
-
-
-/************************************************************************
-*    DESC:  Get the color
-************************************************************************/
-const CColor & CSprite2D::getColor() const
-{
-    return m_visualComponent.getColor();
-}
-
-
-/************************************************************************
-*    DESC:  Get the default color
-************************************************************************/
-const CColor & CSprite2D::getDefaultColor() const
-{
-    return m_rObjectData.getVisualData().getColor();
-}
-
-
-/************************************************************************
-*    DESC:  Set the Alpha
-************************************************************************/
-void CSprite2D::setAlpha( float alpha )
-{
-    if( alpha > 1.5 )
-        alpha *= defs_RGB_TO_DEC;
-
-    m_visualComponent.setAlpha( alpha );
-}
-
-
-/************************************************************************
-*    DESC:  Get the Alpha
-************************************************************************/
-float CSprite2D::getAlpha() const
-{
-    return m_visualComponent.getAlpha();
-}
-
-
-/************************************************************************
-*    DESC:  Get the default alpha
-************************************************************************/
-float CSprite2D::getDefaultAlpha() const
-{
-    return m_rObjectData.getVisualData().getColor().getA();
-}
-
-
-/************************************************************************
-*    DESC:  Set the default alpha
-************************************************************************/
-void CSprite2D::setDefaultAlpha()
-{
-    m_visualComponent.setAlpha( m_rObjectData.getVisualData().getColor().getA() );
-}
-
-
-/************************************************************************
 *    DESC:  Get the frame count
 ************************************************************************/
 uint CSprite2D::getFrameCount() const 
@@ -402,31 +331,4 @@ void CSprite2D::setFrame( uint index )
         if( m_rObjectData.getVisualData().getGenerationType() == NDefs::EGT_SPRITE_SHEET )
             setCropOffset( m_rObjectData.getVisualData().getSpriteSheet().getGlyph(index).getCropOffset() );
     }
-}
-
-
-/************************************************************************
-*    DESC:  Create the font string
-************************************************************************/
-void CSprite2D::createFontString( const std::string & fontString )
-{
-    m_visualComponent.createFontString( fontString );
-}
-
-
-/************************************************************************
-*    DESC:  Get the font size
-************************************************************************/
-const CSize<float> & CSprite2D::getFontSize() const
-{
-    return m_visualComponent.getFontSize();
-}
-
-
-/************************************************************************
-*    DESC:  Set the physics position and rotation
-************************************************************************/
-void CSprite2D::setPhysicsTransform( float x, float y, float angle, bool resetVelocity )
-{
-    m_physicsComponent.setTransform( x, y, angle, resetVelocity );
 }

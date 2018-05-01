@@ -140,6 +140,11 @@ CVisualComponent3D & CSprite3D::getVisualComponent()
     return m_visualComponent;
 }
 
+iVisualComponent * CSprite3D::getVisualInterface()
+{
+    return &m_visualComponent;
+}
+
 
 /************************************************************************
  *    DESC:  Get the physics component                                                            
@@ -147,6 +152,11 @@ CVisualComponent3D & CSprite3D::getVisualComponent()
 CPhysicsComponent3D & CSprite3D::getPhysicsComponent()
 {
     return m_physicsComponent;
+}
+
+iPhysicsComponent * CSprite3D::getPhysicsInterface()
+{
+    return &m_physicsComponent;
 }
 
 
@@ -177,85 +187,4 @@ void CSprite3D::setAI( iAIBase * pAIBase )
 
     // Handle any initialization in a separate function
     m_upAI->init();
-}
-
-
-/************************************************************************
- *    DESC:  Set the color
- ************************************************************************/
-void CSprite3D::setColor( const CColor & color )
-{
-    m_visualComponent.setColor( color );
-}
-
-void CSprite3D::setColor( float r, float g, float b, float a )
-{
-    // This function assumes values between 0.0 to 1.0.
-    m_visualComponent.setColor( r, g, b, a );
-}
-
-
-/************************************************************************
- *    DESC:  Set the default color
- ************************************************************************/
-void CSprite3D::setDefaultColor()
-{
-    m_visualComponent.setColor( m_objectData.getVisualData().getColor() );
-}
-
-
-/************************************************************************
- *    DESC:  Get the color
- ************************************************************************/
-const CColor & CSprite3D::getColor() const
-{
-    return m_visualComponent.getColor();
-}
-
-
-/************************************************************************
- *    DESC:  Get the default color
- ************************************************************************/
-const CColor & CSprite3D::getDefaultColor() const
-{
-    return m_objectData.getVisualData().getColor();
-}
-
-
-/************************************************************************
- *    DESC:  Set the Alpha
- ************************************************************************/
-void CSprite3D::setAlpha( float alpha )
-{
-    if( alpha > 1.5 )
-        alpha *= defs_RGB_TO_DEC;
-
-    m_visualComponent.setAlpha( alpha );
-}
-
-
-/************************************************************************
- *    DESC:  Get the Alpha
- ************************************************************************/
-float CSprite3D::getAlpha() const
-{
-    return m_visualComponent.getAlpha();
-}
-
-
-/************************************************************************
- *    DESC:  Get the default alpha
- ************************************************************************/
-float CSprite3D::getDefaultAlpha() const
-{
-    return m_objectData.getVisualData().getColor().getA();
-}
-
-
-/************************************************************************
-*    DESC:  Set the default alpha
-************************************************************************/
-void CSprite3D::setDefaultAlpha()
-{
-    m_visualComponent.setAlpha( m_objectData.getVisualData().getColor().getA() );
 }

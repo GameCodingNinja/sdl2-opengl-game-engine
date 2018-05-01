@@ -114,6 +114,7 @@ add_library(
         common/fontdata.cpp
         common/fontproperties.cpp
         common/isprite.cpp
+        common/ivisualcomponent.cpp
         slot/symbol2d.cpp
         slot/symbolsetview.cpp
         slot/symbolsetviewmanager.cpp

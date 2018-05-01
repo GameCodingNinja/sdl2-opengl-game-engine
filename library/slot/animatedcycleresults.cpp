@@ -116,7 +116,7 @@ void CAnimatedCycleResults::startAnimation()
         {
             for( auto sympIter : iter )
             {
-                sympIter->getSprite().setAlpha( 0.20f );
+                sympIter->getSprite().getVisualComponent().setAlpha( 0.20f );
                 sympIter->getSprite().getScriptComponent().resetAndRecycle();
                 sympIter->setDeferredRender( false );
             }
@@ -126,7 +126,7 @@ void CAnimatedCycleResults::startAnimation()
         for( auto & iter : rSymbPos )
         {
             auto symbol = rCycleResultSymb.at(iter.getReel()).at(iter.getPos());
-            symbol->getSprite().setDefaultColor();
+            symbol->getSprite().getVisualComponent().setDefaultColor();
             symbol->getSprite().prepareFuncId( "animate" );
             symbol->setDeferredRender( true );
         }
@@ -150,7 +150,7 @@ void CAnimatedCycleResults::stopAnimation()
         {
             for( auto sympIter : iter )
             {
-                sympIter->getSprite().setDefaultColor();
+                sympIter->getSprite().getVisualComponent().setDefaultColor();
                 sympIter->getSprite().getScriptComponent().resetAndRecycle();
                 sympIter->setDeferredRender( false );
             }

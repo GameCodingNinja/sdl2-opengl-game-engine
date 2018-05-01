@@ -7,10 +7,17 @@
 
 
 //
-// Fade in the ball
+// Init in the ball when created
 //
-void Ball_FadeIn( iSprite & sprite )
+void Ball_Init( iSprite & sprite )
 {
+    // Put ball into a random rotation
+    CPoint pos = sprite.getPos();
+    sprite.setPhysicsTransform( pos.x, pos.y, UniformRandomFloat(-3.1415, 3.145) );
+    
+    // Add a slight rotation to the ball so that it doesn't fall flat on a peg and stay there
+    sprite.applyAngularImpulse( UniformRandomFloat(-1, 1) );
+    
     sprite.setAlpha(0);
     
     AlphaTo( 500, 1, sprite );

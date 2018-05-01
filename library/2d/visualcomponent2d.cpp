@@ -665,19 +665,50 @@ const CColor & CVisualComponent2D::getColor() const
 
 
 /************************************************************************
+*    DESC:  Set/Get the default color
+************************************************************************/
+void CVisualComponent2D::setDefaultColor()
+{
+    m_color = m_rVisualData.getColor();
+}
+
+const CColor & CVisualComponent2D::getDefaultColor() const
+{
+    return m_rVisualData.getColor();
+}
+
+
+/************************************************************************
 *    DESC:  Set/Get the alpha
 ************************************************************************/
 void CVisualComponent2D::setAlpha( float alpha, bool allowToExceed )
 {
+    if( alpha > 1.5 )
+        alpha *= defs_RGB_TO_DEC;
+    
     if( allowToExceed || (alpha < m_rVisualData.getColor().a) )
         m_color.a = alpha;
     else
-        alpha = m_rVisualData.getColor().a;
+        m_color.a = m_rVisualData.getColor().a;
 }
 
 float CVisualComponent2D::getAlpha() const
 {
     return m_color.a;
+}
+
+
+/************************************************************************
+*    DESC:  Set/Get the default alpha
+************************************************************************/
+void CVisualComponent2D::setDefaultAlpha()
+{
+    m_color.a = m_rVisualData.getColor().a;
+}
+
+float CVisualComponent2D::getDefaultAlpha() const
+{
+    return m_rVisualData.getColor().a;
 }
 
 
@@ -705,15 +736,6 @@ void CVisualComponent2D::setFrame( uint index )
 uint CVisualComponent2D::getCurrentFrame() const
 {
     return m_frameIndex;
-}
-
-
-/************************************************************************
-*    DESC:  Set the default color
-************************************************************************/
-void CVisualComponent2D::setDefaultColor()
-{
-    m_color = m_rVisualData.getColor();
 }
 
 

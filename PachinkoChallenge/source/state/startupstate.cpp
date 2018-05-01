@@ -46,6 +46,7 @@
 #include <script/scripthighresolutiontimer.h>
 #include <script/scriptstrategymanager.h>
 #include <script/scriptistrategy.h>
+#include <script/scriptsize.h>
 #include <2d/sprite2d.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
@@ -194,6 +195,7 @@ void CStartUpState::assetLoad()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
+    NScriptSize::Register();
     NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();

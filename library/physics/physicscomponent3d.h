@@ -8,6 +8,9 @@
 #ifndef __physics_component_3d_h__
 #define __physics_component_3d_h__
 
+// Physical component dependency
+#include <physics/iphysicscomponent.h>
+
 // Game lib dependencies
 #include <common/point.h>
 
@@ -24,7 +27,7 @@ class CPhysicsWorld3D;
 class btRigidBody;
 class asIScriptEngine;
 
-class CPhysicsComponent3D : boost::noncopyable
+class CPhysicsComponent3D : public iPhysicsComponent, boost::noncopyable
 {
 public:
 

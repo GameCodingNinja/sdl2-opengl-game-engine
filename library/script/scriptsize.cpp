@@ -6,7 +6,7 @@
  ************************************************************************/
 
 // Physical component dependency
-#include <script/scriptpoint.h>
+#include <script/scriptsize.h>
 
 // Game lib dependencies
 #include <common/size.h>

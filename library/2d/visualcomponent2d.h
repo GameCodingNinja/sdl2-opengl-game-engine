@@ -8,6 +8,9 @@
 #ifndef __visual_component_2d_h__
 #define __visual_component_2d_h__
 
+// Physical component dependency
+#include <common/ivisualcomponent.h>
+
 // Game lib dependencies
 #include <utilities/matrix.h>
 #include <common/color.h>
@@ -31,7 +34,7 @@ class CShaderData;
 class CFontData;
 class CFontProperties;
 
-class CVisualComponent2D : boost::noncopyable
+class CVisualComponent2D : public iVisualComponent, boost::noncopyable
 {
 public:
 
@@ -50,16 +53,6 @@ public:
     // Is this a font sprite
     bool isFontSprite();
 
-    // Set/Get the color
-    void setColor( const CColor & color );
-    void setColor( float r, float g, float b, float a );
-    const CColor & getColor() const;
-    void setDefaultColor();
-
-    // Set/Get the alpha
-    void setAlpha( float alpha, bool allowToExceed = false );
-    float getAlpha() const;
-
     // Set the frame index
     void setFrame( uint index );
     
@@ -72,19 +65,34 @@ public:
     // Load the font properties from XML node
     void loadFontPropFromNode( const XMLNode & node );
 
-    // Set the string to display
-    void createFontString();
-    void createFontString( const std::string & fontString );
-
-    // Get the displayed font string
-    const std::string & getFontString();
-    void setFontString( const std::string & fontString );
-    
-    // Get the font size
-    const CSize<float> & getFontSize() const;
-    
     // Set the font properties
     void setFontProperties( const CFontProperties & fontProp );
+    
+    // NOTE: Interface overridden member functions
+    
+    // Set/Get the color
+    void setColor( const CColor & color ) override;
+    void setColor( float r, float g, float b, float a ) override;
+    const CColor & getColor() const override;
+    void setDefaultColor() override;
+    const CColor & getDefaultColor() const override;
+
+    // Set/Get the alpha
+    void setAlpha( float alpha, bool allowToExceed = false ) override;
+    float getAlpha() const override;
+    void setDefaultAlpha() override;
+    float getDefaultAlpha() const override;
+    
+    // Set the string to display
+    void createFontString() override;
+    void createFontString( const std::string & fontString ) override;
+
+    // Get the displayed font string
+    const std::string & getFontString() override;
+    void setFontString( const std::string & fontString ) override;
+    
+    // Get the font size
+    const CSize<float> & getFontSize() const override;
 
 private:
 

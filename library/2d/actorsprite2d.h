@@ -89,33 +89,11 @@ public:
     // Check for collision against other actor sprite
     bool isCollision( CActorSprite2D & rPlayerActor );
     
+    // Get the visual component interface
+    iVisualComponent * getVisualInterface() override { return nullptr; }
     
-    // Set/Get the color
-    void setColor( const CColor & color ) override {}
-    void setColor( float r, float g, float b, float a ) override {}
-    void setDefaultColor() override {}
-    const CColor & getColor() const override {return m_dummy;}
-    const CColor & getDefaultColor() const override {return m_dummy;}
-
-    // Set/Get the alpha
-    void setAlpha( float alpha ) override {}
-    float getAlpha() const override {return 0;}
-    void setDefaultAlpha() override {}
-    float getDefaultAlpha() const override {return 0;}
-
-    // Get the frame count
-    uint getFrameCount() const override {return 0;}
-
-    // Set the texture ID from index
-    void setFrame( uint index ) override {}
-    
-    // Get the current frame
-    uint getCurrentFrame() const override {return 0;}
-    
-    // Create the font string
-    void createFontString( const std::string & fontString ) override {}
-    
-    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
+    // Get the physics component interface
+    iPhysicsComponent * getPhysicsInterface() override { return nullptr; }
     
 protected:
     

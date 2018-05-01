@@ -75,7 +75,7 @@ void CCommonState::handleEvent( const SDL_Event & rEvent )
 void CCommonState::update()
 {
     // Update the menus
-    CMenuMgr::Instance().updateMenu();
+    CMenuMgr::Instance().update();
 }
 
 

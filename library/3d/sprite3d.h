@@ -39,9 +39,11 @@ public:
 
     // Get the visual component
     CVisualComponent3D & getVisualComponent();
+    iVisualComponent * getVisualInterface();
 
     // Get the physics component
     CPhysicsComponent3D & getPhysicsComponent();
+    iPhysicsComponent * getPhysicsInterface();
 
     // Get the scripting component
     CScriptComponent & getScriptComponent();
@@ -67,22 +69,6 @@ public:
 
     // Set/Get the AI pointer
     void setAI( iAIBase * pAIBase ) override;
-    
-    // Set the physics position and rotation
-    void setPhysicsTransform( float x, float y, float angle, bool resetVelocity = true ) override {}
-    
-    // Set/Get the color
-    void setColor( const CColor & color ) override;
-    void setColor( float r, float g, float b, float a ) override;
-    void setDefaultColor() override;
-    const CColor & getColor() const override;
-    const CColor & getDefaultColor() const override;
-
-    // Set/Get the alpha
-    void setAlpha( float alpha ) override;
-    float getAlpha() const override;
-    void setDefaultAlpha() override;
-    float getDefaultAlpha() const override;
 
 private:
 

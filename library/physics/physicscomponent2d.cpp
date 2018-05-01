@@ -402,6 +402,16 @@ void CPhysicsComponent2D::setAngularVelocity( float value )
 
 
 /************************************************************************
+*    DESC:  Set the angular impulse
+************************************************************************/
+void CPhysicsComponent2D::applyAngularImpulse( float value, bool wake )
+{
+    if( m_pBody != nullptr )
+        m_pBody->ApplyAngularImpulse( value, wake );
+}
+
+
+/************************************************************************
 *    DESC:  Get the body
 ************************************************************************/
 b2Body * CPhysicsComponent2D::getBody()

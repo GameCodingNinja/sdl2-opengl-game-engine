@@ -8,6 +8,9 @@
 #ifndef __visual_component_3d_h__
 #define __visual_component_3d_h__
 
+// Physical component dependency
+#include <common/ivisualcomponent.h>
+
 // Game lib dependencies
 #include <utilities/matrix.h>
 #include <common/color.h>
@@ -28,7 +31,7 @@ class CObjectVisualData3D;
 class CFont;
 class CShaderData;
 
-class CVisualComponent3D : boost::noncopyable
+class CVisualComponent3D : public iVisualComponent, boost::noncopyable
 {
 public:
 
@@ -42,19 +45,22 @@ public:
     void render( const CMatrix & matrix, const CMatrix & ropMatrix );
 
     // Set/Get the color
-    void setColor( const CColor & color );
-    void setColor( float r, float g, float b, float a );
-    const CColor & getColor() const;
-    void setDefaultColor();
+    void setColor( const CColor & color ) override;
+    void setColor( float r, float g, float b, float a ) override;
+    const CColor & getColor() const override;
+    void setDefaultColor() override;
+    const CColor & getDefaultColor() const override;
 
     // Set/Get the alpha
-    void setAlpha( float alpha );
-    float getAlpha() const;
+    void setAlpha( float alpha, bool allowToExceed = false ) override;
+    float getAlpha() const override;
+    void setDefaultAlpha() override;
+    float getDefaultAlpha() const override;
 
 private:
 
     // Reference to object visual data
-    const CObjectVisualData3D & m_visualData;
+    const CObjectVisualData3D & m_rVisualData;
     
     // Shader data pointer - We DON'T own this pointer, don't free
     CShaderData * m_pShaderData;

@@ -8,6 +8,9 @@
 #ifndef __physics_component_2d_h__
 #define __physics_component_2d_h__
 
+// Physical component dependency
+#include <physics/iphysicscomponent.h>
+
 // Game lib dependencies
 #include <common/size.h>
 
@@ -27,7 +30,7 @@ class CPhysicsWorld2D;
 class b2Body;
 class CFixture;
 
-class CPhysicsComponent2D : boost::noncopyable
+class CPhysicsComponent2D : public iPhysicsComponent, boost::noncopyable
 {
 public:
 
@@ -48,21 +51,26 @@ public:
 
     // Update the physics
     void update( CSprite2D * pSprite );
+    
+    // Get the body
+    b2Body * getBody();
+    
+    // NOTE: Interface overridden member functions
 
     // Is this component active?
     bool isActive();
     
     // Set the physics position and rotation
-    void setTransform( float x, float y = 0, float angle = 0, bool resetVelocity = true );
+    void setTransform( float x, float y, float angle = 0, bool resetVelocity = true ) override;
     
     // Set the linear velocity
-    void setLinearVelocity( float x, float y );
+    void setLinearVelocity( float x, float y ) override;
     
     // Set the linear velocity
-    void setAngularVelocity( float angle );
+    void setAngularVelocity( float angle ) override;
     
-    // Get the body
-    b2Body * getBody();
+    // Set the angular impulse
+    void applyAngularImpulse( float value, bool wake = false ) override;
 
 private:
 

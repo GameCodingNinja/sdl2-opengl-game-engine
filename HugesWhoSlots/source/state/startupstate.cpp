@@ -43,6 +43,7 @@
 #include <script/scriptsoundmanager.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
+#include <script/scriptsize.h>
 #include <system/device.h>
 #include <gui/menumanager.h>
 #include <gui/menu.h>
@@ -192,6 +193,7 @@ void CStartUpState::assetLoad()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
+    NScriptSize::Register();
     NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();

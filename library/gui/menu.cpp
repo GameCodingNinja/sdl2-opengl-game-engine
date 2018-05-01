@@ -924,7 +924,7 @@ void CMenu::setAlpha( float alpha )
     if( isVisible() )
     {
         for( auto & iter : m_spriteDeq )
-            iter.setAlpha( alpha );
+            iter.getVisualComponent().setAlpha( alpha );
 
         for( auto iter : m_pStaticControlVec )
             iter->setAlpha( alpha );

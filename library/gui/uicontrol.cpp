@@ -1042,7 +1042,7 @@ void CUIControl::connect_executionAction( const ExecutionActionSignal::slot_type
 void CUIControl::setAlpha( float alpha )
 {
     for( auto & iter : m_spriteDeq )
-        iter.setAlpha( alpha );
+        iter.getVisualComponent().setAlpha( alpha );
 }
 
 

@@ -37,6 +37,7 @@
 #include <script/scriptsound.h>
 #include <script/scriptplaylist.h>
 #include <script/scriptpoint.h>
+#include <script/scriptsize.h>
 #include <script/scriptglobals.h>
 #include <script/scriptisprite.h>
 #include <script/scriptsoundmanager.h>
@@ -197,6 +198,7 @@ void CStartUpState::assetLoad()
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
+    NScriptSize::Register();
     NScriptiSprite::Register();
     NScriptSound::Register();
     NScriptPlayLst::Register();
