@@ -50,6 +50,7 @@ add_library(
         script/scriptmenumanager.cpp
         script/scriptfontmanager.cpp
         script/scriptscriptmanager.cpp
+        script/scriptuicontrol.cpp
         system/basegame.cpp
         system/device.cpp
         utilities/xmlparsehelper.cpp

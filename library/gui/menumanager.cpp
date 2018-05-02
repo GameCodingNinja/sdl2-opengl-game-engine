@@ -1038,6 +1038,15 @@ CMenu & CMenuMgr::getMenu( const std::string & nameStr )
     return menuIter->second;
 }
 
+/************************************************************************
+*    DESC:  Get the pointer to the menu control
+************************************************************************/
+CUIControl * CMenuMgr::getPtrToMenuControl( const std::string & menuName, const std::string & controlName )
+{
+    CMenu & rMenu = getMenu(menuName);
+    return rMenu.getPtrToControl(controlName);
+}
+
 
 /************************************************************************
 *    DESC:  Get reference to the first active menu.

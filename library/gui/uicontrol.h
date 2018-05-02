@@ -94,6 +94,7 @@ public:
 
     // Set the type of action
     void setActionType( NUIControl::EControlActionType value );
+    void setActionType( const std::string & value );
 
     // Set the execution action
     void setExecutionAction( const std::string & action );
@@ -162,7 +163,7 @@ public:
     void callSpriteScriptFuncKey( const std::string & scriptFuncMapKey, bool forceUpdate = false );
     
     // Set the alpha value of this menu
-    virtual void setAlpha( float alpha );
+    virtual void setAlpha( float alpha ) override;
     
     // Get the pointer to the active control
     virtual CUIControl * getPtrToActiveControl();
@@ -175,11 +176,11 @@ public:
     
     // an this control scroll?
     bool canScroll( int msg );
+    
+    // Set the script state function
+    void setScriptStateFunc( const std::string & scriptStateStr, const std::string & scriptFuncStr );
 
 protected:
-
-    // Set the type of action
-    void setActionType( const std::string & value );
 
     // Set the sprite's display based on it's current state
     void setDisplayState();
@@ -213,6 +214,9 @@ protected:
     // Is the point in the control
     bool isPointInControl( int x, int y );
     bool isPointInControl( const CPoint<float> & pos );
+    
+    // Get the script state
+    NUIControl::EControlState getScriptState( const std::string & scriptStateStr );
 
 private:
 

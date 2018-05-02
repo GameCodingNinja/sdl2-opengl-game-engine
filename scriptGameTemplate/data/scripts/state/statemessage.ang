@@ -9,13 +9,13 @@ class CStateMessage
 {
     private EGameState m_loadState = EGS_NULL;
     private EGameState m_unloadState = EGS_NULL;
-        
+
     EGameState GetLoadState()
     { return m_loadState; }
-    
+
     EGameState GetUnloadState()
     { return m_unloadState; }
-    
+
     void SetMsg( const EGameState loadState, const EGameState unloadState )
     {
         m_loadState = loadState;

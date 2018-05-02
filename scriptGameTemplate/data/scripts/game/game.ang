@@ -11,7 +11,7 @@ class CGame
     iGameState@ m_gameState;
     
     //
-    // Init the game
+    //  Init the game
     //
     void Init()
     {
@@ -21,7 +21,7 @@ class CGame
     }
     
     //
-    // Handle the state change
+    //  Handle the state change
     //
     void HandleStateChange()
     {
@@ -51,7 +51,7 @@ class CGame
     }
     
     //
-    // Main game loop
+    //  Main game loop
     //
     void GameLoop()
     {

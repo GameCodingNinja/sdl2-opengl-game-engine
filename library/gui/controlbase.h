@@ -56,6 +56,10 @@ public:
     // Get the faction name
     const std::string & getFaction() const;
     
+    // Set the alpha value of this menu
+    virtual void setAlpha( float alpha ) = 0;
+    float getAlpha() const;
+    
 private:
     
     // Load the dynamic offset data from node
@@ -84,6 +88,9 @@ protected:
     
     // Dynamic offset
     CDynamicOffset m_dynamicOffset;
+    
+    // menu alpha value
+    float m_alpha;
 
 };
 

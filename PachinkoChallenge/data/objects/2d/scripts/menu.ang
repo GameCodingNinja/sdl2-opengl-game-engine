@@ -8,7 +8,7 @@
 /************************************************************************
 *    desc:  Sound to play when the menu control becomes active
 ************************************************************************/
-void Control_OnActive()
+void Control_OnActive( CUIControl & control )
 {
     SoundMgr.play( "(menu)", "active" );
 }
@@ -17,7 +17,7 @@ void Control_OnActive()
 /************************************************************************
 *    desc:  Sound to play when the menu control is selected
 ************************************************************************/
-void Control_OnSelect()
+void Control_OnSelect( CUIControl & control )
 {
     SoundMgr.play( "(menu)", "select" );
 }

@@ -96,6 +96,9 @@ public:
     
     // Get reference to the active menu
     CMenu & getActiveMenu();
+    
+    // Get the pointer to the menu control
+    CUIControl * getPtrToMenuControl( const std::string & menuName, const std::string & controlName );
 
     // Get the reference to the control in question
     template <typename Target>
@@ -213,8 +216,7 @@ private:
 template <typename Target>
 Target & CMenuMgr::getMenuControl( const std::string & menuName, const std::string & controlName )
 {
-    CMenu & rMenu = getMenu(menuName);
-    Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToControl(controlName));
+    Target * pControl = NGenFunc::DynCast<Target>(getPtrToMenuControl(menuName, controlName));
     assert( pControl != nullptr );
 
     return *pControl;
@@ -228,6 +230,7 @@ Target * CMenuMgr::getPtrToActiveControl( const std::string & menuName )
 {
     CMenu & rMenu = getMenu(menuName);
     Target * pControl = NGenFunc::DynCast<Target>(rMenu.getPtrToActiveControl());
+    assert( pControl != nullptr );
 
     return pControl;
 }

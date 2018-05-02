@@ -15,6 +15,7 @@
     <file path="data/scripts/game/shared_utilities.ang"/>
     <file path="data/scripts/menu/menu_defs.ang"/>
     <file path="data/scripts/menu/menu.ang"/>
+    <file path="data/scripts/menu/smartgui.ang"/>
   </groupList>
 
 </listTable>

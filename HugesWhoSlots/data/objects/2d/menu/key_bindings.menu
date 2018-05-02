@@ -1,8 +1,8 @@
 <menu>
     
     <scriptLst>
-        <script transIn="Menu_TransIn"/>
-        <script transOut="Menu_TransOut"/>
+        <script onTransIn="Menu_TransIn"/>
+        <script onTransOut="Menu_TransOut"/>
     </scriptLst>
 
     <staticMenuControls>

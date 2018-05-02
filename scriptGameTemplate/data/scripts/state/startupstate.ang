@@ -9,69 +9,73 @@ final class CStartUpState : iGameState
 {
     // Startup logo
     iSprite @m_logo;
-    
+
     // Basic strategy
-    iStrategy @strategy;
-    
+    iStrategy @strategyFor2D;
+
     //
-    // Constructor
+    //  Constructor
     //
     CStartUpState()
     {
         super( EGS_STARTUP, EGS_TITLE_SCREEN );
     }
-    
+
     //
-    // Destructor
+    //  Destructor
     //
     ~CStartUpState()
     {
         ObjectDataMgr.freeGroup2D( "(startup)" );
-        strategy.setToDestroy( m_logo.getId() );
+        strategyFor2D.setToDestroy( m_logo.getId() );
     }
-    
+
     //
-    // Init the state
+    //  Init the state
     //
     void Init() override
     {
+        // Create all the needed strategies
+        @strategyFor2D = StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
+        StrategyMgr.createBasicSpriteStrategy( "strategyFor3D" );
+        StrategyMgr.createMenuStrategy( "menu" );
+
         // Load this states assets and display the logo
-        LoadStateAndFade();
-        
+        LoadStateAndFadeIn();
+
         // Do the fade in
         Screen_FadeIn();
-        
+
         // Load the remaining assets
         LoadAssets();
 
         // Loading done, fade out
         Screen_FadeOut();
-        
+
         DoChangeState();
     }
-    
+
     //
-    // Load this states assets for displaying the logo
+    //  Load this states assets for displaying the logo
     //
-    void LoadStateAndFade()
+    void LoadStateAndFadeIn()
     {
         // Load the shaders
         ShaderMgr.load( "data/shaders/shader.cfg" );
         ShaderMgr.setAllShaderColor( "additive", 0, 0, 0, 1 );
-        
+
         // Load the 2d object data list table
         ObjectDataMgr.loadListTable( "data/objects/2d/objectDataList/dataListTable.lst" );
-        
+
         // Load the start up group
         ObjectDataMgr.loadGroup2D( "(startup)" );
-        
-        // Create a basic strategy for 2d sprites and create the logo sprite
-        @strategy = StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
-        @m_logo = strategy.createSprite( "(startup)", "logo" );
+
+        // Create the logo for the sprite strategy
+        @m_logo = strategyFor2D.createSprite( "(startup)", "logo" );
     }
-    
+
     //
-    // Load the remaining assets
+    //  Load the remaining assets
     //
     void LoadAssets()
     {
@@ -79,10 +83,10 @@ final class CStartUpState : iGameState
         ObjectDataMgr.loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
         MenuMgr.loadListTable( "data/objects/2d/menu/menuListTable.lst" );
         SoundMgr.loadListTable( "data/sound/soundListTable.lst" );
-        
+
         // Load the menu scripts
         ScriptMgr.loadGroup( "(menu)" );
-        
+
         // Load in any fonts
         FontMgr.load( "data/textures/fonts/font.lst" );
 
@@ -96,7 +100,7 @@ final class CStartUpState : iGameState
         ObjectDataMgr.loadGroup2D( "(menu)" );
         ObjectDataMgr.loadGroup2D( "(title_screen)" );
         ObjectDataMgr.loadGroup3D( "(cube)" );
-        
+
         SoundMgr.loadGroup("(menu)");
 
         // Load the menu group

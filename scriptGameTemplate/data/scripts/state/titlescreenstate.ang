@@ -8,41 +8,38 @@
 final class CTitleScreenState : iGameState
 {
     iSprite @cube;
-    
+
     //
     // Constructor
     //
     CTitleScreenState()
     {
         super( EGS_TITLE_SCREEN, EGS_GAME_LOAD );
-        
-        // Create the strategy to hold the menu system
-        StrategyMgr.createMenuStrategy( "menu" );
-        
+
         // Unblock the menu messaging and activate needed trees
         MenuMgr.allow();
         MenuMgr.activateTree( "title_screen_tree" );
     }
-    
+
     //
     // Init the state
     //
     void Init() override
     {
         StrategyMgr.createSprite( "strategyFor2D", "(title_screen)", "background" );
-        
-        iStrategy @strategy = StrategyMgr.createBasicSpriteStrategy( "strategyFor3D" );
+
+        iStrategy @strategy = StrategyMgr.getStrategy( "strategyFor3D" );
         strategy.setCameraId( "camera3D" );
-        
+
         CCamera @camera = CameraMgr.createPerspective("camera3D");
         camera.setPos( 0, 0, 20 );
-     
+
         @cube = strategy.createSprite( "(cube)", "cube" );
         cube.setScale(3,3,3);
-        
+
         Spawn("Screen_FadeIn");
     }
-    
+
     //
     // Update the state
     //

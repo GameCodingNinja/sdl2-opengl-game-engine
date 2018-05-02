@@ -359,6 +359,8 @@ void CMenu::init()
 
     for( auto iter : m_pControlVec )
         iter->init();
+    
+    prepare( "onInit" );
 }
 
 
@@ -748,7 +750,7 @@ void CMenu::onTransIn( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
-        prepare( "transIn" );
+        prepare( "onTransIn" );
 
         m_state = NMenu::EMS_ACTIVE;
     }
@@ -765,7 +767,7 @@ void CMenu::onTransOut( const SDL_Event & rEvent )
 {
     if( rEvent.user.code == NMenu::ETC_BEGIN )
     {
-        prepare( "transOut" );
+        prepare( "onTransOut" );
 
         m_state = NMenu::EMS_ACTIVE;
     }
@@ -913,6 +915,8 @@ void CMenu::smartHandleEvent( const SDL_Event & rEvent )
 {
     if( m_upSmartGui )
         m_upSmartGui->handleEvent( rEvent );
+    
+    prepare( "onEvent" );
 }
 
 

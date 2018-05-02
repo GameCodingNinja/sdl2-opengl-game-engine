@@ -41,6 +41,7 @@
 #include <script/scriptglobals.h>
 #include <script/scriptisprite.h>
 #include <script/scriptsoundmanager.h>
+#include <script/scriptuicontrol.h>
 #include <script/scriptmenu.h>
 #include <script/scriptshadermanager.h>
 #include <script/scripthighresolutiontimer.h>
@@ -191,6 +192,7 @@ void CStartUpState::assetLoad()
     NScriptSound::Register();
     NScriptPlayLst::Register();
     NScriptSoundManager::Register();
+    NScriptUIControl::Register();
     NScriptMenu::Register();
     NScriptShaderManager::Register();
     NScriptHighResolutionTimer::Register();

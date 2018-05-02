@@ -86,26 +86,12 @@ void CUIControl::loadFromNode( const XMLNode & node )
     XMLNode stateScriptNode = node.getChildNode( "stateScript" );
     if( !stateScriptNode.isEmpty() )
     {
-        if( stateScriptNode.isAttributeSet( "onInit" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_INIT, stateScriptNode.getAttribute( "onInit" ) );
-        
-        if( stateScriptNode.isAttributeSet( "onDisabled" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_DISABLED, stateScriptNode.getAttribute( "onDisabled" ) );
+        std::vector<std::string> stateScriptStr =
+            {"onInit", "onDisabled", "onInactive", "onActive", "onSelect", "onExecute", "onEvent" };
 
-        if( stateScriptNode.isAttributeSet( "onInactive" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_INACTIVE, stateScriptNode.getAttribute( "onInactive" ) );
-
-        if( stateScriptNode.isAttributeSet( "onActive" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_ACTIVE, stateScriptNode.getAttribute( "onActive" ) );
-
-        if( stateScriptNode.isAttributeSet( "onSelect" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_SELECTED, stateScriptNode.getAttribute( "onSelect" ) );
-        
-        if( stateScriptNode.isAttributeSet( "onExecute" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_EXECUTE, stateScriptNode.getAttribute( "onExecute" ) );
-        
-        if( stateScriptNode.isAttributeSet( "onEvent" ) )
-            m_scriptFunction.emplace( NUIControl::ECS_EVENT, stateScriptNode.getAttribute( "onEvent" ) );
+        for( auto & iter : stateScriptStr )
+            if( stateScriptNode.isAttributeSet( iter.c_str() ) )
+                setScriptStateFunc( iter.c_str(), stateScriptNode.getAttribute( iter.c_str() ) );
     }
 
     // Load the scroll data from node
@@ -116,6 +102,48 @@ void CUIControl::loadFromNode( const XMLNode & node )
 
     // Init to the default state
     revertToDefaultState();
+}
+
+
+/************************************************************************
+*    DESC:  Set the script state function
+************************************************************************/
+void CUIControl::setScriptStateFunc( const std::string & scriptStateStr, const std::string & scriptFuncStr )
+{
+    auto ctrlState = getScriptState( scriptStateStr );
+
+    if( ctrlState != NUIControl::ECS_NULL )
+        m_scriptFunction.emplace( ctrlState, scriptFuncStr );
+}
+
+
+/************************************************************************
+*    DESC:  Get the script state
+************************************************************************/
+NUIControl::EControlState CUIControl::getScriptState( const std::string & scriptStateStr )
+{
+    if( scriptStateStr == "onInit" )
+        return NUIControl::ECS_INIT;
+
+    else if( scriptStateStr == "onDisabled" )
+        return NUIControl::ECS_DISABLED;
+
+    else if( scriptStateStr == "onInactive" )
+        return NUIControl::ECS_INACTIVE;
+
+    else if( scriptStateStr == "onActive" )
+        return NUIControl::ECS_ACTIVE;
+
+    else if( scriptStateStr == "onSelect" )
+        return NUIControl::ECS_SELECTED;
+
+    else if( scriptStateStr == "onExecute" )
+        return NUIControl::ECS_EXECUTE;
+
+    else if( scriptStateStr == "onEvent" )
+        return NUIControl::ECS_EVENT;
+
+    return NUIControl::ECS_NULL;
 }
 
 
@@ -298,7 +326,7 @@ void CUIControl::handleEvent( const SDL_Event & rEvent )
 
     // Do any smart event handling
     smartHandleEvent( rEvent );
-    
+
     // Prepare script functions associated with this event
     prepareControlScriptFunction( NUIControl::ECS_EVENT );
 }
@@ -379,7 +407,7 @@ void CUIControl::onSelectExecute( const SDL_Event & rEvent )
 
         // Boost signal execute action
         m_executionActionSignal(this);
-        
+
         // Prepare script functions associated with this event
         prepareControlScriptFunction( NUIControl::ECS_EXECUTE );
     }
@@ -604,7 +632,7 @@ void CUIControl::prepareSpriteScriptFunction( NUIControl::EControlState controlS
         case NUIControl::ECS_SELECTED:
             scriptFuncMapKey = "selected";
         break;
-        
+
         case NUIControl::ECS_INIT:
         case NUIControl::ECS_EXECUTE:
         case NUIControl::ECS_EVENT:
@@ -638,7 +666,7 @@ void CUIControl::prepareControlScriptFunction( NUIControl::EControlState control
     auto iter = m_scriptFunction.find( controlState );
 
     if( iter != m_scriptFunction.end() )
-        m_scriptComponent.prepare(m_group, iter->second);
+        m_scriptComponent.prepare(m_group, iter->second, {this});
 }
 
 
@@ -806,7 +834,7 @@ void CUIControl::setActionType( const std::string & value )
 const std::string & CUIControl::getExecutionAction()
 {
     return m_executionAction;
-} 
+}
 
 void CUIControl::setExecutionAction( const std::string & action )
 {
@@ -1043,6 +1071,8 @@ void CUIControl::setAlpha( float alpha )
 {
     for( auto & iter : m_spriteDeq )
         iter.getVisualComponent().setAlpha( alpha );
+
+    m_alpha = alpha;
 }
 
 

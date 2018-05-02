@@ -19,7 +19,8 @@
 ************************************************************************/
 CControlBase::CControlBase( const std::string & group ) :
     m_group(group),
-    m_type(NUIControl::ECT_NULL)
+    m_type(NUIControl::ECT_NULL),
+    m_alpha(0.f)
 {
 }
 
@@ -133,4 +134,13 @@ NUIControl::EControlType CControlBase::getType() const
 const std::string & CControlBase::getFaction() const
 {
     return m_faction;
+}
+
+
+/************************************************************************
+*    DESC:  Get the alpha value of this control
+************************************************************************/
+float CControlBase::getAlpha() const
+{
+    return m_alpha;
 }

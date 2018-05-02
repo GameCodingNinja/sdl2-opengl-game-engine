@@ -7,7 +7,7 @@
 
 
 //
-//  DESC: Color to the final color in time
+//  Color to the final color in time
 //
 shared void ColorTo( float time, CColor &in final, iSprite & sprite )
 {
@@ -34,7 +34,7 @@ shared void ColorTo( float time, CColor &in final, iSprite & sprite )
 }
 
 //
-//  DESC: Shader color to the final color in time
+//  Shader color to the final color in time
 //
 shared void ShaderColorTo( float time, CColor current, CColor &in final, const string &in shaderMember )
 {
@@ -61,7 +61,7 @@ shared void ShaderColorTo( float time, CColor current, CColor &in final, const s
 }
 
 //
-//  DESC: Alpha to the final alpha
+//  Alpha to the final alpha
 //
 shared void AlphaTo( float time, float final, iSprite & sprite )
 {
@@ -120,7 +120,7 @@ shared void AlphaTo( float time, float final, CMenu & menu )
 }
 
 //
-//  DESC: Volume to the final volume
+//  Volume to the final volume
 //
 shared void VolumeTo( float time, int final, CSound & sound )
 {
@@ -153,7 +153,7 @@ shared void VolumeTo( float time, int final, CSound & sound )
 }
 
 //
-//  DESC: Play the animation
+//  Play the animation
 //
 shared void Play( int fps, iSprite & sprite, bool loop = false )
 {
@@ -173,7 +173,7 @@ shared void Play( int fps, iSprite & sprite, bool loop = false )
 }
 
 //
-//  DESC: Hold the execution in time
+//  Hold the execution in time
 //
 shared void Hold( float time )
 {
@@ -187,7 +187,7 @@ shared void Hold( float time )
 }
 
 //
-//  DESC: Screen fade in script
+//  Screen fade in script
 //
 shared void Screen_FadeIn()
 {
@@ -197,7 +197,7 @@ shared void Screen_FadeIn()
 }
 
 //
-//  DESC: Screen fade out script
+//  Screen fade out script
 //
 shared void Screen_FadeOut()
 {

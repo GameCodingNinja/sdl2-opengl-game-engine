@@ -9,49 +9,49 @@ class iGameState
 {
     // Flag to indicate state change
     private bool m_changeState = false;
-        
+
     // Message to send to next state
     private CStateMessage m_stateMessage;
-        
+
     // This objects current game state value
     private EGameState m_gameState = EGS_NULL;
 
     // This objects next game state value
     private EGameState m_nextState = EGS_NULL;
-    
+
     //
-    // Default Constructor - required if defining a constructor with parameters
+    //  Default Constructor - required if defining a constructor with parameters
     //
     iGameState()
     {}
-    
+
     //
-    // Constructor
+    //  Constructor
     //
     iGameState( const EGameState gameState, const EGameState nextState )
     {
         m_gameState = gameState;
         m_nextState = nextState;
     }
-    
+
     void Init()
     {
         // Empty member to be overwritten
     }
-    
+
     void Update()
     {
         // Empty member to be overwritten
     }
-    
-    // 
+
+    //
     void DoChangeState()
     { m_changeState = true; }
-    
+
     // Is the state done
     bool IsStateChange()
     { return m_changeState; };
-    
+
     // Get the current game state
     EGameState GetState()
     { return m_gameState; }
@@ -59,7 +59,7 @@ class iGameState
     // Get the next game state
     EGameState GetNextState()
     { return m_nextState; }
-    
+
     // Get the message
     CStateMessage & GetStateMessage()
     { return m_stateMessage; }

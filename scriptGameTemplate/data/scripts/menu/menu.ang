@@ -1,57 +1,54 @@
 
-/************************************************************************
-*    FILE NAME:       menu.ang
-*
-*    DESCRIPTION:     Scripts for controlling/animating menu interface
-************************************************************************/
+//
+//  FILE NAME:  menu.ang
+//
+//  DESC:       Scripts for controlling/animating menu interface
+//
 
-/************************************************************************
-*    desc:  Sound to play when the menu control becomes active
-************************************************************************/
-void Control_OnActive()
+
+//
+//  Sound to play when the menu control becomes active
+//
+void Control_OnActive( CUIControl & control )
 {
     SoundMgr.play( "(menu)", "active" );
 }
 
-
-/************************************************************************
-*    desc:  Sound to play when the menu control is selected
-************************************************************************/
-void Control_OnSelect()
+//
+//  Sound to play when the menu control is selected
+//
+void Control_OnSelect( CUIControl & control )
 {
     SoundMgr.play( "(menu)", "select" );
 }
 
-
-/************************************************************************
-*    desc:  Menu transition in script
-************************************************************************/
+//
+//  Menu transition in script
+//
 void Menu_TransIn( CMenu & menu )
 {
     menu.setVisible( true );
-    
+
     AlphaTo( 250, 1.f, menu );
-    
+
     DispatchEvent( EGE_MENU_TRANS_IN, ETC_END );
 }
 
-
-/************************************************************************
-*    desc:  Menu transition out script
-************************************************************************/
+//
+//  Menu transition out script
+//
 void Menu_TransOut( CMenu & menu )
 {
     AlphaTo( 250, 0.f, menu );
-    
+
     menu.setVisible( false );
-    
+
     DispatchEvent( EGE_MENU_TRANS_OUT, ETC_END );
 }
 
-
-/************************************************************************
-*    desc:  Script for setting the look of the disabled state
-************************************************************************/
+//
+//  Script for setting the look of the disabled state
+//
 void Control_Disabled( iSprite & sprite )
 {
     CColor color = sprite.getDefaultColor();
@@ -60,28 +57,25 @@ void Control_Disabled( iSprite & sprite )
     sprite.setColor( color );
 }
 
-
-/************************************************************************
-*    desc:  Script for setting the look of the inactive state
-************************************************************************/
+//
+//  Script for setting the look of the inactive state
+//
 void Control_Inactive( iSprite & sprite )
 {
     sprite.setDefaultColor();
 }
 
-
-/************************************************************************
-*    desc:  Script for setting the look of the hidden state
-************************************************************************/
+//
+//  Script for setting the look of the hidden state
+//
 void Control_Hidden( iSprite & sprite )
 {
     sprite.setVisible( false );
 }
 
-
-/************************************************************************
-*    desc:  Script for animating the look of the active state
-************************************************************************/
+//
+//  Script for animating the look of the active state
+//
 void Ctrl_Active( iSprite & sprite, float hiHSV, float lowHSV )
 {
     sprite.setVisible( true );
@@ -109,10 +103,9 @@ void Control_Solid_Active( iSprite & sprite )
     Ctrl_Active( sprite, 1.1, .5 );
 }
 
-
-/************************************************************************
-*    desc:  Script for animating the look of the selected state
-************************************************************************/
+//
+//  Script for animating the look of the selected state
+//
 void Ctrl_Selected( iSprite & sprite, float hiHSV, float lowHSV )
 {
     sprite.setVisible( true );
@@ -129,10 +122,9 @@ void Ctrl_Selected( iSprite & sprite, float hiHSV, float lowHSV )
     ColorTo( 100, hiColor, sprite );
 }
 
-
-/************************************************************************
-*    desc:  Animates the selected state and sends a message
-************************************************************************/
+//
+//  Animates the selected state and sends a message
+//
 void Control_Selected_Dispatch_Exe( iSprite & sprite )
 {
     Ctrl_Selected( sprite, 1.7, .6 );
@@ -159,10 +151,9 @@ void Control_Selected_Visible( iSprite & sprite )
     sprite.setColor( sprite.getDefaultColor() );
 }
 
-
-/************************************************************************
-*    desc:  Animates the selected state for solid
-************************************************************************/
+//
+//  Animates the selected state for solid
+//
 void Control_Solid_Selected_visible( iSprite & sprite )
 {
     Ctrl_Selected( sprite, 1.5, .6 );
@@ -184,10 +175,9 @@ void Control_Solid_Selected( iSprite & sprite )
     sprite.setVisible( false );
 }
 
-
-/************************************************************************
-*    desc:  Animates the selected state and sets final color to white
-************************************************************************/
+//
+//  Animates the selected state and sets final color to white
+//
 void Control_Selected_frame_highlight( iSprite & sprite )
 {
     Ctrl_Selected( sprite, 1.7, .6 );
@@ -195,10 +185,9 @@ void Control_Selected_frame_highlight( iSprite & sprite )
     sprite.setColor( 1, 1, 1, 1 );
 }
 
-
-/************************************************************************
-*    desc:  Fast display of selected state
-************************************************************************/
+//
+//  Fast display of selected state
+//
 void Ctrl_Fast_Selected( iSprite & sprite, float hiHSV )
 {
     sprite.setVisible( true );
@@ -252,28 +241,25 @@ void Control_slider_btn_Selected( iSprite & sprite )
     Ctrl_Fast_Selected( sprite, 1.7 );
 }
 
-
-/************************************************************************
-*    desc:  Meter on start
-************************************************************************/
+//
+//  Meter on start
+//
 void Meter_OnStart( iSprite & sprite )
 {
     sprite.setVisible( true );
     AlphaTo( 300, 1, sprite );
 }
 
-
-/************************************************************************
-*    desc:  Meter on stop
-************************************************************************/
+//
+//  Meter on stop
+//
 void Meter_OnStop( iSprite & sprite )
 {
 }
 
-
-/************************************************************************
-*    desc:  Meter on clear
-************************************************************************/
+//
+//  Meter on clear
+//
 void Meter_OnClear( iSprite & sprite, uint value )
 {
     if( sprite.isVisible() )

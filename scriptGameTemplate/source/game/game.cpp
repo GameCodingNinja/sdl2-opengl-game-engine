@@ -52,6 +52,7 @@
 #include <script/scriptmenumanager.h>
 #include <script/scriptfontmanager.h>
 #include <script/scriptscriptmanager.h>
+#include <script/scriptuicontrol.h>
 
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
@@ -190,7 +191,6 @@ void CGame::init()
     NScriptPlayLst::Register();
     NScriptiStrategy::Register();
     NScriptSoundManager::Register();
-    NScriptMenu::Register();
     NScriptShaderManager::Register();
     NScriptObjectDataManager::Register();
     NScriptStrategyManager::Register();
@@ -198,6 +198,8 @@ void CGame::init()
     NScriptActionManager::Register();
     NScriptSettings::Register();
     NScriptHighResolutionTimer::Register();
+    NScriptUIControl::Register();
+    NScriptMenu::Register();
     NScriptMenuManager::Register();
     NScriptFontManager::Register();
     NScriptScriptManager::Register();
