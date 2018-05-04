@@ -8,13 +8,17 @@
 final class CTitleScreenState : iGameState
 {
     iSprite @cube;
+    dictionary m_gameStateDict;
 
     //
-    // Constructor
+    //  Constructor
     //
     CTitleScreenState()
     {
         super( EGS_TITLE_SCREEN, EGS_GAME_LOAD );
+        
+        m_gameStateDict.set("title_screen_state", EGS_TITLE_SCREEN);
+        m_gameStateDict.set("run_state", EGS_RUN);
 
         // Unblock the menu messaging and activate needed trees
         MenuMgr.allow();
@@ -22,9 +26,9 @@ final class CTitleScreenState : iGameState
     }
 
     //
-    // Init the state
+    //  Init the state
     //
-    void Init() override
+    void init() override
     {
         StrategyMgr.createSprite( "strategyFor2D", "(title_screen)", "background" );
 
@@ -39,13 +43,39 @@ final class CTitleScreenState : iGameState
 
         Spawn("Screen_FadeIn");
     }
+    
+    //
+    //  Handle events
+    //
+    void handleEvent() override
+    {
+        if( ActionMgr.wasEvent(EGE_MENU_GAME_STATE_CHANGE, ETC_BEGIN) )
+            getStateMessage().setMsg( EGameState(m_gameStateDict[MenuMgr.getActiveMenu().getActiveControl().getExecutionAction()]), getState() );
+    }
 
     //
-    // Update the state
+    //  Update the state
     //
-    void Update() override
+    void update() override
     {
         float rot = HighResTimer.getElapsedTime() * 0.04;
         cube.incRot( rot, rot, 0 );
     }
 };
+
+
+//
+//  Functions for loading/unloading the assets for this state
+//
+namespace NTitleScreenState
+{
+    //
+    //  Namespace function for loading the assets for this state
+    //  NOTE: Only call when the class is not allocated
+    //
+    void ObjectDataLoad()
+    {
+        ObjectDataMgr.loadGroup2D( "(title_screen)" );
+        ObjectDataMgr.loadGroup3D( "(cube)" );
+    }
+}

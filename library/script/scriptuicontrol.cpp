@@ -165,6 +165,7 @@ namespace NScriptUIControl
         Throw( pEngine->RegisterObjectMethod("CUIControl", "const string & getName()",    asFUNCTION(GetName), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("CUIControl", "const string & getGroup()",   asFUNCTION(GetGroup), asCALL_CDECL_OBJLAST) );
         Throw( pEngine->RegisterObjectMethod("CUIControl", "const string & getFaction()", asFUNCTION(GetFaction), asCALL_CDECL_OBJLAST) );
+        Throw( pEngine->RegisterObjectMethod("CUIControl", "const string & getExecutionAction()", asMETHOD(CUIControl, getExecutionAction), asCALL_THISCALL) );
 
         // Object pos, rot & scale
         Throw( pEngine->RegisterObjectMethod("CUIControl", "void setVisible(bool)",                                 asFUNCTION(SetVisible), asCALL_CDECL_OBJLAST) );

@@ -32,11 +32,10 @@ namespace NScriptGlobals
             throw NExcept::CCriticalException("Error Registering AngelScript Function!",
                 boost::str( boost::format("Function could not be created.\n\n%s\nLine: %s")
                     % __FUNCTION__ % __LINE__ ));
-
-    }   // Throw
+    }
 
     /************************************************************************
-    *    DESC:  Suspend the script to the game loop                                                             
+    *    DESC:  Suspend the script to the game loop
     ************************************************************************/
     void Suspend()
     {
@@ -45,17 +44,16 @@ namespace NScriptGlobals
         // Suspend the context so the game loop can resumed
         if( ctx )
             ctx->Suspend();
+    }
+ 
 
-    }   // Suspend
-    
-    
     /************************************************************************
     *    DESC:  Register the global functions
     ************************************************************************/
     void Register()
     {
         asIScriptEngine * pEngine = CScriptMgr::Instance().getEnginePtr();
-        
+
         Throw( pEngine->RegisterGlobalFunction("void Print(string &in)", asFUNCTION(NGenFunc::PostDebugMsg), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("void Suspend()", asFUNCTION(Suspend), asCALL_CDECL) );
         Throw( pEngine->RegisterGlobalFunction("int UniformRandomInt(int startRange, int endRange, int seed = 0)", asFUNCTION( NGenFunc::UniformRandomInt), asCALL_CDECL ) );

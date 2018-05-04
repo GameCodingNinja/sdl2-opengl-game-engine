@@ -42,18 +42,18 @@ int main()
 int main()
 {
     // Load the script list table
-    CScriptManager::Instance().loadListTable( "scriptListTable.lst" );
+    CScriptMgr::Instance().loadListTable( "scriptListTable.lst" );
     
     // Register the script items
-    RegisterStdString( CScriptManager::Instance().getEnginePtr() );
+    RegisterStdString( CScriptMgr::Instance().getEnginePtr() );
     NScriptGlobals::Register();
     NScriptHighResolutionTimer::Register();
 
-    CScriptManager::Instance().loadGroup("(test)");
+    CScriptMgr::Instance().loadGroup("(test)");
 
-    CScriptManager::Instance().prepare("(test)", "Script_Run");
+    CScriptMgr::Instance().prepare("(test)", "Script_Run");
     
-    CScriptManager::Instance().update();
+    CScriptMgr::Instance().update();
     
     return 0;
 }

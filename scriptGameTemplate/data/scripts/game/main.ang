@@ -10,7 +10,7 @@ void main()
     // Create the game
     CGame game;
     game.Init();
-    
+
     // Call the game loop
     while(true)
     {
@@ -18,5 +18,3 @@ void main()
         Suspend();
     }
 }
-
-

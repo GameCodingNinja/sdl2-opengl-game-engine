@@ -57,6 +57,8 @@
 // AngelScript lib dependencies
 #include <scriptstdstring/scriptstdstring.h>
 #include <scriptarray/scriptarray.h>
+#include <scriptdictionary/scriptdictionary.h>
+#include <scriptmath/scriptmath.h>
 
 // Boost lib dependencies
 #include <boost/bind.hpp>
@@ -181,6 +183,8 @@ void CGame::init()
     // Register the script items
     RegisterStdString( CScriptMgr::Instance().getEnginePtr() );
     RegisterScriptArray( CScriptMgr::Instance().getEnginePtr(), false );
+    RegisterScriptDictionary( CScriptMgr::Instance().getEnginePtr() );
+    RegisterScriptMath( CScriptMgr::Instance().getEnginePtr() );
     NScriptGlobals::Register();
     NScriptColor::Register();
     NScriptPoint::Register();
@@ -309,6 +313,18 @@ bool CGame::handleEvent( const SDL_Event & rEvent )
     
     // Handle events for the menu manager
     CMenuMgr::Instance().handleEvent( rEvent );
+    
+    // Check for the "game change state" message
+    if( rEvent.type == NMenu::EGE_MENU_GAME_STATE_CHANGE )
+    {
+        // Block all message processing in the menu manager
+        if( rEvent.user.code == NMenu::ETC_BEGIN )
+            CMenuMgr::Instance().allow( false );
+
+        // Clear out all the trees
+        else if( rEvent.user.code == NMenu::ETC_END )
+            CMenuMgr::Instance().clearActiveTrees();
+    }
 
     // Filter out these events. Can't do this through the normal event filter
     if( (rEvent.type >= SDL_JOYAXISMOTION) && (rEvent.type <= SDL_JOYBUTTONUP) )

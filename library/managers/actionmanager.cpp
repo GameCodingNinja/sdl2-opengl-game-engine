@@ -869,14 +869,30 @@ void CActionMgr::clearQueue()
 
 
 /************************************************************************
-*    DESC:  Was this an event in the Queue
+*    DESC:  Was this action in the Queue
 ************************************************************************/
-bool CActionMgr::wasEvent( const std::string & actionStr, NDefs::EActionPress actionPress )
+bool CActionMgr::wasActionInQueue( const std::string & actionStr, NDefs::EActionPress actionPress )
 {
     if( m_allowAction )
     {
         for( auto & iter : m_eventQueue )
             if( wasAction( iter, actionStr ) == actionPress )
+                return true;
+    }
+
+    return false;
+}
+
+
+/************************************************************************
+*    DESC:  Was the event in the Queue
+************************************************************************/
+bool CActionMgr::wasEventInQueue( uint type, int code )
+{
+    if( m_allowAction )
+    {
+        for( auto & iter : m_eventQueue )
+            if( (iter.type == type) && (iter.user.code == code) )
                 return true;
     }
 

@@ -33,7 +33,7 @@ final class CStartUpState : iGameState
     //
     //  Init the state
     //
-    void Init() override
+    void init() override
     {
         // Create all the needed strategies
         @strategyFor2D = StrategyMgr.createBasicSpriteStrategy( "strategyFor2D" );
@@ -41,24 +41,24 @@ final class CStartUpState : iGameState
         StrategyMgr.createMenuStrategy( "menu" );
 
         // Load this states assets and display the logo
-        LoadStateAndFadeIn();
+        loadStateAndFadeIn();
 
         // Do the fade in
         Screen_FadeIn();
 
         // Load the remaining assets
-        LoadAssets();
+        loadAssets();
 
         // Loading done, fade out
         Screen_FadeOut();
 
-        DoChangeState();
+        doChangeState();
     }
 
     //
     //  Load this states assets for displaying the logo
     //
-    void LoadStateAndFadeIn()
+    void loadStateAndFadeIn()
     {
         // Load the shaders
         ShaderMgr.load( "data/shaders/shader.cfg" );
@@ -77,7 +77,7 @@ final class CStartUpState : iGameState
     //
     //  Load the remaining assets
     //
-    void LoadAssets()
+    void loadAssets()
     {
         // Load the list tables
         ObjectDataMgr.loadListTable( "data/objects/3d/objectDataList/dataListTable.lst" );
@@ -98,13 +98,13 @@ final class CStartUpState : iGameState
 
         // Load the start up animation group
         ObjectDataMgr.loadGroup2D( "(menu)" );
-        ObjectDataMgr.loadGroup2D( "(title_screen)" );
-        ObjectDataMgr.loadGroup3D( "(cube)" );
-
+        
         SoundMgr.loadGroup("(menu)");
 
         // Load the menu group
         MenuMgr.loadGroup("(menu)");
+        
+        NTitleScreenState::ObjectDataLoad();
     }
 };
 

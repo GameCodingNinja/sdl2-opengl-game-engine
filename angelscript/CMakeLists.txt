@@ -38,7 +38,9 @@ add_library(
         source/as_typeinfo.cpp
         source/as_variablescope.cpp
         add_on/scriptstdstring/scriptstdstring.cpp
-        add_on/scriptarray/scriptarray.cpp )
+        add_on/scriptarray/scriptarray.cpp
+	add_on/scriptdictionary/scriptdictionary.cpp
+	add_on/scriptmath/scriptmath.cpp )
 
 include_directories(include)
 

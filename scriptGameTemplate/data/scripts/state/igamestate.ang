@@ -34,33 +34,38 @@ class iGameState
         m_nextState = nextState;
     }
 
-    void Init()
+    void init()
+    {
+        // Empty member to be overwritten
+    }
+    
+    void handleEvent()
     {
         // Empty member to be overwritten
     }
 
-    void Update()
+    void update()
     {
         // Empty member to be overwritten
     }
 
     //
-    void DoChangeState()
+    void doChangeState()
     { m_changeState = true; }
 
     // Is the state done
-    bool IsStateChange()
+    bool isStateChange()
     { return m_changeState; };
 
     // Get the current game state
-    EGameState GetState()
+    EGameState getState()
     { return m_gameState; }
 
     // Get the next game state
-    EGameState GetNextState()
+    EGameState getNextState()
     { return m_nextState; }
 
     // Get the message
-    CStateMessage & GetStateMessage()
+    CStateMessage & getStateMessage()
     { return m_stateMessage; }
 };

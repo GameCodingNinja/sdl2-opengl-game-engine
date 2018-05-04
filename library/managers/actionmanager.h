@@ -93,8 +93,11 @@ public:
     // Clear the queue
     void clearQueue();
     
-    // Was this an event in the Queue
-    bool wasEvent( const std::string & actionStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    // Was this action in the Queue
+    bool wasActionInQueue( const std::string & actionStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );
+    
+    // Was the event in the Queue
+    bool wasEventInQueue( uint type, int code );
     
     // Device specific key checks
     bool wasKeyboard( const std::string & componentIdStr, NDefs::EActionPress actionPress = NDefs::EAP_DOWN );

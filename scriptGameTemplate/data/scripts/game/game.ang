@@ -17,7 +17,7 @@ class CGame
     {
         // Create the startup state
         @m_gameState = CStartUpState();
-        m_gameState.Init();
+        m_gameState.init();
     }
     
     //
@@ -25,16 +25,16 @@ class CGame
     //
     void HandleStateChange()
     {
-        if( m_gameState.IsStateChange() )
+        if( m_gameState.isStateChange() )
         {
             // Get the game state we are moving to
-            const EGameState curState = m_gameState.GetState();
+            const EGameState curState = m_gameState.getState();
 
             // Get the game state we are moving to
-            const EGameState nextState = m_gameState.GetNextState();
+            const EGameState nextState = m_gameState.getNextState();
 
             // Get the message to the next state
-            const CStateMessage stateMessage = m_gameState.GetStateMessage();
+            const CStateMessage stateMessage = m_gameState.getStateMessage();
 
             if( nextState == EGS_TITLE_SCREEN )
                 @m_gameState = CTitleScreenState();
@@ -46,7 +46,7 @@ class CGame
                 //upGameState.reset( new CRunState );
 
             // Do any pre-game loop init's
-            m_gameState.Init();
+            m_gameState.init();
         }
     }
     
@@ -57,6 +57,8 @@ class CGame
     {
         HandleStateChange();
         
-        m_gameState.Update();
+        m_gameState.handleEvent();
+        
+        m_gameState.update();
     }
 };

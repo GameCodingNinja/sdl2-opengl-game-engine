@@ -31,10 +31,11 @@ namespace NScriptActionManager
         Throw( pEngine->RegisterObjectType( "CActionMgr", 0, asOBJ_REF|asOBJ_NOCOUNT) );
         
         Throw( pEngine->RegisterObjectMethod("CActionMgr", "void load(string &in)",                             asMETHOD(CActionMgr, loadActionFromXML),     asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasEvent(string &in, int actionPress = 1)",    asMETHOD(CActionMgr, wasEvent),              asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasKeyboard(string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasKeyboard),           asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasMouse(string &in, int actionPress = 1)",    asMETHOD(CActionMgr, wasMouse),              asCALL_THISCALL) );
-        Throw( pEngine->RegisterObjectMethod("CActionMgr", "void wasGamepad(string &in, int actionPress = 1)",  asMETHOD(CActionMgr, wasGamepad),            asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasAction(string &in, int actionPress = 1)",   asMETHOD(CActionMgr, wasActionInQueue),      asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasEvent(int, int)",                           asMETHOD(CActionMgr, wasEventInQueue),       asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasKeyboard(string &in, int actionPress = 1)", asMETHOD(CActionMgr, wasKeyboard),           asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasMouse(string &in, int actionPress = 1)",    asMETHOD(CActionMgr, wasMouse),              asCALL_THISCALL) );
+        Throw( pEngine->RegisterObjectMethod("CActionMgr", "bool wasGamepad(string &in, int actionPress = 1)",  asMETHOD(CActionMgr, wasGamepad),            asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getMouseAbsolutePos()",              asMETHOD(CActionMgr, getMouseAbsolutePos),   asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getMouseRelativePos()",              asMETHOD(CActionMgr, getMouseRelativePos),   asCALL_THISCALL) );
         Throw( pEngine->RegisterObjectMethod("CActionMgr", "const CPoint & getControllerPosLeft()",             asMETHOD(CActionMgr, getControllerPosLeft),  asCALL_THISCALL) );

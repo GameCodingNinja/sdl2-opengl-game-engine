@@ -1,3 +1,13 @@
+
+//
+//  FILE NAME: shared_defs.ang
+//
+//  DESC:      misc defines
+//
+
+const double PI = 3.14159265358979323846;
+const int MAX_ANALOG_AXIS_VALUE = 32767;
+
 shared enum EGameEvent
 {
     // Menu events
@@ -27,9 +37,18 @@ shared enum EGameEvent
     EGE_MENU_TAB_RIGHT,
 }
 
+// Menu transition codes
 shared enum ETransCode
 {
     ETC_RESET=0,
     ETC_BEGIN,
     ETC_END,
 }
+
+// Button states
+shared enum EActionPress
+{
+    EAP_IDLE = 0,
+    EAP_DOWN,
+    EAP_UP
+};

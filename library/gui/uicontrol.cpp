@@ -87,7 +87,7 @@ void CUIControl::loadFromNode( const XMLNode & node )
     if( !stateScriptNode.isEmpty() )
     {
         std::vector<std::string> stateScriptStr =
-            {"onInit", "onDisabled", "onInactive", "onActive", "onSelect", "onExecute", "onEvent" };
+            {"onInit", "onDisabled", "onInactive", "onActive", "onSelect", "onExecute" };
 
         for( auto & iter : stateScriptStr )
             if( stateScriptNode.isAttributeSet( iter.c_str() ) )
@@ -139,9 +139,6 @@ NUIControl::EControlState CUIControl::getScriptState( const std::string & script
 
     else if( scriptStateStr == "onExecute" )
         return NUIControl::ECS_EXECUTE;
-
-    else if( scriptStateStr == "onEvent" )
-        return NUIControl::ECS_EVENT;
 
     return NUIControl::ECS_NULL;
 }
@@ -326,9 +323,6 @@ void CUIControl::handleEvent( const SDL_Event & rEvent )
 
     // Do any smart event handling
     smartHandleEvent( rEvent );
-
-    // Prepare script functions associated with this event
-    prepareControlScriptFunction( NUIControl::ECS_EVENT );
 }
 
 
