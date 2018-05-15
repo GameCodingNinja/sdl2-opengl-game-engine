@@ -1,13 +1,221 @@
 // consoleTestAp.cpp : Defines the entry point for the console application.
 //
 
+#include <iostream>
+#include <utilities/highresolutiontimer.h>
+
+void MultiMatrix1()
+{
+    float TempMatrix[4][4];
+    float Matrix[4][4] = {{2,5,8,9},{5,9,3,5},{4,6,9,3},{6,9,3,5}};
+    float NewMatrix[4][4] = {{7,3,7,9},{3,9,8,5},{2,6,9,4},{6,9,3,2}};
+    
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) 
+            TempMatrix[i][j] = (Matrix[i][0] * NewMatrix[0][j])
+              + (Matrix[i][1] * NewMatrix[1][j])
+              + (Matrix[i][2] * NewMatrix[2][j])
+              + (Matrix[i][3] * NewMatrix[3][j]);
+    
+    // Copy TempMatrix to Matrix:
+    for (int i = 0; i < 4; i++)
+    {
+       Matrix[i][0] = TempMatrix[i][0];
+       Matrix[i][1] = TempMatrix[i][1];
+       Matrix[i][2] = TempMatrix[i][2];
+       Matrix[i][3] = TempMatrix[i][3];
+    }
+}
+
+void MultiMatrix2()
+{
+    float TempMatrix[16];
+    float Matrix[16]= {2,5,8,9,5,9,3,5,4,6,9,3,6,9,3,5};
+    float NewMatrix[16] = {7,3,7,9,3,9,8,5,2,6,9,4,6,9,3,2};
+    
+    for (int i = 0; i < 4; i++)
+    {
+        int offset = i * 4;
+        for (int j = 0; j < 4; j++)
+        {
+            TempMatrix[offset+j] = (Matrix[offset] * NewMatrix[j])
+              + (Matrix[offset+1] * NewMatrix[4+j])
+              + (Matrix[offset+2] * NewMatrix[8+j])
+              + (Matrix[offset+3] * NewMatrix[12+j]);
+        }
+    }
+    
+    // Copy TempMatrix to Matrix:
+    for (int i = 0; i < 16; i++)
+    {
+       Matrix[i] = TempMatrix[i];
+       Matrix[i] = TempMatrix[i];
+       Matrix[i] = TempMatrix[i];
+       Matrix[i] = TempMatrix[i];
+    }
+}
+
+// Fibonacci Series
+int main()
+{
+    std::cout << "Test started..." << std::endl;
+    
+    CHighResTimer::Instance().timerStart();
+    
+    for( int i = 0; i < 30000000; ++i )
+        MultiMatrix1();
+    
+    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
+    
+    return 0;
+}
+
+/*#include <iostream>
+
+// Fibonacci Series
+int main()
+{
+    float fResult;
+    uint32_t iResult;
+    
+    fResult = 3.2682 + 7.9672;
+    
+    std::cout << "Float addition result: " << fResult << std::endl;
+    
+    fResult = 3.2682 * 7.9672;
+    
+    std::cout << "Float multiplication result: " << fResult << std::endl;
+    
+    fResult = 3.2682 / 7.9672;
+    
+    std::cout << "Float division result: " << fResult << std::endl;
+    
+    iResult = 32682 + 79672;
+    
+    std::cout << "Int addition result: " << ((float)iResult / 10000.f) << std::endl;
+    
+    iResult = 32682 * 79672;
+    
+    std::cout << "Int multiplication result: " << ((float)iResult / (10000.f * 10000.f)) << std::endl;
+    
+    iResult = (32682 * 10000) / 79672;
+    
+    std::cout << "Int division result: " << ((float)iResult / 10000.f) << std::endl;
+    
+    return 0;
+}*/
+
+
+/*
+#include <iostream>
+
+// Fibonacci Series
+int main()
+{
+    int n, t1 = 0, t2 = 1, nextTerm = 0;
+
+    std::cout << "Enter the number of terms: ";
+    std::cin >> n;
+
+    std::cout << "Fibonacci Series: ";
+
+    for (int i = 1; i <= n; ++i)
+    {
+        // Prints the first two terms.
+        if(i == 1)
+        {
+            std::cout << " " << t1;
+            continue;
+        }
+        if(i == 2)
+        {
+            std::cout << t2 << " ";
+            continue;
+        }
+        nextTerm = t1 + t2;
+        t1 = t2;
+        t2 = nextTerm;
+        
+        std::cout << nextTerm << " ";
+    }
+    
+    return 0;
+}*/
+
+/*#include <iostream>
+
+template <class node_type>
+class CNode
+{
+public:
+
+    CNode(node_type _value)
+    { value = _value; }
+
+    node_type value;
+
+    CNode * pNode = nullptr;
+};
+
+void RemoveNode( CNode<int> *& headNode, int value )
+{
+    auto node = headNode;
+    auto lastNode = node;
+    while( node != nullptr )
+    {
+        if( node->value == value )
+        {
+            if( node == headNode )
+            {
+                headNode = headNode->pNode;
+                node = headNode;
+                lastNode = node;
+            }
+            else
+            {
+                lastNode->pNode = node->pNode;
+                node = node->pNode;
+            }
+        }
+
+        if( node == nullptr )
+            break;
+
+        lastNode = node;
+        node = node->pNode;
+    };
+}
+
+int main()
+{
+    // Allocate the linked list
+    auto node = new CNode<int>(5);
+    node->pNode = new CNode<int>(3);
+    node->pNode->pNode = new CNode<int>(2);
+    node->pNode->pNode->pNode = new CNode<int>(7);
+
+    // Remove a node
+    RemoveNode( node, 3 );
+    
+    // Print the end result
+    while( node != nullptr )
+    {
+        std::cout << node->value << std::endl;
+        node = node->pNode;
+    }
+    
+    return 0;
+}*/
+
+
+
 /*#include <iostream>
 
 int main()
 {
     // This does not correlate to the number of pi digits currently 1,717 digits
     const int max_range = 6000;
-    
+
     int r[max_range + 1];
     int i, k, b, d, c = 0;
     for (i = 0; i < max_range; i++) {
@@ -28,14 +236,15 @@ int main()
         printf("%.4d", c + d / 10000);
         c = d % 10000;
     }
-    
+
     return 0;
 }*/
 
-#include <iostream>
+/*#include <iostream>
 #include <script/scriptmanager.h>
 #include <script/scriptglobals.h>
 #include <script/scripthighresolutiontimer.h>
+#include <utilities/highresolutiontimer.h>
 
 #include <scriptstdstring/scriptstdstring.h>
 
@@ -43,7 +252,7 @@ int main()
 {
     // Load the script list table
     CScriptMgr::Instance().loadListTable( "scriptListTable.lst" );
-    
+
     // Register the script items
     RegisterStdString( CScriptMgr::Instance().getEnginePtr() );
     NScriptGlobals::Register();
@@ -51,12 +260,23 @@ int main()
 
     CScriptMgr::Instance().loadGroup("(test)");
 
-    CScriptMgr::Instance().prepare("(test)", "Script_Run");
+    std::cout << "Test started..." << std::endl;
+
+    CHighResTimer::Instance().timerStart();
     
+    CScriptMgr::Instance().prepare("(test)", "Script_Run");
     CScriptMgr::Instance().update();
     
+    CScriptMgr::Instance().prepare("(test)", "Script_Run");
+    CScriptMgr::Instance().update();
+    
+    CScriptMgr::Instance().prepare("(test)", "Script_Run");
+    CScriptMgr::Instance().update();
+    
+    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
+
     return 0;
-}
+}*/
 
 /*#include <iostream>
 #include <thread>
@@ -65,11 +285,11 @@ int main()
 void threadFunc()
 {
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    
+
     std::cout << "threadFunc call signal manager: " << std::this_thread::get_id() << std::endl;
-    
+
     CSignalMgr::Instance().Broadcast_LoadSignal();
-    
+
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
@@ -81,13 +301,13 @@ void TestFunc()
 int main()
 {
     CSignalMgr::Instance().Connect_Load( TestFunc );
-    
+
     std::cout << "Main thread: " << std::this_thread::get_id() << std::endl;
-    
+
     std::thread thread(threadFunc);
-    
+
     thread.join();
-    
+
     return 0;
 }*/
 
@@ -101,16 +321,16 @@ int main()
         std::this_thread::sleep_for(std::chrono::seconds(2));
         return 1;
     };
-    
+
     std::packaged_task<int()> task(sleep);
 
     auto f = task.get_future();
-    
+
     std::thread thread(std::move(task));
     thread.detach();
-    
+
     std::cout << "Thread started. Waiting on future" << std::endl;
-    
+
     std::cout << "Future returned: " << f.get() << std::endl;
 
     return 0;
@@ -119,37 +339,49 @@ int main()
 /*#include <iostream>
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
-#include <utilities/matrix.h>
 
-int main()  // 7124.35 ms
+void Crunch()
 {
-    long long int value = 0;
-    long long int test;
-    long long int maxValue = 10000000;
-   
-    std::cout << "Test started..." << std::endl;
-    
-    CHighResTimer::Instance().timerStart();
+    int32_t value = 0;
+    int32_t test;
+    int32_t maxValue = 100000;
+    int32_t counter = 0;
     
     do
     {
         test = ++value;
+        ++counter;
 
         do
         {
-            if ((test & 1) == 0)
-                test /= 2;
-            //if( (test % 2) == 0 )
+            //if ((test & 1) == 0)
             //    test /= 2;
+            if( (test % 2) == 0 )
+                test /= 2;
             else
                 test = (test * 3) + 1;
+
+            ++counter;
         }
         while (test > 1);
     }
     while ((test > 0) && (value < maxValue));
+}
+
+
+int main()  // 7124.35 ms
+{
+
+    std::cout << "Test started..." << std::endl;
+
+    CHighResTimer::Instance().timerStart();
     
-    std::cout << "Value: " << value << ", Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
-    
+    Crunch();
+    Crunch();
+    Crunch();
+
+    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
+
     return 0;
 }*/
 
@@ -159,13 +391,13 @@ int main()  // 7124.35 ms
 int main()
 {
     XMLNode node = XMLNode::openFileHelper( "actorDataList.lst", "spriteList" );
-    
+
     const XMLNode collisionNode = node.getChildNode("collision");
     if( !collisionNode.isEmpty() )
     {
         return 1;
     }
-    
+
     return 0;
 }*/
 
@@ -176,11 +408,11 @@ int main()
 int main()
 {
     CHighResTimer::Instance().TimerStart();
-    
+
     std::this_thread::sleep_for(std::chrono::milliseconds(25));
-    
+
     std::cout << "Execution time: " << CHighResTimer::Instance().TimerStop() << "\n";
-    
+
     return 0;
 }*/
 
@@ -210,21 +442,21 @@ int main()
     int phySize = sizeof(CPhysicsComponent2D); // 20
     int objSize = sizeof(CObject);             // 72
     int objSize2D = sizeof(CObject2D);         // 224, 160, 148
-    
+
     int sprSize = sizeof(CSprite2D);           // 532, 468, 456, 428, 324
-    
+
     int crlSize = sizeof(CUIControl);          // 496
-    
+
     int strSize = sizeof(std::string);         // 24
     int mapSize = sizeof(std::map<std::string, std::string>); // 24
     int vecSize = sizeof(std::vector<int>);    // 12
     int lstSize = sizeof(std::list<int>);      // 12
     int queSize = sizeof(std::queue<int>);     // 40
     int deqSize = sizeof(std::deque<int>);     // 40
-    
+
     int unqSize = sizeof(std::unique_ptr<int>);  // 40
     int shrSize = sizeof(std::shared_ptr<int>);  // 40
-    
+
     int max = std::numeric_limits<int8_t>::max();
     int min = std::numeric_limits<int8_t>::min();
 
@@ -238,10 +470,10 @@ class CFoo
 public:
     void Set( int val)
     { value = val; }
-    
+
     int Get() const
     { return value; }
-    
+
 private:
     int value;
 };
@@ -251,26 +483,26 @@ int main()
     CFoo foo;
     const CFoo * const pFoo = &foo;
     const CFoo & rFoo = foo;
-    
-    
+
+
     pFoo->Get();
     rFoo.Get();
-    
+
     foo.Get();
-    
+
     return 0;
 }*/
 
 /*#include <algorithm>
 #include <vector>
 #include <iostream>
-#include <ctime> 
+#include <ctime>
 
 int main()
 {
     std::vector<int> shuffle = {0,1,2,3,4,5};
     std::srand ( unsigned ( std::time(0) ) );
-    
+
     for( int i = 0; i < 5; ++i )
     {
         std::random_shuffle( shuffle.begin(), shuffle.end() );
@@ -280,7 +512,7 @@ int main()
 
         std::cout << std::endl;
     }
-    
+
     return 0;
 }*/
 
@@ -293,18 +525,18 @@ int main()
 int main()
 {
     auto begin = std::chrono::high_resolution_clock::now();
-    
+
     auto time = std::chrono::high_resolution_clock::now().time_since_epoch();
     auto seed = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
 
     std::mt19937 generator(seed);
     std::uniform_int_distribution<int> distribution(0,50);
     distribution(generator);
-    
-    
+
+
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
-    
+
     std::cout << duration << std::endl;*/
 
     //unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
@@ -343,65 +575,65 @@ int main()
 int main()
 {
     IXMLDomParser iDom;
-    
+
     auto start = std::chrono::high_resolution_clock::now().time_since_epoch();
-    
+
     ITCXMLNode xMainNode = iDom.openFileHelper("menuOther.lst", "objectDataList2D");
-    
+
     auto finish = std::chrono::high_resolution_clock::now().time_since_epoch();
     std::cout << "New Parser time: " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ns\n";
 
-    
+
     start = std::chrono::high_resolution_clock::now().time_since_epoch();
-    
+
     // this open and parse the XML file:
     const XMLNode mainNode = XMLNode::openFileHelper( "menuOther.lst", "objectDataList2D" );
-    
+
     finish = std::chrono::high_resolution_clock::now().time_since_epoch();
     std::cout << "Old Parser time: " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ns\n";
-    
-    
+
+
     if( xMainNode.isEmpty() )
         std::cout << "Node Empty" << std::endl;
     else
     {
         ITCXMLNode node = xMainNode.getChildNode( "objectList" );
         std::cout << "Number of children: " << node.nChildNode() << std::endl;
-        
+
         std::cout << "First Attribute: " << node.getChildNode().getAttributeValue() << std::endl;
     }
-    
+
     if( mainNode.isEmpty() )
         std::cout << "Node Empty" << std::endl;
     else
     {
         XMLNode node = mainNode.getChildNode( "objectList" );
         std::cout << "Number of children: " << node.nChildNode() << std::endl;
-        
+
         std::cout << "First Attribute: " << node.getChildNode().getAttributeValue() << std::endl;
     }
-    
-    
+
+
     start = std::chrono::high_resolution_clock::now().time_since_epoch();
-    
+
     IXMLReaderFile iReader("twitter.json");
     //IXMLReaderFile iReader("test.json");
     IJSONPullParser pp(&iReader);
     IXMLDomParser jsonDom;
     ITCXMLNode jsonNode=jsonDom.parse(&pp);
-    
+
     std::cout << jsonNode.getElementByPath("results/[2]/metadata/recent_retweets") << std::endl;
     //std::cout << jsonNode.getElementByPath("customers/[1]/firstName") << std::endl;
-    
+
     //std::cout << jsonNode.getChildNode().getElementByPath("lastName") << std::endl;
-    
+
     finish = std::chrono::high_resolution_clock::now().time_since_epoch();
     std::cout << "JSON Parser time: " << std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count() << "ns\n";
-    
-   
+
+
     std::cout << "The End" << std::endl;
-    
-    
+
+
 
     // Wait here before exiting
     #if defined(_WINDOWS)
@@ -501,7 +733,7 @@ void SpeedTest()
     calcType test;
     calcType overflow;
     calcType MASK = OVERFLOW_MASK;
-   
+
     do
     {
         test = ++value;
@@ -566,7 +798,7 @@ void Calc()
                     mutex.lock();
                     std::cout << "Overflow Value: " << preTestValue << " - Value to overflow: " << overflow << " - Max Count: " << maxCount << " of value: " << maxCountValue << std::endl;
                     mutex.unlock();
-                    
+
                     test = 0;
                 }
             }
@@ -601,29 +833,29 @@ int main()
 {
     // Speed test
     std::cout << "Test started..." << std::endl;
-    
-    
+
+
     CHighResTimer::Instance().TimerStart();
-    
+
     value = 1;
     SpeedTest();
-    
+
     CHighResTimer::Instance().TimerStop();
-    
+
     std::cout << "Execution time: " << CHighResTimer::Instance().GetElapsedTime() << std::endl;
-    
-    
-    
+
+
+
     // Test code;
     //value = 23035530000;
    // Calc();
-    
-    
+
+
     // Full execution
     //value = 1;
 
     //later later_test1(60000 * 1, true, &timer_callback);
-   
+
     //std::thread thread1(Calc);
     //std::thread thread2(Calc);
     //std::thread thread3(Calc);
@@ -643,10 +875,10 @@ int main()
     //thread8.join();
 
     //std::cout << "Final Value: " << value << std::endl;
-    
-    
-    
-    
+
+
+
+
     // Wait here before exiting
     //getchar();
 }*/
@@ -663,14 +895,14 @@ public:
     int Calc( int n )
     {
         int firstTerm = 1, secondTerm = 1, nextTerm;
-        
+
         while ( nextTerm < n)
         {
             nextTerm = firstTerm + secondTerm;
             firstTerm = secondTerm;
             secondTerm = nextTerm;
         }
-        
+
         return nextTerm;
     }
 };
@@ -680,16 +912,16 @@ public:
 int main()
 {
     std::vector< std::future<void> > jobs;
-    
+
     auto & mutex = CThreadPool::Instance().GetMutex();
-    
+
     for( int i = 0; i < 8; ++i )
     {
         jobs.emplace_back(
             CThreadPool::Instance().PostRetFut([&mutex] {
-                
+
                 std::this_thread::sleep_for(std::chrono::seconds(1));
-                
+
                 {
                     std::unique_lock<std::mutex> lock( mutex );
                     std::cout << "Task finished in thread: " << std::this_thread::get_id() << std::endl;
@@ -719,27 +951,27 @@ int main(int argc, char **argv)
     float magnitude2 = point2.GetLength2D();
 
     float scalar = point1.GetDotProduct2D(point2);
-    
+
     float scalarNomalized = scalar / (magnitude1 * magnitude2);
-    
+
     float radians = acos( scalarNomalized );
 
     float degrees = radians * defs_RAD_TO_DEG;
 
     std::cout << "Using vectors: scalar: " << scalar << ", normalized scaler: " << scalarNomalized <<  ", radians: " << radians << ", degrees: " << degrees << std::endl;
-    
-    
+
+
     point1.Normalize2D();
     point2.Normalize2D();
 
     float scalar2 = point1.GetDotProduct2D(point2);
-    
+
     float radians2 = acos( scalar2 );
-    
+
     float degrees2 = radians2 * defs_RAD_TO_DEG;
-    
+
     std::cout << "Using unit vectors: scalar: " << scalar2 << ", radians: " << radians2 << ", degrees: " << degrees2 << std::endl;
-    
+
 
     system("PAUSE");
 
@@ -761,16 +993,16 @@ int main(int argc, char **argv)
     float angel = ( normal.x * light.x +
                     normal.y * light.y +
                     normal.z * light.z ) / lightMag;
-    
+
     std::cout << "Light Angle: " << angel << std::endl;
-    
+
     // or this way
     light.Normalize();
-    
+
     angel = ( normal.x * light.x +
               normal.y * light.y +
               normal.z * light.z );
-    
+
     std::cout << "Light Angle: " << angel << std::endl;
 
     system("PAUSE");
@@ -812,7 +1044,7 @@ void  PrintParticles() {
 void InitializeParticles() {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0,50);
-  
+
     for (int i = 0; i < NUM_PARTICLES; ++i) {
         particles[i].position = (Vector2){distribution(generator), distribution(generator)};
         particles[i].velocity = (Vector2){0, 0};
@@ -829,13 +1061,13 @@ int main (int argc, char *argv[]) {
     float totalSimulationTime = 10; // The simulation will run for 10 seconds.
     float currentTime = 0; // This accumulates the time that has passed.
     float dt = 1; // Each step will take one second.
-    
+
     InitializeParticles();
     PrintParticles();
-    
+
     while (currentTime < totalSimulationTime) {
         // We're sleeping here to keep things simple. In real applications you'd use some
-        // timing API to get the current time in milliseconds and compute dt in the beginning 
+        // timing API to get the current time in milliseconds and compute dt in the beginning
         // of every iteration like this:
         // currentTime = GetTime()
         // dt = currentTime - previousTime
@@ -851,7 +1083,7 @@ int main (int argc, char *argv[]) {
             particle->position.x += particle->velocity.x * dt;
             particle->position.y += particle->velocity.y * dt;
         }
-        
+
         PrintParticles();
         currentTime += dt;
     }
@@ -875,27 +1107,27 @@ class CDog : public CAnimal
 public:
     CDog(const CCat & cat, int){};
     ~CDog() { std::cout << "CDog::dtor" << std::endl; }
-    
+
     int test = 0;
     double myDouble = 1.0;
 };
 
-int main (int argc, char *argv[]) 
+int main (int argc, char *argv[])
 {
     //std::unique_ptr<CDog[]> unique_ary(new CDog[3]);
     //std::shared_ptr<CDog> shared_ary(new CDog[3], std::default_delete<CDog[]>());
-    
+
     std::map<const std::string, CDog> dogMap;
-    
+
     int test1 = 5;
     int test2 = 10;
     std::string testStr = "test";
     CCat cat;
-    
+
     dogMap.emplace(std::piecewise_construct,  std::forward_as_tuple(testStr),  std::forward_as_tuple(cat, test2));
-    
+
     std::vector<CDog> dogVec;
-    
+
     dogVec.emplace_back( cat, test2 );
 }*/
 
@@ -904,7 +1136,7 @@ int main (int argc, char *argv[])
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (int argc, char *argv[]) 
+int main (int argc, char *argv[])
 {
 int nthreads, tid;
 
@@ -917,7 +1149,7 @@ int nthreads, tid;
   printf("Hello World from thread = %d\n", tid);
 
   // Only master thread does this
-  if (tid == 0) 
+  if (tid == 0)
     {
     nthreads = omp_get_num_threads();
     printf("Number of threads = %d\n", nthreads);
@@ -999,7 +1231,7 @@ int main()
     threads.reset();
 
     system("PAUSE");
-	
+
     return 0;
 }*/
 
@@ -1038,27 +1270,27 @@ int main(int argc, char **argv)
     float magnitude2 = point2.GetLength();
 
     float scalar = point1.GetDotProduct(point2);
-    
+
     float scalarNomalized = scalar / (magnitude1 * magnitude2);
-    
+
     float radians = acos( scalarNomalized );
 
     float degrees = radians * defs_RAD_TO_DEG;
 
     std::cout << "Using vectors: scalar: " << scalar << ", normalized scaler: " << scalarNomalized <<  ", radians: " << radians << ", degrees: " << degrees << std::endl;
-    
-    
+
+
     point1.Normalize2D();
     point2.Normalize2D();
 
     float scalar2 = point1.GetDotProduct(point2);
-    
+
     float radians2 = acos( scalar2 );
-    
+
     float degrees2 = radians2 * defs_RAD_TO_DEG;
-    
+
     std::cout << "Using unit vectors: scalar: " << scalar2 << ", radians: " << radians2 << ", degrees: " << degrees2 << std::endl;
-    
+
 
     system("PAUSE");
 
@@ -1115,7 +1347,7 @@ unsigned int ConvertEndianness( unsigned long value )
 
 
 int main(int argc, char **argv)
-{ 
+{
 	FILE *pFile = fopen("C:/screen shots/picture001.png", "rb");
 
 	struct size
@@ -1326,7 +1558,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar 
+        ar
 			& BOOST_SERIALIZATION_NVP(degrees)
             & BOOST_SERIALIZATION_NVP(minutes)
             & BOOST_SERIALIZATION_NVP(seconds)
@@ -1336,7 +1568,7 @@ private:
 			//& boost::serialization::make_nvp("the_minutes", minutes)
 			//& boost::serialization::make_nvp("the_seconds", seconds)
 			//& boost::serialization::make_nvp("the_vecString", vecString)
-			
+
 			;
     }
     int degrees;
@@ -1384,7 +1616,7 @@ int main()
 	boost::posix_time::time_duration conversion( boost::posix_time::duration_from_string( boost::posix_time::to_simple_string(duration) ) );
 	//boost::posix_time::time_duration conversion( boost::posix_time::duration_from_string("0") );
 
-	
+
 	std::cout << "Time Duration: " << conversion.hours() << ":" << conversion.minutes() << std::endl;
 	std::cout << "As string: " << boost::posix_time::to_simple_string(duration) << std::endl;
 
@@ -1524,7 +1756,7 @@ int main() {
 
     // save data to archive
     {
-        
+
 		boost::archive::text_oarchive oa_txt(ofs_txt);
 		//boost::archive::binary_oarchive oa_bin(ofs_bin);
 		//boost::archive::text_oarchive oa_xml(ofs_xml);

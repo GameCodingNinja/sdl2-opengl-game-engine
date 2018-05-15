@@ -47,13 +47,8 @@ CBaseGame::CBaseGame()
 ************************************************************************/
 CBaseGame::~CBaseGame()
 {
-    // Destroy the OpenGL context
-    if( m_context != nullptr )
-        SDL_GL_DeleteContext( m_context );
-
-    // Destroy window
-    if( m_pWindow != nullptr )
-        SDL_DestroyWindow( m_pWindow );
+    // Destroy the window and OpenGL context
+    CDevice::Instance().destroy();
 
     // Quit SDL subsystems
     SDL_Quit();

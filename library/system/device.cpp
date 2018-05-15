@@ -43,6 +43,27 @@ CDevice::~CDevice()
 
 
 /***************************************************************************
+*   DESC:  Destroy the window and OpenGL context
+ ****************************************************************************/
+void CDevice::destroy()
+{
+    // Destroy the OpenGL context
+    if( m_context != nullptr )
+    {
+        SDL_GL_DeleteContext( m_context );
+        m_context = nullptr;
+    }
+
+    // Destroy window
+    if( m_pWindow != nullptr )
+    {
+        SDL_DestroyWindow( m_pWindow );
+        m_pWindow = nullptr;
+    }
+}
+
+
+/***************************************************************************
 *   DESC:  Create the window and OpenGL context
  ****************************************************************************/
 void CDevice::create()

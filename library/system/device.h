@@ -29,6 +29,9 @@ public:
         static CDevice device;
         return device;
     }
+    
+    // Destroy the window and Vulkan instance
+    void destroy();
 
     // Create the window and OpenGL context
     void create();
