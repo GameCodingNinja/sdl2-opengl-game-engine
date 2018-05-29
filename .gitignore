@@ -54,6 +54,7 @@
 /consoleTestAp/nbproject/
 /consoleTestAp/build/
 
+
 /org.howiesfunware.PachinkoChallenge/build
 /org.howiesfunware.PachinkoChallenge/gradle
 /org.howiesfunware.PachinkoChallenge/app/build
@@ -86,3 +87,6 @@
 /bulletPhysics/build3/vs2010/Win32/
 
 /*.user
+/c_consoleTestApp/build/
+/c_consoleTestApp/dist/
+/c_consoleTestApp/nbproject/

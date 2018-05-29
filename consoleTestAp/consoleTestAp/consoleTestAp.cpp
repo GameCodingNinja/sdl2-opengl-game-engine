@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <xmmintrin.h>
 #include <utilities/highresolutiontimer.h>
 
 void MultiMatrix1()
@@ -10,15 +11,54 @@ void MultiMatrix1()
     float Matrix[4][4] = {{2,5,8,9},{5,9,3,5},{4,6,9,3},{6,9,3,5}};
     float NewMatrix[4][4] = {{7,3,7,9},{3,9,8,5},{2,6,9,4},{6,9,3,2}};
     
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j) 
+            TempMatrix[i][j] = (Matrix[i][j] * NewMatrix[i][j]);
+}
+
+void MultiMatrix2()
+{
+    float TempMatrix[4][4];
+    float Matrix[4][4] = {{2,5,8,9},{5,9,3,5},{4,6,9,3},{6,9,3,5}};
+    float NewMatrix[4][4] = {{7,3,7,9},{3,9,8,5},{2,6,9,4},{6,9,3,2}};
+    
     for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++) 
+        __m128 c = _mm_mul_ps( _mm_load_ps(&Matrix[i][0]), _mm_load_ps(&NewMatrix[i][0]) );
+}
+
+int main()
+{
+    std::cout << "Test started..." << std::endl;
+    
+    CHighResTimer::Instance().timerStart();
+    
+    for( int i = 0; i < 30000000; ++i )
+        MultiMatrix2();
+    
+    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
+
+    return 0;
+}
+
+/*#include <xmmintrin.h>
+#include <iostream>
+#include <utilities/highresolutiontimer.h>
+
+void MultiMatrix1()
+{
+    float TempMatrix[4][4];
+    float Matrix[4][4] = {{2,5,8,9},{5,9,3,5},{4,6,9,3},{6,9,3,5}};
+    float NewMatrix[4][4] = {{7,3,7,9},{3,9,8,5},{2,6,9,4},{6,9,3,2}};
+    
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j) 
             TempMatrix[i][j] = (Matrix[i][0] * NewMatrix[0][j])
               + (Matrix[i][1] * NewMatrix[1][j])
               + (Matrix[i][2] * NewMatrix[2][j])
               + (Matrix[i][3] * NewMatrix[3][j]);
     
     // Copy TempMatrix to Matrix:
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; ++i)
     {
        Matrix[i][0] = TempMatrix[i][0];
        Matrix[i][1] = TempMatrix[i][1];
@@ -32,11 +72,13 @@ void MultiMatrix2()
     float TempMatrix[16];
     float Matrix[16]= {2,5,8,9,5,9,3,5,4,6,9,3,6,9,3,5};
     float NewMatrix[16] = {7,3,7,9,3,9,8,5,2,6,9,4,6,9,3,2};
+    int offset;
     
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; ++i)
     {
-        int offset = i * 4;
-        for (int j = 0; j < 4; j++)
+        offset = (i<<2);
+        
+        for (int j = 0; j < 4; ++j)
         {
             TempMatrix[offset+j] = (Matrix[offset] * NewMatrix[j])
               + (Matrix[offset+1] * NewMatrix[4+j])
@@ -46,7 +88,7 @@ void MultiMatrix2()
     }
     
     // Copy TempMatrix to Matrix:
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 16; ++i)
     {
        Matrix[i] = TempMatrix[i];
        Matrix[i] = TempMatrix[i];
@@ -54,6 +96,63 @@ void MultiMatrix2()
        Matrix[i] = TempMatrix[i];
     }
 }
+
+void MultiMatrix3()
+{
+    float TempMatrix[4][4];
+    float Matrix[4][4] = {{2,5,8,9},{5,9,3,5},{4,6,9,3},{6,9,3,5}};
+    float NewMatrix[4][4] = {{7,3,7,9},{3,9,8,5},{2,6,9,4},{6,9,3,2}};
+    
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            __m128 a = _mm_load_ps(&Matrix[i][0]);
+            __m128 b = _mm_load_ps(&NewMatrix[i][0]);
+            
+            __m128 c = _mm_mul_ps( a, b );
+            
+            TempMatrix[i][j] = c[0] + c[1] + c[2] + c[3];
+        }
+    }
+    
+    // Copy TempMatrix to Matrix:
+    for (int i = 0; i < 4; i++)
+    {
+       Matrix[i][0] = TempMatrix[i][0];
+       Matrix[i][1] = TempMatrix[i][1];
+       Matrix[i][2] = TempMatrix[i][2];
+       Matrix[i][3] = TempMatrix[i][3];
+    }
+}
+
+void MultiMatrix4()
+{
+    float tempMatrix[16];
+    float matrix[16]= {2,5,8,9,5,9,3,5,4,6,9,3,6,9,3,5};
+    float newMatrix[16] = {7,3,7,9,3,9,8,5,2,6,9,4,6,9,3,2};
+    
+    float (*Matrix)[4] = (float (*)[4]) matrix;
+    float (*NewMatrix)[4] = (float (*)[4]) newMatrix;
+    float (*TempMatrix)[4] = (float (*)[4]) tempMatrix;
+    
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j) 
+            TempMatrix[i][j] = (Matrix[i][0] * NewMatrix[0][j])
+              + (Matrix[i][1] * NewMatrix[1][j])
+              + (Matrix[i][2] * NewMatrix[2][j])
+              + (Matrix[i][3] * NewMatrix[3][j]);
+    
+    // Copy TempMatrix to Matrix:
+    for (int i = 0; i < 4; ++i)
+    {
+       Matrix[i][0] = TempMatrix[i][0];
+       Matrix[i][1] = TempMatrix[i][1];
+       Matrix[i][2] = TempMatrix[i][2];
+       Matrix[i][3] = TempMatrix[i][3];
+    }
+}
+
 
 // Fibonacci Series
 int main()
@@ -63,12 +162,12 @@ int main()
     CHighResTimer::Instance().timerStart();
     
     for( int i = 0; i < 30000000; ++i )
-        MultiMatrix1();
+        MultiMatrix3();
     
     std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
     
     return 0;
-}
+}*/
 
 /*#include <iostream>
 
@@ -340,12 +439,12 @@ int main()
 #include <stdint.h>
 #include <utilities/highresolutiontimer.h>
 
-void Crunch()
+int64_t Crunch()
 {
-    int32_t value = 0;
-    int32_t test;
-    int32_t maxValue = 100000;
-    int32_t counter = 0;
+    int64_t value = 0;
+    int64_t test;
+    int64_t maxValue = 10000000;
+    int64_t counter = 0;
     
     do
     {
@@ -354,10 +453,10 @@ void Crunch()
 
         do
         {
-            //if ((test & 1) == 0)
-            //    test /= 2;
-            if( (test % 2) == 0 )
+            if ((test & 1) == 0)
                 test /= 2;
+            //if( (test % 2) == 0 )
+            //    test /= 2;
             else
                 test = (test * 3) + 1;
 
@@ -366,6 +465,8 @@ void Crunch()
         while (test > 1);
     }
     while ((test > 0) && (value < maxValue));
+    
+    return counter;
 }
 
 
@@ -376,11 +477,11 @@ int main()  // 7124.35 ms
 
     CHighResTimer::Instance().timerStart();
     
-    Crunch();
-    Crunch();
-    Crunch();
+    //Crunch();
+    //Crunch();
+    auto counter = Crunch();
 
-    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << std::endl;
+    std::cout << "Execution time: " << CHighResTimer::Instance().timerStop() << ", Counter: " << counter << std::endl;
 
     return 0;
 }*/
