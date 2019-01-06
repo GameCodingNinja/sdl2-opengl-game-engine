@@ -22,16 +22,23 @@ else()
 endif()
 
 # Need to do this to find SDL2 libraries
-INCLUDE(FindPkgConfig)
-PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
-PKG_SEARCH_MODULE(SDL2MIXER REQUIRED SDL2_mixer)
+#INCLUDE(FindPkgConfig)
+#find_package(PkgConfig)
+#PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+#PKG_SEARCH_MODULE(SDL2MIXER REQUIRED SDL2_mixer)
+#find_package(SDL2 REQUIRED)
+#find_package(SDL2MIXER REQUIRED)
+
+set(OpenGL_GL_PREFERENCE "GLVND")
+set(SDL2_INCLUDE_DIRS /usr/include/SDL2)
+set(SDL2_LIBRARY /usr/lib/libSDL2.so)
+set(SDL2MIXER_LIBRARY /usr/lib/libSDL2_mixer.so)
 
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^arm")
     # List all the include directories
     include_directories(
         ${OPENGLES2_INCLUDE_DIR}
         ${SDL2_INCLUDE_DIRS}
-        ${SDL2MIXER_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
         ../
         ../bulletPhysics/src
@@ -48,7 +55,6 @@ else()
         ${OPENGL_INCLUDE_DIRS}
         ${GLEW_INCLUDE_DIRS}
         ${SDL2_INCLUDE_DIRS}
-        ${SDL2MIXER_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
         ../
         ../bulletPhysics/src
