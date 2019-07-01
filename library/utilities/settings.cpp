@@ -92,7 +92,7 @@ void CSettings::loadXML()
         const XMLNode displayListNode = m_mainNode.getChildNode("display");
         if( !displayListNode.isEmpty() )
         {
-            #if defined(__IOS__) || defined(__ANDROID__) || defined(__arm__)
+            #if defined(__IOS__) || defined(__ANDROID__)
 
             SDL_DisplayMode dm;
             SDL_GetDesktopDisplayMode(0, &dm);

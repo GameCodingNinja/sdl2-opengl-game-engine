@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/home/pi/Development/sdl2-opengl-game-engine/library"
+		}
+	],
+	"settings": {}
+}

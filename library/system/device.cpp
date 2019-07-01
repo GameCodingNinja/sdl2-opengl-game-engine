@@ -97,14 +97,16 @@ void CDevice::create()
     if( m_context == nullptr )
         throw NExcept::CCriticalException("OpenGL context could not be created!", SDL_GetError() );
 
-    #if !(defined(__IOS__) || defined(__ANDROID__) || defined(__arm__))
+    #if !(defined(__IOS__) || defined(__ANDROID__))
+    #if !defined(__arm__)
     // Initialize GLEW
     glewExperimental = GL_TRUE;
     uint32_t glewError = glewInit();
     if( glewError != GLEW_OK )
         throw NExcept::CCriticalException("Error initializing GLEW!",
             boost::str( boost::format("Error initializing GLEW (%s).\n\n%s\nLine: %s")
-                % glewGetErrorString( glewError ) % __FUNCTION__ % __LINE__ ));
+                % glewGetErrorString( glewError ) % __FUNCTION__ % __LINE__ ));;
+    #endif
 
     // Enable/disable v-sync
     enableVSync( CSettings::Instance().getVSync() );
