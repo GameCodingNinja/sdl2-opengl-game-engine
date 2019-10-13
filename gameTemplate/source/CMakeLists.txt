@@ -43,7 +43,7 @@ else()
         ${OPENGL_LIBRARIES}
         ${SDL2_LIBRARY}
         ${SDL2MIXER_LIBRARY}
-        ${GLEW_LIBRARY} )
+        /usr/lib/libGLEW.so )
 endif()
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR})
