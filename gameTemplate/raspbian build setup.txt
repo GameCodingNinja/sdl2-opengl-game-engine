@@ -1,10 +1,15 @@
-Install VSCode
+The below are terminal commands
+
+Install VSCode:
 wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -
 curl -L https://raw.githubusercontent.com/headmelted/codebuilds/master/docs/installers/apt.sh | sudo bash^C
 
-To build under raspbian, install the below packages.
-
+To build under raspbian, install the below packages:
 sudo apt-get install libsdl2-dev
 sudo apt-get install libsdl2-mixer-dev
 sudo apt-get install libboost-all-dev
 sudo apt-get install cmake
+
+Setup Git to checkin files:
+git config --global user.name GameCodingNinja
+git config --global user.email hrosenorn@gmail.com
