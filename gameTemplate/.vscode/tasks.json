@@ -7,12 +7,21 @@
             "options": {
                 "cwd": "${workspaceRoot}/build"
             },
-            "command": "make",
+            "command": "cmake --build .",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Multi-core Build",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "command": "cmake --build . --parallel -j",
+            "problemMatcher": []
         },
         {
             "label": "CMake Debug",
