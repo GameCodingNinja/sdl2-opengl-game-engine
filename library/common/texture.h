@@ -11,6 +11,9 @@
 // Game lib dependencies
 #include <common/size.h>
 
+// Standard lib dependencies
+#include <cstdint>
+
 // Texture type
 enum ETextureType
 {
